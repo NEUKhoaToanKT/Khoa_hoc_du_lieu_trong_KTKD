@@ -1,0 +1,261 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r, warning = FALSE, echo = FALSE}
+library(readxl)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(forcats)
+library(ggpubr)
+library(grid)
+library(gridExtra)
+library(forcats)
+library(pryr)
+```
+
+```{r, echo = FALSE}
+
+```
+
+# Boosting và cây quyết định.
+Trong một vài cuốn sách, boosting được dịch sang tiếng Việt là học tăng cường, tuy nhiên trong cuốn sách này, chúng tôi giữ nguyên khái niệm này bởi vì chúng tôi không nghĩ rằng học tăng cường giải nghĩa được chính xác ý tưởng của Boosting. Tính đến thời điểm chúng tôi đang viết cuốn sách này, có thể khẳng định rằng boosting là một trong những ý tưởng mạnh mẽ nhất trong lĩnh vực học máy. Ban đầu boosting được áp dụng cho các bài toán phân loại, nhưng bạn đọc sẽ thấy rằng có thể dễ dàng áp dụng boosting cho các bài toán hổi quy để cho kết quả hơn cả mong đợi. Ý tưởng chung của boosting là kết hợp kết quả đầu ra của nhiều hàm phân loại, hoặc hàm hồi quy “yếu”, để tạo ra một hàm phân loại hoặc hồi quy "mạnh". Cùng là kết hợp nhiều hàm phân loại hay hổi quy, tuy nhiên boosting khác bagging hay random forest ở chỗ các hàm phân loại hoặc hồi quy được tạo ra theo thứ tự nhất định mà trong đó hàm phân loại hay hồi quy được tạo ra ở bước thứ $m$ sẽ phụ thuộc vào kết quả của hàm đó tại các bước thứ $1, 2, \cdots, (m-1)$. Trong bagging hay random forest, cách xây dựng hàm phân loại hay hổi quy ở lần thứ $m$ hoàn toàn không phụ thuộc vào kết quả của các bước trước đó.
+
+Khái niệm boosting lần đầu tiên được nhắc đến trong nghiên cứu của Freund và Schapire (1997). Chúng tôi gọi thuật toán được giới thiệu trong nghiên cứu của Freund và Schapire là "AdaBoost.M1" để phân biệt với thuật toán AdaBoost thông dụng hiện nay. Trong bài toán phân loại, biến mục tiêu chỉ nhận hai giá trị $Y \in \{-1,1\}$. Hàm phân loại được ký hiệu là $f^C$ và với véc-tơ biến độc lập $\textbf{x}_i$ chúng ta có $f^C(\textbf{x}_i) \in \{-1,1\}$. Sai số của hàm phân loại $f^C$ trên dữ liệu $(\textbf{x},y)$ được tính như sau
+\begin{align}
+err(\textbf{x},y) = \cfrac{1}{n} \ \sum\limits_{i=1}^n \mathbb{I}\left(f^C(\textbf{x}_i) \neq y_i \right) 
+\end{align}
+
+Môt hàm phân loại "yếu" $f^C$ là một hàm phân loại có khả năng dự báo chỉ tốt hơn một chút so với việc phân loại một cách ngẫu nhiên. Ý tưởng của boosting là áp dụng tuần tự các hàm phân loại yếu trên các phiên bản dữ liệu được liên tục cập nhật dựa trên kết quả của các hàm phân loại trước đó. Hàm phân loại cuối cùng thu được bằng cách kết hợp có trọng số tất cả các hàm phân loại:
+\begin{align}
+f(x) =  sign\left( \sum\limits_{m=1}^M \alpha_m \cdot f_m^C(x)  \right) 
+\end{align}
+trong đó các hệ số $\alpha_1, \alpha_2, \cdots, \alpha_M$ được tính toán khả năng phân loại của các hàm $f^C_1, f^C_2, \cdots,  f^C_M$.
+
+Quá trình cập nhật và thay đổi dữ liệu ở mỗi bước của boosting được thực hiện thông qua thay đổi véc-tơ trọng số $w^{(m)}_1, w^{(m)}_2, \cdots ,w^{(m)}_n$ cho từng quan sát trong dữ liệu xây dựng mô hình $(\textbf{x}_i,y_i)$, với $i = 1, 2, \cdots ,n$, và $m = 1, 2, \cdots, M$.
+
+Ban đầu tất cả các trọng số được cho bằng nhau tại bước thứ nhất $w^{(1)}_i = \cfrac{1}{n}$ với mọi $i$. Trong bước đầu tiên, hàm phân loại được xây dựng trên dữ liệu ban đầu theo cách thông thường. Đối với những lần xây dựng hàm phân loại tiếp theo $m = 2, 3, \cdots ,M$, trọng số $w^{(m)}_i$ của quan sát thứ $i$ thay đổi và hàm phân loại được áp dụng lại cho dữ liệu với trọng số vừa cập nhật. Tại bước thứ $m$, nếu quan sát thứ $i$ bị phân loại sai bởi hàm phân loại ở bước ngay liền trước đó, $f^C_{m-1}(x_i)$, trọng số $w^{(m)}_i$ sẽ được tăng lên. Ngược lại, nếu quan sát thứ $i$ được phân loại đúng ở bước $(m-1)$, trọng số $w^m_i$ sẽ được giảm đi. Khi quá trình kể trên diễn ra lặp đi lặp lại, những quan sát khó phân loại chính xác sẽ nhận càng có tỷ trọng cao trong những bước phân loại tiếp theo. Những hàm phân loại xây dựng cho những bước sau sẽ tập trung vào phân loại những quan sát mà những hàm phân loại ở các bước trước đã bỏ sót.
+
+Thuật toán AdaBoost.M1 được mô tả trong nghiên cứu của Freund và Schapire (1997) được phát biểu như sau:
+
+- 1. Cho $w^{(1)}_i = \cfrac{1}{n}$ với mọi $i = 1, 2, \cdots, n$ với $n$ là số dòng của dữ liệu ban đầu.
+
+- 2. Tại bước thứ $m$, với $m = 1, 2, \cdots, M$,
+
+  - 2.(a) Xây dựng hàm phân loại $f^C_m$ trên dữ liệu ban đầu với véc-tơ trọng số tương ứng với dòng $i$ là $w^{(m)}_i$.
+
+  - 2.(b) Tính toán sai số của hàm phân loại $f^C_m$
+  
+  \begin{align}
+  err_m = \sum\limits_{m=1}^M  w^{(m)}_i \cdot \mathbb{I} \left(f_m^C(\textbf{x}_i) \neq y_i \right)
+  \end{align}
+  
+  - 2.(c) Tính hệ số của hàm phân loại thứ $m$ dựa trên sai số
+  
+  \begin{align}
+  \alpha_m = \log\left( \cfrac{1 - err_m}{err_m} \right)
+  \end{align}
+ 
+  - 2.(d). Cập nhật trọng số cho bước tiếp theo
+  
+  \begin{align}
+  w^{(m+1)}_i = w^{(m)}_i \cdot \exp\left[ \alpha_m \cdot \mathbb{I} \left(f_m^C(\textbf{x}_i) \neq y_i \right) \right]
+  \end{align}
+
+  - 2.(e). Chuẩn hóa lại trọng số để tổng các trọng số bằng 1.
+
+  \begin{align}
+  w^{(m+1)}_i = \cfrac{w^{(m+1)}_i}{\sum\limits_{i=1}^n  w^{(m+1)}_i} 
+  \end{align}
+  
+- 3. Kết thúc lần lặp thứ $M$, trả lại kết quả hàm phân loại cuối cùng:
+\begin{align}
+f^C(x) =  sign\left( \sum\limits_{m=1}^M \alpha_m \cdot f_m^C(x)  \right) 
+\end{align}
+
+Chúng tôi khuyên bạn đọc hãy hiểu ý tưởng của các bước kể trên thay vì cố gắng hiểu cặn kẽ công thức toán học. Các bước của thuật toán AdaBoost.M1 được trình bày ở trên khá rõ ràng, ngoại trừ bước 2.(a) là "Xây dựng hàm phân loại $f^C_m$ trên dữ liệu ban đầu với véc-tơ trọng số tương ứng với dòng $i$ là $w^{(m)}_i$". Quá trình xây dựng một hàm phân loại luôn luôn bao gồm hai bước: bước thứ nhất là lựa chọn kiểu mô hình và bước thứ hai là ước lượng tham số của mô hình với mục tiêu tối thiểu hóa một hàm tổn thất. Thuật toán AdaBoost.M1 ở trên có thể được áp dụng với mọi hàm phân loại (cây quyết định, hồi quy logistic, ...) nhưng hàm tổn thất được lựa chọn phải là hàm tổn thất kiểu mũ. Trong các phần tiếp theo của cuốn sách bạn đọc sẽ được giải thích rằng công thức tính toán các trọng số $w^{(m)}_i$ ở bước 2.(d) là kết quả của việc lựa chọn hàm tổn thất, trong khi hàm phân loại có thể là bất cứ dạng hàm nào.
+
+Thuật toán AdaBoost.M1 được Friedman (2000) gọi là thuật toán AdaBoost phân loại vì các hàm $f^C_m$ được xây dựng ở bước thứ $m$ luôn là các dạng hàm phân loại. Nghiên cứu của Friedman (2000) điều chỉnh AdaBoost.M1 để phù hợp hơn cho cả bài toán phân loại và bài toán hồi quy. Hàm phân loại trong nghiên cứu của Friedman luôn luôn có dạng là một cây quyết định có 1 node duy nhất, còn được gọi là một "stump". Một stump chỉ là một hàm phân loại yếu, nhưng bằng cách kết hợp các stump như ý tưởng của AdaBoost.M1, khả năng dự đoán của hàm phân loại cuối cùng là đáng kinh ngạc. Thuật toán được giới thiệu trong nghiên cứu của Friedman (2000) chính là thuật toán AdaBoost được áp dụng rộng rãi hiện nay. 
+
+Trong chương này chúng tôi sẽ giới thiệu đến bạn đọc những nội dung như sau: 
+
+<!-- - Phần thứ nhất: Chúng tôi chứng minh rằng AdaBoost phù hợp với mô hình cộng tính trong trình học cơ sở, tối ưu hóa hàm mất mũ mới. Hàm mất này rất giống với khả năng ghi nhật ký nhị thức (âm) (Phần 10.2– 10.4). • Bộ giảm thiểu dân số của hàm mất mũ được biểu diễn bằng log-odds của các xác suất của lớp (Phần 10.5). • Chúng tôi mô tả các hàm mất mát cho hồi quy và phân loại mạnh hơn sai số bình phương hoặc mất mát theo cấp số nhân (Phần 10.6). • Người ta lập luận rằng cây quyết định là một trình học cơ sở lý tưởng cho các ứng dụng khai thác dữ liệu tăng cường (Phần 10.7 và 10.9). • Chúng tôi phát triển một lớp mô hình tăng cường độ dốc (GBM), để tăng cường cây có bất kỳ chức năng mất nào (Phần 10.10). • Tầm quan trọng của “học chậm” được nhấn mạnh và được thực hiện bằng cách thu gọn từng thuật ngữ mới đưa vào mô hình (Phần 10.12), cũng như ngẫu nhiên hóa (Phần 10.12.2). • Mô tả các công cụ giải thích mô hình phù hợp (Phần 10.13) -->
+
+## Những cơ sở của kỹ thuật boosting
+Xây dựng mô hình dựa trên kỹ thuật boosting về cơ bản là kết hợp tuyến tính một tập hợp các hàm cơ bản nhằm cải thiện khả năng giải thích hoặc dự đoán. Một cách tổng quát, hàm $f$ thu được từ kỹ thuật boosting có thể viết dưới dạng tổng của $M$ hàm phân loại hoặc hồi quy như sau:
+\begin{align}
+f(\textbf{x}) = \sum\limits_{m=1}^M \ \lambda_m \cdot b(\textbf{x},\theta_m)
+(\#eq:boosting1)
+\end{align}
+trong đó $\lambda_m$ là hệ số tuyến tính, $b(\textbf{x},\theta_m)$ là một hàm phân loại hoặc hồi quy cơ bản có tham số là $\theta_m$. Dạng tham số của hàm $b$ thường được xác định trước khi xây dựng hàm $f$ trong khi các tham số $\lambda_m$ và $\theta_m$ được ước lượng tại mỗi bước nhằm tối thiểu hóa hàm tổn thất. Quá trình ước lượng tham số của mô hình \@ref(eq:boosting1) được thực hiện thông qua các bước như sau:
+
+- Bước 1: Lựa chọn hàm tổn thất $\sum\limits_{i=1}^n L(y_i, \hat{y}_i)$, dạng hàm cơ bản $b(\textbf{x},\theta)$, và cho $f_0(\textbf{x}) = 0$.
+
+- Bước 2: với mỗi $m = 1, 2, \cdots, M$, tìm tham số ($\lambda_m$,$\theta_m$) như sau
+\begin{align}
+(\lambda_m,\theta_m) = \underset{\lambda,\theta}{\operatorname{argmax}} \sum\limits_{i=1}^n L\left( y_i, f_{m-1}(x_i) + \lambda \cdot b(\textbf{x}_i,\theta) \right)
+\end{align}
+
+- Bước 3: cho $f_m(\textbf{x}) = f_{m-1}(\textbf{x}) + \lambda_m \cdot b(\textbf{x}_i,\theta_m)$.
+
+Tại mỗi bước $m = 1, 2, \cdots, M$, chúng ta cần phải tìm các tham số ($\lambda_m$,$\theta_m$) để tối thiểu hóa một hàm tổn thất. Khi giải bài toán tối ưu, lời giải chính xác luôn được ưu tiên trước, nếu không thể giải bằng lời giải chính xác mới cần sử dụng phương pháp số. Việc tồn tại hay không tồn tại lời giải chính xác cho mỗi bước $m$ phụ thuộc vào lựa chọn hàm tổn thất $L$ và hàm cơ bản $b$. Hàm cơ bản $b$ thường được lựa chọn ở mức độ đơn giản nhất, chẳng hạn như 1 cây quyết định với 1 node. Hàm tổn thất có thể là hàm tổn thất kiểu mũ, hàm tổn thất kiểu trung bình sai số, hàm hợp lý,...
+
+- Ví dụ 1: trong bài toán hồi quy, khi hàm tổn thất là hàm tổng sai số bình phương,
+\begin{align}
+L(y_i, \hat{y}_i) = \cfrac{1}{2} \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2
+\end{align}
+tham số $(\lambda_m,\theta_m)$ là lời giải của bài toán tối ưu sau
+\begin{align}
+(\lambda_m,\theta_m) & = \underset{\lambda,\theta}{\operatorname{argmin}} \cfrac{1}{2} \sum\limits_{i=1}^n \left(y_i - f_{m-1}(x_i) - \lambda \cdot b(\textbf{x}_i,\theta) \right)^2 \\
+& = \underset{\lambda,\theta}{\operatorname{argmin}} \cfrac{1}{2} \sum\limits_{i=1}^n \left(\epsilon_{i,m-1}  - \lambda \cdot b(\textbf{x}_i,\theta) \right)^2
+\end{align}
+trong đó $\epsilon_{i,m-1}$ là sai số của thuật toán Boosting sau bước thứ $(m-1)$. Bạn đọc có thể thấy rằng nếu chúng ta chọn hàm tổn thất là tổng sai số bình phương, tại bước thứ $m$ của quá trình boosting, chúng ta sẽ cần tìm các hệ số $(\lambda_m,\theta_m)$ sao cho tổng sai số giữa $\lambda_m \cdot b(\textbf{x}_i,\theta_m)$ và sai số tại bước thứ $(m-1)$, $\epsilon_{i,m-1}$ là nhỏ nhất.
+
+- Ví dụ 2: trong bài toán phân loại mà biến mục tiêu $y$ chỉ nhận hai giá trị là -1 hoặc 1, Freund và Schapire (1997) lựa chọn hàm tổn thất kiểu mũ
+\begin{align}
+L(y_i, \hat{y}_i) = \sum\limits_{i=1}^n exp(- y_i \cdot \hat{y_i})
+\end{align}
+tham số $(\lambda_m,\theta_m)$ là lời giải của bài toán tối ưu sau
+\begin{align}
+(\lambda_m,\theta_m) & = \underset{\lambda,\theta}{\operatorname{argmin}} \sum\limits_{i=1}^n \exp\left[- y_i  \cdot \left(f_{m-1}(x_i) + \lambda \cdot b(\textbf{x}_i,\theta) \right) \right] \\
+& = \underset{\lambda,\theta}{\operatorname{argmin}} \sum\limits_{i=1}^n \exp\left[ - y_i  \cdot f_{m-1}(x_i)\right]  \cdot \exp\left[- y_i \cdot \lambda \cdot b(\textbf{x}_i,\theta)  \right] \\
+& = \underset{\lambda,\theta}{\operatorname{argmin}} \sum\limits_{i=1}^n w_i^{(m)}  \cdot \exp\left[- \lambda \cdot y_i \cdot b(\textbf{x}_i,\theta)  \right]
+\end{align}
+với $w_i^{(m)} = \exp\left[ - y_i  \cdot f_{m-1}(x_i)\right]$. Bạn đọc có thể thấy rằng $w_i^{(m)}$ không phụ thuộc vào $\lambda$ hay $\theta$ nên có thể coi như trọng số tương ứng với dữ liệu thứ $i$. 
+
+Từ kết quả của ví dụ 2, chúng ta đã có thể giải thích các bước trong thuật toán AdaBoost.M1. Với mọi $\lambda > 0$ và với một lựa chọn của hàm $b$, tham số $\theta_m$ là giá trị tối thiểu hóa hàm tổn thất
+\begin{align}
+(\theta_m) & = \underset{\theta}{\operatorname{argmin}} \sum\limits_{i=1}^n w_i^{(m)}  \cdot \exp\left[- \lambda \cdot y_i \cdot b(\textbf{x}_i,\theta)  \right] \\
+(\#eq:boosting2)
+\end{align}
+Biến đổi công thức phía bên phải của phương trình \@ref(eq:boosting2) chúng ta có
+\begin{align}
+\sum\limits_{i=1}^n w_i^{(m)}  \cdot \exp\left[- \lambda \cdot y_i \cdot b(\textbf{x}_i,\theta)  \right] & = \sum\limits_{i=1}^n w_i^{(m)}  \cdot \left[ e^{-\lambda} \cdot \mathbb{I}(y_i = b(\textbf{x}_i,\theta)) + e^{\lambda} \cdot \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta))  \right]\\
+& = \sum\limits_{i=1}^n w_i^{(m)}  \cdot e^{-\lambda} +  \sum\limits_{i=1}^n w_i^{(m)}  \cdot \left[ e^{\lambda} - e^{-\lambda} \right] \cdot \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta)) \\
+& = e^{-\lambda} \cdot \sum\limits_{i=1}^n w_i^{(m)}  + \left[ e^{\lambda} - e^{-\lambda} \right] \cdot  \sum\limits_{i=1}^n w_i^{(m)}  \cdot  \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta))
+(\#eq:boosting3)
+\end{align}
+
+Do $e^{\lambda} - e^{-\lambda} > 0$ và các $w_i^{(m)}$ không phụ thuộc vào $\theta$ nên ta có giá trị $\theta_m$ tối thiểu hóa hàm tổn thất trong phương trình \@ref(eq:boosting2) cũng là giá trị $\theta_m$ tối thiểu hóa sai số dự đoán
+\begin{align}
+(\theta_m) & = \underset{\theta}{\operatorname{argmin}} \sum\limits_{i=1}^n w_i^{(m)}  \cdot  \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta))
+(\#eq:boosting4)
+\end{align}
+
+Với mỗi $\theta_m$ là lời giải của \@ref(eq:boosting4), chúng ta có giá trị $\lambda_m$ để tối thiểu hóa giá trị hàm tổn thất trong phương trình \@ref(eq:boosting2) là lời giải của phương trình 
+\begin{align}
+\sum\limits_{i=1}^n w_i^{(m)}  \cdot \cfrac{\partial \exp\left[- \lambda \cdot y_i \cdot b(\textbf{x}_i,\theta_m)  \right]}{\partial \lambda} = 0 \\
+\end{align}
+
+Lấy đạo hàm của vế phải của phương trình \@ref(eq:boosting4) theo $\lambda$ chúng ta có:
+\begin{align}
+& - e^{-\lambda_m} \cdot \sum\limits_{i=1}^n w_i^{(m)}  + \left[ e^{\lambda_m} + e^{-\lambda_m} \right] \cdot  \sum\limits_{i=1}^n w_i^{(m)}  \cdot  \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta_m)) = 0 \\
+& \rightarrow \lambda_m = \cfrac{1}{2} \cdot \log\left(\cfrac{1}{err_m} - 1 \right)
+\end{align}
+với $err_m$ là sai số của hàm phân loại $b(\textbf{x}_i,\theta_m)$
+\begin{align}
+err_m = \cfrac{\sum\limits_{i=1}^n w_i^{(m)}  \cdot  \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta_m))}{\sum\limits_{i=1}^n w_i^{(m)}}
+\end{align}
+
+Chúng ta cập nhật trọng số cho bước tiếp theo như sau
+\begin{align}
+w_i^{(m+1)}& = \exp\left[- y_i \cdot f_m(x_i)\right] \\
+& = exp\left[- y_i \cdot f_{m-1}(x_i) - y_i \lambda_m b(x_i,\theta_m) \right] \\
+& = w_i^{(m)} \cdot \exp\left[ \lambda_m \cdot(2 \mathbb{I}(b(x_i,\theta_m) \neq y_i) - 1)  \right] \\
+& = w_i^{(m)} \cdot \exp\left[ (2\lambda_m) \cdot \mathbb{I}(b(x_i,\theta_m) \neq y_i)  \right] \cdot \exp(-\lambda_m)
+\end{align}
+Công thức ở trên tương đương với bước 2.(d) trong thuật toán AdaBoost.M1 với $(2\lambda_m) = \alpha_m$. Giá trị $\exp(-\lambda_m)$ không ảnh hưởng đến trọng số vì không phụ thuộc vào $i$.
+
+
+- Ví dụ 1: chúng ta sẽ áp dụng thuật toán AdaBoost.M1 trên một dữ liệu có 10 quan sát như dưới đây. Dữ liệu có biến mục tiêu $Y$ nhận giá trị 1 khi khách hàng đồng ý mua sản phẩm và nhận giá trị -1 khi khách hành không đồng ý. Có bốn biến giải thích là độ tuổi ($Age$), số năm kinh nghiệm lái xe ($seniority$), giới tính ($sex$) và thành thị ($urban$). Hàm phân loại chúng ta lựa chọn là cây quyết định có 1 node duy nhất.
+
+```{r, warning=FALSE, message=FALSE}
+df<-read.csv("C:/Users/AD/Desktop/Tex file/Thu latex/Book demo/bookdown_demo_hieu/AdaBoostM1Example1.csv")
+knitr::kable(df, booktabs = T,
+      col.names = c("Tuổi", "Kinh nghiệm", "Giới tính", "Thành thị", "Lựa chọn"),
+      escape=F, align = 'r') %>%
+  #column_spec(c(1,4,5,6,7),border_left = T) %>% column_spec(7,border_right = T) %>% 
+  kable_styling(latex_options = "scale_down",full_width = F)
+```
+Tại bước $m=1$ chúng ta có tỷ trọng của mỗi hàng dữ liệu là $w^{(1)}_i = 0.1$; để xây dựng mô hình cây quyết định với 1 node và tôi thiểu hóa sai số trên dữ liệu, chúng ta thử trên từng cột dữ liệu
+
+- Cột $age$, bạn đọc có thể kiểm tra rằng tại điểm cắt 55.5 (tuổi), cây quyết định cho sai số có trọng số $w^{(1)}_i$ nhỏ nhất là 0.3. Lưu ý rằng điểm cắt 48 tuổi cũng có sai số là 0.3 tuy nhiên điểm cắt này chia dữ liệu thành một phần chỉ có 2 quan sát và một phần có 8 quan sát nên ít tối ưu hơn so với điểm cắt 55.5.
+
+- Cột $seniority$, điểm cắt tối ưu là 24.5 (năm) và cũng cho sai số có trọng số là 0.3
+
+- Cột $sex$ chỉ có một lựa chọn là chia dữ liệu thành hai phần, Male và Female, cho sai số có trọng số là 0.3
+
+- Cột $urban$ chỉ có một lựa chọn là chia dữ liệu thành 0 và 1, cũng cho sai số có trọng số là 0.3
+
+Chúng ta chọn cây quyết định dựa trên biến $age$ với điểm cắt là 55.5 tuổi là hàm phân loại tại $m = 1$. Cây quyết định cho giá trị là 1 khi biến $age$ nhỏ hơn 55.5 và cho giá trị là -1 khi biến $age$ cho giá trị lớn hơn 1. Hệ số của hàm phân loại thứ nhất trong hàm phân loại tổng là
+\begin{align}
+alpha_1 = log(\cfrac{1 - err_1}{err_1}) = log(\cfrac{1-0.3}{0.3}) = 0.8473
+\end{align}
+
+Trọng số cho bước thứ 2 được cập nhật, theo công thức 2.(d) như sau
+\begin{align}
+w^{(2)}_i = w^{(1)}_i \cdot \exp\left[ 0.8473 \cdot \mathbb{I} \left(f_m^C(\textbf{x}_i) \neq y_i \right) \right] = 
+  \begin{cases}
+  0.1 \cdot e^0 \textit{ nếu }  f_m^C(\textbf{x}_i) = y_i \\
+  0.1 \cdot e^{0.8473} \textit{ nếu }  f_m^C(\textbf{x}_i) \neq y_i
+  \end{cases}
+\end{align}
+
+Bạn đọc có thể thấy rằng trọng số cho 3 hàng bị dự đoán sai đã được tăng lên thành $0.1 \times e^{0.8473}$ trong khi trọng số cho 7 hàng được dự đoán đúng vẫn là 0.1. Chuẩn hóa lại trọng số để có tổng bằng 1 chúng ta có bảng sau
+```{r, warning=FALSE, message=FALSE}
+df<-mutate(df, w1 = 0.1, pred1 = ifelse(age<48,1,-1))
+df<-mutate(df, w2 = ifelse(Y == pred1, 0.1,exp(0.8573)))
+df<-mutate(df, w2 = round(w2/sum(w2),3))
+knitr::kable(df, booktabs = T,
+      col.names = c("Tuổi", "Kinh nghiệm", "Giới tính", "Thành thị", "Y", "$w^{(1)}$", "$b(x_i,\\theta_1)$", "$w^{(2)}$" ),
+      escape=F, align = 'r') %>%
+  kable_styling(latex_options = "scale_down",full_width = F)
+```
+
+Tại bước $m=2$, chúng ta cần tìm cây quyết định để tối thiểu hóa sai số có trọng số $w^{(2)}$ như bảng ở trên.
+
+- Cột $age$, bạn đọc có thể kiểm tra rằng tại điểm cắt 64.5 (tuổi), cây quyết định cho sai số có trọng số $w^{(2)}_i$ nhỏ nhất là 0.342
+
+- Cột $seniority$, điểm cắt tối ưu là 24.5 (năm) cho sai số có trọng số là 0.329
+
+- Cột $sex$ chỉ có một lựa chọn là chia dữ liệu thành hai phần, Male và Female, cho sai số có trọng số là 0.329
+
+- Cột $urban$ chỉ có một lựa chọn là chia dữ liệu thành 0 và 1, cũng cho sai số có trọng số là 0.039
+
+Như vậy, cây quyết định dựa trên biến $urban$ sẽ là cây quyết định tại bước thứ hai. Cây quyết định trả lại giá trị là $1$ khi $urban = 1$ và trả lại giá trị $-1$ khi $urban = 0$  Hệ số của hàm phân loại thứ hai trong hàm phân loại tổng là
+\begin{align}
+alpha_2 = log(\cfrac{1-0.039}{0.039}) = 3.204
+\end{align}
+
+Với $M = 2$ chúng ta có hàm phân loại từ thuật toán AdaBoost.M1 được xây dựng dựa trên dữ liệu cho bởi bảng ... như sau
+\begin{align}
+f^C = sign(0.8473 \cdot f^C_1 + 3.204 \cdot f^C_2) = \begin{cases}
+-1 \textit{ nếu } age < 55.5 \textit{ và } urban = 0 \\
+-1 \textit{ nếu } age > 55.5 \textit{ và } urban = 0 \\
+-1 \textit{ nếu } age < 55.5 \textit{ và } urban = 1 \\
+1 \textit{ nếu } age > 55.5 \textit{ và } urban = 1 
+\end{cases}
+
+\end{align}
+
+Mặc dù chúng tôi sử dụng hàm tổn thất kiểu mũ để giải thích các bước của AdaBoost.M1, tuy nhiên thực tế thì thuật toán AdaBoost.M1 lại được xây dựng dựa trên khía cạnh khác 
+
+
+# REFERENCE
+
+<!-- ### Source from thesis -->
+**1.** Freund, Y. and Schapire, R. (1997). A decision-theoretic generalization of
+online learning and an application to boosting*
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+
+<!-- ### Souce from website -->
+
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->

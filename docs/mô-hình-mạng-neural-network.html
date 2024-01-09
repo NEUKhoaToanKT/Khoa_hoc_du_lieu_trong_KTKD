@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chương 13 Mô hình mạng neural network | index</title>
+<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta property="og:title" content="Chương 13 Mô hình mạng neural network | index">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chương 13 Mô hình mạng neural network | index">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto-0.4.8/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.8/girafe.js"></script><script src="libs/plotly-binding-4.10.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="Chương sách này thảo luận một chủ đề quan trọng có ứng dụng rộng rãi nhất trong lĩnh vực trí tuệ nhân tạo, đó là mô hình mạng học sâu. Tại thời điểm nhóm tác giả viết cuốn sách (2023), mạng học...">
+<meta property="og:description" content="Chương sách này thảo luận một chủ đề quan trọng có ứng dụng rộng rãi nhất trong lĩnh vực trí tuệ nhân tạo, đó là mô hình mạng học sâu. Tại thời điểm nhóm tác giả viết cuốn sách (2023), mạng học...">
+<meta name="twitter:description" content="Chương sách này thảo luận một chủ đề quan trọng có ứng dụng rộng rãi nhất trong lĩnh vực trí tuệ nhân tạo, đó là mô hình mạng học sâu. Tại thời điểm nhóm tác giả viết cuốn sách (2023), mạng học...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ma-tr%E1%BA%ADn-m%E1%BA%A3ng-nhi%E1%BB%81u-chi%E1%BB%81u-v%C3%A0-list.html"><span class="header-section-number">2</span> Ma trận, mảng nhiều chiều và \(list\)</a></li>
+<li><a class="" href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">3</span> Phân tích dữ liệu bằng R</a></li>
+<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r.html"><span class="header-section-number">4</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">5</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">6</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">9</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">10</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="" href="reference.html"><span class="header-section-number">11</span> REFERENCE</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y.html"><span class="header-section-number">12</span> Mô hình dạng cây</a></li>
+<li><a class="active" href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">13</span> Mô hình mạng neural network</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/dgrtwo/tidy-text-mining">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mô-hình-mạng-neural-network" class="section level1" number="13">
+<h1>
+<span class="header-section-number">Chương 13</span> Mô hình mạng neural network<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network"><i class="fas fa-link"></i></a>
+</h1>
+<p>Chương sách này thảo luận một chủ đề quan trọng có ứng dụng rộng rãi nhất trong lĩnh vực trí tuệ nhân tạo, đó là mô hình mạng học sâu. Tại thời điểm nhóm tác giả viết cuốn sách (2023), mạng học sâu là một lĩnh vực nghiên cứu tích cực nhất không chỉ trong khoa học máy tính, công nghệ thông tin mà còn cả trong các lĩnh vực khác như kinh tế, tài chính, y tế, xây dựng,… Nền tảng của mô hình mạng học sâu là mô hình mạng thần kinh nhân tạo (Neural Network). Mô hình neural network đã được biết đến đến rộng rãi vào cuối những năm 1980 bởi cách vận hành của mô hình mô tả lại cách thức mà hệ thống thần kinh của con người xử lý thông tin. Mặc dù các đặc tính của mô hình Neural Network được phân tích bởi những nhà toán học và nhà thống kê và các thuật toán liên quan đến mô hình này đã được cải thiện nhưng sau đó, do với sự ra đời của các phương pháp học máy khác như SVM, random forest, boosting,… các mô hình mạng nơ-ron phần nào không được ưa chuộng.</p>
+<p>Từ những năm 2010, với nhu cầu xử lý các dữ liệu ngày càng phức tạp và sự ra đời của các kiến trúc máy tính lớn, mô hình mạng nơ-ron đã quay trở lại với tên mới là mạng học sâu (deep learning). Mạng học sâu vượt trội hoàn toàn các mô hình học máy thông thường trong phân loại hình ảnh/video và mô hình hóa ngôn ngữ tự nhiên bao gồm dữ liệu kiểu văn bản và lời nói (Natural Langugue Processing). Các nhà khoa học trong lĩnh vực này tin rằng lý do chính cho những thành công của mô hình mạng nơ-ron là sẵn có của các bộ dữ liệu để huấn luyện môn hình và cấu trúc của mô hình mạng nơ-ron có thể đáp ứng được với bất kỳ tập dữ liệu khổng lồ nào.</p>
+<div id="mạng-neural-với-một-layer-duy-nhất" class="section level2" number="13.1">
+<h2>
+<span class="header-section-number">13.1</span> Mạng neural với một layer duy nhất<a class="anchor" aria-label="anchor" href="#m%E1%BA%A1ng-neural-v%E1%BB%9Bi-m%E1%BB%99t-layer-duy-nh%E1%BA%A5t"><i class="fas fa-link"></i></a>
+</h2>
+<div id="hồi-quy-logistic-là-một-mạng-nơ-ron-không-có-layer-ẩn" class="section level3" number="13.1.1">
+<h3>
+<span class="header-section-number">13.1.1</span> Hồi quy logistic là một mạng nơ-ron không có layer ẩn<a class="anchor" aria-label="anchor" href="#h%E1%BB%93i-quy-logistic-l%C3%A0-m%E1%BB%99t-m%E1%BA%A1ng-n%C6%A1-ron-kh%C3%B4ng-c%C3%B3-layer-%E1%BA%A9n"><i class="fas fa-link"></i></a>
+</h3>
+<p>Trước khi giới thiệu về cấu trúc của một mô hình mạng nơ-ron, chúng ta sẽ xem xét lại cách hồi quy logistic hoạt động. Sau đó, khi nhìn nhận cách vận hành của hổi quy logistic như một mạng nơ-ron đơn giản, bạn đọc sẽ có hình dung cụ thể hơn về cách xây dựng mô hình mạng nơ-ron.</p>
+<p>Dữ liệu dùng để xây dựng mô hình hồi quy logistic được xây dựng dựa trên dữ liệu bao gồm 5 quan sát được cho trong bảng dưới đây</p>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-3">Table 13.1: </span>Dữ liệu cho hồi quy Logistic
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Dữ liệu
+</th>
+<th style="text-align:right;">
+x1
+</th>
+<th style="text-align:right;">
+x2
+</th>
+<th style="text-align:left;">
+Màu sắc
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+blue
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+red
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+red
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+blue
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+blue
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+?
+</td>
+</tr>
+</tbody>
+</table></div>
+<div class="inline-figure"><img src="12-mo-hinh-mang-noron_files/figure-html/plot1-1.png" width="672"></div>
+<p>Với mỗi điểm dữ liệu bất kỳ, giả sử là điểm A có với các thuộc tính $x_1(A) = $ và $x_2(A) = $, chúng ta sẽ thực hiện hai phép biến đổi kế tiếp nhau:</p>
+<ul>
+<li>Phép biến đổi tuyển tính: với bộ 3 số thực bất kỳ <span class="math inline">\((b_0, b_1, b_2)\)</span>, chúng ta luôn có thể thực hiện phép biến đổi tuyến tính:</li>
+</ul>
+<p><span class="math display">\[
+A(1, x_1, x_2) \rightarrow b_0 \times 1 + b_1 \times x_1 + b_2 \times x_2
+\]</span>
+- Phép biến đổi phi tuyến tính: chúng ta sử dụng hàm số <span class="math inline">\(f(x) = sigmoid(x) = \cfrac{1}{1+e^{x}}\)</span> để thực hiện phép biến đổi thứ hai</p>
+<p><span class="math display">\[
+b_0 + b_1 x_1 + b_2 x_2 \rightarrow \cfrac{1}{1+e^{b_0 + b_1 x_1 + b_2 x_2}}
+\]</span>
+Sau khi thực hiện các phép biến đổi với từng điểm dữ liệu, chúng ta sẽ thu được với mỗi điểm dữ liệu một số nằm trong khoảng <span class="math inline">\((0,1)\)</span>.</p>
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-4">Table 13.2: </span>Dữ liệu cho hồi quy Logistic
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Dữ liệu
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(x_1\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(x_2\)</span>
+</th>
+<th style="text-align:left;">
+Màu sắc
+</th>
+<th style="text-align:right;">
+Biến mục tiêu (<span class="math inline">\(y_i\)</span>)
+</th>
+<th style="text-align:left;">
+Dữ liệu sau chuyển đổi (<span class="math inline">\(p_i\)</span>)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+blue
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+<span class="math inline">\((1+exp(b_0+ b_1+2 b_2))^{-1}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+red
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+<span class="math inline">\((1+exp(b_0+2 b_1+ b_2))^{-1}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+red
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+<span class="math inline">\((1+exp(b_0+4 b_1+ b_2))^{-1}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+blue
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+<span class="math inline">\((1+exp(b_0+3 b_1+3 b_2))^{-1}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+blue
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+<span class="math inline">\((1+exp(b_0+1.5 b_1+3 b_2))^{-1}\)</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Hàm tổn thất, tính bằng Cross Entropy qua năm điểm dữ liệu A, B, C, D, và E, sẽ là một hàm số của ba biến <span class="math inline">\((b_0, b_1, b_2)\)</span> như sau</p>
+<p><span class="math display">\[
+Loss(b_0, b_1, b_2) = - \sum\limits_{Data = A}^E [y_i \times log(p_i) + (1-y_i) \times log(1-p_i)]
+\]</span>
+với giá trị của <span class="math inline">\(y_i\)</span> và <span class="math inline">\(p_i\)</span> được cho bởi bảng ở trên. Bằng thuật toán gradient descent, chúng ta có thể tính toán được giá trị của <span class="math inline">\((b_0, b_1, b_2)\)</span> sao cho hàm <span class="math inline">\(Loss\)</span> đạt giá trị nhỏ nhất bằng <span class="math inline">\((25,15,-30)\)</span>. Vậy có thể tính toán khả năng điểm <span class="math inline">\(F\)</span> có màu xanh là
+<span class="math display">\[
+\mathbb{P}(F = blue) = (1+exp(25 + 3 \times 15 + 3 \times -30))^{-1} = 1
+\]</span>
+Như vậy, trong hổi quy logistic, chúng ta đã sử dụng 2 phép biến đổi dữ liệu bao gồm một phép biến đổi tuyến tính thông qua một véc-tơ <span class="math inline">\(b\)</span> và sau đó là một phép biến đổi phi tuyến (hàm sigmoid) để thu được một giá trị duy nhất cho mỗi điểm dữ liệu. Quá trình ước lượng mô hình logistic là quá trình tìm kiếm các tham số <span class="math inline">\(b\)</span> sao cho giá trị đầu ra sau các phép biến đổi của mỗi điểm dữ liệu gần với kết quả mong muốn nhất có thể.</p>
+</div>
+</div>
+<div id="mạng-neural-với-nhiều-layer-ẩn." class="section level2" number="13.2">
+<h2>
+<span class="header-section-number">13.2</span> Mạng neural với nhiều layer ẩn.<a class="anchor" aria-label="anchor" href="#m%E1%BA%A1ng-neural-v%E1%BB%9Bi-nhi%E1%BB%81u-layer-%E1%BA%A9n."><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="ước-lượng-tham-số-cho-mạng-neural-network" class="section level2" number="13.3">
+<h2>
+<span class="header-section-number">13.3</span> Ước lượng tham số cho mạng neural network<a class="anchor" aria-label="anchor" href="#%C6%B0%E1%BB%9Bc-l%C6%B0%E1%BB%A3ng-tham-s%E1%BB%91-cho-m%E1%BA%A1ng-neural-network"><i class="fas fa-link"></i></a>
+</h2>
+<div id="backpropagation" class="section level3" number="13.3.1">
+<h3>
+<span class="header-section-number">13.3.1</span> Backpropagation<a class="anchor" aria-label="anchor" href="#backpropagation"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="regularization-and-stochastic-gradient-descent" class="section level3" number="13.3.2">
+<h3>
+<span class="header-section-number">13.3.2</span> Regularization and Stochastic Gradient Descent<a class="anchor" aria-label="anchor" href="#regularization-and-stochastic-gradient-descent"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="thực-hành-1" class="section level2" number="13.4">
+<h2>
+<span class="header-section-number">13.4</span> Thực hành:<a class="anchor" aria-label="anchor" href="#th%E1%BB%B1c-h%C3%A0nh-1"><i class="fas fa-link"></i></a>
+</h2>
+<div id="sử-dụng-mạng-neural-network-trong-phân-loại-văn-bản." class="section level3" number="13.4.1">
+<h3>
+<span class="header-section-number">13.4.1</span> Sử dụng mạng neural network trong phân loại văn bản.<a class="anchor" aria-label="anchor" href="#s%E1%BB%AD-d%E1%BB%A5ng-m%E1%BA%A1ng-neural-network-trong-ph%C3%A2n-lo%E1%BA%A1i-v%C4%83n-b%E1%BA%A3n."><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="sử-dụng-mạng-neural-network-tích-chập-với-dữ-liệu-mnist." class="section level3" number="13.4.2">
+<h3>
+<span class="header-section-number">13.4.2</span> Sử dụng mạng neural network tích chập với dữ liệu <span class="math inline">\(mnist()\)</span>.<a class="anchor" aria-label="anchor" href="#s%E1%BB%AD-d%E1%BB%A5ng-m%E1%BA%A1ng-neural-network-t%C3%ADch-ch%E1%BA%ADp-v%E1%BB%9Bi-d%E1%BB%AF-li%E1%BB%87u-mnist."><i class="fas fa-link"></i></a>
+</h3>
+<!-- # REFERENCE -->
+<!-- ### Source from thesis -->
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+<!-- ### Souce from website -->
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y.html"><span class="header-section-number">12</span> Mô hình dạng cây</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network"><span class="header-section-number">13</span> Mô hình mạng neural network</a></li>
+<li>
+<a class="nav-link" href="#m%E1%BA%A1ng-neural-v%E1%BB%9Bi-m%E1%BB%99t-layer-duy-nh%E1%BA%A5t"><span class="header-section-number">13.1</span> Mạng neural với một layer duy nhất</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#h%E1%BB%93i-quy-logistic-l%C3%A0-m%E1%BB%99t-m%E1%BA%A1ng-n%C6%A1-ron-kh%C3%B4ng-c%C3%B3-layer-%E1%BA%A9n"><span class="header-section-number">13.1.1</span> Hồi quy logistic là một mạng nơ-ron không có layer ẩn</a></li></ul>
+</li>
+<li><a class="nav-link" href="#m%E1%BA%A1ng-neural-v%E1%BB%9Bi-nhi%E1%BB%81u-layer-%E1%BA%A9n."><span class="header-section-number">13.2</span> Mạng neural với nhiều layer ẩn.</a></li>
+<li>
+<a class="nav-link" href="#%C6%B0%E1%BB%9Bc-l%C6%B0%E1%BB%A3ng-tham-s%E1%BB%91-cho-m%E1%BA%A1ng-neural-network"><span class="header-section-number">13.3</span> Ước lượng tham số cho mạng neural network</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#backpropagation"><span class="header-section-number">13.3.1</span> Backpropagation</a></li>
+<li><a class="nav-link" href="#regularization-and-stochastic-gradient-descent"><span class="header-section-number">13.3.2</span> Regularization and Stochastic Gradient Descent</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#th%E1%BB%B1c-h%C3%A0nh-1"><span class="header-section-number">13.4</span> Thực hành:</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#s%E1%BB%AD-d%E1%BB%A5ng-m%E1%BA%A1ng-neural-network-trong-ph%C3%A2n-lo%E1%BA%A1i-v%C4%83n-b%E1%BA%A3n."><span class="header-section-number">13.4.1</span> Sử dụng mạng neural network trong phân loại văn bản.</a></li>
+<li><a class="nav-link" href="#s%E1%BB%AD-d%E1%BB%A5ng-m%E1%BA%A1ng-neural-network-t%C3%ADch-ch%E1%BA%ADp-v%E1%BB%9Bi-d%E1%BB%AF-li%E1%BB%87u-mnist."><span class="header-section-number">13.4.2</span> Sử dụng mạng neural network tích chập với dữ liệu \(mnist()\).</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/dgrtwo/tidy-text-mining/blob/master/12-mo-hinh-mang-noron.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/dgrtwo/tidy-text-mining/edit/master/12-mo-hinh-mang-noron.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong></strong>" was written by . </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

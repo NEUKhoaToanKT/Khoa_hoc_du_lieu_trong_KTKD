@@ -1,0 +1,65 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r, warning = FALSE, echo = FALSE}
+library(readxl)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(forcats)
+library(ggpubr)
+library(grid)
+library(gridExtra)
+library(forcats)
+library(pryr)
+```
+
+```{r, echo = FALSE}
+colorize <- function(x, color) {
+ if (knitr::is_latex_output()) {
+ sprintf("\\textcolor{%s}{%s}", color, x)
+ } else if (knitr::is_html_output()) {
+ sprintf("<span style='color: %s;'>%s</span>", 
+ color,
+ x)
+ } else x
+}
+```
+
+# Mô hình dạng cây
+
+## Cây quyết định và bài toán hồi quy
+
+## Cây quyết định trong bài toán phân loại
+
+## Các kỹ thuật kết hợp nhiều cây quyết định
+
+## Thực hành: 
+
+### So sánh random forest, boosting, và mô hình tuyến tính trên dữ liệu Sales.
+### So sánh random forest, boosting, và logistic regression trên dữ liệu tín dụng khách hàng.
+### So sánh random forest, boosting, và Poisson regression trên dữ liệu bồi thường bảo hiểm.
+
+
+
+
+
+
+<!-- # REFERENCE -->
+
+<!-- ### Source from thesis -->
+
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+
+<!-- ### Souce from website -->
+
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->

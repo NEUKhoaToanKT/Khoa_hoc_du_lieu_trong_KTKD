@@ -1,0 +1,1372 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r, warning = FALSE, echo = FALSE}
+library(readxl)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(forcats)
+library(grid)
+library(gridExtra)
+library(forcats)
+library(pryr)
+library(tibble)
+library(dplyr)
+library(dslabs)
+library(lubridate)
+library(tidyr)
+library(ggthemes)
+library(ggrepel)
+library(wesanderson)
+library(RColorBrewer)
+library(plotly)
+library(ggiraph)
+```
+
+```{r, echo = FALSE}
+colorize <- function(x, color) {
+ if (knitr::is_latex_output()) {
+ sprintf("\\textcolor{%s}{%s}", color, x)
+ } else if (knitr::is_html_output()) {
+ sprintf("<span style='color: %s;'>%s</span>", 
+ color,
+ x)
+ } else x
+}
+```
+
+# Trực quan hóa dữ liệu
+
+Trực quan hóa dữ liệu là nghệ thuật mô tả dữ liệu thông qua việc sử dụng đồ họa và hình ảnh như các biểu đồ, sơ đồ, và cả hình ảnh động hoặc hình ảnh tương tác. Trực quan hóa dữ liệu là một phương pháp truyền đạt thông tin một cách trực quan và dễ hiểu từ người quản lý dữ liệu đến người tiếp nhận. Trực quan hóa giúp mô tả các mối quan hệ dữ liệu phức tạp, các thông tin chuyên sâu, và cả các vấn đề bất thường ẩn chứa trong dữ liệu.
+
+Tại sao lại cần trực quan hóa dữ liệu ? Thứ nhất là do não bộ của con người sẽ cho phản ứng đối với hình ảnh, màu sắc, kích thước, khoảng cách, ... tốt hơn nhiều so với các ký hiệu và con số. Thứ hai là do dữ liệu mà chúng ta phải đối mặt trong thời đại ngày nay ngày càng lớn và phức tạp. Trực quan hóa là phương pháp hiệu quả nhất để tìm ra các giá trị ẩn chứa bên trong dữ liệu. Đây chính là điểm khiến kỹ năng trực quan hóa dữ liệu được đánh giá là kỹ năng quan trọng nhất đối với những người phân tích dữ liệu.
+
+Có nhiều công cụ để trực quan hóa dữ liệu. Tiêu biểu phải kể đến Power BI và Tableau. Đây là hai công cụ thân thiện với người dùng, cho phép người dùng tạo bảng điều khiển và báo cáo tương tác một cách nhanh chóng và dễ dàng. Cả hai đều có giao diện kiểu kéo và thả chuột giúp dễ dàng tạo hình ảnh trực quan mà không cần bất kỳ kỹ năng lập trình nào.
+
+R sử dụng thư viện $ggplot2$ để trực quan hóa dữ liệu. Sẽ là không dễ dàng cho người mới bắt đầu vẽ được đồ thị bằng $ggplot2$. Điểm mạnh của $ggplot2$ so với các công cụ như Power BI hay Tableau là cho phép người dùng tạo các hình ảnh có khả năng tùy biến cao. $ggplot2$ là một lựa chọn phù hợp dành cho các nhà phân tích dữ liệu, những người cảm thấy hứng thú với việc viết các câu lệnh để tạo ra các hình ảnh trực quan phức tạp, và đúng theo ý muốn của mình. Với một chút kinh nghiệm về Power BI và Tableau, cùng với nhiều hơn một chút kinh nghiệm về $ggplot2$, chúng tôi cho rằng bạn đọc nên làm quen với cả hai cách trực quan hóa dữ liệu. Khi bạn phải tạo các báo cáo trực quan trong một thời gian ngắn, Power BI hay Tableau sẽ là lựa chọn tối ưu. Khi bạn muốn vẽ những hình ảnh phức tạp, có tính cá nhân cao, và bạn có thời gian để làm việc đó, hãy sử dụng $ggplot2$.
+
+## Giới thiệu về $ggplot2$
+
+$ggplot2$ là một thư viện để trực quan hóa dữ liệu trong R. Ngoài $ggplot2$, bạn đọc cũng có thể sử dụng các đồ thị cơ bản của R, hoặc sử dụng các thư viện khác như $lattice$ để vẽ đồ thị. Tuy nhiên, không giống như hầu hết các công cụ khác, $ggplot2$ trực quan hóa dữ liệu dựa trên Ngữ pháp của đồ thị (Wilkinson 2005). Hai chữ $gg$ bắt đầu có nghĩa là Grammar of Graphic hay Ngữ pháp của đồ thị. Ngữ pháp cho phép bạn đọc vẽ đồ thị bằng cách kết hợp các cấu phần độc lập lại với nhau. Đây chính là điểm mạnh của $ggplot2$. Thay vì bị giới hạn ở các bộ đồ thị đã được xác định trước, bạn đọc có thể tạo đồ thị mới phù hợp với mục tiêu của mình. Ý tưởng phải học ngữ pháp để vẽ đồ thị có thể làm cho bạn đọc cảm thấy nản chí, nhưng sự thật là ngữ pháp của $ggplot2$ thực sự dễ học. Chỉ có một số nguyên tắc cốt lõi đơn giản và có rất ít trường hợp đặc biệt. Khi đã thông thạo Ngữ pháp của đồ thị, ngoài tạo ra những đồ thị quen thuộc, bạn đọc còn có thể tạo ra những đồ thị mới hơn, đẹp hơn và mang tính cách riêng. Bạn đọc có thể gặp khó khăn một chút thời gian ban đầu nhưng chúng tôi tin rằng khi đã quen với $ggplot2$ thì sẽ rất ít bạn đọc muốn quay lại với các công cụ trực quan hóa dữ liệu khác.
+
+Hãy thử xem một chút $ggplot2$ trực quan hóa dữ liệu như thế nào. Chúng ta sẽ bắt đầu với một dữ liệu có tên là $murders$ trong thư viện $dslabs$. Giả sử bạn muốn du lịch đến Mỹ nhưng bạn lo ngại về việc cho phép sử dụng súng ở quốc gia này và bạn muốn biết ở những bang nào có tỷ lệ số vụ sát nhân bằng súng cao. Dữ liệu $murders$ là dữ liệu do FBI cung cấp về số vụ sát nhân bằng súng tại các bang của nước Mỹ vào năm 2010. Do bạn đọc đã biết về $data.frame()$, nên bạn có thể tìm hiểu về dữ liệu bằng các hàm như `head()`, `str()`, `view()`
+```{r, warning=FALSE, message=FALSE}
+library(dslabs)
+head(murders)
+```
+
+Thật khó để có thể có được cái nhìn tổng thể về dữ liệu nếu chỉ nhìn vào các bảng, các con số, ký hiệu như trên. Thay vì sử dụng con số, bạn đọc có thể trình bày dữ liệu $murders$ dưới dạng một đồ thị rải điểm (scatter plot) như sau
+
+```{r, warning=FALSE, message=FALSE, fig.width=10, echo = FALSE}
+murders %>% ggplot(aes(x = population/10^6, y = total, label = abb)) +
+  geom_point(aes(fill=region), size = 4, shape=21, alpha = 0.8, color = "black") +
+  geom_text_repel(hjust=1.5, alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE, linetype = 2, color="grey")+
+  scale_x_log10() +
+  scale_y_log10() +
+  scale_fill_brewer(palette = "Dark2")+
+  #scale_fill_manual(values = c("lightskyblue","red","orange","green"))+
+  #scale_fill_brewer(palette = "Set1")+
+  xlab("Dân số mỗi bang") +
+  ylab("Tổng số vụ sát nhân bằng súng") +
+  ggtitle("Số vụ sát nhân bằng súng trong năm 2010 tại Mỹ")+
+  theme_minimal()
+```
+
+Chúng tôi đã sử dụng một vài kỹ thuật biến đổi dữ liệu để vẽ đồ thị ở trên:
+
+- Do các biến total (tổng số vụ sát nhân) và biến population (dân số của mỗi bang) đều có đuôi dài, nghĩa là có nhiều điểm tập trung ở khu vực trung tâm, và một số ít điểm tập trung ở phía đuôi bên phải, do đó thay vì sử dụng chính xác giá trị của các biến trên đồ thị, các điểm của đồ thị rải điểm sẽ phân bố không đồng đều. Giá trị hiển thị trên đồ thị đã được điều chính lại theo hàm $log()$ cơ số 10.
+
+- Chúng tôi thêm vào một đường thẳng tuyến tính (đường kẻ màu xám đi qua trung tâm) để mô tả mối quan hệ chung giữa hai biến $total$ và $population$. 
+
+Dựa trên đồ thị rải điểm ở trên, bạn đọc có thể đưa ra được ngay các nhận xét như sau
+
+- Bang nào có dân số càng cao thì số vụ sát nhân bằng súng càng nhiều. 
+
+- Hầu hết các bang nằm phía trên đường trung bình là các bang ở miền Nam (màu đỏ).
+
+- Các vùng còn lại không có sự phân biệt rõ ràng.
+
+- Bang "District of Columbia" là bang nằm cao hơn hẳn so với đường trung bình, và cũng là bang có tỷ lệ số vụ sát nhân bằng súng cao nhất.
+
+- Bang California có tổng số vụ sát nhân bằng súng lớn nhất, nhưng tỷ lệ số vụ sát nhân bằng súng trên đầu người chỉ bằng mức trung bình chung.
+
+Không dễ dàng để đưa ra được các nhận xét như trên nếu chỉ dựa trên quan sát con số và dữ liệu. Thay vì biểu diễn dưới dạng con số, chúng ta có thể đưa ra nhiều phân tích có ý nghĩa về dữ liệu khi sử dụng đồ thị như trên.    
+
+Wilkinson (2005) giới thiệu khái niệm Ngữ pháp đồ thị để mô tả các thành phần cơ bản làm nền tảng cho tất cả các đồ thị sử dụng và cách các thành phần tương tác trong mô tả dữ liệu. Ngữ pháp đồ thị là mô tả chính xác nhất cho câu hỏi đồ thị trực quan hóa dữ liệu là gì? Thư viện $ggplot2$ được Wickham giới thiệu vào 2009 xây dựng dựa trên ngữ pháp đồ thị mà Wilkinson đã đề cập bằng cách tập trung vào việc xây dựng đồ thị dựa trên nhiều lớp (layer). Nhìn chung, ngữ pháp đồ thị cho chúng ta biết quy tắc cho tương ứng các biến của dữ liệu với các thuộc tính thẩm mỹ (các aesthetic attributions) của đối tượng hình ảnh xuất hiện (các geometries). Đồ thị trong $ggplot2$ cũng có thể bao gồm các mô hình thống kê của dữ liệu và hệ tọa độ mà đồ thị sử dụng. Bạn đọc cũng có thể chia dữ liệu thành các tập hợp con dựa trên các biến rời rạc và mô tả dữ liệu thông qua một nhóm các đồ thị con thông qua kỹ thuật facetting. Sự kết hợp của các thành phần độc lập kể trên tạo nên một đồ thị mô tả dữ liệu.
+
+Bạn đọc không cần phải lo lắng nếu khái niệm Ngữ pháp đồ thị ở trên không có ý nghĩa ngay lập tức. Trong phần sau của cuốn sách, chúng tôi sẽ nói về ngữ pháp đồ thị một cách chi tiết hơn. Bạn sẽ có nhiều cơ hội hơn để tìm hiểu về Ngữ pháp và các sử dụng ngữ pháp để các cấu phần độc lập của một đồ thị hoạt động cùng nhau. Trong phần giới thiệu này, chúng tôi muốn bạn đọc hãy ghi nhớ \textbf{bảy} thành phần độc lập tạo nên một đồ thị cơ bản bao gồm có
+
+1. Dữ liệu (Data) là dữ liệu hay tập hợp các dữ liệu mà bạn đọc muốn trực quan hóa. Thông thường thì chỉ có một dữ liệu chính mà bạn đọc muốn minh họa cho người tiếp nhận dữ liệu, trong khi các dữ liệu khác được sử dụng với mục đích để mô tả dữ liệu chính. Một ví dụ điển hình của dữ liệu phụ là dữ liệu kiểu bản đồ. Chẳng hạn như khi bạn đọc muốn mô tả về dữ liệu $murder$, bạn đọc có thể sử dụng dữ liệu về bản đồ nước Mỹ để mô tả tốt hơn về dữ liệu $murder$.
+
+2. Hình dạng đồ họa (các $geometries$ hay viết tắt là các $geom$) là những hình dạng đồ họa mà chúng ta muốn nhìn thấy trên đồ thị. Các hình dạng này có thể là các điểm, các thanh, các đường.
+
+3. Các ánh xạ thẩm mỹ (Aesthetic mapping) là các quy tắc cho tương ứng từ các biến (cột của dữ liệu) đến các thuộc tính thẩm mỹ (aesthetic attribution) của các hình dạng đồ họa. Các thuộc tính thẩm mỹ có thể là hình dạng, màu sắc, độ đậm nhạt, ...
+
+4. Các mô hình hay biến đổi thống kê (statistics hay viết tắt là stats) là các quy tắc tóm tắt dữ liệu, các mô hình xây dựng trên dữ liệu được mô tả dưới dạng một hình dạng đồ họa nhằm tăng tính dễ hiểu cho đồ thị hoặc làm nổi bật một xu thế nào đó. Ví dụ như trong đồ thị rải điểm mô tả dữ liệu $murder$, chúng tôi đã sử dụng một mô hình tuyến tính mô tả mối quan hệ giữa biến $total$ và biến $population$ với mục đích phân loại ra các bang có tỷ lệ số vụ sát nhân bằng súng thấp hơn và các bang có tỷ lệ số vụ sát nhân bằng súng cao hơn so với chung bình chung.
+
+5. Hệ tọa độ (Cordinate) mô tả cách dữ liệu được trực quan hóa trên mặt phẳng của đồ họa. Đa số các trường hợp chúng ta sẽ sử dụng hệ tọa độ Descartes, nhưng cũng có một số hệ tọa độ khác có thể sử dụng bao gồm tọa độ cực và bản đồ.
+
+6. Một thành phần mô tả cách dữ liệu được hiển thị là chia nhỏ dữ liệu để mô tả bằng một nhóm các đồ thị thay vì một đồ thị duy nhất được gọi là facetting. Thành phần này thường được sử dụng để mô tả dữ liệu có kích thước lớn và hoặc chúng ta muốn so sánh trực quan dữ liệu ở các nhóm khác nhau.
+
+7. Thành phần cuối cùng của đồ thị là ngữ cảnh của đồ thị hay các themes. Theme quy định khung hoặc nền mà đồ thị được hiển thị chẳng hạn như kích thước phông chữ hoặc màu nền. Mặc dù các giá trị mặc định trong $ggplot2$ đã được lựa chọn hợp lý nhưng bạn đọc cũng có thể cần tham khảo các tài liệu tham khảo khác để tạo ra một ngữ cảnh phù hợp hơn cho đồ thị của mình.
+
+Mỗi khi vẽ một đồ thị $ggplot$, bạn đọc cần tự định nghĩa ít nhất ba thành phần: 1. Dữ liệu; 2. Các hình dạng đồ họa; và 3. Các ánh xạ thẩm mỹ. Các thành phần 5. Hệ tọa độ; và 7. Ngữ cảnh; sẽ được tự động gán cho các giá trị mặc định nếu bạn đọc không quy định trong câu lệnh. Và các thành phần 4. Mô hình; và 6. Facetting; chỉ xuất hiện khi bạn đọc gọi lên trong câu lệnh của mình. 
+
+Trước khi đi vào giới thiệu chi tiết các cách tạo nên một đồ thị trực quan hóa, bạn đọc cũng cần biết được các hạn chế khi trực quan hóa dữ liệu bằng $ggplot2$:
+
+- $ggplot2$ là một thư viện của R nên bạn đọc cần có kỹ năng viết câu lệnh R tương đối thành thạo.
+
+- $ggplot2$ không gợi ý bạn đọc nên sử dụng đồ thị nào khi gặp một dữ liệu cụ thể. Điều đó cũng có nghĩa là bạn đọc cần có một chút kinh nghiệm về trực quan hóa dữ liệu trước khi sử dụng $ggplot2$.
+
+- $ggplot2$ không được phát triển để vẽ các đồ thị động hay đồ thị tương tác mà chỉ tập trung vào vẽ các đồ thị tĩnh. Muốn vẽ các đồ thị tương tác hay đồ thị động trong $ggplot2$ bạn đọc phải sử dụng các packages đi kèm như $gganimate$ hay $ggplotly$. 
+
+Để kết thúc phần giới thiệu về $ggplot2$, chúng tôi sẽ sử dụng $ggplot2$ kết hợp với $gganimate$ để kể một câu chuyện (story telling) về sự phát triển của các quốc gia trên thế giới từ năm 1960 đến năm 2010 thông qua hai khía cạnh là tuổi thọ trung bình và thu nhập bình quân đầu người. Dữ liệu chính được sử dụng là dữ liệu $gapminder$. 
+
+```{r code visualization 1, warning = FALSE, message = FALSE, out.height=700, out.width = 900, echo = FALSE, eval = FALSE}
+library(tidyverse)
+library(gganimate)
+library(dslabs)
+library(gifski)
+k<-2
+p<-gapminder%>%
+# FIX DU LIEU
+filter(year<=2010)%>%
+# AESTHETIC MAPPING
+ggplot(aes(x=fertility,y=life_expectancy,size = population, fill= continent))+
+# TAO DO THI SCATTERPLOT
+geom_point(shape=21,alpha=0.6)+
+# THAY DOI TITLE CUA DO THI, TRUC X, TRUC Y
+labs(title = 'Năm: {as.integer(frame_time)}',
+y = "Tuổi thọ trung bình",
+x = "Tỷ lệ sinh trên mỗi phụ nữ")+
+#GIOI HAN LAI GIA TRI TREN X,Y
+xlim(0,10)+ylim(20,90)+
+# SCALE LAI SIZE (POPULATION)
+scale_size(range = c(1*2, 20*2)) +
+# SCALE LAI MAU SAC THE0 DAI MAU "SET1" CUA BREWER
+scale_color_brewer(palette = "Set1")+
+# LAM TITLE THAY DOI THEO NAM
+transition_time(year)+
+
+# theme
+theme_minimal()+
+#SIZE & FONT CHU
+theme(plot.title = element_text(size = 10*k),
+axis.title.x = element_text(size = 10*k),
+axis.title.y = element_text(size = 10*k),
+axis.text.x = element_text(size = 10*k),
+axis.text.y = element_text(size = 10*k),
+legend.text = element_text(size = 10*k,margin = margin(r = 10*k, unit = "pt")),
+legend.title = element_text(size = 10*k),
+#    legend.text=element_text(size=20*2),
+)
+#legend.key.size = element_rect(size = rel(1.5)),
+
+# TAO DO THI DANG DONG
+animate(p, renderer = gifski_renderer(),
+width = 1600, #pixel chieu rong
+height = 1600) # pixel chieu cao
+```
+
+## Tạo một đồ thị $ggplot2$ cơ bản
+Trước khi giới thiệu chi tiết về các thành phần độc lập của đồ thị và cách sử dụng ngữ pháp của đồ thị, chúng tôi nghĩ rằng sẽ tốt hơn nếu bạn đọc bắt đầu vẽ các đồ thị đơn giản bằng cách copy và dán các câu lệnh vẽ đồ thị trước. Sau khi thực thi một vài lần, bạn đọc sẽ có "cảm nhận" được phần nào cách mà một đồ thị của $ggplot2$ được xây dựng. Dữ liệu chúng tôi sử dụng để trực quan hóa trong suốt chương sách này là dữ liệu $gapminder$, dữ liệu về sức khỏe và thu nhập của tất cả các quốc gia trên thế giới bắt đầu từ năm 1960 đến năm 2016. Bạn đọc hãy đảm bảo rằng mình đã đọc và hiểu một cách cơ bản về dữ liệu này.
+```{r, warning=FALSE, message=FALSE, echo = FALSE, fig.width=12,fig.height=4}
+gapminder%>%group_by(year)%>%
+  group_modify(~summarize(.x, across(everything(), function(x) sum(is.na(x))/length(x) ))) %>%
+  as.data.frame()%>%select(-country)%>%gather(variables,na_rate,-year)%>%ggplot(aes(x = year, y = variables, fill = na_rate))+
+  geom_tile(color = "grey")+
+  #scale_fill_distiller(palette = "PiYG")+
+  scale_fill_gradient(low="white", high = "#555555",
+                      labels = scales::label_percent())+
+  theme_minimal()+ylab("")+xlab("")+ggtitle("Tỷ lệ ko quan sát được của mỗi biến qua các năm")
+```
+
+Bạn đọc có thể thấy rằng dữ liệu $gapminder$ có nhiều giá trị không quan sát được trong năm 2016. Hai cột có tỷ lệ không quan sát được qua các năm lớn là $infant\_mortality$ và $gdp$. Riêng biến $gdp$ là gần như không quan sát được từ năm 2012 đến 2016. Do chỉ sử dụng dữ liệu với mục đích trực quan hóa nên chúng tôi sẽ tiền xử lý dữ liệu một cách đơn giản là xóa các quan sát của các năm 2012 đến 2016. Giá trị không quan sát được từ năm 1960 đến 2012 sẽ được thay thế bằng mô hình rừng ngẫu nhiên. Dữ liệu sau bước tiền xử lý này được gọi là $gapminder\_1$
+
+```{r, warning=FALSE, message=FALSE, echo = FALSE}
+gapminder_1<-gapminder%>%filter(year<=2011)
+```
+
+Hàm số để vẽ đồ thị của thư viện $ggplot2$ là hàm `ggplot()`. Bạn đọc hãy nhớ rằng ba thành phần bắt buộc phải có của một đồ thị là 1. Dữ liệu; 2. (Ít nhất) Một hình dạng đồ họa; và 3. Ánh xạ thẩm mỹ. Đồ thị dưới đây mô tả hai biến gdp bình quân đầu người và tuổi thọ trung bình của các quốc gia trên thế giới vào năm 2011. Bạn đọc có thể copy các đoạn lệnh ở dưới vào cửa sổ R script và thực hiện giống như các câu lệnh thông thường.
+
+```{r, warning=FALSE, message=FALSE, fig.width= 8}
+dat<-gapminder%>%filter(year==2011)%>%mutate(gdp_per_capita = gdp/population)
+ggplot(dat, aes(x = life_expectancy, y = gdp_per_capita)) + geom_point()
+```
+
+Trong câu lệnh `ggplot()` ở trên, dữ liệu được đưa vào là $data.frame$ có tên là $dat$, hình dạng đồ họa là các điểm trên trục tọa độ Descartes. Hình dạng đồ họa này được gọi bằng hàm `geom_point()`. Ánh xạ thẩm mỹ được gọi thông qua hàm `aes()` nằm trong hàm `ggplot()`. Trong ánh xạ thẩm mỹ ở trên, chúng ta đã cho tương ứng biến $life\_expectancy$ với giá trị trên trục $x$ của trục tọa độ Descartes, biến $gdp\_per\_capita$ với giá trị trên trục $y$ của trục tọa độ Descartes.
+
+Bạn đọc đã có thể thấy được một vài thông tin phán ánh trên dữ liệu.
+
+- Có mối liên hệ đồng biến giữa tuổi thọ trung bình và thu nhập bình quân đầu người. Quốc gia nào có thu nhập bình quân đầu người cao thì tuổi thọ trung bình cũng sẽ cao. Điều này khá hợp lý bởi các quốc gia có thu nhập trung bình cao thường là các nước phát triển có hệ thống chăm sóc sức khỏe tốt, do đó tuổi thọ trung bình cũng sẽ cao.
+
+- Mối liên hệ đồng biến nhưng không tuyến tính, thu nhập bình quân đầu người tăng nhanh hơn rất nhiều ro với tuổi thọ trung bình.
+
+- Có một vài điểm có khả năng là ngoại lai trong mối liên hệ tuyến tính này. Đây là các quốc gia có mức thu nhập bình quân khá cao (từ 10 nghìn USD - 20 nghìn USD/1 người) nhưng lại có tuổi thọ trung bình không cao. Tuy nhiên chỉ với các thông tin như trên chúng ta không thể đưa ra giải thích cho các giá trị có khả năng cao là ngoại lai này.
+
+Hình dạng đồ họa là những gì mà bạn đọc nhìn thấy trên đồ thị của mình. Khi gọi các hình dạng đồ họa thư viện $ggplot2$ luôn luôn sử dụng các hàm số bắt đầu bởi `geom` là viết tắt của $geometries$. Bạn đọc có thể thử với một vài hình dạng đồ họa quen thuộc như dưới đây
+
+```{r, warning=FALSE, message=FALSE, eval = FALSE}
+## geom_histogram() sử dụng các thanh để mô tả phân phối của một biến liên tục
+ggplot(dat,aes(x = gdp_per_capita))+geom_histogram()
+
+## geom_bar() sử dụng các thanh để mô tả phân phối của một biến rời rạc
+ggplot(dat,aes(x = continent))+geom_bar()
+
+## geom_boxplot() sử dụng các hình hộp để mô tả phân phối của biến liên tục
+ggplot(dat,aes(x = continent, y = life_expectancy))+geom_boxplot()
+
+## geom_line() sử dụng đường nối các điểm theo thứ tự điểm xuất hiện
+dat1<-filter(gapminder, year<=2011, country == "United States")%>%select(year,gdp)
+ggplot(dat1,aes(x = year, y = gdp))+geom_line()
+```
+
+Còn rất nhiều các hàm  $geom_*()$ khác có thể được sử dụng để tạo đồ thị trong thư viện $ggplot2$. Bạn đọc có thể xem danh sách các $geom$ thường sử dụng trong danh sách đính kèm dưới đây.
+
+https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf
+
+Bạn đọc có thể thầy rằng CHEAT SHEET cũng đã có gợi ý cho người sử dụng nên dùng hàm `geom_*()` nào trong từng trường hợp. Chẳng hạn như `geom_point()` được khuyên dùng trong trường hợp mô tả hai biến liên tục. Đồng thời, mỗi hàm `geom_*()` sẽ có một danh sách các thuộc tính thẩm mỹ đi kèm. Đối với `geom_point()` các thuộc tính thẩm mỹ bao gồm $x$, $y$, $alpha$, $color$, $fill$, $shape$, $size$, và $stroke$. Bạn đọc hướng dẫn sử dụng của hàm `geom_point()` để biết các thuộc tính thẩm mỹ này có ý nghĩa như thế nào. Trong các thuộc tính thẩm mỹ này, $color$, $fill$, $shape$ và $size$ là các thuộc tính thẩm mỹ xuất hiện ở nhiều hàm `geom_*()` khác. Đây là các thuộc tính thẩm mỹ thường xuyên được sử dụng để tăng khả năng mô tả dữ liệu của các đồ thị.
+
+Để mô tả tốt hơn mối quan hệ giữa thu nhập bình quân đầu người và tuổi thọ trung bình của các quốc gia trên thế giới, chúng ta cần thêm thông tin vào đồ thị ở trên. Một phương pháp đơn giản để thêm biến khác vào một đồ thị là ánh xạ biến đó đến một trong các thuộc tính thẩm mỹ của đồ thị được vẽ bởi hàm `geom_point()`. Biến được thêm vào dưới đây là biến $continent$. Chúng ta sẽ ánh xạ biến đó tương ứng với thuộc tính thẩm mỹ $color$ như sau
+
+```{r, warning=FALSE, message=FALSE, fig.width= 8}
+dat<-gapminder%>%filter(year==2011)%>%mutate(gdp_per_capita = gdp/population)
+ggplot(dat, aes(x = life_expectancy, y = gdp_per_capita, color = continent)) +
+  geom_point()
+```
+
+Chúng ta đã có thể đưa ra thêm các phân tích về mối liên hệ giữa tuổi thọ trung bình và thu nhập bình quân. Có sự phân bố không đồng đều về thu nhập bình quân và tuổi thọ trung bình của các quốc gia trên thế giới, đa số các quốc gia Châu Phi (màu đỏ) có thu nhập bình quân đầu người thấp và tuổi thọ trung bình thấp; các quốc gia Châu Âu (màu xanh da trời) có thu nhập bình quân đầu người cao và tuổi thọ trung bình cao. Có sự phân hóa rõ ràng ở Châu Đại Dương và Châu Mỹ, một vài quốc gia nằm trong nhóm các nước có thu nhập cao, tuổi thọ trung bình cao trong khi đa số các quốc gia còn lại nằm trong nhóm thu nhập thấp và tuổi thọ trung bình thấp. Sự phân hóa ở Châu Á không quá rõ ràng.
+
+Có một nguyên tắc là thuộc tính thẩm mỹ $color$ thường được sử dụng với biến rời rạc và thuộc tính thẩm mỹ $size$ thường được sử dụng với biến liên tục. Thuộc tính thẩm mỹ $shape$ chỉ có thể được sử dụng với biến rời rạc, R sẽ báo lỗi nếu bạn ánh xạ một biến liên tục vào $shape$. Có 21 giá trị khác nhau trong dành cho thuộc tính thẩm mỹ $shape$ do đó R sẽ có cảnh báo nếu bạn đọc ánh xạ một biến rời rạc có nhiều hơn 21 giá trị. 
+
+Đồ thị dưới đây thêm biến $population$ vào đồ thị bằng cách sử dụng thuộc tính thẩm mỹ $size$. Bạn đọc hãy luôn nhớ rằng để khai báo ánh xạ thẩm mỹ từ một biến đến một thuộc tính thẩm mỹ, hãy luôn luôn khai báo bên trong hàm `aes()`.
+
+```{r, warning=FALSE, message=FALSE, fig.width= 8}
+ggplot(dat, aes(x = life_expectancy, y = gdp_per_capita, 
+                color = continent, size = population)) + geom_point(alpha = 0.4)
+```
+
+Tham số $alpha$ sử dụng trong hàm `geom_point()` trong trường hợp dữ liệu có nhiều điểm bị trùng lên nhau. Chúng ta sẽ thảo luận kỹ hơn về thuộc tính thẩm mỹ này trong phần sau của chương. Khi thêm biến $population$ vào có thể làm đồ thị có thêm thông tin, chẳng hạn như bạn đọc có thể nhận ra vị trí của các quốc gia đông dân tiêu biểu như Trung Quốc và Ấn Độ vào năm 2011 vẫn nằm trong nhóm các nước có thu nhập bình quân đầu người thấp; hoặc cũng có thể nhận ra Mỹ và Nhật Bản là các quốc gia nằm ở góc trên bên phải là các nước cũng có dân số tương đối lớn. Tuy nhiên, bạn đọc cũng có thể nhận ra rằng khi cùng sử dụng nhiều thuộc tính thẩm mỹ trên một đồ thị, hiệu quả sẽ không được như mong muốn.
+
+Với các dữ liệu có nhiều quan sát, bạn đọc có thể chia nhỏ dữ liệu thành các nhóm và tạo đồ thị cho từng nhóm.
+
+```{r, warning=FALSE, message=FALSE, fig.width= 10}
+ggplot(dat, aes(x = life_expectancy, y = gdp_per_capita, size = population)) + 
+  geom_point(alpha = 0.4)+
+  facet_wrap(~continent)
+```
+
+Sử dụng năm đồ thị có cùng trục tọa độ $x$ và $y$ để mô tả mối quan hệ giữa thu nhập bình quân đầu người và tuổi thọ trung bình là rõ ràng hơn rất nhiều so với sử dụng một đồ thị duy nhất và phân biệt bằng màu sắc. 
+
+Thành phần cuối cùng mà bạn đọc có thể thêm vào đồ thị $ggplot2$ là ngữ cảnh, hay các $themes$. Có một số $theme$ có sẵn hoặc có các $theme$ nằm trong các thư viện cài đặt bổ sung. Chúng ta sẽ nói chi tiết về cách tùy chỉnh $theme$ hoặc tự tạo $theme$ ở phần sau của chương. Trong đoạn câu lệnh dưới đây, chúng tôi sử dụng `theme_minimal()` là một $theme$ có sẵn trong thư viện $ggplot2$.
+
+```{r, warning=FALSE, message=FALSE, fig.width= 10}
+ggplot(dat, aes(x = life_expectancy, y = gdp_per_capita, size = population)) + 
+  geom_point(shape = 21, alpha = 0.7, fill = "lightskyblue")+
+  facet_wrap(~continent)+
+  # thêm title
+  labs( title = "Thu nhập bình quân và tuổi thọ trung bình",
+        subtitle = "Các quốc gia trên thế giới năm 2011")+
+  xlab("Tuổi thọ trung bình (năm)")+
+  ylab("Gdp bình quân đầu người (USD)")+
+  theme_minimal()# thêm ngữ cảnh
+```
+
+Còn một thành phần khác chưa được nhắc đến khi tạo đồ thị là các $statistics$ hay viết tắt là các $stats$. Tuy nhiên đây là thành phần phức tạp nhất và liên quan đến các kiến thức về xây dựng mô hình trên dữ liệu nên chúng tôi không sử dụng trong phần này. Mục tiêu của chúng tôi là để bạn đọc làm quen và tự tạo các đồ thị đơn giản bằng các dòng lệnh của thư viện $ggplot2$.
+
+## Cấu trúc nhiều lớp và ngữ pháp của đồ thị $ggplot2$.
+
+Cấu trúc theo lớp (layer) của đồ thị $ggplot2$ giúp cho người phân tích dữ liệu có thể xây dựng đồ thị của mình theo hướng có cấu trúc. Đồ thị trong $ggplot2$ từ đơn giản đến phức tạp đều được tạo thành từ một hoặc nhiều lớp. Mỗi lớp trong đồ thị có mục tiêu hiển thị khác nhau:
+
+- Mục tiêu thứ nhất và cũng là mục tiêu chính, đó là để hiển thị dữ liệu. Luôn luôn có một hoặc một vài lớp (chính) với mục tiêu mô tả dữ liệu thô, mô tả cấu trúc tổng thể và các giá trị ngoại lai của dữ liệu. Lớp này xuất hiện trên tất cả các đồ thị. Trong giai đoạn đầu của quá trình khai phá dữ liệu bằng trực quan hóa, lớp này thường xuất hiện duy nhất. Đơn giản như khi mô tả mỗi quan hệ giữa gdp bình quân đầu người và tuổi thọ trung bình của tất cả các quốc gia trên thế giới, lớp đồ thị được hiển thị bằng hàm `geom_point()` là lớp hiển thị dữ liệu.
+
+- Các lớp có mục tiêu tóm tắt và mô tả ý nghĩa thống kê của dữ liệu. Bằng cách thêm vào đồ thị các mô hình, hoặc hiển thị các dự đoán dựa trên mô hình người tiếp nhận dữ liệu, hoặc bản thân người phân tích dữ liệu sẽ nhận biết được những giá trị bên trong dữ liệu, hoặc những chi tiết mà khi xây dựng mô hình có thể bỏ sót.
+
+- Các lớp có mục tiêu thêm vào ngữ cảnh của dữ liệu. Các lớp này hiển thị bối cảnh nền, thêm vào các chú thích giúp mang lại ý nghĩa cho dữ liệu thô hoặc các giá trị tham chiếu nhằm hỗ trợ việc so sánh hoặc đánh giá. Đây thường là lớp cuối cùng được thêm vào trong đồ thị.
+
+Lớp chính của đồ thị có thể bao gồm bảy thành phần độc lập giống như chúng ta đã giới thiệu ở phần đầu. Cấu trúc của các lớp còn lại của đồ thị $ggplot2$ có thể bao gồm các thành phần sau
+
+1. Dữ liệu: nếu bạn không khai báo dữ liệu trong mỗi lớp, $ggplot2$ sẽ sử dụng dữ liệu ban đầu là giá trị mặc định
+
+2. Ánh xạ thẩm mỹ: được khai báo trong hàm `aes()` trong mỗi lớp, nếu không có khai báo $ggplot2$ sẽ tìm ánh xạ thẩm mỹ trong hàm `ggplot()`. Trong trường hợp không tìm thấy ánh xạ thẩm mỹ nào được khai báo, $ggplot2$ sử dụng giá trị mặc định.
+
+3. Một hình dạng đồ họa: được gọi từ các hàm `geom_*()`
+
+4. Một biến đổi thống kê hoặc một tóm tắt cơ bản của dữ liệu được gọi từ hàm $stat_*()$
+
+5. Vị trí xuất hiện của lớp đó. Chúng ta sẽ thảo luận vấn đề này chi tiết trong phần sau của chương.
+
+Khi đồ thị chỉ có một lớp chính với mục tiêu hiển thị dữ liệu thô, bạn không cần phải am hiểu về ngữ pháp của đồ thị. Bạn đọc chỉ cần khai báo chính xác ánh xạ thẩm mỹ trong hàm `aes()` để có được kết quả mong muốn. Tuy nhiên khi xây dựng đồ thị có nhiều lớp, bạn đọc cần phải nắm được ngữ pháp để kết hợp các lớp lại với nhau theo ý muốn của bạn. 
+
+### Ánh xạ thẩm mỹ trong đồ thị có nhiều lớp.
+
+Hãy quan sát ví dụ ở dưới đây, khi bạn muốn thêm vào một đường cong mô tả xu thế mối quan hệ giữa gdp bình quân đầu người và tuổi thọ trung bình của các quốc gia trên thế giới vào năm 2011.
+
+```{r, warning=FALSE, message=FALSE, fig.width= 12}
+## Hình bên trái
+p1<-dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita, 
+                color = continent)) + 
+  geom_point(alpha = 0.4)+
+  geom_smooth(se=FALSE)
+
+## Hình bên phải
+p2<-dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita))+
+  geom_point(aes(color = continent), alpha = 0.4) + 
+  geom_smooth(se=FALSE)
+
+## Vẽ p1 và p2 trên cùng một đồ thị
+grid.arrange(p1,p2,nrow= 1 , ncol = 2)
+```
+
+Bạn đọc có thể thấy sự khác nhau giữa hai đồ thị là các đường mô tả mối quan hệ giữa tuổi thọ bình quân và gdp bình quân đầu người được xây dựng theo từng lục địa (hình bên trái) và được xây dựng cho tất cả các quốc gia (hình bên phải). Sự khác biệt là do trong hình bên phải, thay vì khai báo ánh xạ thẩm mỹ từ biến $continent$ tới thuộc tính thẩm mỹ $color$ trong hàm `ggplot()`, chúng tôi đã khai báo ánh xạ thẩm mỹ này trog hàm `geom_point()`.
+
+Nếu như hàm `geom_point()` là lớp chính mô tả dữ liệu thô thì hàm `geom_smooth()` là lớp phụ được thêm vào nhằm tăng khả năng mô tả của dữ liệu. Các ánh xạ thẩm mỹ được khai báo trong hàm `ggplot()` cũng giống như các biến toàn cục trong một đồ thị cụ thể, trong khi các ánh xạ thẩm mỹ được khai báo trong các hàm `geom_*()` giống như khai báo giá trị cho các biến cục bộ trong môi trường của hàm số đó. Các biến cục bộ nếu không được khai báo trong các hàm `geom_*()` sẽ được tìm trên môi trường toàn cục của hàm `ggplot()`. Trong trường hợp trong các hàm `geom_*()` và `ggplot()` đều không được khai báo giá trị,  biến sẽ nhận giá trị mặc định.
+
+Hãy quay trở lại đoạn câu lệnh ở trên. Trong hình bên trái, các thuộc tính thẩm mỹ $x$, $y$, và $color$  được khai báo trong hàm `ggplot()`; đồng thời trong các hàm `geom_point()` và `geom_smooth()` không khai báo các ánh xạ thẩm mỹ; do đó cả hai hàm này đều hiểu các thuộc tính thẩm mỹ $x$, $y$, và $color$ giống như khai báo ban đầu. Trong hình bên phải, hai thuộc tính thẩm mỹ $x$ và $y$ được khai báo trong hàm `ggplot()` trong khi thuộc tính thẩm mỹ $color$ được khai báo bên trong hàm `geom_point()`. Do đó, hàm `geom_smooth()` chỉ hiểu hai thuộc tính thẩm mỹ $x$ và $y$ như được khai báo trong `ggplot()`.
+
+```{r, warning=FALSE, message=FALSE, echo = FALSE}
+Col1 = c("Hình bên trái", "Hình bên phải")
+Col2 = c("x, y và color", "x, y, và color")
+Col3 = c("x, y và color", "x, y")
+mydat<-data.frame(c1 = Col1, c2 = Col2, c3 = Col3 )
+```
+
+```{r, warning = FALSE, message=FALSE, echo = FALSE}
+kable(mydat, booktabs = T,
+      col.names = c(" ",
+        "geom_point()", "geom_smooth()"),
+      escape=F) %>%
+  column_spec(c(2,2)) %>% 
+  kable_styling(latex_options = "scale_down")
+```
+
+Hàm `geom_smooth()` khi thuộc tính thẩm mỹ $color$ nhận giá trị mặc định sẽ xây dựng một mô hình được gọi là locally estimated scatterplot smoothing hay loess nhằm mô tả mỗi quan hệ giữa biến liên tục $y$ theo một biến liên tục $x$. Nếu thuộc tính thẩm mỹ $color$ được khai báo giá trị tương ứng với một biến rời rạc, `geom_smooth()` sẽ chia dữ liệu thành các nhóm tương ứng với $color$ trước khi xây dựng mô hình mà $y$ phụ thuộc vào $x$. Điều này giải thích tại sao trong hình bên trái có 5 mô hình được xây dựng tương ứng với năm lục địa, trong khi trong hình bên phải chỉ có một mô hình duy nhất được xây dựng cho tất cả các quốc gia trên thế giới. 
+
+Vậy khi nào bạn nên khai báo ánh xạ thẩm mỹ trong hàm `ggplot()` và khi nào bạn nên khai báo ánh xạ thẩm mỹ bên trong hàm `geom_*()`? Câu trả lời là nếu đa số các lớp bạn đọc sử dụng chung một dữ liệu và chung các ánh xạ thẩm mỹ, bạn nên khai báo ánh xạ thẩm mỹ bên trong hàm `ggplot()`. Còn trong trường hợp đa số các lớp sử dụng sữ liệu khác nhau, hoặc ánh xạ thẩm mỹ khác nhau, bạn hãy khai báo ánh xạ thẩm mỹ bên trong mỗi hàm `geom_*()`. Trong trường hợp bạn dùng một hàm `geom_()*` và không muốn sử dụng ánh xạ thẩm mỹ đã khai báo trong `ggplot()`, bạn có thể khai báo lại hoặc khai báo thuộc tính thẩm mỹ đó bằng NULL.
+
+```{r, warning=FALSE, message=FALSE, fig.width= 15}
+## Hình bên trái
+p1<-dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita, 
+                color = continent)) + 
+  geom_point(alpha = 0.4)+
+  geom_smooth(aes(color=NULL), se = FALSE)
+
+## Hình ở giữa
+p2<-dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita, 
+                color = continent)) + 
+  geom_point(alpha = 0.4)+
+  geom_smooth(color="black", se = FALSE)
+
+## Hình bên phải 
+
+p3<-dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita, 
+                color = continent)) + 
+  geom_point(alpha = 0.4)+
+  geom_smooth(aes(color="black") , se = FALSE)
+
+## Vẽ p1, p2, p3 trên cùng một đồ thị
+grid.arrange(p1,p2,p3, nrow= 1 , ncol = 3)
+```
+
+Có hai cách để bạn tác động đến các thuộc tính thẩm mỹ của đồ thị trong các hàm `geom_*()`, đó là dùng ánh xạ thẩm mỹ (mapping) và cài đặt tham số (setting). Khác nhau giữa hai cách này là việc bạn khai báo giá trị của thuộc tính thẩm mỹ bên trong hay bên ngoài hàm `aes()`. Hãy quan sát đồ thị ở trên: 
+
+- Hình bên trái cho đường cong của mô hình $loess$ có màu xanh da trời. Khi gọi hàm `geom_smooth()`, chúng ta đã cho thuộc tính thẩm mỹ $color$ về giá trị mặc định bằng cách ánh xạ thuộc tính này tới giá trị $NULL$. Màu xanh da trời là màu mặc định của các đường cong được tạo ra từ `geom_smooth()`.
+
+- Hình ở giữa chúng ta cài đặt (setting) cấu phần thẩm mỹ $color$ bằng một giá trị cố định là "black" (màu đen). Do đó đường cong được tạo từ `geom_smooth()` sẽ có màu đen giống như cài đặt. Bạn đọc chỉ cần sử dụng giá trị màu sắc có ý nghĩa với R để cài đặt cho thuộc tính thẩm mỹ $color$. Nếu trong một hàm `geom_*()` vừa có ánh xạ thẩm mỹ được khai báo trong hàm `aes()` và vừa có cài đặt thuộc tính thẩm mỹ (ngoài hàm `aes()`), $ggplot2$ sẽ ưu tiên giá trị nằm ngoài `aes()`.
+
+- Hình bên tay phải phức tạp hơn một chút. Khác với hình ở giữa, thuộc tính $color$ được gán cho giá trị "black" bên trong hàm `aes()`. Bạn đọc có thể thấy rằng đường cong được tạo từ hàm `geom_smooth()` không có màu đen như hình ở giữa. Khi khai báo thuộc tính trong hàm `aes()`, chúng ta đã ánh xạ thuộc tính $color$ của hàm `geom_smooth()` đến một giá trị kiểu ký tự là "black" chứ không phải cho màu sắc của đường cong nhận giá trị màu tương ứng! Trong hàm `geom_point()` trước đó đã ánh xạ biến $continent$ tới thuộc tính thẩm mỹ $color$, khi chúng ta tiếp tục ánh xạ một biến "black" tới $color$ trong `geom_smooth()` thì $ggplot2$ sẽ hiểu rằng có thêm một giá trị mới cho thuộc tính $color$ ("black") thêm vào các giá trị hiện có (tên của 5 châu lục). Điều này giải thích tại sao trong chú giải (legend) của hình bên tay phải có 6 loại thay vì 5 loại như hình ở giữa. Đường cong tạo bởi `geom_smooth()` có màu xanh lá cây vì giá trị "black" có thứ hạng là 4 khi sắp xếp 6 giá trị ánh xạ tới thuộc tính $color$ theo thứ tự tăng dần.
+
+Khi cân nhắc sử dụng ánh xạ hay thiết lập giá trị cho các thuộc tính thẩm mỹ, bạn đọc nên cân nhắc về việc có muốn tác động lên thuộc tính thẩm mỹ nữa hay không. Nếu bạn muốn cố định giá trị cho thuộc tính thẩm mỹ, hãy sử dụng thiết lập giá trị. Còn nếu bạn muốn tác động ngược lại lên thuộc tính thẩm mỹ đó, hãy sử dụng ánh xạ thay vì thiết lập giá trị.
+
+Hãy nói một chút về cách chú giải ghi nhận giá trị mới của một thuộc tính thẩm mỹ. Trong hình bên phải, khi chúng ta khai báo giá trị "black" cho thuộc tính $color$, $ggplot2$ ghi nhận "black" như một giá trị mới tương đương với tên các Châu lục đã sử dụng trong khai báo trước đó. Cách ghi nhận tên biến mới trong chú giải sẽ rất hữu ích khi chúng ta muốn tạo một đồ thị nhiều lớp và đặt tên cho từng lớp trong phần chú giải của đồ thị. Đồ thị dưới đây so sánh ba phương pháp xây dựng mô hình trên dữ liệu là phương pháp hồi quy tuyến tính thông thường (`method = "lm"`); hồi quy loess (`method = "loess"`), và mô hình cộng tính tổng quát (`method = "gam"`)
+
+```{r, warning=FALSE, message=FALSE, fig.width= 8}
+# So sánh ba phương pháp xây dựng mô hình khác nhau của hàm geom_smooth
+dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita)) +
+  #Layer 1: đồ thị rải điểm
+  geom_point(alpha = 0.4)+
+  
+  # Layer 2: Đường hồi quy tuyến tính
+  geom_smooth(aes(color="Hồi quy tuyến tính"), method = "lm" , se = FALSE)+
+  
+  # Layer 3: Đường hồi quy loess
+  geom_smooth(aes(color="Hồi quy loess"), method = "loess" , se = FALSE)+
+  
+  # Layer 4: Mô hình GAM (generalized additive model)
+  geom_smooth(aes(color="Mô hình cộng tính tổng quát"), method = "gam" , se = FALSE)
+```
+
+### Các hàm `geom_*()` cơ bản
+Các hình dạng đồ họa, gọi tắt là các $geoms$, là một cách phổ biến để hiển thị một lớp của một đồ thị mô tả dữ liệ. Ví dụ như sử dụng `geom_point()` sẽ tạo ra một đồ thị phân tán, trong khi sử dụng `geom_line()` sẽ tạo ra các đồ thị theo đường. Danh sách các $geoms$ và các thuộc tính thẩm mỹ bạn đọc có thể tìm thấy trong CHEAT SHEET ở trên. Ở đây chúng tôi chỉ tổng hợp và phân loại lại các $geoms$ một cách ngắn gọn.
+
+- Khi mô tả một biến:
+  - Mô tả biến rời rạc:
+    -  `geom_bar()`: hiển thị phân phối của biến rời rạc dưới dạng các thanh.
+
+  - Mô tả một biến liên tục:
+    - `geom_histogram()`: nhóm dữ liệu liên tục lại vào các nhóm (bin) và hiển thị dưới dạng các thanh. 
+    - `geom_density()`: vẽ đường mô tả hàm mật độ xác suất của biến ngẫu nhiên liên tục. Hàm mật độ xác suất được ước lượng bằng phương pháp kernel. Giá trị hàm mật độ tại một điểm $x$ bất kỳ được tính bằng trung bình giá trị hàm $K$, được gọi là hàm $kernel$, tính trên khoảng cách từ điểm $x$ tới tất cả các quan sát. Nếu $\hat{f}(x)$ là giá trị hàm mật độ tính tại $x$ bằng phương pháp kernel thì ta có
+
+\begin{align}
+\hat{f}(x) = \cfrac{1}{nh} \times \sum\limits_{i = 1}^{n} \ K\left( \cfrac{x - x_i}{h} \right)
+\end{align}
+trong đó $x_i$ là giá trị quan sát thứ $i$ và $h$ là được gọi là tham số làm mịn. $h$ càng lớn thì hàm $\hat{f}$ sẽ càng mịn. Hàm $K$ được sử dụng làm hàm kernel mặc định cho `geom_density()` là hàm mật độ của biến ngẫu nhiên phân phối chuẩn.
+
+  - `geom_boxplot()`: vẽ đồ thị boxplot của một biến liên tục.
+  
+```{r, warning=FALSE, message=FALSE}
+p1<-gapminder%>%filter(year==2011)%>%ggplot(aes(fertility))+
+  geom_histogram()
+p2<-gapminder%>%filter(year==2011)%>%ggplot(aes(fertility))+
+  geom_density()
+p3<-gapminder%>%filter(year==2011)%>%ggplot(aes(y=fertility))+
+  geom_boxplot()
+grid.arrange(p1,p2,p3,nrow=1,ncol=3)
+```
+
+- Khi mô tả hai biến:
+  - Cả hai biến đều là liên tục:
+    - `geom_point()`: đồ thị rải điểm là cách hiệu quả nhất để mô tả hai biến liên tục. Bạn đọc có thể sử dụng cùng với `geom_smooth()` để mô tả mối quan hệ giữa hai biến. Trong trường hợp biến liên tục nhưng các điểm bị trùng nhau khi hiển thị, bạn đọc có thể sử dụng `geom_jitter()` thay thế cho `geom_point()` để hiện thị tốt hơn. `geom_jitter()` sẽ di chuyển các điểm một cách ngẫu nhiên xung quanh điểm ban đầu để tránh việc hiển thị điểm bị trùng nhau.
+    - `geom_line()`: thường để mô tả hai biến liên tục mà một trong hai biến là kiểu thời gian. 
+    - `geom_text()`: tương tự `geom_point()` nhưng hiển thị biến kiểu ký tự thay vì hiển thị điểm. `geom_text()` thường sử dụng kết hợp với `geom_point()`. Lưu ý để khi hiển thị biến kiểu ký tự và điểm không bị trùng nhau là bạn đọc cần phải sử dụng thêm các tham số như $hjust$, $vjust$ để điều chỉnh trong hàm `geom_text()`. Trong nhiều trường hợp, để hiện thị biến kiểu ký tự tốt hơn, chúng tôi sử dụng hàm `geom_text_repel()` từ thư viện bổ sung $ggrepel$.
+    - `geom_label()`: tương tự `geom_text()`. Hàm có thể hiện thị tốt hơn trong thư viện $ggrepel$ là hàm `geom_label_repel()`. Bạn đọc quan sát ví dụ dưới đây để thấy các hàm `geom_text_repel()` và `geom_label_repel()` cho kết quả tốt hơn `geom_text()` và `geom_label()`
+    
+
+```{r, warning=FALSE, message=FALSE}
+p1<-gapminder%>%filter(year==2011, region=="South-Eastern Asia")%>%
+  ggplot(aes(fertility, infant_mortality))+
+  geom_point()+geom_text(aes(label = country), vjust=1.1)+
+  ggtitle("Sử dụng geom_text()")
+p2<-gapminder%>%filter(year==2011, region=="South-Eastern Asia")%>%
+  ggplot(aes(fertility, infant_mortality))+
+  geom_point()+geom_label(aes(label = country), vjust=0.9)+
+  ggtitle("Sử dụng geom_label()")
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+```{r, warning=FALSE, message=FALSE}
+p1<-gapminder%>%filter(year==2011, region=="South-Eastern Asia")%>%
+  ggplot(aes(fertility, infant_mortality))+
+  geom_point()+geom_text_repel(aes(label = country), vjust=1.1)+
+  ggtitle("Sử dụng geom_text_repel()")
+p2<-gapminder%>%filter(year==2011, region=="South-Eastern Asia")%>%
+  ggplot(aes(fertility, infant_mortality))+
+  geom_point()+geom_label_repel(aes(label = country), vjust=0.9)+
+  ggtitle("Sử dụng geom_label_repel()")
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+  -`geom_bin2d()` và `geom_density2d()` tương tự như `geom_histogram()` và `geom_density()` dùng để mô tả phân phối của hai biến liên tục. Khi số lượng quan sát cần hiển thị lớn thì sử dụng đồ thị rải điểm sẽ không hiệu quả. `geom_bin2d()` chia miền giá trị của từng biến thành các khoảng bằng nhau và đếm trong mỗi hình chữ nhật có bao nhiêu điểm sau đó sử dụng màu sắc từ đậm đến nhạt để mô tả số lượng điểm trong từng hình chữ nhật từ nhỏ đến lớn. `geom_density2d()` sử dụng phương pháp kernel để tính giá trị hàm mật độ trong không gian hai chiều. Khoảng cách từ quan sát $x_i$ đến điểm $x$ được sử dụng là khoảng cách Euclid. Kernel được sử dụng là hàm mật độ của biến ngẫu nhiên phân phối chuẩn hai chiều. `geom_density2d()` vẽ các đường nỗi các điểm có giá trị hàm mật độ bằng nhau. Hình vẽ dưới đây mô tả phân phối đồng của hai biến $favorite\_count$ và $retweet\_count$ trong dữ liệu $trump\_tweet$.
+
+```{r, warning = FALSE, message=FALSE}
+# geom_bind2d
+p1<-trump_tweets%>%mutate(log_favorite_count = log(favorite_count), 
+                          log_retweet_count = log(retweet_count)) %>%
+  ggplot(aes(log_favorite_count,log_retweet_count))+geom_bin2d()+theme_minimal()
+
+# geom_density2d
+p2<-trump_tweets%>%mutate(log_favorite_count = log(favorite_count), 
+                          log_retweet_count = log(retweet_count)) %>%
+  ggplot(aes(log_favorite_count,log_retweet_count))+geom_density2d()+theme_minimal()
+
+grid.arrange(p1,p2,nrow=1, ncol = 2)
+```
+
+  - Một biến liên tục và một biến rời rạc
+    - `geom_boxplot()` vẽ đồ thị boxplot của một biến liên tục theo các nhóm được phân loại theo biến rời rạc. 
+    - `geom_violin()` tương tự `geom_boxplot()` và sử dụng cùng với `geom_boxplot()` để bổ sung thông tin khi mô tả phân phối của biến liên tục trong từng nhóm. Chúng ta có thể mô tả phân phối của biến $life_expectancy$ trong các năm 1990, 2000, và 2010 trong dữ liệu $gapminder$ như sau
+    
+```{r warning=FALSE, message=FALSE}
+p1<- gapminder%>%filter(year %in% c(1990,2000,2010))%>%ggplot(aes(x = as.factor(year),y = life_expectancy))+geom_boxplot()
+
+p2<-gapminder%>%filter(year %in% c(1990,2000,2010))%>%ggplot(aes(x = as.factor(year),y = life_expectancy))+geom_violin()
+
+grid.arrange(p1,p2,nrow=1, ncol = 2)
+```
+
+  - Mô tả hai biến rời rạc:
+    - `geom_count()` được sử dụng để mô tả hai biến rời rạc. `geom_count()` tạo ra đồ thị thường được gọi là đồ thị kiểu bong bóng, mà kích thước của mỗi bong bóng cho biết số lượng hay mật độ của các điểm rời rạc. Ví dụ như khi mô tả hai biến là $cut$ và $color$ trong dữ liệu $diamonds$, chúng ta sử dụng `geom_count()` như sau
+```{r warning=FALSE, message=FALSE}
+diamonds%>%ggplot(aes(cut,color))+geom_count(color="lightskyblue")+theme_minimal()
+```
+
+Không khó để nhận ra tỷ trọng lớn các viên kim cương có biến $cut$ nhận giá trị $ideal$, và trong các viên kim cương đó màu $G$ có tỷ trọng lớn nhất.
+
+ - Mô tả ba biến: Sử dụng các hình ảnh kiểu 3 chiều không phải là một phương pháp tốt để hiển thị ba biến trên cùng một đồ thị. $ggplot2$ thường hiển thị dữ liệu trên một mặt phẳng và sử dụng một thuộc tính thẩm mỹ nào đó làm chiều thứ ba. `geom_title()` thường được sử dụng để mô tả ba biến 
+cùng một lúc bằng cách sử dụng trục $x$ và $y$ đề mô tả hai biến và màu sắc để mô tả biến thứ ba. Hình vẽ dưới đây sử dụng `geom_tile()` để mô tả ba biến $region$, $year$, và $life\_expectancy$. $life\_expectancy$ được tính theo trung bình của vùng qua các năm.
+```{r, warning=FALSE, message=FALSE,fig.width=10}
+danhsach<-gapminder%>%filter(year==2010)%>%
+  group_by(region)%>%summarise(continent = unique(continent))%>%
+  arrange(continent)
+gapminder%>%group_by(year,continent, region)%>%summarise(life_expectancy = mean(life_expectancy,na.rm = TRUE))%>%
+  ggplot()+geom_tile(aes(x = year, y = region , fill = life_expectancy), color= "grey")+
+  scale_fill_gradientn(colours = c(rgb(0.8,0.3,0.3),rgb(0.9,0.9,0.9),rgb(0.3,0.3,0.9)))+
+  scale_x_continuous(breaks = seq(1960,2010,5))+
+  scale_y_discrete(limits = danhsach$region)+
+  theme_minimal()
+```
+
+Trong đồ thị ở trên chúng tôi đã sử dụng thêm các hàm `scale_*()` để kiểm soát ánh xạ thẩm mỹ. Chẳng hạn giá trị năm (trục x) sẽ là cách đều 5 năm, các vùng trên trục $y$ được sắp xếp theo lục địa (Châu Đại Dương, Châu Âu, Châu Á, Châu Mỹ, và cuối cùng là Châu Phi). Dải màu sắc cũng được cho giá trị dải màu từ đỏ sang xanh da trời. Chúng ta sẽ thảo luận về `scale_*()` trong phần sau của chương sách.
+
+### Các hàm `stat_*()`
+Bạn đọc cũng có thể xây dựng các lớp cho đồ thị $ggplot2$ bằng các hàm `stat_*()`. Các hàm số này thường không hiển thị dữ liệu ở trạng thái ban đầu mà thường hiển thị dữ liệu dưới một phép biến đổi thống kê hoặc một sau một tóm tắt dữ liệu theo một cách nào đó. Nhiều hàm `stat_*()` được gọi thông qua các hàm `geom_*()`, chẳng hạn như `stat_bin()` tương đương với `geom_histogram()` và `geom_bar()`; `stat_smooth()` tương đương với `geom_smooth()`; ... Sự tương đồng hay khác biệt giữa sử dụng hàm `stat_*()` và hàm `geom_*()` sẽ được thảo luận ở phần cuối của chương sách.
+
+Thay vì sử dụng `geom_*()`, chúng ta có thể sử dụng `stat_*()` để mô tả phân phối của các biến liên tục
+
+```{r, warning=FALSE, message=FALSE, fig.width= 12}
+# ĐỒ thị histogram
+p1<-gapminder%>%filter(year==2011)%>%ggplot(aes(fertility))+
+  stat_bin()+ggtitle("Đồ thị histogram của fertility") 
+# hàm phân phối xác suất
+p2<-gapminder%>%filter(year==2011)%>%ggplot(aes(fertility))+
+  stat_density()+ggtitle("Hàm mật độ") 
+p3<-gapminder%>%filter(year==2011)%>%ggplot(aes(fertility))+
+  stat_boxplot()+ggtitle("Đồ thị boxplot") 
+grid.arrange(p1,p2,p3,nrow=1,ncol=3)
+```
+
+## Scale
+$Scale$ trong ggplot2 kiểm soát ánh xạ từ dữ liệu đến thuộc tính thẩm mỹ của đồ thị. Các hàm `scale_*()` lấy dữ liệu ban đầu và biến đổi thành các đối tượng trực quan mà bạn có thể nhìn thấy, như kích thước, màu sắc, vị trí hoặc hình dạng. Bạn có thể tạo biểu đồ bằng $ggplot2$ mà không cần biết chính xác ánh xạ hoạt động như thế nào, nhưng hiểu về $scale$ và học cách thao tác các hàm `scale_*()` sẽ giúp bạn kiểm soát tốt hơn rất nhiều. 
+
+### Vị trí xuất hiện trên trục tọa độ
+Đa số các đồ thị trong $ggplot2$ hiển thị dữ liệu trên trục tọa độ Descartes nên chúng tôi sẽ tập trung vào cách dữ liệu hiển thị trên hai trục tọa độ $x$ và $y$. Khi ánh xạ các cột dữ liệu tới các trục tọa độ $x$ và $y$ nếu chúng ta không sử dụng $scale$, các điểm sẽ được hiển thị đúng như giá trị của điểm đó trên các trục tọa độ. Trong nhiều trường hợp, hiển thị tại vị trí đúng như dữ liệu ban đầu sẽ không mang lại hiệu quả. Ví dụ như khi mô tả hai biến $total$ và $population$ của dữ liệu $murders$, bạn đọc có thể so sánh cách hiển thị giữa việc không kiểm soát (hình bên trái) và có kiểm soát ánh xạ thẩm mỹ như hình dưới đây
+```{r, warning=FALSE, message=FALSE,fig.width=10}
+p1<-murders%>%ggplot(aes(x = population,y = total))+geom_point(size = 3, color = "lightskyblue")+
+  theme_minimal()+ggtitle("Không sử dụng scale")
+p2<-murders%>%ggplot(aes(x = population,y = total))+geom_point(size = 3, color = "lightskyblue")+
+  theme_minimal()+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  ggtitle("Có sử dụng scale (log10)")
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+Có thể thấy rằng hình bên phải hiển thị rõ ràng hơn hình bên trái sau khi chúng ta kiểm soát ánh xạ từ biến $population$ đến thuộc tính $x$ và từ biến $total$ đến thuộc tính $y$ bằng các hàm `scale_x_continuous()` và `scale_y_continuous()`. Đây là hai hàm số được dùng để kiểm soát vị trí xuất hiện của các điểm trên trục tọa độ khi các biến trong ánh xạ là các biến kiểu số liên tục. Các tham số có thể được sử dụng trong các hàm này bao gồm có:
+
+- Tham số $trans$, là viết tắt của transformation, nhận giá trị mặc định là 'identity' nghĩa là lấy chính xác giá trị của biến ánh xạ vào thuộc tính $x$ hoặc $y$ tương ứng. Để biết các giá trị mà tham số này có thể nhận được bạn đọc có thể tham khảo trong tài liệu đi kèm với hàm `scale_x_continuous()` và `scale_y_continuous()`. Khi scale các biến, chẳng hạn như $x_1$ và $x_2$, là các biến ánh xạ tới $x$ và $y$ trong ánh xạ thẩm mỹ bằng một hàm $f$ được khai báo bằng tham số $trans$, giá trị xuất hiện trên trục tọa độ $x$ và $y$ sẽ tương ứng là $f(x_1)$ và $f(x_2)$. Chẳng hạn như trong đồ thị phía bên phải ở trên, khi chúng ta thực hiện scale sử dụng hàm $log10$, tọa độ của các điểm (các quốc gia) sẽ là $log10(population)$ và $log10(total)$. Việc chuyển đổi này sẽ hữu ích bởi rất đa số các quốc gia có dân số nhỏ, trong khi có một vài quốc gia có dân số rất lớn. Thực hiện chuyển đổi dữ liệu bằng các hàm $log$ sẽ giúp cho khoảng cách của các điểm cách đều nhau hơn và dễ dàng phân biệt hơn. 
+
+- Tham số $limits$ giới hạn giá trị trên các trục $x$ và $y$. Mỗi khi chúng ta vẽ đồ thị sử dụng $ggplot2$, tham số $limits$ mặc định sẽ đảm bảo việc hiển thị được đầy đủ nhất. Tuy nhiên, khi chúng ta muốn so sánh hai dữ liệu con trên cùng một miền giá trị của $x$ và $y$, sử dụng tham số $limits$ cho phép so sánh rõ ràng hơn là sử dụng tham số mặc định. Hình vẽ dưới đây mô tả hai biến $fertility$ và $life\_expectancy$ trong năm 1960 và 2010 và không sử dụng scale.
+
+```{r, warning=FALSE, message=FALSE,fig.width=10, echo=FALSE}
+p1<-gapminder%>%filter(year==1960)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(shape = 21, size = 3,alpha = 0.8, fill= "lightskyblue")+
+  ggtitle("Năm 1960")
+p2<-gapminder%>%filter(year==2010)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(shape = 21, size = 3,alpha = 0.8, fill= "lightskyblue")+
+  ggtitle("Năm 2010")
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+Không thể thấy rõ được sự khác biệt giữa hai năm 1960 và 2010 nếu không biểu diễn các biến trên cùng một miền giá trị của $x$ và $y$. Hình phía dưới sử dụng tùy biến $limits$. Để khai báo tham số cho tùy biến này chúng ta sử dụng một véc-tơ hai chiều chứa giá trị nhỏ nhất và giá trị lớn nhất trên trục mà bạn muốn hiển thị. Rõ ràng đã có sử khác nhau đáng kể về sự phân bố của các điểm trong năm 1960 và năm 2010. 
+```{r, warning=FALSE, message=FALSE,fig.width=10}
+p1<-gapminder%>%filter(year==1960)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(shape = 21, size = 3,alpha = 0.8, fill= "lightskyblue")+
+  ggtitle("Năm 1960")+
+  scale_x_continuous(limits = c(1,9))+
+  scale_y_continuous(limits = c(25,85))
+p2<-gapminder%>%filter(year==2010)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(shape = 21, size = 3,alpha = 0.8, fill= "lightskyblue")+
+  ggtitle("Năm 2010")+
+   scale_x_continuous(limits = c(1,9))+
+  scale_y_continuous(limits = c(25,85))
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+- Tham số $breaks$ kiểm soát vị trí các điểm đánh dấu xuất hiện trên các trục $x$ và trục $y$. Chúng tôi thường kết hợp $breaks$ với tham số $labels$ để kiểm soát đồng thời vị trí và cách hiển thị trên các trục số. Ví dụ như trong hình so sánh đồ thị rải điểm của năm 1960 và 2010 chúng ta muốn giá trị xuất hiện trên các trục $x$ là các số 2, 4, 6, 8 thay vì 2,5; 5,0; và 7, và các số trên trục $y$ xuất hiện tại các vị trí 10, 30, 50, 70, và 90 thay vì 40, 60, 80 như hiện tại, chúng ta chỉ cần gán giá trị tham số $breaks$ bằng véc-tơ chứa các giá trị mà chúng ta muốn hiển thị. Lưu ý rằng $breaks$ có chữ $s$ ở cuối để phân biệt với từ khóa $break$.
+
+```{r, warning=FALSE, message=FALSE,fig.width=10}
+p1<-gapminder%>%filter(year==1960)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(shape = 21, size = 3,alpha = 0.8, fill= "lightskyblue")+
+  ggtitle("Năm 1960")+
+  scale_x_continuous(limits = c(1,9), 
+                     breaks = c(2,4,6,8),
+                     labels = paste(c(2,4,6,8),"trẻ em"))+
+  scale_y_continuous(limits = c(25,85), 
+                     breaks = c(10,30,50,70,90),
+                     labels = paste(c(10,30,50,70,90),"tuổi"))
+p2<-gapminder%>%filter(year==2010)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(shape = 21, size = 3,alpha = 0.8, fill= "lightskyblue")+
+  ggtitle("Năm 2010")+
+  scale_x_continuous(limits = c(1,9), 
+                     breaks = c(2,4,6,8),
+                     labels = paste(c(2,4,6,8),"trẻ em"))+
+  scale_y_continuous(limits = c(25,85), 
+                     breaks = c(10,30,50,70,90),
+                     labels = paste(c(10,30,50,70,90),"tuổi"))
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+Khi một trong hai biến liên tục là biến kiểu thời gian thì hàm số sử dụng để kiểm soát giá trị hiển thị là `scale_x_date()` với hai tham số thường được sử dụng là $date\_break$ và $date\_labels$. Bạn đọc quan sát dữ liệu $AirPassengers$ được trực quan hóa khi sử dụng `scale_x_date()` như sau
+
+```{r, warning=FALSE, message=FALSE,fig.width=10}
+dat<-data.frame(Number_Passengers = AirPassengers, 
+                Month = seq(as.Date("1949-01-01"), by = "month", length.out = 144))
+p1<-dat%>%ggplot(aes(x = Month, y = Number_Passengers))+
+  geom_line() + ggtitle("Không sử dụng scale")
+p2<-dat%>%ggplot(aes(x = Month, y = Number_Passengers))+
+  geom_line()+ ggtitle("Sử dụng scale_x_date()")+
+  scale_x_date(date_break = "2 years", date_labels = "%b\n%Y" )+
+  scale_y_continuous(breaks = seq(100,600,length=6))
+                     
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+Khi giá trị trên trục $x$ hoặc trục $y$ là các giá trị rời rạc, các hàm số sử dụng để kiểm soát ánh xạ thẩm mỹ từ biến đến các trục tọa độc là `scale_x_discrete()` và `scale_y_discrete()`. Các tham số thường sử dụng bao gồm $limits$ và $labels$. Tham số $limits$ được sử dụng để cho biết các giá trị nào của biến rời rạc xuất hiện trên đồ thị, trong khi tham số $labels$ cho biết từng giá trị của biến rời rạc xuất hiện như thế nào  
+
+```{r, warning=FALSE, message=FALSE,fig.width=12}
+p1<-murders%>%mutate(rate = total/population*10^6)%>%
+  ggplot(aes(region,rate))+
+  geom_boxplot()+ggtitle("Không sử dụng scale")
+
+# Sử dụng tham số limits cho giá trị trên trục x
+p2<-murders%>%mutate(rate = total/population*10^6)%>%
+  ggplot(aes(region,rate))+
+  geom_boxplot()+ggtitle("Không sử dụng scale")+
+  scale_y_continuous(limits = c(0,50))+
+  # chỉ hiển thị boxplot cho 2 vùng "Northeast" và "West"
+  scale_x_discrete(limits = c("Northeast", "West"))+
+  ggtitle("Sử dụng dụng tham số limits")
+# Sử dụng tham số labels cho giá trị trên trục x
+p3<-murders%>%mutate(rate = total/population*10^6)%>%
+  ggplot(aes(region,rate))+
+  geom_boxplot()+ggtitle("Không sử dụng scale")+
+  scale_y_continuous(limits = c(0,100))+
+  # Thay thế giá trị hiển thị trên trục số bằng labels
+  scale_x_discrete(labels = c("Northeast" = "Đông Bắc", 
+                              "West" = "Miền Tây",
+                              "South" = "Miền Nam",
+                              "North Central" = "Miền Bắc"))+
+  ggtitle("Sử dụng dụng tham số labels")
+grid.arrange(p1,p2,p3,nrow=1,ncol=3)
+```
+
+
+### Màu sắc hiển thị và chú giải
+Thuộc tính thẩm mỹ được sử dụng phổ biến nhất là màu sắc. Có nhiều cách để ánh xạ giá trị của biến tới màu sắc trong $ggplot2$. Vì màu sắc là một chủ đề phức tạp nên phần này chúng tôi sẽ bắt đầu bằng việc thảo luận một chút về lý thuyết màu sắc. Sau đó chúng tôi sẽ giới thiệu đến bạn đọc về thang màu liên tục, thang màu rời rạc và thang màu tổng hợp. Chúng tôi cũng sẽ đề cập đến các thang màu dành cho biến kiểu thời gian ngày/giờ, độ trong của các màu sắc hiển thị và nguyên tắc chú giải được thiết lập trong các đồ thị $ggplot2$.
+
+#### Cảm nhận về màu sắc
+Trong vật lý, màu sắc được tạo ra bởi hỗn hợp các bước sóng ánh sáng. Để mô tả đầy đủ về một màu sắc, chúng ta cần biết sự kết hợp chính xác của các bước sóng. Sự thật thì mắt con người chỉ có ba cơ quan cảm nhận màu sắc khác nhau, và vì vậy chúng ta có thể tóm tắt khả năng cảm nhận về bất kỳ màu nào chỉ bằng ba con số. Một không gian màu có thể quen thuộc với bạn đọc là không gian màu RGB, không gian mà mọi màu sắc được xác định theo cường độ ánh sáng đỏ, xanh da trời và xanh lá cây để tạo ra màu đó. Ưu điểm của không gian màu này là sự đơn giản do mỗi màu sắc đều được mô tả bằng ba con số từ 0 đến 255 hoàn toàn độc lập với nhau. Một vấn đề với không gian này là các dải màu liên tục nhận được bằng cách tăng giảm các cường độ màu đỏ, xanh lam, xanh lá cây lại không giống như cách nhận thức về màu sắc của còn người. Khi nhìn vào một màu cụ thể, chúng ta không thể ước tính được cường độ mỗi màu là bao nhiêu, điều này có thể gây khó khăn cho việc tạo ánh xạ từ một biến liên tục sang một dải màu. 
+
+Mỗi khi hiển thị một giá trị màu sắc trong không gian RGB, R thường sử dụng ký tự có 6 chữ số trong hệ 16 (từ 0 đến F) và bắt đầu bằng một dấu '#' thay vì một véc-tơ ba chiều đại diện cho 3 sắc đỏ, xanh lá cây, và  xanh lam. Hai chữ số đầu đại diện cho sắc đỏ, 2 chữ số tiếp theo đại diện cho màu xanh lá cây và 2 chữ số cuối đại diện cho màu lam. Chẳng hạn như "#FF0000" sẽ là màu đỏ, "#00FF00" là màu xanh lá cây và "#0000FF" là màu xanh lam. 
+
+Một không gian màu được chuyển đổi từ không gian RGB là không gian Lab trong đó L đại diện cho độ tương phản sáng-tối của màu sắc, trục tọa độ a và b cho biết các vị trí của màu trên trên trục đỏ đến xanh lam và vàng đến xanh lá. Cải tiến từ không gian RGB sang không gian Lab giúp cho các dải màu sắc tương ứng hơn với cách khả năng nhận biết màu sắc của con người, tuy nhiên vẫn còn khoảng cách giữa không gian Lab với nhận thức màu sắc. Không gian $Lab$ cũng có các ưu điểm riêng, do đó $ggplot2$ mặc định sử dụng không gian $Lab$ khi nội suy tuyến tính các màu sắc nằm giữa hai màu bất kỳ khi chúng ta ánh xạ một biến liên tục lên thuộc tính thẩm mỹ màu sắc.
+
+Một không gian màu khác có thể hạn chế vấn đề của không gian RGB là không gian màu HCL với ba thành phần màu: màu sắc (Hue), sắc độ (Chroma) và độ chói (Luminance):
+
+- Màu sắc nằm trong khoảng từ 0 đến 360 (một góc) và cho biết màu muốn hiển thị.
+
+- Sắc độ là “độ tinh khiết” của một màu, nằm trong khoảng từ 0 (xám) đến mức tối đa thay đổi theo độ sáng.
+
+- Độ sáng là độ sáng của màu, dao động từ 0 (đen) đến 1 (trắng).
+
+Ba chiều có những đặc tính khác nhau. Tương tự như không gian màu Lab, màu sắc trong HCL được sắp xếp xung quanh một hình tròn và không được coi là có trật tự; ví dụ: màu xanh lá dường như không lớn hơn hay nhỏ hơn màu đỏ và màu xanh lam dường như không lớn hơn hay nhỏ hơn màu xanh lá. Ngược lại, cả sắc độ và độ sáng đều được coi là có trật tự: màu hồng được coi là nằm giữa màu đỏ và trắng, và màu xám được coi là nằm giữa màu đen và trắng. Tạo các thang màu sắc từ không gian HCL thường được dựa trên nguyên tắc cố định 2 tham số và thay đổi tham số còn lại. Do không gian màu HCL gần với nhận thức màu sắc của con người hơn nên các dải màu được tạo ra sẽ "cách đều" nhau hơn theo cách mà chúng ta nhận thức.  
+
+Xin được nhắc lại rằng màu sắc là một chủ để phức tạp mà phạm vi của nó vượt rất xa những gì mà chúng tôi đề cập ở trên. Bạn đọc nên tham khảo thêm các tài liệu chuyên ngành khoa học máy tính để có thể sử dụng màu sắc một cách hiệu quả nhất.
+
+#### Dải màu liên tục
+Dải màu liên tục được sử dụng để hiển thị giá trị của một biến liên tục trên bề mặt phẳng. Để kiểm soát màu sắc trong $ggplot2$, chúng ta sử dụng các hàm `scale_color_*()`. Lưu ý rằng các thuộc tính thẩm mỹ $color$ và $fill$ là tương đồng nhau, do đó bất kỳ hàm `scale_color_*()` cũng có hàm `scale_fill_*()` tương ứng. 
+
+Dải màu liên tục thường được sử dụng cùng với các $geoms$ có hình dạng đồ họa cần màu sắc để phân biệt trên trên mặt phẳng như `geom_polygon()`, `geom_tile()` (hoặc `geom_raster()`), và `geom_bin2d()`. Mỗi khi chúng ta cho một biến liên tục ánh xạ đến thuộc tính thẩm mỹ màu sắc, $ggplot2$ sẽ tự động hiểu rằng chúng ta sử dụng dải màu liên tục để mô tả biến đó. Hình vẽ dưới đây mô tả hàm mật độ của biến ngẫu nhiên phân phối chuẩn hai chiều trung bình 0, phương sai 1 và hệ số tương quan $\rho = 0.8$. Lưu ý rằng hàm mật độ của hai biến ngẫu nhiên phân phối chuẩn $\mathcal{N}(0,1)$ với hệ số tương quan $\rho = 0.8$ được tính như sau
+\begin{align}
+f(x,y) = \cfrac{1}{2 \pi \sqrt{1-\rho^2}} \ \exp \left(- \cfrac{x^2 + y^2 - 2\rho x y}{1-\rho^2}  \right)
+\end{align}
+```{r, warning=FALSE,message=FALSE}
+# tạo lưới điểm trên hình vuông [-2,2] * [2-,2]
+n<-100
+x<-rep(1:n,n)/n*4-2 
+y<-sort(x, decreasing = FALSE)
+rho<-0.8
+dat<-data.frame(x=x,y=y,dens = 1/(2*pi*sqrt(1-rho^2)) * exp(-(x^2+y^2-2*rho*x*y)/(1-rho^2)))
+p<-dat%>%ggplot(aes(x,y,fill=dens))+geom_raster()+theme_minimal()
+```
+
+Phương pháp đơn giản nhất để kiểm soát ánh xạ thẩm mỹ từ một biến liên tục đến màu sắc là lựa chọn các dải màu liên tục có sẵn trong $ggplot2$ hoặc trong các thư viện bổ sung. Các dải màu có sẵn này đều được xây dựng để những người gặp khó khăn trong phân biệt màu sắc cũng có thể cảm nhận được. Trong hình vẽ dưới đây chúng tôi lựa chọn các dải màu: 1. Dải màu mặc định của $ggplot2$, 2. Dải màu $viridis$, 3. Dải màu $distiller$ và 4. Dải màu $fermenter$. Mỗi dải màu sẽ có tùy biến $palette$ để lựa chọn. 
+
+```{r, warning=FALSE,message=FALSE}
+# tạo lưới điểm trên hình vuông [-2,2] * [2-,2]
+p1<-p + scale_fill_continuous()+
+  ggtitle("Màu mặc định") # sử dụng dải màu mặc định
+p2<-p + scale_fill_viridis_c()+ # Dải màu viridis liên tục
+  ggtitle("Dải màu viridis")
+p3<-p + scale_fill_distiller()+ # Dải màu distiller
+  ggtitle("Dải màu distiller")
+p4<-p + scale_fill_fermenter()+ # Dải màu fermenter
+  ggtitle("Dải màu fermenter")
+grid.arrange(p1,p2,p3,p4,nrow=2,ncol=2)
+```
+
+Để dải màu sắc liên tục có tính cá nhân hóa cao hơn, bạn đọc cần chỉ định thang màu sắc thay vì sử dụng các thang màu có sẵn. $Gradient$ $scale$ là một công cụ mạnh mẽ giúp bạn thực hiện việc này. Bạn chỉ cần cung cấp các giá trị màu sắc tương ứng với giá trị nhỏ nhất, giá trị lớn nhất, có thể thêm một vài giá trị trung gian, $ggplot2$ sẽ nội suy tuyến tính ra các màu sắc trong thang màu. Các hàm số có thể sử dụng để tạo thang màu bao gồm
+
+- `scale_fill_gradient()` tạo một thang màu liên tục giữa hai màu sắc mà bạn khai báo. Hai tham số được sử dụng để khai báo hai điểm đầu của dải màu là tham số $low$ và tham số $high$. Mỗi khi chúng ta ánh xạ tuyến tính từ một biến liên tục đến màu sắc, $ggplot2$ mặc định sử dụng dải màu liên tục theo hàm số này với giá trị low là "#132B43" và giá trị high là "#56B1F7". Không gian để nội suy tuyến tính là không gian màu Lab.
+
+- `scale_fill_gradient2()` tạo một thang màu liên tục từ ba màu, bao gồm một màu sắc ở giữa. Ngoài hai giá trị là hai điểm đầu của hai thang màu, chúng ta cần khai báo thêm một màu ở giữa bằng tham số $mid$ và tham số $midpoint$ cho biết giá trị nào của biến ánh xạ tới thuộc tính màu sắc tương ứng với màu được khai báo với tham số $mid$. Nếu không khai báo tham số $midpoint$ sẽ nhận giá trị mặc định là 0.
+
+- `scale_fill_gradientn()` tạo một thang màu liên tục từ một véc-tơ chứa các màu sắc khai báo.
+
+```{r, warning=FALSE,message=FALSE}
+p1<-p + ggtitle("Màu mặc định") # sử dụng dải màu mặc định
+p2<-p + scale_fill_gradient(low = "blue", high = "red")+
+  ggtitle("Dải màu từ xanh lam đến đỏ") # sử dụng dải màu từ xanh lam đến đo
+p3<-p + scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0.12)+
+  ggtitle("Dải màu từ xanh lam đến đỏ điểm giữa là trắng") 
+p4<-p +  scale_fill_gradientn(colours = c("#00FF00","#FFFFFF","#0000FF", "#FFFF00"))+
+  ggtitle("Dải màu đi qua nhiều điểm màu") 
+grid.arrange(p1,p2,p3,p4,nrow=2,ncol=2)
+```
+
+Cả ba hàm số kể trên đều nội suy tuyến tính trong không gian màu $Lab$ để tạo ra các giải màu liên tục. Khi nói đến nội suy tuyến tính giữa hai màu sắc, sẽ dễ hiểu nếu chúng ta sử dụng không gian RGB mà tất cả các màu đều nằm trong một hình lập phương với điểm (0,0,0) là màu đen, (1,1,1) là màu trắng... Bạn đọc có thể hiểu như sau: trong mỗi không gian mỗi màu sắc hiển thị có ba thành phần là cường độ màu đỏ (r), cường độ màu xanh lá (g) cường độ màu xanh lam (b) ... Một dải màu bao gồm $n$ màu, bắt đầu từ màu $m_1$ bao gồm các thành phần $(r_1, g_1, b_1)$, đến màu $m_n$ với thành phần $(r_n, g_n, b_n)$ sẽ là các màu $m_i$ có các thành phần tương ứng
+\begin{align}
+r_i = \left[r_1 + (i-1) * \cfrac{r_n - r_1}{(n-1)} \right] \\
+g_i = \left[g_1 + (i-1) * \cfrac{g_n - g_1}{(n-1)} \right] \\
+b_i = \left[b_1 + (i-1) * \cfrac{b_n - b_1}{(n-1)} \right]
+\end{align}
+
+Đáng tiếc là trong không gian $Lab$ việc nội suy màu sắc không đơn giản như vậy. Việc nội suy dựa trên các tính toán phức tạp và kết quả cuối cùng là các công thức gần đúng. Ưu điểm của nội suy màu sắc trong không gian $Lab$ so với không gian $RGB$ sự chuyển đổi màu sắc giữa các điểm mượt mà hơn rất nhiều trong cách nhận biết màu sắc của con người.
+
+```{r, warning=FALSE,message=FALSE, echo= FALSE}
+n<-100
+x<-rep(1:n,n)/n*4-2 
+y<-sort(x, decreasing = FALSE)
+rho<-0
+dat<-data.frame(x=x,y=y,dens = 1/(2*pi*sqrt(1-rho^2)) * exp(-(x^2+y^2-2*rho*x*y)/(1-rho^2)))
+h<-(max(dat$dens)-min(dat$dens))/n
+dat<-mutate(dat,dens.d = round((dens - min(dat$dens))/h))
+dat$dens.d<-as.factor(dat$dens.d)
+
+mycol<-colorRampPalette(c("blue", "red"),space = "rgb")(n+1)
+p1<-dat%>%ggplot(aes(x,y,fill=dens.d))+geom_raster()+theme_minimal()+
+  scale_fill_manual(values= mycol)+
+  theme(legend.position = "none")+
+  ggtitle("Nội suy trên RGB")
+
+mycol<-colorRampPalette(c("blue", "red"),space = "Lab")(n+1)
+p2<-dat%>%ggplot(aes(x,y,fill=dens.d))+geom_raster()+theme_minimal()+
+  scale_fill_manual(values= mycol)+
+  theme(legend.position = "none")+
+  ggtitle("Nội suy trên Lab")
+grid.arrange(p1,p2,ncol=2,nrow=1)
+```
+
+Cả hai hình đều sử dụng dải màu liên tục từ xanh lam đến đỏ để mô tả một biến liên tục là mật độ của phân phối chuẩn hai chiều có hệ số tương quan $\rho=0$, hình bên trái nội suy trong không gian RGB, hình bên phải nội suy trong không gian Lab. Có thể thấy rằng việc chuyển hóa màu sắc từ xanh lam sang đỏ khi sử dụng không gian màu Lab là mượt hơn nhiều so với không gian RGB.
+
+Tương tự như vị trí trên trục tọa độ, các tham số $limits$, $breaks$, và $label$ cũng có thể được sử dụng trong các hàm $scale_fill_*()$ để kiểm soát các thang màu liên tục. Tham số $limits$ nhận giá trị là một véc-tơ hai phần tử, phần tử thứ nhất cho biết màu sắc bắt đầu trong thang màu tương ứng với giá trị nào trong biến liên tục và phần tử thứ hai cho biết màu sắc kết thúc của thang màu ứng với giá trị nào của biến liên tục. Hàm $breaks$ và $labels$ sử dụng để thay đổi giá trị trên thang màu của chú giải. 
+
+```{r, warning=FALSE,message=FALSE}
+# limits cho biết hai giá trị tương ứng với điểm đầu và cuối của dải màu
+p1<-p + scale_fill_gradient(low = "blue", high = "red", 
+                            limits = c(0,0.5))+
+  ggtitle("Tham số limits")
+# breaks cho biết các giá trị nào xuất hiện trên chú giải
+# labels cho biết giá trị hiển thị trong chú giải
+p2<-p + scale_fill_gradient(low = "blue", high = "red", 
+                            limits = c(0,0.3),
+                            breaks = c(0.1,0.15,0.25),
+                            labels = paste("Density at", c(0.1,0.15,0.25)))+
+  ggtitle("Tham số breaks và labels") 
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+
+
+#### Dải màu rời rạc
+Dải màu rời rạc dùng để mô tả thuộc tính thẩm mỹ màu sắc của các biến rời rạc. Hàm số dùng để kiểm soát màu sắc rời rạc trong $ggplot2$ là `scale_fill_discrete()` và `scale_color_discrete()`. Mỗi khi sử dụng các hàm số kiểm soát màu sắc rời rạc, $ggplot2$ sẽ mặc định sử dụng dải màu rời rạc "cách đều nhau" trong không gian $HCL$. Dải màu mặc định này có cùng sắc độ (Chromes hay tham số $c$), độ sáng (Luminance hay tham số $l$) và giá trị $h$ cách đều nhau từ góc 15 độ ($h$ nhận giá trị từ 0 đến 360 độ). Bạn đọc muốn sử dụng các dải màu rời rạc trong không gian $hcl$ thì có thể sử dụng `scale_fill_hue()` và `scale_color_hue()` thay vì `scale_fill_discrete()` và `scale_color_discrete()`.
+
+```{r, warning=FALSE, message=FALSE, fig.width=12}
+p1<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()
+p2<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_hue(h=c(0,360)+15+360/5)
+p3<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_hue(c=30)
+grid.arrange(p1,p2,p3,nrow=1,ncol=3)
+```
+
+Dải màu mặc định đối với biến rời rạc sử dụng tham số $c$ bằng 100 và tham số $l$ bằng 65 trong khi tham số $h$ nhận các giá trị cách đều nhau, bắt đầu từ $h = 15 (độ)$. Lưu ý rằng $h$ nhận giá trị từ 0 độ đến 360 độ nên trong trường hợp biến rời rạc có năm giá trị, các màu sắc sẽ lần lượt nhận các giá trị h = 15, 15 + 360/5, 15 + 2 * 360/5, 15 + 3 * 360/5 và 15 + 4 * 360/5. Đó là màu sắc của các thanh trong đồ thị barplot bên tay trái theo thứ tự từ trái qua phải. Trong hình ở giữa, khi chúng ta sử dụng giá trị tịnh tiến giá trị h lên 360/5, chúng ta có thể thấy các màu sắc bắt đầu từ h = 15 + 360/5 và kết thúc ở h = 15. Trong hình bên phải, chúng tôi giảm độ chói (tham số $c$) xuống còn 40. Chúng ta có thể thấy dải màu vẫn tương tự như hình ban đầu nhưng không đạt được độ sáng như vậy.
+
+Bạn đọc cũng có thể sử dụng các dải màu rời rạc được thiết kế sẵn cho mục đích trực quan hóa các biến rời rạc. Dải màu rời rạc mà chúng tôi thường sử dụng là dải màu Brewer. Những dải màu này được thiết kế để hoạt động tốt trong nhiều tình huống khác nhau kể cả đối với những người khó khăn khi nhận biết màu sắc hay khi sử dụng để hiển thị trên những bề mặt lớn. Hàm số để kiểm soát ánh xạ thẩm mỹ màu sắc sử dụng dải màu Brewer là `scale_color_brewer()` và `scale_fill_brewer()`. Bạn đọc cần sử dụng thư viện $RColorBrewer$ để gọi được các hàm này. Để xem các dải màu có sẵn trong thư viện này, bạn đọc sử dụng câu lệnh sau
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+display.brewer.all()
+```
+
+Bạn đọc sử dụng tùy biến $palette$ trong hàm `scale_color_brewer()` để lựa chọn dải màu có sẵn.
+```{r, warning=FALSE, message=FALSE, fig.width=12}
+p1<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_brewer(palette = "Dark2")+
+  ggtitle("Sử dụng dải màu Dark2")
+p2<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_brewer(palette = "Set1")+
+  ggtitle("Sử dụng dải màu Set1")
+p3<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_brewer(palette = "Spectral")+
+  ggtitle("Sử dụng dải màu Spectral")
+grid.arrange(p1,p2,p3,nrow=1,ncol=3)
+```
+
+Để tạo ra dải màu rời rạc theo ý muốn của mình, bạn đọc sử dụng hàm `scale_fill_manual()` và `scale_color_manual()`. Tham số $values$ trong hàm này nhận giá trị là véc-tơ chứa màu sắc mà bạn đọc tự tạo. Lưu ý rằng số lượng phần tử trong véc-tơ phải tương ứng với số lượng phần tử trong biến rời rạc.
+
+Một hàm số có thể được sử dụng để nội suy ra các màu sắc "cách đều nhau" trong không gian màu "RGB" hoặc không gian màu Lab là hàm số `colorRampPalette()` của thư viện $grDevices$. Để tạo ra một véc-tơ có độ dài 5, mỗi giá trị là một màu sắc được nội suy tuyến tính từ màu xanh lam đến màu đỏ chúng ta sử dụng `colorRampPalette()` như sau
+```{r, warning=FALSE, message=FALSE, fig.width=12}
+# nội suy trong RGB
+mypalette1<-colorRampPalette(c("blue","red"), space = "rgb")(5)
+# nội suy trong Lab
+mypalette2<-colorRampPalette(c("blue","red"), space = "Lab")(5)
+```
+
+Các đồ thị barplot dưới đây sử dụng các màu sắc mà chúng ta tự chỉ định bằng hàm `scale_fill_manual()`
+```{r, warning=FALSE, message=FALSE, fig.width=12}
+p1<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_manual(values = c("blue","green","grey","yellow","red"))+
+  ggtitle("Màu tự định nghĩa")
+p2<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_manual(values = mypalette1)+
+  ggtitle("Màu nội suy trong RGB")
+p3<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_manual(values = mypalette2)+
+  ggtitle("Màu nội suy trong Lab")
+grid.arrange(p1,p2,p3,nrow=1,ncol=3)
+```
+
+Cách sử dụng tham số $limits$, $breaks$, và $label$ cũng gần tương tự như đối với biến liên tục. Tham số $limits$ cho biết các giá trị nào trong biến rời rạc được ánh xạ tới dải màu sắc. Tham số $breaks$ cho biết các giá trị nào không được sử dụng trong ánh xạ thẩm mỹ. $label$ cho biết cách các màu sắc hiển thị trong phần chú giải. Theo kinh nghiệm của chúng tôi thì tham số $breaks$ không có nhiều ý nghĩa khi sử dụng đối với dải màu sắc liên tục, trong khi tham số $limits$ có ý nghĩa quan trọng khi bạn đọc cần cố định ánh xạ màu sắc lên biến rời rạc khi vẽ nhiều biểu đồ khác nhau và để kiểm soát thứ tự xuất hiện của biến liên tục trên đồ thị. 
+
+```{r, warning=FALSE, message=FALSE, fig.width=12}
+p1<-gapminder%>%filter(year==1960, continent == "Asia")%>%
+  arrange(-population)%>%head(10)%>%
+  ggplot(aes(fill=country))+
+  geom_bar(aes(x = population, y = reorder(country,population)),stat="identity",col="black")+
+  ylab("")+ggtitle("Năm 1960")+
+  scale_x_continuous(labels = scales::comma)+
+  scale_fill_manual(values = c("blue","red","yellow"), limits = c("Philippines","Vietnam", "Indonesia"))
+p2<-gapminder%>%filter(year==2010, continent == "Asia")%>%
+  arrange(-population)%>%head(10)%>%
+  ggplot(aes(fill=country))+
+  geom_bar(aes(x = population, y = reorder(country,population)),stat="identity",col="black")+
+  ylab("")+ggtitle("Năm 2010")+
+  scale_x_continuous(labels = scales::comma)+
+  scale_fill_manual(values = c("blue","red","yellow"), limits = c("Philippines","Vietnam", "Indonesia"))
+
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+Sử dụng $limits$ trong đồ thị ở trên giúp chúng ta nhấn mạnh vào 3 quốc gia Philippines, Vietnam, và Indonesia trong nhóm 10 nước có dân số lớn nhất châu Á trong các năm 1960 và 2010. 
+
+### Các thuộc tính thẩm mỹ khác
+Ngoài vị trí và màu sắc, còn có một số thuộc tính thẩm mỹ khác mà $ggplot2$ có thể sử dụng để mô tả dữ liệu. Trong phần này, chúng ta sẽ xem xét thuộc tính kích thước (size), hình dạng (shape), chiều rộng của line và kiểu line, sử dụng cùng với các thuộc tính vị trí và màu sắc để thể hiện tốt nhất các biến trong dữ liệu. Ngoài đề cập đến các giá trị mặc định, chúng tôi cũng sẽ thảo luận về các hàm số để bạn đọc có thể sử dụng để kiểm soát tốt các thuộc tính này.
+
+#### Kích thước (size)
+Thuộc tính thẩm mỹ kích thước thường được sử dụng để mô tả hình dạng đồ họa kiểu điểm hoặc ký tự. Như chúng tôi đã đề cập trong phần giới thiệu, thuộc tính kích thước thường được sử dụng với biến liên tục. Nếu không có hàm kiểm soát ánh xạ thẩm mỹ, bán kính của điểm tương ứng với giá trị nhỏ nhất luôn là 1 và bán kính của điểm có giá trị lớn nhất luôn là 6, nghĩa là có bán kính gấp 6 lần bán kính của điểm nhỏ nhất. Khi nội suy ra kích thước của các điểm khác, $ggplot2$ mặc định cho kích thước của điểm là diện tích của hình tròn mô tả điểm đó chứ không phải đường kính của hình tròn. Kích thước của điểm sẽ phụ thuộc vào thứ hạng (rank) của giá trị đó trong biến liên tục chứ không được tính bằng giá trị thực của điểm đó. Nếu $r_m$ là bán kính của hình tròn tương ứng với giá trị nhỏ nhất và $r_M$ tương ứng với diện tích của hình tròn tương ứng với giá trị lớn nhất thì diện tích của hình tròn tương ứng với giá trị có thứ hạng $k$ trong tổng số $n$ giá trị của biến liên tục là
+\begin{align}
+area = r_m + (k-1) \times \cfrac{r_M - r_m}{n - 1}
+\end{align}
+
+Bạn đọc có thể quan sát kích thước của các hình tròn trong hình dưới đây
+```{r, warning=FALSE, message=FALSE, fig.width=12}
+dat<-data.frame(x=1:3,y=1:3,z=1:3)
+# Hình bên trái
+p1<-dat%>%ggplot(aes(x,y,size=z))+geom_point(shape=21,fill= "lightskyblue")+
+  theme(legend.position = "none")
+# Hình ở giữa
+p2<-dat%>%ggplot(aes(x,y,size=z^2))+geom_point(shape=21,fill= "lightskyblue")+
+  theme(legend.position = "none")
+# Hình bên phải
+p3<-dat%>%filter(z>=2)%>%ggplot(aes(x,y,size=z))+geom_point(shape=21,fill= "lightskyblue")+
+  theme(legend.position = "none")
+grid.arrange(p1,p2,p3,ncol=3,nrow=1)
+```
+
+Hình bên tay trái: diện tích của hình tròn nằm ở tọa độ (2,2) bằng trung bình cộng diện tích của hình tròn nằm ở vị trí (1,1) và (3,3). Do diện tích của hình tròn nằm ở vị trí (3,3) bằng $6^2 = 36$ lần diện tích của hình tròn tại vị trí $(1,1)$ nên diện tích của hình tròn tại (2,2) bằng $\cfrac{36+1}{2} = 18,5 \textit{(lần)}$ diện tích hình tròn tại (1,1), hay nói cách khác đường kính của hình tròn tại vị trí (2,2) bằng $\sqrt{18,5} \sim 4,3 \textit{ (lần)}$ đường kính của hình tròn tại vị trí (1,1). Hình ở giữa: cho thấy khi chúng ta ánh xạ thuộc tính thẩm mỹ vào $z^2$ thay vì $z$ thì kích thước các hình tròn vẫn không hề thay đổi do thứ hạng của các điểm trong véc-tơ $z$ không thay đổi. Hình bên phải: khi chúng ta chỉ vẽ hai điểm thay vì cả ba điểm, diện tích hình tròn nhỏ nhất và hình tròn lớn nhất vẫn không thay đổi.
+
+Hàm số dùng để kiểm soát giá trị của ánh xạ thẩm mỹ kích thước là hàm `scale_size()`. Để thay đổi miền giá trị của kích thước, chúng ta sử dụng tham số $range$. 
+
+```{r, warning=FALSE, message=FALSE, fig.width=15}
+dat<-data.frame(x=1:3,y=1:3,z=1:3)
+# Hình bên trái
+p1<-dat%>%ggplot(aes(x,y,size=z))+geom_point(shape=21,fill= "lightskyblue")+
+  theme(legend.position = "none")
+# Hình ở giữa
+p2<-dat%>%ggplot(aes(x,y,size=z))+geom_point(shape=21,fill= "lightskyblue")+
+  scale_size(range=c(1,12))+
+  theme(legend.position = "none")
+# Hình bên phải
+p3<-dat%>%ggplot(aes(x,y,size=z))+geom_point(shape=21,fill= "lightskyblue")+
+  scale_size(range=c(6,24))+
+  theme(legend.position = "none")
+grid.arrange(p1,p2,p3,ncol=3,nrow=1)
+```
+
+Hình bên trái: đường kính của hình nhỏ nhất là 1, của hình lớn nhất là 6. Hình ở giữa: đường kính của hình nhỏ nhất là 1, của hình lớn nhất là 12. Hình bên phải: đường kính của hình nhỏ nhất là 6, của hình lớn nhất là 24. Đường kính của các hình nằm ở giữa được nội suy tuyến tính theo diện tích tăng dần theo hạng của điểm đó.
+
+Trong trường hợp bạn đọc muốn sử dụng nội suy tuyển tính theo đường kính của điểm thay vì diện tích, hãy sử dụng hàm `scale_radius()`
+
+```{r, warning=FALSE, message=FALSE, fig.width=15}
+dat<-data.frame(x=1:3,y=1:3,z=1:3)
+# Hình bên trái
+p1<-dat%>%ggplot(aes(x,y,size=z))+geom_point(shape=21,fill= "lightskyblue")+
+  theme(legend.position = "none")+
+  scale_size(range=c(1,7))
+# Hình ở giữa
+p2<-dat%>%ggplot(aes(x,y,size=z))+geom_point(shape=21,fill= "lightskyblue")+
+  scale_radius(range=c(1,7))+
+  theme(legend.position = "none")
+# Hình bên phải
+p3<-dat%>%ggplot(aes(x,y,size=z))+geom_point(shape=21,fill= "lightskyblue")+
+  scale_radius(range=c(4,10))+
+  theme(legend.position = "none")
+grid.arrange(p1,p2,p3,ncol=3,nrow=1)
+```
+
+Hình bên trái sử dụng scale theo diện tích và đường kính hình tròn lớn nhất bằng 7 lần đường tròn nhỏ; hình tròn ở giữa có bán kính bằng $\sqrt{\cfrac{7^2+1^2}{2}} = 5 \textit{ (lần)}$ diện tích hình tròn nhỏ nhất. Hình ở giữa, do scale theo đường kính hình tròn nên hình ở giữa có đường kính bằng $\cfrac{7+1}{2} = 4 \textit{ (lần)}$ đường kính hình tròn nhỏ. Hình bên phải: đường kính của hình nhỏ nhất là 4, hình lớn nhất là 10, nên bán kính hình ở giữa là $\cfrac{4+10}{2} = 7$ (bằng kích thước của hình tròn lớn nhất của hình ở giữa).
+
+Các tham số $limits$, $breaks$, và $label$ được sử dụng tương tự như thuộc tính thẩm mỹ màu sắc. $limits$ cho biết miền giá trị nào của biến được ánh xạ đến thuộc tính thẩm mỹ size. $breaks$ cho biết các kích thước nào xuất hiện trên chú giải, và $labels$ mô tả thuộc tính thẩm trên chú giải của đồ thị.
+
+```{r,warning=FALSE, message=FALSE}
+gapminder%>%filter(year==2010)%>%
+  ggplot(aes(infant_mortality,life_expectancy, size = population))+
+  geom_point(shape = 21, fill = "lightskyblue",alpha = 0.5)+
+  scale_size(range = c(1,12),
+             limits = c(10^7,max(gapminder$population)),
+             breaks = c(10^8,2*10^8,5*10^8,10^9),
+             #label = paste("Dân số",c(10^8,2*10^8,5*10^8,10^9)),
+             labels = scales::label_comma())
+```
+
+#### Hình dạng (shape)
+Hình dạng thường được sử dụng để mô tả một biến rời rạc có không quá nhiều giá trị riêng biệt. Theo kinh nghiệm của tác giả thì hình dạng chỉ nên sử dụng với các biến có nhỏ hơn hoặc bằng 5 giá trị riêng biệt. Mặc dù $ggplot2$ cho phép sử dụng lên đến hơn 20 hình dạng khác nhau nhưng sử dụng nhiều hơn 5 hình dạng trong một đồ thị sẽ làm cho đồ thị trở nên rắc rối và khó khăn trong nhận diện. Tại phiên bản $ggplot2$ mà tác giả đang sử dụng, có 25 hình dạng khác nhau có thể dùng để mô tả biến rời rạc ứng với 25 số tự nhiên từ 1 đến 25 như sau
+```{r, warning= FALSE, message= FALSE, fig.width=12, fig.height=5}
+dat<-data.frame(x=c(rep(1:10,2),1:5),y = c(rep(3,10),rep(2,10),rep(1,5)), z = 1:25)
+dat%>%ggplot(aes(x,y,shape=as.factor(z)))+geom_point(size=3)+
+  scale_shape_manual(values = 1:25)+theme_classic()+geom_text(aes(label=z),vjust=-1)+
+  theme(legend.position = "none")+
+  theme_void()
+```
+
+Bạn đọc lưu ý rằng có một số hình dạng trông giống nhau nhưng lại có thuộc tính thẩm mỹ khác nhau. Chẳng hạn như hình dạng tương ứng với số 1 là một điểm hình tròn với thuộc tính thẩm mỹ color là màu sắc của hình tròn đó, trong khi hình dạng tương ứng với số 21 có thuộc tính thẩm mỹ color là màu viền bên ngoài của hình tròn và thuộc tính thẩm mỹ fill mới là màu sắc bên trong hình tròn.
+
+Để kiểm soát ánh xạ thẩm mỹ đến thuộc tính hình dạng, bạn đọc sử dụng hàm `scale_shape_manual()`.
+```{r,warning=FALSE, message=FALSE}
+gapminder%>%filter(year==2010, continent == "Asia")%>%
+  ggplot(aes(gdp/population,life_expectancy, shape = region))+
+  geom_point()+
+  scale_x_continuous(trans="log10")+
+  scale_shape_manual(values=c(21:24,8) )
+```
+
+Nhìn chung ánh xạ biến rời rạc đến thuộc tính thẩm mỹ hình dạng không cho hiệu quả tốt trong phân biệt các nhóm. Bạn đọc nên thận trọng khi sử dụng thuộc tính thẩm mỹ này.
+
+#### Kích thước và hình dạng của các đường (linewidth và linetype)
+Đối với hình dạng đồ họa kiểu các đường như `geom_line()`, `geom_path()`, `geom_segment()` chúng ta có thể ánh xạ các biến rời rạc vào độ rộng hoặc hình dạng của đường. Hình vẽ dưới đây mô tả sự thay đổi của biến $gdp$ của ba quốc gia bao gồm Mỹ, Trung Quốc và Nhật Bản theo thời gian từ năm 1960 đến năm 2010.
+
+```{r, warning=FALSE, message=FALSE}
+gapminder%>%filter(country %in% c("United States", "China", "Japan"), year <= 2011)%>%
+  ggplot(aes(x = year,y = gdp/10^9))+
+  geom_line(aes(linetype = country))+
+  theme_minimal()+
+  ylab("GDP in $B")+
+  scale_x_continuous(breaks = seq(1960,2010,10))+
+  scale_y_continuous(labels = scales::label_comma())
+```
+
+Hàm số dùng để kiểm soát ánh xạ thẩm mỹ vào hình dạng của đường là `scale_linetype_manual()`. $ggplot2$ có 13 hình dạng cho các đường được đánh số từ 1 đến 13 như dưới đây
+
+```{r, warning=FALSE, message=FALSE, echo = FALSE}
+df <- data.frame(value = as.factor(1:13))
+p <- df%>%ggplot()+
+  geom_segment(aes(x = 0, xend = 1, y = value, yend = value,linetype = value),show.legend = FALSE)+
+  geom_label(aes(x = 0.5 ,y = value,label = value))+
+  scale_linetype_manual(values = 1:13)+
+  theme_void()+
+  scale_y_discrete(limits = 13:1) 
+p
+```
+
+Để các đường có hình dạng như mong muốn, chúng ta gán giá trị tham số $values$ cho véc-tơ chứa các số từ 1 đến 13 là hình dạng mà bạn lựa chọn.
+
+```{r, warning=FALSE, message=FALSE}
+gapminder%>%filter(country %in% c("United States", "China", "Japan"), year <= 2011)%>%
+  ggplot(aes(x = year,y = gdp/10^9))+
+  geom_line(aes(linetype = country))+
+  theme_minimal()+
+  ylab("GDP in $B")+
+  scale_x_continuous(breaks = seq(1960,2010,10))+
+  scale_y_continuous(labels = scales::label_comma())+
+  scale_linetype_manual(values = c(4,7,12))
+```
+
+
+## Chú giải của ánh xạ thẩm mỹ
+
+Về mặt hình thức, nếu coi các hàm `scale_*()` trong phần trước của chương sách như các ánh xạ từ một tập hợp các giá trị của biến đến một tập hợp các giá trị của thuộc tình thẩm mỹ thì chú giải là ánh xạ ngược từ thuộc tính thẩm mỹ đến miền giá trị của biến. Chú giải cho phép bạn chuyển đổi các thuộc tính trực quan trở lại giá trị của dữ liệu. Giá trị xuất hiện trên các trục tọa độ và các chú giải có cách hiển thị khác nhau nhưng về bản chất lại có cùng một mục đích là cho phép người tiếp nhận quan sát các hình ảnh đồ họa trực quan và ánh xạ chúng trở lại giá trị của dữ liệu.
+
+```{r, warning=FALSE, message=FALSE, fig.width=12, echo = FALSE}
+knitr::include_graphics("Image/Rplot01.PNG")
+```
+
+Chú giải có khả năng giải thích tốt hơn giá trị xuất hiện trên các trục tọa độ bởi các nguyên nhân sau
+
+- Chú giải có thể giải thích nhiều biến cùng lúc trong khi giá trị trên trục tọa độ chỉ cho phép một biến.
+
+- Chú giải có thể tùy biến dễ hơn: có thể xuất hiện ở các vị trí theo ý muốn của người xây dựng đồ thị, có thể xuất hiện theo bất kỳ hướng nào.
+
+Bạn đọc hãy lưu ý rằng dù chúng ta không gọi bất kỳ hàm `scale_*()` nào trong các câu lệnh thì $ggplot2$ vẫn luôn luôn sử dụng một hàm $scale$ mặc định để ánh xạ từ biến đến miền giá trị của thuộc tính thẩm mỹ. Mỗi khi bạn gọi hàm `scale` để kiểm soát ánh xạ thẩm mỹ, các giá trị mà bạn khai báo sẽ thay thế cho các giá trị mặc định. Trong trường hợp bạn gọi nhiều hàm `scale` tác động đến một thuộc tính thẩm mỹ thì chỉ có hàm `scale_*()` sau cùng bạn gọi ra sau cùng được sử dụng.
+
+
+```{r, warning=FALSE, message=FALSE, fig.width=12}
+p<-gapminder%>%filter(year==2010,region=="South-Eastern Asia")%>%
+  mutate(gdp_per_capita = gdp/population)%>%
+  ggplot(aes(reorder(country,gdp_per_capita),gdp_per_capita,fill = country))+
+  geom_bar(stat="identity")+
+  theme_minimal()
+p+scale_y_continuous(name = "GDP bình quân đầu người", labels = scales::label_comma())+
+  scale_x_discrete(name = "Country")+
+  scale_y_continuous(trans = "sqrt")+
+  scale_x_discrete(name = "Quốc gia", labels = c(
+    "Vietnam" = "VN",
+    "Thailand" = "TL",
+    "Timor-Leste" = "Đông Timor"))+
+  scale_y_continuous(name = "GDP bình quân đầu người", labels = scales::label_dollar())
+```
+
+Khi bạn sử dụng nhiều hàm `scale_*()` tác động đến cùng một thuộc tính thẩm mỹ như trên, $ggplot2$ sẽ đưa ra các cảnh báo. Bạn cần xem xét lại các câu lệnh của mình để đảm bảo sử dụng đúng với mục đích.
+
+Nhìn chung để kiểm soát chú giải của các ánh xạ thẩm mỹ, bạn đọc sử dụng tham số $guide$ trong các hàm `scale_*()` tương ứng. Giá trị gán cho tham số $guide$ là một trong các hàm số sau đây:
+
+- `guide_axis()` là hàm số dùng để gán cho tham số $guide$ khi chúng ta sử dụng các hàm `scale_*()` nhằm kiểm soát ánh xạ thẩm mỹ đến các trục tọa độ.
+
+```{r, warning=FALSE, message=FALSE, fig.width=12}
+p+ scale_x_discrete(name = "Quốc gia",
+                   guide = guide_axis(title = "Country",
+                                      angle = 90))+
+  scale_y_continuous(name = "GDP bình quân đầu người", labels = scales::label_dollar(),
+                     guide = guide_axis(title = "GDP per capita"))
+```
+
+Bạn đọc có thể thấy rằng tham số $title$ trong hàm $guide$ đã thay thế cho tham số $name$ trong hàm `scale_()`. Tham số $angle$ cho biết hướng các giá trị xuất hiện trên trục tọa độ. Bạn đọc tham khảo hướng dẫn sử dụng hàm `guide_axis()` để hiểu về các tham số khác như $n.dodge$, $order$, hay $position$.
+
+- `guide_legend()` là hàm số dùng để gán cho tham số $guide$ khi gọi các hàm `scale_*()` kiểm soát ánh xạ từ các biến rời rạc đến màu sắc. Có rất nhiều tham số có thể sử dụng trong hàm số này. Bạn đọc tham khảo hướng dẫn sử dụng hàm để biết đầy đủ các tham số.
+
+```{r, warning=FALSE, message=FALSE, fig.width=12}
+p+scale_x_discrete(guide = guide_axis(title = "Quốc gia",
+                                      angle = 90))+
+  scale_y_continuous(labels = scales::label_dollar(),
+                     guide = guide_axis(title = "GDP per capita"))+
+  scale_fill_brewer(palette = "Paired",
+                    guide = guide_legend(
+                      title = "Quốc gia",
+                      title.position = "top",
+                      ncol = 2
+                    ))
+```
+
+- `guide_colorbar()` được dùng khi chú giải cho các ánh xạ từ biến liên tục đến dải màu liên tục
+
+- `guide_bin()` được dùng khi chú giải cho các ánh xạ từ biến liên tục đến thuộc tính thẩm mỹ kích thước (size).
+
+## Các kiểu trục tọa độ
+
+
+## Chủ đề và ngữ cảnh của đồ thị (theme)
+Trong phần này, chúng ta sẽ học cách sử dụng chủ đề và ngữ cảnh (theme) cho các đồ thị. Ngữ cảnh cho phép bạn đọc kiểm soát tốt các cấu phần không ánh xạ đến dữ liệu trong câu chuyện của bạn. Nhìn chung chủ đề và ngữ cảnh không ảnh hưởng đến cách dữ liệu được hiển thị bằng các hình dạng đồ họa hoặc cách dữ liệu được biến đổi. Chủ đề và ngữ cảnh cho phép bạn đọc kiểm soát những cấu phần như phông chữ, hình nền, vị trí chú giải,...
+
+Sự phân tách giữa các thành các phần có ánh xạ đến dữ liệu và thành phần không ánh xạ đến dữ liệu trong $ggplot2$ là điểm khác biệt so với đồ họa cơ sở. Trong đồ họa cơ sở hầu hết các hàm đều có một số lượng lớn các tham số số chỉ định cả hình thức dữ liệu và phần không liên quan đến dữ liệu, điều này làm cho các hàm trong đồ thị cơ sở trở nên phức tạp. $ggplot2$ tiếp cận theo cách khác: khi tạo đồ thị, bạn xác định cách hiển thị dữ liệu trước, sau đó bạn có thể chỉnh sửa mọi chi tiết không liên quan đến dữ liệu bằng cách hàm kiểm soát chủ đề và ngữ cảnh. Để kiểm soát chủ đề và ngữ cảnh của đồ thị, bạn đọc cần nắm vững các nội dung sau:
+
+- Các chủ đề và ngữ cảnh đã được hoàn chỉnh sẵn có trong $ggplot2$ và trong thư viện $ggthemes$.
+
+- Kiểm soát các thành phần của chủ đề và ngữ cảnh như: tiêu đề của đồ thị (kiểu chữ, kích thước, vị trí), cách hiển thị các số trên các trục, cách hiển thị các hình dạng đồ họa trên chú giải, kiểu chữ, kích thước hay vị trí của chú giải...
+
+- Kiểm soát các tùy biến của các hàm dùng để gán giá trị cho các thành phần của chủ đề. Ví dụ như hàm `element_text()` có thể dùng để chỉnh kích thước phông chữ, màu sắc và giao diện của các thành phần văn bản.
+
+- Cách sử dụng hàm `theme()` với một danh sách dài các tùy biến cho phép bạn ghi đè lên các thành phần của chủ đề và ngữ cảnh mặc định.
+
+## Tạo đồ thị tương tác và đồ thị động.
+
+Các đồ thị của thư viện $ggplot2$ đều là các đồ thị tĩnh. Các đồ thị động hay đồ thị tương tác ngoài lợi thế hơn đồ thị tĩnh ở việc thu hút thị giác của người tiếp nhận còn ở khả năng mô tả dữ liệu một cách đầy đủ thông tin hơn:
+
+- Các đồ thị dạng động đặc biệt hiệu quả trong việc mô tả sự thay đổi dữ liệu theo thời gian.
+
+- Các đồ thị tương tác cho phép hiển thị thông tin bằng con trỏ, hoặc phóng to, thu nhỏ từng phần của đồ thị. Bạn đọc tránh phải hiển thị quá nhiều thông tin lên đồ thị cùng lúc.
+
+Khuyết điểm duy nhất của các đồ thị tương tác và các đồ thị động đó là không thể biểu diễn trên các bản in cứng. 
+
+Trong phần này của chương sách, chúng tôi sẽ thảo luận về hai thư viện dùng để tạo đồ thị tương tác và đồ thị dạng động sử dụng cùng với $ggplot2$ là $ggiraph$ và $plotly$. Nếu như $ggiraph$ là thư viện bổ sung cho $ggplot2$ và được xây dựng dựa trên cấu trúc ngữ pháp đồ thị tương tự như $ggplot2$ thì $plotly$ là một thư viện khá độc lập với $ggplot2$ và chuyên sử dụng để tạo đồ thị dạng động và tương tác.
+
+### Tạo đồ thị tương tác với $ggiraph$
+Ưu điểm lớn nhất của $ggiraph$ đó là các câu lệnh tạo đồ thị cũng được dựa trên ngữ pháp của đồ thị, nghĩa là hoàn toàn tương đồng với các câu lệnh trong $ggplot2$. Để tạo một đồ thị trong $ggiraph$, bạn đọc chỉ cần thêm các thuộc tính thẩm mỹ của đồ thị tương tác và đồ thị động cùng với các thuộc tính của đồ thị tĩnh của $ggplot2$. Tại thời điểm chúng tôi viết chương sách này, thư viện $ggiraph$ đang ở phiên bản 0.8.7 và hướng dẫn sử dụng ở trong link dưới đây
+
+https://cloud.r-project.org/web/packages/ggiraph/ggiraph.pdf
+
+Sau khi xem qua danh sách các hàm số trong thư viện $ggiraph$, bạn đọc có thể thấy rằng đa số các hàm `geom_*()` trong thư viện $ggplot2$ đều có một hàm tương ứng để tạo đồ thị tương tác là `geom_*_interactive()`. Chẳng hạn như hàm `geom_point()` trong thư viện $ggplot2$ sẽ có hàm tương ứng trong $ggiraph$ là `geom_point_interactive()`. Hai cấu phần thẩm mỹ cho đồ thị tương tác là $tooltip$ và $data_id$. Cũng giống như $plotly$, bạn đọc cần tạo một đối tượng kiểu đồ thị bằng hàm `ggplot()` sau đó sử dụng hàm `girafe()` để tạo đồ thị tương tác. Hãy quan sát ví dụ dưới đây:
+ 
+```{r, warning=FALSE, message=FALSE, fig.width=10}
+p<-murders %>% ggplot(aes(y = total, x = population)) +
+  geom_point_interactive(aes(fill=region, 
+                             tooltip = paste0("State: ", state, "\n Region: ", region, "\n Population: ", population), 
+                             onclick = region), 
+                         size = 4, shape=21, alpha = 0.8, color = "black") +
+  geom_smooth(method = "lm", se = FALSE, linetype = 2, color="grey")+
+  scale_x_continuous(trans = "log10", labels = scales::label_comma()) +
+  scale_y_log10() +
+  scale_fill_brewer(palette = "Dark2")+
+  theme_minimal()+
+  ggtitle("Số vụ sát nhân bằng súng tại các bang năm 2010")
+girafe(ggobj = p)
+```
+
+Thuộc tính thẩm mỹ $tooltip$ cho biết thông tin hiển thị của các điểm trên đồ thị khi sử dụng con trỏ trong khi thuộc tính thẩm mỹ $data\_id$ khi được ánh xạ đến từ một biến sẽ cho biết các quan sát có cùng giá trị trên biến đó. Bạn đọc có thể sử dụng con trỏ di chuyển đến từng các điểm để xem kết quả của ánh xạ đến thuộc tính $tooltip$ và $data_id$.
+
+Cách sử dụng các thuộc tính thẩm mỹ $tooltip$ và $data\_id$ hoàn toàn tương tự trong các đồ thị cơ bản khác. 
+
+1. Đồ thị dạng bong bóng
+```{r, warning=FALSE, message=FALSE, fig.width=10}
+p<-diamonds%>%group_by(cut,color)%>%mutate(ave_price = mean(price))%>%ungroup()%>%
+  as.data.frame()%>%
+  ggplot(aes(cut,color,color = ave_price))+
+  geom_count_interactive(aes(tooltip = paste0("Number: ", after_stat(n))))+
+  scale_color_continuous(type = "viridis")+
+  scale_size(range=c(1,12))+
+  theme_minimal()
+girafe(ggobj = p)
+```
+
+2. Đồ thị dạng line: Đồ thị dưới đây mô tả tỷ lệ thất nghiệp của nước Mỹ qua các thời kỳ Tổng thống và các Đảng
+```{r, warning=FALSE, message=FALSE, eval = FALSE}
+dat1<-presidential[3:11,]
+p<-economics%>%mutate(unemploy_rate = unemploy/pop)%>%
+  ggplot()+
+  geom_line_interactive(aes(x=date,y=unemploy_rate,tooltip = name, data_id = party))+
+  scale_y_continuous(limits = c(0.013,0.052))+
+  geom_rect(data=dat1,
+              aes(xmin = start, xmax = end, 
+                  ymin = 0.013, ymax = 0.052,fill = party),alpha = 0.4)+
+  geom_rect_interactive(data=dat1,
+            aes(xmin = start, xmax = end, 
+                ymin = 0.013, ymax = 0.052,
+                tooltip = name,
+                data_id = name),color = "black",size=0.1,alpha=0.01)+
+  scale_fill_manual(values=c("blue","red"))+
+  theme_minimal()
+girafe(ggobj = p)
+```
+
+3. Đồ thị dạng thanh
+
+
+4. Bản đồ tương tác
+
+
+Chúng ta sẽ mô tả biến infant_mortality của dữ liệu $gapminder$ thông qua bản đồ thế giới
+
+
+### Tạo đồ thị tương tác với $plotly$
+Để tạo một đồ thị tương tác bằng thư viện $plotly$ dễ hơn bạn nghĩ rất nhiều. Việc duy nhất bạn đọc cần làm là gọi thư viện $plotly$ và sau đó sử dụng hàm `ggplotly()`. Đoạn câu lệnh dưới đây mô tả dữ liệu $murders$ dưới dạng đồ thị rải điểm tương tác. 
+
+```{r, warning=FALSE, message=FALSE, fig.width=10}
+p<-murders %>% ggplot(aes(y = total, label = state, x = population)) +
+  geom_point(aes(fill=region), size = 4, shape=21, alpha = 0.8, color = "black") +
+  geom_smooth(method = "lm", se = FALSE, linetype = 2, color="grey")+
+  scale_x_continuous(trans = "log10", labels = scales::label_comma()) +
+  scale_y_log10() +
+  scale_fill_brewer(palette = "Dark2")+
+  theme_minimal()+
+  ggtitle("Số vụ sát nhân bằng súng tại các bang năm 2010")
+ggplotly(p)
+```
+
+Bạn đọc có thể tương tác với đồ thị bằng các thao tác như sau:
+
+1. Sử dụng con trỏ chỉ vào các điểm để xem thông tin chính xác về dân số, số vụ sát nhân, tên bang, và tên vùng của mỗi điểm.
+
+2. Sử dụng con trỏ, hoặc các nút phóng to, thu nhỏ để xem từng phần của đồ thị.
+
+3. Sử dụng con trỏ trên chú giải để lựa chọn các vùng nào hiển thị, hoặc không hiển thị trên đồ thị.
+
+4. Sử dụng con trỏ trượt theo đường thẳng tạo bởi `geom_smooth()` để biết giá trị trên trục total và population của mỗi điểm trên đường thẳng. Lưu ý rằng giá trị xuất hiện là giá trị sau khi đã chuyển đổi bằng hàm $log10()$.
+
+Các thông tin bạn đọc muốn hiển thị bằng con trỏ là các dữ liệu đã được ánh xạ vào trong các thuộc tính thẩm mỹ của đồ thị. Trong đồ thị ở trên thông tin của mỗi điểm bao gồm có 1: Population, 2: Total, 3: State, và 4: region. Nếu không sử dụng $plotly$, thuộc tính thẩm mỹ $label$ sẽ không được hiển thị do chúng ta không sử dụng `geom_text()` hay `geom_label()`. $plotly$ sẽ hiển thị thông tin của tất cả các biến có ánh xạ đến thuộc tính thẩm mỹ, dù thuộc tính thẩm mỹ đó không hiển thị trong $ggplot2$.
+
+Tham số $tooltip$ trong hàm $ggplotly$ được sử dụng để kiểm soát các thuộc tính thẩm mỹ xuất hiện trên đồ thị tương tác. Ví dụ như trong đồ thị rải điểm ở trên, bạn đọc không chỉ muốn thông tin hiển thị trên mỗi điểm chỉ bao gồm tên bang (thuộc tính thẩm mỹ $fill$) và vùng (thuộc tính thẩm mỹ $label$), chúng ta sử dụng tùy biến $tooltip$ như sau
+
+```{r, warning=FALSE, message=FALSE, fig.width=10, eval = FALSE}
+# Thông tin mỗi điểm chỉ bao gồm 1. Tên bang (label) và 2. Vùng (fill) 
+ggplotly(p, tooltip = c("label","fill"))
+```
+
+Chúng ta có thể sử dụng $ggplotly$ trên hầu hết các đồ thị được tạo bởi $ggplot2$, dưới đây là một số ví dụ
+
+1. Đồ thị kiểu bong bóng:
+```{r warning=FALSE, message=FALSE}
+p<-diamonds%>%group_by(cut,color)%>%mutate(ave_price = mean(price))%>%ungroup()%>%
+  as.data.frame()%>%
+  ggplot(aes(cut,color,color = ave_price))+
+  geom_count()+
+  scale_color_continuous(type = "viridis")+
+  scale_size(range=c(1,12))+
+  theme_minimal()
+ggplotly(p, tooltip = c("n", "fill"))
+```
+
+2. Đồ thị kiểu line
+```{r, warning=FALSE, message=FALSE, fig.width=10}
+p<-gapminder%>%filter(country %in% c("United States","Japan","China","Germany","France"),
+                   year <= 2011)%>%mutate(gdp_bil_usd = gdp/10^9)%>%
+  ggplot(aes(x = year, y = gdp_bil_usd, color = country, linetype = country))+
+  geom_line(size=0.5)+
+  scale_y_continuous(labels = scales::label_comma())+
+  theme_minimal()
+ggplotly(p, tooltip = c("x","y", "color") )
+```
+
+3. Đồ thị kiểu thanh: barplot kết hợp với thuộc tính thẩm mỹ $fill$ có thể sử dụng để trực quan hóa hai biến rời rạc. Đồ thị dưới đây mô tả thu nhập bình quân đầu người tại các Châu lục vào năm 2010 theo các mức độ: dưới \$2000, từ \$2000 đến $5000, và trên \$5000.
+```{r, warning=FALSE, message=FALSE, fig.width=10}
+p<-gapminder%>%filter(year == 2010)%>%drop_na()%>%
+  mutate(gdp_per_capita = gdp/population,
+         gdp_levels = ifelse(gdp_per_capita<2000,"Low",
+                            ifelse(gdp_per_capita<5000,"Medium","High")),
+         gdp_range = factor(gdp_levels, levels = c("High","Medium","Low")))%>%
+  ggplot(aes(x = continent,fill = gdp_range))+
+  geom_bar(color="grey",alpha=0.6)+
+  scale_fill_manual(values = c("green","blue","red"))+
+  theme_minimal()
+ggplotly(p, tooltip = "count")
+```
+
+4. Bản đồ tương tác: bản đồ tương tác giúp cho việc hiển thị dữ liệu trên bản đồ trở nên đơn giản hơn rất nhiều so với sử dụng `geom_text()` hoặc `geom_label()`
+
+```{r, warning=FALSE, message=FALSE}
+dat<-map_data("state")
+dat1<-murders%>%mutate(murder_rate=total/population*10^6,
+                       state = tolower(state))
+
+p<-dat%>%mutate(state = region)%>%
+  mutate(murder_rate=dat1$murder_rate[match(state,dat1$state)])%>%
+  ggplot(aes(x=long,y=lat,group=group,label = state, fill=murder_rate))+
+  geom_polygon(color="black",size = 0.1)+
+  scale_x_continuous(expand=c(0,0))+
+  scale_fill_gradientn(colors = c(rgb(0.95,0.95,0.95),rgb(0.95,0.3,0.3),
+                                  rgb(0.95,0.1,0.1)))+
+  theme_minimal()+
+  theme(legend.position = "bottom")
+ggplotly(p)
+```
+
+Tạo đồ thị dạng động (dynamic) là một phương pháp thường được sử dụng để mô tả dữ liệu biến đổi theo thời gian. Đồ thị dạng động ngoài yếu tố bắt mắt còn giúp cho người tiếp nhận dữ liệu cảm nhận được bản chất của vấn đề phức tạp một cách trực quan nhất. Hãy bắt đầu với một dữ liệu đơn giản bao gồm hai biến $x$, $y$ và thời gian $time$. 
+```{r, warning=FALSE, message=FALSE}
+dat<-data.frame(x=1:10,y=1:10,time=1:10)
+```
+
+Chúng ta muốn vẽ một điểm tại các vị trí lưu ở cột $x$ và cột $y$ di chuyển theo thời gian được lưu trong cột $time$ với $ggplotly$, chúng ta chỉ cần khai báo thêm ánh xạ thẩm mỹ từ thuộc tính $frame$ của hàm `animation_opts()` đến biến $time$ như dưới đây
+```{r, warning=FALSE, message=FALSE}
+p<-dat%>%ggplot(aes(x=x,y=y,size=time, frame = time, color= time))+
+  geom_point()+
+  theme_minimal()
+ggplotly(p, width = 600, height = 600, tooltip = "color") %>%
+animation_slider(frame = 1000)
+```
+
+Đồ thị dạng động sẽ được kích hoạt mỗi khi chúng ta bấm nút "play". Các tham số $width$ và $height$ trong hàm `ggplotly()` cho biết kích thước của đồ thị dạng động trong khi tham số $frame$ trong hàm `animation_opts()` cho biết độ mượt của hình động.
+
+Giả sử bạn đọc muốn theo dõi mối quan hệ giữa hai biến tuổi thọ trung bình và tỷ lệ sinh trung bình của tất cả các quốc gia trên thế giới. Bạn sử dụng đồ thị rải điểm để mô tả mối quan hệ giữa hai biến liên tục, sử dụng màu sắc để phân biệt giữa các châu lục, sử dụng kích thước của các điểm để mô tả dân số, và sau cùng bạn sử dụng $frame$ để mô tả biến $year$. Với một vài điều chỉnh ánh xạ thẩm mỹ, bạn đã có thể kể được một câu chuyện hấp dẫn về tuổi thọ trung bình và tỷ lệ sinh dựa trên dữ liệu $gapminder$
+
+```{r, warning=FALSE, message=FALSE, eval= FALSE}
+p<-gapminder%>%filter(year %in% 1960:2011)%>%
+  ggplot(aes(x = fertility, y = life_expectancy, size = population, 
+             fill = continent, frame = year, label = country))+
+  geom_point(alpha = 0.5,shape=21)+
+  scale_fill_brewer(palette = "Set1")+
+  scale_size(range=c(1,15))+
+  theme_minimal()+
+  ggtitle("Tuổi thọ và tỷ lệ sinh trung bình 1960 đến 2011")
+ggplotly(p, width = 800, height = 600, tooltip = c("label","size") ) %>%
+animation_slider(frame = 204)
+```
+
+Một trong những công việc khó khăn nhất của những người làm việc liên quan đến xây dựng các mô hình toán học phức tạp là giải thích kết quả của mình cho những người ít có kiến thức chuyên môn về lĩnh vực này. Kinh nghiệm của chúng tôi là hãy trực quan hóa kết quả của mình thay vì các công thức phức tạp. Dưới đây là một vài khái niệm toán học phức tạp được giải thích dưới dạng đồ thị động
+
+1. Chuyển động Brown: chuyển động Brown là một quá trình ngẫu nhiên có ý nghĩa đặc biệt quan trọng trong tài chính, bảo hiểm, và cả các lĩnh vực công nghệ. Không dễ dàng để giải thích cho những người không có nền tảng về toán các khái niệm về chuyển động Brown. Thay vì các công thức toán, chúng ta có thể giải thích về chuyển động Brown thông qua trực quan hóa:
+
+2. Markov Chain Monte Carlo là một kỹ thuật mô phỏng biến ngẫu nhiên hoặc một véc-tơ ngẫu nhiên có hàm phân phối $F$ mà không thể mô phỏng được một cách trực tiếp. Quá trình tạo ra biến ngẫu nhiên có hàm phân phối $F$ sẽ bắt đầu từ một phân phối $G$ mà chúng ta có thể mô phỏng ra được đi qua các hàm phân phối trung gian và sẽ hội tụ đến phân phối $F$. Hình vẽ dưới đây mô tả quá trình mô phỏng biến ngẫu nhiên phân phối chuẩn $\mathcal{N}(0,1)$ từ một phân phối có hai đinh (2 mode). 
+
+```{r, warning=FALSE, message=FALSE, echo = FALSE}
+# Input
+N<-2*10^4 # number of simulation
+n<-300 # length of each tranjectory
+dt<-0.025
+
+# pi(x)
+pi_x<-function(x){
+  return (exp(-(x^2+sin(5*x+5))))
+}
+
+d_log_pi<-function(x) return (-x)
+
+# simulate process Xt
+X<-matrix(0,N,n)
+## initial value: mix nornal
+X[,1]<- ifelse(runif(N,0,1)<0.5,rnorm(N,-3,1),rnorm(N,3,1))
+
+# generate Xt
+for (j in 2:n){
+  dX <- 1/2*d_log_pi(X[,(j-1)])*dt + sqrt(dt)*rnorm(N,0,1)
+  X[,j]<-X[,(j-1)]+dX
+}
+
+# visualization
+dat<-data.frame(t = c(1:(N*n)), value = rep(0,N*n))
+for (i in 1:n){
+  ind<-((i-1)*N+1):(i*N)
+  dat$t[ind]<-i
+  dat$value[ind]<-X[,i]
+}
+
+p<-dat%>%ggplot(aes(value,frame=t))+
+  geom_density(fill = "yellow")+#GIOI HAN LAI GIA TRI TREN X,Y
+  xlim(-5,5)+ylim(0,0.5)+
+  theme_dark()
+ggplotly(p, width = 800, height = 600) %>%
+  animation_opts(frame = 2)
+```
+
+## Kiến thức nâng cao về $ggplot2$
+
+### Lập trình trong $ggplot2$
+
+### Tạo dashboard với $shiny$
+
+
+
+
+
+
+
+
+
+<!-- # REFERENCE -->
+
+<!-- ### Source from thesis -->
+
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+
+<!-- ### Souce from website -->
+
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->

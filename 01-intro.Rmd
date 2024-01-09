@@ -1,21 +1,79 @@
-# Introduction {#intro}
-
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
-
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
-
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
+---
+output:
+  pdf_document: default
+  html_document: default
+header-includes:
+- \usepackage{tikz}
+- \usepackage{pgfplots}
+- \usetikzlibrary{arrows,automata,positioning}
+- \usepackage[utf8]{inputenc}
+- \usepackage[utf8]{vietnam}
+- \usepackage{etoolbox}
+- \usepackage{xcolor}
+- \usepackage{hyperref}
+- \usepackage{fontawesome5}
+- \makeatletter
+- \preto{\@verbatim}{\topsep=0pt \partopsep=-0pt}
+- \makeatother
+- \DeclareMathOperator*{\argmax}{arg\,max}
+- \newcommand\tstrut{\rule{0pt}{3ex}}
+- \newcommand\bstrut{\rule[-2.5ex]{0pt}{0pt}}
+  
+---
+```{r, warning = FALSE, echo = FALSE}
+library(readxl)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(forcats)
+library(grid)
+library(gridExtra)
+library(forcats)
+library(pryr)
 ```
 
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
-
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
+```{r, echo=FALSE}
+colorize <- function(x, color) {
+ if (knitr::is_latex_output()) {
+ sprintf("\\textcolor{%s}{%s}", color, x)
+ } else if (knitr::is_html_output()) {
+ sprintf("<span style='color: %s;'>%s</span>", 
+ color,
+ x)
+ } else x
+}
 ```
 
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+# Giới thiệu chung
+
+## Các khái niệm cơ bản trong khoa học dữ liệu
+
+Khoa học dữ liệu là ngành khoa học kết hợp toán học và thống kê, lập trình chuyên biệt, kiến thức chuyên môn cụ thể để khám phá những thông tin hữu ích ẩn trong dữ liệu của các cơ quan, tổ chức. Những thông tin hữu ích này có thể được sử dụng để hướng dẫn việc ra quyết định và lập kế hoạch chiến lược cho cơ quan tổ chức đó.
+
+
+
+
+## R là gì và tại sao lại sử dụng R
+
+
+
+
+
+
+
+<!-- # REFERENCE -->
+
+<!-- ### Source from thesis -->
+
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+
+<!-- ### Souce from website -->
+
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->

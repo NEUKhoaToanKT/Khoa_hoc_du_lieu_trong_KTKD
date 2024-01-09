@@ -14,6 +14,7 @@ pre code {
 }
 .book .book-body .page-wrapper .page-inner {
   max-width: 92%;
+  font-size: 150%;
 }
 .summary > li:first-child {
   height: 50px;
@@ -27,6 +28,6 @@ pre code {
   font-family: 'Times New Roman', sans-serif;
 }
 h1, h2, h3, h4 {
-  font-family: 'Times New Roman', serif;
+  font-family: 'Times New Roman', sans-serif;
   color: #000000;
 }

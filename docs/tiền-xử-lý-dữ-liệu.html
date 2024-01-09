@@ -1,0 +1,3142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chương 5 Tiền xử lý dữ liệu | index</title>
+<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta property="og:title" content="Chương 5 Tiền xử lý dữ liệu | index">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chương 5 Tiền xử lý dữ liệu | index">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto-0.4.8/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.8/girafe.js"></script><script src="libs/plotly-binding-4.10.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="Tiền xử lý dữ liệu là một công việc đòi hỏi sự tỉ mỉ, cẩn thận và cũng là một trong những bước quan trọng nhất trong một quy trình làm việc với dữ liệu. Tiền xử lý dữ liệu là tập hợp tất cả các...">
+<meta property="og:description" content="Tiền xử lý dữ liệu là một công việc đòi hỏi sự tỉ mỉ, cẩn thận và cũng là một trong những bước quan trọng nhất trong một quy trình làm việc với dữ liệu. Tiền xử lý dữ liệu là tập hợp tất cả các...">
+<meta name="twitter:description" content="Tiền xử lý dữ liệu là một công việc đòi hỏi sự tỉ mỉ, cẩn thận và cũng là một trong những bước quan trọng nhất trong một quy trình làm việc với dữ liệu. Tiền xử lý dữ liệu là tập hợp tất cả các...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ma-tr%E1%BA%ADn-m%E1%BA%A3ng-nhi%E1%BB%81u-chi%E1%BB%81u-v%C3%A0-list.html"><span class="header-section-number">2</span> Ma trận, mảng nhiều chiều và \(list\)</a></li>
+<li><a class="" href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">3</span> Phân tích dữ liệu bằng R</a></li>
+<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r.html"><span class="header-section-number">4</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
+<li><a class="active" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">5</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">6</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">9</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">10</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="" href="reference.html"><span class="header-section-number">11</span> REFERENCE</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y.html"><span class="header-section-number">12</span> Mô hình dạng cây</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">13</span> Mô hình mạng neural network</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/dgrtwo/tidy-text-mining">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tiền-xử-lý-dữ-liệu" class="section level1" number="5">
+<h1>
+<span class="header-section-number">Chương 5</span> Tiền xử lý dữ liệu<a class="anchor" aria-label="anchor" href="#ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
+</h1>
+<p>Tiền xử lý dữ liệu là một công việc đòi hỏi sự tỉ mỉ, cẩn thận và cũng là một trong những bước quan trọng nhất trong một quy trình làm việc với dữ liệu. Tiền xử lý dữ liệu là tập hợp tất cả các bước kỹ thuật nhằm đảm bảo cho dữ liệu bạn sử dụng để phân tích được đảm bảo về định dạng, giá trị và ý nghĩa. Hiểu một cách đơn giản, tiền xử lý dữ liệu là biến dữ liệu thô thành dữ liệu có thể sử dụng được để phân tích và đưa ra kết quả.</p>
+<p>Khi làm việc với dữ liệu, thực tế là đến hơn 50% các trường hợp bạn đọc sẽ nhận được những dự liệu dạng thô chưa qua xử lý. Nếu những dữ liệu này được nhập và xuất ra qua một hệ thống được phát triển đầy đủ, tiền xử lý dữ liệu chỉ cần qua một vài bước cơ bản để đi đến kết quả. Trong trường hợp dữ liệu bạn nhận được là dữ liệu được nhập một cách thủ công, thông qua nhiều người nhập thì đây thực sự sẽ là một vấn đề lớn. Tiền xử lý dữ liệu trong hoàn cảnh như vậy có thể chiếm 80% - 90% thời gian công việc của bạn!.</p>
+<div id="tiền-xử-lý-dữ-liệu-là-gì" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Tiền xử lý dữ liệu là gì?<a class="anchor" aria-label="anchor" href="#ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u-l%C3%A0-g%C3%AC"><i class="fas fa-link"></i></a>
+</h2>
+<p>Các vấn đề thường gặp phải khi làm việc với một dữ liệu từ các nguồn khác nhau thường xuất phát từ hai vấn đề</p>
+<ul>
+<li><p>Dữ liệu sai định dạng: trong cùng một cột dữ liệu có các biến kiểu khác nhau hoặc kiểu của biến không đúng như quy ước.</p></li>
+<li><p>Dữ liệu chứa giá trị không quan sát được hoặc chứa các giá trị ngoại lai (outliers).</p></li>
+</ul>
+<p>Ví dụ như bạn đọc nhận được dữ liệu về 3 ứng cử viên từ bộ phận nhân sự như sau với yêu cầu về cho biết độ tuổi trung bình của những ứng cử viên và tỷ lệ Nam/Nữ ứng tuyển</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-27">Table 5.1: </span>Dữ liệu thô từ nguồn bên ngoài
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Họ và tên
+</th>
+<th style="text-align:left;">
+Ngày sinh
+</th>
+<th style="text-align:left;">
+Giới tính
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Nguyễn Văn An
+</td>
+<td style="text-align:left;">
+01/02/98
+</td>
+<td style="text-align:left;">
+Nam
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Trần Văn Cường
+</td>
+<td style="text-align:left;">
+12/17/1999
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lê Thị Loan
+</td>
+<td style="text-align:left;">
+1-1-1992
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Đây là một dữ liệu không thể sử dụng để phân tích được bởi vì giá trị trong các cột ngày sinh là không đúng định dạng ngày tháng đồng thời có các giá trị không quan sát được ở cột giới tính. Nếu sử dụng dữ liệu này để phân tích mà bỏ qua việc tiền xử lý dữ liệu thì kết quả sẽ sai lệch hoàn toàn so với bản chất của dữ liệu:</p>
+<ul>
+<li><p>Tính độ tuổi trung bình của các ứng cử viên là không thể thực hiện được với dữ liệu này bởi vì cột ngày sinh đang là dạng chuỗi ký tự và định dạng ngày tháng là rất lộn xộn</p></li>
+<li><p>Nếu bỏ qua những giá trị không có quan sát, tỷ lệ giới tính Nam là 100%. Liệu con số này có thực sự đúng?</p></li>
+</ul>
+<p>Tiền xử lý dữ liệu không chỉ bao gồm các công cụ kỹ thuật mà còn yêu cầu cả kiến thức phổ thông và kiến thức nghiệp vụ của người làm dữ liệu. Khi có vấn đề gây khó hiểu về dữ liệu nhận được, điều hết cần làm đó là liên hệ với người chủ dữ liệu để kiểm tra lại thông tin. Khi việc này là không thể thực hiện được, người xử lý dữ liệu sẽ phải đưa ra các phán đoán về dữ liệu đó dựa trên hiểu biết của mình.</p>
+<p>Với cột ngày sinh của các nhân viên:</p>
+<ul>
+<li><p>Giá trị “01/02/98” có khả năng cao là ngày 01 tháng 02 năm 1998 do quy ước phổ biến ở Việt Nam là viết theo thứ tự ngày -&gt; tháng -&gt; năm.</p></li>
+<li><p>Giá trị “12/17/1999” có khả năng cao là ngày 17 tháng 12 năm 1999. Khi gặp các trường hợp này nhiều khả năng người nhập dữ liệu sử dụng format ngày tháng của Microsoft Excel.</p></li>
+<li><p>Giá trị “1-1-1992” có khả năng cao là ngày 01 tháng 01 năm 1992.</p></li>
+</ul>
+<p>Như vậy với mỗi giá trị trong cột ngày sinh, bạn đọc cần một phép biến đổi khác nhau</p>
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">DOB</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1900-01-01"</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span> <span class="co"># tạo vector dạng date độ dài 3</span></span>
+<span><span class="va">DOB</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"01/02/98"</span>, format <span class="op">=</span> <span class="st">"%d/%m/%y"</span><span class="op">)</span></span>
+<span><span class="va">DOB</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"12/17/1999"</span>, format <span class="op">=</span> <span class="st">"%m/%d/%Y"</span><span class="op">)</span></span>
+<span><span class="va">DOB</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">"1-1-1992"</span>, format <span class="op">=</span> <span class="st">"%d-%m-%Y"</span><span class="op">)</span></span></code></pre></div>
+<p>Vec-tơ <span class="math inline">\(DOB\)</span> chứa giá trị ngày sinh dạng ngày tháng của các ứng cử viên và bạn đọc đã có thể sử dụng các hàm số có sẵn để tính tuổi của các ứng cử viên.</p>
+<p>Với cột giới tính của nhân viên:</p>
+<ul>
+<li><p>Giới tính của ứng cử viên Trần Văn Cường là không quan sát được tuy nhiên theo tên của ứng cử viên thì nhiều khả năng đây là Nam.</p></li>
+<li><p>Giới tính của ứng cử viên Lê Thị Loan là không quan sát được tuy nhiên theo tên của ứng cử viên thì nhiều khả năng đây là Nữ.</p></li>
+</ul>
+<p>Sau những bước xử lý như trên, chúng ta đã có một dữ liệu được định dạng chính xác và đã có thể đưa ra các phân tích về dữ liệu</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-30">Table 5.2: </span>Dữ liệu sau tiền xử lý
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Họ và tên
+</th>
+<th style="text-align:left;">
+Ngày sinh
+</th>
+<th style="text-align:left;">
+Giới tính
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Nguyễn Văn An
+</td>
+<td style="text-align:left;">
+1998-02-01
+</td>
+<td style="text-align:left;">
+Nam
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Trần Văn Cường
+</td>
+<td style="text-align:left;">
+1999-12-17
+</td>
+<td style="text-align:left;">
+Nam
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lê Thị Loan
+</td>
+<td style="text-align:left;">
+1992-01-01
+</td>
+<td style="text-align:left;">
+Nữ
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Đây là một ví dụ điển hình của tiền xử lý dữ liệu. Dữ liệu bạn đọc nhận được sẽ hiếm khi được định dạng chuẩn và sẵn sàng để phân tích giống như những dữ liệu sẵn có trên R. Để xử lý những giá trị sai định dạng, và điền vào dữ liệu các giá trị không quan sát, loại bỏ các giá trị ngoại lai, …, người làm dữ liệu phải sử dụng kiến thức phổ thông và kiến thức nghiệp vụ để dưa ra dự đoán tốt nhất có thể.</p>
+</div>
+<div id="định-dạng-lại-các-cột-dữ-liệu-sử-dụng-thư-viện-readr" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Định dạng lại các cột dữ liệu sử dụng thư viện <span class="math inline">\(readr\)</span><a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-l%E1%BA%A1i-c%C3%A1c-c%E1%BB%99t-d%E1%BB%AF-li%E1%BB%87u-s%E1%BB%AD-d%E1%BB%A5ng-th%C6%B0-vi%E1%BB%87n-readr"><i class="fas fa-link"></i></a>
+</h2>
+<div id="quy-tắc-định-đạng-cột-của-readr" class="section level3" number="5.2.1">
+<h3>
+<span class="header-section-number">5.2.1</span> Quy tắc định đạng cột của <span class="math inline">\(readr\)</span><a class="anchor" aria-label="anchor" href="#quy-t%E1%BA%AFc-%C4%91%E1%BB%8Bnh-%C4%91%E1%BA%A1ng-c%E1%BB%99t-c%E1%BB%A7a-readr"><i class="fas fa-link"></i></a>
+</h3>
+<p>Mỗi thư viện đọc dữ liệu sẽ có các quy tắc khác nhau khi đọc và định dạng lại dữ liệu khi lưu trên R. Chúng ta sẽ tập trung vào cách thư viện “readr” đọc dữ liệu. Khi đọc một file vào R, các hàm đọc dữ liệu của thư viện <span class="math inline">\(readr\)</span> cố gắng dự đoán kiểu dữ liệu của từng cột bằng cách sử dụng 1000 hàng dữ liệu đầu tiên dựa trên nguyên tắc như sau:</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+Giá trị trong cột dữ liệu
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(readr\)</span> dự đoán
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Cột dữ liệu chỉ bao gồm TRUE, FALSE, True, False, true, false, F, T, t, f
+</td>
+<td style="text-align:left;">
+Kiểu logic
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cột dữ liệu chỉ bao gồm số, số thập phân sử dụng dấu ‘.’ ,
+</td>
+<td style="text-align:left;">
+Kiểu số
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lê Thị Loan
+</td>
+<td style="text-align:left;">
+1-1-1992
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lưu ý rằng các giá trị không quan sát được không ảnh hưởng đến việc <span class="math inline">\(readr\)</span> dự đoán kiểu dữ liệu của một cột. Khi đọc dữ liệu kiểu số, việc sử dụng dấu thập phân là ‘.’ (dữ liệu từ các nước sử dụng ngôn ngữ tiếng Anh) hay ‘,’ (dữ liệu từ Việt Nam, Pháp) có thể làm cho giá trị của biến kiểu số thay đổi về bản chất. Bạn đọc không sử dụng tham số nào khác khi sử dụng <span class="math inline">\(readr\)</span>, số thập phân luôn được hiểu là ‘.’ khi bạn đọc sử dụng read_csv() và số thập phân sẽ là ‘,’ nếu bạn đọc dùng read_csv2().</p>
+<div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">file</span><span class="op">&lt;-</span><span class="st">"C1;C2;C3;C4; C5</span></span>
+<span><span class="st">         1e-10;2.2;1.0;TRUE; 1.0.0.0</span></span>
+<span><span class="st">         Inf;3,2;1,000.0;1;10%"</span> </span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv2</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 2 × 5
+##        C1    C2    C3 C4    C5     
+##     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;  
+## 1   1e-10  22      10 TRUE  1.0.0.0
+## 2 Inf       3.2     1 1     10%</code></pre>
+<p>Từ kết quả trên có thể thấy rằng <span class="math inline">\(readr\)</span> sẽ bỏ qua dấu ‘,’ trong các số khi bạn đọc dùng read_csv() và bỏ qua ‘.’ với biến kiểu số khi bạn đọc dùng read_csv2(). Đối với biến kiểu logic, bạn đọc có thể kiểm tra kiểu dữ liệu của các cột dưới đây đều là kiểu logic sau khi dữ liệu được đọc bằng read_csv()</p>
+<div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">file</span><span class="op">&lt;-</span><span class="st">"X1,X2,X3,X4,X5,X6</span></span>
+<span><span class="st">        TRUE,t,True,false,F,</span></span>
+<span><span class="st">        F,F,FALSE,T,f,True"</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="va">file</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 2 × 6
+##   X1    X2    X3    X4    X5    X6   
+##   &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt;
+## 1 TRUE  TRUE  TRUE  FALSE FALSE NA   
+## 2 FALSE FALSE FALSE TRUE  FALSE TRUE</code></pre>
+<p>Để hiểu kỹ hơn cách <span class="math inline">\(readr\)</span> dự đoán kiểu giá trị trong cột, bạn đọc có thể đọc hướng dẫn của hàm <code>guess_parse()</code>.</p>
+</div>
+<div id="định-dạng-cột-bằng-các-hàm-parse_" class="section level3" number="5.2.2">
+<h3>
+<span class="header-section-number">5.2.2</span> Định dạng cột bằng các hàm <code>parse_*()</code><a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-c%E1%BB%99t-b%E1%BA%B1ng-c%C3%A1c-h%C3%A0m-parse_"><i class="fas fa-link"></i></a>
+</h3>
+<p>Với các cột mà không thể xác định được kiểu dữ liệu, thư viện <span class="math inline">\(readr\)</span> sẽ lưu dưới dạng vec-tơ kiểu chuỗi ký tự. Để làm việc được trên dữ liệu, bạn đọc cần định dạng lại các cột cho đúng với mong muốn. Các hàm thuộc nhóm <code>parse_*()</code> trong thư viện <span class="math inline">\(readr\)</span> hỗ trợ bạn đọc làm việc này. Nhóm hàm <code>parse_*()</code> có đầu vào là một véc-tơ kiểu chuỗi ký tự và đầu ra sẽ là kiểu dữ liệu mà bạn đọc mong muốn. Đối với mỗi kiểu dữ liệu, hàm <code>parse_*()</code> tương ứng sẽ có các tùy biến phù hợp. Trong phần tiếp theo của cuốn sách chúng tôi sẽ lần lượt giới thiệu các nhóm hàm <code>parse_*()</code> tương ứng với biến kiểu logic, biến kiểu số, biến kiểu thời gian và biến kiểu chuỗi ký tự.</p>
+<div id="định-dạng-véc-tơ-kiểu-logic." class="section level4" number="5.2.2.1">
+<h4>
+<span class="header-section-number">5.2.2.1</span> Định dạng véc-tơ kiểu logic.<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-v%C3%A9c-t%C6%A1-ki%E1%BB%83u-logic."><i class="fas fa-link"></i></a>
+</h4>
+<p>Định dạng lại một véc-tơ kiểu chuỗi ký tự thành kiểu logic là đơn giản nhất. Hàm số sử dụng trong trường hợp này là <code><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_logical()</a></code>. Bạn đọc hãy quan sát ví dụ sau:</p>
+<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"TRUE"</span>,<span class="st">"True"</span>,<span class="st">"1"</span>,<span class="st">"0"</span>,<span class="st">"2"</span>,<span class="st">"."</span>,<span class="st">"@"</span>,<span class="st">"FALSE"</span>,<span class="st">"false"</span>,<span class="st">"f"</span>,<span class="st">"F"</span>,<span class="st">"T"</span>,<span class="st">"t"</span>,<span class="st">"true"</span>,<span class="st">"false"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_logical</a></span><span class="op">(</span><span class="va">x</span>, na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"."</span>, <span class="st">"@"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##  [1]  TRUE  TRUE  TRUE FALSE    NA    NA    NA FALSE FALSE FALSE FALSE  TRUE
+## [13]  TRUE  TRUE FALSE
+## attr(,"problems")
+## # A tibble: 1 × 4
+##     row   col expected           actual
+##   &lt;int&gt; &lt;int&gt; &lt;chr&gt;              &lt;chr&gt; 
+## 1     5    NA 1/0/T/F/TRUE/FALSE 2</code></pre>
+<p>Bạn đọc có thể thấy rằng tất cả các giá trị nằm trong véc-tơ <span class="math inline">\(x\)</span> ở trên, ngoại trừ hai ký tự đặc biệt đã được khai báo trong hàm <code><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_logical()</a></code> là <span class="math inline">\("."\)</span> và <span class="math inline">\("@"\)</span>, thì chỉ có số 2 là không thể đổi sang biến kiểu logic. <code><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_logical()</a></code> tự động đổi ký tự <span class="math inline">\("1"\)</span> thành <span class="math inline">\(TRUE\)</span> và ký tự <span class="math inline">\("0"\)</span> thành <span class="math inline">\(FALSE\)</span>. Trong trường hợp véc-tơ <span class="math inline">\(x\)</span> có kích thước lớn, các phần tử không thể đổi sang kiểu logic sẽ được lưu vào một <span class="math inline">\(tibble\)</span>. Bạn đọc sử dụng hàm <code><a href="https://readr.tidyverse.org/reference/problems.html">problems()</a></code> để lấy các các giá trị này.</p>
+<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">10</span><span class="op">^</span><span class="fl">4</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">y</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_logical</a></span><span class="op">(</span><span class="va">x1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/problems.html">problems</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 1,955 × 4
+##      row   col expected           actual
+##    &lt;int&gt; &lt;int&gt; &lt;chr&gt;              &lt;chr&gt; 
+##  1     2    NA 1/0/T/F/TRUE/FALSE 2     
+##  2     5    NA 1/0/T/F/TRUE/FALSE .     
+##  3     7    NA 1/0/T/F/TRUE/FALSE 2     
+##  4     8    NA 1/0/T/F/TRUE/FALSE .     
+##  5    11    NA 1/0/T/F/TRUE/FALSE @     
+##  6    15    NA 1/0/T/F/TRUE/FALSE .     
+##  7    19    NA 1/0/T/F/TRUE/FALSE .     
+##  8    23    NA 1/0/T/F/TRUE/FALSE @     
+##  9    24    NA 1/0/T/F/TRUE/FALSE 2     
+## 10    25    NA 1/0/T/F/TRUE/FALSE 2     
+## # ℹ 1,945 more rows</code></pre>
+<p>Cột <span class="math inline">\(row\)</span> cho biết vị trí của các phần tử trong véc-tơ <span class="math inline">\(x1\)</span> không thể đổi sang kiểu logic. Giá trị của các phần tử này nằm trong cột <span class="math inline">\(actual\)</span>. Bạn đọc có thể quan sát các giá trị trong cột <span class="math inline">\(actual\)</span> để tìm hiểu nguyên nhân tại sao <code><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_logical()</a></code> không thể hoạt động trên các giá trị này.</p>
+</div>
+<div id="định-dạng-véc-tơ-kiểu-số." class="section level4" number="5.2.2.2">
+<h4>
+<span class="header-section-number">5.2.2.2</span> Định dạng véc-tơ kiểu số.<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-v%C3%A9c-t%C6%A1-ki%E1%BB%83u-s%E1%BB%91."><i class="fas fa-link"></i></a>
+</h4>
+<p>Khi <span class="math inline">\(readr\)</span> không thể tự định dạng một véc-tơ có kiểu số, các vấn đề thường gặp phải là:</p>
+<ul>
+<li><p>Cách đánh số thập phân của các số trong véc-tơ. Tại Việt Nam số thập phân được sử dụng là dấu “,” trong khi R hiểu số thập phân là dấu “.”. Nhiều quốc gia khác trên thế giới cũng sử dụng dấu thập phân là dấu “,”.</p></li>
+<li><p>Cách viết các số sử dụng cùng với các ký tự “.” hoặc “,” để người đọc dễ dàng đọc số đó. Chẳng hạn như tại Việt Nam, chúng ta viết số 1 tỷ như sau: 1.000.000.000; tại Thụy Sỹ số 1 tỷ được viết thành 1’000’000’000; chúng ta cần định dạng lại cho các giá trị kiểu như vậy để R hiểu được đây là các con số.</p></li>
+<li><p>Khi các con số đi kèm theo đơn vị, chẳng hạn như đi kèm với ký hiệu tiền tệ: “100.000 đồng”, “100.000 vnd”, hoặc đi kèm với ký hiệu % như “50%”, chúng ta <span class="math inline">\(readr\)</span> cũng sẽ không thể tự động chuyển đổi sang kiểu số.</p></li>
+</ul>
+<p>Bạn đọc có thể sử dụng <code><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_double()</a></code> hoặc <code><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number()</a></code> khi gặp phải các vấn đề ở trên. Chẳng hạn như khi gặp vấn đề về dấu “,” đối với dấu thập phân (với các số thập phân viết theo kiểu Việt Nam), bạn đọc sử dụng <code><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number()</a></code> với tùy biến <code>locale = locale(decimal_mark = ",")</code> để định dạng cho véc-tơ kiểu ký tự:</p>
+<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"0,5"</span>,<span class="st">"1,5"</span><span class="op">)</span> <span class="co"># véc-tơ chứa các số 0,5 và 1,5; dấu thập phân là dấu ","</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">x</span>, locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>decimal_mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.5 1.5</code></pre>
+<p>Khi gặp phải vấn đề về thứ hai, chúng ta sử dụng tùy biến <span class="math inline">\(grouping\_mark\)</span> trong hàm <span class="math inline">\(locate()\)</span>. Trong ví dụ dưới đây sử dụng đồng thời hai tùy biến <span class="math inline">\(decimal\_mark\)</span> và <span class="math inline">\(grouping\_mark\)</span> của hàm <code>locate()</code></p>
+<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1.000,5"</span>,<span class="st">"1.000.000,5"</span><span class="op">)</span> <span class="co"># véc-tơ chứa các số 1000,5 và 1000000,5; dấu thập phân là dấu ","</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">x</span>, locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>decimal_mark <span class="op">=</span> <span class="st">","</span>,</span>
+<span>                                grouping_mark <span class="op">=</span> <span class="st">"."</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]    1000.5 1000000.5</code></pre>
+<p>Khi gặp phải chuỗi ký tự chứa biến kiểu số đi kèm với đơn vị tiền tệ, hoặc dấu “%”, hàm <span class="math inline">\(parse_number()\)</span> vẫn rất hiệu quả trong việc đổi chuỗi ký tự về kiểu số</p>
+<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1.000,5 đồng"</span>,<span class="st">"1.000.000,5 vnd"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">x</span>, locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>decimal_mark <span class="op">=</span> <span class="st">","</span>,</span>
+<span>                                grouping_mark <span class="op">=</span> <span class="st">"."</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1]    1000.5 1000000.5</code></pre>
+</div>
+<div id="định-dạng-véc-tơ-kiểu-thời-gian" class="section level4" number="5.2.2.3">
+<h4>
+<span class="header-section-number">5.2.2.3</span> Định dạng véc-tơ kiểu thời gian<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-v%C3%A9c-t%C6%A1-ki%E1%BB%83u-th%E1%BB%9Di-gian"><i class="fas fa-link"></i></a>
+</h4>
+<p>Hàm số <code><a href="https://readr.tidyverse.org/reference/parse_datetime.html">parse_datetime()</a></code> có thể sử dụng để chuyển đổi các véc-tơ kiểu chuỗi ký tự sang véc-tơ kiểu thời gian và véc-tơ kiểu ngày tháng.</p>
+<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"1/2/2023"</span>, <span class="st">"23/10/2023 "</span>, <span class="st">"01/01/1900"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_datetime.html">parse_datetime</a></span><span class="op">(</span><span class="va">x</span>, format <span class="op">=</span> <span class="st">"%d/%m/%Y"</span>,</span>
+<span>               na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"01/01/1900"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "2023-02-01 UTC" "2023-10-23 UTC" NA</code></pre>
+<p>Hai tùy biến của hàm <code><a href="https://readr.tidyverse.org/reference/parse_datetime.html">parse_datetime()</a></code> mà bạn đọc cần lưu ý là <span class="math inline">\(na\)</span> và <span class="math inline">\(format\)</span>. Tùy biến <span class="math inline">\(na\)</span> như đã sử dụng ở phần trước là một véc-tơ chứa các giá trị mà bạn đọc cho rằng đây là các giá trị không quan sát được. Trong véc-tơ <span class="math inline">\(x\)</span> ở trên, giá trị “01#01#1990” nếu không có trong tùy biến <span class="math inline">\(na\)</span> sẽ có kết quả là một ngày tháng có ý nghĩa trong véc-tơ kết quả. Tuy nhiên, bằng một cách nào đó, nếu bạn đọc biết rằng giá trị này do người nhập liệu đưa vào do không quan sát được biến đó, việc chuyển đổi biến thành giá trị ngày tháng sẽ làm sai lệch phân tích. Do đó bạn đọc cần khai báo giá trị này vào trong véc-tơ <span class="math inline">\(na\)</span>.</p>
+<p>Tùy biến <span class="math inline">\(format\)</span> trong hàm <code><a href="https://readr.tidyverse.org/reference/parse_datetime.html">parse_datetime()</a></code> là để bạn đọc gợi ý cho R định dạng của biến kiểu ngày tháng. Khi gán giá trị cho <span class="math inline">\(format\)</span> bạn đọc cần lưu ý</p>
+<ul>
+<li><p>Mỗi thành phần của biến thời gian (ngày, tháng, năm, giờ, phút, giây,…) được định nghĩa bắt đầu bằng <span class="math inline">\("%"\)</span> và theo sau 1 chữ cái, chẳng hạn như bạn đọc sử dụng “%Y” khi muốn nói với R rằng biến kiểu thời gian nằm trong chuỗi ký tự được sử dụng 4 chữ số để chỉ định.</p></li>
+<li><p>Các ký tự không liên quan đến các thành phần của thời gian, ngoại trừ các khoảng trắng phía trước và sau biến thời gian, cần phải được khai báo chính xác.</p></li>
+</ul>
+<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">" 1@2@2023-23#25#01  "</span>, <span class="st">"  23@10@2023-01#06#59 "</span>, <span class="st">"01@01@2023-00:00:00"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_datetime.html">parse_datetime</a></span><span class="op">(</span><span class="va">x</span>, format <span class="op">=</span> <span class="st">"%d@%m@%Y-%H#%M#%S"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "2023-02-01 23:25:01 UTC" "2023-10-23 01:06:59 UTC"
+## [3] NA</code></pre>
+<p>Từ ví dụ trên bạn đọc có thể thấy rằng</p>
+<ul>
+<li><p>Cần khai báo chính xác các ký tự nằm giữa các biến thời gian. Ký tự <span class="math inline">\("@"\)</span> nằm giữa các giá trị ngày, tháng, năm; phân tách giữa ngày tháng với thời gian trong ngày là ký tự <span class="math inline">\("-"\)</span>; phân tách giữa các thành phần của thời gian trong ngày là ký tự <span class="math inline">\("#"\)</span>. Tất cả đều cần phải được khai báo chính xác với tùy biến <span class="math inline">\(format\)</span>. Giá trị thứ ba trong véc-tơ <span class="math inline">\(x\)</span> gặp vấn đề vì phân tách giữa các thành phần của thời gian trong ngày sử dụng dấu “:”</p></li>
+<li><p>Các khoảng trắng nằm trước và sau các chuỗi ký tự được bỏ qua và không ảnh hưởng đến kết quả.</p></li>
+</ul>
+<p>Để biết chính xác cách gán giá trị cho tùy biến <span class="math inline">\(format\)</span>, bạn đọc nên tham khảo hướng dẫn sử dụng hàm <code><a href="https://readr.tidyverse.org/reference/parse_datetime.html">parse_datetime()</a></code>. Chúng tôi tóm tắt cách định dạng các thành phần của một biến thời gian trong bảng dưới đây:</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+Thành phần
+</th>
+<th style="text-align:left;">
+Định dạng chi tiết
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Năm
+</td>
+<td style="text-align:left;">
+%Y (4 chữ số) và %y (1 đến 2 chữ số)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tháng
+</td>
+<td style="text-align:left;">
+%m (1-2 chữ số), %b (tên tháng viết tắt), %B (tên tháng đầy đủ)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ngày
+</td>
+<td style="text-align:left;">
+%d (1-2 chữ số)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Giờ
+</td>
+<td style="text-align:left;">
+%H (1-2 chữ số)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Phút
+</td>
+<td style="text-align:left;">
+%M (1-2 chữ số)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Giây
+</td>
+<td style="text-align:left;">
+%S (1-2 chữ số)
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Lưu ý rằng khi bạn đọc sử dụng %y, các ký tự “00” đến “69” sẽ được chuyển thành năm 2000 đến năm 2069 trong khi các ký tự từ “70” đến 99 sẽ được chuyển thành năm 1970 đến 1999. Ngoài ra, thành phần tháng của biến thời gian trong nhiều dữ liệu thường được viết dưới dạng chuỗi ký tự thay vì sử dụng số. Do đó bạn đọc cần các gợi ý %b hoặc %B để R có thể hiểu được:</p>
+<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sep 21, 23 "</span>, <span class="st">"  JAN 1, 69 "</span>, <span class="st">"Dec 25, 70"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_datetime.html">parse_datetime</a></span><span class="op">(</span><span class="va">x</span>, format <span class="op">=</span> <span class="st">"%b %d, %y"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "2023-09-21 UTC" "1969-01-01 UTC" "1970-12-25 UTC"</code></pre>
+</div>
+</div>
+<div id="định-dạng-cột-kiểu-chuỗi-ký-tự" class="section level3" number="5.2.3">
+<h3>
+<span class="header-section-number">5.2.3</span> Định dạng cột kiểu chuỗi ký tự<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-c%E1%BB%99t-ki%E1%BB%83u-chu%E1%BB%97i-k%C3%BD-t%E1%BB%B1"><i class="fas fa-link"></i></a>
+</h3>
+<p>Khi bạn đọc dùng <span class="math inline">\(readr\)</span> để đọc dữ liệu từ nguồn ngoài vào R, cột dữ liệu không rõ định dạng sẽ được lưu dưới dạng véc-tơ chuỗi ký tự. Vậy tại sao cần định dạng lại thành véc-tơ kiểu chuỗi ký tự? Nghe có vẻ vô lý nhưng đây lại là vấn đề phức tạp nhất trong định dạng lại cột dữ liệu. Để hiểu vấn đề này bạn đọc cần tìm hiểu một chút về cách máy tính điện tử lưu và mở một chuỗi ký tự. Giả sử bạn đọc muốn gửi một dữ liệu chứa ký tự “a” đến một máy tính khác. Sau khi viết ký tự “a” lên một phần mềm soạn thảo văn bản nào, bạn đọc sẽ cần lưu ký tự “a” lên máy tính của bạn. Tất nhiên máy tính của bạn sẽ không thể ghi nhớ chữ “a” một cách tượng hình mà sẽ mã hóa (hay thuật ngữ chuyên ngành gọi là <span class="math inline">\(encode\)</span>) chữ “a” thành một đoạn mã nhị phân bao gồm 0 và 1 mà máy tính có thể lưu được. Khi bạn gửi dữ liệu sang một máy tính khác, đoạn mã bao gồm 0 và 1 đó sẽ được gửi đi. Khi máy tính điện tử khác mở dữ liệu, đoạn mã nhị phân sẽ được giải mã (thuật ngữ chuyên ngành gọi là <span class="math inline">\(decode\)</span>) để hiển thị. Sẽ không có vấn đề gì xảy ra nếu quy tắc mã hóa và giải mã được thống nhất và chữ “a” sẽ được hiển thị chính xác trên máy tính thứ hai.</p>
+<p>Thực tế là trước khi có bộ mã hóa và quy tắc mã hóa chung được công nhận rộng rãi như Unicode và UTF-8, rất khó để có sự thống nhất quy tắc mã hóa ký tự. May mắn là đến thời điểm chúng tôi viết cuốn sách này đa số các hệ điều hành, hệ soạn thảo văn bản,… đều sử dụng bảng mã Unicode và bộ mã hóa UTF-8. Giải thích chi tiết về bộ mã hóa hay quy tắc mã hóa là rất phức tạp và vượt quá nội dung của cuốn sách này. Chúng tôi chỉ cần bạn đọc hiểu về Unicode và UTF-8 như sau:</p>
+<ul>
+<li><p>Unicode là một bảng mã chuẩn được công nhận rộng rãi cho biết quy tắc cho tương ứng hầu hết các ký tự từ đơn giản đến phức tạp, kể cả các ngôn ngữ sử dụng ký tự tượng hình phức tạp như chữ Hán của tiếng Trung Quốc, tiếng Nhật, chữ Nôm của tiếng Việt, với một số nằm giữa số 0 đến số <span class="math inline">\(10FFFF\)</span> khi viết theo hệ 16. Một số khi viết trong hệ 16 có thể sử dụng (0, 1, …, 9, A, B, C, D, E, F) để biểu diễn, do đó số các ký tự mà bảng mã Unicode có thể đưa vào là <span class="math inline">\(16^4 + 16^5 = 1.114.112\)</span> ký tự, bao gồm <span class="math inline">\(16^5\)</span> số từ 0 đến FFFFF và <span class="math inline">\(16^4\)</span> số từ 100000 đến 10FFFF.</p></li>
+<li><p>UTF-8 là quy tắc lưu các số viết trong hệ 16 của bảng mã Unicode thành các chuỗi nhị phân 0 và 1 mà máy tính có thể phân biệt được. Số 8 ở đây có nghĩa là 8 bit hay một byte là 8 giá trị 0 và 1 đứng liền nhau. Một ký tự bất kỳ trong bảng mã Unicode đều có thể được mã hóa thành 1, 2, 3 hoặc nhiều byte theo quy tắc mã hóa UTF-8.</p></li>
+</ul>
+<p>Quay trở lại vấn đề định dạng lại dữ liệu kiểu chuỗi ký tự, sẽ không có vấn đề xảy ra nếu người nhập liệu sử dụng bộ mã hóa UTF-8 bởi <span class="math inline">\(readr\)</span> luôn sử dụng UTF-8 để giải mã. Trong thực tế thì vẫn còn một số hệ thống, hoặc hệ soạn thảo văn bản sử dụng cách mã hóa không tương thích với UTF-8. Giả sử khi đọc một dữ liệu từ nguồn ngoài vào bằng <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> và cho kết quả như sau</p>
+<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD/Dataset/Book1.csv"</span><span class="op">)</span></span>
+<span><span class="va">x</span></span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##   A              B         
+##   &lt;chr&gt;          &lt;chr&gt;     
+## 1 "l\xea"        20.000 vnd
+## 2 "t\xe1o"       35.000 vnd
+## 3 "qu\xfdt"      30.000 vnd
+## 4 "c\xe0 t\xedm" 5.500 vnd 
+## 5 "m\xedt"       10.000 vnd</code></pre>
+<p>Cột <span class="math inline">\(A\)</span> của dữ liệu đã không được lưu bằng mã hóa UTF-8 nên thư viện <span class="math inline">\(readr\)</span> không hiển thị được các giá trị có ý nghĩa. Để định dạng lại cột dữ liệu, bạn đọc sử dụng hàm <code><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_character()</a></code> với tùy biến <span class="math inline">\(encoding\)</span>. Không dễ để biết được dữ liệu đã được mã hóa bằng bộ mã hóa nào. Thư viện <span class="math inline">\(readr\)</span> cung cấp hàm <code><a href="https://readr.tidyverse.org/reference/encoding.html">guess_encoding()</a></code> hỗ trợ bạn đọc dự đoán một biến kiểu chuỗi ký tự đã được mã hóa bẳng bộ mã hóa nào. Tuy nhiên trải nghiệm của chúng tôi với hàm số này là không tốt. Lời khuyên của chúng tôi là bạn đọc nếu có thể hãy tìm hiểu nguồn gốc của dữ liệu: dữ liệu được sính ra từ đâu, hệ thống nào,… Trong trường hợp việc này là không thê, bạn đọc hãy thử giải mã đoạn văn bản bằng một số bộ mã hóa thường gặp cho đến khi gặp được kết quả mong muốn! Trong trường hợp dữ liệu ở trên do nguồn là tiếng Việt nên chúng ta có thể thử các</p>
+<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_character</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">A</span>, locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"Latin2"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "lę"     "táo"    "quýt"   "cŕ tím" "mít"</code></pre>
+<p>Kết quả khi sử dụng bộ mã <span class="math inline">\(Latin2\)</span> đã cho một vài giá trị có ý nghĩa, chúng ta tiếp tục thử với <span class="math inline">\(Latin1\)</span></p>
+<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_character</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">A</span>, locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"Latin1"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] "lê"     "táo"    "quýt"   "cà tím" "mít"</code></pre>
+<p>May mắn là cột dữ liệu đều đã có thể đọc được với chúng ta. Đối với cột <span class="math inline">\(B\)</span> của dữ liệu bạn đọc có thể sử dụng <code>parse_numbder()</code> như đã trình bày ở trên. Dữ liệu sau khi được định dạng lại đã dễ hiểu hơn rất nhiều</p>
+<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>Name <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">parse_character</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">A</span>, locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>encoding <span class="op">=</span> <span class="st">"Latin1"</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>      Price <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">B</span>, locale <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/locale.html">locale</a></span><span class="op">(</span>grouping_mark <span class="op">=</span> <span class="st">"."</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## # A tibble: 5 × 2
+##   Name   Price
+##   &lt;chr&gt;  &lt;dbl&gt;
+## 1 lê     20000
+## 2 táo    35000
+## 3 quýt   30000
+## 4 cà tím  5500
+## 5 mít    10000</code></pre>
+</div>
+</div>
+<div id="giá-trị-ngoại-lai-và-giá-trị-không-quan-sát-được." class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Giá trị ngoại lai và giá trị không quan sát được.<a class="anchor" aria-label="anchor" href="#gi%C3%A1-tr%E1%BB%8B-ngo%E1%BA%A1i-lai-v%C3%A0-gi%C3%A1-tr%E1%BB%8B-kh%C3%B4ng-quan-s%C3%A1t-%C4%91%C6%B0%E1%BB%A3c."><i class="fas fa-link"></i></a>
+</h2>
+<p>Giá trị không quan sát được là các giá trị xuất hiện dưới dạng <span class="math inline">\(NA\)</span> trong dữ liệu sau khi nhập vào R. Có nhiều lý do khác nhau dẫn đến việc dữ liệu không quan sát được, chẳng hạn như thông tin do người làm dữ liệu cung cấp không đầy đủ, những người cung cấp dữ liệu từ chối chia sẻ thông tin, hệ thống quản lý dữ liệu bị lỗi, hoặc cũng có thể do người quản lý xóa dữ liệu vì lý do bảo mật. Giá trị không quan sát được ngoài các giá trị <span class="math inline">\(NA\)</span> xuất hiện trong dữ liệu, mà còn là các giá trị không phù hợp với kiểu dữ liệu hoặc miền giá trị của cột dữ liệu. Đối với một vài hệ thống khi dữ liệu được xuất ra giá trị không quan sát được vẫn được ghi nhận bằng một giá trị nào đó. Bạn đọc cần cẩn trọng khi làm việc với những dữ liệu kiểu như vậy.</p>
+<p>Giá trị ngoại lai hay còn được gọi là giá trị bất thường là một điểm dữ liệu hoặc một quan sát sai khác đáng kể so với đa số các quan sát khác. Một giá trị ngoại lai xuất hiện trong dữ liệu có thể là do lỗi trong quản lý dữ liệu, do sai số trong đo lường hoặc cũng có thể do bản chất phân phối của dữ liệu. Tùy theo nguồn gôc của giá trị ngoại lai mà chúng ta có cách xử lý dữ liệu khác nhau.</p>
+<p>Khi không được xử lý thích hợp, giá trị không quan sát được và các giá trị ngoại lai có thể làm sai lệch kết luận của tất cả các phân tích về dữ liệu, khiến người quản lý đưa ra quyết định sai lầm. Bạn đọc quan sát ví dụ sau:</p>
+<pre><code>## # A tibble: 4 × 6
+##   MSV      Name            Age                Gender `Height (cm)` `Weight (kg)`
+##   &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;              &lt;chr&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+## 1 MSV00001 12345           30                 Nam             1.76            68
+## 2 MSV43241 Nguyễn Văn An   Nhập sai ngày sinh N             169               72
+## 3 MSV65432 Lê Thị Loan     -1                 Nữ            155               48
+## 4 MSV34    Trần Mạnh Cường 15                 &lt;NA&gt;          175              150</code></pre>
+<p>Trong dữ liệu ở trên, mặc dù chỉ có 1 giá trị đang là <span class="math inline">\(NA\)</span> ở cột giới tính nhưng nếu quan sát kỹ bạn đọc sẽ nhận ra rằng:</p>
+<ul>
+<li><p>Cột <span class="math inline">\(name\)</span>: giá trị “12345” không thể là tên của một sinh viên, do đó đây cũng là một giá trị không quan sát được.</p></li>
+<li><p>Cột <span class="math inline">\(Age\)</span>: thứ nhất, giá trị ở hàng thứ hai của cột <span class="math inline">\(Age\)</span> là kiểu chuỗi ký tự. Thứ hai, tuổi của một sinh viên không thể là số âm, nên giá trị <span class="math inline">\(-1\)</span> không phù hợp với miền giá trị của cột này. Cột <span class="math inline">\(Age\)</span> có hai giá trị không quan sát được.</p></li>
+<li><p>Cột <span class="math inline">\(Gender\)</span>: có giá trị là ký tự <span class="math inline">\(N\)</span> không rõ là thể hiện cho giới tính Nam hay Nữ, giá trị này cũng là không quan sát được.</p></li>
+<li><p>Cột <span class="math inline">\(MSV\)</span>: Giả sử bằng một cách nào đó, bạn đọc biết rằng mã sinh viên phải là một đoạn ký tự có độ dài là 8, bao gồm đoạn ký tự “MSV” và theo sau là 5 chữ số, thì giá trị “MS34” cũng là một giá trị không quan sát được ở cột mã sinh viên.</p></li>
+</ul>
+<p>Để xác định dữ liệu có giá trị ngoại lai hay không cần sử dụng các kiến thức về thống kê toán:</p>
+<ul>
+<li><p>Cột <span class="math inline">\(Height\)</span> có giá trị chiều cao ở hàng thứ nhất là 1,76 cm. Giá trị này quá nhỏ để làm chiều cao của một người bình thường. Nhiều khả năng khi đo chiều cao của sinh viên, người nhập dữ liệu đã ghi lại theo đơn vị mét.</p></li>
+<li><p>Cột <span class="math inline">\(Weight\)</span> có giá trị cân nặng của hàng thứ 4 là 150 kg. Mặc dù dữ liệu có rất ít quan sát để đưa ra kết luận phân phối xác suất của cân nặng của sinh viên là gì, tuy nhiên với kiến thức thực tế chúng ta có thể kết luận rằng 150 kg là một cân nặng lớn bất thường với các giá trị cân nặng còn lại. Đây nhiều khả năng là một giá trị ngoại lai.</p></li>
+</ul>
+<p>Để xác định các giá trị không quan sát được và giá trị ngoại lai tùy thuộc vào từng dữ liệu cụ thể và kiến thức tổng hợp và kiến thức chuyên môn của người xử lý dữ liệu và nằm ngoài phạm vi thảo luận của cuốn sách này. Dữ liệu ở trên chỉ là một dữ liệu nhỏ và đơn giản nên việc xác định các giá trị không quan sát được và giá trị ngoại lai là không khó. Chúng ta biến đổi các giá trị không quan sát được thành <span class="math inline">\(NA\)</span> như sau</p>
+<div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">MSV</span><span class="op">[</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">MSV</span><span class="op">)</span><span class="op">!=</span><span class="fl">8</span><span class="op">)</span><span class="op">]</span><span class="op">&lt;-</span><span class="cn">NA</span> <span class="co"># mã sinh viên không có 8 ký tự là không quan sát được</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">Name</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">Name</span><span class="op">==</span><span class="st">"12345"</span><span class="op">]</span><span class="op">&lt;-</span><span class="cn">NA</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">Age</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_number.html">parse_number</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Age</span>, na <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"-1"</span><span class="op">)</span><span class="op">)</span> <span class="co"># tuổi có giá trị (-1) là không quan sát được</span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">Gender</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">Gender</span> <span class="op">==</span> <span class="st">"N"</span><span class="op">]</span><span class="op">&lt;-</span><span class="cn">NA</span></span></code></pre></div>
+<p>Đối với các giá trị ngoại lai, chúng ta sẽ đổi giá trị bị ghi nhận sai đơn vị về đúng đơn vị. Với giá trị cân nặng 150 kg, do dữ liệu nhỏ, bạn đọc có thể giữ nguyên giá trị này hoặc thay thế giá trị này bằng giá trị lớn nhất của những người có cân nặng thông thường.</p>
+<div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">Height</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">&lt;-</span><span class="va">df</span><span class="op">$</span><span class="va">Height</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">*</span> <span class="fl">100</span> <span class="co"># đổi đơn vị đo từ mét sang cm</span></span></code></pre></div>
+<p>Dữ liệu sau khi xử lý giá trị ngoại lai và định nghĩa lại các giá trị không quan sát được như sau:</p>
+<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span></span></code></pre></div>
+<pre><code>## # A tibble: 4 × 6
+##   MSV      Name              Age Gender `Height (cm)` `Weight (kg)`
+##   &lt;chr&gt;    &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;         &lt;dbl&gt;
+## 1 MSV00001 &lt;NA&gt;               30 Nam             1.76            68
+## 2 MSV43241 Nguyễn Văn An      NA &lt;NA&gt;          169               72
+## 3 MSV65432 Lê Thị Loan        NA Nữ            155               48
+## 4 &lt;NA&gt;     Trần Mạnh Cường    15 &lt;NA&gt;          175              150</code></pre>
+<p>Hàm số <code>is.na(df)</code> trả lại giá trị là <span class="math inline">\(TRUE\)</span> nếu dữ liệu là quan sát là <span class="math inline">\(NA\)</span> và trả lại giá trị <span class="math inline">\(FALSE\)</span> nếu không phải <span class="math inline">\(NA\)</span>. Bạn đọc có thể dùng hàm <code><a href="https://rdrr.io/r/base/NA.html">is.na()</a></code> kết hợp với hàm <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> để tính toán mỗi cột có bao nhiêu giá trị không quan sát được và tỷ lệ số giá trị không quan sát được trên mỗi cột là bao nhiêu:</p>
+<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="co"># cho biết mỗi cột dữ liệu có bao nhiêu giá trị NA</span></span></code></pre></div>
+<pre><code>##         MSV        Name         Age      Gender Height (cm) Weight (kg) 
+##           1           1           2           2           0           0</code></pre>
+<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">df</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="co"># cho biết tỷ lệ giá trị NA trong mỗi cột</span></span></code></pre></div>
+<pre><code>##         MSV        Name         Age      Gender Height (cm) Weight (kg) 
+##        0.25        0.25        0.50        0.50        0.00        0.00</code></pre>
+<p>Với những dữ liệu nhỏ thì hiển thị trực tiếp số lượng giá trị <span class="math inline">\(NA\)</span> trong mỗi cột là hiệu quả nhất. Khi dữ liệu có nhiều quan sát và nhiều biến, bạn đọc nên sử dụng đồ thị để mô tả số lượng hoặc tỷ lệ giá trị không quan sát được của mỗi cột. Ví dụ như với dữ liệu <span class="math inline">\(gapminder\)</span> của thư viện <span class="math inline">\(dslabs\)</span>, sử dụng đồ thị <span class="math inline">\(barplot\)</span> để mô tả giá trị không quan sát được sẽ hiệu quả hơn:</p>
+<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">gapminder</span>,<span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">*</span><span class="fl">100</span><span class="op">)</span> <span class="co"># cho biết tỷ lệ giá trị NA trong mỗi cột</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span>, main <span class="op">=</span> <span class="st">"Tỷ lệ giá trị không quan sát được"</span>,</span>
+<span>        ylab <span class="op">=</span> <span class="st">"Đơn vị %"</span>,</span>
+<span>        xlab <span class="op">=</span> <span class="st">""</span>,</span>
+<span>        col <span class="op">=</span> <span class="st">"lightskyblue"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="08-phan-tich-du-lieu-bang-R_files/figure-html/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;"></div>
+<p>Xử lý giá trị không quan sát được dựa trên kinh nghiệm và hiểu biết về dữ liệu của bạn đọc luôn là ưu tiên trước tiên. Nếu chúng ta không có kinh nghiệm và hiểu biết về dữ liệu, các kỹ thuật xử lý dựa trên các nguyên tắc của xác suất thống kê sẽ được sử dụng.</p>
+<div id="giá-trị-ngoại-lai." class="section level3" number="5.3.1">
+<h3>
+<span class="header-section-number">5.3.1</span> Giá trị ngoại lai.<a class="anchor" aria-label="anchor" href="#gi%C3%A1-tr%E1%BB%8B-ngo%E1%BA%A1i-lai."><i class="fas fa-link"></i></a>
+</h3>
+<p>Giá trị ngoại lai, hay còn gọi là giá trị bất thường, là những giá trị mà khác xa tập hợp các giá trị còn lại. Không có một định nghĩa định lượng chính xác nào cho khái niệm như thế nào là khác xa các giá trị còn lại. Do đó, tùy theo bản chất của dữ liệu và tùy theo quan điểm của người phân tích dữ liệu mà một hay một số giá trị có khả năng là giá trị ngoại lai hay không. Giá trị ngoại lai thường chỉ được nhắc đến với các dữ liệu có số quan sát đủ lớn để đưa ra kết luận có ý nghĩa thống kê.</p>
+<div class="inline-figure"><img src="08-phan-tich-du-lieu-bang-R_files/figure-html/unnamed-chunk-55-1.png" width="960"></div>
+<p>Khi dữ liệu có 10 quan sát như hình bên trái, có 8 quan sát màu xanh da trời nằm gần nhau hơn, điểm màu cam hơi xa hơn tập hợp các điểm màu xanh da trời một chút, còn điểm màu đỏ nằm xa hơn. Khi gặp dữ liệu như vậy, chúng ta có thể kết luận điểm màu đỏ là giá trị ngoại lai, còn kết luận điểm màu cam có phải ngoại lai hay không thì còn tùy thuộc vào ý tưởng của người phân tích dữ liệu. Chuyển sang hình bên phải với dữ liệu có 100 quan sát. Các điểm màu xanh da trời định hình khá rõ miền giá trị của trung tâm của dữ liệu là nằm xung quanh điểm (3,3). Chúng ta có thể kết luận một cách khá chắc chắn rằng điểm màu đỏ là một giá trị ngoại lai. Điểm màu cam, mặc dù nằm khá xa trung tâm của dữ liệu, nhưng để kết luận rằng có phải giá trị ngoại lai hay không vẫn phụ thuộc vào ý tưởng của người phân tích.</p>
+<p>Nguồn gốc của giá trị ngoại lai là có thể có nhiều nguyên nhân khác nhau, bao gồm cả nguyên nhân khách quan hoặc nguyên nhân chủ quan. Các nguyên nhân khách quan có thể do nguồn sinh dữ liệu, hay hệ thống quản lý dữ liệu gặp sự cố, do lỗi trong quá trình truyền hoặc sao chép dữ liệu. Nguyên nhân chủ quan bao gồm có các hành vi gian lận, lỗi nhập và sao chép dữ liệu của con người, hoặc các giá trị được cố tình đưa vào trong dữ liệu với mục đích lấy phản hồi từ người dùng dữ liệu.</p>
+<p>Nếu không xử lý giá trị ngoại lai kết quả tính toán sẽ bị sai lệch đáng kể. Dữ liệu có kích thước càng nhỏ thì ảnh hưởng của giá trị ngoại lai lại càng lớn. Trong ví dụ ở trên, giả sử bạn đọc cần phân tích sự tác động của biến <span class="math inline">\(X\)</span> (trục nằm ngang) lên biến <span class="math inline">\(Y\)</span> (giá trị trên trục dọc) bằng một mối quan hệ tuyến tính. Hãy quan sát kết quả của phân tích khi chúng ta</p>
+<ol style="list-style-type: decimal">
+<li><p>Giữ nguyên 10 quan sát và phân tích mối liên hệ tuyến tính.</p></li>
+<li><p>Loại bỏ điểm A (màu đỏ) ra và phân tích mối liên hệ tuyến tính.</p></li>
+<li><p>Loại bỏ điểm A (màu đỏ) và điểm B (màu cam) ra để phân tích mối liên hệ tuyến tính.</p></li>
+</ol>
+<div class="inline-figure"><img src="08-phan-tich-du-lieu-bang-R_files/figure-html/unnamed-chunk-56-1.png" width="1440"></div>
+<p>Khi giữ nguyên 10 điểm dữ liệu để xây dựng mối quan hệ tuyến tính, đường thẳng mô tả mối quan hệ giữa <span class="math inline">\(Y\)</span> và <span class="math inline">\(X\)</span> là nằm trong hình phía bên trái. Đường thẳng này có hệ số góc dương (một đường dốc lên khi đi từ trái sang phải), điều này có nghĩa là biến <span class="math inline">\(X\)</span> có tác động cùng chiều lên biến <span class="math inline">\(Y\)</span>. Sau khi loại bỏ điểm A (màu đỏ) và tính toán lại, đường thẳng mô tả mối quan hệ tuyến tính giữa <span class="math inline">\(Y\)</span> và <span class="math inline">\(X\)</span> ở là đường thẳng trong hình ở giữa. Đường thẳng gần như nằm ngang, cho thấy <span class="math inline">\(X\)</span> ít có tác động lên biến <span class="math inline">\(Y\)</span>. Sau cùng, trong hình phía bên phải, sau khi loại bỏ các điểm A (màu đỏ) và điểm B (màu cam), đường thẳng mô tả mối quan hệ tuyển tính giữa <span class="math inline">\(Y\)</span> và <span class="math inline">\(X\)</span> là đường dốc xuống, nghĩa là mối tác động của <span class="math inline">\(X\)</span> lên <span class="math inline">\(Y\)</span> là ngược chiều. Bạn đọc có thể thấy rằng kết luận đưa ra sau khi phân tích thay đổi hoàn toàn khi chúng ta có các lựa chọn khác nhau về loại bỏ các giá trị được cho là ngoại lai ra khỏi dữ liệu. Sự tác động của <span class="math inline">\(X\)</span> lên <span class="math inline">\(Y\)</span> từ thuận chiều (hình bên trái) chuyển sang không có mối liên hệ (hình ở giữa) và sau cùng là sự tác động ngược chiều của <span class="math inline">\(X\)</span> lên <span class="math inline">\(Y\)</span> (hình bên phải).</p>
+<p>Trong phần tiếp theo chúng thôi sẽ thảo luận về các phương pháp dùng để xác định các giá trị ngoại lai trong dữ liệu.</p>
+</div>
+<div id="cách-phát-hiện-giá-trị-ngoại-lai" class="section level3" number="5.3.2">
+<h3>
+<span class="header-section-number">5.3.2</span> Cách phát hiện giá trị ngoại lai<a class="anchor" aria-label="anchor" href="#c%C3%A1ch-ph%C3%A1t-hi%E1%BB%87n-gi%C3%A1-tr%E1%BB%8B-ngo%E1%BA%A1i-lai"><i class="fas fa-link"></i></a>
+</h3>
+<p>Không có một định nghĩa chính xác như thế nào là giá trị ngoại lai, chính vì thế không có phương pháp tổng thể và thống nhất nào để phát hiện giá trị ngoại lai trong dữ liệu. Với mỗi cách nhìn nhận giá trị ngoại lại khác nhau mà có phương pháp tiếp cận cụ thể để xác định các giá trị đó. Chúng tôi chỉ trình bày các phương pháp chung được chấp nhận rộng rãi bởi những người phân tích dữ liệu. Các phương pháp đơn giản sẽ được trình bày cụ thể ngay trong phần này. Các phương pháp phức tạp hơn đòi hỏi kiến thức của các chương sau của cuốn sách sẽ được trình bày dưới dạng ý tưởng và hàm có sẵn trong thư viện bổ sung.</p>
+<div id="phát-hiện-giá-trị-ngoại-lai-trong-một-véc-tơ." class="section level4" number="5.3.2.1">
+<h4>
+<span class="header-section-number">5.3.2.1</span> Phát hiện giá trị ngoại lai trong một véc-tơ.<a class="anchor" aria-label="anchor" href="#ph%C3%A1t-hi%E1%BB%87n-gi%C3%A1-tr%E1%BB%8B-ngo%E1%BA%A1i-lai-trong-m%E1%BB%99t-v%C3%A9c-t%C6%A1."><i class="fas fa-link"></i></a>
+</h4>
+<p>Để xác định một giá trị là giá trị ngoại lai hay không luôn bao gồm hai bước, bước thứ nhất là sử dụng các phương pháp xác suất thống kê để xác định các giá trị có nhiều khả năng là ngoại lai, và bước thứ hai là sử dụng kiến thức chuyên môn hoặc hỏi ý kiến chuyên gia (nếu có thể) để khẳng định lại kết quả từ bước thứ nhất.</p>
+<p>Nếu véc-tơ là một véc-tơ kiểu chuỗi ký tự (không phải kiểu factor) thì không có quy tắc rõ ràng nào để xác định giá trị ngoại lai. Một chuỗi ký tự có thể là ngoại lai nếu chuỗi ký tự có độ dài bất thường, có chứa nhiều ký tự bất thường, một chuỗi ký tự không có ý nghĩa, hoặc cũng có thể là một chuỗi ký tự trống,… việc này hoàn toàn phụ thuộc vào cách tiếp cận của người phân tích dữ liệu. Các phương pháp xử lý dữ liệu kiểu chuỗi ký tự hiện đại có khả năng biến đổi một chuỗi ký tự thành một véc-tơ kiểu số. Việc xác định chuỗi ký tự có phải là một giá trị bất thường hay không sẽ liên quan đến việc xác định một véc-tơ kiểu số có phải là một véc-tơ có giá trị bất thường trong một tập hợp các véc-tơ. Các kỹ thuật này vượt quá phạm vi của cuốn sách</p>
+<p>Đối với véc-tơ kiểu factor hay véc-tơ kiểu logic, giá trị có khả năng là ngoại lai là các giá trị xuất hiện với tần xuất rất nhỏ. Chẳng hạn như khi mô tả một véc-tơ chứa tên các loại đồ uống được bán trong một siêu thị trong tháng vừa rồi, bạn gặp trường hợp sau:</p>
+<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Coca"</span>,<span class="st">"Pepsi"</span>,<span class="st">"Red bull"</span>,<span class="st">"Mirinda"</span>,<span class="st">"Collagen"</span><span class="op">)</span>,<span class="fl">10000</span>,prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4000</span>,<span class="fl">3000</span>,<span class="fl">2000</span>,<span class="fl">2000</span>,<span class="fl">5</span><span class="op">)</span>,replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>,col <span class="op">=</span> <span class="st">"lightskyblue"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="08-phan-tich-du-lieu-bang-R_files/figure-html/unnamed-chunk-57-1.png" width="672"></div>
+<p>Khi gặp đồ thị như trên, có khả năng đồ uống có tên “Collagen” là giá trị ngoại lai. Nếu siêu thị có bán loại đồ uống này và việc sản phẩm không được khách hàng ưa chuộng, việc xuất hiện với tần xuất thấp là bình thướng và đây không phải là giá trị ngoại lai. Tuy nhiên việc tên sản phẩm xuất hiện trong danh sách bán hàng tháng này dù siêu thị không bán cũng có thể là do lỗi gặp phải trong quản lý hệ thống bán hàng khi đã ghi nhận tên “Collagen” cho một đồ uống khác.</p>
+<p>Đối với véc-tơ kiểu số, các giá trị có khả năng là ngoại lai thường là các giá trị nằm ở đuôi của phân phối xác suất. Để biết một véc-tơ kiểu số có giá trị ngoại lai hay không, bạn đọc nên sử dụng đồ thị boxplot. Các điểm nằm phía dưới điểm nhỏ nhất (Q0) và nằm phía trên điểm lớn nhất (Q4) của đồ thị boxplot có nhiều khả năng là các giá trị ngoại lai. Điểm nhỏ nhất và điểm lớn nhất của đồ thị boxplot được xác định dựa trên mức từ phân vị thứ nhất (Q1) và mức tứ phân vị thứ 3 (Q3):
+<span class="math display">\[\begin{align}
+&amp;&amp;\text{Inter Quartile Range (IQR)} = Q3 - Q1 \\
+&amp;&amp;\text{Điểm nhỏ nhất (Q0)} = Q1 - 1.5 \times IQR \\
+&amp;&amp;\text{Điểm lớn nhất (Q4)} = Q3 + 1.5 \times IQR
+\end{align}\]</span></p>
+<p>Các giá trị nằm ngoài khoảng <span class="math inline">\((Q1 - 1,5 \times IQR, Q3 + 1.5 \times IQR)\)</span> có nhiều khả năng là giá trị ngoại lai. Giá trị càng thấp hơn Q0 và càng cao hơn Q4 thì khả năng là giá trị ngoại lai lại càng cao.</p>
+<p>Đồ thị boxplot dưới đây mô tả phân phối của véc-tơ chứa khối lượng giao dịch, tính bằng triệu cổ phiếu/ngày, của cổ phiếu của tập đoàn FLC. Cổ phiếu được niêm yết trên sàn giao dich chứng khoán Thành phố Hồ Chí Minh từ ngày 6 tháng 10 năm 2011 đến ngày 8 tháng 9 năm 2022. Dữ liệu có hơn quan sát.</p>
+<div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dat1</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD/Dataset/FLC.csv"</span><span class="op">)</span></span>
+<span><span class="va">dat1</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu">year</span><span class="op">(</span><span class="va">Date</span><span class="op">)</span><span class="op">&gt;=</span><span class="fl">2021</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y<span class="op">=</span><span class="va">Volume</span><span class="op">/</span><span class="fl">10</span><span class="op">^</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"lightskyblue"</span>,alpha<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Khối lượng giao dịch cổ phiếu FLC"</span>,</span>
+<span>              subtitle <span class="op">=</span> <span class="st">"Đơn vị: Triệu cổ phiếu/ngày"</span>,</span>
+<span>              caption <span class="op">=</span> <span class="st">"Nguồn dữ liệu: Sở giao dịch chứng khoán TP HCM"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position<span class="op">=</span><span class="st">"none"</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>axis.text<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">12</span><span class="op">)</span>,</span>
+<span>        axis.title<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size<span class="op">=</span><span class="fl">12</span>,face<span class="op">=</span><span class="st">"bold"</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">14</span>, face <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="08-phan-tich-du-lieu-bang-R_files/figure-html/unnamed-chunk-58-1.png" width="672" style="display: block; margin: auto;"></div>
+<p>Chúng ta có thể thấy trên đồ thị boxplot không có điểm nằm dưới Q0. Có 8 quan sát có giá trị lớn hơn Q4; các giá trị này có khả năng là các giá trị ngoại lai. Có 3 quan sát với giá trị lớn hơn 100, nghĩa là có ba ngày mà có hơn 100 triệu cổ phiếu FLC được giao dịch. Nếu có một chút kinh nghiệm về thị trường chứng khoán Việt Nam, bạn đọc có thể kiểm chứng được đây là số lượng cổ phiếu giao dịch lớn bất thường.</p>
+<p>Thực tế thì ba phiên giao dịch có khối lượng giao dịch lớn hơn 100 triệu cổ phiếu là các phiên giao dịch ngày 10 tháng 1 năm 2022, ngày 11 tháng 1 năm 2022 và phiên giao dịch ngày 1 tháng 4 năm 2022. Thực tế cho thấy đây là ba phiên giao dịch mà cổ phiếu FLC đã bị thao túng giá và dẫn đến việc cố phiếu FLC bị cấm giao dịch trên sàn giao dịch TP HCM kể từ tháng 09 năm 2022.</p>
+<ul>
+<li><p>Sau một vài tháng giá cổ phiếu FCL tăng lên gấp 2 lần, đến ngày 10 và ngày 11 tháng 01 năm 2022, các cổ đông chính của FLC bán ra khối lượng rất lớn các cổ phiếu mà không đăng ký với Ủy ban chứng khoán theo quy định. Sau hai phiên giao dịch này giá cổ phiếu FLC giảm mạnh về đến mức trước đó vài tháng.</p></li>
+<li><p>Ngày 31 tháng 03 năm 2022 các thông tin giả mạo về nhu cầu mua cổ phiếu FLC với khối lượng lớn được đưa ra (sau nhiều ngày giá cổ phiếu FLC giảm hết biên độ) làm cho nhu cầu mua FLC trong ngày 01 tháng 04 năm 2022 cao đột biến.</p></li>
+</ul>
+<p>Đây là ví dụ điển hình về dữ liệu có giá trị ngoại lai có nguyên nhân chủ quan từ con người. Bạn đọc có thể sử dụng kết hợp đồ thị boxplot và các đồ thị mô tả phân phối của biến liên tục như đồ thị <span class="math inline">\(histogram\)</span> hay đồ thị <span class="math inline">\(density\)</span>. Hình vẽ dưới đây mô tả phân phối của chiều cao của 245 nam giới là nhân viên của một công ty. Đơn vị đo chiều cao là <span class="math inline">\(cm\)</span>.</p>
+<div class="inline-figure"><img src="08-phan-tich-du-lieu-bang-R_files/figure-html/unnamed-chunk-59-1.png" width="960" style="display: block; margin: auto;"></div>
+<p>Đồ thị boxplot và histogram đều cho thấy trong dữ liệu có các giá trị chiều cao của nam giới xấp xỉ giá trị 0 và nhiều khả năng đây là các giá trị ngoại lai. Đồ thị histogram còn cho thấy có nhiều hơn 1 giá trị có giá trị như vậy. Lọc các giá trị đó ra khỏi véc-tơ chúng ta sẽ thu được 5 giá trị là 1,52; 1,74; 1,70; 1,62; và 1,80. Đây không thể là chiều cao của nam giới đo bằng đơn vị <span class="math inline">\(cm\)</span>. Có nhiều khả năng là khi ghi lại chiều cao của các nhân viên này, người nhập dữ liệu đã sử dụng đơn vị là <span class="math inline">\(mét\)</span> thay vì <span class="math inline">\(cm\)</span>. Chúng ta có thể sửa các giá trị ngoại lai này bằng cách đổi từ đơn vị <span class="math inline">\(mét\)</span> sang <span class="math inline">\(cm\)</span>. Phân phối của chiều cao sau khi sửa lại dữ liệu được mô tả như hình dưới đây:</p>
+<div class="inline-figure"><img src="08-phan-tich-du-lieu-bang-R_files/figure-html/unnamed-chunk-60-1.png" width="960" style="display: block; margin: auto;"></div>
+<p>Véc-tơ kiểu số có mô tả giá trị đo lường, tiền tệ rất thường xuyên gặp vấn đề như kể trên. Ngay khi gặp giá trị ngoại lai trong véc-tơ kiểu số như trên bạn đọc hãy nghĩ đến sai đơn vị đo lường là nguyên nhân đầu tiên.</p>
+<p>Ngoài việc sử dụng các tứ phân vị để phát hiện giá trị ngoại lai, một phương pháp định lượng khác cũng thường được đề cập đến trong nhiều tài liệu là sử dụng <span class="math inline">\(Z-Score\)</span>. <span class="math inline">\(Z-Score\)</span> được tính bằng khoảng cách từ 1 điểm đến giá trị trung bình của dữ liệu sau đó chia cho độ lệch chuẩn của dữ liệu
+<span class="math display">\[\begin{align}
+Z-Score(x_i) = \cfrac{|x_i - \bar{x}|}{\sigma(x)}
+\end{align}\]</span></p>
+<p><span class="math inline">\(Z-Score\)</span> dựa trên giả thiết là dữ liệu có phân phối chuẩn, do đó các điểm dữ liệu có <span class="math inline">\(Z-Score\)</span> lớn, thường sử dũng ngưỡng lớn hơn 3, được coi là các giá trị ngoại lai. Chẳng hạn như khi vẽ <span class="math inline">\(Z-Score\)</span> của tất cả các điểm dữ liệu trong dữ liệu về chiều cao cùa nhân viên, chúng ta sẽ có đồ thị như sau</p>
+<div class="inline-figure"><img src="08-phan-tich-du-lieu-bang-R_files/figure-html/unnamed-chunk-61-1.png" width="672" style="display: block; margin: auto;"></div>
+<p>Các điểm màu đỏ là các điểm bị ghi nhận sai đơn vị đo lường từ <span class="math inline">\(cm\)</span> sang <span class="math inline">\(mét\)</span> và có <span class="math inline">\(Z-Score\)</span> lên đến hơn 6. Trong trường hợp này <span class="math inline">\(Z-Score\)</span> cũng là phương pháp định lượng hiệu quả để xác định giá trị ngoại lai. Tuy nhiên, <span class="math inline">\(Z-Score\)</span> có điểm bất lợi là giá trị này được tính toán dựa trên giá trị trung bình và độ lệch tiêu chuẩn của dữ liệu trong khi chính các giá trị đó lại phụ thuộc rất lớn vào các giá trị ngoại lai. Một cách đề giảm thiểu tác động của giá trị ngoại lai lên tính <span class="math inline">\(Z-Score\)</span> là không tính đến <span class="math inline">\(x_i\)</span> khi tính toán trung bình <span class="math inline">\(\bar{x}\)</span> và <span class="math inline">\(\sigma(x)\)</span>.</p>
+<p>Đa số các phương pháp xác định giá trị ngoại lai ở trên đều dựa trên giả thiết là véc-tơ dữ liệu có phân phối chuẩn. Dữ liệu về bồi thường bảo hiểm là một điển hình của dữ liệu không có phân phối chuẩn. Đồ thì dưới đây mô tả số liệu về tiền bồi thường bảo hiểm sức khỏe của hơn 1.000 khách hàng của một công ty bảo hiểm nhân thọ</p>
+<div class="inline-figure"><img src="08-phan-tich-du-lieu-bang-R_files/figure-html/unnamed-chunk-62-1.png" width="960" style="display: block; margin: auto;"></div>
+<p>Nhiều điểm dữ liệu bị xác định là ngoại lai trong trường hợp này mặc dù đây là dữ liệu chính xác. Trong thực tế, nếu bạn đọc gặp dữ liệu không có phân phối chuẩn, hãy biến đổi dữ liệu về gần với phân phối chuẩn nhất có thể trước khi thực hiện các bước phân tích. Phép biến đổi thường được sử dụng nhất là biến đổi Box-Cox.</p>
+<div class="inline-figure"><img src="08-phan-tich-du-lieu-bang-R_files/figure-html/unnamed-chunk-63-1.png" width="960" style="display: block; margin: auto;"></div>
+<p>Kỹ thuật biến đổi Box-Cox được trình bày trong phụ lục của chương này.</p>
+</div>
+<div id="giá-trị-ngoại-lai-trong-không-gian-nhiều-chiều" class="section level4" number="5.3.2.2">
+<h4>
+<span class="header-section-number">5.3.2.2</span> Giá trị ngoại lai trong không gian nhiều chiều<a class="anchor" aria-label="anchor" href="#gi%C3%A1-tr%E1%BB%8B-ngo%E1%BA%A1i-lai-trong-kh%C3%B4ng-gian-nhi%E1%BB%81u-chi%E1%BB%81u"><i class="fas fa-link"></i></a>
+</h4>
+<p>Xác định giá trị ngoại lai trong không gian nhiều chiều phức tạp hơn trong không gian một chiều rất nhiều. Trong không gian một chiều, chúng ta cần xác định những số nào là
+giá trị ngoại lai của một véc-tơ. Trong khi trong không gian nhiều chiều, chúng ta cần phải xác định các quan sát nào là giá trị ngoại lai trong một dữ liệu. Ngoài việc xem xét giá trị trong từng cột dữ liệu, chúng ta cần phải xem xét cả mối liên hệ giữa các véc-tơ (cột) đó.</p>
+<p>Các phương pháp để xác định giá giá trị ngoại lai trong không gian nhiều chiều vẫn dựa trên nguyên tắc cơ bản áp dụng trong không gian một chiều, đó là các quan sát càng xa điểm trung tâm của dữ liệu thì quan sát đó càng có khả năng cao là giá trị ngoại lai. Khái niệm xa hay gần trong một không gian nhiều chiều luôn gắn liền với một khái niệm về khoảng cách. Khoảng cách thường sử dung nhiều nhất trong không gian nhiều chiều là khoảng cách Euclid. Tuy nhiên khoảng cách Euclid có nhược điểm là không tính đến mối liên hệ giữa các cột dữ liệu. Khoảng cách thường được dùng trong xác định giá trị ngoại lai là khoảng cách Mahalanobis.</p>
+<p>Cho <span class="math inline">\(x_i = x_{i1}, x_{i2}, \cdots, x_{ip}\)</span> là quan sát thứ <span class="math inline">\(i\)</span> và <span class="math inline">\(\mu = \mu_{1}, \mu_{2}, \cdots, \mu_{p}\)</span> là véc-tơ các giá trị trung bình của các véc-tơ cột. Khoảng cách Euclid và khoảng cách Mahalanobis được định nghĩa như sau
+<span class="math display">\[\begin{align}
+D^{Euclid}(x_i,\mu) = \sqrt{(x_i - \mu)^T (x_i - \mu)} \\
+D^{Mahalanobis}(x_i,\mu) = \sqrt{(x_i - \mu)^T \ \Sigma^{-1} \  (x_i - \mu)} \\
+\end{align}\]</span>
+trong đó <span class="math inline">\(D^{Euclid}(x_i,\mu)\)</span> và <span class="math inline">\(D^{Mahalanobis}(x_i,\mu)\)</span> lần lượt là khoảng cách Euclid và khoảng cách Mahalanobis từ quan sát <span class="math inline">\(x_i\)</span> đến điểm trung bình <span class="math inline">\(\mu\)</span>. Trong công thức tính khoảng cách Mahalanobis, <span class="math inline">\(\Sigma^{-1}\)</span> là ma trận nghịch đảo của ma trận hiệp phương sai của dữ liệu. Ki Có thể thấy rằng khoảng cách Euclid là trường hợp riêng của khoảng cách Mahalanobis khi các cột dữ liệu có phương sai bằng 1 và đôi một độc lập với nhau.</p>
+<p>Bạn đọc có thể tự lập trình hàm số tính khoảng cách Euclid và hàm số tính khoảng cách Mahalanobis giữa 2 véc-tơ như sau</p>
+<div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Dis.Euc</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">x</span><span class="op">-</span><span class="va">y</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">0.5</span></span>
+<span><span class="va">Dis.Mah</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>,<span class="va">y</span>,<span class="va">Sigma</span><span class="op">)</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">x</span><span class="op">-</span><span class="va">y</span><span class="op">)</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">Sigma</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="op">(</span><span class="va">x</span><span class="op">-</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">0.5</span> </span></code></pre></div>
+<p>Chúng ta quay trở lại ví dụ về dữ liệu bao gồm 10 quan sát với hai giá trị ngoại lai là điểm A (màu đỏ) và điểm B (màu cam). Chúng ta tính toán khoảng cách Euclid của mỗi điểm đến trung tâm của dữ liệu và sắp xếp các điểm theo thứ tự khoảng cách Euclid giảm dần</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-66">Table 5.3: </span>Điểm dữ liệu sắp xếp theo khoảng cách Euclid giảm dần
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Điểm dữ liệu
+</th>
+<th style="text-align:right;">
+Tọa độ x
+</th>
+<th style="text-align:right;">
+Tọa độ y
+</th>
+<th style="text-align:right;">
+Khoảng cách Euclid
+</th>
+<th style="text-align:right;">
+Khoảng cách Mahalanobis
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Điểm A (đỏ)
+</td>
+<td style="text-align:right;">
+7.500
+</td>
+<td style="text-align:right;">
+12.000
+</td>
+<td style="text-align:right;">
+7.925
+</td>
+<td style="text-align:right;">
+2.593
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm B (cam)
+</td>
+<td style="text-align:right;">
+10.000
+</td>
+<td style="text-align:right;">
+6.000
+</td>
+<td style="text-align:right;">
+5.046
+</td>
+<td style="text-align:right;">
+1.747
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+1.046
+</td>
+<td style="text-align:right;">
+5.069
+</td>
+<td style="text-align:right;">
+4.216
+</td>
+<td style="text-align:right;">
+1.647
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+1.916
+</td>
+<td style="text-align:right;">
+4.193
+</td>
+<td style="text-align:right;">
+3.302
+</td>
+<td style="text-align:right;">
+1.225
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+7.101
+</td>
+<td style="text-align:right;">
+2.411
+</td>
+<td style="text-align:right;">
+2.753
+</td>
+<td style="text-align:right;">
+1.128
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+6.693
+</td>
+<td style="text-align:right;">
+2.403
+</td>
+<td style="text-align:right;">
+2.497
+</td>
+<td style="text-align:right;">
+1.012
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+2.973
+</td>
+<td style="text-align:right;">
+3.773
+</td>
+<td style="text-align:right;">
+2.327
+</td>
+<td style="text-align:right;">
+0.815
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+4.388
+</td>
+<td style="text-align:right;">
+2.662
+</td>
+<td style="text-align:right;">
+1.935
+</td>
+<td style="text-align:right;">
+0.615
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+5.357
+</td>
+<td style="text-align:right;">
+2.560
+</td>
+<td style="text-align:right;">
+1.858
+</td>
+<td style="text-align:right;">
+0.671
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+5.129
+</td>
+<td style="text-align:right;">
+3.055
+</td>
+<td style="text-align:right;">
+1.360
+</td>
+<td style="text-align:right;">
+0.473
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Có thế thấy rằng khi chỉ có 10 quan sát, khoảng cách Euclid có thể sử dụng để phát hiện được giá trị ngoại lai là điểm A và điểm B vì hai điểm này có khoảng cách đến trung tâm xa hơn so với các điểm còn lại. Khoảng cách Mahalanobis cũng cho kết quả tương tự. Tuy nhiên khoảng cách Euclid sẽ gặp vấn đề khi số lượng quan sát nhiều hơn và mối liên hệ giữa <span class="math inline">\(x\)</span> và <span class="math inline">\(y\)</span> rõ ràng hơn. Bạn đọc có thể thấy khoảng cách Euclid không cho kết quả tốt như khoảng cách Malahanobis trong trường hợp dữ liệu có 100 quan sát</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-68">Table 1.11: </span>Điểm dữ liệu sắp xếp theo khoảng cách Euclid giảm dần
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Điểm dữ liệu
+</th>
+<th style="text-align:right;">
+Tọa độ x
+</th>
+<th style="text-align:right;">
+Tọa độ y
+</th>
+<th style="text-align:right;">
+Khoảng cách Euclid
+</th>
+<th style="text-align:right;">
+Khoảng cách Mahalanobis
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Điểm A (đỏ)
+</td>
+<td style="text-align:right;">
+7.500
+</td>
+<td style="text-align:right;">
+12.000
+</td>
+<td style="text-align:right;">
+9.501
+</td>
+<td style="text-align:right;">
+8.010
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+-1.993
+</td>
+<td style="text-align:right;">
+6.897
+</td>
+<td style="text-align:right;">
+7.100
+</td>
+<td style="text-align:right;">
+2.441
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+-2.448
+</td>
+<td style="text-align:right;">
+5.970
+</td>
+<td style="text-align:right;">
+7.072
+</td>
+<td style="text-align:right;">
+2.430
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+10.216
+</td>
+<td style="text-align:right;">
+-0.163
+</td>
+<td style="text-align:right;">
+7.011
+</td>
+<td style="text-align:right;">
+2.377
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+9.862
+</td>
+<td style="text-align:right;">
+-0.211
+</td>
+<td style="text-align:right;">
+6.725
+</td>
+<td style="text-align:right;">
+2.290
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+10.061
+</td>
+<td style="text-align:right;">
+0.291
+</td>
+<td style="text-align:right;">
+6.667
+</td>
+<td style="text-align:right;">
+2.269
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #FF8080 !important;">
+Điểm B (cam)
+</td>
+<td style="text-align:right;background-color: #FF8080 !important;">
+10.000
+</td>
+<td style="text-align:right;background-color: #FF8080 !important;">
+6.000
+</td>
+<td style="text-align:right;background-color: #FF8080 !important;">
+6.606
+</td>
+<td style="text-align:right;background-color: #FF8080 !important;">
+4.675
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+10.022
+</td>
+<td style="text-align:right;">
+0.591
+</td>
+<td style="text-align:right;">
+6.508
+</td>
+<td style="text-align:right;">
+2.240
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+8.732
+</td>
+<td style="text-align:right;">
+0.131
+</td>
+<td style="text-align:right;">
+5.581
+</td>
+<td style="text-align:right;">
+1.932
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Điểm khác (xanh)
+</td>
+<td style="text-align:right;">
+-0.787
+</td>
+<td style="text-align:right;">
+5.044
+</td>
+<td style="text-align:right;">
+5.183
+</td>
+<td style="text-align:right;">
+1.810
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Khi đo bằng khoảng cách Euclid, điểm <span class="math inline">\(A\)</span> vẫn là điểm xa trung tâm dữ liệu nhất. Tuy nhiên khoảng cách từ điểm <span class="math inline">\(B\)</span> đến trung tâm dữ liệu là nhỏ hơn một số điểm màu xanh khác. Quan sát khoảng cách Mahalanobis chúng ta có thể thấy rằng điểm <span class="math inline">\(A\)</span> là điểm có khoảng cách xa nhất, sau đó đến điểm <span class="math inline">\(B\)</span> (Malahanobis distance = 4.675), các điểm màu xanh khác đều có khoảng cách Mahalanobis nhỏ hơn 2,5.</p>
+<p>Các kỹ thuật phát hiện giá trị ngoại lai phức tạp hơn dựa trên nguyên lý phân cụm sẽ được trình bày trong chương “học máy không có giám sát”. Nguyên tắc xác định một quan sát ngoại lai là phân chia dữ liệu thành các cụm sao cho các quan sát trong cùng một cụm có tính chất tương tự nhau. Các quan sát không nằm trong cụm nào, hoặc trong các cụm có rất ít quan sát, có nhiều khả năng là giá trị ngoại lai.</p>
+</div>
+</div>
+<div id="xử-lý-giá-trị-ngoại-lai." class="section level3" number="5.3.3">
+<h3>
+<span class="header-section-number">5.3.3</span> Xử lý giá trị ngoại lai.<a class="anchor" aria-label="anchor" href="#x%E1%BB%AD-l%C3%BD-gi%C3%A1-tr%E1%BB%8B-ngo%E1%BA%A1i-lai."><i class="fas fa-link"></i></a>
+</h3>
+<p>Có nhiều phương pháp để xử lý giá trị ngoại lai trong dữ liệu. Tùy thuộc vào tình huống và dữ liệu cụ thể, phương pháp nào cũng có thể đúng hoặc sai. Điều quan trọng là bạn đọc phải phân tích các tình huống có thể liên quan đến giá trị ngoại lai. Đôi khi việc phân tích các giá trị ngoại lai này còn giúp bạn có những hiểu biết hơn về dữ liệu và tối ưu công việc phân tích của bạn.</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Phương pháp đơn giản nhất và cũng thường cho hiệu quả thấp nhất đó là loại bỏ các quan sát, hoặc biến có chứa giá trị ngoại lai. Phương pháp này chỉ có ý nghĩa khi bạn có số lượng quan sát đủ lớn và các giá trị bị coi là ngoại lai không có có ý nghĩa trong xác định phân phối xác suất của từng biến.</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Thay thế giá trị ngoại lai bằng một giá trị khác: bạn đọc có thể thay thế giá trị ngoại lai bằng giá trị có ý nghĩa hơn như giá trị Q0 hoặc Q4 của phân phối xác suất, hoặc cũng có thể thay thế giá trị ngoại lai bằng giá trị trung bình, trung vị, hoặc mode của phân phối. Đây là phương pháp đơn giản, dễ sử dụng và thường cho hiệu quả tốt hơn so với phương pháp xóa quan sát.</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Phương pháp sau cùng và cũng là phương pháp đòi hỏi kỹ thuật phức tạp nhất đó là coi giá trị ngoại lai như một giá trị không quan sát được, sau đó xây dựng mô hình để dự đoán cho giá trị ngoại lai.</li>
+</ol></li>
+</ul>
+<p>Các phương pháp thay thế giá trị ngoại lai và hoặc dự đoán giá trị ngoại lai dựa trên mô hình do tương tự như các phương pháp xử lý dữ liệu không quan sát được nên sẽ được trình bày ở phần sau của chương sách.</p>
+</div>
+<div id="xử-lý-giá-trị-không-quan-sát-được." class="section level3" number="5.3.4">
+<h3>
+<span class="header-section-number">5.3.4</span> Xử lý giá trị không quan sát được.<a class="anchor" aria-label="anchor" href="#x%E1%BB%AD-l%C3%BD-gi%C3%A1-tr%E1%BB%8B-kh%C3%B4ng-quan-s%C3%A1t-%C4%91%C6%B0%E1%BB%A3c."><i class="fas fa-link"></i></a>
+</h3>
+<p>Khi dữ liệu có giá trị không quan sát được, cách xử lý đơn giản nhất là xóa các quan sát hoặc xóa các biến chứa các giá trị đó. Nếu bạn đọc gặp dữ liệu mà trong đó có một hoặc một số quan sát mà đa số các giá trị trong đó là <span class="math inline">\(NA\)</span>, trong khi tất cả các quan sát còn lại đều không có chứa <span class="math inline">\(NA\)</span>, thì cách xử lý xóa đi quan sát có giá trị <span class="math inline">\(NA\)</span> là giải pháp hợp lý nhất. Ví dụ như chúng ta có dữ liệu về thông tin của sinh viên của một lớp như sau</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+MSV
+</th>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:right;">
+Age
+</th>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:right;">
+Height (cm)
+</th>
+<th style="text-align:right;">
+Weight (kg)
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+MSV00001
+</td>
+<td style="text-align:left;">
+Lý Văn Thắng
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+Nam
+</td>
+<td style="text-align:right;">
+176
+</td>
+<td style="text-align:right;">
+68
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MSV43241
+</td>
+<td style="text-align:left;">
+Nguyễn Văn An
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+Nam
+</td>
+<td style="text-align:right;">
+169
+</td>
+<td style="text-align:right;">
+72
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MSV65432
+</td>
+<td style="text-align:left;">
+Lê Thị Loan
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+Nữ
+</td>
+<td style="text-align:right;">
+155
+</td>
+<td style="text-align:right;">
+48
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MSV34001
+</td>
+<td style="text-align:left;">
+Trần Mạnh Cường
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+Nam
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+150
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #FF8080 !important;">
+MSV33789
+</td>
+<td style="text-align:left;background-color: #FF8080 !important;">
+Nguyễn Thị Thu Thủy
+</td>
+<td style="text-align:right;background-color: #FF8080 !important;">
+NA
+</td>
+<td style="text-align:left;background-color: #FF8080 !important;">
+NA
+</td>
+<td style="text-align:right;background-color: #FF8080 !important;">
+NA
+</td>
+<td style="text-align:right;background-color: #FF8080 !important;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Quan sát tương ứng với mã sinh viên “MSV33789” ngoài thông tin về tên sinh viên, các thông tin khác đều không quan sát được. Ngoài sinh viên này, các sinh viên còn lại đều có đầy đủ thông tin. Trong trường hợp này phương pháp xử lý hiệu quả nhất là xóa sinh viên “MSV33789” khỏi dữ liệu trước khi phân tích.</p>
+<p>Khi các giá trị không quan sát được tập trung ở một số quan sát (hàng) hoặc tập trung ở một số biến (cột), chúng ta nói rằng các giá trị không quan sát được một cách không ngẫu nhiên (Missing value not at random hay MNAR).</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+MSV
+</th>
+<th style="text-align:left;">
+Name
+</th>
+<th style="text-align:right;">
+Age
+</th>
+<th style="text-align:left;">
+Gender
+</th>
+<th style="text-align:right;">
+Height (cm)
+</th>
+<th style="text-align:right;">
+Weight (kg)
+</th>
+<th style="text-align:right;">
+GPA
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+MSV00001
+</td>
+<td style="text-align:left;">
+Lý Văn Thắng
+</td>
+<td style="text-align:right;">
+30
+</td>
+<td style="text-align:left;">
+Nam
+</td>
+<td style="text-align:right;">
+176
+</td>
+<td style="text-align:right;">
+68
+</td>
+<td style="text-align:right;background-color: #FF8080 !important;">
+3.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MSV43241
+</td>
+<td style="text-align:left;">
+Nguyễn Văn An
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+Nam
+</td>
+<td style="text-align:right;">
+169
+</td>
+<td style="text-align:right;">
+72
+</td>
+<td style="text-align:right;background-color: #FF8080 !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MSV65432
+</td>
+<td style="text-align:left;">
+Lê Thị Loan
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:left;">
+Nữ
+</td>
+<td style="text-align:right;">
+155
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:right;background-color: #FF8080 !important;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MSV34001
+</td>
+<td style="text-align:left;">
+Trần Mạnh Cường
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:left;">
+Nam
+</td>
+<td style="text-align:right;">
+175
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:right;background-color: #FF8080 !important;">
+NA
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Dữ liệu ở trên là ví dụ khác về việc giá trị không quan sát được xuất hiện một cách không ngẫu nhiên. Có thể thấy rằng trong cột <span class="math inline">\(GPA\)</span> đa số các giá trị là không quan sát được. Mọi phân tích liên quan đến giá trị của biến này sẽ không có ý nghĩa, do đó cách tốt nhất là xóa cột này ra khỏi dữ liệu. Để xóa các quan sát có chứa giá trị không quan sát được ra khỏi dữ liệu, bạn đọc có thể sử dụng hàm <code>drop_na()</code> của thư viện <code>tidyr</code>. Để xóa một cột khỏi dữ liệu, bạn đọc có thể coi dữ liệu (một <span class="math inline">\(data.frame\)</span> hoặc <span class="math inline">\(tibble\)</span>) như là một <span class="math inline">\(list\)</span> và gán giá trị của biến đó bằng <span class="math inline">\(NULL\)</span></p>
+<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Du lieu là một tibble hoặc một data.frame có tên là dat</span></span>
+<span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span> <span class="co"># Xóa các quan sát (hàng) có giá trị NA ra khỏi dữ liệu</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">ten_cot</span><span class="op">&lt;-</span><span class="cn">NULL</span> <span class="co"># xóa cột có tên là ten_cot ra khoi du lieu</span></span></code></pre></div>
+<p>Nếu giá trị không quan sát được tập trung vào một số quan sát thì xóa quan sát sẽ không làm ảnh hưởng đến kết quả phân tích. Dữ liệu chúng ta thường gặp sẽ có các giá trị không quán sát được nằm rải rác ở các cột không theo một quy tắc nào. Chúng tôi muốn nói đến trường hợp dữ liệu không quan sát được xuất hiện một cách hoàn toàn ngẫu nhiên (Missing completely at random hay MCAR). Khi gặp trường hợp này nếu xóa đi các quan sát có <span class="math inline">\(NA\)</span>, tỷ lệ quan sát bị xóa đi sẽ là đáng kể.</p>
+<p>Để minh họa rõ hơn cho vấn đề này, và để đánh giá hiệu quả của các phương pháp xử lý giá trị <span class="math inline">\(NA\)</span> trong các phần sau, chúng tôi sẽ sử dụng dữ liệu <span class="math inline">\(mpg\)</span> của thư viện <span class="math inline">\(ggplot2\)</span>. Đây là dữ liệu có 234 quan sát và 11 biến. Dữ liệu mô tả mức độ tiêu hao nhiên liệu của các loại xe oto thương mại đang bán trên thị trường trong hai năm 1999 và 2008. Dữ liệu không có giá trị <span class="math inline">\(NA\)</span> nhưng chúng ta sẽ thêm các giá trị không quan sát được vào dữ liệu một các ngẫu nhiên. Sau đó dữ liệu chính xác sẽ được sử dụng để đánh giá phương pháp xử lý giá trị không quan sát được. Bạn đọc cần đọc mô tả về dữ liệu <span class="math inline">\(mpg\)</span>, ý nghĩa của các biến sau đó sử dụng đoạn câu lệnh dưới đây để thêm giá trị <span class="math inline">\(NA\)</span> vào trong dữ liệu một cách ngẫu nhiên. Chúng ta sẽ gọi tên dữ liệu mới là <span class="math inline">\(na.mpg\)</span> để phân biệt với dữ liệu ban đầu.</p>
+<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Tạo dữ liệu mới giống như dữ liệu ban mpg</span></span>
+<span><span class="va">na.mpg</span><span class="op">&lt;-</span><span class="va">mpg</span></span>
+<span></span>
+<span><span class="co"># Định dạng lại format các cột kiểu biến rời rạc thành kiểu factor</span></span>
+<span><span class="va">chiso</span><span class="op">&lt;-</span> <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">na.mpg</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"displ"</span>, <span class="st">"cty"</span>, <span class="st">"hwy"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">na.mpg</span><span class="op">[</span>,<span class="va">chiso</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">na.mpg</span><span class="op">[</span>,<span class="va">chiso</span><span class="op">]</span>, <span class="va">as.factor</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Viết hàm số để thêm giá trị NA vào một véc-tơ</span></span>
+<span><span class="co">## hàm số có ý nghĩa là thêm vào véc-tơ x các giá trị NA một cách ngẫu nhiên</span></span>
+<span><span class="co">## tỷ lệ giá trị NA được thêm vào bằng tùy biến na.rate</span></span>
+<span><span class="va">rd.add</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">na.rate</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">k</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="va">na.rate</span><span class="op">)</span></span>
+<span>  <span class="va">ind</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>,<span class="va">k</span>,replace<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span>  <span class="va">x</span><span class="op">[</span><span class="va">ind</span><span class="op">]</span><span class="op">&lt;-</span><span class="cn">NA</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Thêm giá trị NA vào các cột NGOẠI TRỪ ba cột</span></span>
+<span><span class="co">## Cột nhà sản xuất: manufacturer</span></span>
+<span><span class="co">## Cột loại xe: model</span></span>
+<span><span class="co">## Cột năm sản xuất</span></span>
+<span><span class="co">## tỷ lệ thêm NA một cách ngẫu nhiên vào các cột là 2%</span></span>
+<span><span class="va">chiso</span><span class="op">&lt;-</span> <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">na.mpg</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"manufacturer"</span>, <span class="st">"model"</span>, <span class="st">"year"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
+<span><span class="va">na.mpg</span><span class="op">[</span>,<span class="va">chiso</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">na.mpg</span><span class="op">[</span>,<span class="va">chiso</span><span class="op">]</span>, <span class="va">rd.add</span>, na.rate <span class="op">=</span> <span class="fl">0.02</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Xem mỗi cột có bao nhiêu giá trị NA</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">na.mpg</span>, <span class="va">f</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## manufacturer        model        displ         year          cyl        trans 
+##            0            0            5            0            5            5 
+##          drv          cty          hwy           fl        class 
+##            5            5            5            5            5</code></pre>
+<p>Chúng ta thấy rằng có 8/11 cột có giá trị <span class="math inline">\(NA\)</span>, cột có 5 giá trị <span class="math inline">\(NA\)</span> xuất hiện một cách ngẫu nhiên trên tổng số 234 giá trị (tỷ lệ khoảng 2%). Tuy nhiên số quan sát có chứa <span class="math inline">\(NA\)</span> lại lớn hơn 2% rất nhiều. Hàm <code>drop_na()</code> trong thư viện <span class="math inline">\(tidyr\)</span> sẽ xóa các quan sát có giá trị <span class="math inline">\(NA\)</span> ra khỏi dữ liệu. Chúng ta có thể tính được sau khi xóa tỷ lệ dữ liệu còn giữ lại là bao nhiêu:</p>
+<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="fu">drop_na</span><span class="op">(</span><span class="va">na.mpg</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">na.mpg</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 0.8461538</code></pre>
+<p>Có thể thấy nếu 2% dữ liệu không quan sát được ở mỗi cột nếu chúng ta xóa các quan sát có giá trị <span class="math inline">\(NA\)</span>, tỷ lệ dữ liệu còn lại là khoảng 85%. Chúng ta có thể thử tăng tỷ lệ giá trị không quan sát được trên mỗi cột lên thành 3%, 5%, 10%, 20%, 30% và quan sát tỷ lệ dữ liệu còn lại sau khi xóa:</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-75">Table 5.4: </span>Tỷ lệ dữ liệu bị xóa nếu loại bỏ quán sát có NA
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+Tỷ lệ NA
+</th>
+<th style="text-align:left;">
+Tỷ lệ xóa
+</th>
+<th style="text-align:left;">
+Tỷ lệ còn lại
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2%
+</td>
+<td style="text-align:left;">
+15%
+</td>
+<td style="text-align:left;">
+85%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3%
+</td>
+<td style="text-align:left;">
+21%
+</td>
+<td style="text-align:left;">
+79%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5%
+</td>
+<td style="text-align:left;">
+34%
+</td>
+<td style="text-align:left;">
+66%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10%
+</td>
+<td style="text-align:left;">
+57%
+</td>
+<td style="text-align:left;">
+43%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+20%
+</td>
+<td style="text-align:left;">
+84%
+</td>
+<td style="text-align:left;">
+16%
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+30%
+</td>
+<td style="text-align:left;">
+94%
+</td>
+<td style="text-align:left;">
+6%
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Chúng ta có thể thấy rằng xóa quan sát có giá trị <span class="math inline">\(NA\)</span> không phải là một giải pháp hiệu quả khi giá trị <span class="math inline">\(NA\)</span> xuất hiện trong hầu hết các cột. Từ kết quả trên có thể thấy rằng khi tỷ lệ <span class="math inline">\(NA\)</span> là 5% trở lên ở mỗi cột trong số 8/11 cột của dữ liệu, chúng ta phải xóa đi khoảng 35% số quan sát để dữ liệu không còn <span class="math inline">\(NA\)</span>. Tỷ lệ dữ liệu xóa đi lớn như vậy sẽ ảnh hưởng lớn đến kết quả của phân tích.</p>
+<p>Các phương pháp xử lý giá trị không quan sát được trong trường hợp này là thay thế giá trị <span class="math inline">\(NA\)</span> bằng các giá trị thích hợp. Phương pháp đơn giản nhất đó là giả thiết các cột chứa giá trị không quan sát được độc lập với nhau và sử dụng các giá trị đặc trưng của cột dữ liệu tương ứng để thay thế cho giá trị <span class="math inline">\(NA\)</span>. Các phương pháp phức tạp hơn cân nhắc mối liên hệ giữa các cột dữ liệu và xây dựng các thuật toán để tìm giá trị tối ưu thay thế cho các giá trị không quan sát được nằm trong tất cả các cột. Mỗi phương pháp đều có ưu nhược điểm và chúng tôi thường thử cả hai hướng tiếp cận sau đó đánh giá hiệu quả dựa trên kết quả phân tích.</p>
+<div id="thay-thế-giá-trị-không-quan-sát-được-bằng-trung-bình-trung-vị-hoặc-mode." class="section level4" number="5.3.4.1">
+<h4>
+<span class="header-section-number">5.3.4.1</span> Thay thế giá trị không quan sát được bằng trung bình, trung vị hoặc mode.<a class="anchor" aria-label="anchor" href="#thay-th%E1%BA%BF-gi%C3%A1-tr%E1%BB%8B-kh%C3%B4ng-quan-s%C3%A1t-%C4%91%C6%B0%E1%BB%A3c-b%E1%BA%B1ng-trung-b%C3%ACnh-trung-v%E1%BB%8B-ho%E1%BA%B7c-mode."><i class="fas fa-link"></i></a>
+</h4>
+<p>Với giả thiết rằng cột chứa giá trị không quan sát được không có mối liên hệ đến các cột còn lại, chúng ta sẽ sử dụng một trong các giá trị như trung bình (mean), trung vị (median), hoặc mode của các giá trị quan sát được để thay thế cho các giá trị không quan sát được.</p>
+<ul>
+<li><p>Giá trị trung bình thường được sử dụng để thay thế cho các giá trị không quan sát được cho véc-tơ kiểu số liên tục và phân phối của các giá trị không có đuôi dài.</p></li>
+<li><p>Giá trị trung vị, là giá trị tại ngưỡng xác suất 50%, thường được sử dụng để thay thế cho các giá trị không quan sát được cho véc-tơ kiểu số liên tục và véc-tơ có đuôi dài. Giá trị trung vị có ưu điểm là ít bị ảnh hưởng bởi các giá trị ngoại lai và không bị thay đổi sau các bước biến đổi dữ liệu bằng các hàm đơn điệu.</p></li>
+<li><p>Giá trị mode, là giá trị mà hàm mật độ có xác suất cao nhất, có thể dùng cho cả véc-tơ kiểu số liên tục hoặc véc-tơ kiểu biến rời rạc. Trong trường hợp véc-tơ kiểu số liên tục, bạn đọc cần phải ước lượng hàm mật độ nên giá trị mode sẽ còn phụ thuộc vào phương pháp tiếp cận của người phân tích.</p></li>
+</ul>
+<p>Để thay thế giá trị không quan sát được bằng một giá trị khác, bạn đọc có thể sử dụng hàm <code><a href="https://dplyr.tidyverse.org/reference/na_if.html">na_if()</a></code> của thư viện <code>dplyr</code>, hàm <code>replace_na</code> của thư viện <code>tidyr</code>, hoặc cũng có thể tự xây dựng hàm số của mình. Để đơn giản hóa, chúng ta giả sử rằng sẽ luôn luôn thay thế giá trị trung vị khi gặp véc-tơ kiểu số liên tục và giá trị mode khi gặp véc-tơ kiểu biến rời rạc.</p>
+<div class="sourceCode" id="cb507"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_mode</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span> <span class="co"># tự định nghĩa hàm mode cho véc-tơ x</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">my_fillna_1</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span> <span class="co"># tự định nghĩa cách thay thế giá trị NA phương pháp thứ nhất</span></span>
+<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>    <span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">x</span>,na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu">my_mode</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">mpg_1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">na.mpg</span>, <span class="va">my_fillna_1</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+Giá trị thật của các biến kiểu số liên tục (nằm trong các cột <span class="math inline">\(displ\)</span>, <span class="math inline">\(hwy\)</span>, và <span class="math inline">\(cty\)</span>) và giá trị dùng để thay thế được tổng kết lại trong bảng dưới đây:
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-78">Table 5.5: </span>Biến liên tục, thay thế NA bằng trung vị
+</caption>
+<thead><tr>
+<th style="text-align:right;">
+displ đúng
+</th>
+<th style="text-align:right;">
+displ thay thế
+</th>
+<th style="text-align:right;">
+hwy đúng
+</th>
+<th style="text-align:right;">
+hwy thay thế
+</th>
+<th style="text-align:right;">
+cty đúng
+</th>
+<th style="text-align:right;">
+cty thay thế
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+4.0
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;border-left:1px solid;">
+16
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;border-left:1px solid;">
+17
+</td>
+<td style="text-align:right;border-right:1px solid;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+5.4
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;border-left:1px solid;">
+24
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;border-left:1px solid;">
+11
+</td>
+<td style="text-align:right;border-right:1px solid;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+3.8
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;border-left:1px solid;">
+12
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;border-left:1px solid;">
+15
+</td>
+<td style="text-align:right;border-right:1px solid;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+2.7
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;border-left:1px solid;">
+27
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;border-left:1px solid;">
+18
+</td>
+<td style="text-align:right;border-right:1px solid;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+1.8
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;border-left:1px solid;">
+20
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;border-left:1px solid;">
+26
+</td>
+<td style="text-align:right;border-right:1px solid;">
+17
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Giá trị thật của các biến kiểu factor và giá trị dùng để thay thế được tổng kết trong bảng phía dưới</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-79">Table 5.6: </span>Biến rời rạc, thay thế NA bằng mode
+</caption>
+<thead><tr>
+<th style="text-align:right;">
+cyl đúng
+</th>
+<th style="text-align:left;">
+cyl thay thế
+</th>
+<th style="text-align:left;">
+trans đúng
+</th>
+<th style="text-align:left;">
+trans thay thế
+</th>
+<th style="text-align:left;">
+drv đúng
+</th>
+<th style="text-align:left;">
+drv thay thế
+</th>
+<th style="text-align:left;">
+fl đúng
+</th>
+<th style="text-align:left;">
+fl thay thế
+</th>
+<th style="text-align:left;">
+class đúng
+</th>
+<th style="text-align:left;">
+class thay thế
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+auto(l6)
+</td>
+<td style="text-align:left;">
+auto(l4)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+e
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+suv
+</td>
+<td style="text-align:left;border-right:1px solid;">
+suv
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+8
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+manual(m5)
+</td>
+<td style="text-align:left;">
+auto(l4)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+r
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+pickup
+</td>
+<td style="text-align:left;border-right:1px solid;">
+suv
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+8
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+manual(m6)
+</td>
+<td style="text-align:left;">
+auto(l4)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+p
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+suv
+</td>
+<td style="text-align:left;border-right:1px solid;">
+suv
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+auto(l4)
+</td>
+<td style="text-align:left;">
+auto(l4)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+r
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+subcompact
+</td>
+<td style="text-align:left;border-right:1px solid;">
+suv
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+6
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+manual(m6)
+</td>
+<td style="text-align:left;">
+auto(l4)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+p
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+pickup
+</td>
+<td style="text-align:left;border-right:1px solid;">
+suv
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Chúng ta có thể thấy rằng việc thay thế giá trị <span class="math inline">\(NA\)</span> trong các véc_tơ kiểu biến liên tục bằng giá trị median là khá hiệu quả. Về tổng thể, giá trị median không cách quá xa so với giá trị thật.</p>
+<p>Thay thế các giá trị không quan sát được trong các véc-tơ kiểu biến rời rạc bằng giá trị mode không cho kết quả tốt trong trường hợp này. Nguyên nhân là do giá trị mode trong các biến rời rạc không chiếm ưu thế so với các giá trị khác. Chẳng hạn như biến <span class="math inline">\(drv\)</span> bị dự đoán sai 4/5 kết quả do biến này có 2 giá trị mode.</p>
+</div>
+<div id="thay-thế-giá-trị-không-quan-sát-được-bằng-một-mẫu-ngẫu-nhiên." class="section level4" number="5.3.4.2">
+<h4>
+<span class="header-section-number">5.3.4.2</span> Thay thế giá trị không quan sát được bằng một mẫu ngẫu nhiên.<a class="anchor" aria-label="anchor" href="#thay-th%E1%BA%BF-gi%C3%A1-tr%E1%BB%8B-kh%C3%B4ng-quan-s%C3%A1t-%C4%91%C6%B0%E1%BB%A3c-b%E1%BA%B1ng-m%E1%BB%99t-m%E1%BA%ABu-ng%E1%BA%ABu-nhi%C3%AAn."><i class="fas fa-link"></i></a>
+</h4>
+<p>Vẫn với giả thiết rằng cột chứa giá trị không quan sát được không có mối liên hệ đến các cột còn lại, chúng ta sẽ sử dụng phép lấy mẫu ngẫu nhiên từ các giá trị quan sát được để thay thế cho các giá trị <span class="math inline">\(NA\)</span>. Hàm <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> là hàm số có sẵn trong R được sử dụng để sinh ngẫu nhiên. Để lấy ra <span class="math inline">\(k\)</span> số ngẫu nhiên từ một véc-tơ <span class="math inline">\(x\)</span> ban đầu, chúng ta viết câu lệnh như sau</p>
+<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">x</span>,size <span class="op">=</span> <span class="va">k</span>, replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span></code></pre></div>
+<p>Tùy biến <span class="math inline">\(replace\)</span> nhận giá trị bằng <span class="math inline">\(TRUE\)</span> có ý nghĩa là giá trị ngẫu nhiên được lấy ra từ véc-tơ <span class="math inline">\(x\)</span> có thể được lấy lặp lại. Chúng ta tự định nghĩa hàm <code>fill_na_2()</code> để thay thế giá trị ngẫu nhiên trong một véc-tơ <span class="math inline">\(x\)</span> bằng các giá trị ngẫu nhiên được lấy từ <span class="math inline">\(x\)</span> như sau</p>
+<div class="sourceCode" id="cb509"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my_fillna_2</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span> <span class="co"># tự định nghĩa cách thay thế giá trị NA, phương pháp thứ 2</span></span>
+<span>  <span class="va">ind</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># véc-tơ kiểu logic, nhận giá trị TRUE tại các vị trí NA</span></span>
+<span>  <span class="va">k</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">ind</span><span class="op">)</span></span>
+<span>  <span class="va">x</span><span class="op">[</span><span class="va">ind</span><span class="op">]</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="op">!</span><span class="va">ind</span><span class="op">]</span>,<span class="va">k</span>,replace <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
+<span><span class="va">mpg_1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">na.mpg</span>, <span class="va">my_fillna_2</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+Giá trị thật của các biến kiểu số liên tục (nằm trong các cột <span class="math inline">\(displ\)</span>, <span class="math inline">\(hwy\)</span>, và <span class="math inline">\(cty\)</span>) và giá trị dùng để thay thế được tổng kết lại trong bảng dưới đây:
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-82">Table 5.7: </span>Biến liên tục, thay thế NA bằng lấy mẫu ngẫu nhiên
+</caption>
+<thead><tr>
+<th style="text-align:right;">
+displ đúng
+</th>
+<th style="text-align:right;">
+displ thay thế
+</th>
+<th style="text-align:right;">
+hwy đúng
+</th>
+<th style="text-align:right;">
+hwy thay thế
+</th>
+<th style="text-align:right;">
+cty đúng
+</th>
+<th style="text-align:right;">
+cty thay thế
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+4.0
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;border-left:1px solid;">
+16
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;border-left:1px solid;">
+17
+</td>
+<td style="text-align:right;border-right:1px solid;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+5.4
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;border-left:1px solid;">
+24
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;border-left:1px solid;">
+11
+</td>
+<td style="text-align:right;border-right:1px solid;">
+21
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+3.8
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;border-left:1px solid;">
+12
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;border-left:1px solid;">
+15
+</td>
+<td style="text-align:right;border-right:1px solid;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+2.7
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;border-left:1px solid;">
+27
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;border-left:1px solid;">
+18
+</td>
+<td style="text-align:right;border-right:1px solid;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+1.8
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;border-left:1px solid;">
+20
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;border-left:1px solid;">
+26
+</td>
+<td style="text-align:right;border-right:1px solid;">
+13
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Có thể thấy rằng biến <span class="math inline">\(year\)</span> là biến gần như không có mối liên hệ đến các biến khác. Khi chúng ta xây dựng mô hình trên dữ liệu, việc xóa bỏ các biến không cần thiết ra khỏi mô hình là rất quan trọng vì các biến này có thể gây ra nhiễu cho mô hình và giảm khả năng dự đoán.</p>
+<p>Còn quá sớm để nói đến xây dựng mô hình trên dữ liệu <span class="math inline">\(mpg\)</span> như thế nào. Bạn đọc nên hiểu</p>
+<p>Giá trị thật của các biến kiểu factor và giá trị dùng để thay thế được tổng kết trong bảng phía dưới</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-83">Table 5.8: </span>Biến rời rạc, thay thế NA bằng lấy mẫu ngẫu nhiên
+</caption>
+<thead><tr>
+<th style="text-align:right;">
+cyl đúng
+</th>
+<th style="text-align:left;">
+cyl thay thế
+</th>
+<th style="text-align:left;">
+trans đúng
+</th>
+<th style="text-align:left;">
+trans thay thế
+</th>
+<th style="text-align:left;">
+drv đúng
+</th>
+<th style="text-align:left;">
+drv thay thế
+</th>
+<th style="text-align:left;">
+fl đúng
+</th>
+<th style="text-align:left;">
+fl thay thế
+</th>
+<th style="text-align:left;">
+class đúng
+</th>
+<th style="text-align:left;">
+class thay thế
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+auto(l6)
+</td>
+<td style="text-align:left;">
+manual(m5)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;border-left:1px solid;">
+e
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+suv
+</td>
+<td style="text-align:left;border-right:1px solid;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;border-left:1px solid;">
+manual(m5)
+</td>
+<td style="text-align:left;">
+auto(l4)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;border-left:1px solid;">
+r
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+pickup
+</td>
+<td style="text-align:left;border-right:1px solid;">
+compact
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+8
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+manual(m6)
+</td>
+<td style="text-align:left;">
+auto(l5)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;border-left:1px solid;">
+p
+</td>
+<td style="text-align:left;">
+p
+</td>
+<td style="text-align:left;border-left:1px solid;">
+suv
+</td>
+<td style="text-align:left;border-right:1px solid;">
+pickup
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+4
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;border-left:1px solid;">
+auto(l4)
+</td>
+<td style="text-align:left;">
+auto(l4)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+4
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;border-left:1px solid;">
+r
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+subcompact
+</td>
+<td style="text-align:left;border-right:1px solid;">
+midsize
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;border-left:1px solid;">
+manual(m6)
+</td>
+<td style="text-align:left;">
+auto(l5)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;border-left:1px solid;">
+p
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+pickup
+</td>
+<td style="text-align:left;border-right:1px solid;">
+midsize
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Hiệu quả của phương pháp lấy mẫu ngẫu nhiên so với phương pháp sử dụng các giá trị trung vị hoặc mode là không rõ ràng. Tuy nhiên phương pháp này có nhược điểm lớn nhất đó là giá trị được sử dụng để thay thế là ngẫu nhiên nên có khả năng sẽ làm cho dữ liệu bị sai lệch.</p>
+</div>
+<div id="thay-thế-giá-trị-không-quan-sát-được-bằng-cách-xây-dựng-mô-hình." class="section level4" number="5.3.4.3">
+<h4>
+<span class="header-section-number">5.3.4.3</span> Thay thế giá trị không quan sát được bằng cách xây dựng mô hình.<a class="anchor" aria-label="anchor" href="#thay-th%E1%BA%BF-gi%C3%A1-tr%E1%BB%8B-kh%C3%B4ng-quan-s%C3%A1t-%C4%91%C6%B0%E1%BB%A3c-b%E1%BA%B1ng-c%C3%A1ch-x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh."><i class="fas fa-link"></i></a>
+</h4>
+<p>Giả thiết cột chứa giá trị không quan sát được không có mối liên hệ đến các cột còn lại là một giả thiết không thực tế. Các cột dữ liệu luôn luôn ít nhiều có mối liên hệ với nhau, hay nói theo khái niệm của xác suất - thống kê thì giá trị trong các cột dữ liệu thường không độc lập với nhau (Not independent hoặc dependent). Làm thế nào để biết hai cột dữ liệu bất kỳ là độc lập hay phụ thuộc là một câu hỏi không dễ có câu trả lời. Do đây là một vấn đề khó và vượt quá phạm vi của cuốn sách nên chúng tôi chỉ trình bày các phương pháp được công nhận rộng rãi. Để kiểm tra hai cột dữ liệu có độc lập hay không, bạn đọc hãy sử dụng các kiểm định như sau:</p>
+<ol style="list-style-type: decimal">
+<li><p>Kiểm định Khi-bình phương khi cả hai biến đều là biến rời rạc.</p></li>
+<li><p>Kiểm định hệ số tương quan Person, hệ số tương quan Spearman, và hệ số tương quan Kendall khi cả hai biến đều là biến liên tục.</p></li>
+<li><p>Sử dụng phân tích phương sai (hay còn gọi là anova test) trong trường hợp một biến là rời rạc và một biến là liên tục.</p></li>
+</ol>
+<p>Chi tiết của các kiểm định này được trình bày ở phần phụ lục của chương.</p>
+<p>Để thực hiện kiểm định Khi-bình phương trong R, chúng ta sử dụng hàm <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test()</a></code>. Để kiểm ra hai biến <span class="math inline">\(year\)</span> và <span class="math inline">\(drv\)</span> có mối liên hệ hay không, chúng ta thực hiện như sau</p>
+<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">na.mpg</span><span class="op">$</span><span class="va">year</span>,<span class="va">na.mpg</span><span class="op">$</span><span class="va">drv</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Pearson's Chi-squared test
+## 
+## data:  na.mpg$year and na.mpg$drv
+## X-squared = 1.689, df = 2, p-value = 0.4298</code></pre>
+<p>Giá trị <span class="math inline">\(p-value\)</span> bằng 42% nghĩa là xác suất bác bỏ giả thiết hai biến <span class="math inline">\(year\)</span> và <span class="math inline">\(drv\)</span> độc lập là <span class="math inline">\(100\% - 42\% = 58\%\)</span>. Thông thường, mức xác suất bác bỏ giả thiết độc lập thường được chọn ở mức <span class="math inline">\(95\%\)</span> hoặc thậm chí <span class="math inline">\(99\%\)</span>. Do xác suất bác bỏ giả thiết độc lập là thấp nên trong trường hợp này có thể đưa ra kết luận rằng hai biến <span class="math inline">\(year\)</span> và <span class="math inline">\(drv\)</span> là không liên quan đến nhau. Tương tự, để kiểm ra hai biến <span class="math inline">\(drv\)</span> và <span class="math inline">\(cyl\)</span> có mối liên hệ hay không, chúng ta thực hiện như sau</p>
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">na.mpg</span><span class="op">$</span><span class="va">drv</span>, <span class="va">na.mpg</span><span class="op">$</span><span class="va">cyl</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Pearson's Chi-squared test
+## 
+## data:  na.mpg$drv and na.mpg$cyl
+## X-squared = 90.288, df = 6, p-value &lt; 2.2e-16</code></pre>
+<p>Do xác suất bác bỏ giả thiết độc lập (<span class="math inline">\(1-10^{-16}\)</span>) là xấp xỉ <span class="math inline">\(100\%\)</span> nên trong trường hợp này có thể đưa ra kết luận rằng hai biến <span class="math inline">\(drv\)</span> và <span class="math inline">\(cyl\)</span> là không độc lập.</p>
+<p>Để kiểm định hệ số tương quan giữa hai biến liên tục chúng ta sử dụng hàm <code><a href="https://rdrr.io/r/stats/cor.test.html">cor.test()</a></code>. Tùy biến <span class="math inline">\(method\)</span> nhận giá trị “pearson”, “kendall”, hoặc “spearman” tương ứng với các hệ số tương quan Pearson, hệ số tương quan Kendall hoặc hệ số tương quan Spearman. Chúng ta kiểm định sự độc lập giữa hai biến <span class="math inline">\(displ\)</span> và <span class="math inline">\(hwy\)</span> như sau</p>
+<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">na.mpg</span><span class="op">$</span><span class="va">displ</span>, <span class="va">na.mpg</span><span class="op">$</span><span class="va">hwy</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Pearson's product-moment correlation
+## 
+## data:  na.mpg$displ and na.mpg$hwy
+## t = -17.743, df = 223, p-value &lt; 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.8143893 -0.7048317
+## sample estimates:
+##       cor 
+## -0.765092</code></pre>
+<div class="sourceCode" id="cb516"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">na.mpg</span><span class="op">$</span><span class="va">displ</span>, <span class="va">na.mpg</span><span class="op">$</span><span class="va">hwy</span>, method <span class="op">=</span> <span class="st">"kendall"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Kendall's rank correlation tau
+## 
+## data:  na.mpg$displ and na.mpg$hwy
+## z = -13.857, p-value &lt; 2.2e-16
+## alternative hypothesis: true tau is not equal to 0
+## sample estimates:
+##        tau 
+## -0.6534741</code></pre>
+<div class="sourceCode" id="cb518"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html">cor.test</a></span><span class="op">(</span><span class="va">na.mpg</span><span class="op">$</span><span class="va">displ</span>, <span class="va">na.mpg</span><span class="op">$</span><span class="va">hwy</span>, method <span class="op">=</span> <span class="st">"spearman"</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+##  Spearman's rank correlation rho
+## 
+## data:  na.mpg$displ and na.mpg$hwy
+## S = 3467012, p-value &lt; 2.2e-16
+## alternative hypothesis: true rho is not equal to 0
+## sample estimates:
+##        rho 
+## -0.8262809</code></pre>
+<p>Kiểm định cả ba hệ số tương quan đều cho xác suất bác bỏ giả thiết hai biến độc lập là xấp xỉ 100%. Nói một cách khác có thể khẳng định hai biến <span class="math inline">\(displ\)</span> và <span class="math inline">\(hwy\)</span> là có sự phụ thuộc.</p>
+<p>Sau cùng, để kiểm định sự phụ thuộc giữa một biến rời rạc và một biến liên tục, chúng ta sử dụng phân tích phương sai. Hàm số để thực hiện phân tích phương sai trong R là hàm <code><a href="https://rdrr.io/r/stats/aov.html">aov()</a></code>. Chúng ta kiểm định sự phụ thuộc giữa <span class="math inline">\(hwy\)</span> và <span class="math inline">\(cyl\)</span> như sau</p>
+<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">hwy</span><span class="op">~</span><span class="va">cyl</span>,data<span class="op">=</span><span class="va">na.mpg</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##              Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## cyl           3   4479  1492.9   101.6 &lt;2e-16 ***
+## Residuals   220   3233    14.7                   
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 10 observations deleted due to missingness</code></pre>
+<p>Xác suất bác bỏ giả thiết giá trị trung bình của biến <span class="math inline">\(hwy\)</span> bằng nhau theo các nhóm của biến <span class="math inline">\(cyl\)</span> là xấp xỉ <span class="math inline">\(100\%\)</span> hay nói một cách khác <span class="math inline">\(hwy\)</span> và <span class="math inline">\(cyl\)</span> là có mối liên hệ.</p>
+<p>Để xem xét một cách tổng thể mối liên hệ giữa các biến trong dữ liệu <span class="math inline">\(na.mpg\)</span>, bạn đọc có thể sử dụng kiểm định phù hợp với từng cặp biến và lưu xác suất bác bỏ giả thiết độc lập vào một ma trận. Hàm số <code>ind_check()</code> được tự xây dựng có đầu vào là một dữ liệu (một tibble hoặc một data.frame) và đầu ra là một ma trận cho biết xác suất bác bỏ giả thiết độc lập của từng cặp biến như thế nào. Bạn đọc có thể xem câu lệnh của hàm số này ở phần phụ lục của chương.</p>
+<p>Ma trận thể hiện xác suất bác bỏ giả thiết độc lập giữa từng cặp biến trong dữ liệu <span class="math inline">\(na.mpg\)</span> như sau</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-88">Table 5.9: </span>Biến rời rạc, thay thế NA bằng lấy mẫu ngẫu nhiên
+</caption>
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+manufacturer
+</th>
+<th style="text-align:right;">
+model
+</th>
+<th style="text-align:right;">
+displ
+</th>
+<th style="text-align:right;">
+year
+</th>
+<th style="text-align:right;">
+cyl
+</th>
+<th style="text-align:right;">
+trans
+</th>
+<th style="text-align:right;">
+drv
+</th>
+<th style="text-align:right;">
+cty
+</th>
+<th style="text-align:right;">
+hwy
+</th>
+<th style="text-align:right;">
+fl
+</th>
+<th style="text-align:right;">
+class
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+manufacturer
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+model
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+displ
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.96
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.92
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+year
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.96
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.99
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.57
+</td>
+<td style="text-align:right;">
+0.41
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cyl
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.99
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+trans
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+drv
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.57
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+cty
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.41
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+hwy
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fl
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.92
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.84
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+class
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Có thể thấy biến <span class="math inline">\(year\)</span> gần như không có mối liên hệ đến các biến khác. Khi xây dựng mô hình trên dữ liệu, sự xuất hiện của các biến không cần thiết sẽ thêm nhiễu và làm giảm chất lượng của mô hình. Trong trường hợp này, chúng ta sẽ loại bỏ biến <span class="math inline">\(year\)</span> trước khi thực hiện dự đoán cho các giá trị không quan sát được.</p>
+<p>Phương pháp để xây dựng mô hình dự đoán cho các giá trị không biết là sử dụng thuật toán “rừng ngẫu nhiên”. Đây là một thuật toán nâng cao của mô hình dạng cây quyết định. Còn quá sớm để nói về mô hình này, bạn đọc chỉ cần hiểu rằng chúng ta sẽ dựa vào các giá trị quan sát được để xây dựng mô hình (một hàm số <span class="math inline">\(f\)</span>) mà biến có giá trị <span class="math inline">\(NA\)</span> phụ thuộc vào biến không có giá trị <span class="math inline">\(NA\)</span> để đưa ra dự đoán. Thư viện “missForest” hỗ trợ chúng ta làm việc này. Bạn đọc có thể cài thư viện sau đó sử dụng hàm <code><a href="https://rdrr.io/pkg/missForest/man/missForest.html">missForest()</a></code>. Quy trình điền giá trị <span class="math inline">\(NA\)</span> vào dữ liệu <span class="math inline">\(na.mpg\)</span> chỉ cần 1 dòng lệnh!</p>
+<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.r-project.org">missForest</a></span><span class="op">)</span></span>
+<span><span class="co">### Thời gian chạy mất khoảng 1-2 phút</span></span>
+<span><span class="va">model</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/pkg/missForest/man/missForest.html">missForest</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">na.mpg</span>,<span class="op">-</span><span class="va">year</span><span class="op">)</span>, maxiter <span class="op">=</span> <span class="fl">200</span>, ntree <span class="op">=</span> <span class="fl">100</span><span class="op">)</span> </span>
+<span><span class="va">mpg_1</span><span class="op">&lt;-</span><span class="va">model</span><span class="op">$</span><span class="va">ximp</span> <span class="co"># Dữ liệu mpg_1 là dữ liệu sau khi thay thế NA</span></span></code></pre></div>
+<p>Giá trị thật của các biến kiểu số và các giá trị thay thế trong bảng dưới đây</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-90">Table 5.10: </span>Biến liên tục, thay thế NA bằng giá trị dự đoán bằng random forest
+</caption>
+<thead><tr>
+<th style="text-align:right;">
+displ đúng
+</th>
+<th style="text-align:right;">
+displ thay thế
+</th>
+<th style="text-align:right;">
+hwy đúng
+</th>
+<th style="text-align:right;">
+hwy thay thế
+</th>
+<th style="text-align:right;">
+cty đúng
+</th>
+<th style="text-align:right;">
+cty thay thế
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+4.0
+</td>
+<td style="text-align:right;">
+4.002192
+</td>
+<td style="text-align:right;border-left:1px solid;">
+16
+</td>
+<td style="text-align:right;">
+15.78726
+</td>
+<td style="text-align:right;border-left:1px solid;">
+17
+</td>
+<td style="text-align:right;border-right:1px solid;">
+16.53488
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+5.4
+</td>
+<td style="text-align:right;">
+4.663533
+</td>
+<td style="text-align:right;border-left:1px solid;">
+24
+</td>
+<td style="text-align:right;">
+24.31500
+</td>
+<td style="text-align:right;border-left:1px solid;">
+11
+</td>
+<td style="text-align:right;border-right:1px solid;">
+11.27833
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+3.8
+</td>
+<td style="text-align:right;">
+3.806883
+</td>
+<td style="text-align:right;border-left:1px solid;">
+12
+</td>
+<td style="text-align:right;">
+14.12071
+</td>
+<td style="text-align:right;border-left:1px solid;">
+15
+</td>
+<td style="text-align:right;border-right:1px solid;">
+14.19350
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+2.7
+</td>
+<td style="text-align:right;">
+3.051833
+</td>
+<td style="text-align:right;border-left:1px solid;">
+27
+</td>
+<td style="text-align:right;">
+26.01500
+</td>
+<td style="text-align:right;border-left:1px solid;">
+18
+</td>
+<td style="text-align:right;border-right:1px solid;">
+18.09544
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+1.8
+</td>
+<td style="text-align:right;">
+1.933100
+</td>
+<td style="text-align:right;border-left:1px solid;">
+20
+</td>
+<td style="text-align:right;">
+18.97731
+</td>
+<td style="text-align:right;border-left:1px solid;">
+26
+</td>
+<td style="text-align:right;border-right:1px solid;">
+26.37494
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Giá trị thật của các biến kiểu factor và giá trị dùng để thay thế được tổng kết trong bảng phía dưới</p>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-91">Table 5.11: </span>Biến rời rạc, thay thế NA bằng giá trị dự đoán bằng random forest
+</caption>
+<thead><tr>
+<th style="text-align:right;">
+cyl đúng
+</th>
+<th style="text-align:left;">
+cyl thay thế
+</th>
+<th style="text-align:left;">
+trans đúng
+</th>
+<th style="text-align:left;">
+trans thay thế
+</th>
+<th style="text-align:left;">
+drv đúng
+</th>
+<th style="text-align:left;">
+drv thay thế
+</th>
+<th style="text-align:left;">
+fl đúng
+</th>
+<th style="text-align:left;">
+fl thay thế
+</th>
+<th style="text-align:left;">
+class đúng
+</th>
+<th style="text-align:left;">
+class thay thế
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+auto(l6)
+</td>
+<td style="text-align:left;">
+auto(l5)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;border-left:1px solid;">
+e
+</td>
+<td style="text-align:left;">
+e
+</td>
+<td style="text-align:left;border-left:1px solid;">
+suv
+</td>
+<td style="text-align:left;border-right:1px solid;">
+suv
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;border-left:1px solid;">
+manual(m5)
+</td>
+<td style="text-align:left;">
+auto(l4)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;border-left:1px solid;">
+r
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+pickup
+</td>
+<td style="text-align:left;border-right:1px solid;">
+pickup
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+8
+</td>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:left;border-left:1px solid;">
+manual(m6)
+</td>
+<td style="text-align:left;">
+auto(l4)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;border-left:1px solid;">
+p
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+suv
+</td>
+<td style="text-align:left;border-right:1px solid;">
+suv
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+auto(l4)
+</td>
+<td style="text-align:left;">
+auto(l5)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;border-left:1px solid;">
+r
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+subcompact
+</td>
+<td style="text-align:left;border-right:1px solid;">
+subcompact
+</td>
+</tr>
+<tr>
+<td style="text-align:right;border-left:1px solid;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;border-left:1px solid;">
+manual(m6)
+</td>
+<td style="text-align:left;">
+auto(s6)
+</td>
+<td style="text-align:left;border-left:1px solid;">
+f
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;border-left:1px solid;">
+p
+</td>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;border-left:1px solid;">
+pickup
+</td>
+<td style="text-align:left;border-right:1px solid;">
+pickup
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Bạn đọc có thể thấy rằng ngoài biến <span class="math inline">\(trans\)</span>, đa số các biến còn lại đều được dự đoán khá chính xác bằng thuật toán rừng ngẫu nhiên. Chúng ta sẽ thảo luận về mô hình này trong chương thảo luận về mô hình cây quyết định.</p>
+</div>
+</div>
+</div>
+<div id="phụ-lục-3" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Phụ lục<a class="anchor" aria-label="anchor" href="#ph%E1%BB%A5-l%E1%BB%A5c-3"><i class="fas fa-link"></i></a>
+</h2>
+<div id="box-cox-transformation" class="section level3" number="5.4.1">
+<h3>
+<span class="header-section-number">5.4.1</span> Box-Cox transformation<a class="anchor" aria-label="anchor" href="#box-cox-transformation"><i class="fas fa-link"></i></a>
+</h3>
+<p>Biến đổi Box-Cox là một phương pháp biến đổi để đưa một véc-tơ có phân phối khác với phân phối chuẩn thành một véc-tơ có phân phối gần với phân phối chuẩn. Phép biến đổi Box-Cox chỉ có duy nhất một tham số <span class="math inline">\(\lambda\)</span>.</p>
+<p><span class="math display">\[\begin{align}
+
+\end{align}\]</span></p>
+</div>
+<div id="kolmogorov-smirnov-tests" class="section level3" number="5.4.2">
+<h3>
+<span class="header-section-number">5.4.2</span> Kolmogorov-Smirnov tests<a class="anchor" aria-label="anchor" href="#kolmogorov-smirnov-tests"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="pearsons-chi-squared-tests" class="section level3" number="5.4.3">
+<h3>
+<span class="header-section-number">5.4.3</span> Pearson’s Chi-squared tests<a class="anchor" aria-label="anchor" href="#pearsons-chi-squared-tests"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+</div>
+<div id="bài-tập-1" class="section level2" number="5.5">
+<h2>
+<span class="header-section-number">5.5</span> Bài tập<a class="anchor" aria-label="anchor" href="#b%C3%A0i-t%E1%BA%ADp-1"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r.html"><span class="header-section-number">4</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></div>
+<div class="next"><a href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">6</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">5</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="nav-link" href="#ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u-l%C3%A0-g%C3%AC"><span class="header-section-number">5.1</span> Tiền xử lý dữ liệu là gì?</a></li>
+<li>
+<a class="nav-link" href="#%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-l%E1%BA%A1i-c%C3%A1c-c%E1%BB%99t-d%E1%BB%AF-li%E1%BB%87u-s%E1%BB%AD-d%E1%BB%A5ng-th%C6%B0-vi%E1%BB%87n-readr"><span class="header-section-number">5.2</span> Định dạng lại các cột dữ liệu sử dụng thư viện \(readr\)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#quy-t%E1%BA%AFc-%C4%91%E1%BB%8Bnh-%C4%91%E1%BA%A1ng-c%E1%BB%99t-c%E1%BB%A7a-readr"><span class="header-section-number">5.2.1</span> Quy tắc định đạng cột của \(readr\)</a></li>
+<li><a class="nav-link" href="#%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-c%E1%BB%99t-b%E1%BA%B1ng-c%C3%A1c-h%C3%A0m-parse_"><span class="header-section-number">5.2.2</span> Định dạng cột bằng các hàm parse_*()</a></li>
+<li><a class="nav-link" href="#%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-c%E1%BB%99t-ki%E1%BB%83u-chu%E1%BB%97i-k%C3%BD-t%E1%BB%B1"><span class="header-section-number">5.2.3</span> Định dạng cột kiểu chuỗi ký tự</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#gi%C3%A1-tr%E1%BB%8B-ngo%E1%BA%A1i-lai-v%C3%A0-gi%C3%A1-tr%E1%BB%8B-kh%C3%B4ng-quan-s%C3%A1t-%C4%91%C6%B0%E1%BB%A3c."><span class="header-section-number">5.3</span> Giá trị ngoại lai và giá trị không quan sát được.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#gi%C3%A1-tr%E1%BB%8B-ngo%E1%BA%A1i-lai."><span class="header-section-number">5.3.1</span> Giá trị ngoại lai.</a></li>
+<li><a class="nav-link" href="#c%C3%A1ch-ph%C3%A1t-hi%E1%BB%87n-gi%C3%A1-tr%E1%BB%8B-ngo%E1%BA%A1i-lai"><span class="header-section-number">5.3.2</span> Cách phát hiện giá trị ngoại lai</a></li>
+<li><a class="nav-link" href="#x%E1%BB%AD-l%C3%BD-gi%C3%A1-tr%E1%BB%8B-ngo%E1%BA%A1i-lai."><span class="header-section-number">5.3.3</span> Xử lý giá trị ngoại lai.</a></li>
+<li><a class="nav-link" href="#x%E1%BB%AD-l%C3%BD-gi%C3%A1-tr%E1%BB%8B-kh%C3%B4ng-quan-s%C3%A1t-%C4%91%C6%B0%E1%BB%A3c."><span class="header-section-number">5.3.4</span> Xử lý giá trị không quan sát được.</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#ph%E1%BB%A5-l%E1%BB%A5c-3"><span class="header-section-number">5.4</span> Phụ lục</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#box-cox-transformation"><span class="header-section-number">5.4.1</span> Box-Cox transformation</a></li>
+<li><a class="nav-link" href="#kolmogorov-smirnov-tests"><span class="header-section-number">5.4.2</span> Kolmogorov-Smirnov tests</a></li>
+<li><a class="nav-link" href="#pearsons-chi-squared-tests"><span class="header-section-number">5.4.3</span> Pearson’s Chi-squared tests</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#b%C3%A0i-t%E1%BA%ADp-1"><span class="header-section-number">5.5</span> Bài tập</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/dgrtwo/tidy-text-mining/blob/master/08-phan-tich-du-lieu-bang-R.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/dgrtwo/tidy-text-mining/edit/master/08-phan-tich-du-lieu-bang-R.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong></strong>" was written by . </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
