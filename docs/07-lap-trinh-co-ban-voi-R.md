@@ -2,7 +2,6 @@
 output:
   pdf_document: default
   html_document: default
-  
 header-includes:
 - \usepackage{tikz}
 - \usepackage{pgfplots}
