@@ -2,7 +2,6 @@
 output:
   pdf_document: default
   html_document: default
-  
 header-includes:
 - \usepackage{tikz}
 - \usepackage{pgfplots}
@@ -50,21 +49,6 @@ library(forcats)
 library(pryr)
 library(ggrepel)
 ```
-
-
-đây là ký hiệu `r knitr::asis_output("\U9415")`
-
-đây là ký hiệu `r knitr::asis_output("\U65330")`
-
-đây là ký hiệu `r knitr::asis_output("\U1F12C")`
-
-đây là ký hiệu `r knitr::asis_output("\U1F161")`
-
-đây là ký hiệu `r knitr::asis_output("\U1F181")`
-
-đây là ký hiệu `r knitr::asis_output("\U24C7")`
-
-đây là ký hiệu `r knitr::asis_output("\U211D")`
 
 Mục đích của cuốn sách này không phải để bạn đọc trở thành một lập trình viên chuyên nghiệp. Cuốn sách được viết nhằm giúp bạn đọc có thể sử dụng R và thực hiện được mục đích của mình một cách nhanh nhất. Theo quan điểm của chúng tôi, R không phải là một ngôn ngữ thích hợp để bắt đầu cho học lập trình. Muốn trở thành một lập trình viên giỏi, bạn đọc nên bắt đầu với các ngôn ngữ lập trình cơ bản như Pascal, C++, Java, hay cũng có thể bắt đầu với ngôn ngữ Python. 
 

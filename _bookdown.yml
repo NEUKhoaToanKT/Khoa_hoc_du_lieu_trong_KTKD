@@ -5,10 +5,12 @@ language:
     chapter_name: "Chương "
 delete_merged_file: true
 new_session: yes
-#rmd_files: ["01-intro.Rmd","07-lap-trinh-co-ban-voi-R.Rmd", "08-phan-tich-du-lieu-bang-R.Rmd", "08-1-truc-quan-hoa-du-lieu.rmd", "13-hoc-may-khong-co-giam-sat.Rmd",
-#"09-mo-hinh-tuyen-tinh.Rmd", "10-mo-hinh-tuyen-tinh-tong-quat.Rmd", "11-mo-hinh-cay-quyet-dinh.Rmd", "12-mo-hinh-mang-noron.Rmd"]
-rmd_files: ["07-lap-trinh-co-ban-voi-R.Rmd","08-phan-tich-du-lieu-bang-R.Rmd", "08-1-truc-quan-hoa-du-lieu.rmd","09-mo-hinh-tuyen-tinh.Rmd", "10-mo-hinh-tuyen-tinh-tong-quat.Rmd", "11-mo-hinh-cay-quyet-dinh.Rmd", "12-mo-hinh-mang-noron.Rmd"]
-
-#rmd_files: ["01-intro.Rmd","07-lap-trinh-co-ban-voi-R.Rmd", "08-phan-tich-du-lieu-bang-R.Rmd", "08-1-truc-quan-hoa-du-lieu.rmd", "10-mo-hinh-tuyen-tinh-tong-quat.Rmd",
-#"10-mo-hinh-tuyen-tinh-tong-quat-mo-rong.Rmd","10-Ung-dung-GLM.rmd","11-mo-hinh-cay-quyet-dinh.Rmd", "12-mo-hinh-mang-noron.Rmd"]
-#rmd_files: ["11-mo-hinh-cay-quyet-dinh.Rmd", "12-mo-hinh-mang-noron.Rmd"]
+rmd_files:
+  ["index.Rmd",
+   "07-lap-trinh-co-ban-voi-R.Rmd",
+   "08-phan-tich-du-lieu-bang-R.Rmd",
+   "08-1-truc-quan-hoa-du-lieu.rmd",
+   "09-mo-hinh-tuyen-tinh.Rmd",
+   "10-mo-hinh-tuyen-tinh-tong-quat.Rmd",
+   "11-mo-hinh-cay-quyet-dinh.Rmd",
+   "12-mo-hinh-mang-noron.Rmd"]

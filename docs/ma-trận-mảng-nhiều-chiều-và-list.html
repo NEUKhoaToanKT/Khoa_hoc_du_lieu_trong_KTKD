@@ -12,8 +12,7 @@
 <meta name="twitter:title" content="Chương 2 Ma trận, mảng nhiều chiều và \(list\) | index">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Roboto-0.4.8/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
 <script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.8/girafe.js"></script><script src="libs/plotly-binding-4.10.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
@@ -22,6 +21,7 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
+<link rel="stylesheet" href="style.css">
 <meta name="description" content="Trong cuốn sách này chúng tôi cố gắng tránh nhắc đến các khái niệm toán học phức tạp bởi đối tượng chúng tôi hướng đến là những người làm việc với dữ liệu nhưng không có một nền tảng chuyên sâu về...">
 <meta property="og:description" content="Trong cuốn sách này chúng tôi cố gắng tránh nhắc đến các khái niệm toán học phức tạp bởi đối tượng chúng tôi hướng đến là những người làm việc với dữ liệu nhưng không có một nền tảng chuyên sâu về...">
 <meta name="twitter:description" content="Trong cuốn sách này chúng tôi cố gắng tránh nhắc đến các khái niệm toán học phức tạp bởi đối tượng chúng tôi hướng đến là những người làm việc với dữ liệu nhưng không có một nền tảng chuyên sâu về...">
@@ -62,7 +62,7 @@
 </ul>
 
         <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/dgrtwo/tidy-text-mining">View book source <i class="fab fa-github"></i></a></p>
+          <p><a id="book-repo" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD">View book source <i class="fab fa-github"></i></a></p>
         </div>
       </nav>
 </div>
@@ -458,7 +458,7 @@ det(M) = det(M^T)
 <div class="sourceCode" id="cb311"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">M</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,nrow <span class="op">=</span> <span class="fl">4</span>,ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/det.html">det</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/det.html">det</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] -2.59991 -2.59991</code></pre>
+<pre><code>## [1] 0.9672898 0.9672898</code></pre>
 <ul>
 <li>Định thức của tích hai ma trận bằng tích của các định thức.
 <span class="math display">\[\begin{align}
@@ -470,7 +470,7 @@ det(A \% * \% B) = det(A) \times det(B)
 <code class="sourceCode R"><span><span class="va">M</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,nrow <span class="op">=</span> <span class="fl">4</span>,ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> </span>
 <span><span class="va">M1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>,nrow <span class="op">=</span> <span class="fl">4</span>,ncol <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/det.html">det</a></span><span class="op">(</span><span class="va">M</span><span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span><span class="va">M1</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/det.html">det</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/det.html">det</a></span><span class="op">(</span><span class="va">M1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
-<pre><code>## [1] 0.4885191 0.4885191</code></pre>
+<pre><code>## [1] 0.06074419 0.06074419</code></pre>
 </div>
 <div id="ma-trận-nghịch-đảo" class="section level3" number="2.1.7">
 <h3>
@@ -498,17 +498,17 @@ M^{-1} = \cfrac{1}{det(M)} adj(M)_{ij}
 <span><span class="va">M1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/solve.html">solve</a></span><span class="op">(</span><span class="va">M</span><span class="op">)</span> <span class="co"># ma trận M1 là ma trận nghịch đảo của ma trận M</span></span>
 <span><span class="va">M1</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">M</span> <span class="co"># tích của M1 với M là ma trận đơn vị</span></span></code></pre></div>
 <pre><code>##               [,1]          [,2]          [,3]          [,4]
-## [1,]  1.000000e+00 -3.521992e-19  1.872384e-17 -4.997520e-17
-## [2,] -1.140619e-16  1.000000e+00  9.805745e-17 -1.612593e-17
-## [3,]  2.371604e-16 -1.384407e-16  1.000000e+00  1.780835e-16
-## [4,] -1.999481e-17 -6.620275e-18 -1.193702e-17  1.000000e+00</code></pre>
+## [1,]  1.000000e+00 -9.988025e-16  3.791809e-16 -3.109981e-15
+## [2,] -4.751616e-16  1.000000e+00 -2.355614e-16  7.924105e-16
+## [3,] -7.983460e-17 -5.850989e-17  1.000000e+00  1.325914e-16
+## [4,]  6.305344e-16  3.408466e-17  6.556189e-17  1.000000e+00</code></pre>
 <div class="sourceCode" id="cb317"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">M</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html">%*%</a></span> <span class="va">M1</span> <span class="co"># tích của M với M1 là ma trận đơn vị</span></span></code></pre></div>
-<pre><code>##               [,1]         [,2]          [,3]          [,4]
-## [1,]  1.000000e+00 1.241536e-17 -9.256025e-17  9.381633e-17
-## [2,] -1.131924e-17 1.000000e+00 -1.528367e-17  1.827124e-17
-## [3,]  4.388910e-17 2.417334e-17  1.000000e+00 -1.029757e-16
-## [4,]  4.178591e-17 2.649143e-18 -2.680516e-17  1.000000e+00</code></pre>
+<pre><code>##               [,1]          [,2]          [,3]          [,4]
+## [1,]  1.000000e+00  1.040279e-16  5.834535e-16  2.800059e-16
+## [2,] -6.987553e-17  1.000000e+00  1.185518e-17  6.301827e-16
+## [3,]  1.247750e-16 -2.363031e-16  1.000000e+00 -4.827934e-16
+## [4,] -4.854133e-17  7.397694e-17 -5.668526e-16  1.000000e+00</code></pre>
 <p>Các tính toán liên quan đến định thức cần nhớ</p>
 <ol style="list-style-type: decimal">
 <li><p>Định thức của ma trận sau khi nhân tất cả các phần tử với một số
@@ -1280,8 +1280,8 @@ PV(CF) = \sum\limits_{t=1}^n \ \cfrac{CF_t}{(1+i)^t}
 
       <div class="book-extra">
         <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/dgrtwo/tidy-text-mining/blob/master/07-lap-trinh-co-ban-voi-R.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/dgrtwo/tidy-text-mining/edit/master/07-lap-trinh-co-ban-voi-R.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+<li><a id="book-source" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD/blob/master/07-lap-trinh-co-ban-voi-R.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD/edit/master/07-lap-trinh-co-ban-voi-R.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
         </ul>
 </div>
     </nav>

@@ -9,12 +9,10 @@ bookdown::gitbook:
     download: ["pdf", "epub"]
 
 bookdown::bs4_book:
+  css: style.css
   theme:
-    primary: "#5b7886"
-    base_font:
-      google: Roboto
-  repo: https://github.com/dgrtwo/tidy-text-mining
-
+    primary: "#544154"
+  repo: https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD
 
 bookdown::pdf_book:
   includes:

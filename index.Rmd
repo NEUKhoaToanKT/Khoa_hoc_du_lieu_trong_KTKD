@@ -1,6 +1,6 @@
 --- 
-title: "Sách về khoa học dữ liệu"
-author: "Lã Minh Hiếu"
+title: "Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh"
+author: "Nguyễn Quang Huy"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 #documentclass: book
@@ -12,17 +12,6 @@ description: "Hello, This is the test version"
 ---
 
 # Prerequisites
-```{r}
- colorize <- function(x, color) {
- if (knitr::is_latex_output()) {
- sprintf("\\textcolor{%s}{%s}", color, x)
- } else if (knitr::is_html_output()) {
- sprintf("<span style='color: %s;'>%s</span>", 
- color,
- x)
- } else x
- }
-```
  
 This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports, e.g., a math equation $a^2 + b^2 = c^2$.
 
