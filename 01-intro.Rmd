@@ -1,25 +1,3 @@
----
-output:
-  pdf_document: default
-  html_document: default
-header-includes:
-- \usepackage{tikz}
-- \usepackage{pgfplots}
-- \usetikzlibrary{arrows,automata,positioning}
-- \usepackage[utf8]{inputenc}
-- \usepackage[utf8]{vietnam}
-- \usepackage{etoolbox}
-- \usepackage{xcolor}
-- \usepackage{hyperref}
-- \usepackage{fontawesome5}
-- \makeatletter
-- \preto{\@verbatim}{\topsep=0pt \partopsep=-0pt}
-- \makeatother
-- \DeclareMathOperator*{\argmax}{arg\,max}
-- \newcommand\tstrut{\rule{0pt}{3ex}}
-- \newcommand\bstrut{\rule[-2.5ex]{0pt}{0pt}}
-  
----
 ```{r, warning = FALSE, echo = FALSE}
 library(readxl)
 library(dplyr)

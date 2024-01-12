@@ -4,15 +4,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chương 4 Nhập dữ liệu từ các nguồn khác nhau vào R | index</title>
+<title>Chương 5 Nhập dữ liệu từ các nguồn khác nhau vào R | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+<meta name="author" content="Nguyễn Quang Huy">
+<meta name="description" content="5.1 Đối tượng dùng để lưu dữ liệu trong R Hai kiểu đối tượng thường được dùng để lưu dữ liệu trong R là \(data.frame\) và \(tibble\). Chúng ta sẽ thảo luận về \(data.frame\) trước vì đây là kiểu...">
 <meta name="generator" content="bookdown 0.37 with bs4_book()">
-<meta property="og:title" content="Chương 4 Nhập dữ liệu từ các nguồn khác nhau vào R | index">
+<meta property="og:title" content="Chương 5 Nhập dữ liệu từ các nguồn khác nhau vào R | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta property="og:type" content="book">
+<meta property="og:description" content="5.1 Đối tượng dùng để lưu dữ liệu trong R Hai kiểu đối tượng thường được dùng để lưu dữ liệu trong R là \(data.frame\) và \(tibble\). Chúng ta sẽ thảo luận về \(data.frame\) trước vì đây là kiểu...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chương 4 Nhập dữ liệu từ các nguồn khác nhau vào R | index">
+<meta name="twitter:title" content="Chương 5 Nhập dữ liệu từ các nguồn khác nhau vào R | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="twitter:description" content="5.1 Đối tượng dùng để lưu dữ liệu trong R Hai kiểu đối tượng thường được dùng để lưu dữ liệu trong R là \(data.frame\) và \(tibble\). Chúng ta sẽ thảo luận về \(data.frame\) trước vì đây là kiểu...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.8/font.css" rel="stylesheet">
+<link href="libs/Roboto_Mono-0.4.8/font.css" rel="stylesheet">
+<link href="libs/Montserrat-0.4.8/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
 <script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.8/girafe.js"></script><script src="libs/plotly-binding-4.10.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
@@ -22,9 +29,6 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="4.1 Đối tượng dùng để lưu dữ liệu trong R Hai kiểu đối tượng thường được dùng để lưu dữ liệu trong R là \(data.frame\) và \(tibble\). Chúng ta sẽ thảo luận về \(data.frame\) trước vì đây là kiểu...">
-<meta property="og:description" content="4.1 Đối tượng dùng để lưu dữ liệu trong R Hai kiểu đối tượng thường được dùng để lưu dữ liệu trong R là \(data.frame\) và \(tibble\). Chúng ta sẽ thảo luận về \(data.frame\) trước vì đây là kiểu...">
-<meta name="twitter:description" content="4.1 Đối tượng dùng để lưu dữ liệu trong R Hai kiểu đối tượng thường được dùng để lưu dữ liệu trong R là \(data.frame\) và \(tibble\). Chúng ta sẽ thảo luận về \(data.frame\) trước vì đây là kiểu...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -34,7 +38,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title=""></a>
+        <a href="index.html" title="">Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -46,19 +50,20 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ma-tr%E1%BA%ADn-m%E1%BA%A3ng-nhi%E1%BB%81u-chi%E1%BB%81u-v%C3%A0-list.html"><span class="header-section-number">2</span> Ma trận, mảng nhiều chiều và \(list\)</a></li>
-<li><a class="" href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">3</span> Phân tích dữ liệu bằng R</a></li>
-<li><a class="active" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r.html"><span class="header-section-number">4</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
-<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">5</span> Tiền xử lý dữ liệu</a></li>
-<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">6</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
-<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Trực quan hóa dữ liệu</a></li>
-<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">9</span> Mô hình hồi quy tuyến tính</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">10</span> Mô hình tuyến tính tổng quát.</a></li>
-<li><a class="" href="reference.html"><span class="header-section-number">11</span> REFERENCE</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y.html"><span class="header-section-number">12</span> Mô hình dạng cây</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">13</span> Mô hình mạng neural network</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Lời nói đầu</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ma-tr%E1%BA%ADn-m%E1%BA%A3ng-nhi%E1%BB%81u-chi%E1%BB%81u-v%C3%A0-list.html"><span class="header-section-number">3</span> Ma trận, mảng nhiều chiều và \(list\)</a></li>
+<li><a class="" href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">4</span> Phân tích dữ liệu bằng R</a></li>
+<li><a class="active" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r.html"><span class="header-section-number">5</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">7</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">10</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">11</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="" href="reference.html"><span class="header-section-number">12</span> REFERENCE</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y.html"><span class="header-section-number">13</span> Mô hình dạng cây</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">14</span> Mô hình mạng neural network</a></li>
 </ul>
 
         <div class="book-extra">
@@ -66,18 +71,18 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r" class="section level1" number="5">
 <h1>
-<span class="header-section-number">Chương 4</span> Nhập dữ liệu từ các nguồn khác nhau vào R<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Chương 5</span> Nhập dữ liệu từ các nguồn khác nhau vào R<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r"><i class="fas fa-link"></i></a>
 </h1>
-<div id="đối-tượng-dùng-để-lưu-dữ-liệu-trong-r" class="section level2" number="4.1">
+<div id="đối-tượng-dùng-để-lưu-dữ-liệu-trong-r" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">4.1</span> Đối tượng dùng để lưu dữ liệu trong R<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%91i-t%C6%B0%E1%BB%A3ng-d%C3%B9ng-%C4%91%E1%BB%83-l%C6%B0u-d%E1%BB%AF-li%E1%BB%87u-trong-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Đối tượng dùng để lưu dữ liệu trong R<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%91i-t%C6%B0%E1%BB%A3ng-d%C3%B9ng-%C4%91%E1%BB%83-l%C6%B0u-d%E1%BB%AF-li%E1%BB%87u-trong-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>Hai kiểu đối tượng thường được dùng để lưu dữ liệu trong R là <span class="math inline">\(data.frame\)</span> và <span class="math inline">\(tibble\)</span>. Chúng ta sẽ thảo luận về <span class="math inline">\(data.frame\)</span> trước vì đây là kiểu lưu dữ liệu phổ biến. Kiểu <span class="math inline">\(tibble\)</span> với một vài ưu điểm hơn <span class="math inline">\(data.frame\)</span> sẽ được thảo luận trong phần tiếp theo.</p>
-<div id="data.frame-là-gì" class="section level3" number="4.1.1">
+<div id="data.frame-là-gì" class="section level3" number="5.1.1">
 <h3>
-<span class="header-section-number">4.1.1</span> <span class="math inline">\(data.frame\)</span> là gì?<a class="anchor" aria-label="anchor" href="#data.frame-l%C3%A0-g%C3%AC"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.1</span> <span class="math inline">\(data.frame\)</span> là gì?<a class="anchor" aria-label="anchor" href="#data.frame-l%C3%A0-g%C3%AC"><i class="fas fa-link"></i></a>
 </h3>
 <p><span class="math inline">\(data.frame\)</span> là đối tượng phổ biến nhất để lưu trữ dữ liệu trên cửa sổ làm việc của R. Hiểu một cách đơn giản, một <span class="math inline">\(data.frame\)</span> là một bảng excel mà mỗi cột tương ứng với một véc-tơ và mỗi dòng tương ứng với một quan sát. Ngay khi cài đặt R, đã có nhiều đối tượng là dữ liệu kiểu <span class="math inline">\(data.frame\)</span> đã được lưu trữ trong R và sẵn sàng sử dụng mà không cần gọi thư viện bổ sung. Để biết trên cửa sổ Rstudio đang sử dụng có những dữ liệu nào, bạn đọc sử dụng câu lệnh <code><a href="https://rdrr.io/r/utils/data.html">data()</a></code></p>
 <div class="sourceCode" id="cb423"><pre class="downlit sourceCode r">
@@ -168,9 +173,9 @@
 <span>      result <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>,<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="co"># Cột result</span></span></code></pre></div>
 <p>Đối tượng kiểu <span class="math inline">\(data.frame\)</span> có một vài nhược điểm khi sử dụng để lưu dữ liệu từ các nguồn khác nhau vào R. Do đó kiểu đối tượng mới được phát triển để khắc phục các nhược điểm này, đó là <span class="math inline">\(tibble\)</span>. Phần tiếp theo chúng ta sẽ thảo luận về đối tượng này.</p>
 </div>
-<div id="tibble-là-một-cải-tiến-của-data.frame" class="section level3" number="4.1.2">
+<div id="tibble-là-một-cải-tiến-của-data.frame" class="section level3" number="5.1.2">
 <h3>
-<span class="header-section-number">4.1.2</span> <span class="math inline">\(tibble\)</span> là một cải tiến của <span class="math inline">\(data.frame\)</span>?<a class="anchor" aria-label="anchor" href="#tibble-l%C3%A0-m%E1%BB%99t-c%E1%BA%A3i-ti%E1%BA%BFn-c%E1%BB%A7a-data.frame"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.2</span> <span class="math inline">\(tibble\)</span> là một cải tiến của <span class="math inline">\(data.frame\)</span>?<a class="anchor" aria-label="anchor" href="#tibble-l%C3%A0-m%E1%BB%99t-c%E1%BA%A3i-ti%E1%BA%BFn-c%E1%BB%A7a-data.frame"><i class="fas fa-link"></i></a>
 </h3>
 <p>Về cơ bản một <span class="math inline">\(tibble\)</span> là cũng có thể hiểu là một <span class="math inline">\(data.frame\)</span> với một vài điều chỉnh để giúp việc lấy dữ liệu từ nguồn bên ngoài vào phân tích trở nên dễ dàng hơn. Ở mức độ phân tích dữ liệu thông thường, sự khác khác nhau giữa <span class="math inline">\(tibble\)</span> và <span class="math inline">\(data.frame\)</span> là không đáng kể. Nếu cần liệt kê ra sự khác nhau cơ bản giữu hai đối tượng này thì có thể kể đến:</p>
 <ul>
@@ -213,14 +218,14 @@
 ## 3   3   Z  2</code></pre>
 <p>Bạn đọc có thể thấy rằng dữ liệu có tên <span class="math inline">\(df\)</span> nếu được lưu dưới dạng <span class="math inline">\(data.frame\)</span> thì tên các cột đã được tự động thay đổi cho thích hợp với tên biến. Những điểm khác nhau giữa <span class="math inline">\(tibble\)</span> và <span class="math inline">\(data.frame\)</span> sẽ được tiếp tục thảo luận ở các phần tiếp theo khi chúng tôi giới thiệu về các hàm dùng để nhập dữ liệu vào R.</p>
 </div>
-<div id="nhập-dữ-liệu-bằng-hàm-sẵn-có." class="section level3" number="4.1.3">
+<div id="nhập-dữ-liệu-bằng-hàm-sẵn-có." class="section level3" number="5.1.3">
 <h3>
-<span class="header-section-number">4.1.3</span> Nhập dữ liệu bằng hàm sẵn có.<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-s%E1%BA%B5n-c%C3%B3."><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.3</span> Nhập dữ liệu bằng hàm sẵn có.<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-s%E1%BA%B5n-c%C3%B3."><i class="fas fa-link"></i></a>
 </h3>
 <p>Danh sách các hàm sẵn có trong R và kiểu dữ liệu tương ứng có thể nhập được liệt kê trong các bảng sau:</p>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-14">Table 1.2: </span>Danh sách hàm có sẵn để lấy dữ liệu từ nguồn bên ngoài
+<span id="tab:unnamed-chunk-14">Table 2.3: </span>Danh sách hàm có sẵn để lấy dữ liệu từ nguồn bên ngoài
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -289,9 +294,9 @@ Dữ liệu được lưu dưới dạng .rds
 ## 1  1  2
 ## 2  3  4</code></pre>
 </div>
-<div id="nhập-dữ-liệu-bằng-thư-viện-readr." class="section level3" number="4.1.4">
+<div id="nhập-dữ-liệu-bằng-thư-viện-readr." class="section level3" number="5.1.4">
 <h3>
-<span class="header-section-number">4.1.4</span> Nhập dữ liệu bằng thư viện <span class="math inline">\(readr\)</span>.<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-readr."><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.4</span> Nhập dữ liệu bằng thư viện <span class="math inline">\(readr\)</span>.<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-readr."><i class="fas fa-link"></i></a>
 </h3>
 <p>Các câu lệnh để đọc dữ liệu của thư viện <span class="math inline">\(readr\)</span> tương tự như các câu lệnh sẵn có, nhưng đặc biệt hiệu quả hơn về thời gian đọc dữ liệu. Hàm số dùng để đọc các file định dạng <span class="math inline">\(csv\)</span> trong thư viện <span class="math inline">\(readr\)</span> là hàm <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code>. Để so sánh thời gian đọc dữ liệu vào R của hàm <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> và hàm <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> chúng ta sẽ tạo hai file dữ liệu bao gồm test1.csv và test2.csv</p>
 <div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
@@ -306,7 +311,7 @@ Dữ liệu được lưu dưới dạng .rds
 <span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> <span class="co"># tính thời gian hàm read.csv chạy</span></span>
 <span></span>
 <span><span class="va">start</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># lưu lại thời điểm trước khi chạy read_csv</span></span>
-<span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"test1.csv"</span><span class="op">)</span> <span class="co"># dùng hàm read_csv để load dữ liệu </span></span>
+<span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu">read_csv</span><span class="op">(</span><span class="st">"test1.csv"</span><span class="op">)</span> <span class="co"># dùng hàm read_csv để load dữ liệu </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> <span class="co"># tính thời gian hàm read_csv chạy</span></span></code></pre></div>
 <p>Đối với dữ liệu <span class="math inline">\(test1.csv\)</span> thì thời gian nhập dữ liệu của <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> có nhanh hơn nhưng không có sự khác biệt đáng kể. Tuy nhiên sự khác biệt sẽ rõ ràng khi nhập dữ liệu <span class="math inline">\(test2.csv\)</span>. Bạn đọc cân nhắc khi dùng hàm <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> đọc dữ liệu thời gian nhập dữ liệu có thể lên đến hơn 20 phút.</p>
 <div class="sourceCode" id="cb449"><pre class="downlit sourceCode r">
@@ -315,12 +320,12 @@ Dữ liệu được lưu dưới dạng .rds
 <span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> <span class="co"># tính thời gian hàm read.csv chạy</span></span>
 <span></span>
 <span><span class="va">start</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># lưu lại thời điểm trước khi chạy read_csv</span></span>
-<span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"test2.csv"</span><span class="op">)</span> <span class="co"># dùng hàm read_csv để load dữ liệu </span></span>
+<span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu">read_csv</span><span class="op">(</span><span class="st">"test2.csv"</span><span class="op">)</span> <span class="co"># dùng hàm read_csv để load dữ liệu </span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> <span class="co"># tính thời gian hàm read_csv chạy</span></span></code></pre></div>
 <p>Hàm <code><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv()</a></code> sẽ mất khoảng 2 phút để đọc dữ liệu <span class="math inline">\(test2.csv\)</span>, nghĩa là thời gian tiết kiêm lên đến hơn 10 lần! Danh sách các hàm để đọc dữ liệu trong gói lệnh <span class="math inline">\(readr\)</span> như sau</p>
 <div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-19">Table 1.5: </span>Danh sách hàm đọc dữ liệu của readr
+<span id="tab:unnamed-chunk-19">Table 2.6: </span>Danh sách hàm đọc dữ liệu của readr
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -417,26 +422,26 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"x;y\n1;2\nx;y"</span><span class="op">)</span> <span class="co"># Thử hàm số khác</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"x|y\n1|2"</span><span class="op">)</span> <span class="co"># Thử hàm số khác</span></span></code></pre></div>
 </div>
-<div id="tương-tác-giữa-r-và-microsoft-excel" class="section level3" number="4.1.5">
+<div id="tương-tác-giữa-r-và-microsoft-excel" class="section level3" number="5.1.5">
 <h3>
-<span class="header-section-number">4.1.5</span> Tương tác giữa R và Microsoft Excel<a class="anchor" aria-label="anchor" href="#t%C6%B0%C6%A1ng-t%C3%A1c-gi%E1%BB%AFa-r-v%C3%A0-microsoft-excel"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.5</span> Tương tác giữa R và Microsoft Excel<a class="anchor" aria-label="anchor" href="#t%C6%B0%C6%A1ng-t%C3%A1c-gi%E1%BB%AFa-r-v%C3%A0-microsoft-excel"><i class="fas fa-link"></i></a>
 </h3>
-<div id="đọc-dữ-liệu-lưu-dưới-định-dạng-của-excel" class="section level4" number="4.1.5.1">
+<div id="đọc-dữ-liệu-lưu-dưới-định-dạng-của-excel" class="section level4" number="5.1.5.1">
 <h4>
-<span class="header-section-number">4.1.5.1</span> Đọc dữ liệu lưu dưới định dạng của Excel<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%8Dc-d%E1%BB%AF-li%E1%BB%87u-l%C6%B0u-d%C6%B0%E1%BB%9Bi-%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-c%E1%BB%A7a-excel"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.5.1</span> Đọc dữ liệu lưu dưới định dạng của Excel<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%8Dc-d%E1%BB%AF-li%E1%BB%87u-l%C6%B0u-d%C6%B0%E1%BB%9Bi-%C4%91%E1%BB%8Bnh-d%E1%BA%A1ng-c%E1%BB%A7a-excel"><i class="fas fa-link"></i></a>
 </h4>
 <p>Microsoft Excel là rất phổ biến trong môi trường làm việc công sở. Do đó, dữ liệu nhận sẽ có thể là các file định dạng (.xls, .xlsx, .xlsb, .xlsm … ). Các gói lệnh <span class="math inline">\(openxlsx\)</span> và <span class="math inline">\(readxl\)</span> thường được sử dụng để đọc dữ liệu từ các file có định dạng như vậy.</p>
 </div>
-<div id="tương-tác-với-microsoft-excel-bằng-gói-lệnh-openxlsx" class="section level4" number="4.1.5.2">
+<div id="tương-tác-với-microsoft-excel-bằng-gói-lệnh-openxlsx" class="section level4" number="5.1.5.2">
 <h4>
-<span class="header-section-number">4.1.5.2</span> Tương tác với Microsoft Excel bằng gói lệnh <span class="math inline">\(openxlsx\)</span><a class="anchor" aria-label="anchor" href="#t%C6%B0%C6%A1ng-t%C3%A1c-v%E1%BB%9Bi-microsoft-excel-b%E1%BA%B1ng-g%C3%B3i-l%E1%BB%87nh-openxlsx"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.5.2</span> Tương tác với Microsoft Excel bằng gói lệnh <span class="math inline">\(openxlsx\)</span><a class="anchor" aria-label="anchor" href="#t%C6%B0%C6%A1ng-t%C3%A1c-v%E1%BB%9Bi-microsoft-excel-b%E1%BA%B1ng-g%C3%B3i-l%E1%BB%87nh-openxlsx"><i class="fas fa-link"></i></a>
 </h4>
 <p>Ngoài việc lấy dữ liệu từ các file được lưu dưới định dạnh của Excel, bạn đọc cũng có thể sử dụng gói lệnh <span class="math inline">\(openxlsx\)</span> để làm việc với các excel workbook thay vì làm việc trực tiếp trên workbook.</p>
 </div>
 </div>
-<div id="lấy-dữ-liệu-từ-một-hệ-cơ-sở-dữ-liệu" class="section level3" number="4.1.6">
+<div id="lấy-dữ-liệu-từ-một-hệ-cơ-sở-dữ-liệu" class="section level3" number="5.1.6">
 <h3>
-<span class="header-section-number">4.1.6</span> Lấy dữ liệu từ một hệ cơ sở dữ liệu<a class="anchor" aria-label="anchor" href="#l%E1%BA%A5y-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-m%E1%BB%99t-h%E1%BB%87-c%C6%A1-s%E1%BB%9F-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1.6</span> Lấy dữ liệu từ một hệ cơ sở dữ liệu<a class="anchor" aria-label="anchor" href="#l%E1%BA%A5y-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-m%E1%BB%99t-h%E1%BB%87-c%C6%A1-s%E1%BB%9F-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
 </h3>
 <p>Có thể sử dụng R như một công cụ để kết nối và thực hiện các câu lệnh truy vấn vào các cơ sở dữ liệu. Để làm được điều này, trước tiên, bạn đọc cần phải cài đặt một Open Database Connectivity (ODBC), được gọi là kết nối cơ sở dữ liệu mở. Kết nối này giúp cho hệ điều hành máy tính tương thích với hệ quản lý cơ sở dữ liệu mà bạn sử dụng. Nhóm tác giả sử dụng hệ điều hành Windows và hệ quản trị cơ sở dữ liệu MySQL nên chúng tôi sẽ lựa chọn ODBC phù hợp. Bạn đọc tham khảo tại địa chỉ <a href="https://dev.mysql.com/downloads/connector/odbc/" class="uri">https://dev.mysql.com/downloads/connector/odbc/</a>. Tại thời điểm nhóm tác giả viết cuốn sách này ODBC cho hệ điều hành Windows đang là phiên bản 8.0</p>
 <p>Sau khi cài đặt ODBC lên hệ điều hành, bạn đọc đã có thể sử dụng R để truy cập vào một cơ sở dữ liệu và thực hiện các câu lệnh truy vấn dữ liệu trên cơ sở dữ liệu đó trên R với sự trợ giúp của thư viện <span class="math inline">\(DBI\)</span>. Sau khi cài đặt thư viện <span class="math inline">\(DBI\)</span>, bạn đọc cần tạo một kết nối giữa R và cơ sở dữ liệu bằng hàm <span class="math inline">\(dbConnect\)</span>.</p>
@@ -452,36 +457,36 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 <p>TIP: Khi làm việc với dữ liệu được trích xuất từ một hệ cơ sở dữ liệu, bạn đọc hãy cố gắng thực hiện các phép biến đổi, sắp xếp dữ liệu bằng SQL thay vì thực hiện biến đổi trên R vì các hệ quản trị cơ sở dữ liệu thực hiện các chức năng này nhanh hơn R rất nhiều.</p>
 </div>
 </div>
-<div id="bài-tập" class="section level2" number="4.2">
+<div id="bài-tập" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">4.2</span> Bài tập<a class="anchor" aria-label="anchor" href="#b%C3%A0i-t%E1%BA%ADp"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Bài tập<a class="anchor" aria-label="anchor" href="#b%C3%A0i-t%E1%BA%ADp"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="phụ-lục-2" class="section level2" number="4.3">
+<div id="phụ-lục-2" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">4.3</span> Phụ lục<a class="anchor" aria-label="anchor" href="#ph%E1%BB%A5-l%E1%BB%A5c-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Phụ lục<a class="anchor" aria-label="anchor" href="#ph%E1%BB%A5-l%E1%BB%A5c-2"><i class="fas fa-link"></i></a>
 </h2>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">3</span> Phân tích dữ liệu bằng R</a></div>
-<div class="next"><a href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">5</span> Tiền xử lý dữ liệu</a></div>
+<div class="prev"><a href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">4</span> Phân tích dữ liệu bằng R</a></div>
+<div class="next"><a href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r"><span class="header-section-number">4</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
+<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r"><span class="header-section-number">5</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
 <li>
-<a class="nav-link" href="#%C4%91%E1%BB%91i-t%C6%B0%E1%BB%A3ng-d%C3%B9ng-%C4%91%E1%BB%83-l%C6%B0u-d%E1%BB%AF-li%E1%BB%87u-trong-r"><span class="header-section-number">4.1</span> Đối tượng dùng để lưu dữ liệu trong R</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data.frame-l%C3%A0-g%C3%AC"><span class="header-section-number">4.1.1</span> \(data.frame\) là gì?</a></li>
-<li><a class="nav-link" href="#tibble-l%C3%A0-m%E1%BB%99t-c%E1%BA%A3i-ti%E1%BA%BFn-c%E1%BB%A7a-data.frame"><span class="header-section-number">4.1.2</span> \(tibble\) là một cải tiến của \(data.frame\)?</a></li>
-<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-s%E1%BA%B5n-c%C3%B3."><span class="header-section-number">4.1.3</span> Nhập dữ liệu bằng hàm sẵn có.</a></li>
-<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-readr."><span class="header-section-number">4.1.4</span> Nhập dữ liệu bằng thư viện \(readr\).</a></li>
-<li><a class="nav-link" href="#t%C6%B0%C6%A1ng-t%C3%A1c-gi%E1%BB%AFa-r-v%C3%A0-microsoft-excel"><span class="header-section-number">4.1.5</span> Tương tác giữa R và Microsoft Excel</a></li>
-<li><a class="nav-link" href="#l%E1%BA%A5y-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-m%E1%BB%99t-h%E1%BB%87-c%C6%A1-s%E1%BB%9F-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">4.1.6</span> Lấy dữ liệu từ một hệ cơ sở dữ liệu</a></li>
+<a class="nav-link" href="#%C4%91%E1%BB%91i-t%C6%B0%E1%BB%A3ng-d%C3%B9ng-%C4%91%E1%BB%83-l%C6%B0u-d%E1%BB%AF-li%E1%BB%87u-trong-r"><span class="header-section-number">5.1</span> Đối tượng dùng để lưu dữ liệu trong R</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data.frame-l%C3%A0-g%C3%AC"><span class="header-section-number">5.1.1</span> \(data.frame\) là gì?</a></li>
+<li><a class="nav-link" href="#tibble-l%C3%A0-m%E1%BB%99t-c%E1%BA%A3i-ti%E1%BA%BFn-c%E1%BB%A7a-data.frame"><span class="header-section-number">5.1.2</span> \(tibble\) là một cải tiến của \(data.frame\)?</a></li>
+<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-s%E1%BA%B5n-c%C3%B3."><span class="header-section-number">5.1.3</span> Nhập dữ liệu bằng hàm sẵn có.</a></li>
+<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-readr."><span class="header-section-number">5.1.4</span> Nhập dữ liệu bằng thư viện \(readr\).</a></li>
+<li><a class="nav-link" href="#t%C6%B0%C6%A1ng-t%C3%A1c-gi%E1%BB%AFa-r-v%C3%A0-microsoft-excel"><span class="header-section-number">5.1.5</span> Tương tác giữa R và Microsoft Excel</a></li>
+<li><a class="nav-link" href="#l%E1%BA%A5y-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-m%E1%BB%99t-h%E1%BB%87-c%C6%A1-s%E1%BB%9F-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">5.1.6</span> Lấy dữ liệu từ một hệ cơ sở dữ liệu</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#b%C3%A0i-t%E1%BA%ADp"><span class="header-section-number">4.2</span> Bài tập</a></li>
-<li><a class="nav-link" href="#ph%E1%BB%A5-l%E1%BB%A5c-2"><span class="header-section-number">4.3</span> Phụ lục</a></li>
+<li><a class="nav-link" href="#b%C3%A0i-t%E1%BA%ADp"><span class="header-section-number">5.2</span> Bài tập</a></li>
+<li><a class="nav-link" href="#ph%E1%BB%A5-l%E1%BB%A5c-2"><span class="header-section-number">5.3</span> Phụ lục</a></li>
 </ul>
 
       <div class="book-extra">
@@ -499,7 +504,7 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong></strong>" was written by . </p>
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-01-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

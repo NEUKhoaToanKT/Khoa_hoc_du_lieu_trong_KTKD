@@ -1,8 +1,34 @@
+--- 
+title: "Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh"
+author: "Nguyễn Quang Huy"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::bs4_book
+#documentclass: book
+#bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+#link-citations: yes
+#github-repo: rstudio/bookdown-demo
+description: "Hello, This is the test version"
+header-includes:
+- \usepackage{tikz}
+- \usepackage{pgfplots}
+- \usetikzlibrary{arrows,automata,positioning}
+- \usepackage[utf8]{inputenc}
+- \usepackage[utf8]{vietnam}
+- \usepackage{etoolbox}
+- \usepackage{xcolor}
+- \usepackage{hyperref}
+- \usepackage{mathtools}
+- \usepackage{fontawesome5}
+- \makeatletter
+- \preto{\@verbatim}{\topsep=0pt \partopsep=-0pt}
+- \makeatother
+- \DeclareMathOperator*{\argmax}{arg\,max}
+- \newcommand\tstrut{\rule{0pt}{3ex}}
+- \newcommand\bstrut{\rule[-2.5ex]{0pt}{0pt}}
 ---
-output:
-  pdf_document: default
-  html_document: default
----
+
 ```{r, warning = FALSE, echo = FALSE}
 library(readxl)
 library(dplyr)
@@ -15,18 +41,6 @@ library(grid)
 library(gridExtra)
 library(forcats)
 library(pryr)
-```
-
-```{r, echo = FALSE}
-colorize <- function(x, color) {
- if (knitr::is_latex_output()) {
- sprintf("\\textcolor{%s}{%s}", color, x)
- } else if (knitr::is_html_output()) {
- sprintf("<span style='color: %s;'>%s</span>", 
- color,
- x)
- } else x
-}
 ```
 
 # Mô hình dạng cây

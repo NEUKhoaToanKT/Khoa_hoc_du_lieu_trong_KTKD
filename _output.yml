@@ -11,7 +11,17 @@ bookdown::gitbook:
 bookdown::bs4_book:
   css: style.css
   theme:
-    primary: "#544154"
+    primary: "#000000"
+    base_font:
+      google:
+        family: Lato
+    heading_font:
+      google:
+        family: Montserrat
+        wght: 500
+    code_font:
+      google:
+        family: Roboto Mono
   repo: https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD
 
 bookdown::pdf_book:

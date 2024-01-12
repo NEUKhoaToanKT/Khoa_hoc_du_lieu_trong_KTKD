@@ -4,15 +4,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chương 7 Trực quan hóa dữ liệu | index</title>
+<title>Chương 8 Trực quan hóa dữ liệu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+<meta name="author" content="Nguyễn Quang Huy">
+<meta name="description" content="p&lt;-gapminder%&gt;%filter(year&lt;=2010)%&gt;% # AESTHETIC MAPPING ggplot(aes(x=fertility,y=life_expectancy,size = population, fill= continent))+ # TAO DO THI SCATTERPLOT geom_point(shape=21,alpha=0.6)+ #...">
 <meta name="generator" content="bookdown 0.37 with bs4_book()">
-<meta property="og:title" content="Chương 7 Trực quan hóa dữ liệu | index">
+<meta property="og:title" content="Chương 8 Trực quan hóa dữ liệu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta property="og:type" content="book">
+<meta property="og:description" content="p&lt;-gapminder%&gt;%filter(year&lt;=2010)%&gt;% # AESTHETIC MAPPING ggplot(aes(x=fertility,y=life_expectancy,size = population, fill= continent))+ # TAO DO THI SCATTERPLOT geom_point(shape=21,alpha=0.6)+ #...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chương 7 Trực quan hóa dữ liệu | index">
+<meta name="twitter:title" content="Chương 8 Trực quan hóa dữ liệu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="twitter:description" content="p&lt;-gapminder%&gt;%filter(year&lt;=2010)%&gt;% # AESTHETIC MAPPING ggplot(aes(x=fertility,y=life_expectancy,size = population, fill= continent))+ # TAO DO THI SCATTERPLOT geom_point(shape=21,alpha=0.6)+ #...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.8/font.css" rel="stylesheet">
+<link href="libs/Roboto_Mono-0.4.8/font.css" rel="stylesheet">
+<link href="libs/Montserrat-0.4.8/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
 <script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.8/girafe.js"></script><script src="libs/plotly-binding-4.10.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
@@ -22,9 +29,6 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="p&lt;-gapminder%&gt;%filter(year&lt;=2010)%&gt;% # AESTHETIC MAPPING ggplot(aes(x=fertility,y=life_expectancy,size = population, fill= continent))+ # TAO DO THI SCATTERPLOT geom_point(shape=21,alpha=0.6)+ #...">
-<meta property="og:description" content="p&lt;-gapminder%&gt;%filter(year&lt;=2010)%&gt;% # AESTHETIC MAPPING ggplot(aes(x=fertility,y=life_expectancy,size = population, fill= continent))+ # TAO DO THI SCATTERPLOT geom_point(shape=21,alpha=0.6)+ #...">
-<meta name="twitter:description" content="p&lt;-gapminder%&gt;%filter(year&lt;=2010)%&gt;% # AESTHETIC MAPPING ggplot(aes(x=fertility,y=life_expectancy,size = population, fill= continent))+ # TAO DO THI SCATTERPLOT geom_point(shape=21,alpha=0.6)+ #...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -34,7 +38,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title=""></a>
+        <a href="index.html" title="">Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -46,19 +50,20 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ma-tr%E1%BA%ADn-m%E1%BA%A3ng-nhi%E1%BB%81u-chi%E1%BB%81u-v%C3%A0-list.html"><span class="header-section-number">2</span> Ma trận, mảng nhiều chiều và \(list\)</a></li>
-<li><a class="" href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">3</span> Phân tích dữ liệu bằng R</a></li>
-<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r.html"><span class="header-section-number">4</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
-<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">5</span> Tiền xử lý dữ liệu</a></li>
-<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">6</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
-<li><a class="active" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Trực quan hóa dữ liệu</a></li>
-<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">9</span> Mô hình hồi quy tuyến tính</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">10</span> Mô hình tuyến tính tổng quát.</a></li>
-<li><a class="" href="reference.html"><span class="header-section-number">11</span> REFERENCE</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y.html"><span class="header-section-number">12</span> Mô hình dạng cây</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">13</span> Mô hình mạng neural network</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Lời nói đầu</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ma-tr%E1%BA%ADn-m%E1%BA%A3ng-nhi%E1%BB%81u-chi%E1%BB%81u-v%C3%A0-list.html"><span class="header-section-number">3</span> Ma trận, mảng nhiều chiều và \(list\)</a></li>
+<li><a class="" href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">4</span> Phân tích dữ liệu bằng R</a></li>
+<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r.html"><span class="header-section-number">5</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">7</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
+<li><a class="active" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">10</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">11</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="" href="reference.html"><span class="header-section-number">12</span> REFERENCE</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y.html"><span class="header-section-number">13</span> Mô hình dạng cây</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">14</span> Mô hình mạng neural network</a></li>
 </ul>
 
         <div class="book-extra">
@@ -66,35 +71,35 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="trực-quan-hóa-dữ-liệu" class="section level1" number="7">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="trực-quan-hóa-dữ-liệu" class="section level1" number="8">
 <h1>
-<span class="header-section-number">Chương 7</span> Trực quan hóa dữ liệu<a class="anchor" aria-label="anchor" href="#tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Chương 8</span> Trực quan hóa dữ liệu<a class="anchor" aria-label="anchor" href="#tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
 </h1>
 <div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p</span><span class="op">&lt;-</span><span class="va">gapminder</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span><span class="op">&lt;=</span><span class="fl">2010</span><span class="op">)</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span><span class="co"># AESTHETIC MAPPING</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">fertility</span>,y<span class="op">=</span><span class="va">life_expectancy</span>,size <span class="op">=</span> <span class="va">population</span>, fill<span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">fertility</span>,y<span class="op">=</span><span class="va">life_expectancy</span>,size <span class="op">=</span> <span class="va">population</span>, fill<span class="op">=</span> <span class="va">continent</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span><span class="co"># TAO DO THI SCATTERPLOT</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>shape<span class="op">=</span><span class="fl">21</span>,alpha<span class="op">=</span><span class="fl">0.6</span><span class="op">)</span><span class="op">+</span></span>
+<span><span class="fu">geom_point</span><span class="op">(</span>shape<span class="op">=</span><span class="fl">21</span>,alpha<span class="op">=</span><span class="fl">0.6</span><span class="op">)</span><span class="op">+</span></span>
 <span><span class="co"># THAY DOI TITLE CUA DO THI, TRUC X, TRUC Y</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Năm: {as.integer(frame_time)}'</span>,</span>
+<span><span class="fu">labs</span><span class="op">(</span>title <span class="op">=</span> <span class="st">'Năm: {as.integer(frame_time)}'</span>,</span>
 <span>y <span class="op">=</span> <span class="st">"Tuổi thọ trung bình"</span>,</span>
 <span>x <span class="op">=</span> <span class="st">"Tỷ lệ sinh trên mỗi phụ nữ"</span><span class="op">)</span><span class="op">+</span></span>
 <span><span class="co">#GIOI HAN LAI GIA TRI TREN X,Y</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">xlim</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">90</span><span class="op">)</span><span class="op">+</span></span>
+<span><span class="fu">xlim</span><span class="op">(</span><span class="fl">0</span>,<span class="fl">10</span><span class="op">)</span><span class="op">+</span><span class="fu">ylim</span><span class="op">(</span><span class="fl">20</span>,<span class="fl">90</span><span class="op">)</span><span class="op">+</span></span>
 <span><span class="co"># SCALE LAI SIZE (POPULATION)</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_size.html">scale_size</a></span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">*</span><span class="fl">2</span>, <span class="fl">20</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu">scale_size</span><span class="op">(</span>range <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">*</span><span class="fl">2</span>, <span class="fl">20</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span><span class="co"># SCALE LAI MAU SAC THE0 DAI MAU "SET1" CUA BREWER</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_color_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Set1"</span><span class="op">)</span><span class="op">+</span></span>
+<span><span class="fu">scale_color_brewer</span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"Set1"</span><span class="op">)</span><span class="op">+</span></span>
 <span><span class="co"># LAM TITLE THAY DOI THEO NAM</span></span>
 <span><span class="fu">transition_time</span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">+</span></span>
 <span><span class="co">#SIZE &amp; FONT CHU</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>,</span>
-<span>plot.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span>axis.title.x <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span>axis.title.y <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span>legend.text <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">*</span><span class="fl">2</span>,margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span><span class="op">(</span>r <span class="op">=</span> <span class="fl">30</span><span class="op">*</span><span class="fl">2</span>, unit <span class="op">=</span> <span class="st">"pt"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>legend.title <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span><span class="fu">theme</span><span class="op">(</span>,</span>
+<span>plot.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>axis.title.x <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>axis.title.y <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,</span>
+<span>legend.text <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">*</span><span class="fl">2</span>,margin <span class="op">=</span> <span class="fu">margin</span><span class="op">(</span>r <span class="op">=</span> <span class="fl">30</span><span class="op">*</span><span class="fl">2</span>, unit <span class="op">=</span> <span class="st">"pt"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>legend.title <span class="op">=</span> <span class="fu">element_text</span><span class="op">(</span>size <span class="op">=</span> <span class="fl">20</span><span class="op">*</span><span class="fl">2</span><span class="op">)</span>,</span>
 <span><span class="co">#    legend.text=element_text(size=20*2),</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#legend.key.size = element_rect(size = rel(1.5)),</span></span>
@@ -151,11 +156,11 @@
 ##     layout</code></pre>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">6</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></div>
-<div class="next"><a href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></div>
+<div class="prev"><a href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">7</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></div>
+<div class="next"><a href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">7</span> Trực quan hóa dữ liệu</a></li></ul>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li></ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
@@ -172,7 +177,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong></strong>" was written by . </p>
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-01-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,15 +4,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chương 12 Mô hình dạng cây | index</title>
+<title>Chương 13 Mô hình dạng cây | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+<meta name="author" content="Nguyễn Quang Huy">
+<meta name="description" content="13.1 Cây quyết định và bài toán hồi quy   13.2 Cây quyết định trong bài toán phân loại   13.3 Các kỹ thuật kết hợp nhiều cây quyết định   13.4 Thực hành:  13.4.1 So sánh random forest, boosting,...">
 <meta name="generator" content="bookdown 0.37 with bs4_book()">
-<meta property="og:title" content="Chương 12 Mô hình dạng cây | index">
+<meta property="og:title" content="Chương 13 Mô hình dạng cây | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta property="og:type" content="book">
+<meta property="og:description" content="13.1 Cây quyết định và bài toán hồi quy   13.2 Cây quyết định trong bài toán phân loại   13.3 Các kỹ thuật kết hợp nhiều cây quyết định   13.4 Thực hành:  13.4.1 So sánh random forest, boosting,...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chương 12 Mô hình dạng cây | index">
+<meta name="twitter:title" content="Chương 13 Mô hình dạng cây | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="twitter:description" content="13.1 Cây quyết định và bài toán hồi quy   13.2 Cây quyết định trong bài toán phân loại   13.3 Các kỹ thuật kết hợp nhiều cây quyết định   13.4 Thực hành:  13.4.1 So sánh random forest, boosting,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.8/font.css" rel="stylesheet">
+<link href="libs/Roboto_Mono-0.4.8/font.css" rel="stylesheet">
+<link href="libs/Montserrat-0.4.8/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
 <script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.8/girafe.js"></script><script src="libs/plotly-binding-4.10.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
@@ -22,9 +29,6 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="12.1 Cây quyết định và bài toán hồi quy   12.2 Cây quyết định trong bài toán phân loại   12.3 Các kỹ thuật kết hợp nhiều cây quyết định   12.4 Thực hành:  12.4.1 So sánh random forest, boosting,...">
-<meta property="og:description" content="12.1 Cây quyết định và bài toán hồi quy   12.2 Cây quyết định trong bài toán phân loại   12.3 Các kỹ thuật kết hợp nhiều cây quyết định   12.4 Thực hành:  12.4.1 So sánh random forest, boosting,...">
-<meta name="twitter:description" content="12.1 Cây quyết định và bài toán hồi quy   12.2 Cây quyết định trong bài toán phân loại   12.3 Các kỹ thuật kết hợp nhiều cây quyết định   12.4 Thực hành:  12.4.1 So sánh random forest, boosting,...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -34,7 +38,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title=""></a>
+        <a href="index.html" title="">Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -46,19 +50,20 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ma-tr%E1%BA%ADn-m%E1%BA%A3ng-nhi%E1%BB%81u-chi%E1%BB%81u-v%C3%A0-list.html"><span class="header-section-number">2</span> Ma trận, mảng nhiều chiều và \(list\)</a></li>
-<li><a class="" href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">3</span> Phân tích dữ liệu bằng R</a></li>
-<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r.html"><span class="header-section-number">4</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
-<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">5</span> Tiền xử lý dữ liệu</a></li>
-<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">6</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
-<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Trực quan hóa dữ liệu</a></li>
-<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">9</span> Mô hình hồi quy tuyến tính</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">10</span> Mô hình tuyến tính tổng quát.</a></li>
-<li><a class="" href="reference.html"><span class="header-section-number">11</span> REFERENCE</a></li>
-<li><a class="active" href="m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y.html"><span class="header-section-number">12</span> Mô hình dạng cây</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">13</span> Mô hình mạng neural network</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Lời nói đầu</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ma-tr%E1%BA%ADn-m%E1%BA%A3ng-nhi%E1%BB%81u-chi%E1%BB%81u-v%C3%A0-list.html"><span class="header-section-number">3</span> Ma trận, mảng nhiều chiều và \(list\)</a></li>
+<li><a class="" href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">4</span> Phân tích dữ liệu bằng R</a></li>
+<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r.html"><span class="header-section-number">5</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">7</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">10</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">11</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="" href="reference.html"><span class="header-section-number">12</span> REFERENCE</a></li>
+<li><a class="active" href="m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y.html"><span class="header-section-number">13</span> Mô hình dạng cây</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">14</span> Mô hình mạng neural network</a></li>
 </ul>
 
         <div class="book-extra">
@@ -66,42 +71,42 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mô-hình-dạng-cây" class="section level1" number="12">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mô-hình-dạng-cây" class="section level1" number="13">
 <h1>
-<span class="header-section-number">Chương 12</span> Mô hình dạng cây<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Chương 13</span> Mô hình dạng cây<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y"><i class="fas fa-link"></i></a>
 </h1>
-<div id="cây-quyết-định-và-bài-toán-hồi-quy" class="section level2" number="12.1">
+<div id="cây-quyết-định-và-bài-toán-hồi-quy" class="section level2" number="13.1">
 <h2>
-<span class="header-section-number">12.1</span> Cây quyết định và bài toán hồi quy<a class="anchor" aria-label="anchor" href="#c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh-v%C3%A0-b%C3%A0i-to%C3%A1n-h%E1%BB%93i-quy"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1</span> Cây quyết định và bài toán hồi quy<a class="anchor" aria-label="anchor" href="#c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh-v%C3%A0-b%C3%A0i-to%C3%A1n-h%E1%BB%93i-quy"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="cây-quyết-định-trong-bài-toán-phân-loại" class="section level2" number="12.2">
+<div id="cây-quyết-định-trong-bài-toán-phân-loại" class="section level2" number="13.2">
 <h2>
-<span class="header-section-number">12.2</span> Cây quyết định trong bài toán phân loại<a class="anchor" aria-label="anchor" href="#c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh-trong-b%C3%A0i-to%C3%A1n-ph%C3%A2n-lo%E1%BA%A1i"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2</span> Cây quyết định trong bài toán phân loại<a class="anchor" aria-label="anchor" href="#c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh-trong-b%C3%A0i-to%C3%A1n-ph%C3%A2n-lo%E1%BA%A1i"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="các-kỹ-thuật-kết-hợp-nhiều-cây-quyết-định" class="section level2" number="12.3">
+<div id="các-kỹ-thuật-kết-hợp-nhiều-cây-quyết-định" class="section level2" number="13.3">
 <h2>
-<span class="header-section-number">12.3</span> Các kỹ thuật kết hợp nhiều cây quyết định<a class="anchor" aria-label="anchor" href="#c%C3%A1c-k%E1%BB%B9-thu%E1%BA%ADt-k%E1%BA%BFt-h%E1%BB%A3p-nhi%E1%BB%81u-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.3</span> Các kỹ thuật kết hợp nhiều cây quyết định<a class="anchor" aria-label="anchor" href="#c%C3%A1c-k%E1%BB%B9-thu%E1%BA%ADt-k%E1%BA%BFt-h%E1%BB%A3p-nhi%E1%BB%81u-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="thực-hành" class="section level2" number="12.4">
+<div id="thực-hành" class="section level2" number="13.4">
 <h2>
-<span class="header-section-number">12.4</span> Thực hành:<a class="anchor" aria-label="anchor" href="#th%E1%BB%B1c-h%C3%A0nh"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4</span> Thực hành:<a class="anchor" aria-label="anchor" href="#th%E1%BB%B1c-h%C3%A0nh"><i class="fas fa-link"></i></a>
 </h2>
-<div id="so-sánh-random-forest-boosting-và-mô-hình-tuyến-tính-trên-dữ-liệu-sales." class="section level3" number="12.4.1">
+<div id="so-sánh-random-forest-boosting-và-mô-hình-tuyến-tính-trên-dữ-liệu-sales." class="section level3" number="13.4.1">
 <h3>
-<span class="header-section-number">12.4.1</span> So sánh random forest, boosting, và mô hình tuyến tính trên dữ liệu Sales.<a class="anchor" aria-label="anchor" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-sales."><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4.1</span> So sánh random forest, boosting, và mô hình tuyến tính trên dữ liệu Sales.<a class="anchor" aria-label="anchor" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-sales."><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="so-sánh-random-forest-boosting-và-logistic-regression-trên-dữ-liệu-tín-dụng-khách-hàng." class="section level3" number="12.4.2">
+<div id="so-sánh-random-forest-boosting-và-logistic-regression-trên-dữ-liệu-tín-dụng-khách-hàng." class="section level3" number="13.4.2">
 <h3>
-<span class="header-section-number">12.4.2</span> So sánh random forest, boosting, và logistic regression trên dữ liệu tín dụng khách hàng.<a class="anchor" aria-label="anchor" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-logistic-regression-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-t%C3%ADn-d%E1%BB%A5ng-kh%C3%A1ch-h%C3%A0ng."><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4.2</span> So sánh random forest, boosting, và logistic regression trên dữ liệu tín dụng khách hàng.<a class="anchor" aria-label="anchor" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-logistic-regression-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-t%C3%ADn-d%E1%BB%A5ng-kh%C3%A1ch-h%C3%A0ng."><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="so-sánh-random-forest-boosting-và-poisson-regression-trên-dữ-liệu-bồi-thường-bảo-hiểm." class="section level3" number="12.4.3">
+<div id="so-sánh-random-forest-boosting-và-poisson-regression-trên-dữ-liệu-bồi-thường-bảo-hiểm." class="section level3" number="13.4.3">
 <h3>
-<span class="header-section-number">12.4.3</span> So sánh random forest, boosting, và Poisson regression trên dữ liệu bồi thường bảo hiểm.<a class="anchor" aria-label="anchor" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-poisson-regression-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-b%E1%BB%93i-th%C6%B0%E1%BB%9Dng-b%E1%BA%A3o-hi%E1%BB%83m."><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4.3</span> So sánh random forest, boosting, và Poisson regression trên dữ liệu bồi thường bảo hiểm.<a class="anchor" aria-label="anchor" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-poisson-regression-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-b%E1%BB%93i-th%C6%B0%E1%BB%9Dng-b%E1%BA%A3o-hi%E1%BB%83m."><i class="fas fa-link"></i></a>
 </h3>
 <!-- # REFERENCE -->
 <!-- ### Source from thesis -->
@@ -142,20 +147,20 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="reference.html"><span class="header-section-number">11</span> REFERENCE</a></div>
-<div class="next"><a href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">13</span> Mô hình mạng neural network</a></div>
+<div class="prev"><a href="reference.html"><span class="header-section-number">12</span> REFERENCE</a></div>
+<div class="next"><a href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">14</span> Mô hình mạng neural network</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y"><span class="header-section-number">12</span> Mô hình dạng cây</a></li>
-<li><a class="nav-link" href="#c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh-v%C3%A0-b%C3%A0i-to%C3%A1n-h%E1%BB%93i-quy"><span class="header-section-number">12.1</span> Cây quyết định và bài toán hồi quy</a></li>
-<li><a class="nav-link" href="#c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh-trong-b%C3%A0i-to%C3%A1n-ph%C3%A2n-lo%E1%BA%A1i"><span class="header-section-number">12.2</span> Cây quyết định trong bài toán phân loại</a></li>
-<li><a class="nav-link" href="#c%C3%A1c-k%E1%BB%B9-thu%E1%BA%ADt-k%E1%BA%BFt-h%E1%BB%A3p-nhi%E1%BB%81u-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh"><span class="header-section-number">12.3</span> Các kỹ thuật kết hợp nhiều cây quyết định</a></li>
+<li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y"><span class="header-section-number">13</span> Mô hình dạng cây</a></li>
+<li><a class="nav-link" href="#c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh-v%C3%A0-b%C3%A0i-to%C3%A1n-h%E1%BB%93i-quy"><span class="header-section-number">13.1</span> Cây quyết định và bài toán hồi quy</a></li>
+<li><a class="nav-link" href="#c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh-trong-b%C3%A0i-to%C3%A1n-ph%C3%A2n-lo%E1%BA%A1i"><span class="header-section-number">13.2</span> Cây quyết định trong bài toán phân loại</a></li>
+<li><a class="nav-link" href="#c%C3%A1c-k%E1%BB%B9-thu%E1%BA%ADt-k%E1%BA%BFt-h%E1%BB%A3p-nhi%E1%BB%81u-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh"><span class="header-section-number">13.3</span> Các kỹ thuật kết hợp nhiều cây quyết định</a></li>
 <li>
-<a class="nav-link" href="#th%E1%BB%B1c-h%C3%A0nh"><span class="header-section-number">12.4</span> Thực hành:</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-sales."><span class="header-section-number">12.4.1</span> So sánh random forest, boosting, và mô hình tuyến tính trên dữ liệu Sales.</a></li>
-<li><a class="nav-link" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-logistic-regression-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-t%C3%ADn-d%E1%BB%A5ng-kh%C3%A1ch-h%C3%A0ng."><span class="header-section-number">12.4.2</span> So sánh random forest, boosting, và logistic regression trên dữ liệu tín dụng khách hàng.</a></li>
-<li><a class="nav-link" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-poisson-regression-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-b%E1%BB%93i-th%C6%B0%E1%BB%9Dng-b%E1%BA%A3o-hi%E1%BB%83m."><span class="header-section-number">12.4.3</span> So sánh random forest, boosting, và Poisson regression trên dữ liệu bồi thường bảo hiểm.</a></li>
+<a class="nav-link" href="#th%E1%BB%B1c-h%C3%A0nh"><span class="header-section-number">13.4</span> Thực hành:</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-sales."><span class="header-section-number">13.4.1</span> So sánh random forest, boosting, và mô hình tuyến tính trên dữ liệu Sales.</a></li>
+<li><a class="nav-link" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-logistic-regression-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-t%C3%ADn-d%E1%BB%A5ng-kh%C3%A1ch-h%C3%A0ng."><span class="header-section-number">13.4.2</span> So sánh random forest, boosting, và logistic regression trên dữ liệu tín dụng khách hàng.</a></li>
+<li><a class="nav-link" href="#so-s%C3%A1nh-random-forest-boosting-v%C3%A0-poisson-regression-tr%C3%AAn-d%E1%BB%AF-li%E1%BB%87u-b%E1%BB%93i-th%C6%B0%E1%BB%9Dng-b%E1%BA%A3o-hi%E1%BB%83m."><span class="header-section-number">13.4.3</span> So sánh random forest, boosting, và Poisson regression trên dữ liệu bồi thường bảo hiểm.</a></li>
 </ul>
 </li>
 </ul>
@@ -175,7 +180,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong></strong>" was written by . </p>
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-01-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

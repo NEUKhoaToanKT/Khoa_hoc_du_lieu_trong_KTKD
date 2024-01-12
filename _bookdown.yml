@@ -1,4 +1,4 @@
-book_filename: "index"
+book_filename: "Sách về Khoa Học Dữ Liệu"
 output_dir: "docs"
 language:
   ui:
@@ -6,11 +6,13 @@ language:
 delete_merged_file: true
 new_session: yes
 rmd_files:
-  ["index.Rmd",
+  [
+   "index.Rmd",
    "07-lap-trinh-co-ban-voi-R.Rmd",
    "08-phan-tich-du-lieu-bang-R.Rmd",
    "08-1-truc-quan-hoa-du-lieu.rmd",
    "09-mo-hinh-tuyen-tinh.Rmd",
    "10-mo-hinh-tuyen-tinh-tong-quat.Rmd",
    "11-mo-hinh-cay-quyet-dinh.Rmd",
-   "12-mo-hinh-mang-noron.Rmd"]
+   "12-mo-hinh-mang-noron.Rmd"
+  ]

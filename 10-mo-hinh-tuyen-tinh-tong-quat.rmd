@@ -1,9 +1,34 @@
+--- 
+title: "Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh"
+author: "Nguyễn Quang Huy"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::bs4_book
+#documentclass: book
+#bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+#link-citations: yes
+#github-repo: rstudio/bookdown-demo
+description: "Hello, This is the test version"
+header-includes:
+- \usepackage{tikz}
+- \usepackage{pgfplots}
+- \usetikzlibrary{arrows,automata,positioning}
+- \usepackage[utf8]{inputenc}
+- \usepackage[utf8]{vietnam}
+- \usepackage{etoolbox}
+- \usepackage{xcolor}
+- \usepackage{hyperref}
+- \usepackage{mathtools}
+- \usepackage{fontawesome5}
+- \makeatletter
+- \preto{\@verbatim}{\topsep=0pt \partopsep=-0pt}
+- \makeatother
+- \DeclareMathOperator*{\argmax}{arg\,max}
+- \newcommand\tstrut{\rule{0pt}{3ex}}
+- \newcommand\bstrut{\rule[-2.5ex]{0pt}{0pt}}
 ---
-output:
-  word_document: default
-  html_document: default
-  pdf_document: default
----
+
 ```{r, warning = FALSE, echo = FALSE}
 library(readxl)
 library(dplyr)
@@ -24,19 +49,8 @@ library(pscl)
 library(xtable)
 ```
 
-```{r, echo = FALSE}
-colorize <- function(x, color) {
- if (knitr::is_latex_output()) {
- sprintf("\\textcolor{%s}{%s}", color, x)
- } else if (knitr::is_html_output()) {
- sprintf("<span style='color: %s;'>%s</span>", 
- color,
- x)
- } else x
-}
-```
-
 # Mô hình tuyến tính tổng quát.
+
 Mô hình tuyến tính tổng quát, Generalized Linear Model hay viết tắt là GLM, được sử dụng rộng rãi trong các doanh nghiệp, các cơ quan tổ chức hoạt động trong lĩnh vực tài chính, ngân hàng, và bảo hiểm. Các chuyên gia quản trị rủi ro trong các ngân hàng sử dụng GLM để chấm điểm tín dụng khách hàng và quyết định phê duyệt tín dụng. Các chuyên gia tính toán thường xuyên sử dụng mô hình GLM để xác định phí thuần của các sản phẩm bảo hiểm, để xác định dự phòng nghiệp vụ, hoặc để phân loại rủi ro mà công ty phải đối mặt. Khái niệm GLM lần đầu tiên được sử dụng trong nghiên cứu của Nelder và Wedderburn (1972) và từ đó đến nay đã có nhiều sách tham khảo tin cậy cho mô hình này như Alan Agresti (2015) hay Annette J. Dobson and Adrian G. Barnett (2018). Đa số các tài liệu tham khảo giới thiệu GLM dưới góc độ toán học và mang nhiều tính lý thuyết. Chương sách này sẽ cố gắng giải thích và tiếp cận GLM từ một góc nhìn mang tính thực hành nhiều hơn. Chúng tôi sẽ không quá đi sâu vào các khía cạnh như giả thiết hay phương pháp ước lượng của mô hình GLM, mà sẽ tập trung vào hướng dẫn bạn đọc ứng dụng GLM trên nhiều kiểu dữ liệu nhất có thể.
 
 Mô hình tuyến tính tổng quát được phát biểu dưới dạng công thức như sau:
@@ -193,12 +207,15 @@ Quay trở lại ví dụ ở phần trước của chương sách, chúng ta ph
 Phân phối xác suất của biến $Y$ là phân phối nhị thức do $Y$ chỉ có thể nhận là 0 hoặc 1. Đồng thời, giá trị trung bình của $Y$ nằm trong khoảng $(0,1)$ chúng ta có thể chọn hàm liên kết $g$ là hàm $\Phi^{-1}$. Đây là hàm ngược của hàm phân phối xác suất của biến ngẫu nhiên phân phối chuẩn $\mathcal{N}(0,1)$ nên thỏa mãn các điều kiện của một hàm liên kết: hàm đơn điệu tăng; có miền xác định là $(0,1)$; và miền giá trị là tập số thực $\mathbb{R}$. Nếu không lựa chọn $\Phi^{-1}$, mọi hàm số đơn điệu, có miền xác định là khoảng $(0,1)$, và miền giá trị là tập số thực $\mathbb{R}$ đều có thể được lựa chọn làm hàm số kết nối.
 
 ## Xây dựng mô hình tuyến tính tổng quát
+
 Phần tiếp theo của cuốn sách sẽ thảo luận về cách xây dựng mô hình tuyến tổng quát với các kiểu giá trị khác nhau của biến phụ thuộc $Y$. Xin được nhắc lại rằng đây là cuốn sách dành cho cả các bạn đọc không có nền tảng toán học nâng cao. Do đó, những thảo luận phức tạp liên quan đến các giả thiết của mô hình hay phương pháp ước lượng tham số sẽ được trình bày ở phần sau của chương sách. Chúng ta sẽ hiểu về mô hình tuyến tính tổng quát thông qua việc ứng dụng mô hình cho các các dữ liệu thực tế trước khi đi sâu vào bản chất toán học của mô hình.
 
 ### Biến phụ thuộc là biến dạng nhị phân.
+
 Đây là các trường hợp mà biến phụ thuộc chỉ nhận một trong hai giá trị. Ở phần trên chúng ta đã trình bày các ví dụ cho trường hợp này: khách hàng có hay không hoàn trả nợ thẻ tín dụng, khách hàng phản hồi tích cực hay tiêu cực về sản phầm, một yêu cầu bồi thường là trục lợi hay bình thường, một giao dịch rút tiền ngân hàng có hay không phải là giao dịch gian lận, ... Mặc dù đây chỉ là một trường hợp đặc biệt của biến phụ thuộc nhận giá trị rời rạc nhưng qua các ví dụ thực tế lại thấy rằng phần lớn các dữ liệu gặp phải lại có biến phụ thuộc ở dạng nhị phân. Khi $Y$ chỉ nhận hai giá trị, chúng ta sẽ luôn mã hóa giá trị của $Y$ thành hai số là 0 và 1. Một vài cuốn sách khác, hoặc trong một vài lĩnh vực nghiên cứu khác, người xây dựng mô hình có thể mã hóa $Y$ thành -1 và 1. Tuy nhiên hai cách mã hóa này chỉ khác nhau ở hình thức chứ không làm ảnh hưởng đến kết quả của mô hình.
 
 #### Phân phối xác suất của biến phụ thuộc.
+
 Khi biến phụ thuộc là biến dạng nhị phân, một cách tự nhiên, chúng ta sẽ sử dụng phân phối nhị thức, hay còn gọi là phân phối Bernoulli, để mô tả biến phụ thuộc. Biến ngẫu nhiên $B$ có phân phối nhị thức với tham số $\rho$, $0 < \rho < 1$, ký hiệu $\mathcal{B}(\rho)$, là biến ngẫu nhiên chỉ nhận hai giá trị là 0 và 1 với hàm khối lượng xác suất như sau  
 \begin{align}
 \mathbb{P}(B = x) = \rho^x \times (1-\rho)^{(1-x)} \text{ với } x \in \{0;1\}
@@ -382,6 +399,7 @@ kable(dat, booktabs = T,
 Có thể thấy rằng không có sự khác biệt lớn trong tính toán xác suất của $Y$ khi sử dụng hàm liên kết khác nhau. Thực tế thì việc lựa chọn hàm kết nối sẽ không ảnh hưởng lớn đến kết quả của mô hình bằng việc lựa chọn phân phối cho biến phụ thuộc hay việc lựa chọn biến độc lập để giải thích mô hình. 
 
 ### Biến phụ thuộc là biến rời rạc không có thứ tự.
+
 Biến rời rạc không có thứ tự, hay còn gọi là biến rời rạc danh nghĩa (non-ordinal variable), là biến ngẫu nhiên mà các giá trị có thể nhận không có ý nghĩa so sánh với nhau. Khi nói đến biến rời rạc không có thứ tự, chúng ta luôn hiểu rằng biến nhận từ ba giá trị trở lên bởi vì trường hợp có hai giá trị sẽ tương tự như biến có phân phối nhị phân. Một ví dụ đơn giản cho biến rời rạc không có thứ tự là màu sắc được chọn khi mua xe ô tô, hoặc loại hình bảo hiểm được lựa chọn bởi các khách hàng của một công ty bảo hiểm.
 
 Giả sử biến rời rạc danh nghĩa $Y$ có thể nhận $J$ giá trị khác nhau lần lượt là $1, 2, \cdots, J$. Với biến danh nghĩa, chúng ta không thể mô tả được mối liên hệ giữa xác suất của hai sự kiện $(Y=i)$ và $(Y=j)$ với $1 \leq i < j \leq J$ dưới dạng tham số. Chính vì thế cấu trúc dạng tham số của mô hình tuyến tính tổng quát như phương trình \@ref(eq:glm1) là không thể áp dụng được.
@@ -504,6 +522,7 @@ kable(M2, booktabs = T,
 Kết quả từ mô hình cho thấy chỉ có "Basic Plan" và "Bronze Plan" được chọn nếu chúng ta chỉ sử dụng hai biến độc lập là giới tính và độ tuổi. Khả năng dự đoán của mô hình không cao do mô hình còn quá đơn giản, chúng tôi muốn nhấn mạnh về cách xây dựng mô hình trước khi cố gắng xây dựng một mô hình có khả năng dự báo tốt. Chúng ta sẽ thảo luận về đánh giá hiệu quả của mô hình ở các phần sau của chương sách.
 
 ### Biến phụ thuộc là biến rời rạc có thứ tự.
+
 Biến rời rạc có thứ tự, còn gọi là ordinal categorical variable, là các biến nhận giá trị rời rạc mà các giá trị rời rạc có thể so sánh được với nhau. Một ví dụ điển hình cho biến rời rạc có thứ tự là số lần mà một người đi khám chữa bệnh sử dụng bảo hiểm y tế hoặc một khách hàng gửi yêu cầu bồi thường đến công ty bảo hiểm. Đây là trường hợp mà chúng ta có thể sử dụng một phân phối xác suất rời rạc có tham số để mô tả biến phụ thuộc $Y$ giống như mô hình \@ref(eq:gml1).
 
 #### Biến phụ thuộc có phân phối Poisson.
@@ -561,6 +580,7 @@ Bạn đọc có thể thấy rằng cả hai biến $PC$ và $NCD$ đều có t
 Hệ số của biến $PC$ là số dương, điều này cho biết các xe đăng ký dưới dạng cá nhân có khả năng gây tai nạn cao hơn so với xe đăng ký dưới hình thức doanh nghiệp. Đồng thời, hệ số của biến $NCD$ âm cho biết lái xe có lịch sử lái xe tốt, tương ứng với $NCD$ cao, ít có khả năng gây ra tai nạn hơn lái xe có lịch sử lái xe không tốt, tương ứng với $NCD$ thấp.
 
 #### Phân phối rời rạc có lạm phát tại giá trị 0.
+
 Biến phụ thuộc dạng đếm chứa một tỷ lệ lớn giá trị bằng 0 là các kiểu biến phụ thuộc thường gặp phải khi làm việc trên dữ liệu trong lĩnh vực bảo hiểm. Tỷ lệ lớn ở đây thường được hiểu là trên 90\% giá trị quan sát được. Đa số các phân phối xác suất rời rạc thông thường, bao gồm phân phối Poisson, không mô tả tốt khi biến phụ thuộc $Y$ trong trường hợp này. 
 
 Một giải pháp phổ biến khi làm việc với kiểu dữ liệu như vậy là thay đổi phân phối dạng đếm thông thường để làm tăng tỷ lệ giá trị nhận được tại 0, để thu được các phân phối thường được gọi là các phân phối lạm phát tại 0, hay Zero-inflated variable. Phân phối lạm phát tại 0 là hỗn hợp của hai phân phối xác suất rời rạc, bao gồm một phân phối nhị thức chỉ báo cho trường hợp 0, và một phân phối xác suất dành cho biến đếm thông thường. Hàm phân phối của biến ngẫu nhiên dạng đếm có lạm phát tại 0, ký hiệu $ZI_Y$, có thể được mô tả như sau
@@ -736,6 +756,7 @@ Giá trị số tiền bồi thường trung bình được được mô tả b�
 Trước khi đi vào chi tiết các thành phần của mô hình, chúng tôi muốn kết luận rằng mô hình tuyến tính tổng quát có thể được sử dụng để mô hình hóa dữ liệu trong nhiều hoàn cảnh khác nhau. Việc xây dựng mô hình tuyến tính tổng quát luôn được bắt đầu bằng việc lựa chọn phân phối cho biến phụ thuộc và lựa chọn hàm số liên kết. Có các quy tắc chung trong việc lựa chọn phân phối và hàm liên kết giống như chúng tôi đã trình bày ở phần trên. Tuy nhiên để đưa ra được mô hình tuyến tính tổng quát phù hợp cho từng dữ liệu cụ thể, hoặc để có thể mở rộng được mô hình tuyến tính tổng quát trong các kiểu dữ liệu phức tạp hơn, bạn đọc cần am hiểu sâu hơn về các đặc điểm kỹ thuật của các mô hình này. Các kiến thức này sẽ được trình bày trong các phần tiếp theo của chương.
 
 ## Các thành phần của mô hình tuyến tính tổng quát.
+
 Như chúng ta đã thảo luận trong phần trước, mô hình tuyến tính tổng quát khắc phục hai giả thiết, cũng là hai nhược điểm của mô hình tuyến tính thông thường, đó là i) biến phụ thuộc có phân phối chuẩn, và ii) giá trị trung bình của biến phụ thuộc bằng một tổ hợp tuyến tính của các biến độc lập. Trong phần này của cuốn sách, chúng tôi sẽ thảo luận kỹ hơn vào cách tiếp cận để khắc phục các hạn chế kể trên. 
 
 - Thứ nhất, thay vì sử dụng phân phối chuẩn, mô hình tuyến tính tổng quát giả thiết rằng biến phụ thuộc có phân phối nằm trong họ các phân phối kiểu mũ (exponential family). Phân phối chuẩn chỉ là một trường hợp đặc biệt của họ các phân phối này.
@@ -743,6 +764,7 @@ Như chúng ta đã thảo luận trong phần trước, mô hình tuyến tính
 - Thứ hai, mô hình tuyến tính tổng quát sử dụng một hàm $g$, được gọi là hàm liên kết, để mô tả mối liên hệ giữa giá trị trung bình của biến phụ thuộc với tổ hợp tuyến tính của các biến độc lập. Lựa chọn hàm $g$ có ý nghĩa quan trọng không chỉ trong cách luận giải kết quả của mô hình, mà còn ở việc dễ dàng ước lượng tham số của mô hình.
 
 ### Họ các biến ngẫu nhiên có phân phối kiểu mũ.
+
 Thay vì giả thiết rằng $Y$ có phân phối chuẩn trong mô hình tuyến tính thông thường, mô hình tuyến tính tổng quát giả thiết biến phụ thuộc $Y$ nằm trong họ các biến ngẫu nhiên có phân phối kiểu mũ. Họ các biến ngẫu nhiên có phân phối kiểu mũ (exponential family) có hàm mật độ xác suất có thể viết dưới dạng như sau:
 \begin{align}
 f(y;\theta,\phi) = \exp\left[ \cfrac{y \theta - b(\theta)}{a(\phi)} + c(y,\phi) \right]
@@ -841,6 +863,7 @@ Giả sử biến phụ thuộc quan sát được là $Y_1, Y_2, \cdots, Y_n$ c
 Khi ước lượng mô hình tuyến tính tổng quát trên một dữ liệu cụ thể, giá trị hàm phương sai $V$ phụ thuộc vào cách chúng ta lựa chọn hàm $b$ và giá trị trung bình của $Y_i$. Tham số $\phi$ không phụ thuộc vào quan sát $Y_i$, do đó hệ số $w_i$ có ý nghĩa quyết định trong xác định phương sai của $Y_i$. Chúng ta có thể lựa chọn đơn giản là cho $w_i$ bằng 1 với mọi $i$, nếu chúng ta tin rằng tỷ lệ $\cfrac{V(\mu_i)}{\mathbb{V}(Y_i)}$ là hằng số. Trong một số trường hợp, $\cfrac{V(\mu_i)}{\mathbb{V}(Y_i)}$ thay đổi theo $i$, đó là lúc chúng ta cần lựa chọn $w_i$ để cho kết quả tốt nhất. Chúng ta sẽ tiếp tục thảo luận về hàm phương sai của biến phụ thuộc trong phần hàm hợp lý tối đa của biến ngẫu nhiên nằm trong họ phân phối các phân phối kiểu mũ. 
 
 ### Hàm liên kết.
+
 Hàm số liên kết $g(\cdot)$ liên kết giá trị trung bình của biến phụ thuộc với tổ hợp tuyến tính của các biến độc lập luôn được lựa chọn trong nhóm các hàm số đơn điệu và có đạo hàm trên miền xác định của hàm số đó. Các giả thiết này đảm bảo để hàm liên kết có hàm số ngược $g^{-1}(\cdot)$ cũng là hàm đơn điệu và có đạo hàm trên miền xác định. Một yếu tố quan trọng khác khi lựa chọn hàm liên kết đó là $g(\cdot)$ có miền xác định trùng với miền xác định của giá trị trung bình của biến phụ thuộc và miền giá trị của $g(\cdot)$ là tập số thực $\mathbb{R}$.
  
 Xin được nhắc lại rằng mối liên hệ giữa trung bình của biến phụ thuộc và tổ hợp tuyến tính của biến độc lập được mô tả thông qua hàm liên kết như sau:
@@ -890,6 +913,7 @@ Như vậy, với lựa chọn hàm liên kết $g(\cdot) = (b^{'})^{-1}(\cdot)$
 - Ví dụ 2: khi $Y$ là biến ngẫu nhiên có phân phối $gamma(\alpha,\gamma)$, chúng ta có $b(\mu) = \log(-\mu)$, và $b^{'}(\mu) = -1/\mu$, do đó hàm liên kết chính tắc của biến ngẫu nhiên phân phối gamma là $g(\mu) = -1/\mu$. Trong trường hợp này hàm liên kết không có miền xác định là tập các số thực dương. Có thể thấy rằng lựa chọn hàm liên kết chính tắc không phải là một lựa chọn phù hợp.
 
 ## Hàm hợp lý tối đa và ước lượng mô hình.
+
 Hệ số tuyến tính của các biến độc lập $\boldsymbol{\beta} =  (\beta_0, \beta_1, \cdots, \beta_p)$ được ước lượng từ dữ liệu $\textbf{y} = (y_1, y_2, \cdots y_n)$ và $\textbf{x} = (\textbf{x}_1, \textbf{x}_2, \cdots \textbf{x}_n)$ bằng phương pháp tối đa hóa hàm hợp lý, hay còn gọi là hàm likelihood. Khi biến mục tiêu $Y_i$ có phân phối kiểu mũ, hàm likelihood được viết như sau
 \begin{align}
 L(\textbf{y},\boldsymbol{\beta}) = \prod\limits_{i=1}^n \ \exp\left[ \cfrac{y_i \theta - b(\theta)}{a_i(\phi)} + c_i(y_i,\phi) \right]
@@ -984,9 +1008,11 @@ véc-tơ tham số $\boldsymbol{\beta}$ để tối đa hóa giá trị của h�
 \end{align}
 
 ## So sánh và lựa chọn mô hình tuyến tính tổng quát.
+
 Nắm được các nguyên tắc chung bạn đọc có thể tự xây dựng nhiều mô hình tuyến tính tổng quát khác nhau cho một dữ liệu cụ thể. Thách thức đặt ra là một mô hình liệu có thực sự có tốt hơn các mô hình khác, hay trong số các mô hình bạn lựa chọn mô hình nào là phù hợp nhất? Phần này của chương sẽ thảo luận về vấn đề so sánh mô hình và lựa chọn mô hình. Các chỉ tiêu thống kê được sủ dụng để so sánh mô hình sẽ xoay quanh giá trị của hàm hợp lý tối đa, bao gồm có thước đo deviance, chỉ tiêu AIC, AICC, hay BIC.
 
 ### Thước đo deviance
+
 Thước đo được gọi là deviance thường được sử dụng để đánh giá và so sánh các mô hình tuyến tính tổng quát có cùng phân phối của biến độc lập. Chỉ tiêu này được tính toán dựa trên giá trị hàm Log-likelihood. Khi $Y$ là biến ngẫu nhiên trong nhóm các phân phối mũ, hàm log-likelihood được viết như sau
 \begin{align}
 l(\textbf{y},\theta) & = \sum\limits_{i=1}^n  \left(\cfrac{y_i \theta_i - b(\theta_i)}{a_i(\phi)} + c_i(y_i,\phi)\right)
@@ -1082,6 +1108,7 @@ kable(dat, booktabs = T,
 Mô hình $M_1$ và $M_2$ đều chỉ có một biến độc lập và $M_1$ có deviance nhỏ hơn $M_2$ do đó mô hình $M_1$ tốt hơn $M_2$. So sánh mô hình $M_1$ với 1 biến độc lập là $Age$ với mô hình $M_3$ có 2 biến độc lập là $Age$ và $Gender$ cần dựa trên kiểm định $\chi^2$. Ta có $D^{*}(y, \theta^{M_1}) - D^{*}(y, \theta^{M_2}) = 8324.2 - 8316.8 = 7.4$. Giá trị 7.4 tương ứng với mức xác suất $0.994$ của phân phối $\chi^2(1)$. Điều này có ý nghĩa là ở mức độ tin cậy 99\%, có thể kết luận rằng thêm biến $Gender$ vào mô hình $M_1$ là có ý nghĩa thống kê, tuy nhiên việc thêm biến $Gender$ lại không có ý nghĩa thống kê ở mức độ tin cậy $99.5\%$.
 
 ### Giá trị hàm log-likelihood, AIC và BIC
+
 Deviance là một thước đo hữu ích trong so sánh các mô hình có cùng phân phối của biến phụ thuộc và hàm liên kết. Khi các mô hình cần so sánh không có chung phân phối của biến phụ thuộc thì hiệu giữa hai hàm log-likelihood sẽ không có phân phối $\chi^2$ và khi đó việc so sánh các mô hình là không thế thực hiện được. 
 
 Trong phần trước, chúng ta đã định nghĩa $l(y,\theta^M)$ là giá trị tối đa của hàm log-likelihood cho mô hình M với tập hợp các biến độc lập đã lựa chọn. Nhìn chung, giá trị của $l(y,\theta^M)$ không cho biết nhiều thông tin về độ phù hợp của mô hình, nhưng người xây dựng mô hình thường mong muốn giá trị này càng lớn thì càng tốt. Tuy nhiên, có một vấn đề khi so sánh trực tiếp giá trị $l(y,\theta^M)$ giữa các mô hình là: một mô hình bao gồm nhiều biến độc lập hơn thì rất có thể có giá trị $l(y,\theta^M)$ lớn hơn. Để giải quyết vấn đề này, có ba thước đo được điều chỉnh từ $l(y,\theta^M)$ thường được sử dụng cho mô hình tuyến tính tổng quát với mục đích đánh giá và so sánh giữa các mô hình là AIC, AICC và BIC.

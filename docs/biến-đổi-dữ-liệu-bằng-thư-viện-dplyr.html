@@ -4,15 +4,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chương 6 Biến đổi dữ liệu bằng thư viện \(dplyr\) | index</title>
+<title>Chương 7 Biến đổi dữ liệu bằng thư viện \(dplyr\) | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+<meta name="author" content="Nguyễn Quang Huy">
+<meta name="description" content="Dữ liệu trước khi đưa vào trực quan hóa hoặc xây dựng mô hình hiếm khi có được định dạng chính xác mà bạn đọc mong muốn. Thông thường, bạn đọc sẽ cần tạo thêm một số biến, hoặc có thể bạn đọc chỉ...">
 <meta name="generator" content="bookdown 0.37 with bs4_book()">
-<meta property="og:title" content="Chương 6 Biến đổi dữ liệu bằng thư viện \(dplyr\) | index">
+<meta property="og:title" content="Chương 7 Biến đổi dữ liệu bằng thư viện \(dplyr\) | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta property="og:type" content="book">
+<meta property="og:description" content="Dữ liệu trước khi đưa vào trực quan hóa hoặc xây dựng mô hình hiếm khi có được định dạng chính xác mà bạn đọc mong muốn. Thông thường, bạn đọc sẽ cần tạo thêm một số biến, hoặc có thể bạn đọc chỉ...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chương 6 Biến đổi dữ liệu bằng thư viện \(dplyr\) | index">
+<meta name="twitter:title" content="Chương 7 Biến đổi dữ liệu bằng thư viện \(dplyr\) | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="twitter:description" content="Dữ liệu trước khi đưa vào trực quan hóa hoặc xây dựng mô hình hiếm khi có được định dạng chính xác mà bạn đọc mong muốn. Thông thường, bạn đọc sẽ cần tạo thêm một số biến, hoặc có thể bạn đọc chỉ...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lato-0.4.8/font.css" rel="stylesheet">
+<link href="libs/Roboto_Mono-0.4.8/font.css" rel="stylesheet">
+<link href="libs/Montserrat-0.4.8/font.css" rel="stylesheet">
+<script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
 <script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.8/girafe.js"></script><script src="libs/plotly-binding-4.10.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
@@ -22,9 +29,6 @@
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
 <link rel="stylesheet" href="style.css">
-<meta name="description" content="Dữ liệu trước khi đưa vào trực quan hóa hoặc xây dựng mô hình hiếm khi có được định dạng chính xác mà bạn đọc mong muốn. Thông thường, bạn đọc sẽ cần tạo thêm một số biến, hoặc có thể bạn đọc chỉ...">
-<meta property="og:description" content="Dữ liệu trước khi đưa vào trực quan hóa hoặc xây dựng mô hình hiếm khi có được định dạng chính xác mà bạn đọc mong muốn. Thông thường, bạn đọc sẽ cần tạo thêm một số biến, hoặc có thể bạn đọc chỉ...">
-<meta name="twitter:description" content="Dữ liệu trước khi đưa vào trực quan hóa hoặc xây dựng mô hình hiếm khi có được định dạng chính xác mà bạn đọc mong muốn. Thông thường, bạn đọc sẽ cần tạo thêm một số biến, hoặc có thể bạn đọc chỉ...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -34,7 +38,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title=""></a>
+        <a href="index.html" title="">Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</a>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
@@ -46,19 +50,20 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ma-tr%E1%BA%ADn-m%E1%BA%A3ng-nhi%E1%BB%81u-chi%E1%BB%81u-v%C3%A0-list.html"><span class="header-section-number">2</span> Ma trận, mảng nhiều chiều và \(list\)</a></li>
-<li><a class="" href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">3</span> Phân tích dữ liệu bằng R</a></li>
-<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r.html"><span class="header-section-number">4</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
-<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">5</span> Tiền xử lý dữ liệu</a></li>
-<li><a class="active" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">6</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
-<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Trực quan hóa dữ liệu</a></li>
-<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">9</span> Mô hình hồi quy tuyến tính</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">10</span> Mô hình tuyến tính tổng quát.</a></li>
-<li><a class="" href="reference.html"><span class="header-section-number">11</span> REFERENCE</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y.html"><span class="header-section-number">12</span> Mô hình dạng cây</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">13</span> Mô hình mạng neural network</a></li>
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Lời nói đầu</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ma-tr%E1%BA%ADn-m%E1%BA%A3ng-nhi%E1%BB%81u-chi%E1%BB%81u-v%C3%A0-list.html"><span class="header-section-number">3</span> Ma trận, mảng nhiều chiều và \(list\)</a></li>
+<li><a class="" href="ph%C3%A2n-t%C3%ADch-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-r.html"><span class="header-section-number">4</span> Phân tích dữ liệu bằng R</a></li>
+<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-t%E1%BB%AB-c%C3%A1c-ngu%E1%BB%93n-kh%C3%A1c-nhau-v%C3%A0o-r.html"><span class="header-section-number">5</span> Nhập dữ liệu từ các nguồn khác nhau vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="active" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr.html"><span class="header-section-number">7</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u-1.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">10</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">11</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="" href="reference.html"><span class="header-section-number">12</span> REFERENCE</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-d%E1%BA%A1ng-c%C3%A2y.html"><span class="header-section-number">13</span> Mô hình dạng cây</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-m%E1%BA%A1ng-neural-network.html"><span class="header-section-number">14</span> Mô hình mạng neural network</a></li>
 </ul>
 
         <div class="book-extra">
@@ -66,16 +71,16 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr" class="section level1" number="6">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr" class="section level1" number="7">
 <h1>
-<span class="header-section-number">Chương 6</span> Biến đổi dữ liệu bằng thư viện <span class="math inline">\(dplyr\)</span><a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Chương 7</span> Biến đổi dữ liệu bằng thư viện <span class="math inline">\(dplyr\)</span><a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr"><i class="fas fa-link"></i></a>
 </h1>
 <p>Dữ liệu trước khi đưa vào trực quan hóa hoặc xây dựng mô hình hiếm khi có được định dạng chính xác mà bạn đọc mong muốn. Thông thường, bạn đọc sẽ cần tạo thêm một số biến, hoặc có thể bạn đọc chỉ muốn đổi tên các biến, hoặc sắp xếp lại các quan sát, hoặc tổng hợp dữ liệu để làm cho dữ liệu dễ dàng xử lý tiếp. Bạn đọc sẽ học cách thực hiện tất cả những phép biến đổi đó trong phần này. Nội dung chủ yếu của phần này sẽ hướng dẫn bạn đọc cách chuyển đổi dữ liệu của mình bằng cách sử dụng thư viện <span class="math inline">\(dplyr\)</span> và tập dữ liệu <span class="math inline">\(gapminder\)</span> - dữ liệu về sức khỏe và thu nhập của các quốc gia trên thế giới từ năm 1960 đến năm 2016.</p>
 <p>Thư viện <span class="math inline">\(dplyr\)</span> là một thư viện nằm trong thư viện tổng hợp <span class="math inline">\(tidyverse\)</span>, bạn đọc có thể gọi thư viện <span class="math inline">\(tidyverse\)</span> hoặc trực tiếp thư viện <span class="math inline">\(dplyr\)</span> lên cửa sổ đang làm việc. Bạn đọc cũng nên lưu ý rằng trong thư viện <span class="math inline">\(dplyr\)</span> có một số hàm trùng tên với các hàm có sẵn trong R, chẳng hạn như hàm <span class="math inline">\(filter()\)</span> hoặc hàm <span class="math inline">\(lag()\)</span>. Tuy nhiên R ưu tiên <span class="math inline">\(dplyr\)</span> trước các thư viện có sẵn nên bạn đọc sẽ nhận được thông báo khi gọi thư viện này.</p>
 <p>Dữ liệu <span class="math inline">\(gapminder\)</span> là dữ liệu đã được sử dụng trong phần tiền xử lý dữ liệu. Bạn đọc lưu ý thực hiện các bước tiền xử lý dữ liệu trước khi chạy các câu lệnh biến đổi dữ liệu. Mỗi phần tiếp theo sẽ giới thiệu một hàm quan trọng của thư viện <span class="math inline">\(dplyr\)</span> và các tham số của hàm đó. Sau cùng chúng tôi sẽ giới thiệu về cách sử dụng pipe (<span class="math inline">\(%\&gt;\%\)</span>) để kết nối các hàm với nhau trong một câu lệnh duy nhất.</p>
-<div id="thêm-biến-bằng-hàm-mutate" class="section level2" number="6.1">
+<div id="thêm-biến-bằng-hàm-mutate" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">6.1</span> Thêm biến bằng hàm <span class="math inline">\(mutate()\)</span><a class="anchor" aria-label="anchor" href="#th%C3%AAm-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-mutate"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Thêm biến bằng hàm <span class="math inline">\(mutate()\)</span><a class="anchor" aria-label="anchor" href="#th%C3%AAm-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-mutate"><i class="fas fa-link"></i></a>
 </h2>
 <p>Khi bạn đọc muốn thêm các cột khác vào một dữ liệu được tính toán từ các cột hiện có, bạn đọc có thể sử dụng hàm <span class="math inline">\(mutate()\)</span>. Hàm <span class="math inline">\(mutate()\)</span> luôn thêm cột vào sau cột cuối cùng trong dữ liệu hiện có. Khi bạn muốn thêm cột vào một vị trí cụ thể, bạn có thể sử dụng tùy biến</p>
 <ul>
@@ -138,9 +143,9 @@
 ## 10            NA 
 ## # ℹ 10,535 more rows</code></pre>
 </div>
-<div id="lựa-chọn-cột-bằng-hàm-select" class="section level2" number="6.2">
+<div id="lựa-chọn-cột-bằng-hàm-select" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">6.2</span> Lựa chọn cột bằng hàm <span class="math inline">\(select()\)</span><a class="anchor" aria-label="anchor" href="#l%E1%BB%B1a-ch%E1%BB%8Dn-c%E1%BB%99t-b%E1%BA%B1ng-h%C3%A0m-select"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Lựa chọn cột bằng hàm <span class="math inline">\(select()\)</span><a class="anchor" aria-label="anchor" href="#l%E1%BB%B1a-ch%E1%BB%8Dn-c%E1%BB%99t-b%E1%BA%B1ng-h%C3%A0m-select"><i class="fas fa-link"></i></a>
 </h2>
 <p>Khi dữ liệu có quá nhiều cột và bạn đọc chỉ muốn sử dụng một số cột nhất định để phân tích, bạn đọc hãy sửa dụng hàm <span class="math inline">\(select()\)</span>. Điều quan trọng nhất khi sử dụng hàm <span class="math inline">\(select()\)</span> là bạn đọc cần phải gọi tên đúng các cột (biến) mà mình muốn lựa chọn.</p>
 <div class="sourceCode" id="cb529"><pre class="downlit sourceCode r">
@@ -237,9 +242,9 @@
 ## # ℹ 10,535 more rows
 ## # ℹ 1 more variable: region &lt;fct&gt;</code></pre>
 </div>
-<div id="lọc-quan-sát-bằng-hàm-filter" class="section level2" number="6.3">
+<div id="lọc-quan-sát-bằng-hàm-filter" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">6.3</span> Lọc quan sát bằng hàm <code>filter()</code><a class="anchor" aria-label="anchor" href="#l%E1%BB%8Dc-quan-s%C3%A1t-b%E1%BA%B1ng-h%C3%A0m-filter"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Lọc quan sát bằng hàm <code>filter()</code><a class="anchor" aria-label="anchor" href="#l%E1%BB%8Dc-quan-s%C3%A1t-b%E1%BA%B1ng-h%C3%A0m-filter"><i class="fas fa-link"></i></a>
 </h2>
 <p>Hàm <code><a href="https://dplyr.tidyverse.org/reference/filter.html">filter()</a></code> cho phép bạn đọc lọc các quan sát dựa trên giá trị của các cột. Do có một số thư viện trong R sử dụng hàm <span class="math inline">\(filter()\)</span> với mục đích khác nhau và chúng tôi không chắc chắn cửa sổ R bạn đọc đang sử dụng đang có sẵn các thư viện nào nên chúng tôi đổi tên cho hàm <span class="math inline">\(filter()\)</span> của thư viện <span class="math inline">\(dplyr\)</span> thành <span class="math inline">\(dfilter()\)</span> phương pháp mượn tham số:</p>
 <div class="sourceCode" id="cb539"><pre class="downlit sourceCode r">
@@ -281,9 +286,9 @@
 ## # ℹ 29 more rows
 ## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
 </div>
-<div id="sắp-xếp-dữ-liệu-bằng-hàm-arrange" class="section level2" number="6.4">
+<div id="sắp-xếp-dữ-liệu-bằng-hàm-arrange" class="section level2" number="7.4">
 <h2>
-<span class="header-section-number">6.4</span> Sắp xếp dữ liệu bằng hàm <code>arrange()</code><a class="anchor" aria-label="anchor" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-arrange"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4</span> Sắp xếp dữ liệu bằng hàm <code>arrange()</code><a class="anchor" aria-label="anchor" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-arrange"><i class="fas fa-link"></i></a>
 </h2>
 <p>Hàm <code><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange()</a></code> sắp xếp các hàng của dữ liệu theo thứ tự tăng dần. Nguyên tắc sắp xếp cũng tương tự như hàm <code><a href="https://rdrr.io/r/base/sort.html">sort()</a></code> khi làm trên véc-tơ, nghĩa là hàm bạn đọc có thể sắp xếp dữ liệu dựa theo bất kỳ kiểu dữ liệu nào. Chẳng hạn như để sắp xếp dữ liệu <span class="math inline">\(gapminder\)</span> theo thứ tự tăng dần theo năm, theo Châu lục, và sau cùng là theo vùng, bạn đọc sử dụng câu lệnh như sau</p>
 <div class="sourceCode" id="cb544"><pre class="downlit sourceCode r">
@@ -323,9 +328,9 @@
 ## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
 <p>Lưu ý rằng nếu trong cột dữ liệu sử dụng để sắp xếp có giá trị <span class="math inline">\(NA\)</span> thì các giá trị này luôn được sắp xếp xuống phía dưới của dữ liệu.</p>
 </div>
-<div id="kết-hợp-các-hàm-bằng-toán-tử-pipe" class="section level2" number="6.5">
+<div id="kết-hợp-các-hàm-bằng-toán-tử-pipe" class="section level2" number="7.5">
 <h2>
-<span class="header-section-number">6.5</span> Kết hợp các hàm bằng toán tử pipe (<code>\%&gt;\%</code>)<a class="anchor" aria-label="anchor" href="#k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-h%C3%A0m-b%E1%BA%B1ng-to%C3%A1n-t%E1%BB%AD-pipe"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5</span> Kết hợp các hàm bằng toán tử pipe (<code>\%&gt;\%</code>)<a class="anchor" aria-label="anchor" href="#k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-h%C3%A0m-b%E1%BA%B1ng-to%C3%A1n-t%E1%BB%AD-pipe"><i class="fas fa-link"></i></a>
 </h2>
 <p>Trước khi giới thiệu các hàm khác dùng để biến đổi dữ liệu của thư viện <span class="math inline">\(dplyr\)</span>, chúng tôi muốn giới thiệu đến bạn đọc toán tử pipe (<span class="math inline">\(\%&gt;\%\)</span>). Đây là một công cụ vô cùng hữu hiệu khi bạn đọc thực hiện một chuỗi các phép biến đổi dữ liệu. Toán tử pipe được mượn từ toán học khi nói đến việc sử dụng các hàm số nối tiếp nhau. Pipe trong thư viện <span class="math inline">\(dplyr\)</span> cũng có ý nghĩa tương tự khi bạn đọc sử dụng một chuỗi các hàm của thư viện này nhằm biến đổi dữ liệu. Ví dụ như khi bạn đọc muốn lấy ra từ dữ liệu <span class="math inline">\(gapminder\)</span> ba quốc gia có thu nhập bình quân đầu người cao nhất trong năm 2000, bạn sẽ cần các phép biến đổi sau:
 - Thứ nhất: thêm cột thu nhập bình quân đầu người (sử dụng hàm <span class="math inline">\(mutate()\)</span>)
@@ -361,9 +366,9 @@
 ## 3 Norway             39954.</code></pre>
 <p>Kết quả thu được hoàn toàn tương tự như trên tuy nhiên câu lệnh đã rõ ràng hơn rất nhiều. Từ phần này của cuốn sách, mọi phép biến đổi trên dữ liệu chúng tôi sẽ luôn luôn ưu tiên sử dụng toán tử <span class="math inline">\(pipe\)</span> vì sự đơn giản và rõ ràng của các câu lệnh.</p>
 </div>
-<div id="tổng-hợp-dữ-liệu-bằng-group_by-và-summarise" class="section level2" number="6.6">
+<div id="tổng-hợp-dữ-liệu-bằng-group_by-và-summarise" class="section level2" number="7.6">
 <h2>
-<span class="header-section-number">6.6</span> Tổng hợp dữ liệu bằng <span class="math inline">\(group\_by()\)</span> và <span class="math inline">\(summarise()\)</span><a class="anchor" aria-label="anchor" href="#t%E1%BB%95ng-h%E1%BB%A3p-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-group_by-v%C3%A0-summarise"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.6</span> Tổng hợp dữ liệu bằng <span class="math inline">\(group\_by()\)</span> và <span class="math inline">\(summarise()\)</span><a class="anchor" aria-label="anchor" href="#t%E1%BB%95ng-h%E1%BB%A3p-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-group_by-v%C3%A0-summarise"><i class="fas fa-link"></i></a>
 </h2>
 <p>Hàm <span class="math inline">\(group\_by()\)</span> là một công cụ hữu hiệu trong tổng hợp dữ liệu và tính toán theo nhóm. Chẳng hạn như từ dữ liệu <span class="math inline">\(gapminder\)</span> bạn đọc muốn biết tổng thu nhập quốc dân (<span class="math inline">\(gdp\)</span>) của một quốc gia là cao hay thấp so với tổng thu nhập quốc dân trung bình của châu lục (<span class="math inline">\(continent\)</span>) trong năm tương ứng (<span class="math inline">\(year\)</span>), bạn đọc cần phải thực hiện các thao tác sau:
 - Bước 1: Nhóm dữ liệu lại theo châu lục và theo năm
@@ -421,18 +426,18 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">5</span> Tiền xử lý dữ liệu</a></div>
-<div class="next"><a href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Trực quan hóa dữ liệu</a></div>
+<div class="prev"><a href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></div>
+<div class="next"><a href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr"><span class="header-section-number">6</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
-<li><a class="nav-link" href="#th%C3%AAm-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-mutate"><span class="header-section-number">6.1</span> Thêm biến bằng hàm \(mutate()\)</a></li>
-<li><a class="nav-link" href="#l%E1%BB%B1a-ch%E1%BB%8Dn-c%E1%BB%99t-b%E1%BA%B1ng-h%C3%A0m-select"><span class="header-section-number">6.2</span> Lựa chọn cột bằng hàm \(select()\)</a></li>
-<li><a class="nav-link" href="#l%E1%BB%8Dc-quan-s%C3%A1t-b%E1%BA%B1ng-h%C3%A0m-filter"><span class="header-section-number">6.3</span> Lọc quan sát bằng hàm filter()</a></li>
-<li><a class="nav-link" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-arrange"><span class="header-section-number">6.4</span> Sắp xếp dữ liệu bằng hàm arrange()</a></li>
-<li><a class="nav-link" href="#k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-h%C3%A0m-b%E1%BA%B1ng-to%C3%A1n-t%E1%BB%AD-pipe"><span class="header-section-number">6.5</span> Kết hợp các hàm bằng toán tử pipe (\%&gt;\%)</a></li>
-<li><a class="nav-link" href="#t%E1%BB%95ng-h%E1%BB%A3p-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-group_by-v%C3%A0-summarise"><span class="header-section-number">6.6</span> Tổng hợp dữ liệu bằng \(group\_by()\) và \(summarise()\)</a></li>
+<li><a class="nav-link" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr"><span class="header-section-number">7</span> Biến đổi dữ liệu bằng thư viện \(dplyr\)</a></li>
+<li><a class="nav-link" href="#th%C3%AAm-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-mutate"><span class="header-section-number">7.1</span> Thêm biến bằng hàm \(mutate()\)</a></li>
+<li><a class="nav-link" href="#l%E1%BB%B1a-ch%E1%BB%8Dn-c%E1%BB%99t-b%E1%BA%B1ng-h%C3%A0m-select"><span class="header-section-number">7.2</span> Lựa chọn cột bằng hàm \(select()\)</a></li>
+<li><a class="nav-link" href="#l%E1%BB%8Dc-quan-s%C3%A1t-b%E1%BA%B1ng-h%C3%A0m-filter"><span class="header-section-number">7.3</span> Lọc quan sát bằng hàm filter()</a></li>
+<li><a class="nav-link" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-arrange"><span class="header-section-number">7.4</span> Sắp xếp dữ liệu bằng hàm arrange()</a></li>
+<li><a class="nav-link" href="#k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-h%C3%A0m-b%E1%BA%B1ng-to%C3%A1n-t%E1%BB%AD-pipe"><span class="header-section-number">7.5</span> Kết hợp các hàm bằng toán tử pipe (\%&gt;\%)</a></li>
+<li><a class="nav-link" href="#t%E1%BB%95ng-h%E1%BB%A3p-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-group_by-v%C3%A0-summarise"><span class="header-section-number">7.6</span> Tổng hợp dữ liệu bằng \(group\_by()\) và \(summarise()\)</a></li>
 </ul>
 
       <div class="book-extra">
@@ -450,7 +455,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong></strong>" was written by . </p>
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-01-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
