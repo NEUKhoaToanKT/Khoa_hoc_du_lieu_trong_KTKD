@@ -1,0 +1,5 @@
+﻿MSV,Name,Age,Gender,Height (cm),Weight (kg)
+MSV00001,12345,30,Nam,1.76,68
+MSV43241,Nguyễn Văn An,Nhập sai ngày sinh,N,169,72
+MSV65432,Lê Thị Loan,-1,Nữ,155,48
+MSV34,Trần Mạnh Cường,15,,175,150

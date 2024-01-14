@@ -1,0 +1,91 @@
+--- 
+title: "Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh"
+author: "Nguyễn Quang Huy"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::bs4_book
+#documentclass: book
+#bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+#link-citations: yes
+#github-repo: rstudio/bookdown-demo
+description: "Hello, This is the test version"
+header-includes:
+- \usepackage{tikz}
+- \usepackage{pgfplots}
+- \usetikzlibrary{arrows,automata,positioning}
+- \usepackage[utf8]{inputenc}
+- \usepackage[utf8]{vietnam}
+- \usepackage{etoolbox}
+- \usepackage{xcolor}
+- \usepackage{hyperref}
+- \usepackage{mathtools}
+- \usepackage{fontawesome5}
+- \makeatletter
+- \preto{\@verbatim}{\topsep=0pt \partopsep=-0pt}
+- \makeatother
+- \DeclareMathOperator*{\argmax}{arg\,max}
+- \newcommand\tstrut{\rule{0pt}{3ex}}
+- \newcommand\bstrut{\rule[-2.5ex]{0pt}{0pt}}
+---
+
+```{r, warning = FALSE}
+library(readxl)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(forcats)
+library(ggpubr)
+library(grid)
+library(gridExtra)
+library(forcats)
+library(pryr)
+```
+
+```{r}
+colorize <- function(x, color) {
+ if (knitr::is_latex_output()) {
+ sprintf("\\textcolor{%s}{%s}", color, x)
+ } else if (knitr::is_html_output()) {
+ sprintf("<span style='color: %s;'>%s</span>", 
+ color,
+ x)
+ } else x
+}
+```
+
+# Mô hình hồi quy tuyến tính
+
+## Mô hình hổi quy tuyến tính đơn
+
+## Mô hình hồi quy tuyến tính đa biến
+
+## Những cân nhắc khi xây dựng mô hình hồi quy tuyến tính
+
+## Mở rộng mô hình hồi quy tuyến tính
+
+## Thực hành: Xây dựng mô hình hổi quy tuyến tính cho dữ liệu Sales
+
+## Thực hành: Mô hình hổi quy tuyến tính mở rộng
+
+
+
+
+
+
+<!-- # REFERENCE -->
+
+<!-- ### Source from thesis -->
+
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+
+<!-- ### Souce from website -->
+
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->

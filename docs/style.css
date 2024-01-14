@@ -1,0 +1,62 @@
+/* Typography and Headings */
+.book .book-header h1 {
+  opacity: 1;
+  text-align: left;
+  color: #333333; /* Darker shade for better readability */
+  font-size: 2rem; /* Increased size for prominence */
+}
+
+h2, h3, h4, h5 {
+  color: #4a4a4a; /* Consistent color for headings */
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+h2 { font-size: 1.6rem; font-weight: 600; }
+h3 { font-size: 1.4rem; font-weight: 500; }
+h4 { font-size: 1.3rem; }
+h5 { font-size: 1.2rem; }
+
+/* Sidebar Formatting */
+div.sidebar, div.base {
+  padding: 1em;
+  margin: 1em 0;
+  background-color: #ffffff; /* White background for sidebar */
+}
+
+/* Sidebar Headers */
+div.base::before,
+.book .book-body .page-wrapper .page-inner section.normal .sidebar h3 {
+  font-size: 1.2em;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  color: #007bff; /* Matching color with sidebar border */
+}
+
+/* TODO Box */
+.todo {
+  border: 1px solid #dc3545; /* Red color for emphasis */
+  border-left-width: 5px;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  background-color: #fff3cd; /* Light yellow background */
+}
+
+.todo::before {
+  content: "TO DO: ";
+  font-weight: bold;
+  color: #dc3545; /* Red color for the label */
+}
+
+/* Layout Adjustments */
+.book .book-body .page-wrapper .page-inner {
+  max-width: 1500px !important;
+  padding: 15px; /* Added padding for inner content */
+}
+
+.book .book-body .page-wrapper .page-inner section.normal code {
+  background-color: #e9ecef; /* Light grey background for code */
+  padding: 2px 4px; /* Adjusted padding for code */
+  border-radius: 4px; /* Rounded corners for code blocks */
+}
