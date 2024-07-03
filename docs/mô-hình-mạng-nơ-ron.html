@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chương 3 Mô hình mạng nơ-ron | bookdown-demo.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chương 3 Mô hình mạng nơ-ron | bookdown-demo.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chương 3 Mô hình mạng nơ-ron | bookdown-demo.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="giới-thiệu-chung.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">KHDL KT&KD</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="mở-đầu.html"><a href="mở-đầu.html"><i class="fa fa-check"></i><b>1</b> Mở đầu</a></li>
+<li class="chapter" data-level="2" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html"><i class="fa fa-check"></i><b>2</b> Giới thiệu chung</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#giới-thiệu-về-khoa-học-dữ-liệu-và-các-ứng-dụng"><i class="fa fa-check"></i><b>2.1</b> Giới thiệu về Khoa học dữ liệu và các ứng dụng</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#dữ-liệu-chi-phí-quảng-cáo"><i class="fa fa-check"></i><b>2.1.1</b> Dữ liệu chi phí quảng cáo</a></li>
+<li class="chapter" data-level="2.1.2" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#dữ-liệu-bảo-hiểm-xe-ô-tô"><i class="fa fa-check"></i><b>2.1.2</b> Dữ liệu bảo hiểm xe ô tô</a></li>
+<li class="chapter" data-level="2.1.3" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#dữ-liệu-về-giá-nhà"><i class="fa fa-check"></i><b>2.1.3</b> Dữ liệu về giá nhà</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#sơ-lược-quá-trình-phát-triển-của-xây-dựng-mô-hình-dữ-liệu"><i class="fa fa-check"></i><b>2.2</b> Sơ lược quá trình phát triển của xây dựng mô hình dữ liệu</a></li>
+<li class="chapter" data-level="2.3" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#tại-sao-lại-sử-dụng-phần-mềm-r"><i class="fa fa-check"></i><b>2.3</b> Tại sao lại sử dụng phần mềm R</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#phần-mềm-r-là-gì"><i class="fa fa-check"></i><b>2.3.1</b> Phần mềm R là gì?</a></li>
+<li class="chapter" data-level="2.3.2" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#tại-sao-r-lại-được-sử-dụng-trong-khdl"><i class="fa fa-check"></i><b>2.3.2</b> Tại sao R lại được sử dụng trong KHDL</a></li>
+<li class="chapter" data-level="2.3.3" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#r-có-thể-làm-những-gì"><i class="fa fa-check"></i><b>2.3.3</b> R có thể làm những gì?</a></li>
+<li class="chapter" data-level="2.3.4" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#tại-sao-cuốn-sách-này-lại-sử-dụng-r"><i class="fa fa-check"></i><b>2.3.4</b> Tại sao cuốn sách này lại sử dụng R</a></li>
+<li class="chapter" data-level="2.3.5" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#các-lựa-chọn-thay-thế-và-bổ-sung-cho-r-trong-khdl"><i class="fa fa-check"></i><b>2.3.5</b> Các lựa chọn thay thế và bổ sung cho R trong KHDL</a></li>
+<li class="chapter" data-level="2.3.6" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#cài-đặt-r-và-rstudio"><i class="fa fa-check"></i><b>2.3.6</b> Cài đặt R và RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#về-cuốn-sách-và-tác-giả"><i class="fa fa-check"></i><b>2.4</b> Về cuốn sách và tác giả</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#đôi-lời-từ-tác-giả"><i class="fa fa-check"></i><b>2.4.1</b> Đôi lời từ tác giả</a></li>
+<li class="chapter" data-level="2.4.2" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#ai-nên-đọc-cuốn-sách-này"><i class="fa fa-check"></i><b>2.4.2</b> Ai nên đọc cuốn sách này</a></li>
+<li class="chapter" data-level="2.4.3" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#cấu-trúc-của-cuốn-sách"><i class="fa fa-check"></i><b>2.4.3</b> Cấu trúc của cuốn sách</a></li>
+<li class="chapter" data-level="2.4.4" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#các-ký-hiệu-thông-dụng"><i class="fa fa-check"></i><b>2.4.4</b> Các ký hiệu thông dụng</a></li>
+<li class="chapter" data-level="2.4.5" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#các-dữ-liệu-sử-dụng-trong-cuốn-sách"><i class="fa fa-check"></i><b>2.4.5</b> Các dữ liệu sử dụng trong cuốn sách</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="mô-hình-mạng-nơ-ron.html"><a href="mô-hình-mạng-nơ-ron.html"><i class="fa fa-check"></i><b>3</b> Mô hình mạng nơ-ron</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="mô-hình-mạng-nơ-ron.html"><a href="mô-hình-mạng-nơ-ron.html#mạng-nơ-rơn-có-một-lớp-ẩn"><i class="fa fa-check"></i><b>3.1</b> Mạng nơ-rơn có một lớp ẩn</a></li>
+<li class="chapter" data-level="3.2" data-path="mô-hình-mạng-nơ-ron.html"><a href="mô-hình-mạng-nơ-ron.html#mạng-neural-với-nhiều-layer-ẩn."><i class="fa fa-check"></i><b>3.2</b> Mạng neural với nhiều layer ẩn.</a></li>
+<li class="chapter" data-level="3.3" data-path="mô-hình-mạng-nơ-ron.html"><a href="mô-hình-mạng-nơ-ron.html#ước-lượng-tham-số-cho-mạng-neural-network"><i class="fa fa-check"></i><b>3.3</b> Ước lượng tham số cho mạng neural network</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="mô-hình-mạng-nơ-ron.html"><a href="mô-hình-mạng-nơ-ron.html#backpropagation"><i class="fa fa-check"></i><b>3.3.1</b> Backpropagation</a></li>
+<li class="chapter" data-level="3.3.2" data-path="mô-hình-mạng-nơ-ron.html"><a href="mô-hình-mạng-nơ-ron.html#regularization-and-stochastic-gradient-descent"><i class="fa fa-check"></i><b>3.3.2</b> Regularization and Stochastic Gradient Descent</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="mô-hình-mạng-nơ-ron.html"><a href="mô-hình-mạng-nơ-ron.html#thực-hành"><i class="fa fa-check"></i><b>3.4</b> Thực hành:</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="mô-hình-mạng-nơ-ron.html"><a href="mô-hình-mạng-nơ-ron.html#sử-dụng-mạng-neural-network-trong-phân-loại-văn-bản."><i class="fa fa-check"></i><b>3.4.1</b> Sử dụng mạng neural network trong phân loại văn bản.</a></li>
+<li class="chapter" data-level="3.4.2" data-path="mô-hình-mạng-nơ-ron.html"><a href="mô-hình-mạng-nơ-ron.html#sử-dụng-mạng-neural-network-tích-chập-với-dữ-liệu-mnist."><i class="fa fa-check"></i><b>3.4.2</b> Sử dụng mạng neural network tích chập với dữ liệu <span class="math inline">\(mnist()\)</span>.</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mô-hình-mạng-nơ-ron" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chương 3</span> Mô hình mạng nơ-ron<a href="mô-hình-mạng-nơ-ron.html#mô-hình-mạng-nơ-ron" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Chương sách này thảo luận một chủ đề quan trọng có ứng dụng rộng rãi nhất trong lĩnh vực trí tuệ nhân tạo là mô hình mạng học sâu (deep learning). Tại thời điểm nhóm tác giả viết cuốn sách (2023), học sâu là một lĩnh vực nghiên cứu tích cực nhất không chỉ trong khoa học máy tính, công nghệ thông tin mà còn cả trong các lĩnh vực khác như kinh tế, tài chính, y tế, xây dựng,… Nền tảng của mô hình mạng học sâu là mô hình mạng nơ-ron (hay neural network). Mô hình mạng nơ-ron đã được biết đến đến rộng rãi vào cuối những năm 1980 bởi cách vận hành của mô hình mô tả lại cách thức mà hệ thống thần kinh của con người xử lý thông tin. Mặc dù các đặc tính của mô hình mạng nơ-ron được phân tích bởi những nhà toán học và nhà thống kê nhiều thuật toán liên quan đến mô hình này đã được cải thiện với sự ra đời của các phương pháp học máy khác như SVM, rừng ngẫu nhiên, học tăng cường,…, mà mô hình mạng nơ-ron phần nào không được ưa chuộng.</p>
+<p>Từ những năm 2010, với nhu cầu xử lý các dữ liệu ngày càng phức tạp và sự ra đời của các kiến trúc máy tính lớn, mô hình mạng nơ-ron đã quay trở lại với tên mới là mạng học sâu (deep learning). Mạng học sâu vượt trội hoàn toàn các mô hình học máy thông thường trong phân loại hình ảnh/video và mô hình hóa ngôn ngữ tự nhiên bao gồm dữ liệu kiểu văn bản và giọng nói (natural langugue processing hay NLP). Các nhà khoa học trong lĩnh vực này tin rằng lý do chính cho những thành công của mô hình mạng nơ-ron là càng ngày những người xây dựng mô hình càng chú trọng vào xây dựng các bộ dữ liệu khổng lồ để huấn luyện môn hình và cấu trúc của mô hình cho phép nó đáp ứng được với bất kỳ tập kích thước dữ liệu nào.</p>
+<div id="mạng-nơ-rơn-có-một-lớp-ẩn" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Mạng nơ-rơn có một lớp ẩn<a href="mô-hình-mạng-nơ-ron.html#mạng-nơ-rơn-có-một-lớp-ẩn" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Mô hình mạng nơ-ron lấy một véc-tơ đầu vào gồm <span class="math inline">\(p\)</span> biến <span class="math inline">\(\textbf{X} = (X_1, X_2, \cdots , X_p)\)</span> và xây dựng một hàm phi tuyến <span class="math inline">\(\hat{f}\)</span> để dự đoán biến mục tiêu <span class="math inline">\(Y\)</span> . Chúng ta đã xây dựng các mô hình dự đoán phi tuyến trong các chương trước, ví dụ như mô hình cộng tính tổng quát, mô hình cây quyết định, mô hình rừng ngẫu nhiên, mô hình tăng cường. Điều làm nên sự khác biệt của mô hình mạng nơ-ron là cấu trúc xây dựng của mô hình. Hình <a href="mô-hình-mạng-nơ-ron.html#fig:fgnn001">3.1</a> mô tả một mạng nơ-ron chuyển tiếp để mô hình biến mục tiêu <span class="math inline">\(Y\)</span> định lượng từ <span class="math inline">\(p = 3\)</span> biến giải thích là <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, và <span class="math inline">\(X_3\)</span>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="mô-hình-mạng-nơ-ron.html#cb1-1" tabindex="-1"></a><span class="fu">draw_neu</span>(<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">5</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:fgnn001"></span>
+<img src="bookdown-demo_files/figure-html/fgnn001-1.png" alt="Mô hình mạng nơ-ron có p = 3 đơn vị trong lớp đầu vào, một lớp ẩn có năm đơn vị, và một đơn vị đầu ra." width="672" />
+<p class="caption">
+Figure 3.1: Mô hình mạng nơ-ron có p = 3 đơn vị trong lớp đầu vào, một lớp ẩn có năm đơn vị, và một đơn vị đầu ra.
+</p>
+</div>
+<p>Theo thuật ngữ chuyên môn, ba biến giải thích <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, và <span class="math inline">\(X_3\)</span> là các đơn vị (unit) của lớp đầu vào (input layer). Các mũi tên được dùng để mô tả rằng mỗi đơn vị đầu vào sẽ chuyển tiếp thông tin vào <span class="math inline">\(k = 5\)</span> đơn vị của lớp ẩn (hidden layer) được ký hiệu là <span class="math inline">\(H_i\)</span> với <span class="math inline">\(i = 1, 2, \cdots, k\)</span>. Dạng của hàm <span class="math inline">\(f\)</span> trong mô hình mạng nơ-ron nhân tạo sẽ được viết như sau:
+<span class="math display" id="eq:nn003" id="eq:nn002" id="eq:nn001">\[\begin{align}
+f(\textbf{X}) &amp; = \beta_0 + \sum\limits_{i = 1}^k \beta_i \cdot h_i\left(\textbf{X}\right) \\
+&amp; = \beta_0 + \sum\limits_{i = 1}^k \beta_i \cdot g\left(w_{i,0} + \sum\limits_{j=1}^p w_{i,j} \cdot X_j\right)
+\tag{3.1}
+\end{align}\]</span>
+trong đó <span class="math inline">\(g\)</span> là một hàm số phi tuyến được xác định trước, được gọi theo thuật ngữ chuyên môn là các hàm kích hoạt (activation function). Các <span class="math inline">\(\beta_i\)</span> và <span class="math inline">\(w_{i,j}\)</span> là các hằng số và cũng là các tham số cần được ước lượng của mô hình. Hàm <span class="math inline">\(f\)</span> trong phương trình <a href="#eq:nn01">(<strong>??</strong>)</a> được xây dựng theo hai bước:</p>
+<ul>
+<li><p>Bước thứ nhất, các đơn vị <span class="math inline">\(H_i\)</span> trong lớp ẩn được tính bằng hàm kích hoạt tính trên tổ hợp tuyến tính của các biến đầu vào:
+\begin{algin}
+H_i = g(w_{i,0} + <em>{j=1}^p w</em>{i,j} X_j)
+\tag{3.2}
+\end{align}</p></li>
+<li><p>Bước thứ hai, <span class="math inline">\(k\)</span> đơn vị của lớp ẩn là yếu tố đầu vào để tính toán giá trị biến đầu ra định lượng:
+\begin{algin}
+Y = <em>0 + </em>{i = 1}^k _i H_i
+\tag{3.3}
+\end{align}</p></li>
+</ul>
+<p>Tất cả các tham số <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(\cdots\)</span> , <span class="math inline">\(\beta_k\)</span> và <span class="math inline">\(w_{1,0}\)</span> , <span class="math inline">\(\cdots\)</span> , <span class="math inline">\(w_{k,p}\)</span> được ước lượng từ dữ liệu. Các hàm kích hoạt thường được sử dụng là hàm Sigmoid và hàm ReLU. Hàm sigmoid là hàm được thường xuyên sử dụng trong hồi quy logistic để chuyển hàm tuyến tính thành xác suất giữa 0 và 1 trong khi hàm ReLU là hàm phi tuyến được xây dựng một cách đơn giản nhất nhằm mục đích dễ dàng tuyến tính trong các mạng phức tạp.
+<span class="math display">\[\begin{align}
+\text{Sigmoid: } &amp; g(x) = \cfrac{e^x}{1 + e^{x}} = \cfrac{1}{1 + e^{-x}} \\
+\text{RelU: } &amp; g(x) = max(x , 0) = (x)^+
+\end{align}\]</span></p>
+<div class="figure"><span style="display:block;" id="fig:fgnn002"></span>
+<img src="bookdown-demo_files/figure-html/fgnn002-1.png" alt="Hàm kích hoạt sigmoid và hàm kích hoạt ReLU. Hàm Sigmoid có đạo hàm tại mọi điểm trong khi hàm ReLU không có đạo hàm tại 0" width="672" />
+<p class="caption">
+Figure 3.2: Hàm kích hoạt sigmoid và hàm kích hoạt ReLU. Hàm Sigmoid có đạo hàm tại mọi điểm trong khi hàm ReLU không có đạo hàm tại 0
+</p>
+</div>
+<p>Hình <a href="#fig:fgnn02"><strong>??</strong></a> mô tả giá trị của hàm Sigmoid và hàm ReLU trên đoạn từ -4 đến 4. Trong thời kỳ đầu của mô hình mạng nơ-ron, hàm Sigmoid được ưa chuộng vì hàm số này có đạo hàm liên tục tại mọi giát trị của <span class="math inline">\(x\)</span>. Sau đó, hàm ReLU lại là lựa chọn ưa thích trong các mô hình mạng nơ-ron hiện đại vì hàm số này đơn giản, dễ tính toán và cho hiệu quả tốt hơn so với hàm Sigmoid.</p>
+<p>Có thể tóm tắt lại mô hình được mô tả trong Hình <a href="#fig:fgnn01"><strong>??</strong></a> như sau: từ 3 biến giải thích ban đầu là <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, và <span class="math inline">\(X_3\)</span> chúng ta tạo ra năm biến giải thích mới là <span class="math inline">\(H_1\)</span>, <span class="math inline">\(H_2\)</span>, <span class="math inline">\(H_3\)</span>, <span class="math inline">\(H_4\)</span> và <span class="math inline">\(H_5\)</span> được tính toán bằng giá trị của hàm kích hoạt <span class="math inline">\(g(.)\)</span> trên các tổ hợp tuyến tính của các biến giải thích ban đầu. Sau đó chúng ta sử dụng năm biến giải thích <span class="math inline">\(H_i\)</span>, <span class="math inline">\(i = 1, 2, 3, 4, 5\)</span> để xây dựng một mô hình hồi quy tuyến tính mà trong đó biến phụ thuộc là <span class="math inline">\(Y\)</span>. Tham số của các mô hình bao gồm các hệ số <span class="math inline">\(w_{i,j}\)</span> để tính các biến <span class="math inline">\(H_i\)</span>, và các hệ số <span class="math inline">\(\beta_j\)</span> trong mô hình hồi quy tuyến tính <span class="math inline">\(Y\)</span> theo các biến <span class="math inline">\(H\)</span>.</p>
+<p>Mô hình có tên là mạng nơ-ron bởi vì cấu trúc của mô hình bao gồm các đơn vị <span class="math inline">\(H_i\)</span> hoạt động giống như các tế bào thần kinh trong não bộ của con người. Các đơn vị <span class="math inline">\(H_i\)</span> xấp xỉ hoặc bằng 0 giống như các tế bào thần kinh im lặng (slient neuron), những tế bào ít bị kích hoạt trong quá trình lan truyền thông tin, trong khi các đơn vị <span class="math inline">\(H_i\)</span> lớn (khi sử dụng hàm ReLU), hoặc xấp xỉ 1 (khi sử dụng hàm Sigmoid) giống như những tế bào bị kích hoạt mạng trong quá trình lan truyền thông tin.</p>
+<p>Sử dụng các hàm kích hoạt <span class="math inline">\(g(.)\)</span> phi tuyến là đặc biệt quan trọng tong vì nếu không hàm <span class="math inline">\(f\)</span> sẽ suy biến thành mô hình tuyến tính thông thường với <span class="math inline">\(p = 3\)</span> biến giải thích trong <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, và <span class="math inline">\(X_3\)</span>. Ngoài ra, hàm kích hoạt phi tuyến cho phép mô hình mạng nơ-ron mô tả được những mối liên hệ phi tuyến và phức tạp giữa các biến giải thích <span class="math inline">\(\textbf{X}\)</span> và biến mục tiêu <span class="math inline">\(Y\)</span>.</p>
+<p>Giả sử trong mô hình mạng nơ-ron được mô tả trong Hình <a href="#fig:fgnn01"><strong>??</strong></a>, chúng ta có hàm kích hoạt <span class="math inline">\(g(x) = x^2\)</span> và giá trị của các hệ số <span class="math inline">\(\boldsymbol{\beta} = (\beta_0, \beta_1, \beta_2, \beta_3, \beta_4, \beta_5)\)</span> và <span class="math inline">\(w_{i,j}\)</span>, với <span class="math inline">\(1 \leq i \leq 5\)</span> và <span class="math inline">\(0 \leq j \leq 3\)</span>, được cho như sau
+<span class="math display" id="eq:nn004">\[\begin{align}
+&amp; \text{hệ số chặn: } \beta_0 = w_{1,0} = w_{2,0} = w_{3,0} = w_{4,0} = w_{5,0} 0 \\
+&amp; \\
+&amp; \begin{pmatrix}
+\beta_1 \\
+\beta_2 \\
+\beta_3 \\
+\beta_4 \\
+\beta_5
+\end{pmatrix} = \begin{pmatrix}
+0.5 \\
+0.5 \\
+0.5 \\
+1 \\
+2
+\end{pmatrix} \ \text{ và } \ \begin{pmatrix}
+w_{1,1} &amp; w_{1,2} &amp; w_{1,3} \\
+w_{2,1} &amp; w_{2,2} &amp; w_{2,3} \\
+w_{3,1} &amp; w_{3,2} &amp; w_{3,3} \\
+w_{4,1} &amp; w_{4,2} &amp; w_{4,3} \\
+w_{5,1} &amp; w_{5,2} &amp; w_{5,3}
+\end{pmatrix} = \begin{pmatrix}
+1 &amp; -1 &amp; 1 \\
+1 &amp; 2 &amp; -1 \\
+0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0
+\end{pmatrix}
+\tag{3.4}
+\end{align}\]</span></p>
+<p>Trước hết, để tránh sự phức tạp chúng tôi cho giá trị các hàng 3, 4, và 5 của ma trận <span class="math inline">\(\boldsymbol{w}\)</span> đều bằng 0, điều này dẫn đến giá trị tại các đơn vị <span class="math inline">\(H_3\)</span>, <span class="math inline">\(H_4\)</span> và <span class="math inline">\(H_5\)</span> của lớp ẩn sẽ bằng 0. Các đơn vị này hoạt động như các tế bào im lặng trong mạng nơ-rơn và không có ảnh hưởng đến biến mục tiêu <span class="math inline">\(Y\)</span>. Chúng ta có giá trị tại <span class="math inline">\(H_1\)</span> và <span class="math inline">\(H_2\)</span> được tính theo các biến giải thích và hàm kích hoạt:
+- Giá trị tại <span class="math inline">\(H_1\)</span>
+<span class="math display" id="eq:nn005">\[\begin{align}
+H_1\left(X_1, X_2, X_3\right) &amp; = g\left(w_{1,1} \cdot X_1 + w_{1,2} \cdot X_2 + w_{1,3} \cdot X_3\right) \\
+&amp; = \left(w_{1,1} \cdot X_1 + w_{1,2} \cdot X_2 + w_{1,3} \cdot X_3\right)^2 \\
+&amp; = \left(X_1 - X_2 + X_3\right)^2
+\tag{3.5}
+\end{align}\]</span></p>
+<ul>
+<li>Giá trị tại <span class="math inline">\(H_2\)</span>
+<span class="math display" id="eq:nn006">\[\begin{align}
+H_2 \left(X_1, X_2, X_3\right) &amp; = g\left(w_{2,1} \cdot X_1 + w_{2,2} \cdot X_2 + w_{2,3} \cdot X_3\right) \\
+&amp; = \left(w_{2,1} \cdot X_1 + w_{2,2} \cdot X_2 + w_{2,3} \cdot X_3\right)^2 \\
+&amp; = \left(X_1 + 2 \cdot X_2 - X_3\right)^2
+\tag{3.6}
+\end{align}\]</span></li>
+</ul>
+<p>Giá trị của hàm số <span class="math inline">\(f(\text{X})\)</span> là đầu ra của mạng nơ-ron được xác định như sau:
+<span class="math display" id="eq:nn007">\[\begin{align}
+f(X_1, X_2, X_3) &amp; = 0.5 \cdot H_1\left(X_1, X_2, X_3\right) + 0.5 \cdot H_2 \left(X_1, X_2, X_3\right) \\
+&amp; = X_1^2 + 2.5 \cdot X_2^2 + X_3^2 + X_1 \cdot X_2 - 3 \cdot X_2 \cdot X_3
+\tag{3.7}
+\end{align}\]</span></p>
+</div>
+<div id="mạng-neural-với-nhiều-layer-ẩn." class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Mạng neural với nhiều layer ẩn.<a href="mô-hình-mạng-nơ-ron.html#mạng-neural-với-nhiều-layer-ẩn." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="ước-lượng-tham-số-cho-mạng-neural-network" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Ước lượng tham số cho mạng neural network<a href="mô-hình-mạng-nơ-ron.html#ước-lượng-tham-số-cho-mạng-neural-network" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="backpropagation" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Backpropagation<a href="mô-hình-mạng-nơ-ron.html#backpropagation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="regularization-and-stochastic-gradient-descent" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Regularization and Stochastic Gradient Descent<a href="mô-hình-mạng-nơ-ron.html#regularization-and-stochastic-gradient-descent" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="thực-hành" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Thực hành:<a href="mô-hình-mạng-nơ-ron.html#thực-hành" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="sử-dụng-mạng-neural-network-trong-phân-loại-văn-bản." class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Sử dụng mạng neural network trong phân loại văn bản.<a href="mô-hình-mạng-nơ-ron.html#sử-dụng-mạng-neural-network-trong-phân-loại-văn-bản." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="sử-dụng-mạng-neural-network-tích-chập-với-dữ-liệu-mnist." class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Sử dụng mạng neural network tích chập với dữ liệu <span class="math inline">\(mnist()\)</span>.<a href="mô-hình-mạng-nơ-ron.html#sử-dụng-mạng-neural-network-tích-chập-với-dữ-liệu-mnist." class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!-- # REFERENCE -->
+<!-- ### Source from thesis -->
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+<!-- ### Souce from website -->
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->
+<!-- ### Hồi quy logistic là một mạng nơ-ron không có layer ẩn -->
+<!-- Trước khi giới thiệu về cấu trúc của một mô hình mạng nơ-ron, chúng ta sẽ xem xét lại cách hồi quy logistic hoạt động. Sau đó, khi nhìn nhận cách vận hành của hổi quy logistic như một mạng nơ-ron đơn giản, bạn đọc sẽ có hình dung cụ thể hơn về cách xây dựng mô hình mạng nơ-ron.  -->
+<!-- Dữ liệu dùng để xây dựng mô hình hồi quy logistic được xây dựng dựa trên dữ liệu bao gồm 5 quan sát được cho trong bảng dưới đây -->
+<!-- ```{r table70 input, include=FALSE} -->
+<!-- Col0 <- c("A","B","C","D","E","F") -->
+<!-- Col1 <- c(1,2,4,3,1.5,3) -->
+<!-- Col2 <- c(2,1,1,3,3.0,2) -->
+<!-- Col3 <- c("blue", "red", "red", "blue", "blue", "?") -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE} -->
+<!-- #lik50.tab -->
+<!-- df1 <- data.frame(x0 = Col0, x1 = Col1, x2 = Col2, y = Col3) -->
+<!-- kable(df1, booktabs = T, -->
+<!--       col.names = c("Dữ liệu","x1", -->
+<!--         "x2",  -->
+<!--         "Màu sắc"), -->
+<!--       caption = "Dữ liệu cho hồi quy Logistic",  -->
+<!--       escape=F) %>% -->
+<!--   column_spec(c(2,3)) %>%  -->
+<!--   kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
+<!-- ```{r plot1, echo =FALSE} -->
+<!-- ggplot(df1, aes(x1,x2,fill=y))+ -->
+<!--   geom_point(size=15,alpha=0.8,color="black", shape = 23)+ -->
+<!--   geom_text(aes(label=x0),color="black")+ -->
+<!--   scale_fill_manual(values=c("grey","red","blue"))+ -->
+<!--   xlim(c(0,5))+ylim(c(0,4))+ -->
+<!--   theme_classic()+ -->
+<!--   xlab("")+ylab("")+ -->
+<!--   theme(legend.position = "none") -->
+<!-- ``` -->
+<!-- Với mỗi điểm dữ liệu bất kỳ, giả sử là điểm A có với các thuộc tính $x_1(A) = $ và $x_2(A) = $, chúng ta sẽ thực hiện hai phép biến đổi kế tiếp nhau: -->
+<!-- - Phép biến đổi tuyển tính: với bộ 3 số thực bất kỳ $(b_0, b_1, b_2)$, chúng ta luôn có thể thực hiện phép biến đổi tuyến tính: -->
+<!-- $$  -->
+<!-- A(1, x_1, x_2) \rightarrow b_0 \times 1 + b_1 \times x_1 + b_2 \times x_2 -->
+<!-- $$ -->
+<!-- - Phép biến đổi phi tuyến tính: chúng ta sử dụng hàm số $f(x) = sigmoid(x) = \cfrac{1}{1+e^{x}}$ để thực hiện phép biến đổi thứ hai -->
+<!-- $$  -->
+<!-- b_0 + b_1 x_1 + b_2 x_2 \rightarrow \cfrac{1}{1+e^{b_0 + b_1 x_1 + b_2 x_2}} -->
+<!-- $$ -->
+<!-- Sau khi thực hiện các phép biến đổi với từng điểm dữ liệu, chúng ta sẽ thu được với mỗi điểm dữ liệu một số nằm trong khoảng $(0,1)$.  -->
+<!-- ```{r table701 input, include=FALSE} -->
+<!-- Col0 <- c("A","B","C","D","E") -->
+<!-- Col1 <- c(1,2,4,3,1.5) -->
+<!-- Col2 <- c(2,1,1,3,3.0) -->
+<!-- Col3 <- c("blue", "red", "red", "blue", "blue") -->
+<!-- Col4 <- c(1,0,0,1,1) -->
+<!-- Col5 <- c("$(1+exp(b_0+ b_1+2 b_2))^{-1}$", -->
+<!--           "$(1+exp(b_0+2 b_1+ b_2))^{-1}$", -->
+<!--           "$(1+exp(b_0+4 b_1+ b_2))^{-1}$", -->
+<!--           "$(1+exp(b_0+3 b_1+3 b_2))^{-1}$", -->
+<!--           "$(1+exp(b_0+1.5 b_1+3 b_2))^{-1}$") -->
+<!-- ``` -->
+<!-- ```{r, echo=FALSE} -->
+<!-- #lik50.tab -->
+<!-- df1 <- data.frame(x0 = Col0, x1=Col1,x2= Col2,y= Col3, yi=Col4, transformation=Col5) -->
+<!-- kable(df1, booktabs = T, -->
+<!--       col.names = c("Dữ liệu","$x_1$", -->
+<!--         "$x_2$",  -->
+<!--         "Màu sắc", "Biến mục tiêu ($y_i$)" , "Dữ liệu sau chuyển đổi ($p_i$)"), -->
+<!--       caption = "Dữ liệu cho hồi quy Logistic",  -->
+<!--       escape=F) %>% -->
+<!--   column_spec(c(2,6)) %>%  -->
+<!--   kable_styling(latex_options = "scale_down") -->
+<!-- ``` -->
+<!-- Hàm tổn thất, tính bằng Cross Entropy qua năm điểm dữ liệu A, B, C, D, và E, sẽ là một hàm số của ba biến $(b_0, b_1, b_2)$ như sau -->
+<!-- $$ -->
+<!-- Loss(b_0, b_1, b_2) = - \sum\limits_{Data = A}^E [y_i \times log(p_i) + (1-y_i) \times log(1-p_i)] -->
+<!-- $$ -->
+<!-- với giá trị của $y_i$ và $p_i$ được cho bởi bảng ở trên. Bằng thuật toán gradient descent, chúng ta có thể tính toán được giá trị của $(b_0, b_1, b_2)$ sao cho hàm $Loss$ đạt giá trị nhỏ nhất bằng $(25,15,-30)$. Vậy có thể tính toán khả năng điểm $F$ có màu xanh là -->
+<!-- $$ -->
+<!-- \mathbb{P}(F = blue) = (1+exp(25 + 3 \times 15 + 3 \times -30))^{-1} = 1 -->
+<!-- $$ -->
+<!-- Như vậy, trong hổi quy logistic, chúng ta đã sử dụng 2 phép biến đổi dữ liệu bao gồm một phép biến đổi tuyến tính thông qua một véc-tơ $b$ và sau đó là một phép biến đổi phi tuyến (hàm sigmoid) để thu được một giá trị duy nhất cho mỗi điểm dữ liệu. Quá trình ước lượng mô hình logistic là quá trình tìm kiếm các tham số $b$ sao cho giá trị đầu ra sau các phép biến đổi của mỗi điểm dữ liệu gần với kết quả mong muốn nhất có thể. -->
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="giới-thiệu-chung.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

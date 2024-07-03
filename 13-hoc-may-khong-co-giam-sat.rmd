@@ -1,34 +1,8 @@
---- 
-title: "Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh"
-author: "Nguyễn Quang Huy"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-output: bookdown::bs4_book
-#documentclass: book
-#bibliography: [book.bib, packages.bib]
-biblio-style: apalike
-#link-citations: yes
-#github-repo: rstudio/bookdown-demo
-description: "Hello, This is the test version"
-header-includes:
-- \usepackage{tikz}
-- \usepackage{pgfplots}
-- \usetikzlibrary{arrows,automata,positioning}
-- \usepackage[utf8]{inputenc}
-- \usepackage[utf8]{vietnam}
-- \usepackage{etoolbox}
-- \usepackage{xcolor}
-- \usepackage{hyperref}
-- \usepackage{mathtools}
-- \usepackage{fontawesome5}
-- \makeatletter
-- \preto{\@verbatim}{\topsep=0pt \partopsep=-0pt}
-- \makeatother
-- \DeclareMathOperator*{\argmax}{arg\,max}
-- \newcommand\tstrut{\rule{0pt}{3ex}}
-- \newcommand\bstrut{\rule[-2.5ex]{0pt}{0pt}}
 ---
-
+output:
+  pdf_document: default
+  html_document: default
+---
 ```{r, warning = FALSE, echo = FALSE}
 library(readxl)
 library(dplyr)
@@ -43,12 +17,22 @@ library(forcats)
 library(pryr)
 ```
 
+```{r, echo = FALSE}
+colorize <- function(x, color) {
+ if (knitr::is_latex_output()) {
+ sprintf("\\textcolor{%s}{%s}", color, x)
+ } else if (knitr::is_html_output()) {
+ sprintf("<span style='color: %s;'>%s</span>", 
+ color,
+ x)
+ } else x
+}
+```
+
 # Học máy không có giám sát
 Chương sách này sẽ tập trung vào học máy không giám sát; một tập hợp các công cụ thống kê được sử dụng cho trường hợp chúng ta có một dữ liệu bao gồm $p$ biến $X_1, X_2, \cdots, X_p$ và $n$ quan sát. Mục đích của chúng ta là khám phá những giá trị bên trong dữ liệu mà không quan tâm đến có hay không có biến mục tiêu. Các câu hỏi đặt ra bao gồm có
 
 Có cách nào thông tin để trực quan hóa dữ liệu? Chúng ta có thể khám phá các nhóm con giữa các biến hoặc giữa các quan sát không? Học tập không giám sát đề cập đến một tập hợp các kỹ thuật đa dạng để trả lời các câu hỏi như thế này. Trong chương này, chúng ta sẽ tập trung vào hai loại học tập không giám sát cụ thể: phân tích thành phần chính, một công cụ được sử dụng để trực quan hóa dữ liệu hoặc xử lý trước dữ liệu trước khi áp dụng các kỹ thuật có giám sát và phân cụm, một loại phương pháp rộng rãi để khám phá. các nhóm con chưa biết trong dữ liệu.
-
-
 
 ## Phương pháp phân tích thành phần chính
 

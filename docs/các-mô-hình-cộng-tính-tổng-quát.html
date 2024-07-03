@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chương 1 Các mô hình cộng tính tổng quát | bookdown-demo.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chương 1 Các mô hình cộng tính tổng quát | bookdown-demo.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chương 1 Các mô hình cộng tính tổng quát | bookdown-demo.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="neuralnetwork.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">KHDL KT&KD</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html"><i class="fa fa-check"></i><b>1</b> Các mô hình cộng tính tổng quát</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-splines"><i class="fa fa-check"></i><b>1.1</b> Hồi quy splines</a></li>
+<li class="chapter" data-level="1.2" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#smoothing-splines"><i class="fa fa-check"></i><b>1.2</b> Smoothing Splines</a></li>
+<li class="chapter" data-level="1.3" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-từng-đoạn"><i class="fa fa-check"></i><b>1.3</b> Hồi quy từng đoạn</a></li>
+<li class="chapter" data-level="1.4" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#gammodel"><i class="fa fa-check"></i><b>1.4</b> Mô hình hồi quy cộng tính tổng quát</a></li>
+<li class="chapter" data-level="1.5" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#thực-hành"><i class="fa fa-check"></i><b>1.5</b> Thực hành</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-spline-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>1.5.1</b> Hồi quy spline trên dữ liệu Boston</a></li>
+<li class="chapter" data-level="1.5.2" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-cục-bộ-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>1.5.2</b> Hồi quy cục bộ trên dữ liệu Boston</a></li>
+<li class="chapter" data-level="1.5.3" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#mô-hình-công-tính-tổng-quát-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>1.5.3</b> Mô hình công tính tổng quát trên dữ liệu Boston</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#phụ-lục"><i class="fa fa-check"></i><b>1.6</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen1"><i class="fa fa-check"></i><b>1.6.1</b> Ước lượng tham số cho splines bậc ba và <span class="math inline">\(k\)</span> nút</a></li>
+<li class="chapter" data-level="1.6.2" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen2"><i class="fa fa-check"></i><b>1.6.2</b> Ước lượng tham số cho natural splines bậc ba có <span class="math inline">\(k\)</span> nút</a></li>
+<li class="chapter" data-level="1.6.3" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen3"><i class="fa fa-check"></i><b>1.6.3</b> Tại sao smoothing splines lại là một natural spline</a></li>
+<li class="chapter" data-level="1.6.4" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen4"><i class="fa fa-check"></i><b>1.6.4</b> Ước lượng smoothing splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="neuralnetwork.html"><a href="neuralnetwork.html"><i class="fa fa-check"></i><b>2</b> Các mạng học sâu điển hình</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="neuralnetwork.html"><a href="neuralnetwork.html#mạng-nơ-ron-tích-chập"><i class="fa fa-check"></i><b>2.1</b> Mạng nơ-ron tích chập</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="neuralnetwork.html"><a href="neuralnetwork.html#lớp-tích-chập-trong-mạng-cnn"><i class="fa fa-check"></i><b>2.1.1</b> Lớp tích chập trong mạng CNN</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="neuralnetwork.html"><a href="neuralnetwork.html#pickands-dependent-function"><i class="fa fa-check"></i><b>2.2</b> Pickands dependent function</a></li>
+<li class="chapter" data-level="2.3" data-path="neuralnetwork.html"><a href="neuralnetwork.html#nhóm-các-hàm-at-để-cuv-là-một-copula"><i class="fa fa-check"></i><b>2.3</b> Nhóm các hàm A(t) để C(u,v) là một copula</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="neuralnetwork.html"><a href="neuralnetwork.html#cách-thứ-nhất-để-tham-số-hóa-đa-thức-từng-phần"><i class="fa fa-check"></i><b>2.3.1</b> Cách thứ nhất để tham số hóa đa thức từng phần</a></li>
+<li class="chapter" data-level="2.3.2" data-path="neuralnetwork.html"><a href="neuralnetwork.html#cách-thứ-hai"><i class="fa fa-check"></i><b>2.3.2</b> Cách thứ hai</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="neuralnetwork.html"><a href="neuralnetwork.html#copula-có-2-kendall-tau"><i class="fa fa-check"></i><b>2.4</b> Copula có 2 kendall tau</a></li>
+<li class="chapter" data-level="2.5" data-path="neuralnetwork.html"><a href="neuralnetwork.html#thực-hành-1"><i class="fa fa-check"></i><b>2.5</b> Thực hành:</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="neuralnetwork.html"><a href="neuralnetwork.html#mô-hình-mạng-nơ-ron-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>2.5.1</b> Mô hình mạng nơ-ron trên dữ liệu Boston</a></li>
+<li class="chapter" data-level="2.5.2" data-path="neuralnetwork.html"><a href="neuralnetwork.html#mô-hình-mạng-nơ-ron-để-phân-loại-khách-hàng"><i class="fa fa-check"></i><b>2.5.2</b> Mô hình mạng nơ-ron để phân loại khách hàng</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="neuralnetwork.html"><a href="neuralnetwork.html#phụ-lục-1"><i class="fa fa-check"></i><b>2.6</b> Phụ lục</a></li>
+<li class="chapter" data-level="2.7" data-path="neuralnetwork.html"><a href="neuralnetwork.html#bài-tập"><i class="fa fa-check"></i><b>2.7</b> Bài tập</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="các-mô-hình-cộng-tính-tổng-quát" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chương 1</span> Các mô hình cộng tính tổng quát<a href="các-mô-hình-cộng-tính-tổng-quát.html#các-mô-hình-cộng-tính-tổng-quát" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Trong chương trước,chúng ta đã nghiên cứu về mô hình hồi quy tuyến tính. Đây là lớp các mô hình tương đối đơn giản để hiểu và thực hiện, đồng thời có ưu điểm hơn các phương pháp tiếp cận khác do dễ dàng diễn giải và suy luận. Tuy nhiên, các mô hình hồi quy tuyến tính thông thường có thể có những hạn chế về khả năng dự đoán. Điều này là do giả định tuyến tính hiếm khi xảy ra trong dữ liệu thực tế. Chúng ta cũng đã nghiên cứu một vài phương pháp để có thể cải thiện khả năng dự báo của các mô hình tuyến tính bằng cách sử dụng hồi quy ridge, hay Lasso …, mà trong đó, khả năng dự báo được cải thiện bằng cách giảm bậc tự do của mô hình tuyến tính với mục đích giảm phương sai của mô hình. Tuy nhiên, các phương pháp cải thiện mô hình đó vẫn giữ nguyên giả thuyết tuyến tính.</p>
+<p>Trong chương này, chúng tôi sẽ từng bước nới lỏng giả định tuyến tính trong xây dựng mô hình trong khi vẫn cố gắng duy trì khả năng diễn giải nhiều nhất có thể bằng cách giữ nguyên nguyên tắc cộng tính trong xây dựng mô hình. Chúng ta sẽ bắt đầu chương sách này với các mở rộng đơn giản của các mô hình tuyến tính bao gồm hồi quy đa thức, hồi quy theo hàm bậc thang, sau đó chuyển sang các phương pháp phức tạp hơn như spline, hồi quy cục bộ và sau cùng là mô hình cộng tính tổng quát.</p>
+<div id="hồi-quy-splines" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Hồi quy splines<a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-splines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Khi thảo luận về xây dựng mô hình tuyến tính, chúng tôi đã đề cập đến vấn đề khi tồn lại mối liên hệ phi tuyến giữa biến mục tiêu và biến giải thích. Một phương pháp giải quyết vấn đề này là mở rộng hồi quy tuyến tính mà trong đó biến mục tiêu được mô tả thông qua biến giải thích và các hàm mũ của biến đó, hay nói một cách khác là được mô tả bằng một đa thức của biến giải thích. Ví dụ như chúng ta thay thế mô hình tuyến tính đơn biến
+<span class="math display">\[\begin{align}
+y_i = \beta_0 + \beta_1 \cdot x_i + \epsilon_i
+\end{align}\]</span>
+bằng một mô hình hồi quy đa thức
+<span class="math display" id="eq:gam001">\[\begin{align}
+y_i = \beta_0 + \beta_1 \cdot x_i + \beta_2 \cdot x_i^2 + \cdots + \beta_d \cdot x_i^d + \epsilon_i
+\tag{1.1}
+\end{align}\]</span>
+với <span class="math inline">\(\epsilon_i\)</span> là phần dư và <span class="math inline">\(d\)</span> là bậc của đa thức. Khi bậc của đa thức <span class="math inline">\(d\)</span> là lớn, đa thức sẽ có càng nhiều điểm uốn và độ cong đủ lớn để mô tả các mối liên hệ phi tuyến. Lưu ý rằng các hệ số trong <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam001">(1.1)</a> có thể được ước lượng dễ dàng bằng cách sử dụng phương pháp bình phương nhỏ nhất vì đây là mô hình tuyến tính thông thường với các biến giải thích <span class="math inline">\(x_i, x_i^2, \cdots , x_i^d\)</span>. Khi sử dụng hồi quy đa thức cần lưu ý là khi sử dụng bậc của đa thức quá lớn, ví dụ như <span class="math inline">\(d \geq 4\)</span>, thì đa thức sẽ có hình dạng khá kỳ lạ tại các điểm giới hạn của biến giải thích. Các điểm giới hạn bao gồm các điểm dữ liệu rất nhỏ và rất lớn của biến giải thích.</p>
+<div class="figure"><span style="display:block;" id="fig:fggam01"></span>
+<img src="bookdown-demo_files/figure-html/fggam01-1.png" alt="Hồi quy đa thức biến giá nhà (nghìn USD) theo biến tỷ lệ người sống dưới mức trung bình (%) trên dữ liệu Boston. Hình bên trái: sử dụng đa thức bậc ba. Hình ở giữa: sử dụng đa thức bậc bốn. Hình bên phải: sử dụng đa thức bậc năm" width="672" />
+<p class="caption">
+Figure 1.1: Hồi quy đa thức biến giá nhà (nghìn USD) theo biến tỷ lệ người sống dưới mức trung bình (%) trên dữ liệu Boston. Hình bên trái: sử dụng đa thức bậc ba. Hình ở giữa: sử dụng đa thức bậc bốn. Hình bên phải: sử dụng đa thức bậc năm
+</p>
+</div>
+<p>Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam01">1.1</a> mô tả mô hình hồi quy đa thức trong đó biến mục tiêu là giá nhà (nghìn USD) theo biến tỷ lệ người sống dưới mức trung bình (%) trên dữ liệu về giá nhà tại Boston. Hình bên trái cho thấy sử dụng đa thức bậc ba mô tả khá đầy đủ hình dạng mối liên hệ tuyến tính giữa hai biến: giá nhà có xu hướng giảm tại các khu vực có tỷ lệ người sống dưới mức trung bình lớn. Tốc độ giảm của giá nhà theo biến giải thích có sự khác biệt, giá nhà giảm nhanh khi tỷ lệ sống dưới mức trung bình tăng từ 5% lên 15%, tốc độ giảm chậm dần khi biến giải thích nhận giá trị trong khoảng 15% đến 25%, sau đó tốc độ giảm của giá nhà lại tăng khi tỷ lệ sống dưới mức trung bình cao hơn 25%. Hình ở giữa trong Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam01">1.1</a> sử dụng đa thức bậc bốn. Bạn đọc có thể nhận thấy ngay rằng đa thức bậc bốn là không phù hợp để mô tả mối liên hệ giữa biến mục tiêu và biến giải thích khi hàm số có giá trị tăng trên khoảng tỷ lệ sống dưới mức trung bình cao hơn 30%. Hình bên phải trong Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam01">1.1</a> sử dụng đa thức bậc năm để mô tả mối liên hệ giữa giá nhà và tỷ lệ sống dưới mức trung bình. Không có sự khác biệt nhiều giữa đa thức bậc ba và đa thức bậc năm trong miền 5% đến 30%, tuy nhiên đa thức bậc năm lại cho hình dạng kỳ lạ khi biến giải thích lớn hơn 25%!</p>
+<p>Nhìn chung, kinh nghiệm cho thấy rằng sử dụng đa thức bậc lớn hơn ba trong hồi quy đa thức thường không đem lại hiệu quả trong mô tả dữ liệu. Thay vì tăng bậc của đa thức để giải thích tốt hơn mối liên hệ giữa biến mục tiêu và biến giải thích, những người xây dựng mô hình sử dụng một dạng hàm <span class="math inline">\(f(x)\)</span> mà với mỗi khoảng giá trị khác nhau của <span class="math inline">\(x\)</span> hàm <span class="math inline">\(f\)</span> là một đa thức khác nhau. Nói một cách khác, mối liên hệ giữa <span class="math inline">\(Y\)</span> và <span class="math inline">\(X\)</span> được mô tả bằng một <span class="math inline">\(splines\)</span>. Thay vì tăng bậc cho đa thức bậc ba:
+<span class="math display" id="eq:gam002">\[\begin{align}
+y_i = \beta_0 + \beta_1 \cdot x_i + \beta_2 \cdot x_i^2 +\beta_3 \cdot x_i^3 + \epsilon_i
+\tag{1.2}
+\end{align}\]</span>
+chúng ta có thể thay thế bằng cách hồi quy hai đa thức bậc ba trên hai miền giá trị khác nhau của <span class="math inline">\(x_i\)</span>
+<span class="math display" id="eq:gam003">\[\begin{align}
+y_i = \begin{cases}
+\beta_{01} + \beta_{11} \cdot x_i + \beta_{21} \cdot x_i^2 +\beta_{31} \cdot x_i^3 + \epsilon_i \text{ nếu } x_i &lt; c \\
+\beta_{02} + \beta_{12} \cdot x_i + \beta_{22} \cdot x_i^2 +\beta_{32} \cdot x_i^3 + \epsilon_i \text{ nếu } x_i \geq c \\
+\end{cases}
+\tag{1.3}
+\end{align}\]</span></p>
+<p>Chúng ta chia dữ liệu thành hai phần: phần dữ liệu thứ nhất bao gồm các quan sát có <span class="math inline">\(x_i &lt; c\)</span> và phần dữ liệu thứ hai bao gồm các quan sát có <span class="math inline">\(xi \geq c\)</span>. Đa thức bậc ba thứ nhất có các hệ số <span class="math inline">\(\beta_{01}\)</span>, <span class="math inline">\(\beta_{11}\)</span>, <span class="math inline">\(\beta_{21}\)</span> và <span class="math inline">\(\beta_{31}\)</span> được ước lượng trên phần dữ liệu thứ nhất và đa thức bậc ba thứ hai có các hệ số <span class="math inline">\(\beta_{02}\)</span>, <span class="math inline">\(\beta_{12}\)</span>, <span class="math inline">\(\beta_{22}\)</span> và <span class="math inline">\(\beta_{32}\)</span> được ước lượng trên phần dữ liệu thứ hai. Cả hai đa thức đều có thể được ước lượng bằng cách sử dụng phương pháp bình phương nhỏ nhất giống như trong hồi quy đa biến. Điểm <span class="math inline">\(c\)</span> chia dữ liệu làm hai miền được gọi là một nút hay một điểm cắt. Việc sử dụng nút sẽ giúp cho mô hình linh hoạt hơn là tăng bậc của đa thức và sử dụng càng nhiều nút sẽ càng làm cho hàm <span class="math inline">\(f\)</span> trở nên linh hoạt. Nếu chúng ta sử dụng <span class="math inline">\(k\)</span> nút khác nhau trên miền giá trị của biến <span class="math inline">\(X\)</span> thì chúng ta có <span class="math inline">\(k+1\)</span> miền dữ liệu và tương ứng là <span class="math inline">\(k+1\)</span> đa thức cần ước lượng. Lưu ý rằng chúng ta không nhất thiết phải sử dụng đa thức bậc ba. Thay vào đó chúng ta có thể sử dụng các hàm tuyến tính hoặc đa thức bậc hai, hoặc thậm chí là một hằng số (đa thức bậc không) trên từng phần của dữ liệu.</p>
+<div class="figure"><span style="display:block;" id="fig:fggam02"></span>
+<img src="bookdown-demo_files/figure-html/fggam02-1.png" alt="Hồi quy đa thức trên từng phần dữ liệu Boston: phần thứ nhất tương ứng với biến tỷ lệ người sống dưới mức trung bình nhỏ hơn 15% và phần thứ hai tương ứng với biến tỷ lệ người sống dưới mức trung bình nhỏ lớn hơn hoặc bằng 15%. Hình bên trái: sử dụng hai đa thức bậc một hay hay đường hồi quy tuyến tính. Hình ở giữa: sử dụng hai đa thức bậc hai. Hình bên phải: sử dụng hai đa thức bậc ba" width="672" />
+<p class="caption">
+Figure 1.2: Hồi quy đa thức trên từng phần dữ liệu Boston: phần thứ nhất tương ứng với biến tỷ lệ người sống dưới mức trung bình nhỏ hơn 15% và phần thứ hai tương ứng với biến tỷ lệ người sống dưới mức trung bình nhỏ lớn hơn hoặc bằng 15%. Hình bên trái: sử dụng hai đa thức bậc một hay hay đường hồi quy tuyến tính. Hình ở giữa: sử dụng hai đa thức bậc hai. Hình bên phải: sử dụng hai đa thức bậc ba
+</p>
+</div>
+<p>Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam02">1.2</a> mô tả sử dụng hồi quy đa thức các đa thức bậc khác nhau trên từng phần dữ liệu. Mặc dù đã hạn chế được hình dạng kỳ lạ của tại các điểm giới hạn của biến <span class="math inline">\(X\)</span>, nhưng bạn đọc có thể nhận thấy ngay vấn đề:các đa thức có giá trị không liên tục tại điểm cắt và nếu chúng ta sử dụng hai đa thức bậc ba, sẽ có tổng số tám tham số hay tám bậc tự do để mô tả mối liên hệ giữa biến mục tiêu và biến giải thích. Một cách tổng quát, nếu chúng ta sử dụng <span class="math inline">\(k\)</span> nút, và các đa thức từng phần đều là các đa thức bậc ba, thì sẽ có tổng số <span class="math inline">\(4 \times (k+1)\)</span> tham số cần được ước lượng. Việc này rất dễ dẫn đến hiện tượng overfitting.</p>
+<p>Để khắc phục vấn đề giá trị của các đa thức không liên tục tại các điểm cắt, trong quá trình ước lượng tham số chúng ta có thể thêm vào rằng buộc là giá trị của các đa thức tại các điểm cắt phải bằng nhau. Ngoài ràng buộc giá trị của đa thức bằng nhau tại nút <span class="math inline">\(c\)</span>, người xây dựng mô hình còn thêm các rằng buộc về sự liên tục của đạo hàm bậc một và đạo hàm bậc hai của các đa thức. Nói cách khác ước lượng các tham số <span class="math inline">\(\beta_{01}\)</span>, <span class="math inline">\(\beta_{11}\)</span>, <span class="math inline">\(\beta_{21}\)</span> và <span class="math inline">\(\beta_{31}\)</span> của đa thức thứ nhất và các tham số <span class="math inline">\(\beta_{02}\)</span>, <span class="math inline">\(\beta_{12}\)</span>, <span class="math inline">\(\beta_{22}\)</span> và <span class="math inline">\(\beta_{32}\)</span> của đa thức thứ hai trở thành bài toán tối ưu:
+<span class="math display">\[\begin{align}
+\hat{\boldsymbol{\beta}} = \underset{\boldsymbol{\beta}}{\operatorname{argmin}} \sum\limits_{i=1}^n \left[\mathbb{I}_{\{x_i &lt; c\}} \left(y_i - \beta_{01} - \beta_{11} \cdot x_i - \beta_{21} \cdot x_i^2 - \beta_{31} \cdot x_i^3 \right)^2 + \\
+\ \ \ \ \ \ \ \ \  \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mathbb{I}_{\{x_i \geq c\}} \left(y_i - \beta_{02} - \beta_{12} \cdot x_i - \beta_{22} \cdot x_i^2 - \beta_{32} \cdot x_i^3 \right)^2 \right]
+\end{align}\]</span>
+với các ràng buộc
+<span class="math display" id="eq:gam004">\[\begin{align}
+&amp; \beta_{01} + \beta_{11} \cdot c + \beta_{21} \cdot c^2 +\beta_{31} \cdot c^3 = \beta_{02} + \beta_{12} \cdot c + \beta_{22} \cdot c^2 +\beta_{32} \cdot c^3 \\
+&amp; \beta_{11}  + 2 \beta_{21} \cdot c + 3 \beta_{31} \cdot c^2 = \beta_{12} + 2 \beta_{22} \cdot c +3 \beta_{32} \cdot c^2 \\
+&amp; 2 \beta_{21} + 6 \beta_{31} \cdot c = 2 \beta_{22}  + 6 \beta_{32} \cdot c
+\tag{1.4}
+\end{align}\]</span></p>
+<p>Mỗi ràng buộc mà chúng ta áp đặt lên các đa thức bậc ba sẽ làm số lượng tham số, hay bậc tự do của mô hình, giảm đi một bậc tự do. Điều này cũng đồng nghĩa với việc giảm đi sự phức tạp của mô hình và tránh được hiện tượng overfitting. Với ba ràng buộc trong phương trình <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam004">(1.4)</a> bao gồm ràng buộc về sự liên tục của đa thức, của đạo hàm bậc nhất và của đạo hàm bậc hai, mô hình sẽ còn năm bậc tự do. Hàm số được xây dựng trên cơ sở các đa thức từng phần bậc <span class="math inline">\(d\)</span> với các ràng buộc về sự liên tục của đạo hàm đến bậc <span class="math inline">\(d-1\)</span> tại các nút được gọi chung là các <span class="math inline">\(splines\)</span> bậc <span class="math inline">\(d\)</span>. Về lý thuyết bạn đọc có thể chọn <span class="math inline">\(d \geq 4\)</span> nhưng kinh nghiệm cho thấy bậc của <span class="math inline">\(splines\)</span> không nên vượt quá <span class="math inline">\(d = 3\)</span>. Nếu muốn tăng sự phức tạp cho splines, giải pháp là tăng số nút chứ không nên tăng bậc. Trong trường hợp tổng quát, một splines bậc ba với <span class="math inline">\(k\)</span> nút sẽ có <span class="math inline">\(4 \times (k+1)\)</span> tham số cần được ước lượng, đồng thời có <span class="math inline">\(3 \times k\)</span> ràng buộc tại <span class="math inline">\(k\)</span> nút, do đó số bậc tự do sẽ là <span class="math inline">\(k + 4\)</span>. Để ước lượng tham số của splines, chúng ta không giải bài toán tối ưu như phương trình <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam004">(1.4)</a> mà thực hiện biến đổi tham số và sau đó sử dụng phương pháp bình phương nhỏ nhất thông thường. Bạn đọc tham khảo phần <a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen1">1.6.1</a> để hiểu về cách biến đổi tham số.</p>
+<div class="figure"><span style="display:block;" id="fig:fggam03"></span>
+<img src="bookdown-demo_files/figure-html/fggam03-1.png" alt="Hồi quy giá nhà theo splines bậc ba của biến giải thích là tỷ lệ người sống dưới mức trung bình trong dữ liệu Boston. Hình bên trái: sử dụng một nút tại 15%. Hình bên phải: sử dụng hai nút tại 10% và 20%" width="672" />
+<p class="caption">
+Figure 1.3: Hồi quy giá nhà theo splines bậc ba của biến giải thích là tỷ lệ người sống dưới mức trung bình trong dữ liệu Boston. Hình bên trái: sử dụng một nút tại 15%. Hình bên phải: sử dụng hai nút tại 10% và 20%
+</p>
+</div>
+<p>Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam03">1.3</a> mô tả mô hình hồi quy splines giá nhà theo tỷ lệ người sống dưới mức trung bình trên dữ liệu Boston. Hình bên trái mô tả biến mục tiêu là một splines bậc ba với một nút duy nhất là <span class="math inline">\(c = 15\%\)</span>; Hình bên phải mô tả splines bậc ba với hai nút là <span class="math inline">\(c_1 = 10\%\)</span> và <span class="math inline">\(c_2 = 20\%\)</span>. Với các ràng buộc về sự liên tục của các đa thức và đạo hàm đến bậc hai tại các nút, không thể nhận ra sự khác biệt của các đa thức tại các nút.</p>
+<p>Khi xây dựng một splines, chúng ta cần trả lời câu hỏi là nên đặt bao nhiêu nút hoặc đặt các nút ở đâu? Tại sao trong ví dụ kể trên chúng ta lại sử dụng một nút tại 15%, hay sử dụng hai nút tại \10% và 20% ? Và sau cùng là giữa các cách đặt nút như vậy thì cách nào tối ưu hơn. Trước hết, có thể thấy rằng đường hồi quy linh hoạt hơn ở những khoảng giá trị có nhiều nút vì ở những khoảng giá trị đó hệ số đa thức có thể thay đổi nhanh chóng. Do đó, một gợi ý cho việc đặt nút là nên cho nhiều nút hơn ở những nơi mà chúng ta nhận thấy hàm số có thể thay đổi nhanh nhất và đặt ít nút thắt hơn ở những nơi có vẻ ổn định hơn. Hướng tiếp cận này khá cảm tính và đòi hỏi người xây dựng mô hình cần có nhiều kinh nghiệm.</p>
+<p>Một tiếp cận khác khi đặt nút là dựa theo các quantile của biến giải thích. Khi đặt <span class="math inline">\(k\)</span> nút <span class="math inline">\(c_1 &lt; c_2 &lt; \cdots &lt; c_k\)</span>, nút <span class="math inline">\(c_j\)</span> sẽ là giá trị quantile tương ứng với mức xác suất <span class="math inline">\(\cfrac{j}{k+1}\)</span>, hay nói một cách khác, có <span class="math inline">\(\cfrac{j}{k+1}\)</span> quan sát của biến giải thích nhỏ hơn <span class="math inline">\(c_j\)</span> và <span class="math inline">\(\cfrac{k+1-j}{k+1}\)</span> quan sát của biến giải thích lớn hơn <span class="math inline">\(c_j\)</span>.</p>
+<p>Không có câu trả lời chính xác cho câu hỏi là cần đặt bao nhiêu nút khi xây dựng splines. Kinh nghiệm cho thấy rằng sử dụng xác thực chéo để lựa chọn số lượng nút thường cho lựa chọn tốt. Tham số <span class="math inline">\(k\)</span> tương ứng với sai số xác thực chéo nhỏ nhất sẽ là số nút tối ưu. Tuy nhiên xác thực chéo chỉ có thể thực hiện khi có một hoặc một vài biến giải thích. Khi chúng ta xây dựng mô hình mà biến mục tiêu phụ thuộc vào một số lượng lớn biến giải thích, sử dụng xác thực chéo để lựa chọn số lượng nút cho từng biến giải thích sẽ yêu cầu khối lượng tính toán tăng nhanh theo hàm mũ.</p>
+<div class="figure"><span style="display:block;" id="fig:fggam04"></span>
+<img src="bookdown-demo_files/figure-html/fggam04-1.png" alt="Lựa chọn số nút tối ưu bằng xác thực chéo khi hồi quy giá nhà theo splines của biến giải thích là tỷ lệ số người có mức sống dưới mức trung bình. Tham số của xác thực chéo (số folds) được lựa chọn là K = 5. Hình bên trái sử dụng splines bậc hai. Hình bên phải sử dụng splines bậc ba." width="672" />
+<p class="caption">
+Figure 1.4: Lựa chọn số nút tối ưu bằng xác thực chéo khi hồi quy giá nhà theo splines của biến giải thích là tỷ lệ số người có mức sống dưới mức trung bình. Tham số của xác thực chéo (số folds) được lựa chọn là K = 5. Hình bên trái sử dụng splines bậc hai. Hình bên phải sử dụng splines bậc ba.
+</p>
+</div>
+<p>Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam04">1.4</a> mô tả cách lựa chọn số nút cho mô hình hồi quy biến mục tiêu giá nhà theo splines của biến giải thích là tỷ lệ số người có mức sống dưới trung bình bằng cách sử dụng xác thực chéo. Chúng tôi sử dụng xác thực chéo với tham số <span class="math inline">\(K\)</span> bằng 5. Nếu splines có bậc hai, số lượng nút cho sai số xác thực chéo nhỏ nhất là <span class="math inline">\(k = 8\)</span>. Còn khi splines có bậc ba, số lượng nút cho sai số của xác thực chéo nhỏ nhất là <span class="math inline">\(k=5\)</span>. Có thể giải thích là khi bậc của splines nhỏ hơn, các đa thức từng phần sẽ ít linh hoạt hơn, do đó cần số nút lớn hơn để mô tả tốt mối liên hệ phi tuyến giữa biến mục tiêu và biến giải thích.</p>
+<p>Khái niệm cuối cùng chúng tô muốn giới thiệu đến bạn đọc là <span class="math inline">\(Natural\)</span> <span class="math inline">\(Splines\)</span>. Bạn đọc có thể nhận thấy rằng tại các giá trị giới hạn của biến giải thích, mật độ của các giá trị thường khá thưa thớt. Do đó nếu sử dụng các đa thức bậc lớn hơn hoặc bằng hai để mô tả mối liên hệ giữa biến mục tiêu và biến giải thích, có thể dẫn đến các đường cong có hình dạng kỳ lạ. Để tránh gặp phải tình trạng như vậy, người xây dựng mô hình sẽ thêm vào các rằng buộc rằng đa thức phải có bậc một tại các giá trị giới hạn của biến giải thích. Nói một cách khác, hàm <span class="math inline">\(f\)</span> phải là hàm tuyến tính trong các vùng <span class="math inline">\(X\)</span> nhỏ hơn nút thắt nhỏ nhất và <span class="math inline">\(X\)</span> lớn hơn nút lớn nhất. <span class="math inline">\(Natural\)</span> <span class="math inline">\(Splines\)</span> đơn giản là một splines với ràng buộc tuyến tính tại các giá trị giới hạn của biến giải thích. Ràng buộc bổ sung này giúp cho hàm <span class="math inline">\(f\)</span> tự nhiên hơn và tạo ra các ước tính ổn định hơn ở điểm biên.</p>
+<p>Sử dụng <span class="math inline">\(Natural\)</span> <span class="math inline">\(Splines\)</span> dựa trên đa thức bậc ba thay thế cho Splines bậc ba sẽ giúp giải phóng bốn bậc tự do vì ở mỗi vùng giới hạn chúng ta giảm đi hai tham số. Nói một cách khác, <span class="math inline">\(Natural\)</span> <span class="math inline">\(Splines\)</span> bậc ba sẽ có <span class="math inline">\((k+4)-4 = k\)</span> tham số. Ước lượng tham số cho <span class="math inline">\(Natural\)</span> <span class="math inline">\(Splines\)</span> không được thực hiện thông qua giải bài toán tối ưu mà được thông qua phép biến đổi tham số giống như khi ước lượng tham số cho <span class="math inline">\(Splines\)</span>. Bạn đọc tham khảo chi tiết tại <a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen2">1.6.2</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:fggam05"></span>
+<img src="bookdown-demo_files/figure-html/fggam05-1.png" alt="So sánh giữa splines thông thường và natural splines khi sử dụng véc-tơ các nút giống nhau. Hình bên trái: Giá nhà tại Boston là một splines bậc ba theo tỷ lệ sống dưới mức trung bình; splines sử dụng 5 nút tại các giá trị quantile tương ứng với các mức xác suất 1/6, 2/6, 3/6, 4/6, 5/6 của biến giải thích. Hình bên phải: Giá nhà tại Boston là một natural splines; splines sử dụng 5 nút tại các giá trị quantile tương ứng với các mức xác suất 1/6, 2/6, 3/6, 4/6, 5/6 của biến giải thích." width="672" />
+<p class="caption">
+Figure 1.5: So sánh giữa splines thông thường và natural splines khi sử dụng véc-tơ các nút giống nhau. Hình bên trái: Giá nhà tại Boston là một splines bậc ba theo tỷ lệ sống dưới mức trung bình; splines sử dụng 5 nút tại các giá trị quantile tương ứng với các mức xác suất 1/6, 2/6, 3/6, 4/6, 5/6 của biến giải thích. Hình bên phải: Giá nhà tại Boston là một natural splines; splines sử dụng 5 nút tại các giá trị quantile tương ứng với các mức xác suất 1/6, 2/6, 3/6, 4/6, 5/6 của biến giải thích.
+</p>
+</div>
+<p>Bạn đọc có thể nhận thấy từ Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam05">1.5</a> rằng Natural Splines sẽ cho kết quả là một hàm tuyến tính tại các vùng mà biến giải thích lớn hơn nút nhỏ nhất hoặc lớn hơn nút lớn nhất. Không có sự khác biệt nhiều giữa splines thông thường và natural splines trong khoảng biến giải thích nhỏ hơn nút nhỏ nhất, tuy nhiên có sự khác biệt rõ ràng trong vùng biến giải thích lớn hơn nút lớn nhất. Trong vùng này, Splines thông thường cho thấy xu thế giảm nhanh sau đó đi ngang và cuối cùng là đi lên khi biến giải thích tăng dần. Trong khi đó khi sử dụng natural splines chỉ có một xu thế duy nhất là giảm tại vùng giá trị giới hạn này. Cần dựa trên sai số khi thực hiện xác thực chéo để biết mô hình nào tốt hơn thay vì dựa trên các nhận xét cảm tính, tuy nhiên chắc chắn rằng mô hình được xây dựng từ natural spline sẽ cho dự đoán ổn định hơn, hay nói một cách khác là có phương sai nhỏ hơn so với splines thông thường.</p>
+<p>Trong phần tiếp theo, chúng ta sẽ thảo luận về một hướng tiếp cận khác khi xây dựng mô hình mô tả mối liên hệ phi tuyến giữa biến mục tiêu và biến giải thích nhưng cũng cho kết quả là một splines. Kết quả này còn được biết đến với tên gọi là <span class="math inline">\(Smoothing\)</span> <span class="math inline">\(Splines\)</span>.</p>
+</div>
+<div id="smoothing-splines" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Smoothing Splines<a href="các-mô-hình-cộng-tính-tổng-quát.html#smoothing-splines" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Trong các phần trước, chúng ta đã thảo luận về cách xây dựng các đường hồi quy phi tuyến được tạo ra bằng cách sử dụng một tập hợp các nút của biến giải thích và các đa thức bậc <span class="math inline">\(d\)</span> trên các vùng được xác định bởi các nút. Tham số của các đường hồi quy phi tuyến được ước lượng bằng phương pháp bình phương nhỏ nhất sau khi thực hiện phép biến đổi tham số. Trong phần này, chúng tôi giới thiệu một cách tiếp cận khác nhưng cũng cho kết quả là một splines! Một cách tổng quát, mục tiêu khi chúng ta muốn xây dựng hàm số mô tả mối liên hệ giữa biến mục tiêu <span class="math inline">\(Y\)</span> và biến giải thích <span class="math inline">\(X\)</span>, tạm gọi là hàm <span class="math inline">\(f\)</span>, để phù hợp tối đa với dữ liệu được quan sát: nghĩa là chúng ta muốn
+<span class="math display">\[\begin{align}
+RMSE = \sqrt{\cfrac{\sum\limits_{i=1}^n (y_i − f(x_i))^2}{n}}
+\end{align}\]</span>
+càng nhỏ càng tốt. Tuy nhiên, nếu chúng ta không đặt bất kỳ ràng buộc nào lên hàm <span class="math inline">\(f\)</span> thì chúng ta luôn có thể làm cho <span class="math inline">\(RMSE\)</span> bằng 0 bằng cách chọn <span class="math inline">\(f\)</span> đủ phức tạp sao cho <span class="math inline">\(f(x_i) = y_i \ \forall i\)</span>. Một hàm <span class="math inline">\(f\)</span> như vậy sẽ quá phù hợp với dữ liệu huấn luyện mô hình nhưng sẽ không cho kết quả tốt trên dữ liệu kiểm thử mô hình. Hàm <span class="math inline">\(f\)</span> mà chúng ta thực sự cần xây dựng là một hàm làm cho <span class="math inline">\(RMSE\)</span> nhỏ nhưng cũng cần có sự ràng buộc về sự linh hoạt của hàm <span class="math inline">\(f\)</span>. Đường hồi quy được xây dựng trong Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam06">1.6</a> mô tả một hàm <span class="math inline">\(f\)</span> quá khớp với dữ liệu huấn luyện mô hình. Rất khó để các hàm như vậy có thể cho kết quả tốt cho kết quả tốt trên dữ liệu kiểm tra mô hình do phương sai của hàm <span class="math inline">\(f\)</span> là quá lớn.</p>
+<div class="figure"><span style="display:block;" id="fig:fggam06"></span>
+<img src="bookdown-demo_files/figure-html/fggam06-1.png" alt="Xây dựng hàm f quá linh hoạt. Sai số trên tập huấn luyện mô hình sẽ nhỏ nhưng sai số trên dữ liệu kiểm tra mô hình sẽ lớn." width="672" />
+<p class="caption">
+Figure 1.6: Xây dựng hàm f quá linh hoạt. Sai số trên tập huấn luyện mô hình sẽ nhỏ nhưng sai số trên dữ liệu kiểm tra mô hình sẽ lớn.
+</p>
+</div>
+<p>Làm thế nào chúng ta có thể đảm bảo rằng hàm <span class="math inline">\(f\)</span> đạt được mức độ linh hoạt cần thiết để mô tả được mối liên hệ giữa biến mục tiêu và biến giải thích nhưng cũng không quá linh hoạt vì dễ dẫn đến overfitting? Câu trả lời là cần có ràng buộc cho sự linh hoạt của hàm <span class="math inline">\(f\)</span>. Nếu như đạo hàm của hàm <span class="math inline">\(f\)</span> tại điểm <span class="math inline">\(x_i\)</span> cho biết độ dốc của hàm <span class="math inline">\(f\)</span> tại điểm này, thì đạo hàm bậc hai của hàm <span class="math inline">\(f\)</span> cho biết độ dốc của hàm <span class="math inline">\(f\)</span> thay đổi nhanh hay chậm. Trên một khoảng giá trị <span class="math inline">\([a,b]\)</span> bất kỳ, nếu tổng giá trị tuyệt đối, hoặc tổng bình phương, của các đạo hàm bậc hai của một hàm càng lớn thì hàm số đó sẽ càng linh hoạt. Nói một cách khác, hàm số <span class="math inline">\(f\)</span> sẽ càng linh hoạt nếu <span class="math inline">\(\int\limits_a^b f^{&#39;&#39;}(t)^2 dt\)</span> càng lớn và ngược lại, giá trị này càng gần 0 thì hàm càng ít linh hoạt. Giá trị <span class="math inline">\(\int\limits_a^b f^{&#39;&#39;}(t)^2 dt\)</span> có thể được coi như một thước đo cho sự linh hoạt của hàm <span class="math inline">\(f\)</span> trên khoảng <span class="math inline">\([a,b]\)</span>. Lưu ý rằng bất kỳ hàm tuyến tính nào trên khoảng <span class="math inline">\([a,b]\)</span> cũng sẽ có <span class="math inline">\(\int\limits_a^b f^{&#39;&#39;}(t)^2 dt = 0\)</span>, nghĩa là hàm tuyến tính là hàm ít linh hoạt nhất.</p>
+<div class="figure"><span style="display:block;" id="fig:fggam07"></span>
+<img src="bookdown-demo_files/figure-html/fggam07-1.png" alt="Hình bên trái: Hàm số ít linh loạt. Hình bên phải: Hàm số rất linh hoạt." width="672" />
+<p class="caption">
+Figure 1.7: Hình bên trái: Hàm số ít linh loạt. Hình bên phải: Hàm số rất linh hoạt.
+</p>
+</div>
+<p>Hình bên trái của Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam07">1.7</a> mô tả một hàm <span class="math inline">\(f\)</span> có miền xác định trên đoạn <span class="math inline">\([-1,1]\)</span> có độ dốc (đạo hàm cấp một) thay đổi nhưng tốc độ thay đổi của đạo hàm cấp một không quá nhanh. Hình bên phải của Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam07">1.7</a> mô tả một hàm <span class="math inline">\(f\)</span> có độ dốc thay đổi liên tục khi <span class="math inline">\(x\)</span> chạy từ -1 đến 1. Kết quả là độ linh hoạt của hàm số ở hình bên phải đo bằng <span class="math inline">\(\int\limits_a^b f^{&#39;&#39;}(t)^2 dt\)</span> lớn gấp 40 lần so với độ linh hoạt của hàm được mô tả ở hình bên trái. Để cân bằng giữa sai số RMSE và độ linh hoạt của hàm <span class="math inline">\(f\)</span>, thay vì tìm hàm <span class="math inline">\(f\)</span> để tối thiểu hóa RMSE, người xây dựng mô hình sẽ tìm hàm <span class="math inline">\(f\)</span> để tối thiểu hóa giá trị RMSE cộng thêm một hàm phạt cho sự linh hoạt
+<span class="math display" id="eq:gam005">\[\begin{align}
+\hat{f} = \underset{f}{\operatorname{argmin}} \sum\limits_{i=1}^n (y_i - f(x_i))^2 + \lambda \cdot \int\limits_a^b f^{&#39;&#39;}(t)^2 dt
+\tag{1.5}
+\end{align}\]</span>
+trong đó <span class="math inline">\([a,b]\)</span> là miền giá trị mà người xây dựng mô hình muốn đặt ràng buộc cho sự linh hoạt của hàm <span class="math inline">\(f\)</span>. Thông thường thì cận dưới <span class="math inline">\(a\)</span> thường được lựa chọn là giá trị nhỏ nhất của biến giải thích trong khi cận trên <span class="math inline">\(b\)</span> là giá trị lớn nhất của biến giải thích. Tham số <span class="math inline">\(\lambda &gt; 0\)</span> đóng vai trò điều chỉnh sự linh hoạt của hàm <span class="math inline">\(f\)</span>: nếu <span class="math inline">\(\lambda\)</span> nhỏ thì kết quả của bài toán tối ưu <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam005">(1.5)</a> sẽ là hàm linh hoạt hơn so với khi <span class="math inline">\(\lambda\)</span> nhận giá trị lớn. Khi <span class="math inline">\(\lambda\)</span> rất lớn thì hàm <span class="math inline">\(\hat{f}\)</span> sẽ xấp xỉ với hàm tuyến tính trong khi <span class="math inline">\(\lambda\)</span> xấp xỉ 0 sẽ cho kết quả là một hàm nội suy lại chính xác dữ liệu dùng để huấn luyện mô hình. Tương tự như trong hồi quy ridge hay lasso, tham số <span class="math inline">\(\lambda\)</span> được sử dụng với vai trò cân bằng giữa sự sai lệch và phương sai của mô hình.</p>
+<p>Điều thú vị là: lời giải <span class="math inline">\(\hat{f}\)</span> của bài toán tối ưu <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam005">(1.5)</a> có tính chất đặc biệt: nó là một splines bậc ba với các nút tại các giá trị duy nhất của <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(x_n\)</span> đồng thời có các đạo hàm bậc nhất và bậc hai liên tục tại mỗi nút. Hơn nữa, tại các khoảng giá trị nhỏ hơn nút nhỏ nhất và lớn hơn nút lớn nhất hàm số là hàm tuyến tính. Nói cách khác, hàm <span class="math inline">\(\hat{f}\)</span> là một <span class="math inline">\(Natural\)</span> <span class="math inline">\(Splines\)</span> bậc ba với các nút đặt tại <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(x_n\)</span>. Tuy nhiên, <span class="math inline">\(\hat{f}\)</span> không chính xác là một <span class="math inline">\(natural\)</span> <span class="math inline">\(splines\)</span> với <span class="math inline">\(n\)</span> tham số tương ứng với <span class="math inline">\(n\)</span> nút giống như chúng ta đã đề cập ở phần trước mà các tham số bị ràng buộc theo tham số <span class="math inline">\(\lambda\)</span>. Để tham khảo tại sao <span class="math inline">\(\hat{f}\)</span> lại là một <span class="math inline">\(natural\)</span> <span class="math inline">\(splines\)</span>, bạn đọc tham khảo phần <a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen3">1.6.3</a></p>
+<p>Khi thảo luận về bậc tự do của các hàm có ràng buộc tham số, cũng giống như trong hồi quy ridge, chúng ta cần nhắc đến khái niệm bậc tự do hiệu quả. Tham số <span class="math inline">\(\lambda\)</span> kiểm soát độ linh hoạt của hàm <span class="math inline">\(\hat{f}\)</span> do đó tham số này cũng quyết định bậc tự do hiệu quả của mô hình. Khi <span class="math inline">\(\lambda \rightarrow + \infty\)</span>, hàm <span class="math inline">\(\hat{f}\)</span> sẽ tiến đến một đường tuyến tính (có thước đo độ linh hoạt bằng 0) và do đó có bậc tự do hiệu quả bằng 2, tương ứng với 2 tham số là hệ số chặn và hệ số góc. Khi <span class="math inline">\(\lambda = 0\)</span>, <span class="math inline">\(\hat{f}\)</span> là một <span class="math inline">\(natural\)</span> <span class="math inline">\(splines\)</span> có <span class="math inline">\(n\)</span> nút và không có ràng buộc, nghĩa là số bậc tự hiệu quả bằng <span class="math inline">\(n\)</span>. Nếu định nghĩa <span class="math inline">\(d_{\hat{f}}(\lambda)\)</span> là bậc tự do hiệu quả của hàm <span class="math inline">\(\hat{f}\)</span> thì <span class="math inline">\(d_{\hat{f}}(\lambda)\)</span> là một hàm giảm từ <span class="math inline">\(n\)</span> về 2 khi <span class="math inline">\(\lambda\)</span> nhận giá trị từ 0 đến <span class="math inline">\(+\infty\)</span>.</p>
+<p>Hàm <span class="math inline">\(\hat{f}\)</span> được ước lượng từ mỗi <span class="math inline">\(\lambda\)</span> được gọi là một <span class="math inline">\(Smoothing\)</span> <span class="math inline">\(Splines\)</span>. Quá trình ước lượng tham số cho hàm <span class="math inline">\(\hat{f}\)</span> yêu cầu những chứng minh khá phức tạp. Bạn đọc có thể tham khảo tại <a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen4">1.6.4</a>. Tuy nhiên, điều thú vị khi ước lượng một Smoothing Splines là chúng ta không cần phải quan tâm là cần bao nhiêu nút hoặc đặt các nút ở đâu. Tất cả các tham số cần khai báo chỉ là bậc tự do hiệu quả của smoothing splines đó! Lựa chọn tham số <span class="math inline">\(\lambda\)</span> được thực hiện thông qua xác thực chéo, nghĩa là giá trị <span class="math inline">\(\lambda\)</span> được lựa chọn sao cho sai số xác thực chéo trên dữ liệu huấn luyện mô hình là nhỏ nhất.</p>
+<div class="figure"><span style="display:block;" id="fig:fggam08"></span>
+<img src="bookdown-demo_files/figure-html/fggam08-1.png" alt="Giá nhà tại Boston được hồi quy theo Smoothing Splines của biến giải thích là tỷ lệ người sống dưới mức độ trung bình với bậc tự do hiệu quả khác nhau. Hình bên trái: Khi bậc tự do hiệu quả bằng 2, smoothing splines là một hàm tuyến tính. Hình ở giữa: bậc tự do hiệu quả bằng 10 cho kết quả một đường cong mịn và khớp với dữ liệu. Hình bên phải: Bậc tự do hiệu quả quá lớn làm cho hàm số trở nên quá linh hoạt và dễ dẫn đến overfitting." width="672" />
+<p class="caption">
+Figure 1.8: Giá nhà tại Boston được hồi quy theo Smoothing Splines của biến giải thích là tỷ lệ người sống dưới mức độ trung bình với bậc tự do hiệu quả khác nhau. Hình bên trái: Khi bậc tự do hiệu quả bằng 2, smoothing splines là một hàm tuyến tính. Hình ở giữa: bậc tự do hiệu quả bằng 10 cho kết quả một đường cong mịn và khớp với dữ liệu. Hình bên phải: Bậc tự do hiệu quả quá lớn làm cho hàm số trở nên quá linh hoạt và dễ dẫn đến overfitting.
+</p>
+</div>
+<p>Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam08">1.8</a> mô tả mối liên hệ giữa giá nhà và tỷ lệ người có thu nhập thấp trên dữ liệu Boston sử dụng Smoothing Splines. Khi bậc tự do hiệu quả bằng 2 tương đương với tham số <span class="math inline">\(\lambda = +\infty\)</span>, Smoothing Splines trở thành đường tuyến tính. Nếu chúng ta tăng bậc tự do hiệu quả, hay giảm <span class="math inline">\(\lambda\)</span>, Smoothing Splines sẽ trở nên linh hoạt hơn và khớp tốt hơn với dữ liệu huấn luyện mô hình, tuy nhiên khi bậc tự do hiệu quả quá lớn thì hàm <span class="math inline">\(f\)</span> sẽ trở nên quá linh hoạt như hình phải của Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam08">1.8</a>.</p>
+<p>Trước khi đi vào nội dung chính của chương này là mô hình cộng tính tổng quát, chúng ta sẽ thảo luận về một phương pháp tiếp cận cũng thường được sử dụng và cho hiệu quả tương đương như khi sử dụng splines để mô tả mối liên hệ phi tuyến giữa biến mục tiêu và biến giải thích. Cách tiếp cận này được gọi là hồi quy từng đoạn (<span class="math inline">\(local\)</span> <span class="math inline">\(regression\)</span> hay viết tắt là <span class="math inline">\(loess\)</span>)</p>
+</div>
+<div id="hồi-quy-từng-đoạn" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Hồi quy từng đoạn<a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-từng-đoạn" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Hồi quy từng đoạn hay hồi quy cục bộ là một cách tiếp cận khác để mô tả mối liên hệ phi tuyến tính giữa biến mục tiêu <span class="math inline">\(Y\)</span> và biến giải thích <span class="math inline">\(X\)</span>. Khái niệm cục bộ có nghĩa là, tại một điểm <span class="math inline">\(x_0\)</span> nằm trong miền giá trị của biến giải thích <span class="math inline">\(X\)</span>, biến mục tiêu <span class="math inline">\(Y\)</span> được mô tả thông qua một hàm tuyến tính <span class="math inline">\(\hat{f}\)</span> được ước lượng từ những giá trị quan sát được của biến <span class="math inline">\(X\)</span> nằm gần với giá trị <span class="math inline">\(x_0\)</span>.</p>
+<ul>
+<li><p>Thứ nhất, trong hồi quy cục bộ luôn luôn phải có định nghĩa rõ ràng cho khái niệm gần hay xa <span class="math inline">\(x_0\)</span>. Người xây dựng mô hình phải định nghĩa một tham số <span class="math inline">\(k\)</span>; <span class="math inline">\(2 \leq k \leq n\)</span> để với mỗi <span class="math inline">\(x_0\)</span> chúng ta sử dụng đúng <span class="math inline">\(k\)</span> điểm dữ liệu quan sát được gần với <span class="math inline">\(x_0\)</span> nhất để ước lượng hàm <span class="math inline">\(f\)</span>. Một cách thuận tiện hơn là định nghĩa tham số <span class="math inline">\(span = k/n\)</span> để mô tả cho tỷ lệ dữ liệu sử dụng trong hồi quy cục bộ. Dễ thấy rằng <span class="math inline">\(span \in (0,1]\)</span> đồng thời khi <span class="math inline">\(span\)</span> rất gần 0, số lượng điểm dữ liệu để sử dụng để ước lượng hàm <span class="math inline">\(\hat{f}\)</span> là rất nhỏ. Ngược lại, khi <span class="math inline">\(span\)</span> rất gần 1 thì số lượng điểm dữ liệu sử dụng để ước lượng hàm <span class="math inline">\(\hat{f}\)</span> là gần như toàn bộ dữ liệu dùng để huấn luyện mô hình.</p></li>
+<li><p>Thứ hai, hồi quy từng đoạn không chỉ loại bỏ các điểm dữ liệu cách xa <span class="math inline">\(x_0\)</span>, mà còn ước lượng hàm <span class="math inline">\(\hat{f}\)</span> bằng phương pháp bình phương nhỏ nhất có trọng số. Trọng số cho các điểm dữ liệu nằm gần <span class="math inline">\(x_0\)</span> thường lớn hơn trọng số của các điểm nằm xa <span class="math inline">\(x_0\)</span> để đảm bảo rằng các điểm nằm gần <span class="math inline">\(x_0\)</span> có tác động mạnh hơn đến hình dạng của hàm <span class="math inline">\(\hat{f}\)</span>. Hàm số được sử dụng để định nghĩa trọng số thường là hàm tính trên khoảng cách từ các điểm dữ liệu đến điểm <span class="math inline">\(x_0\)</span>, nhận giá trị trên tập các số thực dương và là hàm tăng theo khoảng cách. Trọng số thường được sử dụng để ước lượng hàm <span class="math inline">\(\hat{f}\)</span> là <span class="math inline">\(\left[(1 - d^3)\right]^3\)</span> trong đó <span class="math inline">\(d = \cfrac{|x - x_0|}{maxdist}\)</span> với <span class="math inline">\(maxdist\)</span> là khoảng cách xa nhất từ các điểm được lựa chọn đến <span class="math inline">\(x_0\)</span></p></li>
+</ul>
+<div class="figure"><span style="display:block;" id="fig:fggam09"></span>
+<img src="bookdown-demo_files/figure-html/fggam09-1.png" alt="Hàm số phi tuyến được xây dựng bằng phương pháp hồi quy cục bộ. Đường màu đen là giá trị thật của hàm f. Hình bên trái có tham số span bằng 0.3. Hình bên phải có tham số span là 0.7" width="672" />
+<p class="caption">
+Figure 1.9: Hàm số phi tuyến được xây dựng bằng phương pháp hồi quy cục bộ. Đường màu đen là giá trị thật của hàm f. Hình bên trái có tham số span bằng 0.3. Hình bên phải có tham số span là 0.7
+</p>
+</div>
+<p>Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam09">1.9</a> minh họa ý tưởng xây dựng hàm <span class="math inline">\(\hat{f}\)</span> bằng phương pháp hồi quy cục bộ trên một dữ liệu mô phỏng. Hình bên trái có tham số span bằng 0.3, nghĩa là mỗi lần ước lượng hàm <span class="math inline">\(f\)</span> chỉ có 30% điểm dữ liệu được đưa vào trong mô hình hồi quy. Đường màu đen mô tả hàm số được sử dụng để tạo ra dữ liệu trong khi đường nét đứt màu đỏ là hàm được ước lượng bằng phương pháp hồi quy cục bộ. Tại điểm <span class="math inline">\(x_0 = 0.25\)</span> hàm <span class="math inline">\(\hat{f}\)</span> là đường tiếp tuyến được ước lượng dựa trên phương pháp bình phương nhỏ nhất có trọng số dựa trên 30% điểm nằm gần <span class="math inline">\(x_0\)</span> nhất (là các điểm màu đỏ). Trong hình bên phải, đường màu cam là ước lượng của hàm <span class="math inline">\(f\)</span> với tham số span bằng 0.7. Đường tiếp tuyến tại điểm <span class="math inline">\(x_0 = 1.5\)</span> là ước lượng của hàm <span class="math inline">\(f\)</span> tại điểm này. Có thể thấy rằng khi tham số span càng gần 1 thì hàm <span class="math inline">\(\hat{f}\)</span> càng ít linh hoạt.</p>
+<p>Quá trình ước lượng hàm <span class="math inline">\(\hat{f}\)</span> tại điểm <span class="math inline">\(x_0\)</span> bằng phương pháp hồi quy cục bộ có thể được mô tả qua các bước sau đây</p>
+<ol style="list-style-type: decimal">
+<li><p>Lựa chọn tham số <span class="math inline">\(span\)</span> và sau đó tính <span class="math inline">\(k\)</span> phần nguyên của <span class="math inline">\(span \times n\)</span> với <span class="math inline">\(n\)</span> là số lượng quan sát. Lựa chọn ra <span class="math inline">\(k\)</span> điểm trong số <span class="math inline">\(n\)</span> điểm có khoảng cách gần với điểm <span class="math inline">\(x_0\)</span> nhất.</p></li>
+<li><p>Lựa chọn hàm trọng số <span class="math inline">\(w(x_i) = h(d)\)</span> là hàm số nhận giá trị dương và tăng theo <span class="math inline">\(d\)</span>, với <span class="math inline">\(d = \cfrac{|x_i - x_0|}{maxdist}\)</span> là khoảng cách từ một điểm <span class="math inline">\(x_i\)</span> trong <span class="math inline">\(k\)</span> điểm được chọn trong bước (1.) và <span class="math inline">\(maxdist\)</span> là khoảng cách từ điểm xa nhất đến <span class="math inline">\(x_0\)</span> để đảm bảo <span class="math inline">\(d\)</span> luôn nằm trong khoảng (0,1].</p></li>
+<li><p>Tìm các tham số <span class="math inline">\(\hat{\beta}_0\)</span>, <span class="math inline">\(\hat{\beta}_1\)</span> để tối thiểu hóa RSS
+<span class="math display">\[\begin{align}
+RSS  = \sum\limits_{i = 1}^k w(x_i) \cdot (y_i - \beta_0 - \beta_1 \cdot x_i)^2
+\end{align}\]</span></p></li>
+<li><p>Trả lại giá trị <span class="math inline">\(\hat{f}(x_0) = \hat{\beta}_0 + \hat{\beta}_1 \cdot x_1\)</span>.</p></li>
+</ol>
+<p>Bạn đọc có thể thấy rằng, để xây dựng được một đường hồi quy liên tục như trong Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam09">1.9</a> chúng ta sẽ phải liên tục cập nhật các điểm <span class="math inline">\(x_0\)</span> mới trên miền giá trị của biến giải thích, và với mỗi một điểm <span class="math inline">\(x_0\)</span> mới, chúng ta lại thực hiện một ước lượng bình phương nhỏ nhất có trọng số mới trên một tập dữ liệu mới. Điều này khiến cho khối lượng tính toán của phương pháp này lớn hơn rất nhiều so với hồi quy splines. Đây cũng là nhược điểm chính của phương pháp hồi quy từng đoạn.</p>
+<p>Tham số <span class="math inline">\(span\)</span> được sử dụng để điều chỉnh độ sai lệch và phương sai của đường hồi quy. Khi <span class="math inline">\(span\)</span> nhỏ, hàm <span class="math inline">\(\hat{f}\)</span> sẽ rất linh hoạt nhưng có phương sai lớn và ngược lại, nếu <span class="math inline">\(span\)</span> lớn hàm <span class="math inline">\(\hat{f}\)</span> sẽ ít linh hoạt hơn và đánh đổi lại là phương sai sẽ nhỏ hơn. Cũng giống như tham số <span class="math inline">\(\lambda\)</span> của Smoothing Splines, tham số <span class="math inline">\(span\)</span> cần được lựa chọn dựa trên xác thực chéo.</p>
+<div class="figure"><span style="display:block;" id="fig:fggam10"></span>
+<img src="bookdown-demo_files/figure-html/fggam10-1.png" alt="Giá nhà được hồi quy cục bộ theo biến giải thích là tỷ lệ người có thu nhập thấp. Tham số span được lựa chọn bằng xác thực chéo." width="672" />
+<p class="caption">
+Figure 1.10: Giá nhà được hồi quy cục bộ theo biến giải thích là tỷ lệ người có thu nhập thấp. Tham số span được lựa chọn bằng xác thực chéo.
+</p>
+</div>
+<p>Ý tưởng hồi quy cục bộ có thể được khái quát theo trong trường hợp có nhiều biến giải thích <span class="math inline">\(X_1, X_2, \cdots, X_p\)</span> và thường cho kết quả tốt hơn so với mô hình hồi quy tuyến tính đa biến khi có các biến giải thích có tính chất cục bộ mà điển hình là biến thời gian. Khi có biến mục tiêu phụ thuộc vào biến giải thích là thời gian thì rất thường gặp phải trường hợp mà hệ số tuyến tính liên tục thay đổi, điều mà mô hình tuyến tính đa biến không thể mô tả được. Tuy nhiên, hồi quy cục bộ lại thường hoạt động không hiệu quả khi số lượng biến giải thích <span class="math inline">\(p\)</span> lớn do rất khó để tìm được các điểm lân cận có tính chất tương tự điểm <span class="math inline">\(x_0\)</span> khi số chiều tăng lên.</p>
+<p>Một lưu ý cuối cùng cho bạn đọc về hồi quy cục bộ đó là việc lựa chọn dạng của hàm <span class="math inline">\(\hat{f}\)</span> trong hồi quy cục bộ không nhất thiết phải là hàm tuyến tính theo <span class="math inline">\(x_i\)</span>. Bạn đọc có thể sử dụng các dạng hàm phức tạp hơn, chẳng hạn như sử dụng các đa thức bậc hai. Khi đó, các tham số cần được ước lượng là <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, và <span class="math inline">\(\beta_2\)</span> để tối thiểu hóa
+<span class="math display">\[\begin{align}
+RSS  = \sum\limits_{i = 1}^k w(x_i) \cdot (y_i - \beta_0 - \beta_1 \cdot x_i - \beta_2 \cdot x_i^2)^2
+\end{align}\]</span></p>
+</div>
+<div id="gammodel" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Mô hình hồi quy cộng tính tổng quát<a href="các-mô-hình-cộng-tính-tổng-quát.html#gammodel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Trong các phần trước của Chương, chúng tôi trình bày một số phương pháp xây dựng các hàm phi tuyến nhằm mô tả mối liên hệ giữa biến mục tiêu <span class="math inline">\(Y\)</span> dựa vào một biến giải thích <span class="math inline">\(X\)</span> duy nhất. Những phương pháp này có thể được coi là sự mở rộng của hồi quy tuyến tính đơn biến. Trong mô hình cộng tính tổng quát, chúng ta thảo luận về vấn đề dự đoán hay đánh giá một biến mục tiêu Y trên cơ sở các hàm phi tuyến của <span class="math inline">\(p\)</span> biến giải thích <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, <span class="math inline">\(\cdots\)</span> , <span class="math inline">\(X_p\)</span>. Mô hình cộng tính tổng quát cũng có thể hiểu như là một sự mở rộng của hồi quy tuyến tính đa biến. Các mô hình cộng tính tổng quát (Genaralized Additive Model hay viết tắt là GAM) mở rộng mô hình tuyến tính tiêu chuẩn bằng cách mô tả biến mục tiêu thông qua tổng các hàm phi tuyến tính của từng biến giải thích. Nếu như mô hình hồi quy tuyến tính mô tả biến mục tiêu bằng phương trình
+<span class="math display">\[\begin{align}
+Y = \beta_0 + \beta_1 \cdot X_1 + \beta_2 \cdot X_2 + \cdots + \beta_p  \cdot X_p + \epsilon
+\end{align}\]</span>
+thì mô hình GAM mô tả biến giải thích thông qua phương trình
+<span class="math display" id="eq:gam006">\[\begin{align}
+Y = \beta_0 + f_1(X_1) + f_2(X_2) + \cdots + f_p(X_p) + \epsilon
+\tag{1.6}
+\end{align}\]</span>
+trong đó <span class="math inline">\(f_j\)</span> có thể là hàm phi tuyến với mọi <span class="math inline">\(1 \leq j \leq p\)</span>. Cụ thể hơn, <span class="math inline">\(f_j\)</span> có thể là bất kỳ hàm số nào trong các hàm số mà chúng ta đã thảo luận trong khác phần trước của chương: <span class="math inline">\(f_j(x)\)</span> có thể đơn giản là một đa thức bậc <span class="math inline">\(d\)</span> của <span class="math inline">\(x\)</span>, có thể là một splines bậc <span class="math inline">\(d\)</span>, một natural splines, smoothing splines, hay là một hàm hồi quy cục bộ theo các miền giá trị của <span class="math inline">\(x\)</span>. Và điều quan trọng là, với <span class="math inline">\(p\)</span> lựa chọn khác nhau cho dạng hàm <span class="math inline">\(f_i\)</span>, có thể sử dụng một phương pháp được gọi là <span class="math inline">\(backfitting\)</span> để ước lượng tất cả các hàm <span class="math inline">\(f_i\)</span> mà người xây dựng mô hình lựa chọn. Phương pháp backfitting được giới thiệu trong nghiên cứu của Leo Breiman (1985) với mục tiêu để ước lượng các mô hình cộng tính tổng quát được mô tả bởi phương trình <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam006">(1.6)</a>. Các ràng buộc bổ sung cho các hàm <span class="math inline">\(f_j\)</span> cho quá trình backfitting là
+<span class="math display" id="eq:gam007">\[\begin{align}
+\sum\limits_{i=1}^n \ f_j(X_{i,j}) = 0 \ \ \ \forall{j}  
+\tag{1.7}
+\end{align}\]</span>
+để đảm bảo nghiệm của quá trình ước lượng tham số cho kết quả duy nhất. Với ràng buộc <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam007">(1.7)</a> chúng ta có thể ước lượng các hàm <span class="math inline">\(f_j\)</span> như sau:</p>
+<ul>
+<li><p>Bước thứ nhất: Tính toán ước lượng cho tham số <span class="math inline">\(\beta_0\)</span> bằng trung bình biến mục tiêu:
+<span class="math display" id="eq:gam008">\[\begin{align}
+\beta_0 = \cfrac{1}{n} \sum\limits_{i=1}^n y_i
+\tag{1.8}
+\end{align}\]</span>
+và cho <span class="math inline">\(\hat{f}_j = 0\)</span> với mọi <span class="math inline">\(1 \leq j \leq p\)</span>.</p></li>
+<li><p>Bước thứ hai: Với mỗi <span class="math inline">\(j\)</span> bằng <span class="math inline">\(1, 2, \cdots, p\)</span>: Ước lượng hàm <span class="math inline">\(\hat{f}_j\)</span> theo dạng hàm đã lựa chọn với biến mục tiêu là
+<span class="math display" id="eq:gam009">\[\begin{align}
+y_i - \hat{\beta}_0 - \sum\limits_{m=1,m \neq j}^{p} \hat{f}_m(x_{i,m})
+\tag{1.9}
+\end{align}\]</span>
+và sau đó để đảm bảo ràng buộc <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam007">(1.7)</a> chúng ta điều chỉnh <span class="math inline">\(\hat{f}_j\)</span> như sau
+<span class="math display" id="eq:gam010">\[\begin{align}
+\hat{f}_j = \hat{f}_j - \sum\limits_{i=1}^n \hat{f}_j(x_{i,j})
+\tag{1.10}
+\end{align}\]</span></p></li>
+<li><p>Bước thứ ba: Lặp lại bước thứ hai cho đến khi các hàm <span class="math inline">\(\hat{f}_j\)</span> không thay đổi đáng kể sau mỗi lần cập nhật.</p></li>
+</ul>
+<p>Chi tiết của phương pháp backfitting sẽ được thảo luận trong phần <a href="#gamapen5"><strong>??</strong></a>. Bạn đọc có thể hiểu quá trình backfitting một cách đơn giản như khi chúng ta ước lượng mô hình hồi quy tuyến tính thông thường biến <span class="math inline">\(Y\)</span> phụ thuộc vào hai biến giải thích là <span class="math inline">\(X_1\)</span> và <span class="math inline">\(X_2\)</span> mà không ước lượng các hệ số <span class="math inline">\(\beta_1\)</span> của <span class="math inline">\(X_1\)</span> và <span class="math inline">\(\beta_2\)</span> của <span class="math inline">\(X_2\)</span> một cách đồng thời. Thật vậy,</p>
+<ul>
+<li><p>Bước thứ nhất: tương tự như thuật toán phát biểu ở trên, chúng ta cho <span class="math inline">\(\hat{\beta_0} = \bar{y}\)</span></p></li>
+<li><p>Bước thứ hai: Ước lượng mô hình tuyến tính
+<span class="math display">\[\begin{align}
+(Y - \hat{\beta}_0) \sim X_1
+\end{align}\]</span>
+và thu được hệ số chặn <span class="math inline">\(\hat{\beta}_{10}\)</span> và hệ số góc <span class="math inline">\(\hat{\beta}_{11}\)</span>. Do biến mục tiêu <span class="math inline">\((Y - \hat{\beta}_0)\)</span> có trung bình bằng 0 nên ta có <span class="math inline">\(\hat{\beta}_{10} + \hat{\beta}_{11} \cdot \bar{x_1} = 0\)</span>. Nói cách khác, hàm <span class="math inline">\(\hat{f}_1(x) = \hat{\beta}_{10} + \hat{\beta}_{11} \cdot x\)</span> đã được tự động điều chỉnh để thỏa mãn ràng buộc <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam007">(1.7)</a>. Với <span class="math inline">\(\hat{\beta}_{10}\)</span> và <span class="math inline">\(\hat{\beta}_{11}\)</span> ước lượng được chúng ta ước lượng mô hình tuyến tính
+<span class="math display">\[\begin{align}
+(Y - \hat{\beta}_0 - hat{\beta}_{10} + \hat{\beta}_{11} \cdot X_1) \sim X_2
+\end{align}\]</span>
+để thu được hệ số chặn <span class="math inline">\(\hat{\beta}_{20}\)</span> và hệ số góc <span class="math inline">\(\hat{\beta}_{21}\)</span>. Tương tự như hàm <span class="math inline">\(\hat{f}_1(x)\)</span>, hàm <span class="math inline">\(\hat{f}_2(x)\)</span> cũng tự động thỏa mãn ràng buộc <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam007">(1.7)</a>.</p></li>
+<li><p>Bước thứ ba: Lặp lại bước thứ hai cho đến khi các hệ số <span class="math inline">\(\hat{\beta}_{10}\)</span>, <span class="math inline">\(\hat{\beta}_{11}\)</span>, <span class="math inline">\(\hat{\beta}_{20}\)</span> và <span class="math inline">\(\hat{\beta}_{21}\)</span> không thay đổi đáng kể sau mỗi bước lặp.</p></li>
+</ul>
+<div class="figure"><span style="display:block;" id="fig:fggam11"></span>
+<img src="bookdown-demo_files/figure-html/fggam11-1.png" alt="Tốc độ hội tụ khi sử dụng phương pháp backfitting trong ước lượng tham số của mô hình hồi quy đa biến với biến giải thích là medv và các biến phụ thuộc là rm và lstat. Hình trên bên trái: Hệ số chặn của hàm tuyến tính của biến rm. Hình trên bên phải: Hệ số góc của hàm tuyến tính của biến rm. Hình dưới bên trái: Hệ số chặn của hàm tuyến tính của biến lstat. Hình dưới bên phải: Hệ số góc của hàm tuyến tính của biến lstat." width="672" />
+<p class="caption">
+Figure 1.11: Tốc độ hội tụ khi sử dụng phương pháp backfitting trong ước lượng tham số của mô hình hồi quy đa biến với biến giải thích là medv và các biến phụ thuộc là rm và lstat. Hình trên bên trái: Hệ số chặn của hàm tuyến tính của biến rm. Hình trên bên phải: Hệ số góc của hàm tuyến tính của biến rm. Hình dưới bên trái: Hệ số chặn của hàm tuyến tính của biến lstat. Hình dưới bên phải: Hệ số góc của hàm tuyến tính của biến lstat.
+</p>
+</div>
+<p>Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam11">1.11</a> mô tả sự hội tụ của các hệ số chặn và hệ số góc của các hàm <span class="math inline">\(f_1\)</span> và <span class="math inline">\(f_2\)</span> lần lượt là các hàm tuyến tính của biến rm và biến lstat trong mô hình hồi quy đa biến với biến mục tiêu là biến medv trên dữ liệu <span class="math inline">\(\textbf{Boston}\)</span>. Trước hết bạn đọc có thể thấy rằng các hệ số tuyến tính hội tụ rất nhanh chỉ sau hơn 10 bước lặp. Thứ hai, các hàm ước lượng được từ backfitting là
+<span class="math display" id="eq:gam011">\[\begin{align}
+\hat{\beta}_0 &amp;= \bar{y} = 22.533 \\
+\hat{f}_1(rm) &amp;= \hat{\beta}_{10} + \hat{\beta}_{11} \cdot rm = -32.019 + 5.095 \cdot rm \\
+\hat{f}_2(lstat) &amp;= \hat{\beta}_{20} + \hat{\beta}_{21} \cdot lstat = 8.127 - 0.642 \cdot lstat
+\tag{1.11}
+\end{align}\]</span>
+sẽ cho ước lượng cộng tính cho hàm <span class="math inline">\(f\)</span> là
+<span class="math display" id="eq:gam012">\[\begin{align}
+\hat{f}(rm, lstat) &amp; = \hat{\beta}_0 + \hat{f}_1(rm) + \hat{f}_2(lstat) \\
+&amp; = - 1.358 +  5.095 \cdot rm - 0.642 \cdot lstat
+\tag{1.12}
+\end{align}\]</span>
+Bạn đọc có thể sử dụng ước lượng hồi quy đa biến thông thường để xác nhận rằng kết quả của hồi quy đa biến băng phương pháp bình phương nhỏ nhất cho kết quả không khác so với phương trình <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam012">(1.12)</a>.</p>
+<p>Trong thực tế, bạn đọc không cần phải viết vòng lặp để ước lượng mô hình cộng tính tổng quát mà sử dụng thư viện <span class="math inline">\(\textbf{gam}\)</span>. Hàm số được sử dụng để xây dựng và ước lượng mô hình cộng tính tổng quát trên R là hàm cùng tên với thư viện, hàm <code>gam()</code>. Chúng ta sẽ sử dụng hàm số này nhiều hơn trong phần thực hành.</p>
+<p>Đối với mô hình cộng tính tổng quát, thách thức với người xây dựng mô hình là chọn dạng hàm cho từng biến giải thích và số bậc tự do tương ứng. Tiêu chí để đánh giá mô hình thường được sử dụng là sai số xác thực chéo. Tuy nhiên, cần nhắc lại với bạn đọc rằng sử dụng xác thực chéo khi số lượng biến giải thích lớn sẽ khiến cho thời gian tính toán tăng lên đáng kể.</p>
+<p>Quay trở lại ví dụ khi chúng ta xây dựng mô hình cộng tính tổng quát khi biến mục tiêu medv phụ thuộc vào hai biến giải thích là lstat và rm. Giả sử chúng ta lựa chọn dạng hàm cho lstat và rm đều là các smoothing spline. Tham số duy nhất của smoothing spline là bậc tự do hiệu quả. Tìm bậc tự do hiệu quả cho lstat và rm phải thực hiện đồng thời và dựa trên sai số xác thực chéo</p>
+<div class="figure"><span style="display:block;" id="fig:fggam12"></span>
+<img src="bookdown-demo_files/figure-html/fggam12-1.png" alt="Sai số xác thực chéo khi lựa chọn tham số bậc tự do hiệu quả cho smoothing spline của biến lstat và bậc tự do hiệu quả cho smoothing spline của biến rm." width="672" />
+<p class="caption">
+Figure 1.12: Sai số xác thực chéo khi lựa chọn tham số bậc tự do hiệu quả cho smoothing spline của biến lstat và bậc tự do hiệu quả cho smoothing spline của biến rm.
+</p>
+</div>
+<p>Hình <a href="các-mô-hình-cộng-tính-tổng-quát.html#fig:fggam12">1.12</a> mô tả quá trình tìm kiếm tham số bậc tự do hiệu quả cho biến lstat và tham số bậc tự do hiệu quả cho biến rm dựa trên sai số xác thực chéo. Có thể thấy rằng tham số cho sai số xác thực chéo nhỏ nhất là <span class="math inline">\(df = 7.9\)</span> đối với biến lstat và <span class="math inline">\(df = 5.9\)</span> đối với biến rm.</p>
+<p>Cũng giống như mô hình tuyến tính thông thường, mô hình cộng tính tổng quát hoàn toàn có thể sử dụng trong các bài toán phân loại. Mô hình tuyến tính thông thường không thể sử dụng trực tiếp cho bài toán phân loại mà cần có sự biến đổi cho phù hợp với phân phối xác suất của biến mục tiêu. Các mô hình tuyến tính dùng cho mục đích phân loại là lớp các mô hình thường được gọi là mô hình tuyến tính tổng quát mà ở đó chúng ta có thể bỏ qua giả thuyết về phân phối chuẩn của biến mục tiêu. Các mô hình này sẽ được trình bày trong phần sau của cuốn sách. Mô hình GAM cho mục đích phân loại cũng cần xây dựng dựa trên nền tảng của mô hình tuyến tính tổng quát do đó sẽ được đề cập trong các chương tiếp theo.</p>
+</div>
+<div id="thực-hành" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Thực hành<a href="các-mô-hình-cộng-tính-tổng-quát.html#thực-hành" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="hồi-quy-spline-trên-dữ-liệu-boston" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Hồi quy spline trên dữ liệu Boston<a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-spline-trên-dữ-liệu-boston" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="hồi-quy-cục-bộ-trên-dữ-liệu-boston" class="section level3 hasAnchor" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Hồi quy cục bộ trên dữ liệu Boston<a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-cục-bộ-trên-dữ-liệu-boston" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="mô-hình-công-tính-tổng-quát-trên-dữ-liệu-boston" class="section level3 hasAnchor" number="1.5.3">
+<h3><span class="header-section-number">1.5.3</span> Mô hình công tính tổng quát trên dữ liệu Boston<a href="các-mô-hình-cộng-tính-tổng-quát.html#mô-hình-công-tính-tổng-quát-trên-dữ-liệu-boston" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="phụ-lục" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Phụ lục<a href="các-mô-hình-cộng-tính-tổng-quát.html#phụ-lục" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="gamapen1" class="section level3 hasAnchor" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> Ước lượng tham số cho splines bậc ba và <span class="math inline">\(k\)</span> nút<a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ước lượng tham số cho splines bậc ba không được thực hiện thông qua bài toán tối ưu như phương trình <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam004">(1.4)</a> mà cần có sự biến đổi tham số. Giả sử <span class="math inline">\(k=1\)</span> và nút duy nhất được lựa chọn là <span class="math inline">\(c\)</span>. Các tham số (<span class="math inline">\(\beta_{01}\)</span>, <span class="math inline">\(\beta_{11}\)</span>, <span class="math inline">\(\beta_{21}\)</span>, <span class="math inline">\(\beta_{31}\)</span>) của đa thức thứ nhất và các tham số (<span class="math inline">\(\beta_{02}\)</span>, <span class="math inline">\(\beta_{12}\)</span>, <span class="math inline">\(\beta_{22}\)</span>, <span class="math inline">\(\beta_{32}\)</span>) của đa thức thứ hai thỏa mãn các ràng buộc trong bài toán tối ưu như phương trình <a href="các-mô-hình-cộng-tính-tổng-quát.html#eq:gam004">(1.4)</a>, có thể chứng minh được rằng tồn tại các tham số <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(\beta_4\)</span> sao cho hàm số <span class="math inline">\(f\)</span> là nghiệm của bài tối ưu thỏa mãn
+<span class="math display">\[\begin{align}
+f(x) = \beta_0 + \beta_1 \cdot x + \beta_2 \cdot x^2 + \beta_3 \cdot x^3 + \beta_4 \cdot \left[(x-c)^3\right]^+
+\end{align}\]</span>
+Nói một cách khác, thay vì giải bài toán tối ưu có điều kiện ràng buộc, chúng ta chỉ cần sử dụng phương pháp bình phương nhỏ nhất thông thường để tìm các hệ số tuyến tính <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(\beta_4\)</span> tương ứng với các biến giải thích lần lượt là <span class="math inline">\(1\)</span>, <span class="math inline">\(x_i\)</span>, <span class="math inline">\(x_i^2\)</span>, <span class="math inline">\(x_i^3\)</span>, <span class="math inline">\(\left[(x_i-c)^3\right]^+\)</span>.</p>
+<p>Để tránh sự nhầm lẫn khi viết các hệ số <span class="math inline">\(\beta\)</span> với chỉ số, chúng ta viết lại bài toán hai đa thức như sau: Cho hai đa thức bậc ba <span class="math inline">\(P_1\)</span> và <span class="math inline">\(P_2\)</span> như sau
+<span class="math display">\[\begin{align}
+&amp; P_1(x) = a_0 + a_1 x + a_2 x^2 + a_3 x^3 \\
+&amp; P_2(x) = b_0 + b_1 x + b_2 x^2 + b_3 x^3
+\end{align}\]</span>
+và nút <span class="math inline">\(c\)</span> sao cho
+<span class="math display">\[\begin{align}
+P_1(c) = P_2(c); \ \ \ P^{&#39;}_1(c) = P{&#39;}_2(c); \ \ \ P{&#39;&#39;}_1(c) = P{&#39;&#39;}_2(c)
+\end{align}\]</span>
+Hàm số <span class="math inline">\(f\)</span> được xác định bởi
+<span class="math display">\[\begin{align}
+f(x) = \mathbb{I}_{\{x_i &lt; c\}} \cdot P_1(x) + \mathbb{I}_{\{x_i \geq c\}} \cdot P_2(x)
+\end{align}\]</span>
+Chúng ta sẽ chứng minh rằng <span class="math inline">\(f(x)\)</span> có thể được viết dưới dạng
+<span class="math display">\[\begin{align}
+f(x) = a_0 + a_1 x + a_2 x^2 + a_3 x^3 + (b_3 - a_3) \cdot \left[(x-c)^3\right]^{+}
+\end{align}\]</span></p>
+<p>Trước hết, chúng ta viết lại đa thức <span class="math inline">\(P_2(x)\)</span> như sau
+<span class="math display">\[\begin{align}
+P_2(x) = d_0 + d_1 (x-c) + d_2 (x-c)^2 + b_3 (x-c)^3
+\end{align}\]</span>
+do <span class="math inline">\(P_1(c) = P_2(c)\)</span>, <span class="math inline">\(P^{&#39;}_1(c) = P{&#39;}_2(c)\)</span>, và <span class="math inline">\(P{&#39;&#39;}_1(c) = P{&#39;&#39;}_2(c)\)</span> nên chúng ta có <span class="math inline">\(d_0 = P_1(c)\)</span>; <span class="math inline">\(d_1 = P^{&#39;}_1(c)\)</span>, và <span class="math inline">\(d_2 = P{&#39;&#39;}_1(c)/2\)</span>.</p>
+<p>Khi <span class="math inline">\(x &lt; c\)</span> có thể dễ dàng thấy rằng <span class="math inline">\(f(x) = P_1(x)\)</span>. Với <span class="math inline">\(x &gt; c\)</span>, chúng ta có
+<span class="math display">\[\begin{align}
+f(x) &amp; = a_0 + a_1 x + a_2 x^2 + a_3 x^3 + (b_3 - a_3) \cdot (x-c)^3 \\
+&amp; = (a_0 + a_3 c^3) + (a_1 - 3 a_3 c^2) x + (a_2 + 3 a_3 c) x^2 + b_3 (x-c)^3
+\end{align}\]</span></p>
+<p>Với <span class="math inline">\(t = x - c\)</span>,
+<span class="math display">\[\begin{align}
+f(x) &amp; = (a_0 + a_3 c^3) + (a_1 - 3 a_3 c^2) (y + c) + (a_2 + 3 a_3 c) (y + c)^2 + b_3 y^3 \\
+&amp; = (a_0 + a_3 c^3 + a_1 c + a_2 c^2) + (a_1 + 3 a_3 c^2 + 2 a_2) y + (a_2 + 3 a_3 c) y^2 + b_3 y^3 \\
+&amp; = d_0 + d_1 y + d_2 y^2 + b_3 y^3
+\end{align}\]</span>
+hay nói cách khác <span class="math inline">\(f(x) = P_2(x)\)</span> khi <span class="math inline">\(x &gt; c\)</span>!</p>
+<p>Trong trường hợp tổng quát, ước lượng một splines bậc ba với <span class="math inline">\(k\)</span> nút <span class="math inline">\(c_1 &lt; c_2 &lt; \cdots &lt; c_k\)</span> sẽ tương đương với ước lượng <span class="math inline">\(k+4\)</span> tham số <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(\beta_{(k+3)}\)</span> với các biến giải thích <span class="math inline">\(1\)</span>, <span class="math inline">\(x_i\)</span>, <span class="math inline">\(x_i^2\)</span>, <span class="math inline">\(x_i^3\)</span>, <span class="math inline">\(\left[(x_i-c_1)^3\right]^+\)</span>, <span class="math inline">\(\left[(x_i-c_2)^3\right]^+\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(\left[(x_i-c_k)^3\right]^+\)</span>.</p>
+</div>
+<div id="gamapen2" class="section level3 hasAnchor" number="1.6.2">
+<h3><span class="header-section-number">1.6.2</span> Ước lượng tham số cho natural splines bậc ba có <span class="math inline">\(k\)</span> nút<a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ước lượng tham số cho một <span class="math inline">\(natural\)</span> <span class="math inline">\(splines\)</span> không được thực hiện thông qua bài toán tối ưu có ràng buộc tại <span class="math inline">\(k\)</span> nút, mà được thực hiện thông qua giải bài toán bình phương nhỏ nhất thông thường của biến mục tiêu <span class="math inline">\(Y\)</span> với <span class="math inline">\(k\)</span> biến giải thích được tính toán từ biến giải thích <span class="math inline">\(X\)</span>. Giả sử <span class="math inline">\(k\)</span> nút được xắp xếp theo thứ tự tăng dần <span class="math inline">\(c_1 &lt; c_2 &lt; \cdots &lt; c_k\)</span>, ta có <span class="math inline">\(k\)</span> biến giải thích: <span class="math inline">\(X_1 = 1\)</span>, <span class="math inline">\(X_2 = x\)</span> và với <span class="math inline">\(j = 3, \cdots, k\)</span>
+<span class="math display">\[\begin{align}
+X_j = \cfrac{\left[(x-c_{j-2})^3\right]^+ - \left[(x-c_k)^3\right]^+ }{c_k - c_{j-2}} - \cfrac{\left[(x-c_{k-1})^3\right]^+ - \left[(x-c_k)^3\right]^+}{c_k - c_{k-1}}
+\end{align}\]</span></p>
+<p>Hàm <span class="math inline">\(\hat{f}\)</span> thu được bằng cách hồi quy tuyến tính <span class="math inline">\(Y\)</span> theo <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(X_k\)</span> có dạng
+<span class="math display">\[\begin{align}
+\hat{f}(x) = \hat{\beta}_1 \cdot X_1(x) + \hat{\beta}_2 \cdot X_2(x) + \cdots + \hat{\beta}_k \cdot X_k(x)
+\end{align}\]</span>
+là một natural splines vì:</p>
+<ol style="list-style-type: decimal">
+<li>Khi <span class="math inline">\(x\)</span> nhỏ hơn <span class="math inline">\(c_1\)</span> hoặc <span class="math inline">\(x\)</span> lớn hơn <span class="math inline">\(c_k\)</span> hàm <span class="math inline">\(f\)</span> là một hàm tuyến tính. Thật vậy</li>
+</ol>
+<ul>
+<li><p>Với <span class="math inline">\(x &lt; c_1\)</span> ta có <span class="math inline">\(X_j(x) = 0\)</span> với mọi <span class="math inline">\(j \geq 3\)</span>, do đó
+<span class="math display">\[\begin{align}
+\hat{f}(x) = \hat{\beta}_1 \cdot X_1(x) + \hat{\beta}_2 \cdot X_2(x) = \hat{\beta}_1 + \hat{\beta}_2 \cdot x
+\end{align}\]</span>
+là một hàm tuyến tính.</p></li>
+<li><p>Với <span class="math inline">\(x &gt; c_k\)</span> ta có: hệ số của <span class="math inline">\(x^3\)</span> của <span class="math inline">\(X_j\)</span> là
+<span class="math display">\[\begin{align}
+\cfrac{1 - 1}{c_k - c_{j-2}} - \cfrac{1 - 1}{c_k - c_{k-1}} = 0 - 0 = 0
+\end{align}\]</span>
+và hệ số của <span class="math inline">\(x^2\)</span> của <span class="math inline">\(X_j\)</span> là
+<span class="math display">\[\begin{align}
+\cfrac{-3c_{j-2} + 3c_k}{c_k - c_{j-2}} - \cfrac{-3c_{k-1} + 3c_k}{c_k - c_{k-1}} = 3 - 3 = 0
+\end{align}\]</span></p></li>
+</ul>
+<p>Nói cách khác, hàm <span class="math inline">\(\hat{f}(x)\)</span> là một hàm tuyến tính theo <span class="math inline">\(x\)</span> khi <span class="math inline">\(x\)</span> nhỏ hơn <span class="math inline">\(c_1\)</span> hoặc <span class="math inline">\(x\)</span> lớn hơn <span class="math inline">\(c_k\)</span>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>Khi <span class="math inline">\(x\)</span> nhận giá trị bất kỳ giữa hai nút <span class="math inline">\(c_{j-1}\)</span> và <span class="math inline">\(c_j\)</span>, hàm <span class="math inline">\(f\)</span> là một đa thức bậc ba.</p></li>
+<li><p>Hàm <span class="math inline">\(f\)</span> có liên tục, và có các đạo hàm đến bậc hai liên tục tại nút <span class="math inline">\(c_j\)</span> bất kỳ. Điều này hiển nhiên vì tất cả các hàm <span class="math inline">\(X_j(x)\)</span> đều liên tục và có đạo hàm đến bậc hai liên tục tại nút <span class="math inline">\(c_j\)</span> bất kỳ, do đó tổ hợp tuyến tính của các hàm <span class="math inline">\(X_j(x)\)</span> cũng có tính chất này.</p></li>
+</ol>
+</div>
+<div id="gamapen3" class="section level3 hasAnchor" number="1.6.3">
+<h3><span class="header-section-number">1.6.3</span> Tại sao smoothing splines lại là một natural spline<a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Trước hết, nếu <span class="math inline">\(f(x)\)</span> là một natural spline trên đoạn <span class="math inline">\([a,b]\)</span> đi qua <span class="math inline">\(n\)</span> điểm <span class="math inline">\((x_i, z_i)\)</span> với <span class="math inline">\(n\)</span> nút thắt tại <span class="math inline">\(x_1, x_2, \cdots, x_n\)</span> thì với mọi hàm số <span class="math inline">\(g(x)\)</span> có đạo hàm bậc hai liên tục và cũng đi qua <span class="math inline">\(n\)</span> điểm <span class="math inline">\((x_i, z_i)\)</span>, ta sẽ có
+<span class="math display">\[\begin{align}
+\int\limits_{a}^b \ \left[g^{&#39;&#39;}(x)\right]^2 dx \geq \int\limits_{a}^b \ \left[f^{&#39;&#39;}(x)\right]^2 dx
+\end{align}\]</span>
+nói một cách khác, trong tất cả các hàm có đạo hàm bậc hai liên tục đi qua <span class="math inline">\(n\)</span> điểm cho trước <span class="math inline">\((x_i, z_i)\)</span>, natural spline là hàm số ít linh hoạt nhất.</p>
+<p>Thật vậy, cho <span class="math inline">\(h(x) = g(x) - f(x)\)</span>, ta có <span class="math inline">\(h^{&#39;&#39;}(x) = g^{&#39;&#39;}(x) - f(x)^{&#39;&#39;}\)</span> và
+<span class="math display">\[\begin{align}
+\int\limits_{a}^b f^{&#39;&#39;}(x) h^{&#39;&#39;}(x) dx = \left[f^{&#39;&#39;}(x) h&#39;(x) \right]^b_a - \int\limits_{a}^b f^{&#39;&#39;&#39;}(x) h^{&#39;}(x) dx
+\end{align}\]</span></p>
+<p>Dễ thấy
+<span class="math display">\[\begin{align}
+\left[f^{&#39;&#39;}(x) h&#39;(x) \right]^b_a = f^{&#39;&#39;}(b) h&#39;(b) - f^{&#39;&#39;}(a) h&#39;(a) = 0
+\end{align}\]</span>
+do <span class="math inline">\(f^{&#39;&#39;}(b) = f^{&#39;&#39;}(a) = 0\)</span> vì <span class="math inline">\(f\)</span> là hàm tuyến tính khi <span class="math inline">\(x &lt; x_1\)</span> và <span class="math inline">\(x &gt; x_n\)</span>. Thêm vào đó
+<span class="math display">\[\begin{align}
+\int\limits_{a}^b f^{&#39;&#39;&#39;}(x) h^{&#39;}(x) dx &amp; = \int\limits_{x_1}^{x_n} f^{&#39;&#39;&#39;}(x) h^{&#39;}(x) dx \\
+&amp; = \sum\limits_{i=1}^n \int\limits_{x_1}^{x_{i+1}} f^{&#39;&#39;&#39;}(x) h^{&#39;}(x) dx \\
+&amp; = \sum\limits_{i=1}^n \left[f^{&#39;&#39;&#39;}(x) h(x) \right]^{x_{i+1}}_{x_i} -  \sum\limits_{i=1}^n \int\limits_{x_1}^{x_{i+1}} f^{(4)}(x) h(x) dx
+\end{align}\]</span></p>
+<p>Ta có <span class="math inline">\(h(x_i) = g(x_i) - f(x_i) = z_i - z_i = 0\)</span> do cả hai hàm <span class="math inline">\(g\)</span> và <span class="math inline">\(f\)</span> đều đi qua điểm <span class="math inline">\((x_i, z_i)\)</span>. Đồng thời <span class="math inline">\(f^{(4)}(x) = 0\)</span> với mọi <span class="math inline">\(x\)</span> do <span class="math inline">\(f\)</span> là một hàm bậc 3. Nói cách khác, giá trị của biểu thức <span class="math inline">\(\int\limits_{a}^b f^{&#39;&#39;}(x) h^{&#39;&#39;}(x) dx\)</span> cũng bằng 0.</p>
+<p>Dựa vào kết quả trên, có thể thấy rằng
+<span class="math display">\[\begin{align}
+\int\limits_{a}^b \ \left[g^{&#39;&#39;}(x)\right]^2 dx &amp; = \int\limits_{a}^b \ \left[f^{&#39;&#39;}(x) + h^{&#39;&#39;}(x)\right]^2 dx \\
+&amp; = \int\limits_{a}^b \ \left[f^{&#39;&#39;}(x)\right]^2 dx + 2 \cdot \int\limits_{a}^b f^{&#39;&#39;}(x) h^{&#39;&#39;}(x) dx + \int\limits_{a}^b \ \left[h^{&#39;&#39;}(x)\right]^2 dx \\
+&amp; = \int\limits_{a}^b \ \left[f^{&#39;&#39;}(x)\right]^2 dx + \int\limits_{a}^b \ \left[h^{&#39;&#39;}(x)\right]^2 dx \\
+&amp; \geq \int\limits_{a}^b \ \left[f^{&#39;&#39;}(x)\right]^2 dx
+\end{align}\]</span>
+và dấu bằng xảy ra chỉ khi <span class="math inline">\(h^{&#39;&#39;}(x) = 0\)</span> với mọi <span class="math inline">\(x\)</span>. Điều này chỉ xảy ra khi <span class="math inline">\(h\)</span> là một hàm tuyến tính. Tuy nhiên, ta lại có <span class="math inline">\(h(x_i) = 0\)</span> với mọi <span class="math inline">\(i\)</span>, do đó <span class="math inline">\(h(x) = 0\)</span> với mọi <span class="math inline">\(x\)</span>.</p>
+<p>Quay trở lại với Smoothing spline, giả sử <span class="math inline">\(\hat{f}\)</span> là lời giải của bài toán tối ưu
+<span class="math display">\[\begin{align}
+\hat{f} = \underset{f}{\operatorname{argmin}} \sum\limits_{i=1}^n (y_i - f(x_i))^2 + \lambda \cdot \int\limits_a^b f^{&#39;&#39;}(t)^2 dt
+\end{align}\]</span></p>
+<p>Gọi <span class="math inline">\(\tilde{f}\)</span> là natural spline đi qua các điểm <span class="math inline">\((x_i, \hat{f}(x_i))\)</span> và có nút tại tất cả các <span class="math inline">\(x_i\)</span> với <span class="math inline">\(1 \leq i \leq n\)</span> thì theo kết quả ở trên ta có
+<span class="math display">\[\begin{align}
+\int\limits_{a}^b \ \left[\hat{f}^{&#39;&#39;}(x)\right]^2 dx \geq \int\limits_{a}^b \ \left[\tilde{f}^{&#39;&#39;}(x)\right]^2 dx
+\end{align}\]</span>
+ngoài ra
+<span class="math display">\[\begin{align}
+\sum\limits_{i=1}^n (y_i - \hat{f}(x_i))^2 = \sum\limits_{i=1}^n (y_i - \tilde{f}(x_i))^2
+\end{align}\]</span>
+hay nói một cách khác
+<span class="math display">\[\begin{align}
+\sum\limits_{i=1}^n (y_i - \hat{f}(x_i))^2 + \lambda \cdot \int\limits_a^b \hat{f}^{&#39;&#39;}(t)^2 dt \geq \sum\limits_{i=1}^n (y_i - \tilde{f}(x_i))^2 + \lambda \cdot \int\limits_a^b \tilde{f}^{&#39;&#39;}(t)^2 dt
+\end{align}\]</span>
+điều này chỉ có thể xảy ra khi <span class="math inline">\(\hat{f}(x) = \tilde{f}(x)\)</span> với mọi <span class="math inline">\(x\)</span></p>
+</div>
+<div id="gamapen4" class="section level3 hasAnchor" number="1.6.4">
+<h3><span class="header-section-number">1.6.4</span> Ước lượng smoothing splines<a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Do smoothing splines là một natural spline nên dạng hàm của smoothing spline có thể viết dưới dạng
+<span class="math display">\[\begin{align}
+\hat{f}(x) = \hat{\beta}_1 \cdot X_1(x) + \hat{\beta}_2 \cdot X_2(x) + \cdots + \hat{\beta}_k \cdot X_k(x)
+\end{align}\]</span>
+với
+<span class="math display">\[\begin{align}
+X_j = \cfrac{\left[(x-c_{j-2})^3\right]^+ - \left[(x-c_k)^3\right]^+ }{c_k - c_{j-2}} - \cfrac{\left[(x-c_{k-1})^3\right]^+ - \left[(x-c_k)^3\right]^+}{c_k - c_{k-1}}
+\end{align}\]</span></p>
+<p>Có thể chứng minh được rằng các hệ số <span class="math inline">\(\boldsymbol{\hat\beta}\)</span> để hàm <span class="math inline">\(\hat{f}\)</span> là nghiệm của bài toán tối ưu
+<span class="math display">\[\begin{align}
+\hat{f} = \underset{f}{\operatorname{argmin}} \sum\limits_{i=1}^n (y_i - f(x_i))^2 + \lambda \cdot \int\limits_a^b f^{&#39;&#39;}(t)^2 dt
+\end{align}\]</span>
+là nghiệm của bài toán tối ưu tương ứng
+<span class="math display">\[\begin{align}
+\boldsymbol{\hat\beta} = \underset{\boldsymbol{\beta}}{\operatorname{argmin}} \left(\textbf{y} - \textbf{x} \boldsymbol{\beta}\right)^T \left(\textbf{y} - \textbf{x} \boldsymbol{\beta}\right) + \lambda \cdot \boldsymbol{\beta}^T \Omega \boldsymbol{\beta}
+\end{align}\]</span>
+với <span class="math inline">\(\lambda &gt; 0\)</span>, <span class="math inline">\(\textbf{x}\)</span> là ma trận kích thước <span class="math inline">\(n \times k\)</span> các biến giải thích có phần tử nằm ở hàng thứ <span class="math inline">\(i\)</span> cột thứ <span class="math inline">\(j\)</span> là <span class="math inline">\(X_j(x_i)\)</span> và <span class="math inline">\(\Omega\)</span> là ma trận kích thước <span class="math inline">\(k \times k\)</span> và
+<span class="math display">\[\begin{align}
+\Omega_{j,l} = \int\limits_{a}^b X_j(t) X_l(t) dt
+\end{align}\]</span>
+với <span class="math inline">\(1 \leq j,l \leq n\)</span>. Có thể thấy rằng ước lượng smoothing spline cũng tương tự như ước lượng tham số của hồi quy ridge. Ta có lời giải chính xác cho các hệ số tuyến tính:
+<span class="math display">\[\begin{align}
+\boldsymbol{\hat\beta} = \left( \textbf{x}^T \textbf{x} + \lambda \Omega \right)^{-1} \textbf{x}^T \textbf{y}
+\end{align}\]</span></p>
+<p>Tương tự như hồi quy ridge, giá trị <span class="math inline">\(\lambda\)</span> sẽ quyết định mức độ linh hoạt của smoothing spline: nếu <span class="math inline">\(\lambda\)</span> lớn thì sự linh hoạt của các smoothing spline sẽ giảm và ngược lại, nếu <span class="math inline">\(\lambda\)</span> giảm thì mức độ linh hoạt của hàm sẽ tăng. Mức độ linh hoạt thường được đo lường bằng khái niệm bậc tự do hiệu quả. Với hệ số <span class="math inline">\(\boldsymbol{\hat\beta}\)</span> ước lượng được như trên, chúng ta có giá trị ước lượng cho biến mục tiêu <span class="math inline">\(\hat{y}\)</span> như sau
+<span class="math display">\[\begin{align}
+\hat{y} &amp; = \textbf{x} \boldsymbol{\hat\beta} \\
+&amp; = \textbf{x} \left( \textbf{x}^T \textbf{x} + \lambda \Omega \right)^{-1} \textbf{x}^T \textbf{y} \\
+&amp; = \textbf{S}_{\lambda} \textbf{y}
+\end{align}\]</span>
+với
+<span class="math display">\[\begin{align}
+\textbf{S}_{\lambda} = \textbf{x} \left( \textbf{x}^T \textbf{x} + \lambda \Omega \right)^{-1} \textbf{x}^T
+\end{align}\]</span></p>
+<p>Bậc tự do hiệu quả của smoothing spline được xác định cũng giống như trong hồi quy ridge, là vết của ma trận <span class="math inline">\(\textbf{S}_{\lambda}\)</span>, được ký hiệu là <span class="math inline">\(trace\left(\textbf{S}_{\lambda}\right)\)</span>.</p>
+<!-- # REFERENCE -->
+<!-- ### Source from thesis -->
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+<!-- ### Souce from website -->
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->
+
+<pre><code>## Loading required package: shape</code></pre>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="neuralnetwork.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

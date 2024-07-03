@@ -47,7 +47,7 @@ div.base::before,
   font-size: 1.1em;
   font-weight: 700;
   margin-bottom: 0.25em;
-  color: #000;
+  color: #F31;
 }
 
 .todo {
@@ -63,6 +63,57 @@ div.base::before,
   content: "TO DO: ";
   font-weight: bold;
   color: red;
+}
+
+.rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning, .rmdcomment {
+  padding: 1em 1em 1em 5em;
+  margin-bottom: 2em;
+  background: #f5f5f5 1em center/3em no-repeat;
+  border: 0.41px solid black;
+}
+.rmdcaution {
+  background-image: url("styimages/exclamation-triangle.svg");
+}
+.rmdimportant {
+  background-image: url("styimages/comment.svg");
+}
+.rmdnote {
+  background-image: url("styimages/info-circle.svg");
+}
+.rmdtip {
+  background-image: url("styimages/thumbs-up.svg");
+}
+.rmdwarning {
+  background-image: url("styimages/comment.svg");
+}
+.rmdcomment {
+  background-image: url("styimages/comment.svg");
+}
+
+/*--- LOGO ---*/
+
+/* Sidebar logo styling */
+.book .book-sidebar .sidebar-title::before {
+  content: "";
+  display: block;
+  margin: 0 auto 10px; /* Center and add space below the logo */
+  text-align: center; /* Center the logo */
+}
+
+.book .book-sidebar .sidebar-title::before {
+  content: url("styimages/LogoASLab.png");
+  display: block;
+  margin: 0 auto 10px; /* Center and add space below the logo */
+  width: 10%;
+  height: auto; /* Maintain aspect ratio */
+}
+
+.book .book-sidebar .sidebar-title img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
 }
 
 /* Other gitbook tweaks -------------------------------------------------- */

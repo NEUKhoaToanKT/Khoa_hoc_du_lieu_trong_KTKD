@@ -1,34 +1,9 @@
---- 
-title: "Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh"
-author: "Nguyễn Quang Huy"
-date: "`r Sys.Date()`"
-site: bookdown::bookdown_site
-output: bookdown::bs4_book
-#documentclass: book
-#bibliography: [book.bib, packages.bib]
-biblio-style: apalike
-#link-citations: yes
-#github-repo: rstudio/bookdown-demo
-description: "Hello, This is the test version"
-header-includes:
-- \usepackage{tikz}
-- \usepackage{pgfplots}
-- \usetikzlibrary{arrows,automata,positioning}
-- \usepackage[utf8]{inputenc}
-- \usepackage[utf8]{vietnam}
-- \usepackage{etoolbox}
-- \usepackage{xcolor}
-- \usepackage{hyperref}
-- \usepackage{mathtools}
-- \usepackage{fontawesome5}
-- \makeatletter
-- \preto{\@verbatim}{\topsep=0pt \partopsep=-0pt}
-- \makeatother
-- \DeclareMathOperator*{\argmax}{arg\,max}
-- \newcommand\tstrut{\rule{0pt}{3ex}}
-- \newcommand\bstrut{\rule[-2.5ex]{0pt}{0pt}}
 ---
-
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
 ```{r, warning = FALSE, echo = FALSE}
 library(readxl)
 library(dplyr)
@@ -73,7 +48,7 @@ Chương sách này được cấu trúc như sau: trước hết, chúng tôi m
 ## Dữ liệu để xây dựng mô hình
 Tập dữ liệu "pricing-modeling-dataset.csv" được sử dụng làm dữ liệu để chúng ta phân tích và xây dựng các mô hình tuyến tính tổng quát. Bộ dữ liệu bao gồm thông tin về các hợp đồng bảo hiểm ô tô chở khách thương mại và chứa cả thông tin về yêu cầu bồi thường. Dữ liệu được quan sát trong các năm từ 2010 đến 2013. Có tổng cộng 40,760 hàng và 24 biến.
 ```{r, warning=FALSE, message=FALSE}
-dat<-read_csv("C:/Users/AD/Desktop/Tex file/Thu latex/Book demo/bookdown_demo_hieu/Dataset/pricing-modeling-dataset.csv")
+dat<-read_csv("../KHDL_KTKD Final/Dataset/pricing-modeling-dataset.csv")
 head(dat)
 ```
 

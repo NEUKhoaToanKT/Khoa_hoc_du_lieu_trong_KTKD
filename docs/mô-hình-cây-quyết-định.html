@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chương 1 Mô hình cây quyết định | bookdown-demo.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chương 1 Mô hình cây quyết định | bookdown-demo.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chương 1 Mô hình cây quyết định | bookdown-demo.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">KHDL KT&KD</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#mô-hình-cây-quyết-định"><i class="fa fa-check"></i><b>1</b> Mô hình cây quyết định</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#cơ-bản-về-mô-hình-cây-quyết-định"><i class="fa fa-check"></i><b>1.1</b> Cơ bản về mô hình cây quyết định</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#mô-hình-cây-quyết-định-hồi-quy"><i class="fa fa-check"></i><b>1.1.1</b> Mô hình cây quyết định hồi quy</a></li>
+<li class="chapter" data-level="1.1.2" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#cây-quyết-định-phân-loại"><i class="fa fa-check"></i><b>1.1.2</b> Cây quyết định phân loại</a></li>
+<li class="chapter" data-level="1.1.3" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#cây-quyết-định-và-mô-hình-tuyến-tính"><i class="fa fa-check"></i><b>1.1.3</b> Cây quyết định và mô hình tuyến tính</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#thực-hành-xây-dựng-mô-hình-cây-quyết-định-sử-dụng-r"><i class="fa fa-check"></i><b>1.2</b> Thực hành: xây dựng mô hình cây quyết định sử dụng R</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#cây-quyết-định-hồi-quy-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>1.2.1</b> Cây quyết định hồi quy trên dữ liệu Boston</a></li>
+<li class="chapter" data-level="1.2.2" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#cây-quyết-định-phân-loại-trên-dữ-liệu-titanic"><i class="fa fa-check"></i><b>1.2.2</b> Cây quyết định phân loại trên dữ liệu Titanic</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#thuật-toán-rừng-ngẫu-nhiên"><i class="fa fa-check"></i><b>1.3</b> Thuật toán rừng ngẫu nhiên</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#phương-pháp-lấy-mẫu-lặp-lại"><i class="fa fa-check"></i><b>1.3.1</b> Phương pháp lấy mẫu lặp lại</a></li>
+<li class="chapter" data-level="1.3.2" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#thuật-toán-rừng-ngẫu-nhiên-1"><i class="fa fa-check"></i><b>1.3.2</b> Thuật toán rừng ngẫu nhiên</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#thực-hành-mô-hình-rừng-ngẫu-nhiên"><i class="fa fa-check"></i><b>1.4</b> Thực hành: mô hình rừng ngẫu nhiên</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#xây-dựng-mô-hình-rừng-ngẫu-nhiên-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>1.4.1</b> Xây dựng mô hình rừng ngẫu nhiên trên dữ liệu Boston</a></li>
+<li class="chapter" data-level="1.4.2" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#xây-dựng-mô-hình-rừng-ngẫu-nhiên-trên-dữ-liệu-oj"><i class="fa fa-check"></i><b>1.4.2</b> Xây dựng mô hình rừng ngẫu nhiên trên dữ liệu OJ</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#bài-tập"><i class="fa fa-check"></i><b>1.5</b> Bài tập</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#bài-tập-lý-thuyết"><i class="fa fa-check"></i><b>1.5.1</b> Bài tập lý thuyết</a></li>
+<li class="chapter" data-level="1.5.2" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#bài-tập-thực-hành"><i class="fa fa-check"></i><b>1.5.2</b> Bài tập thực hành</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#phụ-lục"><i class="fa fa-check"></i><b>1.6</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="1.6.1" data-path="11-mo-hinh-cay-quyet-dinh.html"><a href="#tính-toán-sự-quan-trọng-của-biến-giải-thích-trong-mô-hình-rừng-ngẫu-nhiên"><i class="fa fa-check"></i><b>1.6.1</b> Tính toán sự quan trọng của biến giải thích trong mô hình rừng ngẫu nhiên</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<!--bookdown:title:end-->
+<!--bookdown:title:start-->
+<div id="mô-hình-cây-quyết-định" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chương 1</span> Mô hình cây quyết định<a href="#mô-hình-cây-quyết-định" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Trong chương này, chúng tôi trình bày các phương pháp hồi quy và phân loại dựa trên cây quyết định. Mô hình dạng cây quyết định liên quan đến kỹ thuật phân chia miền giá trị của các biến giải thích hành các miền nhỏ có tính chất tương tự nhau. Để đưa ra dự đoán cho một quan sát, mô hình cây quyết định hồi quy sử dụng giá trị trung bình của các quan sát nằm trong miền tương ứng. Đối với bài toán phân loại, cây quyết định thường sử dụng giá trị mode của các quan sát nằm trong miền này. Các quy tắc dùng để phân tách miền xác định của các biến giải thích được sử dụng có thể được mô tả theo kiểu một cây quyết định nên các kiểu xây dựng mô hình như vậy thường được gọi là mô hình dạng cây quyết định.</p>
+<p>Các phương pháp hồi quy và phân loại dựa trên cây quyết định khá đơn giản và dễ dàng trong việc diễn giải. Tuy nhiên, các phương pháp này thường không so sánh được về khả năng dự đoán chính xác so với các phương pháp học máy có giám sát đã được trình bày trong các chương trước, chẳng hạn như hồi quy Splines, Smoothing Splines, hoặc mô hình cộng tính tổng quát khi có nhiều biến giải thích. Tuy nhiên, mô hình dạng cây quyết định lại thích hợp khi sử dụng kết hợp vơi các kỹ thuật thống kê hiện đại như rừng ngẫu nhiên hoặc học tăng cường để cho kết quả dự đoán chính xác vượt trội. Một lợi thế khác của mô hình dạng cây quyết định đó là mô hình này có thể sử dụng trực tiếp với cả bài toán hồi quy và phân loại mà không cần một sự biến đổi đáng kể nào về cách tiếp cận.</p>
+<p>Trong chương này chúng tôi sẽ trình bày về mô hình dạng cây quyết định sử dụng trong bài toán hồi quy và phân loại và sau đó giới thiệu đến bạn đọc thuật toán kỹ thuật kết hợp nhiều cây quyết định để cải thiện khả năng dự đoán của mô hình còn được biến đến với tên gọi là thuật toán <span class="math inline">\(rừng\)</span> <span class="math inline">\(ngẫu\)</span> <span class="math inline">\(nhiên\)</span>. Kỹ thuật học tăng cường (boosting) sẽ được giới thiệu đến bạn đọc trong chương tiếp theo.</p>
+<div id="cơ-bản-về-mô-hình-cây-quyết-định" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Cơ bản về mô hình cây quyết định<a href="#cơ-bản-về-mô-hình-cây-quyết-định" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Như chúng tôi đã đề cập, cây quyết định có thể được áp dụng cho cả bài toán hồi quy và bài toán phân loại. Chúng ta xem xét bài toán hồi quy trước sau đó chuyển sang cây quyết định phân loại. Bạn đọc sẽ thấy rằng cách xây dựng mô hình cây quyết định và cây quyết định hồi quy là hoàn toàn tương tự nhau, chỉ khác nhau về mục tiêu tối thiểu hóa.</p>
+<div id="mô-hình-cây-quyết-định-hồi-quy" class="section level3 hasAnchor" number="1.1.1">
+<h3><span class="header-section-number">1.1.1</span> Mô hình cây quyết định hồi quy<a href="#mô-hình-cây-quyết-định-hồi-quy" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="xây-dựng-cây-quyết-định-hồi-quy-trên-dữ-liệu-boston" class="section level4 hasAnchor" number="1.1.1.1">
+<h4><span class="header-section-number">1.1.1.1</span> Xây dựng cây quyết định hồi quy trên dữ liệu Boston<a href="#xây-dựng-cây-quyết-định-hồi-quy-trên-dữ-liệu-boston" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Để bắt đầu với cây quyết định hồi quy, chúng ta bắt đầu bằng một ví dụ đơn giản trên một cây hồi quy đơn biến. Chúng tôi sử dụng dữ liệu Boston để dự đoán biến mục tiêu là giá nhà tại các vùng (biến <span class="math inline">\(medv\)</span>, đơn vị là nghìn USD) dựa trên tỷ lệ số người có mức sống thấp trong vùng đó (biến <span class="math inline">\(lstat\)</span>, đơn vị là %). Hình <a href="#fig:fgtree01">1.1</a> mô tả một cây hồi quy phù hợp với dữ liệu này.</p>
+<div class="figure"><span style="display:block;" id="fig:fgtree01"></span>
+<img src="bookdown-demo_files/figure-html/fgtree01-1.png" alt="Cây quyết định hồi quy kích thước bằng 3 mô tả giá nhà phụ thuộc vào tỷ lệ người sống dưới mức trung bình trên dữ liệu Boston. Tại mỗi điểm phân nhánh, ký hiệu lstat < c chỉ định phân nhánh sang bên trái, nghĩa là các điểm dữ liệu thuộc có tính chất lstat < c nằm trong nhánh bên trái trong khi các điểm dữ liệu có lstat lớn hơn hoặc bằng c sẽ nằm sang nhánh bên phải. Cây quyết định ở trên có hai nút và ba lá tương ứng với ba tập hợp con của dữ liệu." width="672" />
+<p class="caption">
+Figure 1.1: Cây quyết định hồi quy kích thước bằng 3 mô tả giá nhà phụ thuộc vào tỷ lệ người sống dưới mức trung bình trên dữ liệu Boston. Tại mỗi điểm phân nhánh, ký hiệu lstat &lt; c chỉ định phân nhánh sang bên trái, nghĩa là các điểm dữ liệu thuộc có tính chất lstat &lt; c nằm trong nhánh bên trái trong khi các điểm dữ liệu có lstat lớn hơn hoặc bằng c sẽ nằm sang nhánh bên phải. Cây quyết định ở trên có hai nút và ba lá tương ứng với ba tập hợp con của dữ liệu.
+</p>
+</div>
+<p>Bạn đọc có thể thấy rằng một cây quyết định bao gồm một chuỗi các quy tắc phân chia, bắt đầu từ ngọn cây xuống dưới. Phần phân chia trên cùng chỉ định các quan sát có <span class="math inline">\(lstat &lt; 9.725 (\%)\)</span> cho nhánh cây bên trái và các quan sát có <span class="math inline">\(lstat \geq 9.725(\%)\)</span> cho nhánh bên phải. Giá nhà cho các vùng có tỷ lệ người có thu nhập thấp lớn hơn hoặc bằng 9.725% được dự đoán bằng giá trị trung bình của các quan sát trong dữ liệu huấn luyện và bằng 17.34 nghìn USD.
+Những vùng có <span class="math inline">\(lstat \geq 9.725(\%)\)</span> được chỉ định vào nhánh bên trái và sau đó lại được chia nhỏ hơn thành hai nhánh, nhánh bên phải là các quan sát có <span class="math inline">\(lstat &lt; 4.65(\%)\)</span> và nhánh bên phải là các quan sát có <span class="math inline">\(lstat \geq 4.65(\%)\)</span>. Giá nhà được dự đoán tại các vùng có <span class="math inline">\(lstat &lt; 4.65(\%)\)</span> là giá trị trung bình của các ngôi nhà trong dữ liệu huấn luyện mô hình có tính chất tương ứng và bằng 39.72 nghìn USD. Tương tự, tại các vùng có <span class="math inline">\(lstat\)</span> nhận giá trị từ 4.65% đến 9.725% giá nhà được dự đoán là 26.65 nghìn USD. Ba tập con riêng biệt của dữ liệu về giá nhà ở Boston được phân tách theo cây quyết định dựa trên biến <span class="math inline">\(lstat\)</span> và giá trị ước lượng tương ứng cho giá nhà được tổng kết lại như sau:
+<span class="math display" id="eq:tree001">\[\begin{align}
+R_1 &amp;= \{X \ | lstat &lt; 4.65\} \rightarrow \hat{y} = 39.72 \\
+R_2 &amp;= \{X \ | lstat \geq 4,65 \ \ \&amp; \ \ lstat &lt; 9.725 \} \rightarrow \hat{y} = 26.65  \\
+R_3 &amp;= \{X \ | lstat \geq 9.725 \} \rightarrow \hat{y} = 17.34
+\tag{1.1}
+\end{align}\]</span></p>
+<div class="figure"><span style="display:block;" id="fig:fgtree02"></span>
+<img src="bookdown-demo_files/figure-html/fgtree02-1.png" alt="Hàm f được ước lượng từ mô hình cây quyết định có dạng hàm bậc thang nhận giá trị bằng hằng số trên các miền giá trị được phân tách của biến giải thích." width="672" />
+<p class="caption">
+Figure 1.2: Hàm f được ước lượng từ mô hình cây quyết định có dạng hàm bậc thang nhận giá trị bằng hằng số trên các miền giá trị được phân tách của biến giải thích.
+</p>
+</div>
+<p>Hình <a href="#fig:fgtree02">1.2</a> mô tả hàm số được ước lượng theo cây quyết định khi có một biến giải thích duy nhất. Bạn đọc có thể thấy rằng trong trường hợp chỉ có một biến, cây quyết định cũng giống như các hồi quy theo đa thức theo từng đoạn, với bậc của các đa thức là bằng 0. Nói cách khác, hàm <span class="math inline">\(f\)</span> là hằng số trên các khoảng giá trị khác nhau của biến giải thích. Các nút chia dữ liệu ra thành các miền con là 9.725 và 4.65 được tính toán sao cho sai số (RSS) trên dữ liệu huấn luyện mô hình là nhỏ nhất. Chúng ta sẽ thảo luận chi tiết về ước lượng mô hình cây quyết định ở phần tiếp theo của chương.<br />
+Điều gì xảy ra nếu chúng ta sử dụng đồng thời hai biến là biến <span class="math inline">\(lstat\)</span> và biến <span class="math inline">\(rm\)</span>. Biến <span class="math inline">\(rm\)</span> cho biết trung bình trong một ngôi nhà ở vùng quan sát có bao nhiêu phòng. Hình <a href="#fig:fgtree03">1.3</a> mô tả một cây quyết định hồi quy khi sử dụng đồng thời hai biến <span class="math inline">\(lstat\)</span> biến <span class="math inline">\(rm\)</span></p>
+<div class="figure"><span style="display:block;" id="fig:fgtree03"></span>
+<img src="bookdown-demo_files/figure-html/fgtree03-1.png" alt="Cây quyết định hồi quy kích thước bằng ba mô tả giá nhà phụ thuộc vào tỷ lệ người sống dưới mức trung bình và số lượng phòng trung bình của mỗi ngôi nhà trên dữ liệu Boston. Điểm phân nhánh (nút) đầu tiên phụ thuộc vào biến rm. Nút thứ hai phụ thuộc vào biến lstat." width="672" />
+<p class="caption">
+Figure 1.3: Cây quyết định hồi quy kích thước bằng ba mô tả giá nhà phụ thuộc vào tỷ lệ người sống dưới mức trung bình và số lượng phòng trung bình của mỗi ngôi nhà trên dữ liệu Boston. Điểm phân nhánh (nút) đầu tiên phụ thuộc vào biến rm. Nút thứ hai phụ thuộc vào biến lstat.
+</p>
+</div>
+<p>Bạn đọc có thể nhận thấy sự khác biệt giữa mô hình cây quyết định có một biến giải thích trong Hình <a href="#fig:fgtree01">1.1</a> và mô hình cây quyết định có hai biến giải thích <a href="#fig:fgtree03">1.3</a>. Khi có hai biến giải thích, nút đầu tiên được sử dụng để phân tách dữ liệu là <span class="math inline">\(rm &lt; 6.941\)</span> và nút thứ hai sử dụng để phân tách dữ liệu là <span class="math inline">\(lstat &lt; 14.4\)</span>. Tuy nhiên, cần lưu ý rằng nút phân tách thứ hai không được thực hiện trên toàn bộ dữ liệu, mà chỉ được thực hiện trên miền bên trái của nút <span class="math inline">\(rm &lt; 6.941\)</span>. Như vậy, ba miền dữ liệu được định nghĩa theo cây quyết định này và giá trị ước lượng tương ứng cho giá nhà có thể được tóm tắt như sau
+<span class="math display" id="eq:tree002">\[\begin{align}
+R_1 &amp;= \{X \ | rm &lt; 6.941 \ \ \&amp; \ \  lstat &lt; 14.4 \} \rightarrow \hat{y} = 23.35 \\
+R_2 &amp;= \{X \ | rm &lt; 6.941 \ \ \&amp; \ \ lstat \geq 14.4  \} \rightarrow \hat{y} = 14.96  \\
+R_3 &amp;= \{X \ | rm \geq 6.941 \} \rightarrow \hat{y} = 37.24
+\tag{1.2}
+\end{align}\]</span></p>
+<div class="figure"><span style="display:block;" id="fig:fgtree04"></span>
+<img src="bookdown-demo_files/figure-html/fgtree04-1.png" alt="Mô hình cây quyết định hồi quy chia hình chữ nhật thành ba phần R1, R2, và R3 và giá nhà trong mỗi miền là hằng số" width="672" />
+<p class="caption">
+Figure 1.4: Mô hình cây quyết định hồi quy chia hình chữ nhật thành ba phần R1, R2, và R3 và giá nhà trong mỗi miền là hằng số
+</p>
+</div>
+<p>Mô hình cây quyết định hồi quy được mô tả trong các hình <a href="#fig:fgtree03">1.3</a>, <a href="#fig:fgtree04">1.4</a>, hoặc phương trình <a href="#eq:tree001">(1.1)</a> có thể được giải thích rất dễ dàng như sau: ở những vùng có số phòng trung bình lớn hơn 6.941 (miền R3) giá nhà được dự đoán là 37.24 nghìn USD, ở những vùng số phòng trung bình nhỏ hơn 6.941 và tỷ lệ số người thu nhập thấp dưới 14.4(%) (miền R1) thì giá nhà được dự đoán là 23.35 nghìn USD, và cuối cung ở những vùng số phòng trung bình nhỏ hơn 6.941 và tỷ lệ số người thu nhập thấp lớn hơn 14.4(%) (miền R2) thì giá nhà được dự đoán là 14.96 nghìn USD. Bạn đọc có thể thấy rằng các mô hình dạng cây quyết định là rất dễ dàng để giải thích, thậm chí còn dễ dàng hơn so với các mô hình hồi quy tuyến tính.</p>
+<p>Một cách tổng quát, có thể tóm tắt lại quá trình xây dựng một cây quyết định hồi quy để mô tả mối liên hệ giữa biến mục tiêu <span class="math inline">\(Y\)</span> và các <span class="math inline">\(p\)</span> biến giải thích <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(X_p\)</span> như sau:</p>
+<p>Thứ nhất: Chúng ta chia không gian các giá trị có thể có của các biến giải thích thành <span class="math inline">\(J\)</span> các vùng riêng biệt và không chồng lấn lên nhau, tạm gọi là <span class="math inline">\(R_1\)</span>, <span class="math inline">\(R_2\)</span>, <span class="math inline">\(\cdots\)</span> , <span class="math inline">\(R_K\)</span>.</p>
+<p>Thứ hai: Đối với tất cả quan sát rơi vào vùng <span class="math inline">\(R_k\)</span>, với <span class="math inline">\(1 \leq k \leq K\)</span>, chúng ta đưa ra dự đoán giống nhau là giá trị trung bình của các giá trị của biến mục tiêu <span class="math inline">\(Y\)</span> của các quan sát của dữ liệu huấn luyện nằm trong vùng <span class="math inline">\(R_k\)</span>. Ví dụ: giả sử ở bước thứ nhất, chúng ta có hai vùng, <span class="math inline">\(R_1\)</span> và <span class="math inline">\(R_2\)</span>, và trung bình của biến mục tiêu của các quan sát trong dữ liệu huấn luyện ở vùng <span class="math inline">\(R_1\)</span> là 5, trong khi trung bình của biến mục tiêu của các quan sát trong dữ liệu huấn luyện ở vùng <span class="math inline">\(R_2\)</span> là 10. Khi đó, đối với một quan sát bất kỳ <span class="math inline">\(X = x\)</span>, nếu <span class="math inline">\(x \in R_1\)</span> chúng ta sẽ dự đoán biến mục tiêu là 5 và nếu <span class="math inline">\(x \in R_2\)</span> chúng ta sẽ dự đoán biến mục tiêu là 10.</p>
+</div>
+<div id="ước-lượng-tham-số-mô-hình-cây-quyết-định" class="section level4 hasAnchor" number="1.1.1.2">
+<h4><span class="header-section-number">1.1.1.2</span> Ước lượng tham số mô hình cây quyết định<a href="#ước-lượng-tham-số-mô-hình-cây-quyết-định" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Về lý thuyết, ước lượng tham số cho mô hình cây quyết định là quá trình tìm cách xây dựng các vùng <span class="math inline">\(R_1\)</span>, <span class="math inline">\(R_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(R_K\)</span>? Các vùng này có thể có hình dạng bất kỳ miễn là các vùng không có chồng lấn và hợp của các vùng là miền giá trị của các biến giải thích. Tuy nhiên, nếu lựa chọn chia không gian các biến giải thích thành vùng có dạng hình chữ nhật nhiều chiều thì mô hình sẽ dễ diễn giải và ước lượng hơn rất nhiều. Một vùng hình chữ nhật nhiều chiều có thể được hiểu là một vùng mà mỗi biến giải thích <span class="math inline">\(X_j\)</span> chỉ bị giới hạn bởi hai giá trị đầu mút là <span class="math inline">\(a_j\)</span> và <span class="math inline">\(b_j\)</span> và không chịu tác động từ các biến giải thích khác:
+<span class="math display">\[\begin{align}
+\cup_{j=1}^p \{X_j \in [a_j, b_j] \}
+\end{align}\]</span></p>
+<p>Với <span class="math inline">\(R_k\)</span> là các hình chữ nhật nhiều chiều, chúng ta cần tìm cách phân chia miền giá trị của các biến giải thích ra thành <span class="math inline">\(K\)</span> hình chữ nhật như vậy với mục tiêu là tối thiểu hóa sai số RSS. Lưu ý rằng RSS được tính dựa trên dự báo cho mỗi miền <span class="math inline">\(R_k\)</span> bằng <span class="math inline">\(\hat{y}_{R_k}\)</span> là giá trị trung bình của biến mục tiêu trong miền này. Tuy nhiên khó khăn thực tế là không thể tính toán được hết mọi phân vùng có thể có của không gian các biến giải thích. Các tiếp cận khả thi để tìm kiếm phân vùng theo cách phân tách nhị phân từ trên xuống:</p>
+<ul>
+<li><p>Tại bước thứ nhất: chúng ta tìm cách chia toàn bộ không gian biến giải thích thành hai hình chữ nhật sao cho sai số RSS trên dữ liệu huấn luyện mô hình là nhỏ nhất.</p></li>
+<li><p>Tại bước thứ hai: chúng ta tìm cách chia một trong hai hình chữ nhật thu được trong bước thứ nhất sao cho sai số RSS trên dữ liệu huấn luyện mô hình là nhỏ nhất.</p></li>
+<li><p>…</p></li>
+<li><p>Tại bước thứ <span class="math inline">\(K\)</span>: chúng ta tìm cách chia một trong <span class="math inline">\(K-1\)</span> hình chữ nhật thu được trong bước thứ <span class="math inline">\(K-1\)</span> thành hai hình chữ nhật con sao cho sai số RSS tính từ <span class="math inline">\(K\)</span> hình chữ nhật là nhỏ nhất.</p></li>
+</ul>
+<p>Đây là quá trình tìm kiếm <span class="math inline">\(tham\)</span> <span class="math inline">\(lam\)</span> bởi vì tại mỗi bước của quá trình xây dựng cây quyết định, chúng ta luôn tìm kiếm sự phân tách tốt nhất có thể dựa trên kết quả của bước tốt nhất trước đó. Cách tìm kiếm này là khả thi nhưng không chắc chắn rằng chúng ta có thể tìm được phân vùng tối ưu. Trong một hình hộp bất kỳ, để thực hiện phân tách thành hai phần, chúng ta cần lựa chọn biến giải thích <span class="math inline">\(X_j\)</span> và điểm cắt <span class="math inline">\(s\)</span> nằm trong miền giá trị của <span class="math inline">\(X_j\)</span> sao cho khi chia hình chữ nhật thành hai vùng: vùng các biến giải thích có <span class="math inline">\(X_j &lt; s\)</span> và vùng các biến giải thích <span class="math inline">\(X_j \leq s\)</span>
+<span class="math display" id="eq:tree003">\[\begin{align}
+R_1(X_j, s) = \{\textbf{X} | X_j &lt; s \} \\
+R_2(X_j, s) = \{\textbf{X} | X_j \leq s \}
+\tag{1.3}
+\end{align}\]</span>
+sau đó chúng ta cần tìm <span class="math inline">\(j\)</span> và <span class="math inline">\(s\)</span> sao cho tổng bình phương sai số là nhỏ nhất:
+<span class="math display" id="eq:tree004">\[\begin{align}
+\sum\limits_{x_i \in R_1} (y_i - \hat{y}_{R_1})^2 + \sum\limits_{x_i \in R_2} (y_i - \hat{y}_{R_2})^2
+\tag{1.4}
+\end{align}\]</span>
+trong đó <span class="math inline">\(\hat{y}_{R_1}\)</span> là giá trị trung bình của biến mục tiêu trong miền <span class="math inline">\(R_1\)</span> và <span class="math inline">\(\hat{y}_{R_2}\)</span> là giá trị trung bình của biến mục tiêu trong miền <span class="math inline">\(R_2\)</span>. Quá trình tìm các giá trị của <span class="math inline">\(j\)</span> và <span class="math inline">\(s\)</span> để tối thiểu hóa <a href="#eq:tree004">(1.4)</a> có thể được thực hiện khá nhanh, đặc biệt khi số lượng biến giải thích <span class="math inline">\(p\)</span> không quá lớn. Chúng ta sẽ lặp lại quy trình tìm kiếm biến giải thích tốt nhất và điểm cắt tốt nhất trên biến giải thích đó để tiếp tục phân tách dữ liệu và để giảm RSS. Quá trình tiếp tục cho đến khi cây quyết định đạt đến một tiêu chí dừng nào đó. Chúng ta cần đặt ra các tiêu chí dừng bởi vì nếu tiếp tục quá trình phân tách dữ liệu cho đến <span class="math inline">\(n\)</span> bước với <span class="math inline">\(n\)</span> là số quan sát trong dữ liệu huấn luyện mô hình thì mô hình cây quyết định sẽ chia dữ liệu ra thành <span class="math inline">\(n\)</span> vùng và mỗi vùng tương ứng với một quan sát. Một cây quyết định như vậy có sai số trên huấn luyện mô hình bằng 0 nhưng không có ý nghĩa trong diễn giải hoặc dự đoán biến mục tiêu. Các tiêu chí dừng thường được sử dụng thường là số lượng dữ liệu nằm trong một vùng không được phép ít hơn một số nào đó. Nếu mọi sự phân tách đều dẫn đến việc số lượng điểm dữ liệu trong một lá nhỏ hơn một ngưỡng, thường là 5 hoặc 10 điểm dữ liệu, thì chúng ta nên dừng quá trình phân tách.</p>
+<div class="figure"><span style="display:block;" id="fig:fgtree05"></span>
+<img src="bookdown-demo_files/figure-html/fgtree05-1.png" alt="Cây quyết định hồi quy kích thước bằng 4, mô tả giá nhà phụ thuộc vào tỷ lệ người sống dưới mức trung bình và số lượng phòng trung bình của mỗi ngôi nhà trên dữ liệu Boston. So với cây quyết định có 3 lá ở trên, vùng R3 đã được chia thành hai phần là R3-1 và R3-2. Các vùng R1 và R2 không thay đổi" width="672" />
+<p class="caption">
+Figure 1.5: Cây quyết định hồi quy kích thước bằng 4, mô tả giá nhà phụ thuộc vào tỷ lệ người sống dưới mức trung bình và số lượng phòng trung bình của mỗi ngôi nhà trên dữ liệu Boston. So với cây quyết định có 3 lá ở trên, vùng R3 đã được chia thành hai phần là R3-1 và R3-2. Các vùng R1 và R2 không thay đổi
+</p>
+</div>
+<div class="figure"><span style="display:block;" id="fig:fgtree06"></span>
+<img src="bookdown-demo_files/figure-html/fgtree06-1.png" alt="Cây quyết định hồi quy kích thước bằng 5, mô tả giá nhà phụ thuộc vào tỷ lệ người sống dưới mức trung bình và số lượng phòng trung bình của mỗi ngôi nhà trên dữ liệu Boston. So với cây quyết định có 4 lá ở trên, vùng R1 đã được chia thành hai phần là R1-1 và R1-2. Các vùng R2, R3-1, và R3-2 không thay đổi" width="672" />
+<p class="caption">
+Figure 1.6: Cây quyết định hồi quy kích thước bằng 5, mô tả giá nhà phụ thuộc vào tỷ lệ người sống dưới mức trung bình và số lượng phòng trung bình của mỗi ngôi nhà trên dữ liệu Boston. So với cây quyết định có 4 lá ở trên, vùng R1 đã được chia thành hai phần là R1-1 và R1-2. Các vùng R2, R3-1, và R3-2 không thay đổi
+</p>
+</div>
+<p>Các Hình <a href="#fig:fgtree05">1.5</a> và <a href="#fig:fgtree06">1.6</a> mô tả các bước thứ tư và bước thứ năm trong xây dựng mô hình cây quyết định mô tả biến giá nhà (<span class="math inline">\(medv\)</span>) phụ thuộc vào hai biến <span class="math inline">\(lstat\)</span> và <span class="math inline">\(rm\)</span>. Để xây dựng mô hình cây quyết định có 4 lá, từ ba vùng <span class="math inline">\(R_1\)</span>, <span class="math inline">\(R_2\)</span>, và <span class="math inline">\(R_3\)</span> thu được trong Hình <a href="#fig:fgtree03">1.3</a>, có sáu lựa chọn để chia không gian các biến giải thích thành hai vùng (có 3 vùng và mỗi vùng có hai lựa chọn để phân chia theo một trong hai biến là <span class="math inline">\(rm\)</span> hoặc <span class="math inline">\(lstat\)</span>). Trong số các lựa chọn đó, phân chia vùng <span class="math inline">\(R3\)</span> theo biến <span class="math inline">\(rm\)</span> tại điểm cắt <span class="math inline">\(rm = 7.437\)</span> là cách phân chia làm cho giá trị RSS là nhỏ nhất. Kết quả thu được là một cây quyết định có bốn lá tương ứng với bốn vùng là <span class="math inline">\(R_1\)</span>, <span class="math inline">\(R_2\)</span>, <span class="math inline">\(R_3-1\)</span>, và <span class="math inline">\(R_3-2\)</span>.</p>
+<p>Quá trình ước lượng cây quyết định có năm lá cũng diễn ra tương tự. Từ bốn vùng thu được từ bước trước, chúng ta có 8 lựa chọn để tiếp tục phân chia dữ liệu thành năm vùng (4 vùng và 2 biến giải thích). Trong số các lựa chọn đó, phân chia vùng <span class="math inline">\(R_1\)</span> thành hai vùng theo biến <span class="math inline">\(lstat\)</span> tại điểm 4.91 là phân chia làm cho RSS giảm đi nhiều nhất. Kết quả thu được là một cây quyết định có năm lá tương ứng với năm vùng <span class="math inline">\(R_1-1\)</span>, <span class="math inline">\(R_1-2\)</span>, <span class="math inline">\(R_2\)</span>, <span class="math inline">\(R_3-1\)</span>, và <span class="math inline">\(R_3-2\)</span>.</p>
+<p>Như chúng tôi đã đề cập ở trên, nếu chúng ta tiếp tục quá trình phân chia dữ liệu sẽ thu được một cây quyết định đủ lớn để có thể nội suy lại chính xác biến mục tiêu. Kể cả khi chúng ta đặt ra các tiêu chí dừng, các cây quyết định có kích thước lớn thường gặp phải hiện thượng overfitting. Do đó, tham số kích thước của cây quyết định <span class="math inline">\(K\)</span> thường được lựa chọn dựa trên xác thực chéo. Các cây quyết định có ưu điểm là đơn giản và không tốn nguồn lực tính toán nhiều, do đó xác thực chéo hoàn toàn có thể thực hiện được trong đa số các trường hợp.</p>
+<div class="figure"><span style="display:block;" id="fig:fgtree07"></span>
+<img src="bookdown-demo_files/figure-html/fgtree07-1.png" alt="Mô hình cây quyết định biến medv phụ thuộc vào lstat và rm trên dữ liệu Boston. Kích thước cây quyết định được lựa chọn dựa trên xác thực chéo. Số lượng lá cho sai số xác thực chéo nhỏ nhất là 9" width="672" />
+<p class="caption">
+Figure 1.7: Mô hình cây quyết định biến medv phụ thuộc vào lstat và rm trên dữ liệu Boston. Kích thước cây quyết định được lựa chọn dựa trên xác thực chéo. Số lượng lá cho sai số xác thực chéo nhỏ nhất là 9
+</p>
+</div>
+<p>Trước khi chuyển sang phần cây quyết định phân loại, chúng tôi sẽ thảo luận về lựa chọn điểm cắt phù hợp để tách dữ liệu thành hai phần. Chúng ta quay trở lại với mô hình cây quyết định với một biến giải thích duy nhất là <span class="math inline">\(lstat\)</span> trong Hình <a href="#fig:fgtree01">1.1</a>, khi mà điểm cắt đầu tiên được ước lượng là 9.725%. Nguyên tắc ước lượng ra điểm cắt này như sau: với biến giải thích <span class="math inline">\(X_j\)</span> là biến liên tục, chúng ta loại bỏ các quan sát của biến <span class="math inline">\(X_j\)</span> bị trùng lặp và sắp xếp lại các quan sát này theo thứ tự tăng dần, chẳng hạn như <span class="math inline">\(x_{1j}\)</span> &lt; <span class="math inline">\(x_{2j}\)</span> &lt; <span class="math inline">\(\cdots\)</span> &lt; <span class="math inline">\(x_{nj}\)</span>. Khi đó, có <span class="math inline">\(n-1\)</span> điểm cắt cần được tính toán tổng sai số bình phương (RSS) là các điểm
+<span class="math display">\[\begin{align}
+\cfrac{x_{1j} + x_{2j}}{2}, \cfrac{x_{2j} + x_{3j}}{2}, \cdots, \cfrac{x_{(n-1)j} + x_{nj}}{2}
+\end{align}\]</span>
+và điểm cắt tối ưu là điểm cắt có RSS nhỏ nhất. Bạn đọc có thể thấy rằng điểm cắt 9.725 là giá trị trung bình của hai giá trị quan sát được của biến <span class="math inline">\(medv\)</span> trong dữ liệu là điểm 9.71 và điểm 9.74.</p>
+<p>Nếu biến giải thích <span class="math inline">\(X_j\)</span> là biến dạng rời rạc hoặc biến định tính với có thể nhận <span class="math inline">\(k\)</span> giá trị khác nhau. Khi đó chúng ta xắp xếp <span class="math inline">\(k\)</span> giá trị đó theo thứ tự mà giá trị trung bình của biến mục tiêu tính trên nhóm đó tăng dần. Chẳng hạn như <span class="math inline">\(k\)</span> giá trị của <span class="math inline">\(X_j\)</span> được xắp xếp theo thứ tự là <span class="math inline">\(c_{1} \rightarrow c_{2} \rightarrow \cdots \rightarrow c_k\)</span>, nghĩa là giá trị trung bình của biến mục tiêu trong miền <span class="math inline">\(X_j = c_i\)</span> nhỏ hơn giá trị trung bình của biến mục tiêu trong miền <span class="math inline">\(X_j = c_{i+1}\)</span>. Khi đó, có <span class="math inline">\(k-1\)</span> cách phân chia dữ liệu cần được cân nhắc
+<span class="math display">\[\begin{align}
+&amp;\text{Cách 1. Vùng 1: } X_j = c_1 \text{ và vùng 2: } X_j \in \{c_2, c_3, \cdots, c_k\} \\
+&amp;\text{Cách 2. Vùng 1: } X_j \in \{c_1, c_2\} \text{ và vùng 2: } X_j \in \{c_3, c_4, \cdots, c_k\} \\
+&amp;\cdots \\
+&amp;\text{Cách (k-1). Vùng 1: } X_j \in \{c_1, c_2, \cdots, c_{k-1}\} \text{ và vùng 2: } X_j = c_k
+\end{align}\]</span>
+và lựa chọn phân vùng tối ưu là lựa chọn phân vùng có RSS nhỏ nhất. Ví dụ, chúng ta xây dựng mô hình cây quyết định trong đó biến mục tiêu <span class="math inline">\(medv\)</span> phụ thuộc vào biến <span class="math inline">\(rad\)</span> là biến rời rạc mô tả khả năng kết nối với đường cao tốc của vùng. Biến <span class="math inline">\(rad\)</span> trong dữ liệu Boston có 9 giá trị riêng biệt là các số tự nhiên từ 1 đến 8 và số 24. Lưu ý rằng đây là biến rời rạc danh nghĩa không có ý nghĩa so sánh giữa các giá trị với nhau. Giá trị trung bình của biến mục tiêu theo các giá trị riêng biệt của <span class="math inline">\(rad\)</span> được cho trong bảng <a href="#tab:tbtree01">1.1</a></p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbtree01">Table 1.1: </span>Giá nhà trung bình tính theo các giá trị riêng biệt của biến rời rạc rad
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Biến rad
+</th>
+<th style="text-align:right;">
+Giá nhà trung bình
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:right;">
+16.40379
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:right;">
+20.97692
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+21.38727
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+24.36500
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+25.70696
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+26.83333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:right;">
+27.10588
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+27.92895
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:right;">
+30.35833
+</td>
+</tr>
+</tbody>
+</table>
+<p>Dựa theo tính toán từ bảng <a href="#tab:tbtree01">1.1</a>, có 8 cách phân vùng có thể khi sử dụng biến <span class="math inline">\(rad\)</span> để phân vùng được liệt kê như sau
+<span class="math display">\[\begin{align}
+&amp;\text{Cách 1. Vùng 1: } rad = 24 \text{ và vùng 2: } rad \in \{6, 4, 1, 5, 2, 7, 3, 8 \} \\
+&amp;\text{Cách 2. Vùng 1: } rad \in \{24, 6 \} \text{ và vùng 2: } rad \in \{4, 1, 5, 2, 7, 3, 8\} \\
+&amp;\text{Cách 3. Vùng 1: } rad \in \{24, 6, 4 \} \text{ và vùng 2: } rad \in \{1, 5, 2, 7, 3, 8\} \\
+&amp;\text{Cách 4. Vùng 1: } rad \in \{24, 6, 4, 1 \} \text{ và vùng 2: } rad \in \{5, 2, 7, 3, 8\} \\
+&amp;\text{Cách 5. Vùng 1: } rad \in \{24, 6, 4, 1, 5 \} \text{ và vùng 2: } rad \in \{2, 7, 3, 8\} \\
+&amp;\text{Cách 6. Vùng 1: } rad \in \{24, 6, 4, 1, 5, 2 \} \text{ và vùng 2: } rad \in \{7, 3, 8\} \\
+&amp;\text{Cách 7. Vùng 1: } rad \in \{24, 6, 4, 1, 5, 2, 7 \} \text{ và vùng 2: } rad \in \{3, 8\} \\
+&amp;\text{Cách 8. Vùng 1: } rad \in \{24, 6, 4, 6, 4, 1, 5, 2, 7 \} \text{ và vùng 2: } rad = 8
+\end{align}\]</span>
+và cách phân vùng cho RSS nhỏ nhất sẽ là phân vùng được lựa chọn. Hình <a href="#fig:fgtree08">1.8</a> mô tả cây quyết định có hai lá trong đó biến mục tiêu là <span class="math inline">\(medv\)</span> và biến giải thích là biến <span class="math inline">\(rad\)</span>.</p>
+<div class="figure"><span style="display:block;" id="fig:fgtree08"></span>
+<img src="bookdown-demo_files/figure-html/fgtree08-1.png" alt="Cây quyết định hồi quy kích thước bằng hai mô tả giá nhà phụ thuộc vào biến rời rạc là khả năng kết nối của ngôi nhà đến đường cao tốc trên dữ liệu Boston." width="672" />
+<p class="caption">
+Figure 1.8: Cây quyết định hồi quy kích thước bằng hai mô tả giá nhà phụ thuộc vào biến rời rạc là khả năng kết nối của ngôi nhà đến đường cao tốc trên dữ liệu Boston.
+</p>
+</div>
+<p>Như vậy phân vùng có RSS nhỏ nhất là cách phân vùng thứ 3. Các giá trị rời rạc 24, 4, 6 của biến <span class="math inline">\(rad\)</span> được cho vào nhánh bên trái cây quyết định với dự đoán cho giá nhà là 18.89 nghìn USD trong khi các giá trị rời rạc còn lại được cho vào nhánh bên phải của cây quyết định với dự đoán cho giá nhà là 26.63 nghìn USD</p>
+</div>
+</div>
+<div id="cây-quyết-định-phân-loại" class="section level3 hasAnchor" number="1.1.2">
+<h3><span class="header-section-number">1.1.2</span> Cây quyết định phân loại<a href="#cây-quyết-định-phân-loại" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cây quyết định có lợi thế là có thể sử dụng cho cả bài toán hồi quy và bài toán phân loại mà không cần có sự biến đổi đáng kể nào về mặt mô hình. Thay đổi duy nhất để cây quyết định phù hợp với bài toán phân loại đó là thay đổi hàm tổn thất từ RSS sang các hàm tổn thất phù hợp với bài toán phân loại. RSS không phù hợp trong bài toán phân loại vì giá trị dự đoán chúng ta đưa ra tại mỗi lá của cây quyết định là giá trị xuất hiện với tần suất lớn nhất chứ không phải giá trị trung bình của các biến nằm trong lá đó.</p>
+<p>Quá trình xây dựng cây quyết định phân loại hoàn toàn tương tự như quá trình xây dựng cây quyết định hồi quy. Chúng ta sử dụng chuỗi các phân tách nhị phân để phân vùng không gian giá trị các biến giải thích thành <span class="math inline">\(k\)</span> vùng <span class="math inline">\(R_1, R_2, \cdots, R_K\)</span> không chồng lấn lên nhau và ở mỗi vùng <span class="math inline">\(R_k\)</span> chúng ta đưa ra một dự đoán <span class="math inline">\(\hat{y}_{R_k}\)</span> cho biến mục tiêu. Trong mô hình hồi quy giá trị dự đoán là giá trị trung bình của biến mục tiêu tương ứng với các quan sát nằm trong vùng <span class="math inline">\(R_k\)</span> còn trong bài toán phân loại giá trị dự đoán <span class="math inline">\(\hat{y}_{R_k}\)</span> là giá trị của biến mục tiêu xuất hiện với tần suất lớn nhất tương ứng với các quan sát trong vùng <span class="math inline">\(R_k\)</span>.</p>
+<p>Như đã trình bày trong cây phân loại hồi quy, để thực hiện phân tách một vùng thành hai phần, chúng ta cần lựa chọn biến giải thích <span class="math inline">\(X_j\)</span> và điểm cắt <span class="math inline">\(s\)</span> nằm trong miền giá trị của <span class="math inline">\(X_j\)</span> sao cho khi chia hình chữ nhật thành hai vùng: vùng các biến giải thích có <span class="math inline">\(X_j &lt; s\)</span> và vùng các biến giải thích <span class="math inline">\(X_j \leq s\)</span>
+<span class="math display">\[\begin{align}
+R_1(X_j, s) = \{\textbf{X} | X_j &lt; s \} \\
+R_2(X_j, s) = \{\textbf{X} | X_j \leq s \}
+\end{align}\]</span>
+với các dự đoán cho biến mục tiêu tương ứng với hai vùng là <span class="math inline">\(\hat{y}_{R_1}\)</span> và <span class="math inline">\(\hat{y}_{R_2}\)</span>, chúng ta cần tìm <span class="math inline">\(j\)</span> và <span class="math inline">\(s\)</span> để tối thiểu hóa sai số của bài toán phân loại. Để lượng hóa sai số của bài toán phân loại, có nhiều cách tiếp cận. Cách tiếp cận tự nhiên và đơn giản nhất là sử dụng <span class="math inline">\(tỷ\)</span> <span class="math inline">\(lệ\)</span> <span class="math inline">\(dự\)</span> <span class="math inline">\(đoán\)</span> <span class="math inline">\(sai\)</span> (còn được gọi là classification error rate hay viết tắt là CER). Cho một véc-tơ <span class="math inline">\(\textbf{y}\)</span> có độ dài <span class="math inline">\(n\)</span> chỉ nhận các giá trị rời rạc là <span class="math inline">\(1, 2, \cdots, m\)</span> và tần suất xuất hiện của các giá trị rời rạc này lần lượt là <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(n_m\)</span>. Nếu <span class="math inline">\(\textbf{y}\)</span> là các giá trị của biến mục tiêu quan sát được trong một vùng của biến giải thích thì giá trị dự đoán cho biến mục tiêu sẽ là <span class="math inline">\(h \in \{1, 2, \cdots, m \}\)</span> sao cho <span class="math inline">\(n_h = max(n_1, n_2, \cdots, n_m)\)</span>. Tỷ lệ dự đoán sai trên véc-tơ <span class="math inline">\(\textbf{y}\)</span> được tính như sau
+<span class="math display" id="eq:tree005">\[\begin{align}
+CER(\textbf{y}) = 1 - \cfrac{n_h}{n}
+\tag{1.5}
+\end{align}\]</span>
+Có thể thấy rằng CER là tỷ lệ số dự đoán sai trên véc-tơ <span class="math inline">\(\textbf{y}\)</span> khi sử dụng đoán là <span class="math inline">\(h = mode(\textbf{y})\)</span>. CER có ưu điểm là dễ hiểu và đơn giản, tuy nhiên nhược điểm lớn nhất của CER là chỉ tính đến giá trị xuất hiện với tần suất nhiều nhất mà không tính đến các giá trị khác, do đó chỉ tiêu này không phù hợp khi sử dụng để phân vùng các cây phân loại, đặc biệt là trong trường hợp biến giải thích nhận nhiều hơn 2 giá trị.</p>
+<p>Hai chỉ số khác thường xuyên được sử dụng thay thế cho nhau để tìm ra phân vùng tối ưu trong cây quyết định phân loại là chỉ số Gini và chỉ số Entropy. Hai chỉ số này có ưu điểm là tính toán đến sự xuất hiện của tất cả các giá trị có xuất hiện trong véc-tơ <span class="math inline">\(\textbf{y}\)</span>
+<span class="math display" id="eq:tree006">\[\begin{align}
+Gini(\textbf{y}) &amp;= \sum\limits_{l = 1}^m \ \cfrac{n_l}{n} \ \left( 1 - \cfrac{n_l}{n}\right) \\
+Entropy(\textbf{y}) &amp;= - \sum\limits_{l = 1}^m \ \cfrac{n_l}{n} \ \log\left(\cfrac{n_l}{n}\right)
+\tag{1.6}
+\end{align}\]</span>
+Các chỉ số Gini và Entropy còn được gọi là các thước đo độ thuần (purity) của véc-tơ <span class="math inline">\(\textbf{y}\)</span>. Do <span class="math inline">\(n_l/n\)</span> nằm trong đoạn <span class="math inline">\([0,1]\)</span> và tổng các tần suất <span class="math inline">\(n_l/n\)</span> bằng 1 nên các chỉ số Gini và Entropy sẽ có giá trị nhỏ khi tồn tại một giá trị <span class="math inline">\(n_l/n\)</span> xấp xỉ 1 và các giá trị còn lại xấp xỉ 0. Nếu cố định <span class="math inline">\(n_h/n\)</span> với <span class="math inline">\(h\)</span> là giá trị xuất hiện nhiều nhất trong <span class="math inline">\(y\)</span> và thay đổi các <span class="math inline">\(n_l\)</span> khác thì CER sẽ không thay đổi trong khi Gini và Entropy sẽ thay đổi. Đây là lý do tại sao chỉ số Gini và Entropy sẽ phù hợp hơn khi đo lường độ thuần của một véc-tơ.</p>
+<p>Để thấy được sự phù hợp của chỉ số Gini và chỉ số Entropy trong lựa chọn phân vùng giá trị của biến giải thích, hãy quan sát ví dụ trong Hình <a href="#fig:fgtree09">1.9</a></p>
+<div class="figure"><span style="display:block;" id="fig:fgtree09"></span>
+<img src="bookdown-demo_files/figure-html/fgtree09-1.png" alt="Ví dụ về hai lựa chọn phân vùng khác nhau cho véc-tơ biến mục tiêu bao gồm ba giá trị riêng biệt là 1, 2, và 3 với tần suất xuất hiện là 6 lần, 3 lần và 3 lần. Nếu sử dụng chỉ số tỷ lệ dự đoán sai thì hai cách phân vùng là không có sự khác biệt. Nếu sử dụng chỉ số Entropy hoặc Gini thì cách phân vùng thứ 2 tốt hơn" width="672" />
+<p class="caption">
+Figure 1.9: Ví dụ về hai lựa chọn phân vùng khác nhau cho véc-tơ biến mục tiêu bao gồm ba giá trị riêng biệt là 1, 2, và 3 với tần suất xuất hiện là 6 lần, 3 lần và 3 lần. Nếu sử dụng chỉ số tỷ lệ dự đoán sai thì hai cách phân vùng là không có sự khác biệt. Nếu sử dụng chỉ số Entropy hoặc Gini thì cách phân vùng thứ 2 tốt hơn
+</p>
+</div>
+<p>Giả sử chúng ta phải đưa ra lựa chọn đâu là phân vùng tốt hơn giữa hai cách phân vùng được mô tả trong hình <a href="#fig:fgtree09">1.9</a>. Một cách trực giác, bạn đọc có thể nhận thấy rằng cách phân vùng thứ hai sẽ dẫn đến một cây phân loại tốt hơn vì đã tách biệt được hoàn toàn giá trị 2 và giá trị 3 vào hai vùng. Với cách phân vùng như vậy, nếu chúng ta tiếp tục thực hiện phân vùng thì nhiều khả năng trong bước tiếp theo chúng ta sẽ phân loại được hoàn toàn giá trị 1 và giá trị 2 trong vùng <span class="math inline">\(R_1\)</span> và phân loại được hoàn toàn giá trị 1 và giá trị 3 trong vùng <span class="math inline">\(R_2\)</span>. Trái lại, trong cách phân vùng thứ nhất, không thể phân tách hai giá trị 2 và 3 ra thành các vùng riêng biệt. Nếu chúng ta tiếp tục phát triển thêm 1 lá cho cây quyết định như trong cách thứ nhất, không thể thu được phân loại chính xác cho cả ba giá trị của biến mục tiêu.</p>
+<p>Bạn đọc có thể sử dụng các chỉ số sai số phân loại, Gini và Entropy để so sánh hai cách phân vùng như sau:</p>
+<ul>
+<li><p>Cho cách phân vùng thứ nhất:
+<span class="math display">\[\begin{align}
+CER &amp; = \cfrac{6}{12} \times \cfrac{3}{6} + \cfrac{6}{12} \times \cfrac{3}{6} = 0.5 \\
+Gini &amp; = \cfrac{6}{12} \times \left[\cfrac{3}{6}\left(1 - \cfrac{3}{6}\right) + \cfrac{2}{6}\left(1 - \cfrac{2}{6}\right) + \cfrac{1}{6}\left(1 - \cfrac{1}{6}\right) \right] + \\
+&amp; \cfrac{6}{12} \times \left[\cfrac{3}{6}\left(1 - \cfrac{3}{6}\right) + \cfrac{1}{6}\left(1 - \cfrac{1}{6}\right) + \cfrac{2}{6}\left(1 - \cfrac{2}{6}\right) \right] = 0.61\\
+Entropy &amp; = - \cfrac{6}{12} \times \left[\cfrac{3}{6} \log\left(\cfrac{3}{6}\right) + \cfrac{2}{6}\log\left(\cfrac{2}{6}\right) + \cfrac{1}{6}\log\left(1 - \cfrac{1}{6}\right) \right] + \\
+&amp; \cfrac{6}{12} \times \left[\cfrac{3}{6}\log\left(\cfrac{3}{6}\right) + \cfrac{1}{6}\log\left(\cfrac{1}{6}\right) + \cfrac{2}{6}\log\left( \cfrac{2}{6}\right) \right] = 1.01
+\end{align}\]</span></p></li>
+<li><p>Cho cách phân vùng thứ hai
+<span class="math display">\[\begin{align}
+CER &amp; = \cfrac{6}{12} \times \cfrac{3}{6} + \cfrac{6}{12} \times \cfrac{3}{6} = 0.5 \\
+Gini &amp; = \cfrac{6}{12} \times \left[\cfrac{3}{6}\left(1 - \cfrac{3}{6}\right) + \cfrac{3}{6}\left(1 - \cfrac{3}{6}\right)\right] + \\
+&amp; \cfrac{6}{12} \times \left[\cfrac{3}{6}\left(1 - \cfrac{3}{6}\right) + \cfrac{3}{6}\left(1 - \cfrac{3}{6}\right) \right] = 0.5\\
+Entropy &amp; = - \cfrac{6}{12} \times \left[\cfrac{3}{6} \log\left(\cfrac{3}{6}\right) + \cfrac{3}{6} \log\left(\cfrac{3}{6}\right) \right] + \\
+&amp; \cfrac{6}{12} \times \left[\cfrac{3}{6} \log\left(\cfrac{3}{6}\right) + \cfrac{3}{6} \log\left(\cfrac{3}{6}\right) \right] = 0.69
+\end{align}\]</span></p></li>
+</ul>
+<p>Bạn đọc có thể thấy rằng chỉ số CER trong hai cách phân vùng bằng nhau và bằng 0.5, nghĩa là CER không có khả năng phân biệt giữa cách phân vùng thứ nhất và cách phân vùng thứ hai. Chỉ số Gini và Entropy của phân vùng thứ hai đều nhỏ hơn cho với cách phân vùng thứ nhất, điều này cho thấy hai chỉ số này có khả năng phân biệt cách phân vùng tốt hơn so với CER.</p>
+<p>Hình <a href="#fig:fgtree10">1.10</a> mô tả cây quyết định được xây dựng trên dữ liệu OJ, dữ liệu chứa thông tin về 1070 lần khách hàng mua một trong hai loại sản phẩm nước cam Citrus Hill hoặc Minute Maid, với biến mục tiêu là <span class="math inline">\(Purchase\)</span> chứa một trong hai giá trị là <span class="math inline">\(CH\)</span> hoặc <span class="math inline">\(MM\)</span> cho biết sản phẩm được mua tương ứng là Citrus Hill hay Minute Maid. Dữ liệu có 17 biến giải thích bao gồm các biến có nhiều khả năng cho ý nghĩa quan trọng trong xây dựng mô hình như sự khác biệt về giá của hai loại sản phẩm (biến <span class="math inline">\(PriceDiff\)</span>) cho biết giá của <span class="math inline">\(MM\)</span> cao hơn giá của <span class="math inline">\(CH\)</span> như thế nào, hoặc biến <span class="math inline">\(LoyalCH\)</span> là biến đo sự trung thành của khách hàng với nhãn hiệu Citrus Hill. Sự trung thành của khách hàng là thước đo sự mua hàng lặp lại trên một nhãn hiệu dựa trên đánh giá về chất lượng hoặc dịch vụ tốt hơn các đối thủ cạnh tranh và không phụ thuộc vào giá cả của nhãn hiệu đó.</p>
+<div class="figure"><span style="display:block;" id="fig:fgtree10"></span>
+<img src="bookdown-demo_files/figure-html/fgtree10-1.png" alt="Cây quyết định phân loại cho biết quyết định mua sản phẩm nước cam của khách hàng dựa vào các biến giải thích khác sử dụng dữ liệu OJ." width="672" />
+<p class="caption">
+Figure 1.10: Cây quyết định phân loại cho biết quyết định mua sản phẩm nước cam của khách hàng dựa vào các biến giải thích khác sử dụng dữ liệu OJ.
+</p>
+</div>
+<p>Có thể thấy rằng biến <span class="math inline">\(LoyalCH\)</span> xuất hiện ở hầu hết các nút của cây quyết định, điều này cho thấy sự trung thành của khách hàng với nhãn hiệu sản phẩm quyết định rất lớn đến quyết định mua hàng của khách hàng. Chúng ta có thể giải thích cây quyết định phân loại trên như sau:</p>
+<ul>
+<li><p>Khi lòng trung thành của khách hàng với sản phẩm Citrus Hill thấp (nhỏ hơn 0.5), tương ứng với nhánh cây quyết định bên trái của nút trên cùng, thì đa số các khách hàng sẽ lựa chọn sản phẩm Minute Maid. Trong nhánh bên trái này, những khách hàng có chỉ số lòng trung thành với Citrus Hill dưới 0.27 sẽ chọn sản phẩm Minute Maid bất kể sự khác biệt về giá cả. Còn những khách hàng có chỉ số trung thành với sản phẩm Citrus Hill từ 0.27 trở lên sẽ có thay đổi quyết định để mua sản phẩm Citrus Hill nếu giá của Minute Maid không lớn hơn giá của Citrus Hill cộng thêm 0.05.</p></li>
+<li><p>Khi lòng trung thành của khách hàng với sản phẩm Citrus Hill lớn (lớn hơn 0.5), tương ứng với nhánh cây quyết định bên phải của nút trên cùng, thì đa số các khách hàng sẽ lựa chọn sản phẩm Citrus Hill. Trong nhánh này, những khách hàng có chỉ số lòng trung thành với Citrus Hill trên 0.76 sẽ chọn sản phẩm Citrus Hill bất kể sự khác biệt về giá cả. Còn những khách hàng có chỉ số trung thành với sản phẩm Citrus Hill dưới 0.76 sẽ có thay đổi quyết định và mua sản phẩm Minute Maid nếu giá của Minute Maid thấp hơn giá của Citrus Hill 0.165</p></li>
+</ul>
+<p>Một sự khác biệt trong kết quả của cây quyết định phân loại và cây phân loại hồi quy đó là hai lá tách ra từ một nút vẫn có thể nhận kết quả giống nhau. Chẳng hạn như trong hình <a href="#fig:fgtree10">1.10</a> bạn đọc có thể thấy rằng tại nút <span class="math inline">\(LoyalCH &lt; 0.0356\)</span>, cả hai lá đều cho kết quả là <span class="math inline">\(MM\)</span>. Nguyên nhân là do chúng ta sử dụng chỉ số Gini để phân vùng dữ liệu. Sai số phân loại của cây quyết định sẽ không giảm nếu hai lá từ một nút cho cùng một kết quả là <span class="math inline">\(MM\)</span> nhưng độ thuần (purity) của các nút sẽ giảm.</p>
+</div>
+<div id="cây-quyết-định-và-mô-hình-tuyến-tính" class="section level3 hasAnchor" number="1.1.3">
+<h3><span class="header-section-number">1.1.3</span> Cây quyết định và mô hình tuyến tính<a href="#cây-quyết-định-và-mô-hình-tuyến-tính" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Cây quyết định hồi quy và cây quyết định phân loại có cách tiếp cận hoàn toàn khác so với các mô hình tuyến tính mà chúng tôi thảo luận trong cá chương trước. Nếu như mô hình tuyến tính cho rằng hàm <span class="math inline">\(f\)</span> mô tả mối liên hệ giữa biến mục tiêu <span class="math inline">\(Y\)</span> và các biến giải thích <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(X_p\)</span> có dạng tuyến tính
+<span class="math display">\[\begin{align}
+f(\textbf{X}) = \beta_0 + \sum\limits_{j=1}^p \beta_j \cdot X_j
+\end{align}\]</span>
+thì mô hình cây quyết định sử dụng dạng của hàm <span class="math inline">\(f\)</span> như sau
+<span class="math display">\[\begin{align}
+f(\textbf{X}) = \sum\limits_{m=1}^M c_m \cdot \mathbb{I}_{\textbf{X} \in R_m}
+\end{align}\]</span>
+trong đó <span class="math inline">\(R_1, R_2, \cdots, R_M\)</span> là một phân vùng của miền xác định của véc-tơ biến giải thích <span class="math inline">\(\textbf{X}\)</span>. Không có câu trả lời cho câu hỏi là mô hình nào tốt hơn. Câu trả lời hoàn toàn tùy thuộc vào dữ liệu mà chúng ta xây dựng mô hình. Nếu mối liên hệ của biến mục tiêu và biến giải thích là mối liên hệ tuyến tính, mô hình tuyến tính sẽ cho kết quả tốt hơn, còn nếu mối liên hệ đó là phi tuyến, mô hình cây quyết định sẽ cho kết quả tốt hơn. Tất nhiên, với một dữ liệu cụ thể, không thể biết được chính xác mối liên hệ giữa biến mục tiêu với các biến khác là tuyến tính hay phi tuyến, do đó cách tốt nhất để biết mô hình nào tốt hơn là xây dựng cả hai dạng mô hình và sau đó sử dụng sai số xác thực chéo để đưa ra kết luận.</p>
+<p>Việc lựa chọn mô hình cũng phụ thuộc vào mục tiêu của người xây dựng mô hình. Nếu mục tiêu của xây dựng mô hình là để suy diễn, đánh giá tác động của các biến giải thích lên biến mục tiêu thì mô hình cây quyết định là mô hình dễ diễn giải và mô tả dữ liệu hơn cả. Mô hình tuyến tính thông thường cũng có khả năng diễn giải kết quả tốt trong khi các mở rộng của mô hình tuyến tính như hồi quy Splines, hay mô hình cộng tính tổng quát dẫn đến các kết quả ít có ý nghĩa diễn giải. Ngược lại, nếu mục tiêu của người xây dựng mô hình là dự đoán biến mục tiêu, nghĩa là để giảm thiểu sai số dự đoán trên dữ liệu kiểm thử mô hình, các mở rộng của mô hình tuyến tính sẽ cho sai số dự báo tốt hơn nhiều so với mô hình cây quyết định.</p>
+<p>Trước khi chuyển sang phần tiếp theo, chúng ta có thể tổng kết lại những điểm mạnh và điểm yếu của mô hình cây quyết định như sau:</p>
+<ul>
+<li><p>Lợi thế thứ nhất của mô hình cây quyết định trước tiên là khả năng diễn giải mô hình. Bạn đọc có thể thấy rằng mô hình cây quyết định thậm chí còn dễ giải thích hơn cả mô hình hồi quy tuyến tính thông thường. Một trong những nguyên nhân khiến cho cây quyết định dễ diễn giải là do cách cây quyết định được xây dựng có mối liên hệ chặt chẽ với việc ra quyết định của não bộ của con người.</p></li>
+<li><p>Thứ hai, mô hình cây quyết định có thể được trực quan hóa bằng đồ họa và có thể dễ dàng để hiểu được ngay cả với người không có nền tảng về toán học.</p></li>
+<li><p>Thứ ba, mô hình cây quyết định có thể sử dụng cho dữ liệu có biến giải thích và biến mục tiêu định tính mà không cần có thay đổi đáng kể nào. Bạn đọc có thể thấy rằng gần như không có sự khác biệt trong cách xây dựng cây quyết định hồi quy và cây quyết định phân loại. Đồng thời cách xây dựng cây quyết định dựa trên biến giải thích định lượng và định tính gần như không có sự khác biệt.</p></li>
+<li><p>Để nói về những hạn chế khi sử dụng mô hình dạng cây, trước hết phải khẳng định rằng mô hình cây quyết định trình bày trong các phần trước không có khả năng dự báo chính xác như các mô hình khác. Đó cũng là sự đánh đổi mà bạn đọc thường xuyên gặp phải khi xây dựng mô hình trên dữ liệu, luôn có sự đánh đổi giữa khả năng dự báo và khả năng diễn giải của mô hình.</p></li>
+<li><p>Nhược điểm thứ hai, cũng là nguyên nhân giải thích nhược điểm thứ nhất, đó là mô hình cây quyết định là các mô hình có phương sai lớn, nghĩa là chỉ cần có một thay đổi nhỏ trong dữ liệu xây dựng mô hình, kết quả của mô hình sẽ có sự thay đổi đáng kể.</p></li>
+</ul>
+<p>Trong phần cuối của chương sách này và trong chương sau, chúng tôi sẽ giới thiệu đến bạn đọc các kỹ thuật thống kê hiện đại có thể sử dụng kết hợp với mô hình cây quyết định để khắc phục được nhược điểm của mô hình này. Các kỹ thuật này bao gồm có mô hình rừng ngẫu nhiên (còn gọi là random forest) và kỹ thuật học tăng cường (còn được gọi là boosting).</p>
+</div>
+</div>
+<div id="thực-hành-xây-dựng-mô-hình-cây-quyết-định-sử-dụng-r" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Thực hành: xây dựng mô hình cây quyết định sử dụng R<a href="#thực-hành-xây-dựng-mô-hình-cây-quyết-định-sử-dụng-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="cây-quyết-định-hồi-quy-trên-dữ-liệu-boston" class="section level3 hasAnchor" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Cây quyết định hồi quy trên dữ liệu Boston<a href="#cây-quyết-định-hồi-quy-trên-dữ-liệu-boston" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="cây-quyết-định-phân-loại-trên-dữ-liệu-titanic" class="section level3 hasAnchor" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Cây quyết định phân loại trên dữ liệu Titanic<a href="#cây-quyết-định-phân-loại-trên-dữ-liệu-titanic" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="thuật-toán-rừng-ngẫu-nhiên" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Thuật toán rừng ngẫu nhiên<a href="#thuật-toán-rừng-ngẫu-nhiên" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="phương-pháp-lấy-mẫu-lặp-lại" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Phương pháp lấy mẫu lặp lại<a href="#phương-pháp-lấy-mẫu-lặp-lại" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Phương pháp lấy mẫu lặp lại (thường gọi là boostrap) là một công cụ vô cùng quan trọng trong thống kê hiện đại. Phương pháp này liên quan đến việc lấy mẫu lặp lại nhiều lần từ dữ liệu huấn luyện ban đầu và ước lượng mô hình trên mỗi mẫu để có thông tin đầy đủ về mô hình hay tham số của mô hình mà chúng ta đang nghiên cứu. Ví dụ: để đánh giá mô hình hồi quy tuyến tính đơn biến trong đó biến mục tiêu <span class="math inline">\(Y\)</span> phụ thuộc vào biến giải thích <span class="math inline">\(X\)</span> dựa trên dữ liệu quan sát được: <span class="math inline">\((x_i, y_i)\)</span> với <span class="math inline">\(1 \leq i \leq n\)</span>, nếu chúng ta sử dụng toàn bộ <span class="math inline">\(n\)</span> quan sát để ước tính hệ số chặn và hệ số góc, chúng ta chỉ có một ước lượng điểm duy nhất. Nếu không có giả thiết quan trọng của mô hình hồi quy tuyến tính là <span class="math inline">\(Y\)</span> có phân phối chuẩn thì chúng ta sẽ không đưa ra được phân phối xác suất hay các khoảng tin cậy cho hệ số của mô hình tuyến tính. Kỹ thuật lấy mẫu lặp tiếp cận theo hướng hoàn toàn khác, thay vì xuất phát từ phân phối xác suất của biến mục tiêu, chúng ta có thể liên tục lấy các mẫu khác nhau từ dữ liệu huấn luyện ban đầu, với mỗi mẫu lấy được chúng ta ước lượng được một hệ số chặn và một hệ số góc, từ đó thu được một phân phối xác suất của các hệ số.</p>
+<p>Để mô tả phương pháp lấy mẫu lặp lại, chúng ta sử dụng ví dụ về dữ liệu Quảng cáo mà trong đó doanh thu bán sản phẩm phụ thuộc vào các biến giải thích là chi phí quảng cáo trên truyền hình (<span class="math inline">\(TV\)</span>), chi phí quảng cáo trên mạng xã hội (<span class="math inline">\(Social\_Media\)</span>) và chi phí quảng cáo qua tờ rơi (<span class="math inline">\(Flyer\)</span>). Do biến quảng cáo qua tờ rơi không có ý nghĩa trong mô hình hồi quy đa biến nên mô hình được lựa chọn chỉ bao gồm hai biến giải thích là <span class="math inline">\(TV\)</span> và <span class="math inline">\(Social\_Media\)</span>.
+<span class="math display">\[\begin{align}
+Sales = \beta_0 + \beta_1 \cdot TV + \beta_2 \cdot Social\_Media + \epsilon
+
+\end{align}\]</span></p>
+<p>Hệ số ước lượng của mô hình tuyến tính đa biến như sau</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbtree02">Table 1.2: </span>Các hệ số ước lượng trong mô hình hồi quy đa biến trên dữ liệu Quảng cáo.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Ước lượng
+</th>
+<th style="text-align:right;">
+Độ lệch chuẩn
+</th>
+<th style="text-align:right;">
+Thống kê t
+</th>
+<th style="text-align:right;">
+p-value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+4.0642
+</td>
+<td style="text-align:right;">
+0.7349
+</td>
+<td style="text-align:right;">
+5.5302
+</td>
+<td style="text-align:right;">
+0.0000011
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TV
+</td>
+<td style="text-align:right;">
+0.0192
+</td>
+<td style="text-align:right;">
+0.0049
+</td>
+<td style="text-align:right;">
+3.9600
+</td>
+<td style="text-align:right;">
+0.0002289
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Social_Media
+</td>
+<td style="text-align:right;">
+0.0699
+</td>
+<td style="text-align:right;">
+0.0128
+</td>
+<td style="text-align:right;">
+5.4746
+</td>
+<td style="text-align:right;">
+0.0000013
+</td>
+</tr>
+</tbody>
+</table>
+<p>Từ kết quả ước lượng, chúng ta có các hệ số = <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\beta_2\)</span> là các biến ngẫu nhiên phân phối chuẩn với giá trị trung bình lần lượt là 4.0642, 0.0192, 0.0699 và độ lệch chuẩn lần lượt là 0.7349, 0.0049, 0.0128. Các tính toán này được dựa trên giả thiết quan trọng là phần dư <span class="math inline">\(\epsilon\)</span> có phân phối chuẩn <span class="math inline">\(\mathcal{N}(0,\sigma^2)\)</span>. Phương pháp lấy mẫu lặp không cần tính đến giả thiết phân phối của phần dư, mà sử dụng phép lấy mẫu lặp lại từ dữ liệu quảng cáo. Mỗi lần lấy mẫu lặp, chúng ta tạo ra một dữ liệu có số quan sát đúng bằng số quan sát của dữ liệu ban đầu, tuy nhiên một quan sát có thể bị lặp lại nhiều lần. Với mỗi mẫu lặp như vậy, chúng ta thực hiện một ước lượng bằng phương pháp bình phương nhỏ nhất để thu được các hệ số. Phân phối xác suất của các hệ số bằng phương pháp hồi quy truyền thống và phương pháp lấy mẫu lặp được trình bày trong hình <a href="#fig:fgtree11">1.11</a></p>
+<div class="figure"><span style="display:block;" id="fig:fgtree11"></span>
+<img src="bookdown-demo_files/figure-html/fgtree11-1.png" alt="Phân phối xác suất của các hệ số của mô hình hồi quy tuyến tính đa biến. Cột bên trái: phân phối xác suất được tính toán từ phương pháp bình phương nhỏ nhất truyền thống. Cột bên phải: phân phối xác suất được tạo thành từ 1000 lần lấy mẫu lặp. Hàng thứ nhất: phân phối xác suất của hệ số chặn. Hàng thứ hai: phân phối xác suất của hệ số tuyến tính của biến TV. Hàng thứ ba: phân phối xác suất của hệ số tuyến tính của biến Social_Media. Các đường màu đỏ ở giữa cho biết giá trị trung bình của hệ số." width="672" />
+<p class="caption">
+Figure 1.11: Phân phối xác suất của các hệ số của mô hình hồi quy tuyến tính đa biến. Cột bên trái: phân phối xác suất được tính toán từ phương pháp bình phương nhỏ nhất truyền thống. Cột bên phải: phân phối xác suất được tạo thành từ 1000 lần lấy mẫu lặp. Hàng thứ nhất: phân phối xác suất của hệ số chặn. Hàng thứ hai: phân phối xác suất của hệ số tuyến tính của biến TV. Hàng thứ ba: phân phối xác suất của hệ số tuyến tính của biến Social_Media. Các đường màu đỏ ở giữa cho biết giá trị trung bình của hệ số.
+</p>
+</div>
+<p>Bạn đọc có thể thấy rằng phân phối xác suất của các hệ số tính toán từ phương pháp lấy mẫu lặp không khác đáng kể so với phân phối xác suất được ước lượng với giả thiết phân phối chuẩn. Như vậy với phương pháp lấy mẫu lặp, bạn đọc có thể tính toán được giá trị trung bình của các hệ số và sai số của ước lượng mà không cần thêm bất kỳ giả thiết nào về hình dạng của phân phối. Đánh đổi lại, để thực hiện ước lượng tham số bằng lấy mẫu lặp, nguồn lực tính toán tăng lên theo số lần chúng ta lấy mẫu.</p>
+</div>
+<div id="thuật-toán-rừng-ngẫu-nhiên-1" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Thuật toán rừng ngẫu nhiên<a href="#thuật-toán-rừng-ngẫu-nhiên-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Phương pháp lấy mẫu lặp lại, hay bootstrap, được giới thiệu trước bởi vì đó là ý tưởng chủ đạo trong mô hình rừng ngẫu nhiên. Các mô hình cây quyết định được biết đến là các mô hình có phương sai lớn, nghĩa là chỉ cần có một thay đổi nhỏ trong dữ liệu huấn luyện, mô hình có thể sẽ thay đổi đáng kể. Như bạn đọc đã biết, một phương pháp đơn giản để không làm thay đổi giá trị trung bình và giảm phương sai của dự đoán đó là dự đoán nhiều lần và sử dụng kết quả trung bình của các dự đoán. Nói một cách khác, giả sử chúng ta sử dụng một biến ngẫu nhiên <span class="math inline">\(Z_1\)</span> có giá trị trung bình <span class="math inline">\(\mu\)</span> (không biết) để làm dự đoán cho <span class="math inline">\(\mu\)</span>. Bằng một cách nào đó, thay vì sử dụng một dự đoán duy nhất, nếu chúng ta có thể tạo ra một dãy các biến ngẫu nhiên <span class="math inline">\(Z_1\)</span>, <span class="math inline">\(Z_2\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(Z_n\)</span> và sử dụng <span class="math inline">\(\bar{Z}\)</span> là giá trị trung bình của các biến ngẫu nhiên kể trên, thì phương sai trong dự đoán sẽ nhỏ hơn phương sai khi sử dụng một dự đoán duy nhất. Trong trường hợp đặc biệt, nếu các <span class="math inline">\(Z_i\)</span> độc lập với nhau, phương sai của <span class="math inline">\(\bar{Z}\)</span> bằng <span class="math inline">\(\frac{1}{n}\)</span> phương sai của một dự đoán duy nhất, với <span class="math inline">\(n\)</span> là số lần dự đoán.</p>
+<p>Với ý tưởng tương tự như vậy, để giảm phương sai của các mô hình có phương sai lớn, chúng ta cần xây dựng nhiều mô hình dự đoán riêng bằng cách sử dụng nhiều dữ liệu huấn luyện và sử dụng giá trị trung bình để dự đoán kết quả. Nói cách khác, nếu chúng ta có <span class="math inline">\(T\)</span> dữ liệu huấn luyện mô hình, chúng ta có thể xây dựng <span class="math inline">\(T\)</span> mô hình cây quyết định (phân loại hoặc hồi quy) <span class="math inline">\(\hat{f}_1\)</span>, <span class="math inline">\(\hat{f}_2\)</span>, <span class="math inline">\(\cdots\)</span> ,<span class="math inline">\(\hat{f}_T\)</span> và sau đó lấy trung bình của các mô hình này để thu được một mô hình có phương sai thấp
+<span class="math display" id="eq:tree007">\[\begin{align}
+\hat{f}_{avg} = \cfrac{1}{T} \ \sum\limits_{t = 1}^T \ \hat{f}_t
+\tag{1.7}
+\end{align}\]</span></p>
+<p>Tất nhiên, chúng ta không thể có được <span class="math inline">\(T\)</span> tập dữ liệu huấn luyện mô hình để xây dựng <span class="math inline">\(T\)</span> mô hình dự đoán. Thay vào đó, chúng ta có thể thực hiện phương pháp lấy mẫu lặp lại <span class="math inline">\(T\)</span> lần trên dữ liệu huấn luyện mô hình ban đầu. Với mỗi dữ liệu thu được, chúng ta xây dựng một cây quyết định và mô hình thu được sau cùng là giá trị trung bình của <span class="math inline">\(T\)</span> mô hình thu được giống như phương trình <a href="#eq:tree007">(1.7)</a>. Với cây quyết định hồi quy giá trị trung bình được hiểu đúng với ý nghĩa, nghĩa là nếu một biến mục tiêu <span class="math inline">\(y_i\)</span> được dự đoán từ <span class="math inline">\(T\)</span> cây quyết định hồi quy lần lượt là <span class="math inline">\(\hat{y}_{i,1}\)</span>, <span class="math inline">\(\hat{y}_{i,2}\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(\hat{y}_{i,T}\)</span> thì giá trị dự đoán của mô hình trung bình là
+<span class="math display">\[\begin{align}
+\hat{y}_i = \cfrac{1}{T} \sum\limits_{t = 1}^T \ \hat{y}_{i,t}
+\end{align}\]</span>
+Đối với cây quyết định phân loại, giá trị dự đoán trong mô hình trung bình là mode của véc-tơ các giá trị dự đoán, nghĩa là nếu biến mục tiêu <span class="math inline">\(y_i\)</span> được dự đoán từ <span class="math inline">\(T\)</span> cây quyết định phân loại lần lượt là <span class="math inline">\(\hat{y}_{i,1}\)</span>, <span class="math inline">\(\hat{y}_{i,2}\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(\hat{y}_{i,T}\)</span> thì giá trị dự đoán của mô hình trung bình là
+<span class="math display">\[\begin{align}
+\hat{y}_i =  mode\left(\hat{y}_{i,1}, \hat{y}_{i,2}, \cdots, \hat{y}_{i,T} \right)
+\end{align}\]</span></p>
+<p>Sử dụng giá trị trung bình của nhiều mô hình để dự đoán cho phép cải thiện đáng kể khả năng dự đoán và có thể sử dụng trong nhiều kiểu mô hình khác nhau. Cách tiếp cận này đặc biệt hữu ích trên mô hình cây quyết định và thuật ngữ “forest” có thể hiểu đơn giản là sử dụng nhiều cây quyết định kết hợp với nhau thành một mô hình duy nhất. Mỗi cây quyết định riêng lẻ có phương sai cao nhưng độ lệch thấp, và trung bình của <span class="math inline">\(T\)</span> cây như vậy có thể làm giảm phương sai. Thực tế chỉ ra rằng kỹ thuật này mang lại những cải tiến vượt bậc về độ chính xác trong dự đoán khi kết hợp hàng trăm hoặc thậm chí hàng nghìn cây vào một mô hình duy nhất.</p>
+<p>Chúng tôi đã giải thích thuật ngữ “forest”, tiếp theo sẽ là thuật ngữ <span class="math inline">\(&quot;random&quot;\)</span>. Quay trở lại ý tưởng khi sử dụng nhiều biến ngẫu nhiên <span class="math inline">\(Z_i\)</span> để dự đoán giá trị trung bình <span class="math inline">\(\mathbb{E}(Z_i) = \mu\)</span>. Nếu các biến <span class="math inline">\(Z_i\)</span> có tương quan dương rất cao với nhau, thì phương sai của <span class="math inline">\(\bar{Z}\)</span> sẽ không được giảm đi một cách đáng kể so với phương sai của một biến duy nhất. Các cây quyết định được xây dựng để đưa ra dự đoán duy nhất trong phương trình <a href="#eq:tree007">(1.7)</a> rất có khả năng là có tương quan cao với nhau, bởi vì các cây được xây dựng từ các dữ liệu được lấy mẫu lặp lại từ một dữ liệu huấn luyện mô hình, và các cây có cùng một tập hợp các biến giải thích cho cùng một biến mục tiêu. Hiện tượng tương quan cao với nhau giữa các cây thường xảy ra khi trong tập hợp các biến giải thích có một biến có ý nghĩa giải thích mạnh vượt trội so với các biến giải thích khác. Khi chúng ta xây dựng các cây quyết định trên các dữ liệu được lấy mẫu từ dữ liệu ban đầu, biến giải thích này luôn luôn chiếm ưu thế và xuất hiện trong các nút phân vùng đầu tiên. Việc này làm cho kết quả dự đoán từ các cây quyết định có tương quan rất cao với nhau và dẫn đến phương sai của mô hình trung bình không được giảm đi đáng kể so với một cây quyết định riêng lẻ.</p>
+<p>Để tránh gặp phải hiện tượng này, khi xây dựng cây quyết định từ một dữ liệu được boostrap từ dữ liệu huấn luyện mô hình, chúng ta chỉ sử dụng một tập hợp con bao gồm <span class="math inline">\(m\)</span> biến giải thích, <span class="math inline">\(m &lt; p\)</span>, được lựa chọn một cách ngẫu nhiên từ <span class="math inline">\(p\)</span> biến giải thích từ mô hình ban đầu. Trong trường hợp dữ liệu có một hoặc một vài biến giải thích mạnh, khả năng mà một biến này được sử dụng trong mô hình là <span class="math inline">\(\cfrac{m}{p}\)</span>. Nói một cách khác, bằng cách chỉ sử dụng ngẫu nhiên <span class="math inline">\(m\)</span> biến trong số <span class="math inline">\(p\)</span> biến giải thích tại mỗi lần xây dựng cây quyết định, chúng ta có thể xây dựng được các cây quyết định ít có tương quan cao với nhau hơn, và do đó có thể thu được một mô hình trung bình có phương sai nhỏ hơn.</p>
+<p>Khi xây dựng mô hình rừng ngẫu nhiên bao gồm <span class="math inline">\(T\)</span> cây quyết định, tại bước thứ <span class="math inline">\(t\)</span> chúng ta có dữ liệu <span class="math inline">\(Data_t\)</span> được boostrap từ dữ liệu huấn luyện mô hình, người xây dựng mô hình lựa chọn ngẫu nhiên <span class="math inline">\(m_t\)</span> biến giải thích từ <span class="math inline">\(p\)</span> biến giải thích ban đầu, sau đó xây dựng một cây quyết định <span class="math inline">\(\hat{f}_t\)</span> với kích thước <span class="math inline">\(L_t\)</span> để mô tả mối quan hệ giữa biến giải thích và các biến mục tiêu. Các tham số <span class="math inline">\(m_t\)</span> và <span class="math inline">\(L_t\)</span> tại mỗi bước <span class="math inline">\(t\)</span> và số lượng cây quyết định <span class="math inline">\(T\)</span> là các tham số của mô hình rừng ngẫu nhiên. Thông thường thì tại mỗi bước <span class="math inline">\(t\)</span>, kích thước cây <span class="math inline">\(L_t\)</span> sẽ được xác định bằng một tiêu chí dừng nào đó, giống như cách xây dựng một cây quyết định thông thường. Số lượng biến giải thích <span class="math inline">\(m_t\)</span> nếu nhận giá trị khác nhau tại các bước thì rất khó để điều khiển mô hình, do đó người xây dựng mô hình rừng ngẫu nhiên thường sử dụng <span class="math inline">\(m_t\)</span> cố định . Nói một cách khác, mô hình rừng ngẫu nhiên có hai tham số cần phải ước lượng là: 1. Số lượng cây quyết định (tham số <span class="math inline">\(T\)</span>) và 2. Số lượng biến giải thích để ước lượng cây quyết định <span class="math inline">\(m\)</span>. Các tham số này thường được tính toán sao cho sai số từ xác thực chéo là nhỏ nhất.</p>
+<div class="figure"><span style="display:block;" id="fig:fgtree12"></span>
+<img src="bookdown-demo_files/figure-html/fgtree12-1.png" alt="Sai số xác thực chéo theo số lượng cây khi sử dụng thuật toán rừng ngẫu nhiên. Mỗi đường thể hiện cho một lựa chọn khác nhau của tham số m là số lượng biến giải thích được lựa chọn trong mỗi cây." width="672" />
+<p class="caption">
+Figure 1.12: Sai số xác thực chéo theo số lượng cây khi sử dụng thuật toán rừng ngẫu nhiên. Mỗi đường thể hiện cho một lựa chọn khác nhau của tham số m là số lượng biến giải thích được lựa chọn trong mỗi cây.
+</p>
+</div>
+<p>Hình <a href="#fig:fgtree12">1.12</a> mô tả quá trình sử dụng xác thực chéo để tìm tham số <span class="math inline">\(T\)</span> và tham số <span class="math inline">\(m\)</span> khi xây dựng mô hình rừng ngẫu nhiên trên dữ liệu Boston với biến mục tiêu là biến giá nhà (<span class="math inline">\(medv\)</span>). Cặp tham số cho sai số xác thực chéo nhỏ nhất là <span class="math inline">\(T = 120\)</span> cây và <span class="math inline">\(m = 6\)</span> biến. Do giới hạn của khả năng tính toán nên chúng ta chỉ có thể thử trên các lựa chọn là <span class="math inline">\(m = 2, 4\)</span> hoặc <span class="math inline">\(6\)</span> và <span class="math inline">\(T \leq 500\)</span>. Trên thực tế, <span class="math inline">\(m\)</span> thương được lựa chọn xung quang giá trị của <span class="math inline">\(p/2\)</span> nếu <span class="math inline">\(p\)</span> nhỏ và <span class="math inline">\(\sqrt{p}\)</span> nếu <span class="math inline">\(p\)</span> lớn trong khi <span class="math inline">\(T\)</span> chỉ có thể được lựa chọn thông qua xác thực chéo. Đồng thời, khi <span class="math inline">\(m\)</span> nhỏ thì tương quan giữa các cây quyết định sẽ thấp hơn nhưng khả năng dự đoán của các cây quyết định riêng lẻ sẽ kém đi nên thường cần nhiều cây quyết định hơn để đưa một kết quả có độ chính xác tương đương như khi <span class="math inline">\(m\)</span> lớn. Bạn đọc có thể thấy rằng khi <span class="math inline">\(m = 2\)</span> hoặc <span class="math inline">\(m = 4\)</span> thì sai số xác thực chéo có xu hướng tiếp tục giảm kể cả khi chúng ta tăng <span class="math inline">\(T\)</span> hơn 500, trong khi khi <span class="math inline">\(m = 6\)</span> thì điểm tối ưu đạt được ngay khi <span class="math inline">\(T = 120\)</span>.</p>
+<p>Bạn đọc có thể nhận thấy ngay sự khác biệt trong khả năng dự đoán của mô hình rừng ngẫu nhiên trong Hình <a href="#fig:fgtree12">1.12</a> và mô hình cây quyết định trong Hình <a href="#fig:fgtree07">1.7</a>. Sai số xác thực chéo của mô hình rừng ngẫu nhiên với <span class="math inline">\(m = 6\)</span> và <span class="math inline">\(T = 120\)</span> là khoảng 3100 nghìn USD trong khi sai số xác thực chéo của cây quyết định tốt nhất là 4600 USD. Tuy nhiên, giải thích hay suy diễn kết quả của một cây quyết định là khá đơn giản trong khi việc diễn giải kết quả cho mô hình rừng ngẫu nhiên là vô cùng khó khăn. Đây chính là sự đánh đổi thường phải chấp nhận đối với người xây dựng mô hình.</p>
+<p>Khi cố gắng giải thích một mô hình rừng ngẫu nhiên người xây dựng mô hình thường sử dụng thước đo sự quan trọng của từng biến giải thích. Có hai cách để định nghĩa sự quan trọng của biến giải thích: thứ nhất là tính toán giá trị trung bình của sự suy giảm độ chính xác của các mô hình cây quyết định khi biến đó không được tính vào trong mô hình, và thứ hai là tính toán tổng của sự suy giảm trong độ thuần (purity) của các nút có chứa biến đó trên tất cả các cây quyết định. Các thước đo này tính trên một biến giải thích lớn tương đối so với các biến giải thích khác nghĩa là biến đó quan trọng hơn và có nhiều ý nghĩa hơn trong mô hình rừng ngẫu nhiên. Bạn đọc có thể tham khảo thêm về cách tính toán mức độ quan trọng của các biến của mô hình rừng ngẫu nhiên trong phần <a href="#treeappen1"><strong>??</strong></a>.</p>
+<div class="figure"><span style="display:block;" id="fig:fgtree13"></span>
+<img src="bookdown-demo_files/figure-html/fgtree13-1.png" alt="Mức độ quan trọng của các biến trong mô hình rừng ngẫu nhiên trên dữ liệu Boston. Hình bên trái: sự quan trọng tính bằng sự suy giảm trung bình trong khả năng dự báo của các cây quyết định khi bỏ biến giải thích ra khỏi mô hình. Hình bên phải: sự quan trọng tính bằng tổng sự suy giảm trong độ thuần của các nút khi sử dụng biến giải thích." width="672" />
+<p class="caption">
+Figure 1.13: Mức độ quan trọng của các biến trong mô hình rừng ngẫu nhiên trên dữ liệu Boston. Hình bên trái: sự quan trọng tính bằng sự suy giảm trung bình trong khả năng dự báo của các cây quyết định khi bỏ biến giải thích ra khỏi mô hình. Hình bên phải: sự quan trọng tính bằng tổng sự suy giảm trong độ thuần của các nút khi sử dụng biến giải thích.
+</p>
+</div>
+<p>Hình <a href="#fig:fgtree13">1.13</a> cho thấy hai biến quan trọng nhất khi sử dụng mô hình rừng ngẫu nhiên để dự đoán giá nhà là <span class="math inline">\(rm\)</span> và <span class="math inline">\(lstat\)</span>, nhóm các biến quan trọng thứ hai bao gồm có <span class="math inline">\(dis\)</span>, <span class="math inline">\(nox\)</span>, <span class="math inline">\(ptratio\)</span>, và <span class="math inline">\(crim\)</span>. Nhóm các biến ít có ý nghĩa trong dự đoán giá nhà là <span class="math inline">\(chas\)</span>, <span class="math inline">\(zn\)</span> và <span class="math inline">\(rad\)</span>.</p>
+</div>
+</div>
+<div id="thực-hành-mô-hình-rừng-ngẫu-nhiên" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Thực hành: mô hình rừng ngẫu nhiên<a href="#thực-hành-mô-hình-rừng-ngẫu-nhiên" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="xây-dựng-mô-hình-rừng-ngẫu-nhiên-trên-dữ-liệu-boston" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Xây dựng mô hình rừng ngẫu nhiên trên dữ liệu Boston<a href="#xây-dựng-mô-hình-rừng-ngẫu-nhiên-trên-dữ-liệu-boston" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="xây-dựng-mô-hình-rừng-ngẫu-nhiên-trên-dữ-liệu-oj" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Xây dựng mô hình rừng ngẫu nhiên trên dữ liệu OJ<a href="#xây-dựng-mô-hình-rừng-ngẫu-nhiên-trên-dữ-liệu-oj" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="bài-tập" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Bài tập<a href="#bài-tập" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="bài-tập-lý-thuyết" class="section level3 hasAnchor" number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Bài tập lý thuyết<a href="#bài-tập-lý-thuyết" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="bài-tập-thực-hành" class="section level3 hasAnchor" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Bài tập thực hành<a href="#bài-tập-thực-hành" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="phụ-lục" class="section level2 hasAnchor" number="1.6">
+<h2><span class="header-section-number">1.6</span> Phụ lục<a href="#phụ-lục" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="tính-toán-sự-quan-trọng-của-biến-giải-thích-trong-mô-hình-rừng-ngẫu-nhiên" class="section level3 hasAnchor" number="1.6.1">
+<h3><span class="header-section-number">1.6.1</span> Tính toán sự quan trọng của biến giải thích trong mô hình rừng ngẫu nhiên<a href="#tính-toán-sự-quan-trọng-của-biến-giải-thích-trong-mô-hình-rừng-ngẫu-nhiên" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!-- # REFERENCE -->
+<!-- ### Source from thesis -->
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+<!-- ### Souce from website -->
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

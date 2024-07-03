@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chương 6 Biến đổi và sắp xếp dữ liệu | bookdown-demo.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chương 6 Biến đổi và sắp xếp dữ liệu | bookdown-demo.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chương 6 Biến đổi và sắp xếp dữ liệu | bookdown-demo.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tiền-xử-lý-dữ-liệu.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">KHDL KT&KD</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html"><i class="fa fa-check"></i><b>1</b> Giới thiệu chung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#các-khái-niệm-cơ-bản-trong-khoa-học-dữ-liệu"><i class="fa fa-check"></i><b>1.1</b> Các khái niệm cơ bản trong khoa học dữ liệu</a></li>
+<li class="chapter" data-level="1.2" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#r-là-gì-và-tại-sao-lại-sử-dụng-r"><i class="fa fa-check"></i><b>1.2</b> R là gì và tại sao lại sử dụng R</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html"><i class="fa fa-check"></i><b>2</b> Kiến thức R cơ bản</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#làm-quen-với-các-dòng-lệnh-cơ-bản"><i class="fa fa-check"></i><b>2.1</b> Làm quen với các dòng lệnh cơ bản</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#sử-dụng-r-như-một-máy-tính-cầm-tay"><i class="fa fa-check"></i><b>2.1.1</b> Sử dụng R như một máy tính cầm tay</a></li>
+<li class="chapter" data-level="2.1.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#sử-dụng-cửa-sổ-script-để-viết-câu-lệnh"><i class="fa fa-check"></i><b>2.1.2</b> Sử dụng cửa sổ Script để viết câu lệnh</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-trong-ngôn-ngữ-r"><i class="fa fa-check"></i><b>2.2</b> Biến trong ngôn ngữ R</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-số"><i class="fa fa-check"></i><b>2.2.1</b> Biến kiểu số</a></li>
+<li class="chapter" data-level="2.2.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-logic"><i class="fa fa-check"></i><b>2.2.2</b> Biến kiểu logic</a></li>
+<li class="chapter" data-level="2.2.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-chuỗi-ký-tự"><i class="fa fa-check"></i><b>2.2.3</b> Biến kiểu chuỗi ký tự</a></li>
+<li class="chapter" data-level="2.2.4" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-thời-gian"><i class="fa fa-check"></i><b>2.2.4</b> Biến kiểu thời gian</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#véc-tơ"><i class="fa fa-check"></i><b>2.3</b> Véc-tơ</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#tại-sao-xử-lý-véc-tơ-là-thế-mạnh-của-r"><i class="fa fa-check"></i><b>2.3.1</b> Tại sao xử lý véc-tơ là thế mạnh của R?</a></li>
+<li class="chapter" data-level="2.3.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#khởi-tạo-véc-tơ-và-các-phép-toán-trên-véc-tơ"><i class="fa fa-check"></i><b>2.3.2</b> Khởi tạo véc-tơ và các phép toán trên véc-tơ</a></li>
+<li class="chapter" data-level="2.3.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#lấy-các-thành-phần-con-từ-một-véc-tơ"><i class="fa fa-check"></i><b>2.3.3</b> Lấy các thành phần con từ một véc-tơ</a></li>
+<li class="chapter" data-level="2.3.4" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#các-hàm-tạo-chỉ-số"><i class="fa fa-check"></i><b>2.3.4</b> Các hàm tạo chỉ số</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#ngôn-ngữ-lập-trình-r"><i class="fa fa-check"></i><b>2.4</b> Ngôn ngữ lập trình R</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#câu-lệnh-điều-kiện"><i class="fa fa-check"></i><b>2.4.1</b> Câu lệnh điều kiện</a></li>
+<li class="chapter" data-level="2.4.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#viết-vòng-lặp"><i class="fa fa-check"></i><b>2.4.2</b> Viết vòng lặp</a></li>
+<li class="chapter" data-level="2.4.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#hàm-số"><i class="fa fa-check"></i><b>2.4.3</b> Hàm số</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-cơ-bản"><i class="fa fa-check"></i><b>2.5</b> Đồ thị cơ bản</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-phân-tán"><i class="fa fa-check"></i><b>2.5.1</b> Đồ thị phân tán</a></li>
+<li class="chapter" data-level="2.5.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-cột"><i class="fa fa-check"></i><b>2.5.2</b> Đồ thị cột</a></li>
+<li class="chapter" data-level="2.5.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-hình-hộp"><i class="fa fa-check"></i><b>2.5.3</b> Đồ thị hình hộp</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#phụ-lục"><i class="fa fa-check"></i><b>2.6</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biểu-thức-chính-quy-và-thư-viện-textbfstringr"><i class="fa fa-check"></i><b>2.6.1</b> Biểu thức chính quy và thư viện <span class="math inline">\(\textbf{stringr}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#bài-tập"><i class="fa fa-check"></i><b>2.7</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html"><i class="fa fa-check"></i><b>3</b> Kiến thức R nâng cao</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#ma-trận"><i class="fa fa-check"></i><b>3.1</b> Ma trận</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#khởi-tạo-ma-trận"><i class="fa fa-check"></i><b>3.1.1</b> Khởi tạo ma trận</a></li>
+<li class="chapter" data-level="3.1.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#lấy-phần-tử-con-và-ma-trận-con-của-ma-trận."><i class="fa fa-check"></i><b>3.1.2</b> Lấy phần tử con và ma trận con của ma trận.</a></li>
+<li class="chapter" data-level="3.1.3" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#các-phép-toán-trên-ma-trận"><i class="fa fa-check"></i><b>3.1.3</b> Các phép toán trên ma trận</a></li>
+<li class="chapter" data-level="3.1.4" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#phép-nhân-ma-trận"><i class="fa fa-check"></i><b>3.1.4</b> Phép nhân ma trận</a></li>
+<li class="chapter" data-level="3.1.5" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#ma-trận-đường-chéo-và-ma-trận-đơn-vị"><i class="fa fa-check"></i><b>3.1.5</b> Ma trận đường chéo và ma trận đơn vị</a></li>
+<li class="chapter" data-level="3.1.6" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#định-thức-của-ma-trận"><i class="fa fa-check"></i><b>3.1.6</b> Định thức của ma trận</a></li>
+<li class="chapter" data-level="3.1.7" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#ma-trận-nghịch-đảo"><i class="fa fa-check"></i><b>3.1.7</b> Ma trận nghịch đảo</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#mảng-nhiều-chiều"><i class="fa fa-check"></i><b>3.2</b> Mảng nhiều chiều</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#khởi-tạo-mảng-nhiều-chiều"><i class="fa fa-check"></i><b>3.2.1</b> Khởi tạo mảng nhiều chiều</a></li>
+<li class="chapter" data-level="3.2.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#sử-dụng-mảng-nhiều-chiều-để-biến-đổi-dữ-liệu-kiểu-hình-ảnh"><i class="fa fa-check"></i><b>3.2.2</b> Sử dụng mảng nhiều chiều để biến đổi dữ liệu kiểu hình ảnh</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#list-trong-r"><i class="fa fa-check"></i><b>3.3</b> List trong R</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#khởi-tạo-list-và-chỉ-số-của-list."><i class="fa fa-check"></i><b>3.3.1</b> Khởi tạo list và chỉ số của list.</a></li>
+<li class="chapter" data-level="3.3.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#sử-dụng-list-trong-viết-hàm-số"><i class="fa fa-check"></i><b>3.3.2</b> Sử dụng list trong viết hàm số</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#các-hàm-họ-apply"><i class="fa fa-check"></i><b>3.4</b> Các hàm họ <code>apply()</code></a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#hàm-apply"><i class="fa fa-check"></i><b>3.4.1</b> Hàm <code>apply()</code></a></li>
+<li class="chapter" data-level="3.4.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#hàm-lapply-và-sapply."><i class="fa fa-check"></i><b>3.4.2</b> Hàm <code>lapply()</code> và <code>sapply()</code>.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#phụ-lục-1"><i class="fa fa-check"></i><b>3.5</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#advrappen1"><i class="fa fa-check"></i><b>3.5.1</b> Kiến thức nâng cao liên quan đến ma trận</a></li>
+<li class="chapter" data-level="3.5.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#advrappen2"><i class="fa fa-check"></i><b>3.5.2</b> Gradient, Hessian và Jacobian</a></li>
+<li class="chapter" data-level="3.5.3" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#thuật-toán-gradient-descent"><i class="fa fa-check"></i><b>3.5.3</b> Thuật toán gradient descent</a></li>
+<li class="chapter" data-level="3.5.4" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#advrappen3"><i class="fa fa-check"></i><b>3.5.4</b> Các giá trị đặc trưng của một dòng tiền tương lai</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#bài-tập-1"><i class="fa fa-check"></i><b>3.6</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html"><i class="fa fa-check"></i><b>4</b> Nhập dữ liệu vào R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#đối-tượng-dùng-để-lưu-dữ-liệu-trong-r"><i class="fa fa-check"></i><b>4.1</b> Đối tượng dùng để lưu dữ liệu trong R</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#data.frame-là-gì"><i class="fa fa-check"></i><b>4.1.1</b> data.frame là gì?</a></li>
+<li class="chapter" data-level="4.1.2" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#tibble-là-một-cải-tiến-của-data.frame"><i class="fa fa-check"></i><b>4.1.2</b> <span class="math inline">\(tibble\)</span> là một cải tiến của <span class="math inline">\(data.frame\)</span>?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#nhập-dữ-liệu-bằng-hàm-sẵn-có."><i class="fa fa-check"></i><b>4.2</b> Nhập dữ liệu bằng hàm sẵn có.</a></li>
+<li class="chapter" data-level="4.3" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#nhập-dữ-liệu-bằng-thư-viện-textbfreadr."><i class="fa fa-check"></i><b>4.3</b> Nhập dữ liệu bằng thư viện <span class="math inline">\(\textbf{readr}\)</span>.</a></li>
+<li class="chapter" data-level="4.4" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#tương-tác-giữa-r-với-microsoft-excel"><i class="fa fa-check"></i><b>4.4</b> Tương tác giữa R với Microsoft Excel</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#đọc-dữ-liệu-lưu-dưới-định-dạng-của-excel"><i class="fa fa-check"></i><b>4.4.1</b> Đọc dữ liệu lưu dưới định dạng của Excel</a></li>
+<li class="chapter" data-level="4.4.2" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#tương-tác-với-microsoft-excel-bằng-thư-viện-textbfopenxlsx"><i class="fa fa-check"></i><b>4.4.2</b> Tương tác với Microsoft Excel bằng thư viện <span class="math inline">\(\textbf{openxlsx}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#kết-nối-r-với-cơ-sở-dữ-liệu"><i class="fa fa-check"></i><b>4.5</b> Kết nối R với cơ sở dữ liệu</a></li>
+<li class="chapter" data-level="4.6" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#thu-thập-dữ-liệu-từ-các-website"><i class="fa fa-check"></i><b>4.6</b> Thu thập dữ liệu từ các website</a></li>
+<li class="chapter" data-level="4.7" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#phụ-lục-2"><i class="fa fa-check"></i><b>4.7</b> Phụ lục</a></li>
+<li class="chapter" data-level="4.8" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#bài-tập-2"><i class="fa fa-check"></i><b>4.8</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html"><i class="fa fa-check"></i><b>5</b> Tiền xử lý dữ liệu</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#tiền-xử-lý-dữ-liệu-là-gì"><i class="fa fa-check"></i><b>5.1</b> Tiền xử lý dữ liệu là gì?</a></li>
+<li class="chapter" data-level="5.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#định-dạng-cột-dữ-liệu-sử-dụng-thư-viện-textbfreadr"><i class="fa fa-check"></i><b>5.2</b> Định dạng cột dữ liệu sử dụng thư viện <span class="math inline">\(\textbf{readr}\)</span></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#quy-tắc-định-dạng-tự-động-của-textbfreadr"><i class="fa fa-check"></i><b>5.2.1</b> Quy tắc định dạng tự động của <span class="math inline">\(\textbf{readr}\)</span></a></li>
+<li class="chapter" data-level="5.2.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#định-dạng-véc-tơ-bằng-các-hàm-parse_"><i class="fa fa-check"></i><b>5.2.2</b> Định dạng véc-tơ bằng các hàm <code>parse_*()</code></a></li>
+<li class="chapter" data-level="5.2.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#định-dạng-cột-kiểu-chuỗi-ký-tự"><i class="fa fa-check"></i><b>5.2.3</b> Định dạng cột kiểu chuỗi ký tự</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xử-lý-giá-trị-không-quan-sát-được"><i class="fa fa-check"></i><b>5.3</b> Xử lý giá trị không quan sát được</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xác-định-giá-trị-không-quan-sát-được"><i class="fa fa-check"></i><b>5.3.1</b> Xác định giá trị không quan sát được</a></li>
+<li class="chapter" data-level="5.3.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xử-lý-giá-trị-không-quan-sát-được."><i class="fa fa-check"></i><b>5.3.2</b> Xử lý giá trị không quan sát được.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xử-lý-giá-trị-ngoại-lai"><i class="fa fa-check"></i><b>5.4</b> Xử lý giá trị ngoại lai</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#ảnh-hưởng-của-giá-trị-ngoại-lai-lên-kết-quả-phân-tích"><i class="fa fa-check"></i><b>5.4.1</b> Ảnh hưởng của giá trị ngoại lai lên kết quả phân tích</a></li>
+<li class="chapter" data-level="5.4.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#phương-pháp-phát-hiện-giá-trị-ngoại-lai"><i class="fa fa-check"></i><b>5.4.2</b> Phương pháp phát hiện giá trị ngoại lai</a></li>
+<li class="chapter" data-level="5.4.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xử-lý-giá-trị-ngoại-lai."><i class="fa fa-check"></i><b>5.4.3</b> Xử lý giá trị ngoại lai.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#phụ-lục-3"><i class="fa fa-check"></i><b>5.5</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#appenptdl01"><i class="fa fa-check"></i><b>5.5.1</b> Kiểm định sự độc lập của hai biến</a></li>
+<li class="chapter" data-level="5.5.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#appenptdl02"><i class="fa fa-check"></i><b>5.5.2</b> Box-Cox transformation</a></li>
+<li class="chapter" data-level="5.5.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#phương-pháp-chuẩn-hóa-véc-tơ-bằng-hàm-ngược"><i class="fa fa-check"></i><b>5.5.3</b> Phương pháp chuẩn hóa véc-tơ bằng hàm ngược</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#bài-tập-3"><i class="fa fa-check"></i><b>5.6</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html"><i class="fa fa-check"></i><b>6</b> Biến đổi và sắp xếp dữ liệu</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#biến-đổi-dữ-liệu-bằng-thư-viện-textbfdplyr"><i class="fa fa-check"></i><b>6.1</b> Biến đổi dữ liệu bằng thư viện <span class="math inline">\(\textbf{dplyr}\)</span></a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#thêm-biến-bằng-hàm-mutate"><i class="fa fa-check"></i><b>6.1.1</b> Thêm biến bằng hàm <code>mutate()</code></a></li>
+<li class="chapter" data-level="6.1.2" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#lựa-chọn-biến-bằng-hàm-select"><i class="fa fa-check"></i><b>6.1.2</b> Lựa chọn biến bằng hàm <code>select()</code></a></li>
+<li class="chapter" data-level="6.1.3" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#sắp-xếp-dữ-liệu-bằng-hàm-arrange"><i class="fa fa-check"></i><b>6.1.3</b> Sắp xếp dữ liệu bằng hàm <code>arrange()</code></a></li>
+<li class="chapter" data-level="6.1.4" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#kết-hợp-các-phép-biến-đổi-bằng-toán-tử-pipe"><i class="fa fa-check"></i><b>6.1.4</b> Kết hợp các phép biến đổi bằng toán tử pipe (<code>%&gt;%</code>)</a></li>
+<li class="chapter" data-level="6.1.5" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#tổng-hợp-dữ-liệu-bằng-group_by-và-summarise"><i class="fa fa-check"></i><b>6.1.5</b> Tổng hợp dữ liệu bằng <code>group_by</code> và <code>summarise()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#sắp-xếp-dữ-liệu-bằng-thư-viện-textbftidyr"><i class="fa fa-check"></i><b>6.2</b> Sắp xếp dữ liệu bằng thư viện <span class="math inline">\(\textbf{tidyr}\)</span></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#kéo-dài-dữ-liệu-bằng-gather"><i class="fa fa-check"></i><b>6.2.1</b> Kéo dài dữ liệu bằng <code>gather()</code></a></li>
+<li class="chapter" data-level="6.2.2" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#mở-rộng-dữ-liệu-với-speard"><i class="fa fa-check"></i><b>6.2.2</b> Mở rộng dữ liệu với <code>speard()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#phụ-lục-4"><i class="fa fa-check"></i><b>6.3</b> Phụ lục</a></li>
+<li class="chapter" data-level="6.4" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#bài-tập-4"><i class="fa fa-check"></i><b>6.4</b> Bài tập</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="biến-đổi-và-sắp-xếp-dữ-liệu" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chương 6</span> Biến đổi và sắp xếp dữ liệu<a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#biến-đổi-và-sắp-xếp-dữ-liệu" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="biến-đổi-dữ-liệu-bằng-thư-viện-textbfdplyr" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Biến đổi dữ liệu bằng thư viện <span class="math inline">\(\textbf{dplyr}\)</span><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#biến-đổi-dữ-liệu-bằng-thư-viện-textbfdplyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dữ liệu trước khi đưa vào thực hiện các phân tích, thực hiện trực quan hóa, hoặc xây dựng mô hình, thường không có được định dạng đúng như chúng ta mong muốn. Thông thường, chúng ta sẽ cần tạo thêm một số biến, hoặc có thể chỉ muốn đổi tên các biến, hoặc sắp xếp lại các quan sát, hoặc tổng hợp và nhóm dữ liệu vào các nhóm để dễ dàng hơn cho các bước tiếp theo. Các bước biến đổi dữ liệu như vậy sẽ được trình bày chi tiết trong phần này. Đa số các hàm thực hiện các phép biến đổi dữ liệu được lấy từ thư viện <span class="math inline">\(\textbf{dplyr}\)</span>. Dữ liệu để minh họa trực tiếp cho các phép biến đổi là tập dữ liệu <span class="math inline">\(\textbf{gapminder}\)</span> của thư viện <span class="math inline">\(\textbf{dslabs}\)</span>, dữ liệu về sức khỏe và thu nhập của các quốc gia trên thế giới từ năm 1960 đến năm 2016. Chúng tôi lựa chọn dữ liệu này vì đây là dữ liệu dễ hiểu và có nhiều ý tưởng để phân tích.</p>
+<p>Thư viện <span class="math inline">\(\textbf{dplyr}\)</span> là một thư viện nằm trong thư viện tổng hợp <span class="math inline">\(\textbf{tidyverse}\)</span>, bạn đọc có thể gọi thư viện <span class="math inline">\(\textbf{dplyr}\)</span> hoặc trực tiếp thư viện <span class="math inline">\(\textbf{dplyr}\)</span> lên cửa sổ làm việc. Bạn đọc cũng cần lưu ý rằng trong thư viện <span class="math inline">\(\textbf{dplyr}\)</span> có một số hàm trùng tên với các hàm có sẵn trong R, chẳng hạn như hàm <code>filter()</code>, hàm <code>select()</code>, hoặc hàm <code>lag()</code>. Bạn đọc cần lưu ý thứ tự ưu tiên của các thư viện khi sử dụng các hàm kể trên, hoặc gọi tên thư viện đính kèm với tên hàm để tránh gặp lỗi khi thực thi các câu lệnh.</p>
+<p>Dữ liệu <span class="math inline">\(\textbf{gapminder}\)</span> là đã được đề cập trong phần tiền xử lý dữ liệu. Bạn đọc nên tham khảo mô tả dữ liệu này trước khi đi đến các phần tiếp theo của cuốn sách. Trong các phần tiếp theo, chúng tôi sẽ lần lượt giới thiệu các hàm quan trọng để thực hiện các phép biến đổi dữ liệu từ thư viện <span class="math inline">\(\textbf{dplyr}\)</span> và các tham số quan trọng của hàm số đó. Chúng tôi cũng sẽ giới thiệu với bạn đọc về cách kết hợp các hàm với nhau thành một câu lệnh duy nhất viết câu lệnh bằng cách sử dụng toán tử pipe (<code>%&gt;%</code>).</p>
+<div id="thêm-biến-bằng-hàm-mutate" class="section level3 hasAnchor" number="6.1.1">
+<h3><span class="header-section-number">6.1.1</span> Thêm biến bằng hàm <code>mutate()</code><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#thêm-biến-bằng-hàm-mutate" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Khi bạn đọc muốn thêm các cột khác vào một dữ liệu được tính toán từ các cột hiện có, bạn có thể sử dụng hàm <code>mutate()</code>. Hàm <code>mutate()</code> luôn thêm cột vào sau cột cuối cùng trong dữ liệu hiện có. Khi bạn muốn thêm cột vào một vị trí cụ thể, bạn có thể sử dụng các tham số sau:</p>
+<ul>
+<li><p>Tham số <code>.after</code> sử dụng để gán giá trị cho tên biến (cột) phía trước cột mà bạn đọc muốn thêm vào.</p></li>
+<li><p>Tham số <code>.before</code> sử dụng để gán giá trị cho tên biến (cột) phía sau cột mà bạn đọc muốn thêm vào.</p></li>
+</ul>
+<p>Cách sử dụng <code>mutate()</code> như sau:</p>
+<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb560-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb560-1" tabindex="-1"></a>mytib<span class="ot">&lt;-</span><span class="fu">as.tibble</span>(gapminder) <span class="co"># mytib là dữ liệu kiểu tibble</span></span>
+<span id="cb560-2"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb560-2" tabindex="-1"></a><span class="fu">mutate</span>(mytib, <span class="at">gdp_per_capita =</span> gdp<span class="sc">/</span>population) <span class="co"># thêm cột có tên là gdp_per_capita</span></span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 10
+##    country   year infant_mortality life_expectancy fertility population      gdp
+##    &lt;fct&gt;    &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Albania   1960            115.             62.9      6.19    1636054 NA      
+##  2 Algeria   1960            148.             47.5      7.65   11124892  1.38e10
+##  3 Angola    1960            208              36.0      7.32    5270844 NA      
+##  4 Antigua…  1960             NA              63.0      4.43      54681 NA      
+##  5 Argenti…  1960             59.9            65.4      3.11   20619075  1.08e11
+##  6 Armenia   1960             NA              66.9      4.55    1867396 NA      
+##  7 Aruba     1960             NA              65.7      4.82      54208 NA      
+##  8 Austral…  1960             20.3            70.9      3.45   10292328  9.67e10
+##  9 Austria   1960             37.3            68.8      2.7     7065525  5.24e10
+## 10 Azerbai…  1960             NA              61.3      5.57    3897889 NA      
+## # ℹ 10,535 more rows
+## # ℹ 3 more variables: continent &lt;fct&gt;, region &lt;fct&gt;, gdp_per_capita &lt;dbl&gt;</code></pre>
+<p>Câu lệnh trên có ý nghĩa là thêm cột có tên là <span class="math inline">\(gdp\_per\_capita\)</span>, được tính bằng tổng thu nhập quốc dân (<span class="math inline">\(gdp\)</span>) chia cho dân số (<span class="math inline">\(population\)</span>) của quốc gia trong năm tương ứng. Nếu bạn đọc muốn cột mới được thêm vào ngay sau cột <span class="math inline">\(gdp\)</span>, hãy sử dụng thêm tham số <code>.after</code> như sau:</p>
+<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb562-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb562-1" tabindex="-1"></a><span class="fu">mutate</span>(mytib, <span class="at">gdp_per_capita =</span> gdp<span class="sc">/</span>population, <span class="at">.after =</span> gdp)</span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 10
+##    country   year infant_mortality life_expectancy fertility population      gdp
+##    &lt;fct&gt;    &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Albania   1960            115.             62.9      6.19    1636054 NA      
+##  2 Algeria   1960            148.             47.5      7.65   11124892  1.38e10
+##  3 Angola    1960            208              36.0      7.32    5270844 NA      
+##  4 Antigua…  1960             NA              63.0      4.43      54681 NA      
+##  5 Argenti…  1960             59.9            65.4      3.11   20619075  1.08e11
+##  6 Armenia   1960             NA              66.9      4.55    1867396 NA      
+##  7 Aruba     1960             NA              65.7      4.82      54208 NA      
+##  8 Austral…  1960             20.3            70.9      3.45   10292328  9.67e10
+##  9 Austria   1960             37.3            68.8      2.7     7065525  5.24e10
+## 10 Azerbai…  1960             NA              61.3      5.57    3897889 NA      
+## # ℹ 10,535 more rows
+## # ℹ 3 more variables: gdp_per_capita &lt;dbl&gt;, continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
+<p>và để thêm cột thu nhập bình quân đầu người vào phía trước cột <span class="math inline">\(gdp\)</span>, chúng ta sử dụng tham số <code>.before</code></p>
+<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb564-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb564-1" tabindex="-1"></a><span class="fu">mutate</span>(mytib, <span class="at">gdp_per_capita =</span> gdp<span class="sc">/</span>population, <span class="at">.before =</span> gdp)</span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 10
+##    country            year infant_mortality life_expectancy fertility population
+##    &lt;fct&gt;             &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Albania            1960            115.             62.9      6.19    1636054
+##  2 Algeria            1960            148.             47.5      7.65   11124892
+##  3 Angola             1960            208              36.0      7.32    5270844
+##  4 Antigua and Barb…  1960             NA              63.0      4.43      54681
+##  5 Argentina          1960             59.9            65.4      3.11   20619075
+##  6 Armenia            1960             NA              66.9      4.55    1867396
+##  7 Aruba              1960             NA              65.7      4.82      54208
+##  8 Australia          1960             20.3            70.9      3.45   10292328
+##  9 Austria            1960             37.3            68.8      2.7     7065525
+## 10 Azerbaijan         1960             NA              61.3      5.57    3897889
+## # ℹ 10,535 more rows
+## # ℹ 4 more variables: gdp_per_capita &lt;dbl&gt;, gdp &lt;dbl&gt;, continent &lt;fct&gt;,
+## #   region &lt;fct&gt;</code></pre>
+<p>Hàm số được sử dụng tương tự như hàm <code>mutate()</code> là hàm <span class="math inline">\(transmute()\)</span>. Hàm <span class="math inline">\(transmute()\)</span> khác <span class="math inline">\(mutate()\)</span> ở chỗ là trong dữ liệu mới được tạo thành chỉ có các cột mới được tạo thành. Ví dụ,</p>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb566-1" tabindex="-1"></a><span class="fu">transmute</span>(mytib, <span class="at">gdp_per_capita =</span> gdp<span class="sc">/</span>population)</span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 1
+##    gdp_per_capita
+##             &lt;dbl&gt;
+##  1            NA 
+##  2          1243.
+##  3            NA 
+##  4            NA 
+##  5          5254.
+##  6            NA 
+##  7            NA 
+##  8          9393.
+##  9          7415.
+## 10            NA 
+## # ℹ 10,535 more rows</code></pre>
+<p>Chúng ta có thể thấy rằng trong dữ liệu mới được tạo thành, chỉ có một cột duy nhất là cột thu nhập bình quân đầu người (<span class="math inline">\(gdp\_per\_capita\)</span>).</p>
+</div>
+<div id="lựa-chọn-biến-bằng-hàm-select" class="section level3 hasAnchor" number="6.1.2">
+<h3><span class="header-section-number">6.1.2</span> Lựa chọn biến bằng hàm <code>select()</code><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#lựa-chọn-biến-bằng-hàm-select" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Khi dữ liệu có quá nhiều cột và chúng ta chỉ muốn sử dụng một số cột nhất định để phân tích, bạn đọc có thể sử dụng hàm <code>select()</code> để lựa chọn các cột mà chúng ta sẽ sử dụng trong các bước tiếp theo. Điều quan trọng khi sử dụng hàm <code>select()</code> là bạn đọc cần gọi tên đúng các biến mà chúng ta muốn lựa chọn. Hàm <code>select()</code> được sử dụng như sau:</p>
+<div class="sourceCode" id="cb568"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb568-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb568-1" tabindex="-1"></a><span class="fu">select</span>(mytib, year, gdp, population) <span class="co"># lựa chọn các cột year, gdp, population</span></span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 3
+##     year          gdp population
+##    &lt;int&gt;        &lt;dbl&gt;      &lt;dbl&gt;
+##  1  1960           NA    1636054
+##  2  1960  13828152297   11124892
+##  3  1960           NA    5270844
+##  4  1960           NA      54681
+##  5  1960 108322326649   20619075
+##  6  1960           NA    1867396
+##  7  1960           NA      54208
+##  8  1960  96677859364   10292328
+##  9  1960  52392699681    7065525
+## 10  1960           NA    3897889
+## # ℹ 10,535 more rows</code></pre>
+<p>Hàm <code>select()</code> cũng có thể được sử dụng để lựa chọn cột và thay đổi tên cột. Ví dụ, khi bạn đọc muốn tên các biến mới tương ứng với các biến <span class="math inline">\(year\)</span>, <span class="math inline">\(gdp\)</span>, và <span class="math inline">\(population\)</span> thành <span class="math inline">\(Year\)</span>, <span class="math inline">\(Gdp\)</span> và <span class="math inline">\(Population\)</span>, chúng ta viết câu lệnh với hàm <code>select()</code> như sau:</p>
+<div class="sourceCode" id="cb570"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb570-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb570-1" tabindex="-1"></a><span class="fu">select</span>(mytib, <span class="at">Year =</span> year, <span class="at">Gdp =</span>  gdp,  <span class="at">Population =</span> population)</span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 3
+##     Year          Gdp Population
+##    &lt;int&gt;        &lt;dbl&gt;      &lt;dbl&gt;
+##  1  1960           NA    1636054
+##  2  1960  13828152297   11124892
+##  3  1960           NA    5270844
+##  4  1960           NA      54681
+##  5  1960 108322326649   20619075
+##  6  1960           NA    1867396
+##  7  1960           NA      54208
+##  8  1960  96677859364   10292328
+##  9  1960  52392699681    7065525
+## 10  1960           NA    3897889
+## # ℹ 10,535 more rows</code></pre>
+<p>Khi dữ liệu có quá nhiều cột và việc gọi tên chính xác tất cả các cột làm cho câu lệnh <code>select()</code> quá phức tạp, bạn đọc có thể sử dụng <code>select()</code> để lựa chọn ra các cột đứng liền nhau bằng cách sử dụng dấu <code>:</code>,</p>
+<div class="sourceCode" id="cb572"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb572-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb572-1" tabindex="-1"></a><span class="fu">select</span>(mytib, year, gdp<span class="sc">:</span>population)</span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 3
+##     year          gdp population
+##    &lt;int&gt;        &lt;dbl&gt;      &lt;dbl&gt;
+##  1  1960           NA    1636054
+##  2  1960  13828152297   11124892
+##  3  1960           NA    5270844
+##  4  1960           NA      54681
+##  5  1960 108322326649   20619075
+##  6  1960           NA    1867396
+##  7  1960           NA      54208
+##  8  1960  96677859364   10292328
+##  9  1960  52392699681    7065525
+## 10  1960           NA    3897889
+## # ℹ 10,535 more rows</code></pre>
+<p>Câu lệnh trên có ý nghĩa là lấy ra biến <span class="math inline">\(year\)</span> và tất cả các biến nằm giữa biến <span class="math inline">\(gdp\)</span> và biến <span class="math inline">\(population\)</span>.</p>
+<p>Hàm <code>select()</code> còn cho phép bạn đọc lấy ra các cột mà chúng ta không nhớ chính xác tên bằng cách sử dụng các tham số dưới đây:</p>
+<ul>
+<li>Tham số <code>starts_with()</code> được sử dụng để lựa chọn các cột có tên bắt đầu bằng một chuỗi ký tự nào đó. Ví dụ như khi chúng ta không nhớ chính xác tên của biến mô tả tỷ lệ tử vong của trẻ sơ sinh trong dữ liệu <span class="math inline">\(\textbf{gapminder}\)</span>, chúng ta chỉ chắc chắn rằng tên cột bắt đầu bằng <code>"infant"</code>, chúng ta lựa chọn biến này như sau:</li>
+</ul>
+<div class="sourceCode" id="cb574"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb574-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb574-1" tabindex="-1"></a><span class="fu">select</span>(mytib, <span class="fu">starts_with</span>(<span class="st">&quot;infant&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 1
+##    infant_mortality
+##               &lt;dbl&gt;
+##  1            115. 
+##  2            148. 
+##  3            208  
+##  4             NA  
+##  5             59.9
+##  6             NA  
+##  7             NA  
+##  8             20.3
+##  9             37.3
+## 10             NA  
+## # ℹ 10,535 more rows</code></pre>
+<ul>
+<li><p>Tương tự như <code>starts_with()</code>, các tham số <code>ends_with()</code> và <code>contains()</code> được sử dụng để lựa chọn các cột kết thúc bởi một chuỗi ký tự và chứa một chuỗi ký tự nào đó.</p></li>
+<li><p>Tham số <code>matches()</code> có thể được sử dụng trong trường hợp tổng quát hơn <code>contains()</code> các cột được lựa chọn có tên được biểu diễn qua các biểu thức chính quy.</p></li>
+</ul>
+<div class="sourceCode" id="cb576"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb576-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb576-1" tabindex="-1"></a>mytib1<span class="ot">&lt;-</span><span class="fu">mutate</span>(mytib, <span class="at">gdp_per_capita =</span> gdp<span class="sc">/</span>population)</span>
+<span id="cb576-2"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb576-2" tabindex="-1"></a><span class="fu">select</span>(mytib1, <span class="fu">contains</span>(<span class="st">&quot;gdp&quot;</span>)) <span class="co"># Lấy các cột có tên chứa &quot;gdp&quot;</span></span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 2
+##             gdp gdp_per_capita
+##           &lt;dbl&gt;          &lt;dbl&gt;
+##  1           NA            NA 
+##  2  13828152297          1243.
+##  3           NA            NA 
+##  4           NA            NA 
+##  5 108322326649          5254.
+##  6           NA            NA 
+##  7           NA            NA 
+##  8  96677859364          9393.
+##  9  52392699681          7415.
+## 10           NA            NA 
+## # ℹ 10,535 more rows</code></pre>
+<p>Khi số lượng cột được lựa chọn nhiều hơn số cột không được lựa chọn, hoặc khi bạn đọc muốn loại một số cột không sử dụng ra khỏi dữ liệu, hàm <code>select()</code> cũng cho phép chúng ta thực thi yêu cầu bằng cách thêm dấu <code>-</code> vào tên các cột mà chúng ta muốn loại ra khỏi dữ liệu. Hãy quan sát ví dụ dưới đây:</p>
+<div class="sourceCode" id="cb578"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb578-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb578-1" tabindex="-1"></a><span class="fu">select</span>(mytib1, <span class="sc">-</span> <span class="fu">starts_with</span>(<span class="st">&quot;gdp&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 8
+##    country  year infant_mortality life_expectancy fertility population continent
+##    &lt;fct&gt;   &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;fct&gt;    
+##  1 Albania  1960            115.             62.9      6.19    1636054 Europe   
+##  2 Algeria  1960            148.             47.5      7.65   11124892 Africa   
+##  3 Angola   1960            208              36.0      7.32    5270844 Africa   
+##  4 Antigu…  1960             NA              63.0      4.43      54681 Americas 
+##  5 Argent…  1960             59.9            65.4      3.11   20619075 Americas 
+##  6 Armenia  1960             NA              66.9      4.55    1867396 Asia     
+##  7 Aruba    1960             NA              65.7      4.82      54208 Americas 
+##  8 Austra…  1960             20.3            70.9      3.45   10292328 Oceania  
+##  9 Austria  1960             37.3            68.8      2.7     7065525 Europe   
+## 10 Azerba…  1960             NA              61.3      5.57    3897889 Asia     
+## # ℹ 10,535 more rows
+## # ℹ 1 more variable: region &lt;fct&gt;</code></pre>
+<p>Hàm <code>select()</code> ỏ trên có ý nghĩa là loại đi ra khỏi dữ liệu tất cả các biến có tên bắt đầu bằng “gdp”</p>
+<p>##$ Lọc dữ liệu bằng hàm <code>filter()</code></p>
+<p>Hàm <code>filter()</code> cho phép chúng ta lọc các quan sát dựa trên giá trị của các cột. Do có một số thư viện trong R sử dụng hàm <code>filter()</code> với mục đích khác nhau và chúng ta có thể không chắc chắn về thứ tự ưu tiên của các thư viện đang sẵn sàng trên môi trường làm việc hiện tại nên tốt nhất là chúng ta định nghĩa lại tên hàm <code>filter()</code> cho hàm có tên tương ứng của thư viện <span class="math inline">\(\textbf{dplyr}\)</span></p>
+<div class="sourceCode" id="cb580"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb580-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb580-1" tabindex="-1"></a>filter<span class="ot">&lt;-</span><span class="cf">function</span>(...) dplyr<span class="sc">::</span><span class="fu">filter</span>(...)</span></code></pre></div>
+<p>Cách hoạt động của hàm <span class="math inline">\(filter()\)</span> như sau: ví dụ chúng ta muốn lấy ra dữ liệu của riêng năm 2010 trong dữ liệu <span class="math inline">\(\textbf{gapminder}\)</span>, hàm <code>filter()</code> được viết như sau như sau</p>
+<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb581-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb581-1" tabindex="-1"></a><span class="fu">filter</span>(mytib, year <span class="sc">==</span> <span class="dv">2010</span>) <span class="co"># chỉ lấy các quan sát có year là 2010</span></span></code></pre></div>
+<pre><code>## # A tibble: 185 × 9
+##    country   year infant_mortality life_expectancy fertility population      gdp
+##    &lt;fct&gt;    &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Albania   2010             14.8            77.2      1.74    2901883  6.14e 9
+##  2 Algeria   2010             23.5            76        2.82   36036159  7.92e10
+##  3 Angola    2010            110.             57.6      6.22   21219954  2.61e10
+##  4 Antigua…  2010              7.7            75.8      2.13      87233  8.37e 8
+##  5 Argenti…  2010             13              75.8      2.22   41222875  4.34e11
+##  6 Armenia   2010             16.1            73        1.55    2963496  4.10e 9
+##  7 Aruba     2010             NA              75.1      1.7      101597 NA      
+##  8 Austral…  2010              4.1            82        1.89   22162863  5.63e11
+##  9 Austria   2010              3.6            80.5      1.44    8391986  2.24e11
+## 10 Azerbai…  2010             33.9            70.1      1.97    9099893  2.12e10
+## # ℹ 175 more rows
+## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
+<p>Sau khi thực thi câu lệnh ở trên, một tibble mới được tạo thành chỉ bao gồm các quan sát có giá trị cột <span class="math inline">\(year\)</span> là <code>2010</code>. Lưu ý rằng nếu chúng ta muốn lưu lại giá trị sau mỗi lần thực hiện biến đổi dữ liệu, hãy gán giá trị kết quả của các hàm trong thư viện <span class="math inline">\(\textbf{dplyr}\)</span> vào một đối tượng. Hàm <code>filter()</code> có thể thực hiện việc lọc dữ liệu trên nhiều cột cùng một lúc. Ví dụ như chúng ta muốn lọc ra các quan sát của năm 2010 của các quốc gia thuộc lục địa Châu Âu, chúng ta sử dụng hai phép so sánh trong hàm <code>filter()</code></p>
+<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb583-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb583-1" tabindex="-1"></a><span class="fu">filter</span>(mytib, year <span class="sc">==</span> <span class="dv">2010</span>, continent <span class="sc">==</span> <span class="st">&quot;Europe&quot;</span>) </span></code></pre></div>
+<pre><code>## # A tibble: 39 × 9
+##    country    year infant_mortality life_expectancy fertility population     gdp
+##    &lt;fct&gt;     &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Albania    2010             14.8            77.2      1.74    2901883 6.14e 9
+##  2 Austria    2010              3.6            80.5      1.44    8391986 2.24e11
+##  3 Belarus    2010              4.7            70.2      1.46    9492122 2.60e10
+##  4 Belgium    2010              3.6            80.1      1.84   10929978 2.67e11
+##  5 Bosnia a…  2010              6.4            77.9      1.24    3835258 8.21e 9
+##  6 Bulgaria   2010             11.2            73.7      1.49    7407297 1.92e10
+##  7 Croatia    2010              4.6            76.7      1.47    4316425 2.80e10
+##  8 Czech Re…  2010              3.4            77.5      1.5    10506617 8.21e10
+##  9 Denmark    2010              3.3            79.4      1.88    5550959 1.69e11
+## 10 Estonia    2010              3.6            76.4      1.63    1332089 8.01e 9
+## # ℹ 29 more rows
+## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
+</div>
+<div id="sắp-xếp-dữ-liệu-bằng-hàm-arrange" class="section level3 hasAnchor" number="6.1.3">
+<h3><span class="header-section-number">6.1.3</span> Sắp xếp dữ liệu bằng hàm <code>arrange()</code><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#sắp-xếp-dữ-liệu-bằng-hàm-arrange" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Hàm <code>arrange()</code> sắp xếp các quan sát của dữ liệu theo thứ tự tăng dần. Nguyên tắc sắp xếp cũng tương tự như quy tắc sắp xếp của hàm <code>sort()</code> khi làm trên véc-tơ, nghĩa là hàm bạn đọc có thể sắp xếp dữ liệu dựa theo kiểu số, kiểu logic, kiểu thời gian, hay kiểu chuỗi ký tự. Lưu ý rằng khi véc-tơ kiểu chuỗi ký tự được định nghĩa dưới dạng factor thì thứ tự tăng dần sẽ được hiểu theo cách đánh số thứ tự của factor bắt đầu từ 1.</p>
+<p>Chúng ta sắp xếp dữ liệu <span class="math inline">\(\textbf{gapmider}\)</span> theo thứ tự tăng dần cuả biến <span class="math inline">\(year\)</span> như sau</p>
+<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb585-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb585-1" tabindex="-1"></a><span class="fu">arrange</span>(mytib, year) </span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 9
+##    country   year infant_mortality life_expectancy fertility population      gdp
+##    &lt;fct&gt;    &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+##  1 Albania   1960            115.             62.9      6.19    1636054 NA      
+##  2 Algeria   1960            148.             47.5      7.65   11124892  1.38e10
+##  3 Angola    1960            208              36.0      7.32    5270844 NA      
+##  4 Antigua…  1960             NA              63.0      4.43      54681 NA      
+##  5 Argenti…  1960             59.9            65.4      3.11   20619075  1.08e11
+##  6 Armenia   1960             NA              66.9      4.55    1867396 NA      
+##  7 Aruba     1960             NA              65.7      4.82      54208 NA      
+##  8 Austral…  1960             20.3            70.9      3.45   10292328  9.67e10
+##  9 Austria   1960             37.3            68.8      2.7     7065525  5.24e10
+## 10 Azerbai…  1960             NA              61.3      5.57    3897889 NA      
+## # ℹ 10,535 more rows
+## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
+<p>Để sắp xếp dữ liệu theo thứ tự giảm dần của một biến, nếu biến dữ liệu dùng để sắp xếp là kiểu số, bạn đọc chỉ cần thêm dấu <code>-</code> trước tên biến đó trong hàm <code>arrange()</code>. Trong trường hợp tổng quát, khi dữ liệu có thể có kiểu chuỗi ký tự, ngày tháng, …, chúng ta sử dụng hàm <code>desc()</code> để sắp xếp dữ liệu theo thứ tự giảm dần:</p>
+<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb587-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb587-1" tabindex="-1"></a><span class="fu">arrange</span>(mytib, <span class="fu">desc</span>(year)) </span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 9
+##    country      year infant_mortality life_expectancy fertility population   gdp
+##    &lt;fct&gt;       &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
+##  1 Albania      2016               NA            78.1        NA         NA    NA
+##  2 Algeria      2016               NA            76.5        NA         NA    NA
+##  3 Angola       2016               NA            60          NA         NA    NA
+##  4 Antigua an…  2016               NA            76.5        NA         NA    NA
+##  5 Argentina    2016               NA            76.7        NA         NA    NA
+##  6 Armenia      2016               NA            74.9        NA         NA    NA
+##  7 Aruba        2016               NA            75.8        NA         NA    NA
+##  8 Australia    2016               NA            82.3        NA         NA    NA
+##  9 Austria      2016               NA            81.4        NA         NA    NA
+## 10 Azerbaijan   2016               NA            73.3        NA         NA    NA
+## # ℹ 10,535 more rows
+## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
+<p>Việc sắp xếp dữ liệu có thể thực hiện dựa trên nhiều cột dữ liệu. Ví dụ, để sắp xếp dữ liệu <span class="math inline">\(\textbf{gapminder}\)</span> theo thứ tự tăng dần theo năm (<span class="math inline">\(year\)</span>), tiếp theo là theo Châu lục (<span class="math inline">\(continent\)</span>), và sau cùng là theo vùng (<span class="math inline">\(region\)</span>), bạn đọc viết câu lệnh như sau:</p>
+<div class="sourceCode" id="cb589"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb589-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb589-1" tabindex="-1"></a><span class="fu">arrange</span>(mytib, year, continent, region) </span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 9
+##    country    year infant_mortality life_expectancy fertility population     gdp
+##    &lt;fct&gt;     &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Burundi    1960            145.             40.6      6.95    2786740  3.41e8
+##  2 Comoros    1960            200              44.0      6.79     188732 NA     
+##  3 Djibouti   1960             NA              45.8      6.46      83636 NA     
+##  4 Eritrea    1960             NA              39.0      6.9     1407631 NA     
+##  5 Ethiopia   1960            162              37.7      6.88   22151218 NA     
+##  6 Kenya      1960            119.             47.4      7.95    8105440  2.12e9
+##  7 Madagasc…  1960            112              42.0      7.3     5099371  2.09e9
+##  8 Malawi     1960            218.             38.5      6.91    3618604  3.48e8
+##  9 Mauritius  1960             67.8            58.7      6.17     660023 NA     
+## 10 Mozambiq…  1960            183              38.2      6.6     7493278 NA     
+## # ℹ 10,535 more rows
+## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
+<p>Lưu ý rằng thứ tự sắp xếp cũng có thể là tăng theo một biến và giảm theo các biến khác:</p>
+<div class="sourceCode" id="cb591"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb591-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb591-1" tabindex="-1"></a><span class="fu">arrange</span>(mytib, year, <span class="fu">desc</span>(continent), <span class="fu">desc</span>(region), <span class="sc">-</span>gdp) <span class="co"># tăng dần theo năm, giảm dần theo continent, region, gdp</span></span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 9
+##    country    year infant_mortality life_expectancy fertility population     gdp
+##    &lt;fct&gt;     &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+##  1 French P…  1960              NA             56.3      5.66      78083 NA     
+##  2 Samoa      1960              92             51.4      7.65     108645 NA     
+##  3 Tonga      1960              NA             61.2      7.36      61600 NA     
+##  4 Kiribati   1960              NA             45.8      6.95      41234 NA     
+##  5 Micrones…  1960              NA             56.8      6.93      44539 NA     
+##  6 Papua Ne…  1960             135.            38.6      6.28    1966957  8.37e8
+##  7 Fiji       1960              54             55.7      6.46     393383  4.37e8
+##  8 New Cale…  1960              NA             56.4      5.22      78058 NA     
+##  9 Solomon …  1960             132.            50.6      6.39     117869 NA     
+## 10 Vanuatu    1960             107.            46.0      7.2       63701 NA     
+## # ℹ 10,535 more rows
+## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
+<p>Khi trong cột dữ liệu sử dụng để sắp xếp có chứa giá trị không quan sát được (NA) thì các giá trị này luôn được sắp xếp xuống phía dưới của dữ liệu bất kể chúng ta sắp xếp dữ liệu theo thứ tự tăng dần hay giảm dần. Ví dụ, cột <span class="math inline">\(gdp\)</span> của dữ liệu <span class="math inline">\(\textbf{gapminder\)</span> có tỷ lệ biến nhận giá trị NA khá cao. Khi quan sát phần đuôi của dữ liệu được sắp xếp theo <span class="math inline">\(gdp\)</span>, chúng ta sẽ luôn thấy các giá trị NA được đẩy xuống phía dưới:</p>
+<div class="sourceCode" id="cb593"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb593-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb593-1" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">arrange</span>(mytib, gdp))</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 9
+##   country       year infant_mortality life_expectancy fertility population   gdp
+##   &lt;fct&gt;        &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
+## 1 Venezuela     2016               NA            74.8        NA         NA    NA
+## 2 West Bank a…  2016               NA            74.7        NA         NA    NA
+## 3 Vietnam       2016               NA            75.6        NA         NA    NA
+## 4 Yemen         2016               NA            64.9        NA         NA    NA
+## 5 Zambia        2016               NA            57.1        NA         NA    NA
+## 6 Zimbabwe      2016               NA            61.7        NA         NA    NA
+## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
+<div class="sourceCode" id="cb595"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb595-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb595-1" tabindex="-1"></a><span class="fu">tail</span>(<span class="fu">arrange</span>(mytib, <span class="fu">desc</span>(gdp)))</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 9
+##   country       year infant_mortality life_expectancy fertility population   gdp
+##   &lt;fct&gt;        &lt;int&gt;            &lt;dbl&gt;           &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;
+## 1 Venezuela     2016               NA            74.8        NA         NA    NA
+## 2 West Bank a…  2016               NA            74.7        NA         NA    NA
+## 3 Vietnam       2016               NA            75.6        NA         NA    NA
+## 4 Yemen         2016               NA            64.9        NA         NA    NA
+## 5 Zambia        2016               NA            57.1        NA         NA    NA
+## 6 Zimbabwe      2016               NA            61.7        NA         NA    NA
+## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
+<p>Bạn đọc có thể quan sát thấy rằng phần đuôi của kết quả không thay đổi dù chúng ta có thực hiện sắp xếp theo thứ tự <span class="math inline">\(gdp\)</span> tăng dần hay <span class="math inline">\(gdp\)</span> giảm dần.</p>
+</div>
+<div id="kết-hợp-các-phép-biến-đổi-bằng-toán-tử-pipe" class="section level3 hasAnchor" number="6.1.4">
+<h3><span class="header-section-number">6.1.4</span> Kết hợp các phép biến đổi bằng toán tử pipe (<code>%&gt;%</code>)<a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#kết-hợp-các-phép-biến-đổi-bằng-toán-tử-pipe" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Trước khi giới thiệu các hàm số khác sử dụng để biến đổi dữ liệu của thư viện <span class="math inline">\(\textbf{dplyr}\)</span>, chúng tôi giới thiệu đến bạn đọc toán tử pipe (<code>%&gt;%</code>). Đây là một công cụ rất hiệu quả khi chúng ta thực hiện một chuỗi các phép biến đổi dữ liệu. Thuật ngữ “toán tử pipe” được mượn từ toán học khi nói đến việc sử dụng các hàm số nối tiếp nhau. Pipe trong thư viện <span class="math inline">\(\textbf{dplyr}\)</span> cũng có ý nghĩa tương tự khi bạn đọc sẽ sử dụng một chuỗi các hàm của thư viện nhằm biến đổi dữ liệu. Toán tử pipe giúp cho việc viết các câu lệnh biến đổi dữ liệu phức tạp trở nên đơn giản và tránh bị nhầm lẫn. Ví dụ, khi chúng ta muốn thực hiện một phân tích trên dữ liệu <span class="math inline">\(textbf{gapminder}\)</span>, đó là tìm ra ba quốc gia có thu nhập bình quân đầu người cao nhất của năm 2000. Để thực hiện được việc này, bạn đọc sẽ cần thực hiện các phép biến đổi sau theo thứ tự như sau:</p>
+<ul>
+<li><p>Thứ nhất: tính toán thêm cột thu nhập bình quân đầu người, sử dụng hàm <code>mutate()</code>.</p></li>
+<li><p>Thứ hai: lọc dữ liệu theo năm, chỉ lấy dữ liệu của năm 2000, sử dụng hàm <code>filter()</code>.</p></li>
+<li><p>Thứ ba: lựa chọn cột tên quốc gia (<span class="math inline">\(country\)</span>) và cột thu nhập bình quân đầu người vừa tính toán, sử dụng hàm <code>select()</code>.</p></li>
+<li><p>Thứ tư: sắp xếp dữ liệu theo cột thu nhập bình quân đầu người, thứ tự sắp xếp là giảm dần, sử dụng hàm <code>arrange()</code>.</p></li>
+<li><p>Thứ năm: lấy ra ba hàng đầu tiên của dữ liệu sau khi sắp xếp, sử dụng hàm <code>head()</code>.</p></li>
+</ul>
+<p>Nếu viết các câu lệnh một cách thông thường, sau mỗi bước ở trên bạn đọc sẽ phải lưu kết quả và gọi lại kết quả vào bước kế tiếp:</p>
+<div class="sourceCode" id="cb597"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb597-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb597-1" tabindex="-1"></a>mytib1<span class="ot">&lt;-</span><span class="fu">mutate</span>(mytib,<span class="at">gdp_per_capita =</span> gdp<span class="sc">/</span>population) <span class="co"># bước thứ nhất</span></span>
+<span id="cb597-2"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb597-2" tabindex="-1"></a>mytib1<span class="ot">&lt;-</span><span class="fu">filter</span>(mytib1, year <span class="sc">==</span> <span class="dv">2010</span>) <span class="co"># bước thứ hai</span></span>
+<span id="cb597-3"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb597-3" tabindex="-1"></a>mytib1<span class="ot">&lt;-</span><span class="fu">select</span>(mytib1, country, gdp_per_capita) <span class="co"># bước thứ ba</span></span>
+<span id="cb597-4"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb597-4" tabindex="-1"></a>mytib1<span class="ot">&lt;-</span><span class="fu">arrange</span>(mytib1, <span class="fu">desc</span>(gdp_per_capita)) <span class="co"># bước thứ tư</span></span>
+<span id="cb597-5"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb597-5" tabindex="-1"></a><span class="fu">head</span>(mytib1,<span class="dv">3</span>) <span class="co"># bước thứ năm</span></span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   country    gdp_per_capita
+##   &lt;fct&gt;               &lt;dbl&gt;
+## 1 Luxembourg         52210.
+## 2 Japan              40013.
+## 3 Norway             39954.</code></pre>
+<p>Cách viết các câu lệnh như trên sẽ gặp khó khăn và dễ bị nhầm lần do chúng ta phải liên tục lưu kết quả của từng câu lệnh và gọi lại kết quả đó trong bước tiếp theo. Để tránh gặp phải vấn đề này, toán tử pipe <code>%&gt;%</code> giúp chúng ta kết nối các câu lệnh lại với nhau trong một câu lệnh duy nhất. Cùng một yêu cầu như ở trên, cách viết các câu lệnh biến đổi dữ liệu sử dụng toán tử pipe như sau:</p>
+<div class="sourceCode" id="cb599"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb599-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb599-1" tabindex="-1"></a>mytib<span class="sc">%&gt;%</span><span class="fu">mutate</span>(<span class="at">gdp_per_capita =</span> gdp<span class="sc">/</span>population)<span class="sc">%&gt;%</span></span>
+<span id="cb599-2"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb599-2" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2010</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb599-3"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb599-3" tabindex="-1"></a>  <span class="fu">select</span>(country, gdp_per_capita)<span class="sc">%&gt;%</span></span>
+<span id="cb599-4"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb599-4" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(gdp_per_capita)) <span class="sc">%&gt;%</span></span>
+<span id="cb599-5"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb599-5" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 2
+##   country    gdp_per_capita
+##   &lt;fct&gt;               &lt;dbl&gt;
+## 1 Luxembourg         52210.
+## 2 Japan              40013.
+## 3 Norway             39954.</code></pre>
+<p>Bạn đọc có thể thấy rằng kết quả thu được hoàn toàn giống như phía trên. Ngoài ra, cách viết câu lệnh sử dụng toán tử pipe có ưu điểm là rất rõ ràng, ngắn gọn, và không gây nhầm lẫn. Để bạn đọc làm quen với cách viết câu lệnh sử dụng pipe, từ phần này của cuốn sách, mọi phép biến đổi trên dữ liệu đều được ưu tiên sử dụng cách viết này.</p>
+<p>Chúng ta sẽ tiếp tục làm quen với các hàm số sử dụng để biến đổi dữ liệu của thư viện <span class="math inline">\(\textbf{dplyr}\)</span> trong các phần tiếp theo.</p>
+</div>
+<div id="tổng-hợp-dữ-liệu-bằng-group_by-và-summarise" class="section level3 hasAnchor" number="6.1.5">
+<h3><span class="header-section-number">6.1.5</span> Tổng hợp dữ liệu bằng <code>group_by</code> và <code>summarise()</code><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#tổng-hợp-dữ-liệu-bằng-group_by-và-summarise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Hàm <code>group_by()</code> là một công cụ mạnh mẽ sử dụng để tổng hợp dữ liệu và tính toán theo nhóm. Ví dụ, tổng thu nhập quốc nội của Việt Nam năm 2000 là hơn 31 tỷ USD. Chúng ta muốn biết nền kinh tế của Việt Nam so với mức trung bình của Châu Á vào năm 2000 là như thế nào. Để thực hiện được việc đó, chúng ta cần tính tổng thu nhập quốc dân trung bình của các quốc gia Châu Á. Một cách tự nhiên, bạn đọc có thể sử dụng hàm <code>filter()</code> để lọc dữ liệu của Châu Á vào năm 2000 sau đó tính trung bình biến tổng thu nhập quốc dân. Tuy nhiên, nếu bạn muốn thực hiện phép so sánh tổng thu nhập quốc dân của tất cả các quốc gia so với thu nhập trung bình của Châu lục tương ứng trong năm 2000, sử dụng hàm <code>filter()</code> như trên sẽ không hiệu quả vì chỉ cho phép thực hiện so sánh với từng quốc gia cụ thể trong một năm cụ thể.</p>
+<p>Hàm <code>group_by()</code> sẽ giúp chúng ta thực hiện các tính toán theo các nhóm trên toàn bộ dữ liệu. Để so sánh <span class="math inline">\(gdp\)</span> của một nước với <span class="math inline">\(gdp\)</span> trung bình của Châu lục trong từng năm, chúng ta sẽ cần thực hiện các bước như sau:</p>
+<ul>
+<li><p>Bước 1: Nhóm dữ liệu lại theo châu lục và theo năm.</p></li>
+<li><p>Bước 2: Tính giá trị trung bình thu nhập quốc dân của châu lục trong mỗi năm. Khi tính giá trị trung bình sẽ bỏ qua các quốc gia không có quan sát về <span class="math inline">\(gdp\)</span>.</p></li>
+<li><p>Bước 3: So sánh gdp của quốc gia với gdp trung bình của châu lục trong năm</p></li>
+</ul>
+<p>Những bước như trên có thể được thực hiện một cách đơn giản thông qua hàm <code>group_by()</code> như sau</p>
+<div class="sourceCode" id="cb601"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb601-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb601-1" tabindex="-1"></a>mytib<span class="sc">%&gt;%</span><span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span> <span class="co"># nhóm dữ liệu theo continent và year</span></span>
+<span id="cb601-2"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb601-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gdp_year_continent =</span> <span class="fu">mean</span>(gdp,<span class="at">na.rm=</span><span class="cn">TRUE</span>))<span class="sc">%&gt;%</span> <span class="co"># thêm cột gdp bình quân theo nhóm</span></span>
+<span id="cb601-3"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb601-3" tabindex="-1"></a>  <span class="fu">ungroup</span>()<span class="sc">%&gt;%</span> <span class="co"># để dữ liệu trở lại trạng thái ban đầu</span></span>
+<span id="cb601-4"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb601-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gdp_level =</span> <span class="fu">ifelse</span>(gdp <span class="sc">&gt;</span> gdp_year_continent, <span class="st">&quot;High&quot;</span>, <span class="st">&quot;Low&quot;</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb601-5"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb601-5" tabindex="-1"></a>  <span class="fu">select</span>(country,continent,year,<span class="fu">contains</span>(<span class="st">&quot;gdp&quot;</span>))</span></code></pre></div>
+<pre><code>## # A tibble: 10,545 × 6
+##    country             continent  year          gdp gdp_year_continent gdp_level
+##    &lt;fct&gt;               &lt;fct&gt;     &lt;int&gt;        &lt;dbl&gt;              &lt;dbl&gt; &lt;chr&gt;    
+##  1 Albania             Europe     1960           NA      110891884444. &lt;NA&gt;     
+##  2 Algeria             Africa     1960  13828152297        3652247577. High     
+##  3 Angola              Africa     1960           NA        3652247577. &lt;NA&gt;     
+##  4 Antigua and Barbuda Americas   1960           NA      114730852582  &lt;NA&gt;     
+##  5 Argentina           Americas   1960 108322326649      114730852582  Low      
+##  6 Armenia             Asia       1960           NA       61181554907. &lt;NA&gt;     
+##  7 Aruba               Americas   1960           NA      114730852582  &lt;NA&gt;     
+##  8 Australia           Oceania    1960  96677859364       32650664881. High     
+##  9 Austria             Europe     1960  52392699681      110891884444. Low      
+## 10 Azerbaijan          Asia       1960           NA       61181554907. &lt;NA&gt;     
+## # ℹ 10,535 more rows</code></pre>
+<p>Các tính toán được sử dụng sau hàm <code>group_by()</code> và trước hàm <code>ungroup()</code> đều được thực hiện theo các nhóm được định nghĩa bởi hàm <code>group_by()</code>. Trong câu lệnh ở trên, sau khi sử dụng hàm <code>group_by()</code>, các quan sát có cùng giá trị của cột <span class="math inline">\(continents\)</span> và cột <span class="math inline">\(year\)</span> sẽ được hiểu là một nhóm. Các tính toán sau đó cần phải được thực hiện bằng các hàm hoạt động trên véc-tơ. Thật vậy, hàm <code>mean(,na.rm = TRUE)</code> tính giá trị trung bình của cột <span class="math inline">\(gdp\)</span> cho từng châu lục theo từng năm. Chúng ta có thể kiểm tra giá trị ở các hàng đầu tiên của cột <span class="math inline">\(gdp\_year\_continent\)</span> từ kết quả ở trên hoàn toàn giống với cách tính sử dụng hàm <code>filter()</code> cho một châu lục cụ thể vào một năm cụ thể:</p>
+<div class="sourceCode" id="cb603"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb603-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb603-1" tabindex="-1"></a>mytib<span class="sc">%&gt;%</span><span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">1960</span>, continent <span class="sc">==</span> <span class="st">&quot;Europe&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb603-2"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb603-2" tabindex="-1"></a>  <span class="fu">select</span>(gdp)<span class="sc">%&gt;%</span><span class="fu">sapply</span>(<span class="cf">function</span>(x) <span class="fu">mean</span>(x,<span class="at">na.rm=</span><span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>##          gdp 
+## 110891884444</code></pre>
+<p>Cả hai cách tính đều cho biết tổng thu nhập quốc dân trung bình của các nước Châu Âu trong năm 1960 là 110 tỷ USD.</p>
+<p>Hàm <code>summarise()</code> được sử dụng tiếp sau hàm <code>group_by()</code> thay cho <code>ungroup()</code> khi chúng ta muốn tạo thành một dữ liệu mới mà mỗi quan sát tương ứng với một nhóm được quy định bởi <code>group_by()</code>. Ví dụ, nếu chúng ta muốn tạo ra một dữ liệu mới mà mỗi quan sát tương ứng với một châu lục trong một năm, và cột <span class="math inline">\(gdp\_year\_continent\)</span> cho biết tổng thu nhập quốc dân trung bình của châu lục trong năm đó, câu lệnh được viết như sau:</p>
+<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb605-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb605-1" tabindex="-1"></a>mytib<span class="sc">%&gt;%</span><span class="fu">group_by</span>(continent, year) <span class="sc">%&gt;%</span></span>
+<span id="cb605-2"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb605-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">gdp_year_continent =</span> <span class="fu">mean</span>(gdp,<span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb605-3"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb605-3" tabindex="-1"></a>  <span class="fu">arrange</span>(year, continent)</span></code></pre></div>
+<pre><code>## # A tibble: 285 × 3
+## # Groups:   continent [5]
+##    continent  year gdp_year_continent
+##    &lt;fct&gt;     &lt;int&gt;              &lt;dbl&gt;
+##  1 Africa     1960        3652247577.
+##  2 Americas   1960      114730852582 
+##  3 Asia       1960       61181554907.
+##  4 Europe     1960      110891884444.
+##  5 Oceania    1960       32650664881.
+##  6 Africa     1961        3642863976.
+##  7 Americas   1961      118059881733.
+##  8 Asia       1961       62764504767.
+##  9 Europe     1961      123997131430.
+## 10 Oceania    1961       33430553232.
+## # ℹ 275 more rows</code></pre>
+<p>Bạn đọc có thể thấy rằng dữ liệu mới được tạo thành dưới dạng một tibble mà mỗi quan sát là một châu lục trong một năm. Dữ liệu có ba biến, trong đó hai biến đầu tiên là <span class="math inline">\(continent\)</span> và <span class="math inline">\(year\)</span> được quy định bởi hàm <code>group_by()</code>, còn biến thứ ba là <span class="math inline">\(gdp\_year\_continent\)</span> mới được tạo thành từ hàm <code>summarise()</code>.</p>
+</div>
+</div>
+<div id="sắp-xếp-dữ-liệu-bằng-thư-viện-textbftidyr" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Sắp xếp dữ liệu bằng thư viện <span class="math inline">\(\textbf{tidyr}\)</span><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#sắp-xếp-dữ-liệu-bằng-thư-viện-textbftidyr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Một dữ liệu trước khi được đưa vào trực quan hóa hay xây dựng mô hình cần phải được sắp xếp và trình bày một cách nhất quán. Các dữ liệu có sẵn trong R hoặc trong thư viện của R nhìn chung đều đã được sắp xếp hoàn chỉnh nên chúng ta không gặp phải vấn đề này trong các ví dụ ở trên. Tuy nhiên, dữ liệu lấy từ các nguồn khác nhau thường gặp phải các vấn đề về sự nhất quán. Hãy quan sát các ví dụ sau, các dữ liệu cùng thể hiện thông tin về tổng thu nhập quốc dân và dân số của các quốc gia trên thế giới từ năm 2000 đến 2010 nhưng lại được trình bày khác nhau:</p>
+<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb607-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb607-1" tabindex="-1"></a>mytib1</span></code></pre></div>
+<pre><code>## # A tibble: 2,035 × 4
+##    country              year           gdp population
+##    &lt;fct&gt;               &lt;int&gt;         &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Albania              2000   3686649387     3121965
+##  2 Algeria              2000  54790058957    31183658
+##  3 Angola               2000   9129180361    15058638
+##  4 Antigua and Barbuda  2000    802526701.      77648
+##  5 Argentina            2000 284203745280    37057453
+##  6 Armenia              2000   1911563665     3076098
+##  7 Aruba                2000   1858659293       90858
+##  8 Australia            2000 416887521196    19107251
+##  9 Austria              2000 192070749954     8050884
+## 10 Azerbaijan           2000   5272617196     8117742
+## # ℹ 2,025 more rows</code></pre>
+<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb609-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb609-1" tabindex="-1"></a>mytib2</span></code></pre></div>
+<pre><code>## # A tibble: 2,035 × 3
+##    country              year gdp_per_capita       
+##    &lt;fct&gt;               &lt;int&gt; &lt;chr&gt;                
+##  1 Albania              2000 3686649387/3121965   
+##  2 Algeria              2000 54790058957/31183658 
+##  3 Angola               2000 9129180361/15058638  
+##  4 Antigua and Barbuda  2000 802526700.6/77648    
+##  5 Argentina            2000 284203745280/37057453
+##  6 Armenia              2000 1911563665/3076098   
+##  7 Aruba                2000 1858659293/90858     
+##  8 Australia            2000 416887521196/19107251
+##  9 Austria              2000 192070749954/8050884 
+## 10 Azerbaijan           2000 5272617196/8117742   
+## # ℹ 2,025 more rows</code></pre>
+<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb611-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb611-1" tabindex="-1"></a>mytib3</span></code></pre></div>
+<pre><code>## # A tibble: 4,070 × 4
+##    country              year type               value
+##    &lt;fct&gt;               &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt;
+##  1 Albania              2000 gdp          3686649387 
+##  2 Albania              2000 population      3121965 
+##  3 Algeria              2000 gdp         54790058957 
+##  4 Algeria              2000 population     31183658 
+##  5 Angola               2000 gdp          9129180361 
+##  6 Angola               2000 population     15058638 
+##  7 Antigua and Barbuda  2000 gdp           802526701.
+##  8 Antigua and Barbuda  2000 population        77648 
+##  9 Argentina            2000 gdp        284203745280 
+## 10 Argentina            2000 population     37057453 
+## # ℹ 4,060 more rows</code></pre>
+<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb613-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb613-1" tabindex="-1"></a>mytib4</span></code></pre></div>
+<pre><code>## # A tibble: 370 × 13
+##    country type   `2000`  `2001`  `2002`  `2003`  `2004`  `2005`  `2006`  `2007`
+##    &lt;fct&gt;   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+##  1 Albania gdp   3.69e 9 3.94e 9 4.06e 9 4.29e 9 4.54e 9 4.79e 9 5.03e 9 5.33e 9
+##  2 Albania popu… 3.12e 6 3.12e 6 3.12e 6 3.12e 6 3.10e 6 3.08e 6 3.05e 6 3.01e 6
+##  3 Algeria gdp   5.48e10 5.62e10 5.89e10 6.29e10 6.62e10 6.96e10 7.10e10 7.31e10
+##  4 Algeria popu… 3.12e 7 3.16e 7 3.20e 7 3.24e 7 3.28e 7 3.33e 7 3.37e 7 3.43e 7
+##  5 Angola  gdp   9.13e 9 9.42e 9 1.08e10 1.11e10 1.24e10 1.46e10 1.77e10 2.17e10
+##  6 Angola  popu… 1.51e 7 1.56e 7 1.61e 7 1.67e 7 1.73e 7 1.79e 7 1.85e 7 1.92e 7
+##  7 Antigu… gdp   8.03e 8 8.20e 8 8.41e 8 8.84e 8 9.46e 8 9.85e 8 1.12e 9 1.01e 9
+##  8 Antigu… popu… 7.76e 4 7.90e 4 8.00e 4 8.09e 4 8.17e 4 8.26e 4 8.35e 4 8.44e 4
+##  9 Argent… gdp   2.84e11 2.72e11 2.42e11 2.63e11 2.87e11 3.14e11 3.40e11 3.70e11
+## 10 Argent… popu… 3.71e 7 3.75e 7 3.79e 7 3.83e 7 3.87e 7 3.91e 7 3.96e 7 4.00e 7
+## # ℹ 360 more rows
+## # ℹ 3 more variables: `2008` &lt;dbl&gt;, `2009` &lt;dbl&gt;, `2010` &lt;dbl&gt;</code></pre>
+<p>Tất cả dữ liệu kể trên đều trình bày chung một nguồn thông tin nhưng chỉ có <code>mytib1</code> là được sắp xếp một cách nhất quán. Trong khi các dữ liệu khác chưa sẵn sàng để thực hiện các bước tiếp theo. Thật vậy:</p>
+<ul>
+<li><p>Dữ liệu lưu trong <code>mytib2</code> có biến <span class="math inline">\(gdp\_per\_capita\)</span> trình bày dưới dạng chuỗi ký tự, với số tổng thu nhập quốc dân và dân số được lưu trong cùng một cột và cách nhau bởi dấu <code>/</code>. Không thể thực hiện các phân tích hay tính toán với cột dữ liệu như vậy.</p></li>
+<li><p>Dữ liệu lưu trong <code>mytib3</code> có cột <span class="math inline">\(type\)</span> cho biết số tương ứng trong cột <span class="math inline">\(value\)</span> là giá trị của tổng thu nhập quốc dân hay dân số của nước đó. Giá trị trong cột <span class="math inline">\(value\)</span> không nhất quán vì vừa có thể là số tiền, vừa là số người.</p></li>
+<li><p>Dữ liệu lưu trong <code>mytyb4</code> cũng là một điển hình cho dữ liệu chưa được sắp xếp một cách nhất quán. Giá trị của biến <span class="math inline">\(year\)</span> không được lưu dưới dạng véc-tơ cột mà được lưu dưới dạng tên các cột nên rất khó khăn trong thực hiện tính toán.</p></li>
+</ul>
+<p>Một dữ liệu được sắp xếp nhất quán cần phải đảm bảo hai yêu cầu:</p>
+<ul>
+<li><p>Thứ nhất: mỗi quan sát là một dòng dữ liệu.</p></li>
+<li><p>Thứ hai: mỗi biến nằm ở một cột. Một biến mô tả một thuộc tính, một tính chất của quan sát tương ứng. Giá trị trong cột phải đồng nhất và đúng định dạng.</p></li>
+</ul>
+<p>Lý do chính khiến dữ liệu không được sắp xếp nhất quán là do dữ liệu thường được tổ chức để thuận lợi cho một số mục tiêu khác với mục tiêu phân tích, chẳng hạn như mục tiêu nhập dữ liệu hoặc mục tiêu để hiển thị trực quan hơn với người quan sát dữ liệu.</p>
+<p>Quá trình sắp xếp dữ liệu là quá trình biến đổi, chuyển hóa dữ liệu từ các định dạng như <code>mytib2</code>, <code>mytib3</code>, hoặc <code>mytib4</code> về định dạng như <code>mytib1</code>. Nhìn chung, sắp xếp dữ liệu là công việc tương đối đơn giản so với các quy trình khác. Trong phần này, bạn đọc chỉ cần nắm vững nguyên tắc của hai phép biến đổi là kéo dài dữ liệu bằng hàm <code>gather()</code> (hoặc <code>pivot_longer()</code> trong các phiên bản mới của <span class="math inline">\(\textbf{tidyr}\)</span>) và mở rộng dữ liệu bằng hàm <code>spread()</code> (hoặc <code>pivot_wider()</code> trong các phiên bản mới của <span class="math inline">\(\textbf{tidyr}\)</span>).</p>
+<div id="kéo-dài-dữ-liệu-bằng-gather" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Kéo dài dữ liệu bằng <code>gather()</code><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#kéo-dài-dữ-liệu-bằng-gather" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Dữ liệu được lưu dưới dạng của <code>mytib4</code> có thông tin về năm quan sát được lưu dưới dạng cột. Đây là trường hợp rất hay gặp phải khi lấy dữ liệu từ các nguồn bên ngoài vào. Các dữ liệu này được lưu dưới dạng các ma trận với ít dòng và nhiều cột để thuận lợi cho người sử dụng dữ liệu có quan sát trực quan. Để đưa dữ liệu như <code>mytib4</code> về định dạng có thể phân tích được, mà mỗi dòng là một quốc gia, được quan sát trong 1 năm, chúng ta cần thêm vào dữ liệu một cột có tên <span class="math inline">\(year\)</span>. Giá trị của biến <span class="math inline">\(year\)</span> là tên tất cả các cột, từ cột <code>2000</code> đến cột <code>2010</code>. Thêm cột <span class="math inline">\(year\)</span> và kéo dài dữ liệu <code>mytib4</code>, chúng ta sử dụng hàm <code>gather()</code> như sau:</p>
+<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb615-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb615-1" tabindex="-1"></a>mytib4<span class="sc">%&gt;%</span><span class="fu">gather</span>(<span class="at">key =</span> <span class="st">&quot;year&quot;</span>, <span class="at">value =</span> <span class="st">&quot;gdp_population&quot;</span>, <span class="sc">-</span>country, <span class="sc">-</span>type)</span></code></pre></div>
+<pre><code>## # A tibble: 4,070 × 4
+##    country             type       year  gdp_population
+##    &lt;fct&gt;               &lt;chr&gt;      &lt;chr&gt;          &lt;dbl&gt;
+##  1 Albania             gdp        2000     3686649387 
+##  2 Albania             population 2000        3121965 
+##  3 Algeria             gdp        2000    54790058957 
+##  4 Algeria             population 2000       31183658 
+##  5 Angola              gdp        2000     9129180361 
+##  6 Angola              population 2000       15058638 
+##  7 Antigua and Barbuda gdp        2000      802526701.
+##  8 Antigua and Barbuda population 2000          77648 
+##  9 Argentina           gdp        2000   284203745280 
+## 10 Argentina           population 2000       37057453 
+## # ℹ 4,060 more rows</code></pre>
+<p>Bạn đọc có thể thấy rằng kết quả thu được đã có thêm cột <span class="math inline">\(year\)</span> cho biết thông tin mỗi quốc gia được quan sát trong năm bao nhiêu va cột <span class="math inline">\(`gdp/population`\)</span> cho biết giá trị của tổng thu nhập quốc dân hoặc dân số của quốc gia đó. Qua cách sử dụng hàm <code>gather()</code>, có thể thấy rằng</p>
+<ul>
+<li><p>Tham số <code>key</code> trong hàm <code>gather()</code> cho biết tên của cột trong dữ liệu mới được tạo thành chứa giá trị là tên các cột được tập hợp lại. Tham số <code>value</code> cho biết tên cột trong dữ liệu mới được tạo thành chứa tất cả các giá trị trong các cột được tập hợp.</p></li>
+<li><p>Sau khi khai báo hai tham số <code>key</code> và <code>value</code>, bạn đọc cần khai báo chính xác thông tin các biến không bị tác động bởi hàm <code>gather()</code>. Trong ví dụ ở trên, tất các các giá trị chúng ta muốn tập hợp lại là các cột bắt đầu từ cột có tên <code>2000</code> (tương ứng với các quan sát trong năm 2000) đến cột có tên <code>2010</code> (tương ứng với các quan sát của năm 2010). Khai báo <code>-country</code> và <code>-type</code> trong hàm <code>gather()</code> có ý nghĩa là các cột được tập hợp thông tin lại thành một cột duy nhất là tất cả các cột, ngoại trừ hai cột <span class="math inline">\(country\)</span> và <span class="math inline">\(type\)</span>.</p></li>
+</ul>
+<p>Trong các phiên bản mới của thư viện <span class="math inline">\(\textbf{tidyr}\)</span>, hàm <code>pivot_long()</code> thường được sử dụng thay thế cho <code>gather()</code>. Ưu điểm của <code>pivot_longer()</code> là câu lệnh dễ hiểu hơn và cho phép chúng ta quản lý tên cột bằng các hàm sử dụng cùng với các biểu thức chính quy. Ví dụ, chúng ta có thể sử dụng <code>pivot_longer()</code> để tập hợp thông tin của tất cả các cột có tên cột bắt đầu bằng ký tự <code>"2"</code> như sau</p>
+<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb617-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb617-1" tabindex="-1"></a>mytib4<span class="sc">%&gt;%</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;2&quot;</span>), </span>
+<span id="cb617-2"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb617-2" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="st">&quot;year&quot;</span>,</span>
+<span id="cb617-3"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb617-3" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">&quot;gdp_population&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 4,070 × 4
+##    country type  year  gdp_population
+##    &lt;fct&gt;   &lt;chr&gt; &lt;chr&gt;          &lt;dbl&gt;
+##  1 Albania gdp   2000      3686649387
+##  2 Albania gdp   2001      3944714844
+##  3 Albania gdp   2002      4059111575
+##  4 Albania gdp   2003      4290480934
+##  5 Albania gdp   2004      4543619309
+##  6 Albania gdp   2005      4793518372
+##  7 Albania gdp   2006      5033194290
+##  8 Albania gdp   2007      5330152753
+##  9 Albania gdp   2008      5740574515
+## 10 Albania gdp   2009      5930013474
+## # ℹ 4,060 more rows</code></pre>
+<p>Hàm <code>pivot_longer()</code> cho phép kéo dài các bảng mà giá trị của nhiều biến được tích hợp trong tên của các cột. Ví dụ, dữ liệu trong <code>mytib5</code> dưới đây lưu điểm của hai sinh viên theo hai kỳ học của các năm 2023 và năm 2024:</p>
+<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb619-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb619-1" tabindex="-1"></a>mytib5</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 5
+##   Name  `2023 S1` `2023 S2` `2024 S1` `2024 S2`
+##   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 SV1         8.5       6.9       8.1       8.5
+## 2 SV2         8         8.2       8.8       8</code></pre>
+<p>Bạn đọc có thể thấy rằng tên các cột có bao gồm hai thông tin là năm học (2023 hoặc 2024) và thông tin về kỳ học (S1 hoặc S2). Chúng ta có thể sử dụng <code>pivot_longer()</code> để tạo thành dữ liệu mới, với hai biến mới tương ứng với hai thông tin: <span class="math inline">\(year\)</span> tương ứng với năm học và <span class="math inline">\(semester\)</span> tương ứng với kỳ học của hai sinh viên:</p>
+<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb621-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb621-1" tabindex="-1"></a>mytib5<span class="sc">%&gt;%</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span>Name, <span class="co"># Không tập hợp cột Names</span></span>
+<span id="cb621-2"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb621-2" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;semester&quot;</span>),</span>
+<span id="cb621-3"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb621-3" tabindex="-1"></a>                      <span class="at">names_sep =</span> <span class="st">&quot; &quot;</span>,</span>
+<span id="cb621-4"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb621-4" tabindex="-1"></a>                      <span class="at">values_to =</span> <span class="st">&quot;GPA&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 4
+##   Name  year  semester   GPA
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;dbl&gt;
+## 1 SV1   2023  S1         8.5
+## 2 SV1   2023  S2         6.9
+## 3 SV1   2024  S1         8.1
+## 4 SV1   2024  S2         8.5
+## 5 SV2   2023  S1         8  
+## 6 SV2   2023  S2         8.2
+## 7 SV2   2024  S1         8.8
+## 8 SV2   2024  S2         8</code></pre>
+<p>Trong các trường hợp phức tạp hơn, trong tên biến của dữ liệu ban đầu vừa chứa tên biến trong dữ liệu mới vừa chứa giá trị của biến trong dữ liệu mới như dữ liệu trong <code>mytib6</code> dưới đây:</p>
+<div class="sourceCode" id="cb623"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb623-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb623-1" tabindex="-1"></a>mytib6</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 5
+##   Lop   Ten_LopTruong Ten_BiThu Diem_LopTruong Diem_BiThu
+##   &lt;chr&gt; &lt;chr&gt;         &lt;chr&gt;              &lt;int&gt;      &lt;int&gt;
+## 1 Act61 LT1           BT1                    6          7
+## 2 Act62 LT2           BT2                    7          8
+## 3 Act63 LT3           BT3                    8          9
+## 4 Act64 LT4           BT4                    9         10</code></pre>
+<p>Bạn đọc có thể thấy rằng dữ liệu chứa thông tin về 8 người, giữ các chức chức vụ lớp trưởng và bí thư tại 4 lớp với thông tin tương ứng với từng người là tên và điểm. Các cột dữ liệu <code>'Ten_LopTruong'</code> và <code>'Ten_BiThu'</code> vừa chứa tên của một biến là tên của người, vừa chứa giá trị của biến chức vụ của người đó. Tương tự, các cột dữ liệu <code>'Diem_LopTruong'</code> và <code>'Diem_BiThu'</code> vừa chứa tên của biến là điểm của bạn sinh viên tương ứng, vừa chứa giá trị của biến là chức vụ của người đó. Dữ liệu có thể được sắp xếp lại bằng <code>pivot_longer()</code> như sau:</p>
+<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb625-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb625-1" tabindex="-1"></a>mytib6<span class="sc">%&gt;%</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">!</span>Lop,</span>
+<span id="cb625-2"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb625-2" tabindex="-1"></a>                      <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;.value&quot;</span>, <span class="st">&quot;Chuc_vu&quot;</span>),</span>
+<span id="cb625-3"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb625-3" tabindex="-1"></a>                      <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 8 × 4
+##   Lop   Chuc_vu   Ten    Diem
+##   &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;
+## 1 Act61 LopTruong LT1       6
+## 2 Act61 BiThu     BT1       7
+## 3 Act62 LopTruong LT2       7
+## 4 Act62 BiThu     BT2       8
+## 5 Act63 LopTruong LT3       8
+## 6 Act63 BiThu     BT3       9
+## 7 Act64 LopTruong LT4       9
+## 8 Act64 BiThu     BT4      10</code></pre>
+<p>Trong câu lệnh ở trên, chúng tôi sử dụng tham số <code>names_to</code> với phần tử đầu tiên là <code>".value"</code> thay vì sử dụng tham số <code>values_to</code> như trên. Mục đích là để khai báo rằng thành phần thứ nhất trong tên của các cột là tên biến, bao gồm các biến <span class="math inline">\(Ten\)</span> và biến <span class="math inline">\(Diem\)</span>. Phần tử thứ hai của tham số <code>names_to</code> là <code>"Chuc_vu"</code> tương ứng với biến <span class="math inline">\(Chuc\_vu\)</span> trong dữ liệu mới.</p>
+</div>
+<div id="mở-rộng-dữ-liệu-với-speard" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Mở rộng dữ liệu với <code>speard()</code><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#mở-rộng-dữ-liệu-với-speard" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ngược lại với <code>gather()</code>, chúng ta sử dụng <code>speard()</code> để mở rộng dữ liệu, nghĩa là biến đổi tên biến thành tên các cột. Dữ liệu cần được mở rộng khi giá trị trong các cột dữ liệu không được đồng nhất, giống như thông tin về tổng thu nhập quốc dân và dân số của các quốc gia trên thế giới trong dữ liệu được lưu trong <code>mytib3</code></p>
+<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb627-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb627-1" tabindex="-1"></a>mytib3</span></code></pre></div>
+<pre><code>## # A tibble: 4,070 × 4
+##    country              year type               value
+##    &lt;fct&gt;               &lt;int&gt; &lt;chr&gt;              &lt;dbl&gt;
+##  1 Albania              2000 gdp          3686649387 
+##  2 Albania              2000 population      3121965 
+##  3 Algeria              2000 gdp         54790058957 
+##  4 Algeria              2000 population     31183658 
+##  5 Angola               2000 gdp          9129180361 
+##  6 Angola               2000 population     15058638 
+##  7 Antigua and Barbuda  2000 gdp           802526701.
+##  8 Antigua and Barbuda  2000 population        77648 
+##  9 Argentina            2000 gdp        284203745280 
+## 10 Argentina            2000 population     37057453 
+## # ℹ 4,060 more rows</code></pre>
+<p>Bạn đọc có thể thấy rằng trong cột <span class="math inline">\(gdp\_population\)</span> vừa có cả thông tin về tổng thu nhập quốc dân (<span class="math inline">\(gdp\)</span>) và thông tin về dân số (<span class="math inline">\(population\)</span>) của quốc gia đó và cột <span class="math inline">\(type\)</span> cho biết giá trị đó là <span class="math inline">\(gdp\)</span> hay <span class="math inline">\(population\)</span>. Dữ liệu như trên có thể được sắp xếp lại bằng cách sử dụng hàm <code>speard()</code> như sau:</p>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb629-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb629-1" tabindex="-1"></a>mytib3<span class="sc">%&gt;%</span><span class="fu">spread</span>(<span class="at">key =</span> type, <span class="at">value =</span> value)</span></code></pre></div>
+<pre><code>## # A tibble: 2,035 × 4
+##    country  year        gdp population
+##    &lt;fct&gt;   &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+##  1 Albania  2000 3686649387    3121965
+##  2 Albania  2001 3944714844    3124093
+##  3 Albania  2002 4059111575    3123112
+##  4 Albania  2003 4290480934    3117045
+##  5 Albania  2004 4543619309    3103758
+##  6 Albania  2005 4793518372    3082172
+##  7 Albania  2006 5033194290    3050741
+##  8 Albania  2007 5330152753    3010849
+##  9 Albania  2008 5740574515    2968026
+## 10 Albania  2009 5930013474    2929886
+## # ℹ 2,025 more rows</code></pre>
+<p>Có thể thấy rằng dữ liệu mới đã được sắp xếp nhất quán và đã có thể được sử dụng trong phân tích và xây dựng mô hình. Trong hàm <code>spread()</code> ở trên, tham số <code>key</code> cho biết cột nào trong dữ liệu ban đầu là cột chứa giá trị là tên các biến mới. Do cột <span class="math inline">\(type\)</span> của dữ liệu <code>mytib3</code> chỉ có chứa hai giá trị là <code>gdp</code> và <code>population</code> nên trong dữ liệu mới có hai cột mới được hình thành tương ứng với hai giá trị trong cột <span class="math inline">\(type\)</span>. Tham số <code>value</code> được sử dụng để cho biết giá trị của biến nào trong dữ liệu ban đầu sẽ được lấy vào các cột mới được hình thành. Trong câu lệnh ở trên, cột <span class="math inline">\(value\)</span> của <code>mytib3</code> chứa giá trị tương ứng với tổng thu nhập quốc dân và dân số của mỗi nước được sử dụng để gán cho tham số <code>value</code> trong hàm <code>spread()</code>.</p>
+<p>Trong các phiên bản mới của thư viện <span class="math inline">\(\textbf{tidyr}\)</span>, hàm <code>pivot_wider()</code> được sử dụng để thay thế cho hàm <code>spread()</code> do có nhiều ưu điểm hơn. Do cách sử dụng <code>pivot_wider()</code> tương tự như <code>pivot_longer()</code> nên chúng tôi không đi vào thảo luận chi tiết về hàm số này. Bạn đọc tự tham khảo cách sử dụng hàm <code>pivot_wider()</code> và thực hành trong phần bài tập của chương.</p>
+</div>
+</div>
+<div id="phụ-lục-4" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Phụ lục<a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#phụ-lục-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb631-1"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb631-1" tabindex="-1"></a><span class="co"># A simple formula to success</span></span>
+<span id="cb631-2"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb631-2" tabindex="-1"></a><span class="cf">while</span> (result <span class="sc">!=</span> success){</span>
+<span id="cb631-3"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#cb631-3" tabindex="-1"></a>  try <span class="ot">&lt;-</span> try <span class="sc">*</span> <span class="dv">2</span> }</span></code></pre></div>
+</div>
+<div id="bài-tập-4" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Bài tập<a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#bài-tập-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- # Trực quan hóa dữ liệu -->
+<!-- ```{r code visualization 1.0, warning = FALSE, message = FALSE,fig.width=8, fig.height=7, out.width=504, out.height=504} -->
+<!-- p<-gapminder%>%filter(year<=2010)%>% -->
+<!-- # AESTHETIC MAPPING -->
+<!-- ggplot(aes(x=fertility,y=life_expectancy,size = population, fill= continent))+ -->
+<!-- # TAO DO THI SCATTERPLOT -->
+<!-- geom_point(shape=21,alpha=0.6)+ -->
+<!-- # THAY DOI TITLE CUA DO THI, TRUC X, TRUC Y -->
+<!-- labs(title = 'Năm: {as.integer(frame_time)}', -->
+<!-- y = "Tuổi thọ trung bình", -->
+<!-- x = "Tỷ lệ sinh trên mỗi phụ nữ")+ -->
+<!-- #GIOI HAN LAI GIA TRI TREN X,Y -->
+<!-- xlim(0,10)+ylim(20,90)+ -->
+<!-- # SCALE LAI SIZE (POPULATION) -->
+<!-- scale_size(range = c(1*2, 20*2)) + -->
+<!-- # SCALE LAI MAU SAC THE0 DAI MAU "SET1" CUA BREWER -->
+<!-- scale_color_brewer(palette = "Set1")+ -->
+<!-- # LAM TITLE THAY DOI THEO NAM -->
+<!-- transition_time(year)+ -->
+<!-- #SIZE & FONT CHU -->
+<!-- theme(, -->
+<!-- plot.title = element_text(size = 20*2), -->
+<!-- axis.title.x = element_text(size = 20*2), -->
+<!-- axis.title.y = element_text(size = 20*2), -->
+<!-- legend.text = element_text(size = 20*2,margin = margin(r = 30*2, unit = "pt")), -->
+<!-- legend.title = element_text(size = 20*2), -->
+<!-- #    legend.text=element_text(size=20*2), -->
+<!-- ) -->
+<!-- #legend.key.size = element_rect(size = rel(1.5)), -->
+<!-- # TAO DO THI DANG DONG -->
+<!-- animate(p, renderer = gifski_renderer(), -->
+<!-- width = 1600, #pixel chieu rong -->
+<!-- height = 1600) # pixel chieu cao -->
+<!-- ``` -->
+<!-- # REFERENCE -->
+<!-- ### Source from thesis -->
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+<!-- ### Souce from website -->
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tiền-xử-lý-dữ-liệu.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
