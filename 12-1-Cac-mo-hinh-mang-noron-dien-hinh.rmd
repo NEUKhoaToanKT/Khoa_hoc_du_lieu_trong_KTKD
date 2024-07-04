@@ -197,9 +197,6 @@ Khác với hình ảnh trong dữ liệu MNIST, ảnh trong dữ liệu CIFAR10
 Một kỹ thuật xây dựng mạng nơ-ron được gọi là mạng nơ-ron tích chập (Convolution Neural Network hay CNN) đã được phát triển với mục đích phân loại các hình ảnh như trong dữ liệu CIFAR100 và đã cho kết quả thành công vượt trội so với các phương pháp trước đây. Mạng CNN phỏng theo cách con người phân loại hình ảnh bằng cách nhận dạng các đặc điểm hoặc đặc trưng cụ thể nằm ở bất kỳ điểm nào trong hình ảnh để phân biệt các đối tượng cụ thể. Hình 10.6 minh họa ý tưởng xây dựng mạng nơ-ron tích chập để xác định hình ảnh một ............
 
 
-
-
-
 Nguyên tắc xây dựng mạng nơ-ron tích chập là sử dụng các lớp để xác định các đặc điểm nhỏ trong hình ảnh đầu vào, chẳng hạn như các mảng màu sắc, các hình dạng nhỏ, các cạnh nhỏ, và những thứ tương tự. Các đặc điểm nhỏ này sau đó được kết hợp để tạo thành các đặc điểm lớn hơn, chẳng hạn như các bộ phận của mắt, mũi, tai trong hình ... Cuối cùng, mạng nơ-ron kết hợp các đặc điểm lớn lại để tính toán xác suất các đặc điểm này xuất hiện đồng thời trên một đối tượng cụ thể. Nguyên tắc xây dựng mạng nơ-ron tích chập cho phân loại ảnh là sử dụng các lớp tích chập để tìm kiếm các đặc điểm nhỏ trong hình ảnh sau đó sử dụng các lớp tổng hợp để tìm kiếm một tập hợp các đặc điểm nổi bật của ảnh. Để đạt được kết quả vượt trội, kiến trúc mạng nơ-ron cần sử dụng nhiều lớp tích chập và lớp gộp. Cách xây dựng các lớp này được trình bày trong phần tiếp theo của chương sách.
 
 ### Lớp tích chập trong mạng CNN
