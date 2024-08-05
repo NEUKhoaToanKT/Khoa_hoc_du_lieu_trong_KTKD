@@ -1,6 +1,5 @@
-# (PART) Kiến thức cơ bản về dữ liệu {-}
 
-# Real Introduction
+# KHDL và các khái niệm cơ bản
 
 ```{r}
 library(dplyr)

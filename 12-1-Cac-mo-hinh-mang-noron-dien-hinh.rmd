@@ -170,7 +170,7 @@ draw_neural_network <- function(a, showall = TRUE,w = 6,h = 4, lsize = 1){
 
 ```
 
-# Các mạng học sâu điển hình {#neuralnetwork}
+# Các mạng học sâu điển hình {#neuralnetwork1}
 
 Mô hình mạng nơ-ron có nhiều lớp ẩn và trong mỗi lớp ẩn có nhiều đơn vị thường được gọi với tên gọi khác là các mạng học sâu (deep neural network). Như chúng ta đã thấy trong phần thực hành của chương trước, mạng học sâu không có ưu thế về khả năng diễn giải hoặc dự đoán so với các mô hình học máy khác khi dữ liệu dùng để xây dựng mô hình là dữ liệu nhỏ và ở dạng quan sát - thuộc tính chẳng hạn như dữ liệu Boston. Ngoài ra, đặc điểm của mạng học sâu là mô hình cho phép sử dụng số lượng tham số rất lớn để mô tả dữ liệu. Đây vừa là nhược điểm cũng vừa là ưu điểm của mô hình mạng học sâu. Sử dụng nhiều tham số rất dễ dẫn đến hiện tượng overfitting đặc biệt là khi dữ liệu xây dựng mô hình nhỏ. Ngược lại, khi gặp dữ liệu lớn và phức tạp, cần có các mô hình có lượng tham số đủ lớn để mô tả sự phức tạp đó, điều này giải thích tại sao các mạng học sâu lại vượt trội hơn các mô hình học máy khác khi mô tả dữ liệu phức tạp như ảnh, video, âm thanh hay dữ liệu kiểu văn bản.
 

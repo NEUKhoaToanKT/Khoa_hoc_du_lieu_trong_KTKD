@@ -1,6 +1,6 @@
 <script>
     $(function() {
-        $("#toc h2").html("Trong chương này"); // Change text for "View source"
+        $("#toc h2").html("TRONG CHƯƠNG NÀY"); // Change text for "View source"
     });
 </script>
 
@@ -37,7 +37,7 @@
   document.addEventListener('DOMContentLoaded', (event) => {
     var tocElement = document.querySelector('nav[aria-label="Table of contents"] h2');
     if (tocElement) {
-      tocElement.textContent = 'Trong chương này'; // Ensure "Trong chương này" text remains
+      tocElement.textContent = 'NỘI DUNG CUỐN SÁCH'; // Ensure "NỘI DUNG CUỐN SÁCH" text remains
     }
   });
 </script>
@@ -46,20 +46,20 @@
     document.addEventListener('DOMContentLoaded', (event) => {
       // Find the paragraph containing the original text and date
       const paragraph = document.querySelector('footer.bg-primary.text-light div.container div.row div.col-12.col-md-6.mt-3 p');
-  
+
       if (paragraph) {
         // Extract the date using a regular expression
         const dateRegex = /(\d{4}-\d{2}-\d{2})/;
         const matches = paragraph.innerHTML.match(dateRegex);
-  
+
         if (matches && matches.length > 1) {
           // Reformat the date from yyyy-mm-dd to dd/mm/yyyy
           const originalDate = matches[1];
           const [year, month, day] = originalDate.split('-');
           const newDate = `${day}/${month}/${year}`;
-  
+
           // Replace the entire paragraph content with the new Vietnamese format
-          paragraph.innerHTML = `"${paragraph.querySelector('strong').innerText}" được viết bởi ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]}. Phiên bản này được cập nhật lần cuối vào ${newDate}.`;
+          paragraph.innerHTML = `Cuốn sách "${paragraph.querySelector('strong').innerText}" được viết bởi TS. ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]} - Trường Công nghệ - Đại học Kinh tế Quốc dân`;
         }
       }
     });
@@ -72,12 +72,12 @@
       paragraphs.forEach(paragraph => {
         if(paragraph.innerHTML.includes('This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.')) {
           // Replace the paragraph content
-          paragraph.innerHTML = 'Quyển sách này được viết bằng ngôn ngữ R, dựa trên gói lệnh bookdown.';
+          paragraph.innerHTML = 'Cuốn sách này được viết bằng hoàn toàn bằng ngôn ngữ R. Phiên bản hiện tại được cập nhật vào ngày ${newDate}.';
         }
       });
     });
 </script>
 
-<script 
+<script
   src="local_edit.js"
 ></script>

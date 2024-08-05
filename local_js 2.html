@@ -1,0 +1,83 @@
+<script>
+    $(function() {
+        $("#toc h2").html("Trong chương này"); // Change text for "View source"
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var viewSourceElement = document.getElementById('book-source');
+        var editPageElement = document.getElementById('book-edit');
+        var viewBookSourceElement = document.getElementById('book-repo');
+
+        if (viewSourceElement) {
+            viewSourceElement.innerText = 'Xem nguồn trang'; // Change text for "View source"
+        }
+
+        if (editPageElement) {
+            editPageElement.innerText = 'Chỉnh sửa trang'; // Change text for "Edit this page"
+        }
+
+        if (viewBookSourceElement) {
+            viewBookSourceElement.innerText = 'Xem nguồn sách'; // Change text for "View book source"
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      var tocElement = document.querySelector('nav[aria-label="Table of contents"] h2');
+      if (tocElement) {
+        tocElement.textContent = 'Mục lục'; // Replace 'Mục lục' (Table of contents) with your desired text
+      }
+    });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', (event) => {
+    var tocElement = document.querySelector('nav[aria-label="Table of contents"] h2');
+    if (tocElement) {
+      tocElement.textContent = 'Trong chương này'; // Ensure "Trong chương này" text remains
+    }
+  });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // Find the paragraph containing the original text and date
+      const paragraph = document.querySelector('footer.bg-primary.text-light div.container div.row div.col-12.col-md-6.mt-3 p');
+  
+      if (paragraph) {
+        // Extract the date using a regular expression
+        const dateRegex = /(\d{4}-\d{2}-\d{2})/;
+        const matches = paragraph.innerHTML.match(dateRegex);
+  
+        if (matches && matches.length > 1) {
+          // Reformat the date from yyyy-mm-dd to dd/mm/yyyy
+          const originalDate = matches[1];
+          const [year, month, day] = originalDate.split('-');
+          const newDate = `${day}/${month}/${year}`;
+  
+          // Replace the entire paragraph content with the new Vietnamese format
+          paragraph.innerHTML = `"${paragraph.querySelector('strong').innerText}" được viết bởi ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]}. Phiên bản này được cập nhật lần cuối vào ${newDate}.`;
+        }
+      }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      // Find the paragraph containing the specific text
+      const paragraphs = document.querySelectorAll('footer.bg-primary.text-light div.container div.row div.col-12.col-md-6.mt-3 p');
+      paragraphs.forEach(paragraph => {
+        if(paragraph.innerHTML.includes('This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.')) {
+          // Replace the paragraph content
+          paragraph.innerHTML = 'Quyển sách này được viết bằng ngôn ngữ R, dựa trên gói lệnh bookdown.';
+        }
+      });
+    });
+</script>
+
+<script 
+  src="local_edit.js"
+></script>

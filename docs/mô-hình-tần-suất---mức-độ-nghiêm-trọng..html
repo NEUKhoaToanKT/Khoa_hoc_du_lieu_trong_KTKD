@@ -1,225 +1,164 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chương 13 Mô hình tần suất - mức độ nghiêm trọng. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+<meta name="author" content="Nguyễn Quang Huy">
+<meta name="description" content="Nhiều dữ liệu thu thập được trong lĩnh vực bảo hiểm có thông tin về tần suất, chẳng hạn như tần suất phát sinh yêu cầu bồi thường, cũng như mức độ nghiêm trọng của yêu cầu bồi thường. Phần này của...">
+<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta property="og:title" content="Chương 13 Mô hình tần suất - mức độ nghiêm trọng. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Nhiều dữ liệu thu thập được trong lĩnh vực bảo hiểm có thông tin về tần suất, chẳng hạn như tần suất phát sinh yêu cầu bồi thường, cũng như mức độ nghiêm trọng của yêu cầu bồi thường. Phần này của...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chương 13 Mô hình tần suất - mức độ nghiêm trọng. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="twitter:description" content="Nhiều dữ liệu thu thập được trong lĩnh vực bảo hiểm có thông tin về tần suất, chẳng hạn như tần suất phát sinh yêu cầu bồi thường, cũng như mức độ nghiêm trọng của yêu cầu bồi thường. Phần này của...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.8/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source%20Code%20Pro:wght@400;450&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.8/girafe.js"></script><script src="libs/plotly-binding-4.10.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script>
+        $(function() {
+            $("#toc h2").html("TRONG CHƯƠNG NÀY"); // Change text for "View source"
+        });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var viewSourceElement = document.getElementById('book-source');
+            var editPageElement = document.getElementById('book-edit');
+            var viewBookSourceElement = document.getElementById('book-repo');
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chương 3 Mô hình tần suất - mức độ nghiêm trọng. | bookdown-demo.knit</title>
-  <meta name="description" content="" />
-  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
+            if (viewSourceElement) {
+                viewSourceElement.innerText = 'Xem nguồn trang'; // Change text for "View source"
+            }
 
-  <meta property="og:title" content="Chương 3 Mô hình tần suất - mức độ nghiêm trọng. | bookdown-demo.knit" />
-  <meta property="og:type" content="book" />
-  
-  
-  
+            if (editPageElement) {
+                editPageElement.innerText = 'Chỉnh sửa trang'; // Change text for "Edit this page"
+            }
 
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chương 3 Mô hình tần suất - mức độ nghiêm trọng. | bookdown-demo.knit" />
-  
-  
-  
+            if (viewBookSourceElement) {
+                viewBookSourceElement.innerText = 'Xem nguồn sách'; // Change text for "View book source"
+            }
+        });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          var tocElement = document.querySelector('nav[aria-label="Table of contents"] h2');
+          if (tocElement) {
+            tocElement.textContent = 'Mục lục'; // Replace 'Mục lục' (Table of contents) with your desired text
+          }
+        });
+    </script><script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        var tocElement = document.querySelector('nav[aria-label="Table of contents"] h2');
+        if (tocElement) {
+          tocElement.textContent = 'NỘI DUNG CUỐN SÁCH'; // Ensure "NỘI DUNG CUỐN SÁCH" text remains
+        }
+      });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          // Find the paragraph containing the original text and date
+          const paragraph = document.querySelector('footer.bg-primary.text-light div.container div.row div.col-12.col-md-6.mt-3 p');
 
+          if (paragraph) {
+            // Extract the date using a regular expression
+            const dateRegex = /(\d{4}-\d{2}-\d{2})/;
+            const matches = paragraph.innerHTML.match(dateRegex);
 
+            if (matches && matches.length > 1) {
+              // Reformat the date from yyyy-mm-dd to dd/mm/yyyy
+              const originalDate = matches[1];
+              const [year, month, day] = originalDate.split('-');
+              const newDate = `${day}/${month}/${year}`;
 
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="reference.html"/>
-<link rel="next" href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+              // Replace the entire paragraph content with the new Vietnamese format
+              paragraph.innerHTML = `Cuốn sách "${paragraph.querySelector('strong').innerText}" được viết bởi TS. ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]} - Trường Công nghệ - Đại học Kinh tế Quốc dân`;
+            }
+          }
+        });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          // Find the paragraph containing the specific text
+          const paragraphs = document.querySelectorAll('footer.bg-primary.text-light div.container div.row div.col-12.col-md-6.mt-3 p');
+          paragraphs.forEach(paragraph => {
+            if(paragraph.innerHTML.includes('This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.')) {
+              // Replace the paragraph content
+              paragraph.innerHTML = 'Cuốn sách này được viết bằng hoàn toàn bằng ngôn ngữ R. Phiên bản hiện tại được cập nhật vào ngày ${newDate}.';
+            }
+          });
+        });
+    </script><script src="local_edit.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">KHDL KT&KD</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html"><i class="fa fa-check"></i><b>1</b> Mô hình tuyến tính tổng quát.</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#các-nhược-điểm-của-mô-hình-hồi-quy-tuyến-tính."><i class="fa fa-check"></i><b>1.1</b> Các nhược điểm của mô hình hồi quy tuyến tính.</a></li>
-<li class="chapter" data-level="1.2" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#xây-dựng-mô-hình-tuyến-tính-tổng-quát"><i class="fa fa-check"></i><b>1.2</b> Xây dựng mô hình tuyến tính tổng quát</a>
-<ul>
-<li class="chapter" data-level="1.2.1" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#biến-phụ-thuộc-là-biến-dạng-nhị-phân."><i class="fa fa-check"></i><b>1.2.1</b> Biến phụ thuộc là biến dạng nhị phân.</a></li>
-<li class="chapter" data-level="1.2.2" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#biến-phụ-thuộc-là-biến-rời-rạc-không-có-thứ-tự."><i class="fa fa-check"></i><b>1.2.2</b> Biến phụ thuộc là biến rời rạc không có thứ tự.</a></li>
-<li class="chapter" data-level="1.2.3" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#biến-phụ-thuộc-là-biến-rời-rạc-có-thứ-tự."><i class="fa fa-check"></i><b>1.2.3</b> Biến phụ thuộc là biến rời rạc có thứ tự.</a></li>
-<li class="chapter" data-level="1.2.4" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#biến-phụ-thuộc-có-phân-phối-liên-tục."><i class="fa fa-check"></i><b>1.2.4</b> Biến phụ thuộc có phân phối liên tục.</a></li>
-</ul></li>
-<li class="chapter" data-level="1.3" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#các-thành-phần-của-mô-hình-tuyến-tính-tổng-quát."><i class="fa fa-check"></i><b>1.3</b> Các thành phần của mô hình tuyến tính tổng quát.</a>
-<ul>
-<li class="chapter" data-level="1.3.1" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#họ-các-biến-ngẫu-nhiên-có-phân-phối-kiểu-mũ."><i class="fa fa-check"></i><b>1.3.1</b> Họ các biến ngẫu nhiên có phân phối kiểu mũ.</a></li>
-<li class="chapter" data-level="1.3.2" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#hàm-liên-kết."><i class="fa fa-check"></i><b>1.3.2</b> Hàm liên kết.</a></li>
-</ul></li>
-<li class="chapter" data-level="1.4" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#hàm-hợp-lý-tối-đa-và-ước-lượng-mô-hình."><i class="fa fa-check"></i><b>1.4</b> Hàm hợp lý tối đa và ước lượng mô hình.</a></li>
-<li class="chapter" data-level="1.5" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#so-sánh-và-lựa-chọn-mô-hình-tuyến-tính-tổng-quát."><i class="fa fa-check"></i><b>1.5</b> So sánh và lựa chọn mô hình tuyến tính tổng quát.</a>
-<ul>
-<li class="chapter" data-level="1.5.1" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#thước-đo-deviance"><i class="fa fa-check"></i><b>1.5.1</b> Thước đo deviance</a></li>
-<li class="chapter" data-level="1.5.2" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#giá-trị-hàm-log-likelihood-aic-và-bic"><i class="fa fa-check"></i><b>1.5.2</b> Giá trị hàm log-likelihood, AIC và BIC</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="reference.html"><a href="reference.html"><i class="fa fa-check"></i><b>2</b> REFERENCE</a></li>
-<li class="chapter" data-level="3" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><i class="fa fa-check"></i><b>3</b> Mô hình tần suất - mức độ nghiêm trọng.</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#tại-sao-tần-suất-lại-có-ảnh-hưởng-đến-mức-độ-nghiêm-trọng"><i class="fa fa-check"></i><b>3.1</b> Tại sao tần suất lại có ảnh hưởng đến mức độ nghiêm trọng?</a></li>
-<li class="chapter" data-level="3.2" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#các-nền-tảng-xây-dựng-mô-hình."><i class="fa fa-check"></i><b>3.2</b> Các nền tảng xây dựng mô hình.</a></li>
-<li class="chapter" data-level="3.3" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-tần-suất---mức-độ-nghiêm-trọng.-1"><i class="fa fa-check"></i><b>3.3</b> Mô hình tần suất - mức độ nghiêm trọng.</a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-hai-thành-phần"><i class="fa fa-check"></i><b>3.3.1</b> Mô hình hai thành phần</a></li>
-<li class="chapter" data-level="3.3.2" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#phân-phối-tweedie"><i class="fa fa-check"></i><b>3.3.2</b> Phân phối Tweedie</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><i class="fa fa-check"></i><b>4</b> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#dữ-liệu-để-xây-dựng-mô-hình"><i class="fa fa-check"></i><b>4.1</b> Dữ liệu để xây dựng mô hình</a></li>
-<li class="chapter" data-level="4.2" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#phân-tích-khai-phá-dữ-liệu"><i class="fa fa-check"></i><b>4.2</b> Phân tích khai phá dữ liệu</a>
-<ul>
-<li class="chapter" data-level="4.2.1" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#biến-tần-suất-và-mối-liên-hệ-đến-các-biến-khác"><i class="fa fa-check"></i><b>4.2.1</b> Biến tần suất và mối liên hệ đến các biến khác</a></li>
-<li class="chapter" data-level="4.2.2" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#biến-mức-độ-nghiêm-trọng-và-mối-liên-hệ-với-các-biến-khác"><i class="fa fa-check"></i><b>4.2.2</b> Biến mức độ nghiêm trọng và mối liên hệ với các biến khác</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-tuyến-tính-tổng-quát-cho-tần-suất."><i class="fa fa-check"></i><b>4.3</b> Mô hình tuyến tính tổng quát cho tần suất.</a>
-<ul>
-<li class="chapter" data-level="4.3.1" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-tuyến-tính-tổng-quát-với-một-biến-giải-thích."><i class="fa fa-check"></i><b>4.3.1</b> Mô hình tuyến tính tổng quát với một biến giải thích.</a></li>
-</ul></li>
-<li class="chapter" data-level="4.4" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#xây-dựng-mô-hình-tuyến-tính-tổng-quát-nhiều-biến"><i class="fa fa-check"></i><b>4.4</b> Xây dựng mô hình tuyến tính tổng quát nhiều biến</a></li>
-<li class="chapter" data-level="4.5" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-tuyến-tính-tổng-quát-cho-biến-mức-độ-nghiêm-trọng."><i class="fa fa-check"></i><b>4.5</b> Mô hình tuyến tính tổng quát cho biến mức độ nghiêm trọng.</a>
-<ul>
-<li class="chapter" data-level="4.5.1" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-đơn-biến-cho-mức-độ-nghiêm-trọng"><i class="fa fa-check"></i><b>4.5.1</b> Mô hình đơn biến cho mức độ nghiêm trọng</a></li>
-<li class="chapter" data-level="4.5.2" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-nhiều-biến-cho-mức-độ-nghiêm-trọng"><i class="fa fa-check"></i><b>4.5.2</b> Mô hình nhiều biến cho mức độ nghiêm trọng</a></li>
-</ul></li>
-<li class="chapter" data-level="4.6" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#xác-định-phí-bảo-hiểm-thuần-và-xác-thực-mô-hình"><i class="fa fa-check"></i><b>4.6</b> Xác định phí bảo hiểm thuần và xác thực mô hình</a></li>
-<li class="chapter" data-level="4.7" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#kết-luận"><i class="fa fa-check"></i><b>4.7</b> Kết luận</a></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Lời nói đầu</a></li>
+<li class="book-part">PHẦN I: GIỚI THIỆU CHUNG</li>
+<li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></li>
+<li><a class="" href="khdl-v%C3%A0-c%C3%A1c-kh%C3%A1i-ni%E1%BB%87m-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> KHDL và các khái niệm cơ bản</a></li>
+<li class="book-part">PHẦN II: GIỚI THIỆU VỀ R</li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">4</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">5</span> Kiến thức R nâng cao</a></li>
+<li class="book-part">PHẦN III: PHÂN TÍCH DỮ LIỆU</li>
+<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html"><span class="header-section-number">6</span> Nhập dữ liệu vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Biến đổi và sắp xếp dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></li>
+<li class="book-part">PHẦN IV: MÔ HÌNH TUYẾN TÍNH</li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">10</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">11</span> Các mô hình cộng tính tổng quát</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">12</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="active" href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">13</span> Mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li><a class="" href="t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">14</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li class="book-part">PHẦN V: MÔ HÌNH CÂY QUYẾT ĐỊNH</li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">15</span> Mô hình cây quyết định</a></li>
+<li><a class="" href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html"><span class="header-section-number">16</span> Boosting và cây quyết định.</a></li>
+<li><a class="" href="neuralnetwork.html"><span class="header-section-number">17</span> Mô hình mạng nơ-ron</a></li>
+<li><a class="" href="neuralnetwork1.html"><span class="header-section-number">18</span> Các mạng học sâu điển hình</a></li>
+<li><a class="" href="h%E1%BB%8Dc-m%C3%A1y-kh%C3%B4ng-c%C3%B3-gi%C3%A1m-s%C3%A1t.html"><span class="header-section-number">19</span> Học máy không có giám sát</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD">View book source <i class="fab fa-github"></i></a></p>
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="mô-hình-tần-suất---mức-độ-nghiêm-trọng." class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Chương 3</span> Mô hình tần suất - mức độ nghiêm trọng.<a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-tần-suất---mức-độ-nghiêm-trọng." class="anchor-section" aria-label="Anchor link to header"></a></h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mô-hình-tần-suất---mức-độ-nghiêm-trọng." class="section level1" number="13">
+<h1>
+<span class="header-section-number">Chương 13</span> Mô hình tần suất - mức độ nghiêm trọng.<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng."><i class="fas fa-link"></i></a>
+</h1>
 <p>Nhiều dữ liệu thu thập được trong lĩnh vực bảo hiểm có thông tin về tần suất, chẳng hạn như tần suất phát sinh yêu cầu bồi thường, cũng như mức độ nghiêm trọng của yêu cầu bồi thường. Phần này của cuốn sách giới thiệu các công cụ để xử lý phân phân phối xác suất đồng thời của tần suất và mức độ nghiêm trọng. Mô hình hóa tần suất rất quan trọng trong các ứng dụng bảo hiểm vì các đặc điểm của hợp đồng, hành vi của chủ hợp đồng, cơ sở dữ liệu mà các công ty bảo hiểm duy trì và cả các yêu cầu pháp lý. Việc lựa chọn mô hình tùy thuộc vào kiểu dữ liệu thu thập được.</p>
 <p>Đối với một số dữ liệu, chúng tôi quan sát số tiền yêu cầu bồi thường và coi yêu cầu bồi thường bằng 0 có nghĩa là không có yêu cầu bồi thường nào trong khoảng thời gian dữ liệu được thu thập. Đối với các dữ liệu khác, dữ liệu quan sát được lại là số tiền yêu cầu bồi thường của từng cá nhân. Cũng như các phần trước, chúng tôi sẽ không quá đi sâu vào các kỹ thuật xây dựng hay ước lượng mô hình mà sẽ nhấn mạnh vào các ứng dụng thực tế. Chương này của cuốn sách sử dụng công cụ thường được áp dụng trong thực tế để so sánh các mô hình đó là xác nhận mô hình ngoài mẫu (out-of-sample validation)</p>
-<div id="tại-sao-tần-suất-lại-có-ảnh-hưởng-đến-mức-độ-nghiêm-trọng" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Tại sao tần suất lại có ảnh hưởng đến mức độ nghiêm trọng?<a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#tại-sao-tần-suất-lại-có-ảnh-hưởng-đến-mức-độ-nghiêm-trọng" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="tại-sao-tần-suất-lại-có-ảnh-hưởng-đến-mức-độ-nghiêm-trọng" class="section level2" number="13.1">
+<h2>
+<span class="header-section-number">13.1</span> Tại sao tần suất lại có ảnh hưởng đến mức độ nghiêm trọng?<a class="anchor" aria-label="anchor" href="#t%E1%BA%A1i-sao-t%E1%BA%A7n-su%E1%BA%A5t-l%E1%BA%A1i-c%C3%B3-%E1%BA%A3nh-h%C6%B0%E1%BB%9Fng-%C4%91%E1%BA%BFn-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng"><i class="fas fa-link"></i></a>
+</h2>
 <p>Hiểu một cách đơn giản nhất, hoạt động cơ bản nhất trong bảo hiểm là các công ty bảo hiểm nhận phí bảo hiểm để đổi lấy lời hứa bồi thường cho chủ hợp đồng về sự cố không chắc chắn của người được bảo hiểm. Mỗi lần khách hàng gặp sự cố sẽ gửi một thông báo đến công ty để yêu cầu công ty thanh toán tổn thất, thông báo này được gọi là yêu cầu bồi thường. Số tiền được gọi là mức độ nghiêm trọng của yêu cầu bồi thường, là khoản chi quan trọng đối với công ty bảo hiểm. Chúng ta cũng có thể coi yêu cầu bồi thường bằng 0 tương đương với việc sự kiện được bảo hiểm không xảy ra. Bỏ qua chi phí, một công ty bảo hiểm nếu chỉ quan tâm đến số tiền đã thanh toán sẽ không quan tâm đến hai yêu cầu bồi thường, mỗi yêu cầu bằng 100 triệu, so sánh với một yêu cầu bồi thường 200 triệu, mặc dù số lượng yêu cầu bồi thường khác nhau.</p>
 <p>Tuy nhiên, nghiên cứu tần suất phát sinh các yêu cầu bồi thường, hay còn gọi tắt là tần suất, cũng là một chủ đề đáng quan tâm của những người nghiên cứu về bảo hiểm. Dưới đây là các nguyên nhân mà chúng ta cần quan tâm đến tần suất của sự kiện bảo hiểm:</p>
 <ul>
@@ -229,8 +168,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>Thứ tư là do quy định pháp luật. Bảo hiểm là một ngành dịch vụ được giám sát chặt chẽ. Các cơ quan quản lý thường xuyên yêu cầu công ty báo cáo cả số lượng và số tiền yêu cầu bồi thường. Các công ty bảo hiểm cần các hệ thống quản lý khác nhau để xử lý các tổn thất nhỏ, xảy ra thường xuyên như bảo hiểm sức khỏa, và các sự kiện hiếm xảy ra, có tác động lớn, chẳng hạn như bảo hiểm cháy nổ hay hàng hải. Mỗi yêu cầu bồi thường bảo hiểm có nghĩa là công ty phải chịu thêm chi phí, cho thấy tần suất yêu cầu bồi thường là yếu tố quan trọng quyết định chi phí của công ty.</p></li>
 </ul>
 </div>
-<div id="các-nền-tảng-xây-dựng-mô-hình." class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Các nền tảng xây dựng mô hình.<a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#các-nền-tảng-xây-dựng-mô-hình." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="các-nền-tảng-xây-dựng-mô-hình." class="section level2" number="13.2">
+<h2>
+<span class="header-section-number">13.2</span> Các nền tảng xây dựng mô hình.<a class="anchor" aria-label="anchor" href="#c%C3%A1c-n%E1%BB%81n-t%E1%BA%A3ng-x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh."><i class="fas fa-link"></i></a>
+</h2>
 <p>Hãy bắt đầu xây dựng mô hình bằng cách suy nghĩ về cơ sở dữ liệu của công ty bảo hiểm duy trì, bao gồm dữ liệu chủ hợp đồng và dữ liệu về yêu cầu bồi thường. Công ty bảo hiểm ký hợp đồng với người được bảo hiểm, quản lý dữ liệu hợp đồng và dữ liệu về yêu cầu bồi thường một cách liên tục theo thời gian. Đối với các mục đích, chẳng hạn như xác định số dự phòng tổn thất, sẽ rất hữu ích khi xem xét dữ liệu một cách liên tục theo thời gian. Phần này của cuốn sách chỉ tập trung vào xây dựng mô hình trong một khoảng thời gian cụ thể, chẳng hạn như 1 năm, và chỉ xem xét đến các yêu cầu bồi thường đã hoàn thành, nghĩa là đã được thanh toán đầy đủ hoặc không đủ điều kiện để bồi thường. Đây là cách xem xét dữ liệu gắn liền với các nghiệp vụ tính toán như xác định mức phí bảo hiểm (rate making) cho hợp đồng mới và tái bảo hiểm (reinsurance).</p>
 <p>Giả sử rằng có <span class="math inline">\(n\)</span> hợp đồng trong danh mục nghiệp vụ bảo hiểm của công ty, các hợp đồng được ký hiệu là <span class="math inline">\(1, 2, \cdots, n\)</span> với</p>
 <ul>
@@ -259,19 +200,19 @@ S_i = \begin{cases}
 <p>Chúng ta có thể sử dụng quy tắc xác suất có điều kiện để xây dựng phân phối đồng thời cho các thành phần tần suất và mức độ nghiêm trọng. Để cụ thể, giả sử dữ liệu được quan sát một cách đầy đủ. Chúng ta có hàm phân phối đồng thời cho hai biến <span class="math inline">\(N\)</span> - tần suất và <span class="math inline">\(Y\)</span> mức độ nghiêm trọng như sau
 <span class="math display" id="eq:FS1">\[\begin{align}
 f(N,Y) = p(N) \cdot f(Y|N)
-\tag{3.1}
+\tag{13.1}
 \end{align}\]</span>
 trong đó <span class="math inline">\(f(N,Y)\)</span> là hàm phân phối xác suất đồng thời của hai biến <span class="math inline">\(N\)</span> và <span class="math inline">\(Y\)</span>, <span class="math inline">\(p(N)\)</span> là phân phối xác suất của biến <span class="math inline">\(N\)</span> và <span class="math inline">\(f(Y|N)\)</span> là phân phối xác suất của mức độ nghiêm trọng <span class="math inline">\(Y\)</span> với điều kiện <span class="math inline">\(N\)</span>.</p>
 <p>Khi dữ liệu thu thập được ở dạng thứ hai, chúng ta cũng có thể mô tả mối liên hệ giữa tần suất và mức độ nghiêm trọng một cách tương tự, thay thế véc-tơ tổn thất riêng <span class="math inline">\(y\)</span> bằng tổng tổn thất <span class="math inline">\(S\)</span>. Đối với dữ liệu thu thập được ở dạng thứ nhất, chúng ta có thể phân tách dữ liệu bằng cách tách sự kiện <span class="math inline">\(N = 0\)</span> thông qua ký hiệu chỉ báo <span class="math inline">\(R_i = \mathbb{I}_{S_i &gt; 0}\)</span> cho thành phần tần suất và chỉ sử dụng phần dữ liệu có <span class="math inline">\(R_i = 1\)</span> cho thành phần mức độ nghiêm trọng.</p>
-<p>Thông qua việc phân tách <span class="math inline">\(S_i\)</span> thành hai thành phần có phân phối như <a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#eq:FS1">(3.1)</a>, chúng ta không yêu cầu giả thiết độc lập của các thành phần như truyền thống. Có nhiều cách để mô hình hóa sự phụ thuộc khi xét <span class="math inline">\(f(N,Y)\)</span>. Ví dụ: chúng ta có thể sử dụng một biến ngẫu nhiên ẩn ảnh hưởng đồng thời đến cả tần số <span class="math inline">\(N\)</span> và lượng tổn thất <span class="math inline">\(Y\)</span> để mô tả mối liên hệ cùng chiều, hoặc ngược chiều. Kỹ thuật copula là một công cụ hữu ích được sử dụng thường xuyên để mô hình hóa các mối liên hệ giữa <span class="math inline">\(N\)</span> và <span class="math inline">\(Y\)</span>. Nhìn chung, xuất phát từ công thức xác suất có điều kiện là một tiếp cận hợp lý cho phép mô tả mối liên hệ giữa các thành phần và cung cấp nền tảng khởi đầu cho các tính toán thực nghiệm.</p>
-<p>Nền tảng thứ hai cho mô hình tần suất - mức độ nghiêm trọng là mô hình tuyến tính tổng quát. Khả năng tùy biến linh hoạt của GLM cho phép chúng ta xây dựng được mối liên hệ của tần suất và mức độ nghiêm trọng với các biến độc lập một cách đồng thời. Giả sử biến <span class="math inline">\(Y_i\)</span> là biến mục tiêu, có thể là tần suất hoặc mức độ nghiêm trọng, chúng ta luôn có thể xây dựng mô hình tuyến tính tổng quát mà giá trị trung bình của biến phụ thuộc được giải thích thông qua các biến phụ thuộc. Do giá trị trung bình của tần suất và mức độ nghiêm trọng là số dương nên trong đa số các trường hợp chúng ta sử dụng hàm liên kết là hàm <span class="math inline">\(log(\cdot)\)</span>. Ta có <span class="math inline">\(\mathbb{E}(Y_i) = exp(\textbf{x}_i^{&#39;} \beta)\)</span>.</p>
+<p>Thông qua việc phân tách <span class="math inline">\(S_i\)</span> thành hai thành phần có phân phối như <a href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html#eq:FS1">(13.1)</a>, chúng ta không yêu cầu giả thiết độc lập của các thành phần như truyền thống. Có nhiều cách để mô hình hóa sự phụ thuộc khi xét <span class="math inline">\(f(N,Y)\)</span>. Ví dụ: chúng ta có thể sử dụng một biến ngẫu nhiên ẩn ảnh hưởng đồng thời đến cả tần số <span class="math inline">\(N\)</span> và lượng tổn thất <span class="math inline">\(Y\)</span> để mô tả mối liên hệ cùng chiều, hoặc ngược chiều. Kỹ thuật copula là một công cụ hữu ích được sử dụng thường xuyên để mô hình hóa các mối liên hệ giữa <span class="math inline">\(N\)</span> và <span class="math inline">\(Y\)</span>. Nhìn chung, xuất phát từ công thức xác suất có điều kiện là một tiếp cận hợp lý cho phép mô tả mối liên hệ giữa các thành phần và cung cấp nền tảng khởi đầu cho các tính toán thực nghiệm.</p>
+<p>Nền tảng thứ hai cho mô hình tần suất - mức độ nghiêm trọng là mô hình tuyến tính tổng quát. Khả năng tùy biến linh hoạt của GLM cho phép chúng ta xây dựng được mối liên hệ của tần suất và mức độ nghiêm trọng với các biến độc lập một cách đồng thời. Giả sử biến <span class="math inline">\(Y_i\)</span> là biến mục tiêu, có thể là tần suất hoặc mức độ nghiêm trọng, chúng ta luôn có thể xây dựng mô hình tuyến tính tổng quát mà giá trị trung bình của biến phụ thuộc được giải thích thông qua các biến phụ thuộc. Do giá trị trung bình của tần suất và mức độ nghiêm trọng là số dương nên trong đa số các trường hợp chúng ta sử dụng hàm liên kết là hàm <span class="math inline">\(log(\cdot)\)</span>. Ta có <span class="math inline">\(\mathbb{E}(Y_i) = exp(\textbf{x}_i^{'} \beta)\)</span>.</p>
 <p>Trong một số trường hợp, giá trị trung bình của biến phụ thuộc được biết là thay đổi tỷ lệ thuận với một biến mà chúng ta gắn nhãn là <span class="math inline">\(E_i\)</span>, trong đó <span class="math inline">\(E\)</span> là viết tắt của “Exposure” - một đại lượng mà chúng ta sẽ thảo luận ở phần dưới. Mối liên hệ giữa giá trị trung bình của biến phụ thuộc và exposure được mô tả như sau</p>
 <p><span class="math display">\[\begin{align}
 \mathbb{E}(Y_i) = E_i \cdot \exp(\textbf{x} \beta)
 \end{align}\]</span></p>
 <p>Lấy <span class="math inline">\(log\)</span> của hai vế, chúng ta có phương trình tuyến tính mà một trong các biến độc lập là <span class="math inline">\(log(E_i)\)</span> với hệ số là 1.
 <span class="math display">\[\begin{align}
-\log(\mu_i) = \log(E_i) + \textbf{x}_i^{&#39;} \beta
+\log(\mu_i) = \log(E_i) + \textbf{x}_i^{'} \beta
 \end{align}\]</span></p>
 <p>Khi xây dựng các mô hình trong bảo hiểm, các chuyên gia tính toán thường sử dụng khái niệm “exposure” để hiệu chỉnh quy mô của một rủi ro. Tùy theo loại hình bảo hiểm mà exposure được định nghĩa khác nhau. Ví dụ như trong bảo hiểm vật chất xe oto, exposure thường được sử dụng là 1 năm mà một xe ô tô được bảo hiểm. Trong bảo hiểm trách nhiệm lái xe ô tô, exposure lại có thể là tổng quãng đường lái xe tính theo km, chẳng hạn như mỗi 10,000 km. Khi xây dựng mô hình tần suất - mức độ nghiêm trọng, cần xác định được mối liên hệ giữa tần suất hoặc mức độ nghiêm trọng với exposure. Đối với bảo hiểm vật chất xe ô tô, tần suất có mối liên hệ trực tiếp đến exposure bởi vì thời gian bảo hiểm hoặc quãng đường lái xe càng dài thì tần suất cũng tăng theo tương ứng nhưng mức độ nghiêm trọng lại không có mối liên hệ. Trái lại, trong bảo hiểm thất nghiệp, exposure là tháng lương của người lao động nên sẽ được điều chỉnh theo lạm phát, nghĩa là exposure có tác động đến mức độ nghiêm trọng nhưng lại không có tác động lên tần suất.</p>
 <p>Để minh họa cách hiệu chỉnh mô hình khi sử dụng exposure, giả sử trong bảo hiểm xe ô tô, <span class="math inline">\(E_i\)</span> là một phần của năm mà chủ hợp đồng được bảo hiểm. Logic đằng sau là số vụ tai nạn dự kiến tỷ lệ thuận với độ dài của thời gian bảo hiểm.</p>
@@ -279,14 +220,14 @@ trong đó <span class="math inline">\(f(N,Y)\)</span> là hàm phân phối xá
 <li><p>Trong trường hợp tần suất xảy ra tai nạn có phân phối Poisson, xây dựng mô hình tuyến tính tổng quát là đơn giản vì nếu 1 đơn vị exposure có phân phối Poisson với tham số <span class="math inline">\(\mu_i\)</span> thì <span class="math inline">\(E_i\)</span> đơn vị exposure sẽ có phân phối Poisson với tham số <span class="math inline">\(\lambda_i = E_i \cdot \mu_i\)</span>. Mô hình tuyến tính tổng quát sẽ có dạng như sau
 <span class="math display" id="eq:pois1">\[\begin{align}
 &amp; Y_i \sim \mathcal{P}(\lambda_i) \\
-&amp; \log(\lambda_i) = \log(E_i) + \textbf{x}_i^{&#39;} \beta
-\tag{1.17}
+&amp; \log(\lambda_i) = \log(E_i) + \textbf{x}_i^{'} \beta
+\tag{12.19}
 \end{align}\]</span></p></li>
-<li><p>Trong trường hợp biến phụ thuộc có giá trị nhị phân và hàm liên kết có dạng logit. Với một đơn vị exposure, xác suất xảy ra tai nạn là <span class="math inline">\(p_i = \cfrac{\exp{\left(\textbf{x}_i^{&#39;} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{&#39;} \beta\right)}}\)</span>. Giả sử <span class="math inline">\(Y_i\)</span> là biến phụ thuộc cho trường hợp có <span class="math inline">\(E_i\)</span> đơn vị exposure. Có một số tiếp cận khác nhau để xây dựng mô hình tuyến tính tổng quát cho <span class="math inline">\(Y_i\)</span> như sau
+<li><p>Trong trường hợp biến phụ thuộc có giá trị nhị phân và hàm liên kết có dạng logit. Với một đơn vị exposure, xác suất xảy ra tai nạn là <span class="math inline">\(p_i = \cfrac{\exp{\left(\textbf{x}_i^{'} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{'} \beta\right)}}\)</span>. Giả sử <span class="math inline">\(Y_i\)</span> là biến phụ thuộc cho trường hợp có <span class="math inline">\(E_i\)</span> đơn vị exposure. Có một số tiếp cận khác nhau để xây dựng mô hình tuyến tính tổng quát cho <span class="math inline">\(Y_i\)</span> như sau
 <span class="math display">\[\begin{align}
-\text{Cách 1: } &amp; P(Y_i = 1) = \pi_i = E_i \cdot p_i = E_i \cfrac{\exp{\left(\textbf{x}_i^{&#39;} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{&#39;} \beta\right)}}\\
-\text{Cách 2: } &amp; P(Y_i = 1) = \pi_i = 1 - (1 - p_i)^{E_i} = 1 - \left(1 - \cfrac{\exp{\left(\textbf{x}_i^{&#39;} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{&#39;} \beta\right)}} \right)^{E_i}\\
-\text{Cách 3: } &amp; P(Y_i = 1) = \pi_i = \cfrac{E_i \cdot p_i}{1 - (1 - E_i) \cdot p_i} = \cfrac{E_i \cdot \cfrac{\exp{\left(\textbf{x}_i^{&#39;} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{&#39;} \beta\right)}}} {1 - (1 - E_i) \cdot \cfrac{\exp{\left(\textbf{x}_i^{&#39;} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{&#39;} \beta\right)}}}
+\text{Cách 1: } &amp; P(Y_i = 1) = \pi_i = E_i \cdot p_i = E_i \cfrac{\exp{\left(\textbf{x}_i^{'} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{'} \beta\right)}}\\
+\text{Cách 2: } &amp; P(Y_i = 1) = \pi_i = 1 - (1 - p_i)^{E_i} = 1 - \left(1 - \cfrac{\exp{\left(\textbf{x}_i^{'} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{'} \beta\right)}} \right)^{E_i}\\
+\text{Cách 3: } &amp; P(Y_i = 1) = \pi_i = \cfrac{E_i \cdot p_i}{1 - (1 - E_i) \cdot p_i} = \cfrac{E_i \cdot \cfrac{\exp{\left(\textbf{x}_i^{'} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{'} \beta\right)}}} {1 - (1 - E_i) \cdot \cfrac{\exp{\left(\textbf{x}_i^{'} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{'} \beta\right)}}}
 \end{align}\]</span></p></li>
 </ul>
 <p>Đối với phân bố Poisson, phương sai bằng giá trị trung bình, do đó cả giá trị trung bình và phương sai đều tăng tỷ lệ với giá trị <span class="math inline">\(E_i\)</span>. Do đó, khi sử dụng phân phối Poisson với hàm liên kết <span class="math inline">\(log(\cdot)\)</span>, chúng ta chỉ cần sử dụng <span class="math inline">\(log(E_i)\)</span> để tự động tính đến phương sai ngày càng tăng. Tuy nhiên, điều này lại không đúng đối với các phân phối khác thuộc nhóm phân phối mũ.</p>
@@ -297,11 +238,15 @@ trong đó <span class="math inline">\(f(N,Y)\)</span> là hàm phân phối xá
 <li><p>Đối với biến mức độ nghiêm trọng, chúng ta sử dụng biến phụ thuộc là <span class="math inline">\(S_i/N_i\)</span> thuộc nhóm các phân phối kiểu mũ có tham số phân tán là <span class="math inline">\(\phi/N_i\)</span>.</p></li>
 </ul>
 </div>
-<div id="mô-hình-tần-suất---mức-độ-nghiêm-trọng.-1" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Mô hình tần suất - mức độ nghiêm trọng.<a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-tần-suất---mức-độ-nghiêm-trọng.-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="mô-hình-tần-suất---mức-độ-nghiêm-trọng.-1" class="section level2" number="13.3">
+<h2>
+<span class="header-section-number">13.3</span> Mô hình tần suất - mức độ nghiêm trọng.<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng.-1"><i class="fas fa-link"></i></a>
+</h2>
 <p>Như chúng ta đã nói ở trên, có ba kiểu dữ liệu được thu thập, đó là i) chỉ có tổng tổn thất theo hợp đồng <span class="math inline">\(S_i\)</span>; ii) có thông tin tần suất và tổng giá trị tổn thất <span class="math inline">\((N_i, S_i)\)</span>; và iii) có đầy đủ thông tin về <span class="math inline">\(N_i\)</span> và các tổn thất riêng lẻ <span class="math inline">\(y_{i,j}\)</span> với <span class="math inline">\(j = 1, 2, \cdots, N_i\)</span>. Tùy theo kiểu dữ liệu của công ty bảo hiểm mà mô hình tần suất mức độ nghiêm trọng được xây dựng theo các trình tự khác nhau.</p>
-<div id="mô-hình-hai-thành-phần" class="section level3 hasAnchor" number="3.3.1">
-<h3><span class="header-section-number">3.3.1</span> Mô hình hai thành phần<a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-hai-thành-phần" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="mô-hình-hai-thành-phần" class="section level3" number="13.3.1">
+<h3>
+<span class="header-section-number">13.3.1</span> Mô hình hai thành phần<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-hai-th%C3%A0nh-ph%E1%BA%A7n"><i class="fas fa-link"></i></a>
+</h3>
 <p>Mô hình hai thành phần thường được sử dụng để xây dựng mô hình trong trường hợp chúng ta chỉ có thông tin về tổng giá trị tổn thất của hợp đồng <span class="math inline">\(S_i\)</span> với <span class="math inline">\(i = 1, 2, \cdots, n\)</span>. Đây là một trường hợp đặc biệt của mô hình tần suất - mức độ nghiêm trọng. Thành phần thứ nhất của mô hình là biến ngẫu nhiên <span class="math inline">\(B_i\)</span> có phân phối nhị phân chỉ nhận hai giá trị là 0 hoặc 1, trong đó 0 tương ứng với hợp đồng không có yêu cầu bổi thường và 1 tương ứng với hợp đồng có yêu cầu bối thường. Thành phần thứ hai của mô hình là biến ngẫu nhiên <span class="math inline">\(S_i\)</span> cho biết tổn thất đó có độ lớn như thế nào với điều kiện <span class="math inline">\(B_i = 1\)</span>.</p>
 <p>Quá trình ước lượng mô hình hai thành phần bao gồm hai mô hình tuyến tính tổng quát:</p>
 <ul>
@@ -316,8 +261,10 @@ trong đó <span class="math inline">\(f(N,Y)\)</span> là hàm phân phối xá
 </ul>
 <p>Nếu dữ liệu xây dựng mô hình ở dạng thứ ba, nghĩa là chúng ta có thông tin chính xác về từng khoảng tổn thất riêng biệt, bước xây dựng mô hình cho tần suất hoàn toàn tương tự như khi dữ liệu ở dạng thứ hai. Trong bước xây dựng mô hình cho mức độ nghiêm trọng, chúng ta sử dụng <span class="math inline">\(y_{i,j}\)</span> là các biến phụ thuộc thay vì sử dụng giá trị trung bình của nhóm <span class="math inline">\(i\)</span>. Phân phối được lựa chọn cho biến <span class="math inline">\(y_{i,j}\)</span> thường là phân phối gamma, hoặc phân phối chuẩn với hàm liên kết là hàm log.</p>
 </div>
-<div id="phân-phối-tweedie" class="section level3 hasAnchor" number="3.3.2">
-<h3><span class="header-section-number">3.3.2</span> Phân phối Tweedie<a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#phân-phối-tweedie" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="phân-phối-tweedie" class="section level3" number="13.3.2">
+<h3>
+<span class="header-section-number">13.3.2</span> Phân phối Tweedie<a class="anchor" aria-label="anchor" href="#ph%C3%A2n-ph%E1%BB%91i-tweedie"><i class="fas fa-link"></i></a>
+</h3>
 <p>Họ các phân phối kiểu mũ bao gồm các phân phối liên tục, chẳng hạn như phân phối chuẩn và phân phối gamma, cũng như các phân bố rời rạc, chẳng hạn như phân phối nhị thức và Poisson. Ngoài ra, các phân phối kiểu mũ cũng bao gồm cả các phân phối hỗn hợp, nghĩa là các phân phối vừa có thành phần rời rạc và vừa có thành phần liên tục. Trong mô hình hóa dữ liệu trong bảo hiểm, một phân phối hỗn hợp được sử dụng rộng rãi là phân phối Tweedie (1984). Phân phối này có mật độ xác suất dương tại điểm 0 (rời rạc) biểu thị rằng không có yêu cầu bồi thường nào, và phân phối này có thành phần liên tục tại mọi giá trị dương, biểu thị tổng số tiền cho một hoặc nhiều yêu cầu bồi thường.</p>
 <p>Phân phối Tweedie được định nghĩa là tổng Poisson của các biến ngẫu nhiên Gamma. Cụ thể, giả sử rằng <span class="math inline">\(N\)</span> có phân phối Poisson với giá trị trung bình <span class="math inline">\(\lambda\)</span>, mô tả tần suất yêu cầu bồi thường. Giả sử <span class="math inline">\(Y_j\)</span>, với <span class="math inline">\(j = 1, 2, \cdots, N_i\)</span>, là các biến ngẫu nhiên độc lập có cùng phân phối và độc lập với <span class="math inline">\(N\)</span>. Hơn nữa, mỗi <span class="math inline">\(Y_j\)</span> có phân phối gamma với các tham số <span class="math inline">\(\alpha\)</span> và <span class="math inline">\(\gamma\)</span>, mô tả số tiền yêu cầu bồi thường thứ <span class="math inline">\(j\)</span>. Khi đó</p>
 <p><span class="math display">\[\begin{align}
@@ -364,33 +311,34 @@ H(y,p,\phi) = \log\left( \cfrac{1}{y} \sum\limits_{k=1}^{\infty} \cfrac{1}{k! \G
 \end{align}\]</span></p>
 <p>Với tham số chính chắc <span class="math inline">\(\theta = \mu^{1-p}\)</span>, ta có <span class="math inline">\(\cfrac{1-p}{2-p} \mu^{2-p} = \cfrac{1-p}{2-p} \theta^{(2-p)/(1-p)}\)</span> hay nói cách khác <span class="math inline">\(b(\theta) = - \cfrac{\theta^{-\alpha}}{\alpha}\)</span>. Giá trị trung bình và phương sai của <span class="math inline">\(S_N\)</span> tính toán theo hàm mật độ xác suất của phân phối kiểu mũ là
 <span class="math display">\[\begin{align}
-\mathbb{E}(S_N) = b^{&#39;}(\theta) = \partial \cfrac{-\theta^{-\alpha}}{\alpha}/ \partial \theta = \theta^{-(\alpha+1)} = \theta^{1/(1-p)} = \mu \\
-\mathbb{V}(S_N) = a(\phi) b^{&#39;&#39;}(\theta) = \phi (1-p) \cdot \cfrac{1}{1-p} \theta^{p/(1-p)} = \phi \cdot \mu^p
+\mathbb{E}(S_N) = b^{'}(\theta) = \partial \cfrac{-\theta^{-\alpha}}{\alpha}/ \partial \theta = \theta^{-(\alpha+1)} = \theta^{1/(1-p)} = \mu \\
+\mathbb{V}(S_N) = a(\phi) b^{''}(\theta) = \phi (1-p) \cdot \cfrac{1}{1-p} \theta^{p/(1-p)} = \phi \cdot \mu^p
 \end{align}\]</span></p>
 <p>Khi sử dụng phân phối Tweedie cho biến phụ thuộc trong mô hình tuyến tính tổng quát, chúng ta ước lượng một mô hình GLM thay vì ước lượng hai thành phần tần suất và mức độ nghiêm trọng. Giả sử các biến <span class="math inline">\(\textbf{x}_{i,T}\)</span> là các biến độc lập trong mô hình Tweedie với hàm liên kết là hàm log và hệ số <span class="math inline">\(\boldsymbol{\beta_T}\)</span> là các hệ số tương ứng của các biến độc lập, ta có mô hình tuyến tính tổng quát như sau
 <span class="math display">\[\begin{align}
 Y_i \sim Tweedie(\mu_i , p , \phi) \\
-\mu_i = \exp(\textbf{x}_{i,T}^{&#39;} \cdot \boldsymbol{\beta_T})
+\mu_i = \exp(\textbf{x}_{i,T}^{'} \cdot \boldsymbol{\beta_T})
 \end{align}\]</span></p>
 <p>Chúng ta sẽ so sánh giữa giữa sử dụng mô hình tần suất - mức độ nghiêm trọng với sử dụng phân phối Tweedie trên dữ liệu “exposure.csv”. Chỉ tiêu để so sánh hai mô hình là giá trị trung bình của tổng tổn thất theo mỗi hợp đồng trên dữ liệu ngoài mẫu. Giá trị trung bình của tổng tổn thất còn được gọi bằng thuật ngữ là phí bảo hiểm thuần. Dữ liệu sử dụng để xây dựng mô hình được lấy ngẫu nhiên 70% từ dữ liệu ban đầu và chúng ta sẽ so sánh giá trị của phí bảo hiểm thuần được tính toán từ mô hình tần suất mức độ nghiêm trọng với mô hình Tweedie.</p>
-<p>Để sử dụng phân phối Tweedie trong hàm <code>glm()</code>, chúng ta cần cài đặt thêm thư viện <span class="math inline">\(statmod\)</span>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-1" tabindex="-1"></a><span class="fu">library</span>(statmod)</span>
-<span id="cb33-2"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-2" tabindex="-1"></a>dat<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;../KHDL_KTKD Final/Dataset/exposure.csv&quot;</span>)</span>
-<span id="cb33-3"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-3" tabindex="-1"></a>n<span class="ot">&lt;-</span><span class="fu">nrow</span>(dat); p<span class="ot">&lt;-</span><span class="fu">ncol</span>(dat)</span>
-<span id="cb33-4"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-4" tabindex="-1"></a>dat<span class="sc">$</span>Gender<span class="ot">&lt;-</span><span class="fu">as.factor</span>(dat<span class="sc">$</span>Gender)</span>
-<span id="cb33-5"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-5" tabindex="-1"></a></span>
-<span id="cb33-6"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-6" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
-<span id="cb33-7"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-7" tabindex="-1"></a>train.index<span class="ot">&lt;-</span><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span>n,<span class="at">size =</span> <span class="fu">round</span>(n<span class="sc">*</span><span class="fl">0.7</span>),<span class="at">replace=</span><span class="cn">FALSE</span>)</span>
-<span id="cb33-8"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-8" tabindex="-1"></a>train<span class="ot">&lt;-</span>dat[train.index,]</span>
-<span id="cb33-9"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-9" tabindex="-1"></a>test<span class="ot">&lt;-</span>dat[<span class="sc">-</span>train.index,]</span>
-<span id="cb33-10"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-10" tabindex="-1"></a></span>
-<span id="cb33-11"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-11" tabindex="-1"></a>glm.ser<span class="ot">&lt;-</span><span class="fu">glm</span>(Ave_Claim<span class="sc">~</span>Age<span class="sc">+</span>Gender,<span class="at">family =</span> <span class="fu">Gamma</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>),<span class="at">data=</span>train, <span class="at">weight =</span> Claim_Count)</span>
-<span id="cb33-12"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-12" tabindex="-1"></a>glm.fre<span class="ot">&lt;-</span><span class="fu">glm</span>(Claim_Count<span class="sc">~</span>Age<span class="sc">+</span>Gender,<span class="at">family =</span> <span class="fu">poisson</span>(<span class="at">link =</span> <span class="st">&quot;log&quot;</span>), <span class="at">data =</span> train)</span>
-<span id="cb33-13"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-13" tabindex="-1"></a>glm.twe<span class="ot">&lt;-</span><span class="fu">glm</span>(Total_Claim<span class="sc">~</span>Age<span class="sc">+</span>Gender,<span class="at">family=</span><span class="fu">tweedie</span>(<span class="at">var.power=</span><span class="fl">1.5</span>,<span class="at">link.power=</span><span class="dv">0</span>),<span class="at">data=</span>train)</span>
-<span id="cb33-14"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-14" tabindex="-1"></a></span>
-<span id="cb33-15"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb33-15" tabindex="-1"></a>glm.fre</span></code></pre></div>
+<p>Để sử dụng phân phối Tweedie trong hàm <code><a href="https://rdrr.io/r/stats/glm.html">glm()</a></code>, chúng ta cần cài đặt thêm thư viện <span class="math inline">\(statmod\)</span>.</p>
+<div class="sourceCode" id="cb837"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">statmod</span><span class="op">)</span></span>
+<span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD Final/Dataset/exposure.csv"</span><span class="op">)</span></span>
+<span><span class="va">n</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>; <span class="va">p</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
+<span><span class="va">dat</span><span class="op">$</span><span class="va">Gender</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Gender</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">train.index</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">n</span>,size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">n</span><span class="op">*</span><span class="fl">0.7</span><span class="op">)</span>,replace<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">train</span><span class="op">&lt;-</span><span class="va">dat</span><span class="op">[</span><span class="va">train.index</span>,<span class="op">]</span></span>
+<span><span class="va">test</span><span class="op">&lt;-</span><span class="va">dat</span><span class="op">[</span><span class="op">-</span><span class="va">train.index</span>,<span class="op">]</span></span>
+<span></span>
+<span><span class="va">glm.ser</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Ave_Claim</span><span class="op">~</span><span class="va">Age</span><span class="op">+</span><span class="va">Gender</span>,family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">Gamma</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>,data<span class="op">=</span><span class="va">train</span>, weight <span class="op">=</span> <span class="va">Claim_Count</span><span class="op">)</span></span>
+<span><span class="va">glm.fre</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Claim_Count</span><span class="op">~</span><span class="va">Age</span><span class="op">+</span><span class="va">Gender</span>,family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">train</span><span class="op">)</span></span>
+<span><span class="va">glm.twe</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Total_Claim</span><span class="op">~</span><span class="va">Age</span><span class="op">+</span><span class="va">Gender</span>,family<span class="op">=</span><span class="fu"><a href="https://rdrr.io/pkg/statmod/man/tweedie.html">tweedie</a></span><span class="op">(</span>var.power<span class="op">=</span><span class="fl">1.5</span>,link.power<span class="op">=</span><span class="fl">0</span><span class="op">)</span>,data<span class="op">=</span><span class="va">train</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">glm.fre</span></span></code></pre></div>
 <pre><code>## 
-## Call:  glm(formula = Claim_Count ~ Age + Gender, family = poisson(link = &quot;log&quot;), 
+## Call:  glm(formula = Claim_Count ~ Age + Gender, family = poisson(link = "log"), 
 ##     data = train)
 ## 
 ## Coefficients:
@@ -400,9 +348,10 @@ Y_i \sim Tweedie(\mu_i , p , \phi) \\
 ## Degrees of Freedom: 6999 Total (i.e. Null);  6997 Residual
 ## Null Deviance:       5952 
 ## Residual Deviance: 5785  AIC: 8934</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb35-1" tabindex="-1"></a>glm.ser</span></code></pre></div>
+<div class="sourceCode" id="cb839"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">glm.ser</span></span></code></pre></div>
 <pre><code>## 
-## Call:  glm(formula = Ave_Claim ~ Age + Gender, family = Gamma(link = &quot;log&quot;), 
+## Call:  glm(formula = Ave_Claim ~ Age + Gender, family = Gamma(link = "log"), 
 ##     data = train, weights = Claim_Count)
 ## 
 ## Coefficients:
@@ -413,7 +362,8 @@ Y_i \sim Tweedie(\mu_i , p , \phi) \\
 ##   (5530 observations deleted due to missingness)
 ## Null Deviance:       3833 
 ## Residual Deviance: 1713  AIC: 13250</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb37-1" tabindex="-1"></a>glm.twe</span></code></pre></div>
+<div class="sourceCode" id="cb841"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">glm.twe</span></span></code></pre></div>
 <pre><code>## 
 ## Call:  glm(formula = Total_Claim ~ Age + Gender, family = tweedie(var.power = 1.5, 
 ##     link.power = 0), data = train)
@@ -426,23 +376,23 @@ Y_i \sim Tweedie(\mu_i , p , \phi) \\
 ## Null Deviance:       91600 
 ## Residual Deviance: 82290     AIC: NA</code></pre>
 <p>Hệ số của các biến độc lập của các mô hình ở trong bảng dưới đây</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb39-1" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">a =</span> <span class="fu">c</span>(<span class="st">&quot;Tần suất&quot;</span>, <span class="st">&quot;Mức độ nghiêm trọng&quot;</span>, <span class="st">&quot;Tweedie&quot;</span>),</span>
-<span id="cb39-2"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb39-2" tabindex="-1"></a>               <span class="at">b =</span> <span class="fu">c</span>(<span class="st">&quot;glm.fre&quot;</span>, <span class="st">&quot;glm.ser&quot;</span>, <span class="st">&quot;glm.twe&quot;</span>),</span>
-<span id="cb39-3"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb39-3" tabindex="-1"></a>               <span class="at">d =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.541</span>,<span class="sc">-</span><span class="fl">0.082</span>,<span class="sc">-</span><span class="fl">0.504</span>),</span>
-<span id="cb39-4"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb39-4" tabindex="-1"></a>               <span class="at">e =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.021</span>,<span class="fl">0.079</span>,<span class="fl">0.055</span>),</span>
-<span id="cb39-5"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb39-5" tabindex="-1"></a>               <span class="at">f =</span> <span class="fu">c</span>(<span class="fl">0.115</span>,<span class="sc">-</span><span class="fl">0.517</span>,<span class="sc">-</span><span class="fl">0.370</span>))</span>
-<span id="cb39-6"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb39-6" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(df, <span class="at">booktabs =</span> T,</span>
-<span id="cb39-7"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb39-7" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">&quot;Hệ số tuyến tính của biến độc lập&quot;</span>,</span>
-<span id="cb39-8"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb39-8" tabindex="-1"></a>      <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Mô hình&quot;</span>, <span class="st">&quot;Tên mô hình trên R&quot;</span>,<span class="st">&quot;Hệ số chặn&quot;</span>, <span class="st">&quot;Hệ số của Age&quot;</span>, <span class="st">&quot;Hệ số của Gender&quot;</span>),</span>
-<span id="cb39-9"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb39-9" tabindex="-1"></a>      <span class="at">escape=</span>F, <span class="at">align =</span> <span class="st">&#39;l&#39;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb39-10"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb39-10" tabindex="-1"></a>  <span class="co">#column_spec(c(1,4,5,6,7),border_left = T) %&gt;% column_spec(7,border_right = T) %&gt;% </span></span>
-<span id="cb39-11"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#cb39-11" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="at">latex_options =</span> <span class="st">&quot;scale_down&quot;</span>,<span class="at">full_width =</span> F)</span></code></pre></div>
-<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<div class="sourceCode" id="cb843"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tần suất"</span>, <span class="st">"Mức độ nghiêm trọng"</span>, <span class="st">"Tweedie"</span><span class="op">)</span>,</span>
+<span>               b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"glm.fre"</span>, <span class="st">"glm.ser"</span>, <span class="st">"glm.twe"</span><span class="op">)</span>,</span>
+<span>               d <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.541</span>,<span class="op">-</span><span class="fl">0.082</span>,<span class="op">-</span><span class="fl">0.504</span><span class="op">)</span>,</span>
+<span>               e <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.021</span>,<span class="fl">0.079</span>,<span class="fl">0.055</span><span class="op">)</span>,</span>
+<span>               f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.115</span>,<span class="op">-</span><span class="fl">0.517</span>,<span class="op">-</span><span class="fl">0.370</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df</span>, booktabs <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>      caption <span class="op">=</span> <span class="st">"Hệ số tuyến tính của biến độc lập"</span>,</span>
+<span>      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Mô hình"</span>, <span class="st">"Tên mô hình trên R"</span>,<span class="st">"Hệ số chặn"</span>, <span class="st">"Hệ số của Age"</span>, <span class="st">"Hệ số của Gender"</span><span class="op">)</span>,</span>
+<span>      escape<span class="op">=</span><span class="cn">F</span>, align <span class="op">=</span> <span class="st">'l'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co">#column_spec(c(1,4,5,6,7),border_left = T) %&gt;% column_spec(7,border_right = T) %&gt;% </span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>latex_options <span class="op">=</span> <span class="st">"scale_down"</span>,full_width <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-30">Table 3.1: </span>Hệ số tuyến tính của biến độc lập
+<span id="tab:unnamed-chunk-4">Bảng 2.2: </span>Hệ số tuyến tính của biến độc lập
 </caption>
-<thead>
-<tr>
+<thead><tr>
 <th style="text-align:left;">
 Mô hình
 </th>
@@ -458,8 +408,7 @@ Hệ số của Age
 <th style="text-align:left;">
 Hệ số của Gender
 </th>
-</tr>
-</thead>
+</tr></thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
@@ -513,7 +462,7 @@ glm.twe
 </td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>Có thể thấy rằng hệ số của các biến độc lập trong mô hình Tweedie khá gần với tổng của hệ số của biến độc lập trong mô hình tần suất và hệ số của biến độc lập trong mô hình mức độ nghiêm trọng. Điều này có thể được giải thích bởi hàm liên kết được sử dụng trong cả ba mô hình đều là hàm <span class="math inline">\(log(\cdot)\)</span>. Giá trị trung bình của tổng tổn thất được tính toán từ các mô hình như sau:
 <span class="math display">\[\begin{align}
 \mathbb{E}(S_N|\text{x}_i) &amp;= \mathbb{E}(N|\text{x}_i) \cdot \mathbb{E}(Y|\text{x}_i) \\
@@ -532,71 +481,79 @@ glm.twe
 <!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
 <!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->
 
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre><code>## 
+## Attaching package: 'kableExtra'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     group_rows</code></pre>
+<pre><code>## 
+## Attaching package: 'gridExtra'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     combine</code></pre>
+<pre><code>## 
+## Attaching package: 'pryr'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     where</code></pre>
+<pre><code>## Classes and Methods for R developed in the
+## Political Science Computational Laboratory
+## Department of Political Science
+## Stanford University
+## Simon Jackman
+## hurdle and zeroinfl functions by Achim Zeileis</code></pre>
 </div>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">12</span> Mô hình tuyến tính tổng quát.</a></div>
+<div class="next"><a href="t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">14</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng."><span class="header-section-number">13</span> Mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li><a class="nav-link" href="#t%E1%BA%A1i-sao-t%E1%BA%A7n-su%E1%BA%A5t-l%E1%BA%A1i-c%C3%B3-%E1%BA%A3nh-h%C6%B0%E1%BB%9Fng-%C4%91%E1%BA%BFn-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng"><span class="header-section-number">13.1</span> Tại sao tần suất lại có ảnh hưởng đến mức độ nghiêm trọng?</a></li>
+<li><a class="nav-link" href="#c%C3%A1c-n%E1%BB%81n-t%E1%BA%A3ng-x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh."><span class="header-section-number">13.2</span> Các nền tảng xây dựng mô hình.</a></li>
+<li>
+<a class="nav-link" href="#m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng.-1"><span class="header-section-number">13.3</span> Mô hình tần suất - mức độ nghiêm trọng.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-hai-th%C3%A0nh-ph%E1%BA%A7n"><span class="header-section-number">13.3.1</span> Mô hình hai thành phần</a></li>
+<li><a class="nav-link" href="#ph%C3%A2n-ph%E1%BB%91i-tweedie"><span class="header-section-number">13.3.2</span> Phân phối Tweedie</a></li>
+</ul>
+</li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="reference.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD/blob/master/10-mo-hinh-tuyen-tinh-tong-quat-mo-rong.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD/edit/master/10-mo-hinh-tuyen-tinh-tong-quat-mo-rong.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-08-05.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -608,7 +565,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

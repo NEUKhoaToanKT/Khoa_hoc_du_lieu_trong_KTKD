@@ -25,6 +25,8 @@ library(tree)
 library(randomForest)
 ```
 
+# (PART) PHẦN V: MÔ HÌNH CÂY QUYẾT ĐỊNH {-}
+
 
 # Mô hình cây quyết định
 

@@ -14,20 +14,20 @@ bookdown::bs4_book:
     primary: "#770513"
     base_font:
       google:
-        family: Source Sans Pro
+        family: Lora
         wght: [400, 450]
         ital: [0, 1]
     heading_font:
       google:
-        family: Source Sans Pro
+        family: Lora
         wght: 600
     code_font:
       google:
-        family: Fira Mono
-        wght: [400, 500]
+        family: Source Code Pro
+        wght: [400, 450]
         local: false
   includes:
-      in_header: ["local_js.html", "header.html"]
+      in_header: ["local_js.html"]
   repo: https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD
 
 bookdown::pdf_book:

@@ -90,30 +90,31 @@ div.base::before,
   background-image: url("styimages/comment.svg");
 }
 
-/*--- LOGO ---*/
+/* Centering the caption of figures and tables ------------------------------------------------- */
 
-/* Sidebar logo styling */
-.book .book-sidebar .sidebar-title::before {
-  content: "";
-  display: block;
-  margin: 0 auto 10px; /* Center and add space below the logo */
-  text-align: center; /* Center the logo */
+caption, p.caption {
+  text-align: center;
+  color: #640514;
+  font-style: italic;
 }
 
-.book .book-sidebar .sidebar-title::before {
-  content: url("styimages/LogoASLab.png");
-  display: block;
-  margin: 0 auto 10px; /* Center and add space below the logo */
-  width: 10%;
-  height: auto; /* Maintain aspect ratio */
+/* Adjusting sidebar width */
+@media (min-width: 1200px) {
+  .sidebar {
+    max-width: 20rem; /* Increased width */
+  }
 }
 
-.book .book-sidebar .sidebar-title img {
-  width: 100%;
-  height: auto;
-  max-width: 100%;
-  display: block;
-  margin: 0 auto;
+@media (max-width: 991.98px) {
+  .sidebar {
+    max-width: 100%; /* Original width */
+    max-width: 80%; /* New width */
+  }
+}
+
+/* Adjusting Table of Contents width */
+.book-toc {
+  max-width: 30rem; /* Set your desired width */
 }
 
 /* Other gitbook tweaks -------------------------------------------------- */
@@ -124,4 +125,15 @@ div.base::before,
 
 .book .book-body .page-wrapper .page-inner section.normal code {
   padding: 2px 0;
+}
+
+.blackbox {
+  background: gray;
+  color: black;
+}
+
+caption, p.caption {
+  text-align: center;
+  color: black;
+  font-style: italic;
 }
