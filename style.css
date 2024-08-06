@@ -94,14 +94,14 @@ div.base::before,
 
 caption, p.caption {
   text-align: center;
-  color: #640514;
+  color: black;
   font-style: italic;
 }
 
 /* Adjusting sidebar width */
 @media (min-width: 1200px) {
   .sidebar {
-    max-width: 20rem; /* Increased width */
+    max-width: 15rem; /* Increased width */
   }
 }
 
@@ -114,7 +114,7 @@ caption, p.caption {
 
 /* Adjusting Table of Contents width */
 .book-toc {
-  max-width: 30rem; /* Set your desired width */
+  max-width: 20rem; /* Set your desired width */
 }
 
 /* Other gitbook tweaks -------------------------------------------------- */
@@ -130,10 +130,4 @@ caption, p.caption {
 .blackbox {
   background: gray;
   color: black;
-}
-
-caption, p.caption {
-  text-align: center;
-  color: black;
-  font-style: italic;
 }

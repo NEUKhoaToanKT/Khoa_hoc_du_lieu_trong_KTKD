@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chương 8 Biến đổi và sắp xếp dữ liệu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+<title>Chương 7 Biến đổi và sắp xếp dữ liệu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
 <meta name="author" content="Nguyễn Quang Huy">
-<meta name="description" content="8.1 Biến đổi dữ liệu bằng thư viện dplyr Dữ liệu trước khi được đưa vào các bước phân tích, trực quan hóa, hoặc xây dựng mô hình, thường không có cấu trúc đúng như mong muốn. Thông thường, chúng...">
+<meta name="description" content="7.1 Biến đổi dữ liệu bằng thư viện dplyr Dữ liệu trước khi được đưa vào các bước phân tích, trực quan hóa, hoặc xây dựng mô hình, thường không có cấu trúc đúng như mong muốn. Thông thường, chúng...">
 <meta name="generator" content="bookdown 0.37 with bs4_book()">
-<meta property="og:title" content="Chương 8 Biến đổi và sắp xếp dữ liệu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta property="og:title" content="Chương 7 Biến đổi và sắp xếp dữ liệu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta property="og:type" content="book">
-<meta property="og:description" content="8.1 Biến đổi dữ liệu bằng thư viện dplyr Dữ liệu trước khi được đưa vào các bước phân tích, trực quan hóa, hoặc xây dựng mô hình, thường không có cấu trúc đúng như mong muốn. Thông thường, chúng...">
+<meta property="og:description" content="7.1 Biến đổi dữ liệu bằng thư viện dplyr Dữ liệu trước khi được đưa vào các bước phân tích, trực quan hóa, hoặc xây dựng mô hình, thường không có cấu trúc đúng như mong muốn. Thông thường, chúng...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chương 8 Biến đổi và sắp xếp dữ liệu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
-<meta name="twitter:description" content="8.1 Biến đổi dữ liệu bằng thư viện dplyr Dữ liệu trước khi được đưa vào các bước phân tích, trực quan hóa, hoặc xây dựng mô hình, thường không có cấu trúc đúng như mong muốn. Thông thường, chúng...">
+<meta name="twitter:title" content="Chương 7 Biến đổi và sắp xếp dữ liệu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="twitter:description" content="7.1 Biến đổi dữ liệu bằng thư viện dplyr Dữ liệu trước khi được đưa vào các bước phân tích, trực quan hóa, hoặc xây dựng mô hình, thường không có cấu trúc đúng như mong muốn. Thông thường, chúng...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.8/font.css" rel="stylesheet">
@@ -120,28 +120,27 @@
 <li><a class="" href="index.html">Lời nói đầu</a></li>
 <li class="book-part">PHẦN I: GIỚI THIỆU CHUNG</li>
 <li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></li>
-<li><a class="" href="khdl-v%C3%A0-c%C3%A1c-kh%C3%A1i-ni%E1%BB%87m-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> KHDL và các khái niệm cơ bản</a></li>
 <li class="book-part">PHẦN II: GIỚI THIỆU VỀ R</li>
-<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">4</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">5</span> Kiến thức R nâng cao</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">4</span> Kiến thức R nâng cao</a></li>
 <li class="book-part">PHẦN III: PHÂN TÍCH DỮ LIỆU</li>
-<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html"><span class="header-section-number">6</span> Nhập dữ liệu vào R</a></li>
-<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Tiền xử lý dữ liệu</a></li>
-<li><a class="active" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Biến đổi và sắp xếp dữ liệu</a></li>
-<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html"><span class="header-section-number">5</span> Nhập dữ liệu vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="active" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Biến đổi và sắp xếp dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
 <li class="book-part">PHẦN IV: MÔ HÌNH TUYẾN TÍNH</li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">10</span> Mô hình hồi quy tuyến tính</a></li>
-<li><a class="" href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">11</span> Các mô hình cộng tính tổng quát</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">12</span> Mô hình tuyến tính tổng quát.</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">13</span> Mô hình tần suất - mức độ nghiêm trọng.</a></li>
-<li><a class="" href="t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">14</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">9</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">10</span> Các mô hình cộng tính tổng quát</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">11</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">12</span> Mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li><a class="" href="t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">13</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
 <li class="book-part">PHẦN V: MÔ HÌNH CÂY QUYẾT ĐỊNH</li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">15</span> Mô hình cây quyết định</a></li>
-<li><a class="" href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html"><span class="header-section-number">16</span> Boosting và cây quyết định.</a></li>
-<li><a class="" href="neuralnetwork.html"><span class="header-section-number">17</span> Mô hình mạng nơ-ron</a></li>
-<li><a class="" href="neuralnetwork1.html"><span class="header-section-number">18</span> Các mạng học sâu điển hình</a></li>
-<li><a class="" href="h%E1%BB%8Dc-m%C3%A1y-kh%C3%B4ng-c%C3%B3-gi%C3%A1m-s%C3%A1t.html"><span class="header-section-number">19</span> Học máy không có giám sát</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">14</span> Mô hình cây quyết định</a></li>
+<li><a class="" href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html"><span class="header-section-number">15</span> Boosting và cây quyết định.</a></li>
+<li><a class="" href="neuralnetwork.html"><span class="header-section-number">16</span> Mô hình mạng nơ-ron</a></li>
+<li><a class="" href="neuralnetwork1.html"><span class="header-section-number">17</span> Các mạng học sâu điển hình</a></li>
+<li><a class="" href="h%E1%BB%8Dc-m%C3%A1y-kh%C3%B4ng-c%C3%B3-gi%C3%A1m-s%C3%A1t.html"><span class="header-section-number">18</span> Học máy không có giám sát</a></li>
 </ul>
 
         <div class="book-extra">
@@ -149,23 +148,23 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="biến-đổi-và-sắp-xếp-dữ-liệu" class="section level1" number="8">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="biến-đổi-và-sắp-xếp-dữ-liệu" class="section level1" number="7">
 <h1>
-<span class="header-section-number">Chương 8</span> Biến đổi và sắp xếp dữ liệu<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Chương 7</span> Biến đổi và sắp xếp dữ liệu<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
 </h1>
-<div id="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr" class="section level2" number="8.1">
+<div id="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">8.1</span> Biến đổi dữ liệu bằng thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span><a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Biến đổi dữ liệu bằng thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span><a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr"><i class="fas fa-link"></i></a>
 </h2>
 <p>Dữ liệu trước khi được đưa vào các bước phân tích, trực quan hóa, hoặc xây dựng mô hình, thường không có cấu trúc đúng như mong muốn. Thông thường, chúng ta sẽ cần thay đổi tên các biến, tạo thêm một số biến mới, sắp xếp lại các quan sát theo một trật tự, lọc dữ liệu theo một số tiêu chí, hoặc tổng hợp và nhóm dữ liệu vào các nhóm để dễ dàng hơn cho các bước tiếp theo. Các bước biến đổi dữ liệu như vậy sẽ được trình bày chi tiết trong phần này của cuốn sách. Đa số các hàm số được sử dụng để thực hiện các phép biến đổi dữ liệu như vậy sẽ nằm trong thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span> và thư viện <span style="color: #640514; font-family: Source Code Pro;">tidyr</span>. Đây là hai thư viện con của thư viện tổng hợp <span style="color: #640514; font-family: Source Code Pro;">tidyverse</span>. Để sử dụng hai thư viện này, bạn đọc có thể gọi thư viện <span style="color: #640514; font-family: Source Code Pro;">tidyverse</span> hoặc gọi tên hai thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span> và thư viện <span style="color: #640514; font-family: Source Code Pro;">tidyr</span> lên cửa sổ làm việc. Bạn đọc cũng cần lưu ý rằng trong thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span> có một số hàm trùng tên với các hàm có sẵn trong R, chẳng hạn như hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span>, hàm <span style="color: #640514; font-family: Source Code Pro;">select()</span>, hoặc hàm <span style="color: #640514; font-family: Source Code Pro;">lag()</span>. Bạn đọc cần kiểm tra thứ tự ưu tiên của các thư viện khi sử dụng các hàm kể trên, hoặc gọi tên thư viện đi kèm với tên hàm để tránh gặp lỗi khi thực thi các câu lệnh.</p>
 <p>Dữ liệu để minh họa cho các phép biến đổi trong chương này là dữ liệu <span style="color: #640514; font-family: Source Code Pro;">gapminder</span> nằm trong thư viện <span style="color: #640514; font-family: Source Code Pro;">dslabs</span>. Đây là dữ liệu mô tả sức khỏe và thu nhập của người dân thuộc tất cả các quốc gia trên thế giới được quan sát từ năm 1960 đến năm 2016. Chúng tôi lựa chọn dữ liệu này vì đây là dữ liệu dễ hiểu với đa số bạn đọc và có nhiều ý tưởng để phân tích. Mặc dù dữ liệu <span style="color: #640514; font-family: Source Code Pro;">gapminder</span> đã được đề cập trong phần tiền xử lý dữ liệu nhưng chúng tôi khuyên bạn đọc nên tham khảo mô tả về các biến trong dữ liệu một lần nữa trước khi đi đến các phần tiếp theo của cuốn sách.</p>
 <p>Để tránh việc hiển thị dữ liệu bị tràn dòng, chúng ta sẽ đổi dữ liệu về dạng <span style="color: #640514; font-family: Source Code Pro;">tibble</span> trước khi thực thi các hàm số</p>
-<div class="sourceCode" id="cb586"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib</span><span class="op">&lt;-</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/deprecated.html">as.tibble</a></span><span class="op">(</span><span class="va">gapminder</span><span class="op">)</span> <span class="co"># mytib là dữ liệu kiểu tibble</span></span></code></pre></div>
 <p>Trong các phần tiếp theo, chúng tôi sẽ lần lượt giới thiệu các hàm quan trọng trong thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span> dùng để thực hiện các biến đổi dữ liệu và các tham số quan trọng của các hàm số đó. Chúng tôi cũng sẽ giới thiệu với bạn đọc về cách kết hợp các hàm số đó với nhau thành một câu lệnh duy nhất bằng cách sử dụng toán tử pipe (<span style="color: #640514; font-family: Source Code Pro;">%&gt;%</span>).</p>
-<div id="thêm-biến-bằng-hàm-mutate" class="section level3" number="8.1.1">
+<div id="thêm-biến-bằng-hàm-mutate" class="section level3" number="7.1.1">
 <h3>
-<span class="header-section-number">8.1.1</span> Thêm biến bằng hàm <span style="color: #640514; font-family: Source Code Pro;">mutate()</span><a class="anchor" aria-label="anchor" href="#th%C3%AAm-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-mutate"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1.1</span> Thêm biến bằng hàm <span style="color: #640514; font-family: Source Code Pro;">mutate()</span><a class="anchor" aria-label="anchor" href="#th%C3%AAm-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-mutate"><i class="fas fa-link"></i></a>
 </h3>
 <p>Khi muốn tính toán giá trị cho một biến mới dựa trên các biến hiện có và thêm biến đó vào dữ liệu, bạn đọc sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">mutate()</span>. Hàm <span style="color: #640514; font-family: Source Code Pro;">mutate()</span> luôn thêm biến vào vị trí phía sau biến cuối cùng theo thứ tự từ trái sang phải trong dữ liệu hiện có. Khi bạn muốn thêm biến vào một vị trí cụ thể trong dữ liệu, bạn có thể sử dụng các tham số sau trong hàm <span style="color: #640514; font-family: Source Code Pro;">mutate()</span>.</p>
 <ul>
@@ -173,7 +172,7 @@
 <li>Tham số <span style="color: #640514; font-family: Source Code Pro;">.before</span> sử dụng để gán giá trị cho tên biến hiện có sẽ nằm phía sau biến mà bạn đọc muốn thêm vào.</li>
 </ul>
 <p>Ví dụ, chúng ta muốn thêm biến thu nhập bình quân đầu người của mỗi quốc gia, được tính bằng thu nhập quốc nội (biến <span style="color: #640514; font-family: Source Code Pro;">gdp</span>) chia cho dân số của quốc gia đó (biến <span style="color: #640514; font-family: Source Code Pro;">population</span>), chúng ta sử dụng <span style="color: #640514; font-family: Source Code Pro;">mutate()</span> như sau:</p>
-<div class="sourceCode" id="cb587"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">mytib</span>, gdp_per_capita <span class="op">=</span> <span class="va">gdp</span><span class="op">/</span><span class="va">population</span><span class="op">)</span> <span class="co"># Thêm cột có tên là gdp_per_capita</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 10
 ##    country   year infant_mortality life_expectancy fertility population      gdp
@@ -192,7 +191,7 @@
 ## # ℹ 3 more variables: continent &lt;fct&gt;, region &lt;fct&gt;, gdp_per_capita &lt;dbl&gt;</code></pre>
 <p>Câu lệnh trên có ý nghĩa là thêm biến có tên là <span style="color: #640514; font-family: Source Code Pro;">gdp_per_capita</span>, được tính bằng tổng thu nhập quốc nội (<span style="color: #640514; font-family: Source Code Pro;">gdp</span>) chia cho dân số (<span style="color: #640514; font-family: Source Code Pro;">population</span>) của quốc gia đó. Do chúng ta không chỉ định vị trí cụ thể cho biến <span style="color: #640514; font-family: Source Code Pro;">gdp_per_capita</span>, biến này sẽ nằm ở vị trí cuối cùng theo thứ tự từ trái sang phải trong dữ liệu mới.</p>
 <p>Nếu bạn đọc muốn biến mới được thêm vào ngay sau biến <span style="color: #640514; font-family: Source Code Pro;">infant_mortality</span>, hãy sử dụng tham số <span style="color: #640514; font-family: Source Code Pro;">.after</span> trong hàm <span style="color: #640514; font-family: Source Code Pro;">mutate()</span> như sau:</p>
-<div class="sourceCode" id="cb589"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">mytib</span>, gdp_per_capita <span class="op">=</span> <span class="va">gdp</span><span class="op">/</span><span class="va">population</span>, .after <span class="op">=</span> <span class="va">infant_mortality</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 10
 ##    country        year infant_mortality gdp_per_capita life_expectancy fertility
@@ -211,7 +210,7 @@
 ## # ℹ 4 more variables: population &lt;dbl&gt;, gdp &lt;dbl&gt;, continent &lt;fct&gt;,
 ## #   region &lt;fct&gt;</code></pre>
 <p>Tương tự như tham số <span style="color: #640514; font-family: Source Code Pro;">.after</span>, chúng ta sử dụng tham số <span style="color: #640514; font-family: Source Code Pro;">.before</span> trong hàm <span style="color: #640514; font-family: Source Code Pro;">mutate()</span> để cho biết biến mới thêm vào sẽ nằm phía trước biến mà chúng ta chỉ định. Để thêm biến thu nhập bình quân đầu người vào phía trước biến <span style="color: #640514; font-family: Source Code Pro;">infant_mortality</span>, chúng ta sử dụng tham số <span style="color: #640514; font-family: Source Code Pro;">.before</span> như sau</p>
-<div class="sourceCode" id="cb591"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb564"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">mytib</span>, gdp_per_capita <span class="op">=</span> <span class="va">gdp</span><span class="op">/</span><span class="va">population</span>, .before <span class="op">=</span> <span class="va">infant_mortality</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 10
 ##    country        year gdp_per_capita infant_mortality life_expectancy fertility
@@ -230,7 +229,7 @@
 ## # ℹ 4 more variables: population &lt;dbl&gt;, gdp &lt;dbl&gt;, continent &lt;fct&gt;,
 ## #   region &lt;fct&gt;</code></pre>
 <p>Một hàm số khác được sử dụng với mục đích tương tự là thêm biến mới vào dữ liệu giống như hàm <span style="color: #640514; font-family: Source Code Pro;">mutate()</span> là hàm <span style="color: #640514; font-family: Source Code Pro;">transmute()</span>. Hàm <span style="color: #640514; font-family: Source Code Pro;">transmute()</span> khác hàm <span style="color: #640514; font-family: Source Code Pro;">mutate()</span> ở chỗ là trong dữ liệu mới được tạo thành chỉ bao gồm các biến mới được khai báo trong hàm số đó. Ví dụ, chúng ta có thể thêm biến thu nhập bình quân đầu người của các quốc gia vào dữ liệu ban đầu bằng hàm <span style="color: #640514; font-family: Source Code Pro;">transmute()</span>:</p>
-<div class="sourceCode" id="cb593"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb566"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span><span class="va">mytib</span>, gdp_per_capita <span class="op">=</span> <span class="va">gdp</span><span class="op">/</span><span class="va">population</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 1
 ##    gdp_per_capita
@@ -248,18 +247,18 @@
 ## # ℹ 10,535 more rows</code></pre>
 <p>Có thể thấy rằng trong dữ liệu mới được tạo thành, chỉ có một biến duy nhất là biến thu nhập bình quân đầu người (<span style="color: #640514; font-family: Source Code Pro;">gdp_per_capita</span>) còn các biến khác đã không được giữ lại.</p>
 </div>
-<div id="lựa-chọn-biến-bằng-hàm-select" class="section level3" number="8.1.2">
+<div id="lựa-chọn-biến-bằng-hàm-select" class="section level3" number="7.1.2">
 <h3>
-<span class="header-section-number">8.1.2</span> Lựa chọn biến bằng hàm <span style="color: #640514; font-family: Source Code Pro;">select()</span><a class="anchor" aria-label="anchor" href="#l%E1%BB%B1a-ch%E1%BB%8Dn-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-select"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1.2</span> Lựa chọn biến bằng hàm <span style="color: #640514; font-family: Source Code Pro;">select()</span><a class="anchor" aria-label="anchor" href="#l%E1%BB%B1a-ch%E1%BB%8Dn-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-select"><i class="fas fa-link"></i></a>
 </h3>
 <p>Khi dữ liệu có quá nhiều biến trong khi chúng ta chỉ muốn sử dụng một số biến nhất định trong việc phân tích, chúng ta sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">select()</span> để lựa chọn các biến cần sử dụng trong các bước tiếp theo. Để biết chính xác tên các biến trong dữ liệu hiện có, chúng ta sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">names()</span>:</p>
-<div class="sourceCode" id="cb595"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb568"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">mytib</span><span class="op">)</span> <span class="co"># Cho biết tên các biến trong mytib</span></span></code></pre></div>
 <pre><code>## [1] "country"          "year"             "infant_mortality" "life_expectancy" 
 ## [5] "fertility"        "population"       "gdp"              "continent"       
 ## [9] "region"</code></pre>
 <p>Lưu ý duy nhất khi sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">select()</span> là cần gọi đúng tên các biến mà chúng ta muốn lựa chọn. Ví dụ, trong số 9 biến hiện có trong <span style="color: #640514; font-family: Source Code Pro;">mytib</span>, chúng ta chỉ sử dụng ba biến có tên là <span style="color: #640514; font-family: Source Code Pro;">year</span>, <span style="color: #640514; font-family: Source Code Pro;">gdp</span>, và <span style="color: #640514; font-family: Source Code Pro;">population</span>, chúng ta sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">select()</span> như sau:</p>
-<div class="sourceCode" id="cb597"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb570"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mytib</span>, <span class="va">year</span>, <span class="va">gdp</span>, <span class="va">population</span><span class="op">)</span> <span class="co"># lựa chọn các cột year, gdp, population</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 3
 ##     year          gdp population
@@ -276,7 +275,7 @@
 ## 10  1960           NA    3897889
 ## # ℹ 10,535 more rows</code></pre>
 <p>Khi sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">select()</span> để lựa chọn biến, chúng ta cũng có thể thực hiện đổi tên biến trong cùng một câu lệnh. Ví dụ, bạn đọc muốn tên các biến mới tương ứng với các biến <span style="color: #640514; font-family: Source Code Pro;">year</span>, <span style="color: #640514; font-family: Source Code Pro;">gdp</span>, và <span style="color: #640514; font-family: Source Code Pro;">population</span> lần lượt là <span style="color: #640514; font-family: Source Code Pro;">Year</span>, <span style="color: #640514; font-family: Source Code Pro;">Gdp</span> và <span style="color: #640514; font-family: Source Code Pro;">Population</span>, chúng ta viết câu lệnh với hàm <span style="color: #640514; font-family: Source Code Pro;">select()</span> như sau:</p>
-<div class="sourceCode" id="cb599"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb572"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mytib</span>, Year <span class="op">=</span> <span class="va">year</span>, Gdp <span class="op">=</span>  <span class="va">gdp</span>,  Population <span class="op">=</span> <span class="va">population</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 3
 ##     Year          Gdp Population
@@ -293,7 +292,7 @@
 ## 10  1960           NA    3897889
 ## # ℹ 10,535 more rows</code></pre>
 <p>Dữ liệu <span style="color: #640514; font-family: Source Code Pro;">mytib</span> chỉ có 9 biến nên việc hiển thị và gọi đúng tên biến không gặp vấn đề. Tuy nhiên, khi dữ liệu có quá nhiều biến đồng thời tên các biến dài và khó nhớ thì việc gọi tên chính xác tất cả các biến trở nên khó khăn và câu lệnh <span style="color: #640514; font-family: Source Code Pro;">select()</span> sẽ trở nên phức tạp. Để hỗ trợ cho người dùng khi gặp những khó khăn như vậy, thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span> có các phương pháp lựa chọn biến mà không cần gọi chính xác tên biến. Ví dụ, chúng ta có thể sử dụng dấu <span style="color: #640514; font-family: Source Code Pro;">:</span> đứng giữa hai tên biến cụ thể để lựa chọn tất cả các biến nằm giữa hai biến mà chúng ta chỉ định.</p>
-<div class="sourceCode" id="cb601"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb574"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mytib</span>, <span class="va">year</span>, <span class="va">gdp</span><span class="op">:</span><span class="va">population</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 3
 ##     year          gdp population
@@ -314,7 +313,7 @@
 <ul>
 <li>Tham số <span style="color: #640514; font-family: Source Code Pro;">starts_with()</span> được sử dụng để lựa chọn các biến có tên bắt đầu bằng một chuỗi ký tự nào đó. Chúng ta chỉ cần viết đoạn ký tự đó trong hàm <span style="color: #640514; font-family: Source Code Pro;">starts_with()</span> đặt trong hàm <span style="color: #640514; font-family: Source Code Pro;">select()</span>. Ví dụ, chúng ta không nhớ chính xác tên của biến tỷ lệ tử vong của trẻ sơ sinh trong dữ liệu <span style="color: #640514; font-family: Source Code Pro;">gapminder</span>; chúng ta chỉ chắc chắn rằng tên biến được bắt đầu bằng <span style="color: #640514; font-family: Source Code Pro;">infant</span>. Tham số <span style="color: #640514; font-family: Source Code Pro;">starts_with()</span> được sử dụng trong trường hợp này như sau:</li>
 </ul>
-<div class="sourceCode" id="cb603"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Lựa chọn tất cả các biến có tên bắt đầu bằng infant</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mytib</span>, <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"infant"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 1
@@ -335,7 +334,7 @@
 <li><p>Tương tự như tham số <span style="color: #640514; font-family: Source Code Pro;">starts_with()</span>, các tham số <span style="color: #640514; font-family: Source Code Pro;">ends_with()</span> hoặc <span style="color: #640514; font-family: Source Code Pro;">contains()</span> được sử dụng để lựa chọn các biến có tên kết thúc bằng một chuỗi ký tự hoặc có tên chứa một chuỗi ký tự nào đó.</p></li>
 <li><p>Tham số <span style="color: #640514; font-family: Source Code Pro;">matches()</span> có thể được sử dụng trong trường hợp tổng quát hơn <span style="color: #640514; font-family: Source Code Pro;">contains()</span>khi các biến được lựa chọn có tên được biểu diễn qua các biểu thức chính quy.</p></li>
 </ul>
-<div class="sourceCode" id="cb605"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib1</span><span class="op">&lt;-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">mytib</span>, gdp_per_capita <span class="op">=</span> <span class="va">gdp</span><span class="op">/</span><span class="va">population</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Lựa chọn các biến có tên chứa "gdp"</span></span>
@@ -355,7 +354,7 @@
 ## 10           NA            NA 
 ## # ℹ 10,535 more rows</code></pre>
 <p>Khi số lượng biến được lựa chọn nhiều hơn số biến không được lựa chọn, hoặc khi chúng ta muốn loại một số biến không sử dụng ra khỏi dữ liệu, hàm <span style="color: #640514; font-family: Source Code Pro;">select()</span> cũng cho phép chúng ta thực thi yêu cầu loại bỏ biến bằng cách thêm dấu <span style="color: #640514; font-family: Source Code Pro;">-</span> vào trước tên các biến mà chúng ta muốn loại ra khỏi dữ liệu. Ví dụ, khi chúng ta muốn lựa chọn tất cả các biến, ngoại trừ các biến có tên bắt đầu bằng chuỗi ký tự <span style="color: #640514; font-family: Source Code Pro;">gdp</span>, hàm <span style="color: #640514; font-family: Source Code Pro;">select()</span> được sử dụng như sau:</p>
-<div class="sourceCode" id="cb607"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb580"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mytib1</span>, <span class="op">-</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"gdp"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 8
 ##    country  year infant_mortality life_expectancy fertility population continent
@@ -373,15 +372,15 @@
 ## # ℹ 10,535 more rows
 ## # ℹ 1 more variable: region &lt;fct&gt;</code></pre>
 </div>
-<div id="lọc-dữ-liệu-bằng-hàm-filter" class="section level3" number="8.1.3">
+<div id="lọc-dữ-liệu-bằng-hàm-filter" class="section level3" number="7.1.3">
 <h3>
-<span class="header-section-number">8.1.3</span> Lọc dữ liệu bằng hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span><a class="anchor" aria-label="anchor" href="#l%E1%BB%8Dc-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-filter"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1.3</span> Lọc dữ liệu bằng hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span><a class="anchor" aria-label="anchor" href="#l%E1%BB%8Dc-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-filter"><i class="fas fa-link"></i></a>
 </h3>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span> trong thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span> cho phép chúng ta lọc ra các quan sát có giá trị của một hoặc một vài biến thỏa mãn các điều kiện nào đó. Như chúng tôi đã đề cập ở trên, có một số thư viện khác trong R sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span> với mục đích khác và chúng ta có thể không chắc chắn về thứ tự ưu tiên của các thư viện đang sẵn sàng trên môi trường làm việc hiện tại. Để đảm bảo gọi đúng hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span> trong thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span>, chúng ta định nghĩa lại hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span> như sau</p>
-<div class="sourceCode" id="cb609"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb582"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">filter</span><span class="op">&lt;-</span><span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
 <p>Cách hoạt động của hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span> khá đơn giản. Ví dụ như chúng ta muốn lấy ra dữ liệu của năm 2010 từ dữ liệu <span style="color: #640514; font-family: Source Code Pro;">gapminder</span>, hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span> được sử dụng để lọc ra giá trị 2010 trong biến <span style="color: #640514; font-family: Source Code Pro;">year</span> như sau:</p>
-<div class="sourceCode" id="cb610"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb583"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mytib</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2010</span><span class="op">)</span> <span class="co"># Chỉ lọc ra các quan sát có year bằng 2010</span></span></code></pre></div>
 <pre><code>## # A tibble: 185 × 9
 ##    country   year infant_mortality life_expectancy fertility population      gdp
@@ -400,7 +399,7 @@
 ## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
 <p>Sau khi thực thi câu lệnh như trên, một <span style="color: #640514; font-family: Source Code Pro;">tibble</span> mới được tạo thành bao gồm các quan sát với giá trị cột <span style="color: #640514; font-family: Source Code Pro;">year</span> bằng <span style="color: #640514; font-family: Source Code Pro;">2010</span>. Lưu ý rằng nếu chúng ta muốn lưu lại giá trị sau mỗi lần thực hiện biến đổi dữ liệu, hãy gán kết quả vào một dữ liệu mới.</p>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span> có thể thực hiện việc lọc dữ liệu trên nhiều biến trong cùng một câu lệnh. Ví dụ, chúng ta muốn lọc ra các quan sát của năm 2010 của các quốc gia thuộc lục địa Châu Âu, có thể sử dụng hai phép so sánh trong hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span> cùng lúc:</p>
-<div class="sourceCode" id="cb612"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">mytib</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2010</span>, <span class="va">continent</span> <span class="op">==</span> <span class="st">"Europe"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 39 × 9
 ##    country    year infant_mortality life_expectancy fertility population     gdp
@@ -418,13 +417,13 @@
 ## # ℹ 29 more rows
 ## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
 </div>
-<div id="sắp-xếp-dữ-liệu-bằng-hàm-arrange" class="section level3" number="8.1.4">
+<div id="sắp-xếp-dữ-liệu-bằng-hàm-arrange" class="section level3" number="7.1.4">
 <h3>
-<span class="header-section-number">8.1.4</span> Sắp xếp dữ liệu bằng hàm <span style="color: #640514; font-family: Source Code Pro;">arrange()</span><a class="anchor" aria-label="anchor" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-arrange"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1.4</span> Sắp xếp dữ liệu bằng hàm <span style="color: #640514; font-family: Source Code Pro;">arrange()</span><a class="anchor" aria-label="anchor" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-arrange"><i class="fas fa-link"></i></a>
 </h3>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">arrange()</span> tạo thành dữ liệu mới thu được bằng cách sắp xếp các quan sát của dữ liệu ban đầu theo thứ tự tăng dần hoặc giảm dần dựa trên giá trị của một hoặc nhiều biến. Nguyên tắc sắp xếp cũng tương tự như quy tắc sắp xếp của hàm <span style="color: #640514; font-family: Source Code Pro;">sort</span> khi sắp xếp trên véc-tơ, nghĩa là hàm bạn đọc có thể sắp xếp dữ liệu không chỉ theo biến kiểu <span style="color: #640514; font-family: Source Code Pro;">numeric</span> hay kiểu thời gian, mà còn có thể sắp xếp theo biến kiểu chuỗi ký tự. Lưu ý rằng khi véc-tơ kiểu chuỗi ký tự được định nghĩa dưới dạng <span style="color: #640514; font-family: Source Code Pro;">factor</span> thì thứ tự tăng dần sẽ được hiểu theo nghĩa là các <span style="color: #640514; font-family: Source Code Pro;">level</span> của biến kiểu <span style="color: #640514; font-family: Source Code Pro;">factor</span> tăng dần.</p>
 <p>Chúng ta sắp xếp dữ liệu <span style="color: #640514; font-family: Source Code Pro;">gapmider</span> theo thứ tự tăng dần cuả biến <span style="color: #640514; font-family: Source Code Pro;">year</span> như sau:</p>
-<div class="sourceCode" id="cb614"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb587"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mytib</span>, <span class="va">year</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 9
 ##    country   year infant_mortality life_expectancy fertility population      gdp
@@ -442,7 +441,7 @@
 ## # ℹ 10,535 more rows
 ## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
 <p>Để sắp xếp dữ liệu theo thứ tự giảm dần của một biến kiểu số hoặc kiểu thời gian, bạn đọc chỉ cần thêm dấu <span style="color: #640514; font-family: Source Code Pro;">-</span> vào phía trước tên biến. Tuy nhiên, R sẽ báo lỗi nếu chúng ta thêm dấu <span style="color: #640514; font-family: Source Code Pro;">-</span> vào trước tên một biến kiểu chuỗi ký tự. Để không xảy ra lỗi này khi sắp xếp dữ liệu theo thứ tự giảm dần của một biến kiểu chuỗi ký tự, chúng ta sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">desc()</span> cho tên biến:</p>
-<div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb589"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sắp xếp dữ liệu theo thứ tự giảm dần theo biến region</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mytib</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">region</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 9
@@ -461,7 +460,7 @@
 ## # ℹ 10,535 more rows
 ## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">desc()</span> có thể sử dụng trên tất cả các kiểu biến khi chúng ta muốn sắp xếp dữ liệu theo thứ tự giá trị trong biến giảm dần. Thêm vào đó, việc sắp xếp dữ liệu sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">arrange()</span> có thể được thực hiện dựa trên nhiều biến cùng lúc. Ví dụ, để sắp xếp dữ liệu <span style="color: #640514; font-family: Source Code Pro;">gapminder</span> theo thứ tự tăng dần theo năm (<span style="color: #640514; font-family: Source Code Pro;">year</span>), theo Châu lục (<span style="color: #640514; font-family: Source Code Pro;">continent</span>), và theo vùng (<span style="color: #640514; font-family: Source Code Pro;">region</span>), bạn đọc viết câu lệnh như sau:</p>
-<div class="sourceCode" id="cb618"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb591"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sắp xếp dữ liệu theo thứ tự tăng dần theo 3 biến</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mytib</span>, <span class="va">year</span>, <span class="va">continent</span>, <span class="va">region</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 9
@@ -480,7 +479,7 @@
 ## # ℹ 10,535 more rows
 ## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
 <p>Lưu ý rằng thứ tự sắp xếp cũng có thể là tăng theo một biến và giảm theo các biến khác:</p>
-<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb593"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Sắp xếp tăng dần theo năm, giảm dần theo continent, region, và gdp</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mytib</span>, <span class="va">year</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">continent</span><span class="op">)</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">region</span><span class="op">)</span>, <span class="op">-</span><span class="va">gdp</span><span class="op">)</span> </span></code></pre></div>
 <pre><code>## # A tibble: 10,545 × 9
@@ -499,7 +498,7 @@
 ## # ℹ 10,535 more rows
 ## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
 <p>Khi trong biến dữ liệu sử dụng để sắp xếp có chứa giá trị không quan sát được thì các giá trị này luôn được sắp xếp xuống phía dưới của dữ liệu, bất kể chúng ta sắp xếp dữ liệu theo thứ tự tăng dần hay giảm dần. Thật vậy, cột <span style="color: #640514; font-family: Source Code Pro;">gdp</span> của dữ liệu <span style="color: #640514; font-family: Source Code Pro;">gapminder</span> có tỷ lệ giá trị <span style="color: #640514; font-family: Source Code Pro;">NA</span> khá cao. Khi quan sát phần đuôi của dữ liệu sau khi được sắp xếp theo biến <span style="color: #640514; font-family: Source Code Pro;">gdp</span>, chúng ta sẽ luôn thấy các giá trị <span style="color: #640514; font-family: Source Code Pro;">NA</span> được sắp xếp xuống phía dưới:</p>
-<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb595"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mytib</span>, <span class="va">gdp</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 9
 ##   country       year infant_mortality life_expectancy fertility population   gdp
@@ -511,7 +510,7 @@
 ## 5 Zambia        2016               NA            57.1        NA         NA    NA
 ## 6 Zimbabwe      2016               NA            61.7        NA         NA    NA
 ## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
-<div class="sourceCode" id="cb624"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb597"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">mytib</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">gdp</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 9
 ##   country       year infant_mortality life_expectancy fertility population   gdp
@@ -525,9 +524,9 @@
 ## # ℹ 2 more variables: continent &lt;fct&gt;, region &lt;fct&gt;</code></pre>
 <p>Bạn đọc có thể thấy rằng phía đuôi của kết quả từ phép sắp xếp dữ liệu không thay đổi dù chúng ta có thực hiện sắp xếp theo thứ tự biến <span style="color: #640514; font-family: Source Code Pro;">gdp</span> tăng dần hay giảm dần. Nguyên nhân là do hàm sắp xếp luôn chuyển các giá trị không quan sát được xuống đuôi của kết quả.</p>
 </div>
-<div id="kết-hợp-các-phép-biến-đổi-bằng-toán-tử-pipe" class="section level3" number="8.1.5">
+<div id="kết-hợp-các-phép-biến-đổi-bằng-toán-tử-pipe" class="section level3" number="7.1.5">
 <h3>
-<span class="header-section-number">8.1.5</span> Kết hợp các phép biến đổi bằng toán tử pipe (<span style="color: #640514; font-family: Source Code Pro;">%&gt;%</span>)<a class="anchor" aria-label="anchor" href="#k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-ph%C3%A9p-bi%E1%BA%BFn-%C4%91%E1%BB%95i-b%E1%BA%B1ng-to%C3%A1n-t%E1%BB%AD-pipe"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1.5</span> Kết hợp các phép biến đổi bằng toán tử pipe (<span style="color: #640514; font-family: Source Code Pro;">%&gt;%</span>)<a class="anchor" aria-label="anchor" href="#k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-ph%C3%A9p-bi%E1%BA%BFn-%C4%91%E1%BB%95i-b%E1%BA%B1ng-to%C3%A1n-t%E1%BB%AD-pipe"><i class="fas fa-link"></i></a>
 </h3>
 <p>Trước khi giới thiệu về các hàm số khác sử dụng để biến đổi dữ liệu trong thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span>, chúng tôi giới thiệu đến bạn đọc một công cụ hiệu quả để kết nối các phép biến đổi, đó là toán tử <em>pipe</em> (<span style="color: #640514; font-family: Source Code Pro;">%&gt;%</span>). Toán tử pipe có thể sử dụng khi chúng ta thực hiện một chuỗi các phép biến đổi trên một dữ liệu mà không cần phải lặp lại việc gọi tên dữ liệu đó. Thuật ngữ <em>toán tử pipe</em> được mượn từ toán học khi nói đến việc sử dụng các hàm số nối tiếp nhau. Sử dụng toán tử pipe trong biến đổi dữ liệu giúp cho việc kết nối các câu lệnh gọi các hàm số trở nên đơn giản và không bị nhầm lẫn.</p>
 <p>Thật vậy, khi chúng ta muốn thực hiện một phân tích trên dữ liệu <span style="color: #640514; font-family: Source Code Pro;">gapminder</span> để trả lời câu hỏi: <em>Ba quốc gia có thu nhập bình quân đầu người cao nhất năm 2000 là ba quốc gia nào?</em>. Để trả lời câu hỏi này, bạn đọc sẽ cần thực hiện các phép biến đổi dữ liệu theo thứ tự như sau:</p>
@@ -539,7 +538,7 @@
 <li>Thứ năm: lấy ra ba hàng đầu tiên của dữ liệu sau khi sắp xếp, sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">head()</span>.</li>
 </ul>
 <p>Nếu viết các câu lệnh một cách thông thường, sau mỗi bước ở trên, bạn đọc sẽ phải lưu kết quả và gọi lại kết quả vào bước kế tiếp như sau:</p>
-<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb599"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Bước thứ nhất</span></span>
 <span><span class="va">mytib1</span><span class="op">&lt;-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">mytib</span>,gdp_per_capita <span class="op">=</span> <span class="va">gdp</span><span class="op">/</span><span class="va">population</span><span class="op">)</span></span>
 <span></span>
@@ -561,7 +560,7 @@
 ## 2 Japan              40013.
 ## 3 Norway             39954.</code></pre>
 <p>Khi viết các câu lệnh như trên sẽ gặp khó khăn và dễ bị nhầm lần do chúng ta phải liên tục lưu kết quả của từng câu lệnh và gọi lại kết quả đó trong câu lệnh tiếp theo. Để tránh gặp phải vấn đề này, toán tử pipe, ký hiệu <span style="color: #640514; font-family: Source Code Pro;">%&gt;%</span>, có thể giúp chúng ta kết nối các câu lệnh lại với nhau trong một câu lệnh duy nhất. Cùng với một yêu cầu như ở trên, cách viết các câu lệnh biến đổi dữ liệu sử dụng toán tử pipe như sau:</p>
-<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb601"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  </span>
 <span>  <span class="co"># Bước thứ nhất</span></span>
@@ -587,12 +586,12 @@
 <p>Bạn đọc có thể thấy rằng kết quả thu được từ hai đoạn câu lệnh là hoàn toàn giống nhau. Cách viết câu lệnh sử dụng toán tử pipe có ưu điểm là rõ ràng, ngắn gọn, và không gây nhầm lẫn. Để bạn đọc làm quen với cách viết câu lệnh sử dụng <span style="color: #640514; font-family: Source Code Pro;">%&gt;%</span>, từ phần này của cuốn sách, mọi phép biến đổi trên dữ liệu đều được ưu tiên sử dụng cách viết này.</p>
 <p>Chúng ta sẽ tiếp tục làm quen với các hàm số sử dụng để biến đổi dữ liệu của thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span> trong các phần tiếp theo.</p>
 </div>
-<div id="tổng-hợp-dữ-liệu-bằng-summarise-và-group_by" class="section level3" number="8.1.6">
+<div id="tổng-hợp-dữ-liệu-bằng-summarise-và-group_by" class="section level3" number="7.1.6">
 <h3>
-<span class="header-section-number">8.1.6</span> Tổng hợp dữ liệu bằng <span style="color: #640514; font-family: Source Code Pro;">summarise()</span> và <span style="color: #640514; font-family: Source Code Pro;">group_by()</span><a class="anchor" aria-label="anchor" href="#t%E1%BB%95ng-h%E1%BB%A3p-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-summarise-v%C3%A0-group_by"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1.6</span> Tổng hợp dữ liệu bằng <span style="color: #640514; font-family: Source Code Pro;">summarise()</span> và <span style="color: #640514; font-family: Source Code Pro;">group_by()</span><a class="anchor" aria-label="anchor" href="#t%E1%BB%95ng-h%E1%BB%A3p-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-summarise-v%C3%A0-group_by"><i class="fas fa-link"></i></a>
 </h3>
 <p>Để biết thông tin về thu nhập quốc nội của một quốc gia, chúng ta có thể sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span> để lọc ra một quan sát và không cần thực hiện thêm tính toán. Câu lệnh dưới đây cho biết thu nhập bình quân đầu người của Việt Nam năm 2000.</p>
-<div class="sourceCode" id="cb630"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb603"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">country</span> <span class="op">==</span> <span class="st">"Vietnam"</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>gdp_per_capita <span class="op">=</span> <span class="va">gdp</span><span class="op">/</span><span class="va">population</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -603,7 +602,7 @@
 ## 1 Vietnam           388.</code></pre>
 <p>Khi muốn so sánh thu nhập bình quân đầu người của Việt Nam với thu nhập bình quân đầu người của vùng Đông Nam Á trong năm 2000, chúng ta cần lọc dữ liệu theo vùng <span style="color: #640514; font-family: Source Code Pro;">South-Eastern Asia</span> và năm <span style="color: #640514; font-family: Source Code Pro;">2000</span>, loại bỏ các quan sát có giá trị <span style="color: #640514; font-family: Source Code Pro;">NA</span>, sau đó tính tổng giá trị của biến <span style="color: #640514; font-family: Source Code Pro;">gdp</span> chia cho tổng giá trị của biến <span style="color: #640514; font-family: Source Code Pro;">population</span>. Các phép tính toán được thực hiện trên nhiều quan sát cùng một lúc như vậy, với mục tiêu trả lại kết quả là một giá trị đặc trưng của các biến như tổng, giá trị trung bình, trung vị, phương sai,…, được gọi là các phép toán tổng hợp dữ liệu.</p>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">summarise()</span> trong thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span> là một công cụ hiệu quả để thực hiện các phép tính toán tổng hợp dữ liệu như vậy. Để thực hiện phép việc tính thu nhập bình quân đầu người của các quốc gia Đông Nam Á trong năm 2000, chúng ta viết câu lệnh với <span style="color: #640514; font-family: Source Code Pro;">summarise()</span> như sau:</p>
-<div class="sourceCode" id="cb632"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb605"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">region</span> <span class="op">==</span> <span class="st">"South-Eastern Asia"</span>, <span class="va">year</span> <span class="op">==</span> <span class="fl">2000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">drop_na</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
@@ -627,7 +626,7 @@
 </ul>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">summarise()</span> kết hợp với hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span> có thể được sử dụng để tính toán thu nhập bình quân đầu người của các vùng, các Châu lục giống như cách chúng ta tính toán với vùng Đông Nam Á. Tuy nhiên, có thể thấy rằng, để có được giá trị là thu nhập bình quân đầu người của nhiều vùng, hoặc tất cả các châu lục, chúng ta cần thực hiện nhiều lần các câu lệnh như trên và tập hợp kết quả lại trong một dữ liệu duy nhất.</p>
 <p>Một phương pháp hiệu quả hơn để thực hiện việc này đó là sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">group_by()</span> thay thế cho hàm <span style="color: #640514; font-family: Source Code Pro;">filter()</span>. Hàm số này cho phép chúng ta thực hiện các tính toán theo nhóm được định nghĩa theo các giá trị của một hoặc một vài biến rời rạc. Ví dụ để tính thu nhập bình quân đầu người của tất cả các vùng trên thế giới trong năm 2000 sử dụng dữ liệu <span style="color: #640514; font-family: Source Code Pro;">gapminder</span>, chúng ta sẽ dùng hàm <span style="color: #640514; font-family: Source Code Pro;">group_by()</span> để nhóm dữ liệu theo biến <span style="color: #640514; font-family: Source Code Pro;">gapminder</span> này, sau đó gọi hàm <span style="color: #640514; font-family: Source Code Pro;">summarise()</span> để tổng hợp dữ liệu cho từng nhóm. Câu lệnh được viết như sau:</p>
-<div class="sourceCode" id="cb634"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb607"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># Lọc dữ liệu theo năm 2000</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -659,7 +658,7 @@
 ## # ℹ 12 more rows</code></pre>
 <p>Có thể thấy trong dữ liệu kết quả từ hàm <span style="color: #640514; font-family: Source Code Pro;">summarise()</span> có 22 quan sát tương ứng với 22 giá trị khác nhau của <span style="color: #640514; font-family: Source Code Pro;">region</span> và có 4 biến. Biến đầu tiên là biến <span style="color: #640514; font-family: Source Code Pro;">region</span> chứa tên 22 vùng; ba biến còn lại được khai báo và tính toán trong hàm <span style="color: #640514; font-family: Source Code Pro;">summarise()</span>. Quan trọng là khi được gọi bên trong hàm <span style="color: #640514; font-family: Source Code Pro;">summarise()</span>, các hàm số thực hiện tính toán véc-tơ như hàm <span style="color: #640514; font-family: Source Code Pro;">sum()</span> chỉ thực thi trên véc-tơ tương ứng với từng vùng, chứ không tính toán trên toàn bộ các quan sát. Bạn đọc có thể thấy trong kết quả các vùng có thu nhập bình quân đầu người ở mức cao hơn 20 nghìn USD là vùng Australia và New Zealand trong khi có những vùng chỉ có thu nhập bình quân đầu người khoảng 271 USD là vùng Đông Phi.</p>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">group_by()</span> được sử dụng với một hoặc một vài biến rời rạc và các hàm số được gọi sau hàm số này đều được tính toán theo nhóm thay vì tính toán theo từng quan sát riêng lẻ. Nếu bạn đọc muốn giữ nguyên mỗi quan sát tương ứng với một quốc gia và tính toán thu nhập bình quân đầu người theo vùng tương ứng với quốc gia đó, chúng ta sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">transmute()</span> thay thế cho <span style="color: #640514; font-family: Source Code Pro;">summarise()</span></p>
-<div class="sourceCode" id="cb636"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb609"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># Lọc dữ liệu theo năm 2000</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -694,7 +693,7 @@
 ## # ℹ 168 more rows</code></pre>
 <p>Dữ liệu mới được tạo thành có 178 quan sát, mỗi mỗi quan sát tương ứng với một quốc gia trong năm 2000. Dữ liệu có 6 biến, trong đó biến <span style="color: #640514; font-family: Source Code Pro;">region</span> được gọi trong hàm <span style="color: #640514; font-family: Source Code Pro;">group_by()</span>, năm biến còn lại được khai báo và tính toán trong hàm <span style="color: #640514; font-family: Source Code Pro;">transmute()</span>. Khi tính toán 5 biến, các biến giữ nguyên giá trị khi chúng ta gán giá trị cho chính biến đó. Với các biến được tính toán dựa trên nhiều quan sát, như biến <span style="color: #640514; font-family: Source Code Pro;">region_gdp_per_capita</span> trong câu lệnh ở trên, chúng ta sử dụng các hàm số tính toán trên véc-tơ. Nếu bạn đọc muốn giữ nguyên các biến của dữ liệu ban đầu, có thể sử dụng <span style="color: #640514; font-family: Source Code Pro;">mutate()</span> thay thế cho <span style="color: #640514; font-family: Source Code Pro;">transmute()</span>.</p>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">group_by()</span> có thể được sử dụng trên nhiều biến rời rạc cùng một lúc, hoặc có thể được gọi nhiều lần trong một câu lệnh nếu chúng ta muốn nhóm dữ liệu theo các cách khác nhau. Ví dụ, chúng ta muốn thêm vào dữ liệu của năm 2000 các cột chứa giá trị là thu nhập bình quân đầu người theo vùng, theo châu lục, và trên toàn thế giới, chúng ta nhóm dữ liệu lần lượt theo các biến <span style="color: #640514; font-family: Source Code Pro;">region</span>, <span style="color: #640514; font-family: Source Code Pro;">continent</span>, và nhóm tất cả dữ liệu, để tính toán trung bình theo nhóm:</p>
-<div class="sourceCode" id="cb638"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb611"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># Lọc dữ liệu theo năm 2000</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op">==</span> <span class="fl">2000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -740,7 +739,7 @@
 ## #   global_gdp_per_capita &lt;dbl&gt;</code></pre>
 <p>Bạn đọc có thể thấy trong dữ liệu được tạo thành có các biến <span style="color: #640514; font-family: Source Code Pro;">region_gdp_per_capita</span>, <span style="color: #640514; font-family: Source Code Pro;">continent_gdp_per_capita</span>, và <span style="color: #640514; font-family: Source Code Pro;">global_gdp_per_capita</span> là các biến được tính toán theo các nhóm được quy định bằng các hàm <span style="color: #640514; font-family: Source Code Pro;">group_by()</span>. Sau khi gọi hàm <span style="color: #640514; font-family: Source Code Pro;">group_by()</span> và thực hiện tính toán, chúng tôi đã sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">ungroup()</span> để trả lại dữ liệu về trạng thái ban đầu. Dữ liệu kết quả đã cho chúng ta một cái nhìn tổng quan hơn về thu nhập bình quân đầu người của tất cả các quốc gia, các vùng lãnh thổ, và các châu lục trên toàn thế giới trong năm 2000. Quan sát đầu tiên tương ứng với Australia, là một quốc gia phát triển, có thu nhập bình quân đầu người khoảng 21 nghìn USD, cao hơn một chút so với vùng Australia and New Zealand, cao hơn so với thu nhập bình quân của Châu đại dương là khoảng 15.5 nghìn USD, và gấp khoảng 4 lần thu nhập bình quân đầu người trên thế giới.</p>
 <p>Có thể sử dụng nhiều biến rời rạc cùng một lúc trong hàm <span style="color: #640514; font-family: Source Code Pro;">group_by()</span>. Ví dụ, bạn đọc quan tâm đến sự thay đổi của thu nhập bình quân đầu người của các Châu lục trên thế giới trong các năm 1990, 2000, và 2010. Để thực hiện được tính toán, chúng ta cần nhóm dữ liệu đồng thời theo các biến <span style="color: #640514; font-family: Source Code Pro;">continent</span> và <span style="color: #640514; font-family: Source Code Pro;">year</span> như sau:</p>
-<div class="sourceCode" id="cb640"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb613"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="co"># Lọc dữ liệu theo các năm 1990, 2000, 2010 và loại bỏ NA</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">year</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1990</span>, <span class="fl">2000</span>, <span class="fl">2010</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
@@ -776,12 +775,12 @@
 <p>Dữ liệu mới được tạo thành có ba biến, trong đó hai biến đầu tiên được gọi trong hàm <span style="color: #640514; font-family: Source Code Pro;">group_by()</span> và biến thứ ba có tên <span style="color: #640514; font-family: Source Code Pro;">continent_gdp_per_capita</span> được tính toán trong hàm <span style="color: #640514; font-family: Source Code Pro;">summarise()</span>.</p>
 </div>
 </div>
-<div id="sắp-xếp-dữ-liệu-bằng-thư-viện-tidyr" class="section level2" number="8.2">
+<div id="sắp-xếp-dữ-liệu-bằng-thư-viện-tidyr" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">8.2</span> Sắp xếp dữ liệu bằng thư viện <span style="color: #640514; font-family: Source Code Pro;">tidyr</span><a class="anchor" aria-label="anchor" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-tidyr"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Sắp xếp dữ liệu bằng thư viện <span style="color: #640514; font-family: Source Code Pro;">tidyr</span><a class="anchor" aria-label="anchor" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-tidyr"><i class="fas fa-link"></i></a>
 </h2>
 <p>Dữ liệu trước khi được đưa vào bước trực quan hóa hoặc xây dựng mô hình cần phải được sắp xếp và trình bày một cách nhất quán. Hầu hết các dữ liệu có sẵn trong R, hoặc trong thư viện của R, nhìn chung đều đã được sắp xếp hoàn chỉnh nên chúng ta không gặp phải vấn đề này trong các ví dụ ở trên. Tuy nhiên, dữ liệu lấy từ các nguồn bên ngoài thường gặp phải các vấn đề về sự thiếu nhất quán. Hãy quan sát các ví dụ sau, các dữ liệu cùng thể hiện thông tin về tổng thu nhập quốc dân và dân số của các quốc gia trên thế giới từ năm 2000 đến 2010 nhưng lại được trình bày khác nhau:</p>
-<div class="sourceCode" id="cb642"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb615"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib1</span></span></code></pre></div>
 <pre><code>## # A tibble: 2,035 × 4
 ##    country              year           gdp population
@@ -797,7 +796,7 @@
 ##  9 Austria              2000 192070749954     8050884
 ## 10 Azerbaijan           2000   5272617196     8117742
 ## # ℹ 2,025 more rows</code></pre>
-<div class="sourceCode" id="cb644"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb617"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib2</span></span></code></pre></div>
 <pre><code>## # A tibble: 2,035 × 3
 ##    country              year gdp_per_capita       
@@ -813,7 +812,7 @@
 ##  9 Austria              2000 192070749954/8050884 
 ## 10 Azerbaijan           2000 5272617196/8117742   
 ## # ℹ 2,025 more rows</code></pre>
-<div class="sourceCode" id="cb646"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib3</span></span></code></pre></div>
 <pre><code>## # A tibble: 4,070 × 4
 ##    country              year type               value
@@ -829,7 +828,7 @@
 ##  9 Argentina            2000 gdp        284203745280 
 ## 10 Argentina            2000 population     37057453 
 ## # ℹ 4,060 more rows</code></pre>
-<div class="sourceCode" id="cb648"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib4</span></span></code></pre></div>
 <pre><code>## # A tibble: 370 × 13
 ##    country type   `2000`  `2001`  `2002`  `2003`  `2004`  `2005`  `2006`  `2007`
@@ -859,12 +858,12 @@
 </ul>
 <p>Lý do chính khiến dữ liệu không được sắp xếp nhất quán là do dữ liệu thường được tổ chức để thuận lợi cho một số mục tiêu khác với mục tiêu phân tích, chẳng hạn như mục tiêu nhập dữ liệu hoặc mục tiêu để hiển thị trực quan hơn với người quan sát dữ liệu.</p>
 <p>Quá trình sắp xếp dữ liệu là quá trình biến đổi, chuyển hóa dữ liệu từ các định dạng như dữ liệu trong <span style="color: #640514; font-family: Source Code Pro;">mytib2</span>, <span style="color: #640514; font-family: Source Code Pro;">mytib3</span>, hoặc <span style="color: #640514; font-family: Source Code Pro;">mytib4</span> về dữ liệu có định dạng như <span style="color: #640514; font-family: Source Code Pro;">mytib1</span>. Nhìn chung, sắp xếp dữ liệu là công việc tương đối đơn giản so với các quy trình khác. Trong phần này, bạn đọc chỉ cần nắm vững nguyên tắc của hai phép biến đổi là kéo dài dữ liệu bằng hàm <span style="color: #640514; font-family: Source Code Pro;">gather()</span> và mở rộng dữ liệu bằng hàm <span style="color: #640514; font-family: Source Code Pro;">spread()</span>. Trong các phiên bản mới của thư viện <span style="color: #640514; font-family: Source Code Pro;">tidyr</span>), các hàm <span style="color: #640514; font-family: Source Code Pro;">gather()</span> và <span style="color: #640514; font-family: Source Code Pro;">spread()</span> đã được bổ sung thêm các tham số mới và có thể được gọi bằng tên mới là <span style="color: #640514; font-family: Source Code Pro;">pivot_longer()</span> và <span style="color: #640514; font-family: Source Code Pro;">pivot_wider()</span>. Tuy nhiên, các nguyên tắc hoạt động của các hàm này là tương đồng nhau và không có sự khác biệt đáng kể.</p>
-<div id="kéo-dài-dữ-liệu-bằng-gather" class="section level3" number="8.2.1">
+<div id="kéo-dài-dữ-liệu-bằng-gather" class="section level3" number="7.2.1">
 <h3>
-<span class="header-section-number">8.2.1</span> Kéo dài dữ liệu bằng <span style="color: #640514; font-family: Source Code Pro;">gather()</span><a class="anchor" aria-label="anchor" href="#k%C3%A9o-d%C3%A0i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-gather"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.1</span> Kéo dài dữ liệu bằng <span style="color: #640514; font-family: Source Code Pro;">gather()</span><a class="anchor" aria-label="anchor" href="#k%C3%A9o-d%C3%A0i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-gather"><i class="fas fa-link"></i></a>
 </h3>
 <p>Dữ liệu được lưu dưới dạng của <span style="color: #640514; font-family: Source Code Pro;">mytib4</span> có thông tin về năm quan sát được lưu dưới dạng cột. Đây là trường hợp rất hay gặp phải khi lấy dữ liệu từ các nguồn bên ngoài vào. Các dữ liệu này được lưu dưới dạng các ma trận với ít dòng và nhiều cột để thuận lợi cho người sử dụng dữ liệu có quan sát trực quan. Để đưa dữ liệu như <span style="color: #640514; font-family: Source Code Pro;">mytib4</span> về định dạng có thể phân tích được, mà mỗi dòng là một quốc gia, được quan sát trong 1 năm, chúng ta cần thêm vào dữ liệu một cột có tên <span style="color: #640514; font-family: Source Code Pro;">year</span>. Giá trị của biến <span style="color: #640514; font-family: Source Code Pro;">year</span> là tên tất cả các cột, từ cột <span style="color: #640514; font-family: Source Code Pro;">2000</span> đến cột <span style="color: #640514; font-family: Source Code Pro;">2010</span>. Thêm cột <span style="color: #640514; font-family: Source Code Pro;">year</span> và kéo dài dữ liệu <span style="color: #640514; font-family: Source Code Pro;">mytib4</span>, chúng ta sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">gather()</span> như sau:</p>
-<div class="sourceCode" id="cb650"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib4</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu">gather</span><span class="op">(</span>key <span class="op">=</span> <span class="st">"year"</span>, value <span class="op">=</span> <span class="st">"gdp_population"</span>, <span class="op">-</span><span class="va">country</span>, <span class="op">-</span><span class="va">type</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 4,070 × 4
 ##    country             type       year  gdp_population
@@ -886,7 +885,7 @@
 <li>Sau khi khai báo hai tham số <span style="color: #640514; font-family: Source Code Pro;">key</span> và <span style="color: #640514; font-family: Source Code Pro;">value</span>, bạn đọc cần khai báo chính xác thông tin các biến không bị tác động bởi hàm <span style="color: #640514; font-family: Source Code Pro;">gather()</span>. Trong ví dụ ở trên, tất các các giá trị chúng ta muốn tập hợp lại giá trị nằm trong các cột bắt đầu từ cột có tên <span style="color: #640514; font-family: Source Code Pro;">2000</span>, tương ứng với các quan sát trong năm 2000, đến cột có tên <span style="color: #640514; font-family: Source Code Pro;">2010</span>, tương ứng với các quan sát của năm 2010. Khai báo <span style="color: #640514; font-family: Source Code Pro;">-country</span> và <span style="color: #640514; font-family: Source Code Pro;">-type</span> trong hàm <span style="color: #640514; font-family: Source Code Pro;">gather()</span> có ý nghĩa là các biến được tập hợp thông tin lại thành một cột duy nhất là tất cả các cột của <span style="color: #640514; font-family: Source Code Pro;">mytib4</span>, ngoại trừ hai cột <span style="color: #640514; font-family: Source Code Pro;">country</span> và <span style="color: #640514; font-family: Source Code Pro;">type</span>.</li>
 </ul>
 <p>Trong các phiên bản mới của thư viện <span style="color: #640514; font-family: Source Code Pro;">tidyr</span>, hàm <span style="color: #640514; font-family: Source Code Pro;">pivot_longer()</span> thường được sử dụng thay thế cho <span style="color: #640514; font-family: Source Code Pro;">gather()</span>. Ưu điểm của <span style="color: #640514; font-family: Source Code Pro;">pivot_longer()</span> là câu lệnh dễ hiểu hơn và cho phép chúng ta quản lý tên cột bằng các hàm sử dụng cùng với các biểu thức chính quy, hay <em>regular expression</em>. Ví dụ, chúng ta có thể sử dụng <span style="color: #640514; font-family: Source Code Pro;">pivot_longer()</span> để tập hợp thông tin của tất cả các cột có tên cột bắt đầu bằng ký tự <span style="color: #640514; font-family: Source Code Pro;">‘2’</span> như sau</p>
-<div class="sourceCode" id="cb652"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib4</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"2"</span><span class="op">)</span>,</span>
 <span>                      names_to <span class="op">=</span> <span class="st">"year"</span>,</span>
 <span>                      values_to <span class="op">=</span> <span class="st">"gdp_population"</span><span class="op">)</span></span></code></pre></div>
@@ -906,7 +905,7 @@
 ## # ℹ 4,060 more rows</code></pre>
 <p>Bạn đọc có thể thấy rằng các tham số <span style="color: #640514; font-family: Source Code Pro;">names_to</span> và <span style="color: #640514; font-family: Source Code Pro;">values_to</span> trong hàm <span style="color: #640514; font-family: Source Code Pro;">pivot_longer()</span> được sử dụng tương tự như tham số <span style="color: #640514; font-family: Source Code Pro;">key</span> và <span style="color: #640514; font-family: Source Code Pro;">value</span> trong hàm <span style="color: #640514; font-family: Source Code Pro;">gather()</span>.</p>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">pivot_longer()</span> cho phép kéo dài các bảng mà giá trị của nhiều biến được tích hợp trong tên của các cột. Ví dụ, dữ liệu trong <span style="color: #640514; font-family: Source Code Pro;">mytib5</span> dưới đây lưu điểm của hai sinh viên theo hai kỳ học của các năm 2023 và năm 2024:</p>
-<div class="sourceCode" id="cb654"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb627"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib5</span></span></code></pre></div>
 <pre><code>## # A tibble: 2 × 5
 ##   Name  `2023 S1` `2023 S2` `2024 S1` `2024 S2`
@@ -914,7 +913,7 @@
 ## 1 SV1         8.5       6.9       8.1       8.5
 ## 2 SV2         8         8.2       8.8       8</code></pre>
 <p>Bạn đọc có thể thấy rằng tên các cột có bao gồm hai thông tin là năm học 2023 hoặc 2024 và thông tin về kỳ học S1 hoặc S2. Chúng ta có thể sử dụng <span style="color: #640514; font-family: Source Code Pro;">pivot_longer()</span> để tạo thành dữ liệu mới, với hai biến mới tương ứng với hai thông tin: <span style="color: #640514; font-family: Source Code Pro;">year</span> tương ứng với năm học và <span style="color: #640514; font-family: Source Code Pro;">semester</span> tương ứng với kỳ học của hai sinh viên:</p>
-<div class="sourceCode" id="cb656"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib5</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="op">!</span><span class="va">Name</span>, <span class="co"># Không tập hợp cột Names</span></span>
 <span>                      names_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"semester"</span><span class="op">)</span>,</span>
 <span>                      names_sep <span class="op">=</span> <span class="st">" "</span>,</span>
@@ -931,7 +930,7 @@
 ## 7 SV2   2024  S1         8.8
 ## 8 SV2   2024  S2         8</code></pre>
 <p>Trong các trường hợp phức tạp hơn, trong tên biến của dữ liệu ban đầu vừa chứa tên biến trong dữ liệu mới vừa chứa giá trị của biến trong dữ liệu mới như dữ liệu trong <span style="color: #640514; font-family: Source Code Pro;">mytib6</span> dưới đây:</p>
-<div class="sourceCode" id="cb658"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib6</span></span></code></pre></div>
 <pre><code>## # A tibble: 4 × 5
 ##   Lop   Ten_LopTruong Ten_BiThu Diem_LopTruong Diem_BiThu
@@ -941,7 +940,7 @@
 ## 3 Act63 LT3           BT3                    8          9
 ## 4 Act64 LT4           BT4                    9         10</code></pre>
 <p>Bạn đọc có thể thấy rằng dữ liệu chứa thông tin về 8 người, giữ các chức chức vụ lớp trưởng và bí thư tại 4 lớp với thông tin tương ứng với từng người là tên và điểm. Các cột dữ liệu <span style="color: #640514; font-family: Source Code Pro;">Ten_LopTruong</span> và <span style="color: #640514; font-family: Source Code Pro;">Ten_BiThu</span> vừa chứa tên của một biến là tên của người, vừa chứa giá trị của biến chức vụ của người đó. Tương tự, các cột dữ liệu <code>'Diem_LopTruong'</code> và <code>'Diem_BiThu'</code> vừa chứa tên của biến là điểm của bạn sinh viên tương ứng, vừa chứa giá trị của biến là chức vụ của người đó. Dữ liệu có thể được sắp xếp lại bằng <span style="color: #640514; font-family: Source Code Pro;">pivot_longer()</span> như sau:</p>
-<div class="sourceCode" id="cb660"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib6</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu">pivot_longer</span><span class="op">(</span>cols <span class="op">=</span> <span class="op">!</span><span class="va">Lop</span>,</span>
 <span>                      names_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">".value"</span>, <span class="st">"Chuc_vu"</span><span class="op">)</span>,</span>
 <span>                      names_sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span></span></code></pre></div>
@@ -958,12 +957,12 @@
 ## 8 Act64 BiThu     BT4      10</code></pre>
 <p>Trong câu lệnh ở trên, chúng tôi sử dụng tham số <span style="color: #640514; font-family: Source Code Pro;">names_to</span> với phần tử đầu tiên là <span style="color: #640514; font-family: Source Code Pro;">.value</span> thay vì sử dụng tham số <span style="color: #640514; font-family: Source Code Pro;">values_to</span> như trên. Mục đích là để khai báo rằng thành phần thứ nhất trong tên của các cột là tên biến, bao gồm các biến <span style="color: #640514; font-family: Source Code Pro;">Ten</span> và biến <span style="color: #640514; font-family: Source Code Pro;">Diem</span>. Phần tử thứ hai của tham số <span style="color: #640514; font-family: Source Code Pro;">names_to</span> là <span style="color: #640514; font-family: Source Code Pro;">Chuc_vu</span> tương ứng với biến <span style="color: #640514; font-family: Source Code Pro;">Chuc_vu</span> trong dữ liệu mới. Chúng ta sẽ tiếp tục thực hành với hàm <span style="color: #640514; font-family: Source Code Pro;">gather()</span> và <span style="color: #640514; font-family: Source Code Pro;">pivot_longer()</span> trong phần thực hành của chương.</p>
 </div>
-<div id="mở-rộng-dữ-liệu-với-speard" class="section level3" number="8.2.2">
+<div id="mở-rộng-dữ-liệu-với-speard" class="section level3" number="7.2.2">
 <h3>
-<span class="header-section-number">8.2.2</span> Mở rộng dữ liệu với <span style="color: #640514; font-family: Source Code Pro;">speard()</span><a class="anchor" aria-label="anchor" href="#m%E1%BB%9F-r%E1%BB%99ng-d%E1%BB%AF-li%E1%BB%87u-v%E1%BB%9Bi-speard"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.2</span> Mở rộng dữ liệu với <span style="color: #640514; font-family: Source Code Pro;">speard()</span><a class="anchor" aria-label="anchor" href="#m%E1%BB%9F-r%E1%BB%99ng-d%E1%BB%AF-li%E1%BB%87u-v%E1%BB%9Bi-speard"><i class="fas fa-link"></i></a>
 </h3>
 <p>Ngược lại với <span style="color: #640514; font-family: Source Code Pro;">gather()</span>, chúng ta sử dụng <span style="color: #640514; font-family: Source Code Pro;">speard()</span> để mở rộng dữ liệu, nghĩa là biến đổi tên biến thành tên các cột. Dữ liệu cần được mở rộng khi giá trị trong các cột dữ liệu không được đồng nhất, giống như thông tin về tổng thu nhập quốc dân và dân số của các quốc gia trên thế giới trong dữ liệu được lưu trong <span style="color: #640514; font-family: Source Code Pro;">mytib3</span></p>
-<div class="sourceCode" id="cb662"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib3</span></span></code></pre></div>
 <pre><code>## # A tibble: 4,070 × 4
 ##    country              year type               value
@@ -980,7 +979,7 @@
 ## 10 Argentina            2000 population     37057453 
 ## # ℹ 4,060 more rows</code></pre>
 <p>Bạn đọc có thể thấy rằng trong cột <span style="color: #640514; font-family: Source Code Pro;">gdp_population</span> vừa có cả thông tin về tổng thu nhập quốc dân (biến <span style="color: #640514; font-family: Source Code Pro;">gdp</span>) và thông tin về dân số (biến <span style="color: #640514; font-family: Source Code Pro;">population</span>) của quốc gia đó. Đồng thời cột <span style="color: #640514; font-family: Source Code Pro;">type</span> cho biết giá trị đó là <span style="color: #640514; font-family: Source Code Pro;">gdp</span> hay <span style="color: #640514; font-family: Source Code Pro;">population</span>. Dữ liệu như trên có thể được sắp xếp lại bằng cách sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">speard()</span> như sau:</p>
-<div class="sourceCode" id="cb664"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib3</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu">spread</span><span class="op">(</span>key <span class="op">=</span> <span class="va">type</span>, value <span class="op">=</span> <span class="va">value</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 2,035 × 4
 ##    country  year        gdp population
@@ -1003,12 +1002,12 @@
 </ul>
 <p>Trong các phiên bản mới của thư viện <span style="color: #640514; font-family: Source Code Pro;">tidyr</span>, hàm <span style="color: #640514; font-family: Source Code Pro;">pivot_wider()</span> được sử dụng để thay thế cho hàm <span style="color: #640514; font-family: Source Code Pro;">spread()</span> do có nhiều ưu điểm hơn. Do cách sử dụng <span style="color: #640514; font-family: Source Code Pro;">pivot_wider()</span> tương tự như <span style="color: #640514; font-family: Source Code Pro;">pivot_longer()</span> nên chúng tôi không đi vào thảo luận chi tiết về hàm số này. Bạn đọc tự tham khảo cách sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">pivot_wider()</span> và thực hành trong phần bài tập của chương.</p>
 </div>
-<div id="phân-tách-và-kết-hợp-các-cột" class="section level3" number="8.2.3">
+<div id="phân-tách-và-kết-hợp-các-cột" class="section level3" number="7.2.3">
 <h3>
-<span class="header-section-number">8.2.3</span> Phân tách và kết hợp các cột<a class="anchor" aria-label="anchor" href="#ph%C3%A2n-t%C3%A1ch-v%C3%A0-k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-c%E1%BB%99t"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2.3</span> Phân tách và kết hợp các cột<a class="anchor" aria-label="anchor" href="#ph%C3%A2n-t%C3%A1ch-v%C3%A0-k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-c%E1%BB%99t"><i class="fas fa-link"></i></a>
 </h3>
 <p>Đối với dữ liệu như <span style="color: #640514; font-family: Source Code Pro;">mytib2</span> với biến <span style="color: #640514; font-family: Source Code Pro;">gdp_per_capita</span> trình bày dưới dạng chuỗi ký tự, với số tổng thu nhập quốc dân và dân số được lưu trong cùng một cột và cách nhau bởi dấu <span style="color: #640514; font-family: Source Code Pro;">/</span>,</p>
-<div class="sourceCode" id="cb666"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib2</span></span></code></pre></div>
 <pre><code>## # A tibble: 2,035 × 3
 ##    country              year gdp_per_capita       
@@ -1025,7 +1024,7 @@
 ## 10 Azerbaijan           2000 5272617196/8117742   
 ## # ℹ 2,025 more rows</code></pre>
 <p>Việc biến đổi dữ liệu về nhất quán như <span style="color: #640514; font-family: Source Code Pro;">mytib1</span> có thể được thực hiện một cách đơn giản bằng hàm <span style="color: #640514; font-family: Source Code Pro;">seperate()</span></p>
-<div class="sourceCode" id="cb668"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mytib2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> </span>
 <span>  </span>
 <span>  <span class="co"># Phân tách cột gdp_per_capita thành hai cột gdp và population</span></span>
@@ -1066,27 +1065,27 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Tiền xử lý dữ liệu</a></div>
-<div class="next"><a href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></div>
+<div class="prev"><a href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></div>
+<div class="next"><a href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">8</span> Biến đổi và sắp xếp dữ liệu</a></li>
+<li><a class="nav-link" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">7</span> Biến đổi và sắp xếp dữ liệu</a></li>
 <li>
-<a class="nav-link" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr"><span class="header-section-number">8.1</span> Biến đổi dữ liệu bằng thư viện dplyr</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#th%C3%AAm-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-mutate"><span class="header-section-number">8.1.1</span> Thêm biến bằng hàm mutate()</a></li>
-<li><a class="nav-link" href="#l%E1%BB%B1a-ch%E1%BB%8Dn-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-select"><span class="header-section-number">8.1.2</span> Lựa chọn biến bằng hàm select()</a></li>
-<li><a class="nav-link" href="#l%E1%BB%8Dc-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-filter"><span class="header-section-number">8.1.3</span> Lọc dữ liệu bằng hàm filter()</a></li>
-<li><a class="nav-link" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-arrange"><span class="header-section-number">8.1.4</span> Sắp xếp dữ liệu bằng hàm arrange()</a></li>
-<li><a class="nav-link" href="#k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-ph%C3%A9p-bi%E1%BA%BFn-%C4%91%E1%BB%95i-b%E1%BA%B1ng-to%C3%A1n-t%E1%BB%AD-pipe"><span class="header-section-number">8.1.5</span> Kết hợp các phép biến đổi bằng toán tử pipe (%&gt;%)</a></li>
-<li><a class="nav-link" href="#t%E1%BB%95ng-h%E1%BB%A3p-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-summarise-v%C3%A0-group_by"><span class="header-section-number">8.1.6</span> Tổng hợp dữ liệu bằng summarise() và group_by()</a></li>
+<a class="nav-link" href="#bi%E1%BA%BFn-%C4%91%E1%BB%95i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-dplyr"><span class="header-section-number">7.1</span> Biến đổi dữ liệu bằng thư viện dplyr</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#th%C3%AAm-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-mutate"><span class="header-section-number">7.1.1</span> Thêm biến bằng hàm mutate()</a></li>
+<li><a class="nav-link" href="#l%E1%BB%B1a-ch%E1%BB%8Dn-bi%E1%BA%BFn-b%E1%BA%B1ng-h%C3%A0m-select"><span class="header-section-number">7.1.2</span> Lựa chọn biến bằng hàm select()</a></li>
+<li><a class="nav-link" href="#l%E1%BB%8Dc-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-filter"><span class="header-section-number">7.1.3</span> Lọc dữ liệu bằng hàm filter()</a></li>
+<li><a class="nav-link" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-arrange"><span class="header-section-number">7.1.4</span> Sắp xếp dữ liệu bằng hàm arrange()</a></li>
+<li><a class="nav-link" href="#k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-ph%C3%A9p-bi%E1%BA%BFn-%C4%91%E1%BB%95i-b%E1%BA%B1ng-to%C3%A1n-t%E1%BB%AD-pipe"><span class="header-section-number">7.1.5</span> Kết hợp các phép biến đổi bằng toán tử pipe (%&gt;%)</a></li>
+<li><a class="nav-link" href="#t%E1%BB%95ng-h%E1%BB%A3p-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-summarise-v%C3%A0-group_by"><span class="header-section-number">7.1.6</span> Tổng hợp dữ liệu bằng summarise() và group_by()</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-tidyr"><span class="header-section-number">8.2</span> Sắp xếp dữ liệu bằng thư viện tidyr</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#k%C3%A9o-d%C3%A0i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-gather"><span class="header-section-number">8.2.1</span> Kéo dài dữ liệu bằng gather()</a></li>
-<li><a class="nav-link" href="#m%E1%BB%9F-r%E1%BB%99ng-d%E1%BB%AF-li%E1%BB%87u-v%E1%BB%9Bi-speard"><span class="header-section-number">8.2.2</span> Mở rộng dữ liệu với speard()</a></li>
-<li><a class="nav-link" href="#ph%C3%A2n-t%C3%A1ch-v%C3%A0-k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-c%E1%BB%99t"><span class="header-section-number">8.2.3</span> Phân tách và kết hợp các cột</a></li>
+<a class="nav-link" href="#s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-tidyr"><span class="header-section-number">7.2</span> Sắp xếp dữ liệu bằng thư viện tidyr</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#k%C3%A9o-d%C3%A0i-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-gather"><span class="header-section-number">7.2.1</span> Kéo dài dữ liệu bằng gather()</a></li>
+<li><a class="nav-link" href="#m%E1%BB%9F-r%E1%BB%99ng-d%E1%BB%AF-li%E1%BB%87u-v%E1%BB%9Bi-speard"><span class="header-section-number">7.2.2</span> Mở rộng dữ liệu với speard()</a></li>
+<li><a class="nav-link" href="#ph%C3%A2n-t%C3%A1ch-v%C3%A0-k%E1%BA%BFt-h%E1%BB%A3p-c%C3%A1c-c%E1%BB%99t"><span class="header-section-number">7.2.3</span> Phân tách và kết hợp các cột</a></li>
 </ul>
 </li>
 </ul>
@@ -1106,7 +1105,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-08-05.</p>
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-08-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

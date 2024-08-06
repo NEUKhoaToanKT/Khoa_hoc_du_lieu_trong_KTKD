@@ -12,7 +12,7 @@ rmd_files:
   [
    "index.Rmd",
    "01-intro.Rmd",
-   "02-literature.Rmd",
+   #"02-literature.Rmd",
    "07-lap-trinh-co-ban-voi-R.Rmd",
    "07-1-lap-trinh-nang-cao-voi-R.Rmd",
    "08-phan-tich-du-lieu-bang-R.Rmd",
