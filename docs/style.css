@@ -90,33 +90,6 @@ div.base::before,
   background-image: url("styimages/comment.svg");
 }
 
-/* Centering the caption of figures and tables ------------------------------------------------- */
-
-caption, p.caption {
-  text-align: center;
-  color: black;
-  font-style: italic;
-}
-
-/* Adjusting sidebar width */
-@media (min-width: 1200px) {
-  .sidebar {
-    max-width: 15rem; /* Increased width */
-  }
-}
-
-@media (max-width: 991.98px) {
-  .sidebar {
-    max-width: 100%; /* Original width */
-    max-width: 80%; /* New width */
-  }
-}
-
-/* Adjusting Table of Contents width */
-.book-toc {
-  max-width: 20rem; /* Set your desired width */
-}
-
 /* Other gitbook tweaks -------------------------------------------------- */
 
 .book .book-body .page-wrapper .page-inner {
@@ -130,4 +103,10 @@ caption, p.caption {
 .blackbox {
   background: gray;
   color: black;
+}
+
+caption, p.caption {
+  text-align: center;
+  color: black;
+  font-style: italic;
 }

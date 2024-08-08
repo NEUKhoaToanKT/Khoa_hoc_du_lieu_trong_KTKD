@@ -7,7 +7,7 @@
 <title>Chương 2 KHDL và các khái niệm cơ bản | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
 <meta name="author" content="Nguyễn Quang Huy">
 <meta name="description" content="library(dplyr) ## ## Attaching package: 'dplyr' ## The following objects are masked from 'package:stats': ## ##   filter, lag ## The following objects are masked from 'package:base': ## ##  ...">
-<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
 <meta property="og:title" content="Chương 2 KHDL và các khái niệm cơ bản | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta property="og:type" content="book">
 <meta property="og:description" content="library(dplyr) ## ## Attaching package: 'dplyr' ## The following objects are masked from 'package:stats': ## ##   filter, lag ## The following objects are masked from 'package:base': ## ##  ...">
@@ -16,11 +16,14 @@
 <meta name="twitter:description" content="library(dplyr) ## ## Attaching package: 'dplyr' ## The following objects are masked from 'package:stats': ## ##   filter, lag ## The following objects are masked from 'package:base': ## ##  ...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.8/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.9/font.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Source%20Code%20Pro:wght@400;450&amp;display=swap" rel="stylesheet">
 <script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.9/girafe.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script>
         $(function() {
             $("#toc h2").html("TRONG CHƯƠNG NÀY"); // Change text for "View source"
         });
@@ -73,7 +76,7 @@
               const newDate = `${day}/${month}/${year}`;
 
               // Replace the entire paragraph content with the new Vietnamese format
-              paragraph.innerHTML = `Cuốn sách "${paragraph.querySelector('strong').innerText}" được viết bởi TS. ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]} - Trường Công nghệ - Đại học Kinh tế Quốc dân`;
+              paragraph.innerHTML = `"${paragraph.querySelector('strong').innerText}" được viết bởi ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]}. Phiên bản này được cập nhật lần cuối vào ${newDate}.`;
             }
           }
         });
@@ -84,7 +87,7 @@
           paragraphs.forEach(paragraph => {
             if(paragraph.innerHTML.includes('This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.')) {
               // Replace the paragraph content
-              paragraph.innerHTML = 'Cuốn sách này được viết bằng hoàn toàn bằng ngôn ngữ R. Phiên bản hiện tại được cập nhật vào ngày ${newDate}.';
+              paragraph.innerHTML = 'Quyển sách này được viết bằng ngôn ngữ R, dựa trên gói lệnh bookdown.';
             }
           });
         });
@@ -116,12 +119,29 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Lời nói đầu</a></li>
 <li class="book-part">PHẦN I: GIỚI THIỆU CHUNG</li>
-<li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></li>
+<li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1nh.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sánh</a></li>
 <li><a class="active" href="khdl-v%C3%A0-c%C3%A1c-kh%C3%A1i-ni%E1%BB%87m-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> KHDL và các khái niệm cơ bản</a></li>
 <li class="book-part">PHẦN II: GIỚI THIỆU VỀ R</li>
 <li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></li>
 <li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">4</span> Kiến thức R cơ bản</a></li>
 <li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">5</span> Kiến thức R nâng cao</a></li>
+<li class="book-part">PHẦN III: PHÂN TÍCH DỮ LIỆU</li>
+<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html"><span class="header-section-number">6</span> Nhập dữ liệu vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Biến đổi và sắp xếp dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></li>
+<li class="book-part">PHẦN IV: MÔ HÌNH TUYẾN TÍNH</li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">10</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">11</span> Các mô hình cộng tính tổng quát</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">12</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="" href="reference.html"><span class="header-section-number">13</span> REFERENCE</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">14</span> Mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li><a class="" href="t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">15</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li class="book-part">PHẦN V: MÔ HÌNH CÂY QUYẾT ĐỊNH</li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">16</span> Mô hình cây quyết định</a></li>
+<li><a class="" href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html"><span class="header-section-number">17</span> Boosting và cây quyết định.</a></li>
+<li><a class="" href="neuralnetwork.html"><span class="header-section-number">18</span> Mô hình mạng nơ-ron</a></li>
+<li><a class="" href="neuralnetwork1.html"><span class="header-section-number">19</span> Các mạng học sâu điển hình</a></li>
 </ul>
 
         <div class="book-extra">
@@ -751,33 +771,19 @@ E\left(y_0 - \hat{f}(x_0)\right)^2 = Var\left(\hat{f}(x_0)\right) + \left[Bias(\
 <span>  <span class="va">test_mse</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="op">(</span><span class="va">Y_test</span> <span class="op">-</span> <span class="va">test_predictions</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code>## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows
-
 ## Warning: 'newdata' had 40 rows but variables found have 160 rows</code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plotting</span></span>
@@ -1081,7 +1087,7 @@ với <span class="math inline">\(t_{\alpha/2} = \hat{F}^{-1}(\alpha/2)\)</span>
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></div>
+<div class="prev"><a href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1nh.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sánh</a></div>
 <div class="next"><a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
@@ -1135,7 +1141,7 @@ với <span class="math inline">\(t_{\alpha/2} = \hat{F}^{-1}(\alpha/2)\)</span>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-08-05.</p>
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-07-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -7,7 +7,7 @@
 <title>Chương 2 Kiến thức R cơ bản | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
 <meta name="author" content="Nguyễn Quang Huy">
 <meta name="description" content="2.1 Làm quen với các dòng lệnh cơ bản Đây là cuốn sách dành cho sinh viên và học viên các ngành kinh tế, quản lý, và quản trị kinh doanh muốn tìm hiểu sang lĩnh vực khoa học dữ liệu. Những bạn đọc...">
-<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
 <meta property="og:title" content="Chương 2 Kiến thức R cơ bản | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta property="og:type" content="book">
 <meta property="og:description" content="2.1 Làm quen với các dòng lệnh cơ bản Đây là cuốn sách dành cho sinh viên và học viên các ngành kinh tế, quản lý, và quản trị kinh doanh muốn tìm hiểu sang lĩnh vực khoa học dữ liệu. Những bạn đọc...">
@@ -16,14 +16,11 @@
 <meta name="twitter:description" content="2.1 Làm quen với các dòng lệnh cơ bản Đây là cuốn sách dành cho sinh viên và học viên các ngành kinh tế, quản lý, và quản trị kinh doanh muốn tìm hiểu sang lĩnh vực khoa học dữ liệu. Những bạn đọc...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.8/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.9/font.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Source%20Code%20Pro:wght@400;450&amp;display=swap" rel="stylesheet">
 <script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
-<script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.8/girafe.js"></script><script src="libs/plotly-binding-4.10.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script>
+<script>
         $(function() {
             $("#toc h2").html("TRONG CHƯƠNG NÀY"); // Change text for "View source"
         });
@@ -76,7 +73,7 @@
               const newDate = `${day}/${month}/${year}`;
 
               // Replace the entire paragraph content with the new Vietnamese format
-              paragraph.innerHTML = `Cuốn sách "${paragraph.querySelector('strong').innerText}" được viết bởi TS. ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]} - Trường Công nghệ - Đại học Kinh tế Quốc dân`;
+              paragraph.innerHTML = `"${paragraph.querySelector('strong').innerText}" được viết bởi ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]}. Phiên bản này được cập nhật lần cuối vào ${newDate}.`;
             }
           }
         });
@@ -87,7 +84,7 @@
           paragraphs.forEach(paragraph => {
             if(paragraph.innerHTML.includes('This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.')) {
               // Replace the paragraph content
-              paragraph.innerHTML = 'Cuốn sách này được viết bằng hoàn toàn bằng ngôn ngữ R. Phiên bản hiện tại được cập nhật vào ngày ${newDate}.';
+              paragraph.innerHTML = 'Quyển sách này được viết bằng ngôn ngữ R, dựa trên gói lệnh bookdown.';
             }
           });
         });
@@ -119,28 +116,9 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Lời nói đầu</a></li>
 <li class="book-part">PHẦN I: GIỚI THIỆU CHUNG</li>
-<li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></li>
+<li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1nh.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sánh</a></li>
 <li class="book-part">PHẦN II: GIỚI THIỆU VỀ R</li>
 <li><a class="active" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">4</span> Kiến thức R nâng cao</a></li>
-<li class="book-part">PHẦN III: PHÂN TÍCH DỮ LIỆU</li>
-<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html"><span class="header-section-number">5</span> Nhập dữ liệu vào R</a></li>
-<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></li>
-<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Biến đổi và sắp xếp dữ liệu</a></li>
-<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
-<li class="book-part">PHẦN IV: MÔ HÌNH TUYẾN TÍNH</li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">9</span> Mô hình hồi quy tuyến tính</a></li>
-<li><a class="" href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">10</span> Các mô hình cộng tính tổng quát</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">11</span> Mô hình tuyến tính tổng quát.</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">12</span> Mô hình tần suất - mức độ nghiêm trọng.</a></li>
-<li><a class="" href="t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">13</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
-<li class="book-part">PHẦN V: MÔ HÌNH CÂY QUYẾT ĐỊNH</li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">14</span> Mô hình cây quyết định</a></li>
-<li><a class="" href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html"><span class="header-section-number">15</span> Boosting và cây quyết định.</a></li>
-<li><a class="" href="neuralnetwork.html"><span class="header-section-number">16</span> Mô hình mạng nơ-ron</a></li>
-<li><a class="" href="neuralnetwork1.html"><span class="header-section-number">17</span> Các mạng học sâu điển hình</a></li>
-<li><a class="" href="h%E1%BB%8Dc-m%C3%A1y-kh%C3%B4ng-c%C3%B3-gi%C3%A1m-s%C3%A1t.html"><span class="header-section-number">18</span> Học máy không có giám sát</a></li>
 </ul>
 
         <div class="book-extra">
@@ -277,8 +255,11 @@ a) \ \cfrac{1}{4^{1/6}} \ \ \ b) \ \cfrac{7 - 4}{12 - 7} \ \ \ c) \ \sqrt{\cfrac
 <code class="sourceCode R"><span><span class="va">x</span> <span class="co"># R trả lại giá trị bằng 3.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="co"># Xóa biến x khỏi môi trường làm việc.</span></span>
 <span><span class="va">x</span> <span class="co"># Sẽ báo lỗi vì biến x không còn tồn tại.</span></span></code></pre></div>
-<p>Một điều cũng cần lưu ý khi đặt tên biến hay khi đặt tên các đối tượng khác trong R là tên biến không được phép trùng với các từ khóa. Danh sách các từ khóa thường sử dụng trong R nằm trong bảng <a href="#tab:tbbasic01"><strong>??</strong></a></p>
+<p>Một điều cũng cần lưu ý khi đặt tên biến hay khi đặt tên các đối tượng khác trong R là tên biến không được phép trùng với các từ khóa. Danh sách các từ khóa thường sử dụng trong R nằm trong bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic01">2.1</a></p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbbasic01">Bảng 2.1: </span>Danh sách các từ khóa không được dùng để đặt tên
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Từ khóa
@@ -372,8 +353,11 @@ Các biến kiểu số dạng đặc biệt
 Hình 2.1: Sự khác nhau về dung lượng bộ nhớ cần sử dụng để lưu véc-tơ kiểu số nguyên và véc-tơ kiểu số thập phân.
 </p>
 </div>
-<p>Biến kiểu số được sử dụng chủ yếu để thực hiện trong các phép tính toán. Các phép tính toán thông thường được liệt kê trong bảng <a href="#tab:tbbasic02"><strong>??</strong></a></p>
+<p>Biến kiểu số được sử dụng chủ yếu để thực hiện trong các phép tính toán. Các phép tính toán thông thường được liệt kê trong bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic02">2.2</a></p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbbasic02">Bảng 2.2: </span>Các phép toán cơ bản thường được sử dụng với biến kiểu số
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Ký hiệu
@@ -472,8 +456,11 @@ Phép lấy phần nguyên của kết quả trong phép chia
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fl">6.5</span> <span class="op"><a href="https://rdrr.io/r/base/Arithmetic.html">%/%</a></span> <span class="fl">2</span> <span class="co"># Phần nguyên của phép chia 6.5 cho 2</span></span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<p>Một cách viết số kiểu khoa học và các giá trị kiểu số đặc biệt được liệt kê trong bảng <a href="#tab:tbbasic03"><strong>??</strong></a>.</p>
+<p>Một cách viết số kiểu khoa học và các giá trị kiểu số đặc biệt được liệt kê trong bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic03">2.3</a>.</p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbbasic03">Bảng 2.3: </span>Các giá trị số được viết kiểu khoa học và các giá trị số đặc biệt
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Loại số
@@ -544,8 +531,11 @@ là kết quả của các phép tính không có nghĩa, viết tắt của Not
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="cn">FALSE</span> <span class="op">+</span> <span class="cn">TRUE</span> <span class="op">*</span> <span class="fl">10</span> <span class="co"># Sẽ cho kết quả giống như 0 + 1 * 10</span></span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<p>Trong thực tế, ít khi chúng ta khởi tạo giá trị cho biến kiểu logic như trên. Biến kiểu logic thường nhận được từ kết quả các phép so sánh. Các phép toán so sánh thường được sử dụng trong R được liệt kê trong bảng <a href="#tab:tbbasic04"><strong>??</strong></a></p>
+<p>Trong thực tế, ít khi chúng ta khởi tạo giá trị cho biến kiểu logic như trên. Biến kiểu logic thường nhận được từ kết quả các phép so sánh. Các phép toán so sánh thường được sử dụng trong R được liệt kê trong bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic04">2.4</a></p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbbasic04">Bảng 2.4: </span>Các phép so sánh cơ bản cho kết quả là một biến logic
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Phép so sánh
@@ -605,8 +595,11 @@ Có khác nhau không?
 </tr>
 </tbody>
 </table></div>
-<p>Ngoài ra, các biến kiểu logic còn là kết quả của việc kết hợp <span class="math inline">\(|\)</span> nhiều biến kiểu logic khác bằng các toán tử logic. Các toán tử logic bao gồm có toán tử “và”, toán tử “hoặc”, và toán tử “phủ định”. Các toán tử này được liệt kê trong bảng <a href="#tab:tbbasic05"><strong>??</strong></a></p>
+<p>Ngoài ra, các biến kiểu logic còn là kết quả của việc kết hợp <span class="math inline">\(|\)</span> nhiều biến kiểu logic khác bằng các toán tử logic. Các toán tử logic bao gồm có toán tử “và”, toán tử “hoặc”, và toán tử “phủ định”. Các toán tử này được liệt kê trong bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic05">2.5</a></p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbbasic05">Bảng 2.5: </span><span id="tab:tbbasic05">Bảng 2.6: </span>Các toán tử sử dụng cùng với biến kiểu logic
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Toán tử logic
@@ -642,8 +635,11 @@ Toán tử Phủ định; Toán tử này phủ định lại biến logic đứ
 </tr>
 </tbody>
 </table></div>
-<p>Bạn đọc cần lưu ý rằng các biến logic khi kết hợp với nhau bằng các toán tử trong bảng <a href="#tab:tbbasic05"><strong>??</strong></a> sẽ cho kết quả là một biến kiểu logic. Quy tắc kết hợp các biến kiểu logic bằng các toán tử logic được tổng hợp trong bảng <a href="#tab:tbbasic06"><strong>??</strong></a></p>
+<p>Bạn đọc cần lưu ý rằng các biến logic khi kết hợp với nhau bằng các toán tử trong bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic05">2.5</a> sẽ cho kết quả là một biến kiểu logic. Quy tắc kết hợp các biến kiểu logic bằng các toán tử logic được tổng hợp trong bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic06">2.7</a></p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbbasic06">Bảng 2.7: </span>Các biến logic được kết hợp bằng các toán tử logic
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Kết hợp
@@ -756,8 +752,11 @@ TRUE
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/character.html">is.character</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<p>Khi xử lý biến kiểu chuỗi ký tự, bạn đọc nên sử dụng các hàm số đã được xây dựng sẵn. Bảng <a href="#tab:tbbasic07"><strong>??</strong></a> liệt kê các hàm thường được sử dụng khi xử lý biến kiểu chuỗi ký tự và kết quả của các hàm này.</p>
+<p>Khi xử lý biến kiểu chuỗi ký tự, bạn đọc nên sử dụng các hàm số đã được xây dựng sẵn. Bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic07">2.8</a> liệt kê các hàm thường được sử dụng khi xử lý biến kiểu chuỗi ký tự và kết quả của các hàm này.</p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbbasic07">Bảng 2.8: </span>Các hàm thường sử dụng để xử lý biến kiểu chuỗi ký tự
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Hàm số
@@ -841,7 +840,7 @@ Trả lại giá trị là biến TRUE nếu đoạn ký tự a nằm trong bi�
 </tr>
 </tbody>
 </table></div>
-<p>Bạn đọc có thể thực thi các hàm liệt kê trong bảng <a href="#tab:tbbasic07"><strong>??</strong></a> và quan sát giá trị trả ra của các hàm đó trong các câu lệnh dưới đây để hiểu cách sử dụng của các hàm này:</p>
+<p>Bạn đọc có thể thực thi các hàm liệt kê trong bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic07">2.8</a> và quan sát giá trị trả ra của các hàm đó trong các câu lệnh dưới đây để hiểu cách sử dụng của các hàm này:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Khởi tạo hai biến kiểu chuỗi ký tự x1 và x2</span></span>
 <span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="st">"I am an Actuary"</span>; <span class="va">x2</span><span class="op">&lt;-</span><span class="st">"I am Vietnamese"</span></span>
@@ -1004,8 +1003,11 @@ Trả lại giá trị là biến TRUE nếu đoạn ký tự a nằm trong bi�
 <span></span>
 <span><span class="co"># z2 là cấp số trừ từ 1 về 0, giảm dần 0.01</span></span>
 <span><span class="va">z2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1</span>,to <span class="op">=</span> <span class="fl">0</span>, <span class="op">-</span><span class="fl">0.01</span><span class="op">)</span></span></code></pre></div>
-<p>Khi thực hiện các phép tính toán tổng hợp các véc-tơ kiểu số, chúng ta thường quan tâm đến các giá trị như tổng, giá trị trung bình, tích, độ lệch chuẩn, hoặc quan tâm đến việc sắp xếp các giá trị trong véc-tơ đó. Các hàm số được liệt kê trong bảng <a href="#tab:tbbasic08"><strong>??</strong></a> là các hàm số thường sử dụng để thực hiện các tính toán như vậy,</p>
+<p>Khi thực hiện các phép tính toán tổng hợp các véc-tơ kiểu số, chúng ta thường quan tâm đến các giá trị như tổng, giá trị trung bình, tích, độ lệch chuẩn, hoặc quan tâm đến việc sắp xếp các giá trị trong véc-tơ đó. Các hàm số được liệt kê trong bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic08">2.9</a> là các hàm số thường sử dụng để thực hiện các tính toán như vậy,</p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbbasic08">Bảng 2.9: </span>Các hàm thường sử dụng trên véc-tơ
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Hàm số
@@ -1278,7 +1280,7 @@ Mọi kiểu véc-tơ
 <code class="sourceCode R"><span><span class="co"># Tính tỷ lệ phần tử trong x lớn hơn 10^4</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">&gt;</span><span class="fl">10</span><span class="op">^</span><span class="fl">4</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] 0.2388132</code></pre>
-<p>Có rất nhiều cách kết hợp các hàm số trong bảng <a href="#tab:tbbasic08"><strong>??</strong></a> lại để đạt được kết quả mong muốn. Một kết quả phân tích có thể đạt được bằng các cách kết hợp khác nhau. Để sử dụng thành thạo các hàm này chỉ có một cách duy nhất là hãy thực hành nhiều trên R và tự đúc kết kinh nghiệm cho chính mình!</p>
+<p>Có rất nhiều cách kết hợp các hàm số trong bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic08">2.9</a> lại để đạt được kết quả mong muốn. Một kết quả phân tích có thể đạt được bằng các cách kết hợp khác nhau. Để sử dụng thành thạo các hàm này chỉ có một cách duy nhất là hãy thực hành nhiều trên R và tự đúc kết kinh nghiệm cho chính mình!</p>
 </div>
 </div>
 <div id="lấy-các-thành-phần-con-từ-một-véc-tơ" class="section level3" number="2.3.3">
@@ -1302,8 +1304,11 @@ Mọi kiểu véc-tơ
 <code class="sourceCode R"><span><span class="co"># Lấy ra phần tử có chỉ số lớn hơn độ dài</span></span>
 <span><span class="va">x</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] NA</code></pre>
-<p>Bạn đọc có thể đặt câu hỏi là điều gì xảy ra nều sử dụng chỉ số 0 hoặc chỉ số là số âm. Hãy nói về chỉ số 0 trước; khi gọi phần tử ở vị trí thứ 0 trong một véc-tơ bất kỳ bạn sẽ nhận được một phần tử rỗng. Khái niệm rỗng có thể hiểu giống như khái niệm rỗng khi nói về một tập hợp không có phần tử. Tùy theo kiểu giá trị của véc-tơ ta sẽ có một phần tử rỗng với kiểu giá trị tương ứng như bảng <a href="#tab:tbbasic09"><strong>??</strong></a></p>
+<p>Bạn đọc có thể đặt câu hỏi là điều gì xảy ra nều sử dụng chỉ số 0 hoặc chỉ số là số âm. Hãy nói về chỉ số 0 trước; khi gọi phần tử ở vị trí thứ 0 trong một véc-tơ bất kỳ bạn sẽ nhận được một phần tử rỗng. Khái niệm rỗng có thể hiểu giống như khái niệm rỗng khi nói về một tập hợp không có phần tử. Tùy theo kiểu giá trị của véc-tơ ta sẽ có một phần tử rỗng với kiểu giá trị tương ứng như bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic09">2.10</a></p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbbasic09">Bảng 2.10: </span>Giá trị tại chỉ số 0 của các kiểu véc-tơ
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Kiểu véc-tơ
@@ -1465,8 +1470,11 @@ POSIXct of length 0
 <h3>
 <span class="header-section-number">2.3.4</span> Các hàm tạo chỉ số<a class="anchor" aria-label="anchor" href="#c%C3%A1c-h%C3%A0m-t%E1%BA%A1o-ch%E1%BB%89-s%E1%BB%91"><i class="fas fa-link"></i></a>
 </h3>
-<p>Có một nhóm các hàm số thường được sử dụng khi làm việc với chỉ số của các phần tử trong véc-tơ. Các hàm số này có thể được phỏng theo bằng cách kết hợp một vài kỹ thuật chỉ số đã đề cập đến ở chương trước. Tuy nhiên chúng tôi khuyên bạn đọc nên sử dụng các hàm có sẵn được trình bày trong phần này bởi sự tiện lợi và sự dễ hiểu của các dòng lệnh. Các hàm số liên quan đến chỉ số của véc-tơ được liệt kê trong bảng <a href="#tab:tbbasic10"><strong>??</strong></a></p>
+<p>Có một nhóm các hàm số thường được sử dụng khi làm việc với chỉ số của các phần tử trong véc-tơ. Các hàm số này có thể được phỏng theo bằng cách kết hợp một vài kỹ thuật chỉ số đã đề cập đến ở chương trước. Tuy nhiên chúng tôi khuyên bạn đọc nên sử dụng các hàm có sẵn được trình bày trong phần này bởi sự tiện lợi và sự dễ hiểu của các dòng lệnh. Các hàm số liên quan đến chỉ số của véc-tơ được liệt kê trong bảng <a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html#tab:tbbasic10">2.11</a></p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbbasic10">Bảng 2.11: </span><span id="tab:tbbasic10">Bảng 2.12: </span>Các hàm số liên quan đến chỉ số của véc-tơ
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Hàm số
@@ -1611,6 +1619,9 @@ Hình 2.2: Sự khác nhau giữa hàm match() và toán tử %in%
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">match()</span> và toán tử <span style="color: #640514; font-family: Source Code Pro;">%in%</span> cho phép tương tác giữa các véc-tơ có độ dài khác nhau nên rất hiệu quả khi bạn đọc muốn kết nối nhiều dữ liệu khác nhau. Bạn đọc hãy đọc ví dụ dưới đây để hình dung cách sử dụng hàm<span style="color: #640514; font-family: Source Code Pro;">match()</span>khi kết nối hai dữ liệu.</p>
 <p>Giả sử chúng ta có danh sách điểm học tại trường đại học của ba sinh viên ngành actuary có mã sinh viên lần lượt là <span style="color: #640514; font-family: Source Code Pro;">MSV001</span>, <span style="color: #640514; font-family: Source Code Pro;">MSV002</span>, <span style="color: #640514; font-family: Source Code Pro;">MSV003</span> khi học các môn học <span style="color: #640514; font-family: Source Code Pro;">Xác suất</span>, <span style="color: #640514; font-family: Source Code Pro;">Toán tài chính</span>, và <span style="color: #640514; font-family: Source Code Pro;">Đầu tư và thị trường tài chính</span>. Thông tin được lưu trong một dữ liệu tên là <span style="color: #640514; font-family: Source Code Pro;">diem_hoc_DH</span>. Sinh viên ngành actuary ngoài các môn học ở trường đại học có thể thi các môn học tại các hiệp hội nghề nghiệp actuary để lấy chứng chỉ hành nghề. Thông tin về điểm thi chứng chỉ được lưu trong dữ liệu có tên là <span style="color: #640514; font-family: Source Code Pro;">diem_chung_chi_Actuary</span>. Khi xét tốt nghiệp, sinh viên có quyền lấy điểm thi chứng chỉ tại các hiệp hội để thay thế cho điểm học tại trường đại học của môn học tương ứng nếu điểm thi chứng chỉ cao hơn. Dữ liệu về điểm thi tại trường đại học và thi chứng chỉ hành nghề như sau:</p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-64">Bảng 2.13: </span>Điểm thi tại trường đại học (diem_hoc_DH)
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Mã sinh viên
@@ -1725,6 +1736,9 @@ MSV003
 </tbody>
 </table></div>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-66">Bảng 2.14: </span>Điểm thi chứng chỉ (diem_chung_chi_Actuary)
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Mã sinh viên
@@ -1846,6 +1860,9 @@ MSV001
 <span><span class="va">diem_hoc_DH</span><span class="op">$</span><span class="va">diem_CT</span><span class="op">&lt;-</span><span class="va">diem_chung_chi_Actuary</span><span class="op">$</span><span class="va">Diem</span><span class="op">[</span><span class="va">y</span><span class="op">]</span></span></code></pre></div>
 <p>Như vậy chúng ta đã có một dữ liệu với điểm học trên lớp và điểm thi chứng chỉ của các sinh viên</p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-73">Bảng 2.15: </span>Điểm thi tại trường đại học và điểm thi chứng chỉ
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Mã sinh viên
@@ -2030,7 +2047,7 @@ NA
 <div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ties.method = "average" -&gt; các số bằng nhau có rank là hoán vị ngẫu nhiên</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rank.html">rank</a></span><span class="op">(</span><span class="va">x</span>,ties.method <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## [1] 2 3 1 5 4</code></pre>
+<pre><code>## [1] 3 1 2 5 4</code></pre>
 <ul>
 <li>Khi <span style="color: #640514; font-family: Source Code Pro;">ties.method</span> nhận giá trị là <span style="color: #640514; font-family: Source Code Pro;">first</span>, giá trị trả lại là <span style="color: #640514; font-family: Source Code Pro;">1, 2, 3, 4, 5</span>. Ba giá trị 10 liền nhau ở phần đầu của véc-tơ <span style="color: #640514; font-family: Source Code Pro;">x</span> được xếp thứ tự theo nguyên tắc số nào xuất hiện trước là có thứ tự nhỏ hơn, do đó thứ tự của ba giá trị trong véc-tơ <span style="color: #640514; font-family: Source Code Pro;">x</span> khi xếp <span style="color: #640514; font-family: Source Code Pro;">x</span> theo thứ tự tăng dần là <span style="color: #640514; font-family: Source Code Pro;">1, 2, 3</span>. Tương tự với hai giá trị 20 ở cuối vec-tơ <span style="color: #640514; font-family: Source Code Pro;">x</span>, số 20 xuất hiện trước được hiểu là có thứ tự trước số 20 xuất hiện sau, do đó thứ tự của hai giá trị 20 sẽ là <span style="color: #640514; font-family: Source Code Pro;">4, 5</span>
 </li>
@@ -2155,6 +2172,9 @@ và thứ tự của hai số 20 ở cuối véc-tơ là</li>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">ifelse()</span> ở trên sẽ tạo ra một véc-tơ có độ dài bằng với véc-tơ <span style="color: #640514; font-family: Source Code Pro;">x</span> và tương ứng với các vị trí <span style="color: #640514; font-family: Source Code Pro;">x</span> chia hết cho 2 sẽ cho kết quả là “chẵn” và tương ứng với các vị trí mà <span style="color: #640514; font-family: Source Code Pro;">x</span> không chia hết cho 2 sẽ cho kết quả là “lẻ”.</p>
 <p>Khi sử dụng câu lệnh rẽ nhánh để thực hiện các yêu cầu phức tạp hơn, bạn đọc thường phải sử dụng các câu lệnh <span style="color: #640514; font-family: Source Code Pro;">if</span> và <span style="color: #640514; font-family: Source Code Pro;">else</span> lồng vào nhau để có được kết quả. Hãy lấy một ví dụ như sau: để viết một đoạn câu lệnh để trả lại giá trị giá vé vào rạp chiếu phim của một khách hàng dựa trên hai yếu tố là độ tuổi và việc có thẻ thành viên hay không, bạn đọc không thể chỉ dùng một câu lệnh điều kiện duy nhất.</p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+(#tab:table777 input)Ví dụ về câu lệnh điều kiện
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Độ tuổi
@@ -2318,14 +2338,14 @@ Không phải thành viên
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="va">start</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.053   0.051   1.151</code></pre>
+##    1.81    0.00    1.94</code></pre>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">## Tính tổng véc-tơ có độ dài 10^8 bằng véc-tơ</span></span>
 <span><span class="va">start</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">tong</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">my_vector</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">-</span><span class="va">start</span></span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.162   0.003   0.167</code></pre>
+##    0.09    0.00    0.10</code></pre>
 <p>Bạn đọc có thể thấy rằng trên máy tính của chúng tôi, sử dụng vòng lặp <span style="color: #640514; font-family: Source Code Pro;">for</span> để tính tổng các số trong véc-tơ có độ dài <span class="math inline">\(10^8\)</span> mất khoảng 2 giây trong khi dùng hàm <span style="color: #640514; font-family: Source Code Pro;">sum()</span> trực tiếp trên véc-tơ chỉ mất 0.1 giây. Nghĩa là thời gian để thực hiện tính toán trên véc-tơ nhanh hơn gấp 20 lần nếu bạn đọc viết dưới dạng đối tượng véc-tơ. Ngoài ra, sử bạn đọc cũng có thể thấy rằng câu lệnh gọi hàm <span style="color: #640514; font-family: Source Code Pro;">sum()</span> là đơn giản hơn nhiều so với viết vòng lặp.</p>
 <p>Trong các ví dụ ở trên, chúng tôi sử dụng trực tiếp giá trị trong véc-tơ để thực hiện vòng lặp. Bạn đọc cũng có thể sử dụng vòng lặp theo chỉ số của véc-tơ và cho kết quả tương tự. Chẳng hạn như đối với véc-tơ <span style="color: #640514; font-family: Source Code Pro;">qua</span>, bạn đọc có thể cho một chỉ số nhận giá trị lần lượt từ 1 đến độ dài của véc-tơ <span style="color: #640514; font-family: Source Code Pro;">qua</span> để lấy từng phần tử của véc-tơ <span style="color: #640514; font-family: Source Code Pro;">qua</span>:</p>
 <div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
@@ -2466,7 +2486,10 @@ Không phải thành viên
 <span class="header-section-number">2.4.2.3</span> Điều khiển vòng lặp<a class="anchor" aria-label="anchor" href="#%C4%91i%E1%BB%81u-khi%E1%BB%83n-v%C3%B2ng-l%E1%BA%B7p"><i class="fas fa-link"></i></a>
 </h4>
 <p>Khi bạn đọc viết các vòng lặp <span style="color: #640514; font-family: Source Code Pro;">for</span> hoặc <span style="color: #640514; font-family: Source Code Pro;">while</span>, R cung cấp các từ khóa để bạn đọc có thể điều khiển vòng lặp. Các từ khóa đó bao gồm <span style="color: #640514; font-family: Source Code Pro;">break</span> và <span style="color: #640514; font-family: Source Code Pro;">next</span>. Ý nghĩa của các từ khóa này như sau</p>
-<div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<div class="inline-table"><table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tbbasic11">Bảng 2.16: </span><span id="tab:tbbasic11">Bảng 2.17: </span>Các từ khóa điều khiển vòng lặp
+</caption>
 <thead><tr>
 <th style="text-align:left;">
 Từ khóa
@@ -2622,7 +2645,7 @@ Dừng vòng lặp ngay lập tức
 <span>       ylab <span class="op">=</span> <span class="st">"Số lượng hành khách"</span>, <span class="co"># tham số ylab của hàm plot()</span></span>
 <span>       xlab <span class="op">=</span> <span class="st">""</span>, <span class="co"># tham số xlab của hàm plot()</span></span>
 <span>       type <span class="op">=</span> <span class="st">"l"</span>, color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="co"># tham số type và color của hàm plot</span></span></code></pre></div>
-<div class="inline-figure"><img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-113-1.png" width="672"></div>
+<div class="inline-figure"><img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-112-1.png" width="672"></div>
 <p>Bạn đọc có thể tham khảo cách sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">plot()</span> trong phần đồ thị cơ bản trong cuốn sách này.</p>
 </div>
 <div id="hàm-số-được-xây-dựng-sẵn" class="section level4" number="2.4.3.2">
@@ -2704,8 +2727,8 @@ Dừng vòng lặp ngay lập tức
 <span>     ylab <span class="op">=</span> <span class="st">"Nhiệt độ"</span>,</span>
 <span>     col <span class="op">=</span> <span class="st">"#640514"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-122"></span>
-<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-122-1.png" alt="Vẽ đồ thị phân tán sử dụng hàm plot()" width="672"><p class="caption">
+<span style="display:block;" id="fig:unnamed-chunk-121"></span>
+<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-121-1.png" alt="Vẽ đồ thị phân tán sử dụng hàm plot()" width="672"><p class="caption">
 Hình 2.3: Vẽ đồ thị phân tán sử dụng hàm plot()
 </p>
 </div>
@@ -2718,8 +2741,8 @@ Hình 2.3: Vẽ đồ thị phân tán sử dụng hàm plot()
 <span>     ylab <span class="op">=</span> <span class="st">"Nhiệt độ"</span>,</span>
 <span>     col <span class="op">=</span> <span class="st">"#640514"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-123"></span>
-<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-123-1.png" alt="Mô tả mối liên hệ giữa hai biến liên tục sử dụng hàm plot()" width="672"><p class="caption">
+<span style="display:block;" id="fig:unnamed-chunk-122"></span>
+<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-122-1.png" alt="Mô tả mối liên hệ giữa hai biến liên tục sử dụng hàm plot()" width="672"><p class="caption">
 Hình 2.4: Mô tả mối liên hệ giữa hai biến liên tục sử dụng hàm plot()
 </p>
 </div>
@@ -2732,8 +2755,8 @@ Hình 2.4: Mô tả mối liên hệ giữa hai biến liên tục sử dụng h
 <span>     ylab <span class="op">=</span> <span class="st">"Số lượng hành khách"</span>,</span>
 <span>     col <span class="op">=</span> <span class="st">"#640514"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-124"></span>
-<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-124-1.png" alt="Mô tả một biến liên tục theo thời gian sử dụng hàm plot()" width="672"><p class="caption">
+<span style="display:block;" id="fig:unnamed-chunk-123"></span>
+<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-123-1.png" alt="Mô tả một biến liên tục theo thời gian sử dụng hàm plot()" width="672"><p class="caption">
 Hình 2.5: Mô tả một biến liên tục theo thời gian sử dụng hàm plot()
 </p>
 </div>
@@ -2755,8 +2778,8 @@ Hình 2.5: Mô tả một biến liên tục theo thời gian sử dụng hàm p
 <span>       fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"#005478"</span>,<span class="st">"#640514"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-125"></span>
-<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-125-1.png" alt="Mô tả nhiều biến liên tục theo thời gian sử dụng hàm plot() và lines()" width="672"><p class="caption">
+<span style="display:block;" id="fig:unnamed-chunk-124"></span>
+<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-124-1.png" alt="Mô tả nhiều biến liên tục theo thời gian sử dụng hàm plot() và lines()" width="672"><p class="caption">
 Hình 2.6: Mô tả nhiều biến liên tục theo thời gian sử dụng hàm plot() và lines()
 </p>
 </div>
@@ -2778,8 +2801,8 @@ Hình 2.6: Mô tả nhiều biến liên tục theo thời gian sử dụng hàm
 <span>     xlab <span class="op">=</span> <span class="st">""</span>, ylab <span class="op">=</span> <span class="st">""</span>,</span>
 <span>     border <span class="op">=</span> <span class="st">"#640514"</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-126"></span>
-<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-126-1.png" alt="Mô tả phân phối của một biến bằng hàm hist()" width="672"><p class="caption">
+<span style="display:block;" id="fig:unnamed-chunk-125"></span>
+<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-125-1.png" alt="Mô tả phân phối của một biến bằng hàm hist()" width="672"><p class="caption">
 Hình 2.7: Mô tả phân phối của một biến bằng hàm hist()
 </p>
 </div>
@@ -2791,8 +2814,8 @@ Hình 2.7: Mô tả phân phối của một biến bằng hàm hist()
 <span>     breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.1</span>,<span class="fl">0.1</span>,length<span class="op">=</span><span class="fl">100</span><span class="op">)</span>,</span>
 <span>     border <span class="op">=</span> <span class="st">"#640514"</span>, col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-127"></span>
-<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-127-1.png" alt="Sử dụng tham số break trong hàm hist()" width="672"><p class="caption">
+<span style="display:block;" id="fig:unnamed-chunk-126"></span>
+<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-126-1.png" alt="Sử dụng tham số break trong hàm hist()" width="672"><p class="caption">
 Hình 2.8: Sử dụng tham số break trong hàm hist()
 </p>
 </div>
@@ -2807,8 +2830,8 @@ Hình 2.8: Sử dụng tham số break trong hàm hist()
 <span><span class="co"># Kết hợp thêm với đồ thị hàm mật độ</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">r_DAX</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"darkblue"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-128"></span>
-<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-128-1.png" alt="Sử dụng đồng thời đồ thị tần suất và hàm mật độ để mô tả phân phối xác suất" width="672"><p class="caption">
+<span style="display:block;" id="fig:unnamed-chunk-127"></span>
+<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-127-1.png" alt="Sử dụng đồng thời đồ thị tần suất và hàm mật độ để mô tả phân phối xác suất" width="672"><p class="caption">
 Hình 2.9: Sử dụng đồng thời đồ thị tần suất và hàm mật độ để mô tả phân phối xác suất
 </p>
 </div>
@@ -2818,25 +2841,14 @@ Hình 2.9: Sử dụng đồng thời đồ thị tần suất và hàm mật đ
 <span class="header-section-number">2.5.3</span> Đồ thị hình hộp<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%93-th%E1%BB%8B-h%C3%ACnh-h%E1%BB%99p"><i class="fas fa-link"></i></a>
 </h3>
 <p>Đồ thị hình hộp, hay còn được gọi là box-and-whisker, hoặc boxplot, dùng để mô tả phân phối xác suất của một biến liên tục hoặc để mô tả mối liên hệ giữa một biến liên tục với một biến rời rạc. Đồ thị hình hộp sử dụng 5 giá trị đặc trưng của một véc-tơ để mô tả hình dạng phân phối xác suất và các điểm có nhiều khả năng là giá trị ngoại lai trong một véc-tơ. Chúng tôi sẽ thảo luận kỹ hơn về cách sử dụng boxplot trong chương Trực quan hóa dữ liệu. Trong phần này, chúng tôi chỉ mô tả cách vẽ một đồ thị hình hộp cơ bản.</p>
-<p>Hàm <span style="color: #640514; font-family: Source Code Pro;">boxplot()</span> được sử dụng để vẽ đồ thị hình hộp. Đồ thị dưới đây mô tả phân phối xác suất của véc-tơ nhiệt độ (biến <span style="color: #640514; font-family: Source Code Pro;">Temp</span>) trong dữ liệu <span style="color: #640514; font-family: Source Code Pro;">airquality</span> bằng đồ thị kiểu hình hộp:</p>
+<p>Hàm <span style="color: #640514; font-family: Source Code Pro;">boxplot()</span> được sử dụng để vẽ đồ thị hình hộp. Đồ thị dưới đây mô tả phân phối xác suất của véc-tơ nhiệt độ (biến Temp) trong dữ liệu <span style="color: #640514; font-family: Source Code Pro;">airquality</span> bằng đồ thị kiểu hình hộp:</p>
 <div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Temp</span>,</span>
-<span>        border <span class="op">=</span> <span class="st">"#640514"</span>,col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-129"></span>
-<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-129-1.png" alt="Đồ thị dạng hộp mô tả phân phối của biến Temp" width="672"><p class="caption">
-Hình 2.10: Đồ thị dạng hộp mô tả phân phối của biến Temp
-</p>
-</div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">airquality</span><span class="op">$</span><span class="va">Temp</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-128-1.png" width="672"></div>
 <p>Để mô tả phân phối xác suất của nhiệt độ theo tháng (cột Month) trong dữ liệu <span style="color: #640514; font-family: Source Code Pro;">airquality</span> chúng ta sử dụng đồ thị hình hộp như sau</p>
 <div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Temp</span><span class="op">~</span><span class="va">Month</span>, data <span class="op">=</span> <span class="va">airquality</span>, border <span class="op">=</span> <span class="st">"#640514"</span>,col <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span></span></code></pre></div>
-<div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:unnamed-chunk-130"></span>
-<img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-130-1.png" alt="Đồ thị dạng hộp mô tả phân phối của biến Temp theo tháng (Month)" width="672"><p class="caption">
-Hình 2.11: Đồ thị dạng hộp mô tả phân phối của biến Temp theo tháng (Month)
-</p>
-</div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span><span class="op">(</span><span class="va">Temp</span><span class="op">~</span><span class="va">Month</span>, data <span class="op">=</span> <span class="va">airquality</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="07-lap-trinh-co-ban-voi-R_files/figure-html/unnamed-chunk-129-1.png" width="672"></div>
 <p>Còn nhiều hàm vẽ đồ thị hữu ích trong R bạn đọc có thể tự tìm hiểu như <span style="color: #640514; font-family: Source Code Pro;">barplot()</span>, <span style="color: #640514; font-family: Source Code Pro;">dotchart()</span>, hay <span style="color: #640514; font-family: Source Code Pro;">coplot()</span>. Như chúng tôi đã đề cập, trọng tâm của phần vẽ đồ thị sẽ ở trong chương Trực quan hóa dữ liệu, do đó các đồ thị được liệt kê trong phần này chỉ mang tính tham khảo.</p>
 </div>
 </div>
@@ -2890,8 +2902,8 @@ Hình 2.11: Đồ thị dạng hộp mô tả phân phối của biến Temp the
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></div>
-<div class="next"><a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></div>
+<div class="prev"><a href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1nh.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sánh</a></div>
+<div class="empty"></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -2952,7 +2964,7 @@ Hình 2.11: Đồ thị dạng hộp mô tả phân phối của biến Temp the
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-08-06.</p>
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-07-30.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
