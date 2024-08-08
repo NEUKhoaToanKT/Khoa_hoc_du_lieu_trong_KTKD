@@ -19,12 +19,12 @@ rmd_files:
    "08-1-truc-quan-hoa-du-lieu.rmd",
    "09-mo-hinh-tuyen-tinh.Rmd",
    "09-mo-hinh-cong-tinh-tong-quat.Rmd",
-   "10-mo-hinh-tuyen-tinh-tong-quat.Rmd",
-   "10-mo-hinh-tuyen-tinh-tong-quat-mo-rong.Rmd",
-   "10-Ung-dung-GLM.Rmd",
-   "11-mo-hinh-cay-quyet-dinh.Rmd",
-   "11-2-cay-quyet-dinh-boosting.Rmd",
-   "12-mo-hinh-mang-noron.Rmd",
-   "12-1-Cac-mo-hinh-mang-noron-dien-hinh.Rmd",
-   "13-hoc-may-khong-co-giam-sat.Rmd"
+   #"10-mo-hinh-tuyen-tinh-tong-quat.Rmd",
+   #"10-mo-hinh-tuyen-tinh-tong-quat-mo-rong.Rmd",
+   #"10-Ung-dung-GLM.Rmd",
+   #"11-mo-hinh-cay-quyet-dinh.Rmd",
+   #"11-2-cay-quyet-dinh-boosting.Rmd",
+   #"12-mo-hinh-mang-noron.Rmd",
+   #"12-1-Cac-mo-hinh-mang-noron-dien-hinh.Rmd",
+   #"13-hoc-may-khong-co-giam-sat.Rmd"
   ]

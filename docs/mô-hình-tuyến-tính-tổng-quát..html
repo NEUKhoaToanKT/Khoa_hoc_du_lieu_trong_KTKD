@@ -4,23 +4,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chương 2 Mô hình tuyến tính tổng quát. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+<title>Chương 11 Mô hình tuyến tính tổng quát. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
 <meta name="author" content="Nguyễn Quang Huy">
 <meta name="description" content="Mô hình tuyến tính tổng quát, Generalized Linear Model hay viết tắt là GLM, là một mô hình được ứng dụng rộng rãi trong các doanh nghiệp, các cơ quan tổ chức hoạt động trong lĩnh vực tài chính,...">
-<meta name="generator" content="bookdown 0.38 with bs4_book()">
-<meta property="og:title" content="Chương 2 Mô hình tuyến tính tổng quát. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta property="og:title" content="Chương 11 Mô hình tuyến tính tổng quát. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Mô hình tuyến tính tổng quát, Generalized Linear Model hay viết tắt là GLM, là một mô hình được ứng dụng rộng rãi trong các doanh nghiệp, các cơ quan tổ chức hoạt động trong lĩnh vực tài chính,...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chương 2 Mô hình tuyến tính tổng quát. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="twitter:title" content="Chương 11 Mô hình tuyến tính tổng quát. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta name="twitter:description" content="Mô hình tuyến tính tổng quát, Generalized Linear Model hay viết tắt là GLM, là một mô hình được ứng dụng rộng rãi trong các doanh nghiệp, các cơ quan tổ chức hoạt động trong lĩnh vực tài chính,...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.8/font.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Source%20Code%20Pro:wght@400;450&amp;display=swap" rel="stylesheet">
 <script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script>
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.8/girafe.js"></script><script src="libs/plotly-binding-4.10.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script>
         $(function() {
             $("#toc h2").html("TRONG CHƯƠNG NÀY"); // Change text for "View source"
         });
@@ -117,7 +120,27 @@
 <li><a class="" href="index.html">Lời nói đầu</a></li>
 <li class="book-part">PHẦN I: GIỚI THIỆU CHUNG</li>
 <li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></li>
-<li><a class="active" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">2</span> Mô hình tuyến tính tổng quát.</a></li>
+<li class="book-part">PHẦN II: GIỚI THIỆU VỀ R</li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">4</span> Kiến thức R nâng cao</a></li>
+<li class="book-part">PHẦN III: PHÂN TÍCH DỮ LIỆU</li>
+<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html"><span class="header-section-number">5</span> Nhập dữ liệu vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Biến đổi và sắp xếp dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
+<li class="book-part">PHẦN IV: MÔ HÌNH TUYẾN TÍNH</li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">9</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">10</span> Các mô hình cộng tính tổng quát</a></li>
+<li><a class="active" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">11</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">12</span> Mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li><a class="" href="t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">13</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li class="book-part">PHẦN V: MÔ HÌNH CÂY QUYẾT ĐỊNH</li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">14</span> Mô hình cây quyết định</a></li>
+<li><a class="" href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html"><span class="header-section-number">15</span> Boosting và cây quyết định.</a></li>
+<li><a class="" href="neuralnetwork.html"><span class="header-section-number">16</span> Mô hình mạng nơ-ron</a></li>
+<li><a class="" href="neuralnetwork1.html"><span class="header-section-number">17</span> Các mạng học sâu điển hình</a></li>
+<li><a class="" href="h%E1%BB%8Dc-m%C3%A1y-kh%C3%B4ng-c%C3%B3-gi%C3%A1m-s%C3%A1t.html"><span class="header-section-number">18</span> Học máy không có giám sát</a></li>
 </ul>
 
         <div class="book-extra">
@@ -125,9 +148,9 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mô-hình-tuyến-tính-tổng-quát." class="section level1" number="2">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="mô-hình-tuyến-tính-tổng-quát." class="section level1" number="11">
 <h1>
-<span class="header-section-number">Chương 2</span> Mô hình tuyến tính tổng quát.<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><i class="fas fa-link"></i></a>
+<span class="header-section-number">Chương 11</span> Mô hình tuyến tính tổng quát.<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><i class="fas fa-link"></i></a>
 </h1>
 <p>Mô hình tuyến tính tổng quát, Generalized Linear Model hay viết tắt là GLM, là một mô hình được ứng dụng rộng rãi trong các doanh nghiệp, các cơ quan tổ chức hoạt động trong lĩnh vực tài chính, ngân hàng, và bảo hiểm. Các chuyên gia quản trị rủi ro trong các ngân hàng sử dụng mô hình GLM để chấm điểm tín dụng khách hàng và quyết định phê duyệt tín dụng. Các chuyên gia tính toán thường xuyên sử dụng mô hình GLM để xác định phí thuần của các sản phẩm bảo hiểm, để xác định dự phòng nghiệp vụ, hoặc để phân loại rủi ro mà công ty phải đối mặt. Khái niệm GLM lần đầu tiên được sử dụng trong nghiên cứu của Nelder và Wedderburn (1972) và từ đó đến nay đã có nhiều sách tham khảo tin cậy cho mô hình này như Alan Agresti (2015) hay Annette J. Dobson and Adrian G. Barnett (2018). Đa số các tài liệu tham khảo giới thiệu GLM dưới góc độ toán học và mang nhiều tính lý thuyết. Chương sách này sẽ cố gắng giải thích và tiếp cận GLM từ một góc nhìn mang tính thực hành nhiều hơn. Chúng tôi sẽ không quá đi sâu vào các khía cạnh như giả thiết hay phương pháp ước lượng của mô hình GLM, mà sẽ tập trung vào hướng dẫn bạn đọc ứng dụng GLM trên nhiều kiểu dữ liệu nhất có thể.</p>
 <p>Mô hình tuyến tính tổng quát là các mô hình được xây dựng trên các dữ liệu kiểu truyền thống, với biến mục tiêu <span class="math inline">\(Y\)</span> và ma trận biến giải thích <span class="math inline">\(\textbf{X} = \left(X_1, X_2, \cdots, X_p\right)\)</span>. Dữ liệu có <span class="math inline">\(n\)</span> quan sát tương ứng với <span class="math inline">\(n\)</span> dòng của ma trận <span class="math inline">\(\textbf{X}\)</span>. Mô hình tuyến tính tổng quát có thể được sử dụng trong trường hợp có nhiều biến mục tiêu, tuy nhiên trong cuốn sách này chúng tôi chỉ tập trung vào trường hợp có một biến mục tiêu duy nhất.</p>
@@ -142,10 +165,10 @@ Y \sim  F_{\boldsymbol{\theta}} \text{    hay    } \mathbb{P}(Y \leq y) =  F_{\b
 &amp; \mathbb{E}(Y|\textbf{X} = \textbf{x}_i) = \mu_i \\
 &amp; g(\mu_i) = \beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p} \\
 &amp; \mu_i = g^{-1}\left(\beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p} \right)
-\tag{2.1}
+\tag{11.1}
 \end{align}\]</span></p></li>
 </ol>
-<p>Chúng tôi ký hiệu biến ngẫu nhiên có điều kiện <span class="math inline">\((Y|\textbf{X} = \textbf{x}_i)\)</span> một cách ngắn gọn là <span class="math inline">\(Y_i\)</span>. Phương trình thứ ba trong hệ phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:glm1">(2.1)</a> có nghĩa là giá trị trung bình của biến <span class="math inline">\(Y_i\)</span>, ký hiệu <span class="math inline">\(\mu_i\)</span>, được xác định bằng giá trị một hàm số ngược của một hàm số thực <span class="math inline">\(g\)</span>, ký hiệu là hàm <span class="math inline">\(g^{-1}\)</span>, tính trên một tổ hợp tuyến tính của các giá trị <span class="math inline">\((x_{i,1}, x_{i,2}, \cdots, x_{i,p})\)</span>.</p>
+<p>Chúng tôi ký hiệu biến ngẫu nhiên có điều kiện <span class="math inline">\((Y|\textbf{X} = \textbf{x}_i)\)</span> một cách ngắn gọn là <span class="math inline">\(Y_i\)</span>. Phương trình thứ ba trong hệ phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:glm1">(11.1)</a> có nghĩa là giá trị trung bình của biến <span class="math inline">\(Y_i\)</span>, ký hiệu <span class="math inline">\(\mu_i\)</span>, được xác định bằng giá trị một hàm số ngược của một hàm số thực <span class="math inline">\(g\)</span>, ký hiệu là hàm <span class="math inline">\(g^{-1}\)</span>, tính trên một tổ hợp tuyến tính của các giá trị <span class="math inline">\((x_{i,1}, x_{i,2}, \cdots, x_{i,p})\)</span>.</p>
 <p>Thay vì cố gắng hiểu các khái niệm toán học ở trên, chúng ta hãy thử áp dụng mô hình kể trên trong một trường hợp cụ thể. Chúng ta sẽ xây dựng một mô hình tuyến tính tổng quát mà trong đó biến mục tiêu <span class="math inline">\(Y\)</span> cho biết người mua bảo hiểm xe có hay không lựa chọn các quyền lợi bảo hiểm bổ sung khi ký hợp đồng mua bảo hiểm trách nhiệm dân sự bắt buộc. Dữ liệu được sử dụng có tên là <span style="color: #640514; font-family: Source Code Pro;">MotoInsurance</span> bao gồm có 6 biến độc lập là:</p>
 <ul>
 <li><ol style="list-style-type: decimal">
@@ -169,7 +192,7 @@ Y \sim  F_{\boldsymbol{\theta}} \text{    hay    } \mathbb{P}(Y \leq y) =  F_{\b
 </ul>
 <p>Biến mục tiêu hay biến phụ thuộc là biến <span class="math inline">\(Y\)</span> nhận một trong hai giá trị, <span style="color: #640514; font-family: Source Code Pro;">'Yes'</span> nếu người mua bảo hiểm trách nhiệm dân sự đồng ý lựa thêm quyền lợi bảo hiểm bổ sung và <span style="color: #640514; font-family: Source Code Pro;">'No'</span> nếu người mua bảo hiểm trách nhiệm dân sự không lựa chọn mua quyền lợi bổ sung. Để mô hình ở dạng đơn giản nhất có thể, chúng tôi lựa chọn hai biến độc lập để xây dựng mô hình là biến <span style="color: #640514; font-family: Source Code Pro;">age</span> và biến <span style="color: #640514; font-family: Source Code Pro;">sex</span>. Chúng ta sẽ sử dụng biến <span style="color: #640514; font-family: Source Code Pro;">age</span> như một biến kiểu số, trong khi biến <span style="color: #640514; font-family: Source Code Pro;">sex</span> là một biến kiểu phân loại/rời rạc nhận một trong hai giá trị là <span style="color: #640514; font-family: Source Code Pro;">'M'</span> tương ứng với nam giới và <span style="color: #640514; font-family: Source Code Pro;">'F'</span> tương ứng với nữ giới.</p>
 <p>Đoạn lệnh R dưới đây được sử dụng để lấy dữ liệu và phân tích nhanh ảnh hưởng của các biến <span style="color: #640514; font-family: Source Code Pro;">age</span> và <span style="color: #640514; font-family: Source Code Pro;">sex</span> lên quyết định mua bảo hiểm bổ sung của người sở hữu xe ô tô.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb774"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD Final/Dataset/MotoInsurance.csv"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Đổi các biến Y và sex sang kiểu factor</span></span>
@@ -177,26 +200,26 @@ Y \sim  F_{\boldsymbol{\theta}} \text{    hay    } \mathbb{P}(Y \leq y) =  F_{\b
 <span><span class="va">dat</span><span class="op">$</span><span class="va">sex</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Thực hiện các phân tích khai phá</span></span>
-<span><span class="va">p1</span><span class="op">&lt;-</span><span class="va">dat</span><span class="op">%&gt;%</span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_boxplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">Y</span>, y <span class="op">=</span> <span class="va">age</span>, fill <span class="op">=</span> <span class="va">Y</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#640514"</span>, alpha <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Mối liên hệ giữa age và biến Y"</span><span class="op">)</span><span class="op">+</span> </span>
-<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Độ tuổi"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">xlab</span><span class="op">(</span><span class="st">"Quyết định mua bảo hiểm bổ sung"</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">theme</span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span>
+<span><span class="va">p1</span><span class="op">&lt;-</span><span class="va">dat</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">Y</span>, y <span class="op">=</span> <span class="va">age</span>, fill <span class="op">=</span> <span class="va">Y</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"#640514"</span>, alpha <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Mối liên hệ giữa age và biến Y"</span><span class="op">)</span><span class="op">+</span> </span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Độ tuổi"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Quyết định mua bảo hiểm bổ sung"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">p2</span><span class="op">&lt;-</span><span class="va">dat</span><span class="op">%&gt;%</span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_bar</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">sex</span>, fill <span class="op">=</span> <span class="va">Y</span><span class="op">)</span>,col <span class="op">=</span> <span class="st">"#640514"</span>, alpha <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Mối liên hệ giữa sex và biến Y"</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Số lượng người mua"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">xlab</span><span class="op">(</span><span class="st">"Giới tính"</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu">theme_minimal</span><span class="op">(</span><span class="op">)</span><span class="op">+</span> <span class="fu">guides</span><span class="op">(</span>fill<span class="op">=</span><span class="fu">guide_legend</span><span class="op">(</span>title<span class="op">=</span><span class="st">"Quyết định mua"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">p2</span><span class="op">&lt;-</span><span class="va">dat</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">sex</span>, fill <span class="op">=</span> <span class="va">Y</span><span class="op">)</span>,col <span class="op">=</span> <span class="st">"#640514"</span>, alpha <span class="op">=</span> <span class="fl">0.75</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Mối liên hệ giữa sex và biến Y"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"Số lượng người mua"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span><span class="op">(</span><span class="st">"Giới tính"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span><span class="op">(</span>fill<span class="op">=</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span><span class="op">(</span>title<span class="op">=</span><span class="st">"Quyết định mua"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">grid.arrange</span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fgglm001a"></span>
 <img src="10-mo-hinh-tuyen-tinh-tong-quat_files/figure-html/fgglm001a-1.png" alt="Mối liên hệ giữa các biến giải thích là độ tuổi và giới tính lên biến mục tiêu quyết định mua bảo hiểm bổ sung trong dữ liệu MotoInsurance. Hình bên trái là đồ thị hình hộp cho biến phân phối xác suất của độ tuổi cho nhóm người có mua và không mua. Hình bên phải là đồ thị dạng cột cho biết mối liên hệ giữa giới tính đến quyết định mua bảo hiểm bổ sung" width="672"><p class="caption">
-Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi và giới tính lên biến mục tiêu quyết định mua bảo hiểm bổ sung trong dữ liệu MotoInsurance. Hình bên trái là đồ thị hình hộp cho biến phân phối xác suất của độ tuổi cho nhóm người có mua và không mua. Hình bên phải là đồ thị dạng cột cho biết mối liên hệ giữa giới tính đến quyết định mua bảo hiểm bổ sung
+Hình 11.1: Mối liên hệ giữa các biến giải thích là độ tuổi và giới tính lên biến mục tiêu quyết định mua bảo hiểm bổ sung trong dữ liệu MotoInsurance. Hình bên trái là đồ thị hình hộp cho biến phân phối xác suất của độ tuổi cho nhóm người có mua và không mua. Hình bên phải là đồ thị dạng cột cho biết mối liên hệ giữa giới tính đến quyết định mua bảo hiểm bổ sung
 </p>
 </div>
-<p>Từ Hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#fig:fgglm001a">2.1</a> cho thấy cả hai biến <span style="color: #640514; font-family: Source Code Pro;">age</span> và <span style="color: #640514; font-family: Source Code Pro;">sex</span> có ảnh hưởng đến quyết định mua bảo hiểm bổ sung. Đồ thị bên trái cho thấy phân phối xác suất của những người có mua bảo hiểm bổ sung thấp hơn, điều này có nghĩa là những người trẻ hơn có xu hướng đồng ý mua bảo hiểm bổ sung hơn. Đồ thị bên phải cho thấy tỷ lệ nữ giới có mua bảo hiểm cao hơn so với tỷ lệ nam giới, hay nói cách khác giới tính nữ có khả năng đồng ý mua bảo hiểm bổ sung cao hơn so với nam giới.</p>
+<p>Từ Hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#fig:fgglm001a">11.1</a> cho thấy cả hai biến <span style="color: #640514; font-family: Source Code Pro;">age</span> và <span style="color: #640514; font-family: Source Code Pro;">sex</span> có ảnh hưởng đến quyết định mua bảo hiểm bổ sung. Đồ thị bên trái cho thấy phân phối xác suất của những người có mua bảo hiểm bổ sung thấp hơn, điều này có nghĩa là những người trẻ hơn có xu hướng đồng ý mua bảo hiểm bổ sung hơn. Đồ thị bên phải cho thấy tỷ lệ nữ giới có mua bảo hiểm cao hơn so với tỷ lệ nam giới, hay nói cách khác giới tính nữ có khả năng đồng ý mua bảo hiểm bổ sung cao hơn so với nam giới.</p>
 <p>Chúng ta có thể khẳng định mối liên hệ giữa biến <span style="color: #640514; font-family: Source Code Pro;">age</span> đến biến mục tiêu <span class="math inline">\(Y\)</span> qua phân tích phương sai:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb775"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html">aov</a></span><span class="op">(</span><span class="va">age</span><span class="op">~</span><span class="va">Y</span>,data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##               Df Sum Sq Mean Sq F value Pr(&gt;F)    
 ## Y              1  24354   24354   139.9 &lt;2e-16 ***
@@ -204,7 +227,7 @@ Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi v�
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Mối liên hệ giữa biến giới tính đến biến mục tiêu được khẳng định qua kiểm định <span style="color: #640514; font-family: Source Code Pro;">chisq.test</span></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb777"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Y</span>, <span class="va">dat</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ##  Pearson's Chi-squared test with Yates' continuity correction
@@ -220,12 +243,12 @@ Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi v�
 &amp; Y_i =  \left(Y|\text{age} = \text{age}_i, \text{sex} = \text{sex}_i\right) \sim \mathcal{B}(\rho_i) \\
 &amp; \mathbb{E}(Y_i) =  \rho_i \\
 &amp; \text{Probit}\left(\rho_i\right) = \beta_0 + \beta_1 \times \text{age}_i + \beta_2 \times \text{sex}_i \\
-\tag{2.2}
+\tag{11.2}
 \end{align}\]</span></p>
 <!-- & \rho_i = \Phi\left(0.678 - 0.016 \times age_i - 0.447 \times sex_i\right) -->
 <p>Giá trị <span class="math inline">\(\rho_i\)</span> là vừa là giá trị trung bình, vừa là xác suất mà người <span class="math inline">\(i\)</span> có tuổi bằng <span style="color: #640514; font-family: Source Code Pro;"><span class="math inline">\(age_i\)</span></span>, giới tính <span style="color: #640514; font-family: Source Code Pro;"><span class="math inline">\(sex_i\)</span></span>, có mua bảo hiểm bổ sung. Hàm <span style="color: #640514; font-family: Source Code Pro;">probit</span> ở trên là hàm ngược của hàm phân phối xác suất của biến ngẫu nhiên phân phối chuẩn có trung bình 0 và phương sai bằng 1. Hàm số này dùng để kết nối giữa giá trị trung bình <span class="math inline">\(\rho_i\)</span> với các giá trị tương ứng của biến giải thích <span style="color: #640514; font-family: Source Code Pro;"><span class="math inline">\(age_i\)</span></span> và <span style="color: #640514; font-family: Source Code Pro;"><span class="math inline">\(sex_i\)</span></span> và còn được gọi là <em>hàm liên kết</em>.</p>
-<p>Trong mô hình tuyến tính tổng quát được mô tả trong hệ phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:glm2">(2.2)</a> có ba tham số cần được ước lượng từ dữ liệu là <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> và <span class="math inline">\(\beta_2\)</span>. Hàm số dùng để xây dựng và ước lượng mô hình tuyến tính tổng quát trong R là hàm <span style="color: #640514; font-family: Source Code Pro;">glm()</span> của thư viện <span style="color: #640514; font-family: Source Code Pro;">stats</span>. Chúng ta ước lượng các hệ số tuyến tính như sau:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<p>Trong mô hình tuyến tính tổng quát được mô tả trong hệ phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:glm2">(11.2)</a> có ba tham số cần được ước lượng từ dữ liệu là <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span> và <span class="math inline">\(\beta_2\)</span>. Hàm số dùng để xây dựng và ước lượng mô hình tuyến tính tổng quát trong R là hàm <span style="color: #640514; font-family: Source Code Pro;">glm()</span> của thư viện <span style="color: #640514; font-family: Source Code Pro;">stats</span>. Chúng ta ước lượng các hệ số tuyến tính như sau:</p>
+<div class="sourceCode" id="cb779"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Biến Y có phân phối nhị thức</span></span>
 <span><span class="co"># Hàm g là hàm probit</span></span>
 <span><span class="va">glm1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Y</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">sex</span>, data<span class="op">=</span><span class="va">dat</span>, </span>
@@ -235,6 +258,10 @@ Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi v�
 ## Call:
 ## glm(formula = Y ~ age + sex, family = binomial(link = "probit"), 
 ##     data = dat)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.4495  -0.9278  -0.7382   1.2584   2.0391  
 ## 
 ## Coefficients:
 ##              Estimate Std. Error z value Pr(&gt;|z|)    
@@ -259,18 +286,18 @@ Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi v�
 </ol>
 <p><span class="math display" id="eq:glm3">\[\begin{align}
 \text{Probit}(\rho_i) = 0.678 - 0.016 \times \text{age}_i - 0.447 \times \text{sex}_i
-\tag{2.3}
+\tag{11.3}
 \end{align}\]</span></p>
-<p>trong đó <span style="color: #640514; font-family: Source Code Pro;"><span class="math inline">\(age_i\)</span></span> là tuổi của người <span class="math inline">\(i\)</span>; <span style="color: #640514; font-family: Source Code Pro;"><span class="math inline">\(sex_i\)</span></span> là giới tính của người <span class="math inline">\(i\)</span>, nhận giá trị bằng 1 nếu người đó là nam giới và 0 nếu người đó là nữ giới. Hàm <span style="color: #640514; font-family: Source Code Pro;">probit</span> được lựa chọn trong công thức ở trên là hàm số ngược của hàm phân phối của biến ngẫu nhiên phân phối chuẩn <span class="math inline">\(\mathcal{N}(0,1)\)</span> nên có thể viết mối liên hệ giữa <span class="math inline">\(\rho_i\)</span> và các biến giải thích trong phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:glm3">(2.3)</a> như sau:
+<p>trong đó <span style="color: #640514; font-family: Source Code Pro;"><span class="math inline">\(age_i\)</span></span> là tuổi của người <span class="math inline">\(i\)</span>; <span style="color: #640514; font-family: Source Code Pro;"><span class="math inline">\(sex_i\)</span></span> là giới tính của người <span class="math inline">\(i\)</span>, nhận giá trị bằng 1 nếu người đó là nam giới và 0 nếu người đó là nữ giới. Hàm <span style="color: #640514; font-family: Source Code Pro;">probit</span> được lựa chọn trong công thức ở trên là hàm số ngược của hàm phân phối của biến ngẫu nhiên phân phối chuẩn <span class="math inline">\(\mathcal{N}(0,1)\)</span> nên có thể viết mối liên hệ giữa <span class="math inline">\(\rho_i\)</span> và các biến giải thích trong phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:glm3">(11.3)</a> như sau:
 <span class="math display" id="eq:glm3a">\[\begin{align}
 \rho_i &amp; = \text{Probit}^{-1}\left(0.678 - 0.016 \times \text{age}_i - 0.447 \times \text{sex}_i \right) \\
 &amp; = \Phi(0.678 - 0.016 \times \text{age}_i - 0.447 \times \text{sex}_i)
-\tag{2.4}
+\tag{11.4}
 \end{align}\]</span></p>
 <p>trong đó <span class="math inline">\(\Phi\)</span> là hàm phân phối xác suất của biến ngẫu nhiên phân phối chuẩn <span class="math inline">\(\mathcal{N}(0,1)\)</span>
 <span class="math display" id="eq:glm3b">\[\begin{align}
 \Phi(x) = \cfrac{1}{\sqrt{2 \pi}} \int\limits_{-\infty}^x \ exp\left(-t^2/2\right) \ dt
-\tag{2.5}
+\tag{11.5}
 \end{align}\]</span></p>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">probit</span> được lựa chọn làm hàm liên kết vì miền xác định của hàm số này là khoảng (0,1) phù hợp với việc mô tả xác suất <span class="math inline">\(\rho_i\)</span> trong khi miền giá trị của hàm số này là tập các số thực phù hợp với tổ hợp tuyến tính của các biến giải thích.</p>
 <p>Bạn đọc có thể nhận thấy được sự khác biệt giữa mô hình tuyến tính tổng quát ở trên với mô hình tuyến tính thông thường được trình bày trong các chương trước ở hai điểm:</p>
@@ -279,22 +306,22 @@ Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi v�
 <li><p>Thứ hai: mối liên hệ giữa giá trị trung bình của biến mục tiêu <span class="math inline">\(Y\)</span> và tổ hợp tuyến tính của các biến độc lập được thể hiện thông qua một hàm số, trong trường hợp này là hàm <span style="color: #640514; font-family: Source Code Pro;">probit</span>. Trong mô hình tuyến tính thông thường, giá trị trung bình của biến mục tiêu bằng tổ hợp tuyến tính của các biến độc lập.</p></li>
 </ul>
 <p>Hai điểm nêu trên cũng chính là hai cải tiến quan trọng của mô hình tuyến tính tổng quát so với mô hình hồi quy tuyến tính thông thường. Việc tổng quát hóa phân phối của biến phụ thuộc và thiết lập một hàm liên kết giữa giá trị trung bình của biến phụ thuộc và với các biến độc lập giúp cho mô hình tuyến tính tổng quát linh hoạt hơn rất nhiều khi làm việc với các dữ liệu cụ thể và vẫn giữ được khả năng suy diễn giống như mô hình hồi quy tuyến tính thông thường. Trong phần tiếp theo của chương chúng ta sẽ thảo luận kỹ hơn về các vấn đề này.</p>
-<div id="các-nhược-điểm-của-mô-hình-hồi-quy-tuyến-tính." class="section level2" number="2.1">
+<div id="các-nhược-điểm-của-mô-hình-hồi-quy-tuyến-tính." class="section level2" number="11.1">
 <h2>
-<span class="header-section-number">2.1</span> Các nhược điểm của mô hình hồi quy tuyến tính.<a class="anchor" aria-label="anchor" href="#c%C3%A1c-nh%C6%B0%E1%BB%A3c-%C4%91i%E1%BB%83m-c%E1%BB%A7a-m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1</span> Các nhược điểm của mô hình hồi quy tuyến tính.<a class="anchor" aria-label="anchor" href="#c%C3%A1c-nh%C6%B0%E1%BB%A3c-%C4%91i%E1%BB%83m-c%E1%BB%A7a-m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh."><i class="fas fa-link"></i></a>
 </h2>
 <p>Mô hình hồi quy tuyến tính là nền tảng quan trọng cho hầu hết các mô hình học máy và các mô hình trí tuệ nhân tạo hiện tại. Trước khi những mô hình học máy được nghiên cứu và phát triển mạnh mẽ như hiện nay, những người xây dựng mô hình luôn gặp khó khăn khi sử dụng mô hình hồi quy tuyến tính trong nhiều hoàn cảnh. Nguyên nhân là do giả thiết về phân phối xác suất của biến mục tiêu và miền giá trị trung bình của biến mục tiêu của mô hình hồi quy tuyến tính thông thường là không phù hợp với đa số dữ liệu thực tế.</p>
 <p>Thật vậy, mô hình hồi quy tuyến tính được thảo luận trong phần trước của cuốn sách có thể được tóm tắt như sau: người xây dựng mô hình cố gắng nghiên cứu mối quan hệ giữa một biến mục tiêu <span class="math inline">\(Y\)</span> với véc-tơ biến độc lập <span class="math inline">\(\textbf{X} = (X_1, X_2, \cdots, X_p)\)</span> bằng cách cho rằng mối liên hệ giữa <span class="math inline">\(Y\)</span> và <span class="math inline">\(\textbf{X}\)</span> là một hàm tuyến tính. Mối liên hệ đó không đồng nhất nên sai số sẽ tồn tại và những người xây dựng mô hình cho rằng sai số có phân phối chuẩn với trung bình bằng 0 và độ lệch chuẩn là một hằng số <span class="math inline">\(\sigma &gt; 0\)</span>. Chúng ta biểu diễn mô hình tuyến tính thông thường như sau:</p>
 <p><span class="math display" id="eq:glm4">\[\begin{align}
 &amp; Y = \beta_0 + \beta_1 \cdot X_1 + \beta_2 \cdot X_2 + \cdots + \beta_p \cdot X_p + \epsilon \\
 &amp; \epsilon \sim \mathcal{N}(0, \sigma^2)
-\tag{2.6}
+\tag{11.6}
 \end{align}\]</span></p>
 <p>Bạn đọc có thể thấy rằng trong mô hình hồi quy tuyến tính, biến phụ thuộc <span class="math inline">\(Y\)</span> là biến ngẫu nhiên có phân phối chuẩn có phương sai là <span class="math inline">\(\sigma^2\)</span> và giá trị trung bình phụ thuộc vào véc-tơ biến độc lập <span class="math inline">\(\textbf{X}_i\)</span>. Với điều kiện biến độc lập nhận giá trị là <span class="math inline">\(\textbf{x}_i = (x_{i,1}, x_{i,2}, \cdots, x_{i,p})\)</span>; chúng ta có mô hình hồi quy tuyến tính như sau:</p>
 <p><span class="math display" id="eq:glm5">\[\begin{align}
 &amp; Y_i \sim  \mathcal{N}(\mu_i, \sigma^2) \\
 &amp; \mu_i = \beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p}
-\tag{2.7}
+\tag{11.7}
 \end{align}\]</span></p>
 <p>Ngoài giả thiết về phân phối chuẩn của <span class="math inline">\(Y\)</span>, mô hình hồi quy tuyến tính thông thường còn cho rằng giá trị trung bình của biến ngẫu nhiên <span class="math inline">\(Y\)</span> với điều kiện các biến độc lập nhận giá trị <span class="math inline">\(\textbf{x}_i\)</span>, ký hiệu <span class="math inline">\(\mu_i\)</span>, là một tổ hợp tuyến tính của các biến độc lập. Với giả thiết này, mô hình tuyến tính luôn cho rằng miền giá trị của <span class="math inline">\(\mu_i\)</span> sẽ là toàn bộ tập các số thực <span class="math inline">\(\mathbb{R}\)</span>.</p>
 <p>Câu hỏi đặt ra là: làm như thế nào để áp dụng mô hình hồi quy tuyến tính trong các trường hợp như sau?</p>
@@ -319,13 +346,13 @@ Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi v�
 &amp; Y \sim  F_\theta \\
 &amp; \mathbb{E}(Y|\textbf{X} = \textbf{x}_i) = \mu_i \\
 &amp; g(\mu_i) = \beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p}
-\tag{2.8}
+\tag{11.8}
 \end{align}\]</span></p>
 <p>Trước hết, có thể thấy rằng mô hình hồi quy tuyến tính thông thường là trường hợp đặc biệt của mô hình tuyến tính tổng quát khi phân phối <span class="math inline">\(F\)</span> là phân phối chuẩn; tham số <span class="math inline">\(\boldsymbol{\theta}\)</span> là <span class="math inline">\(\sigma^2\)</span>; và hàm <span class="math inline">\(g\)</span> là hàm số đồng nhất <span class="math inline">\(g(x) = x\)</span>.</p>
 <p>Giả thiết đơn điệu của hàm liên kết <span class="math inline">\(g\)</span> đảm bảo sự tồn tại của hàm số ngược <span class="math inline">\(g^{-1}\)</span>. Mối liên hệ của <span class="math inline">\(\mu_i\)</span> và <span class="math inline">\(\textbf{x}_i^{'} \boldsymbol{\beta}\)</span> có thể được viết lại dưới dạng hàm ngược của hàm liên kết như sau
 <span class="math display" id="eq:glm7">\[\begin{align}
 \mu_i = g^{-1}\left(\beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p}\right)
-\tag{2.9}
+\tag{11.9}
 \end{align}\]</span></p>
 <p>Quay trở lại ví dụ ở phần trước của chương sách, chúng ta phân tích về tác động của độ tuổi và giới tính lên quyết định có tham gia quyền lợi bảo hiểm bổ sung hay không. Mô hình tuyến tính tổng quát được xây dựng như sau:</p>
 <p><span class="math display">\[\begin{align}
@@ -336,41 +363,41 @@ Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi v�
 \end{align}\]</span></p>
 <p>Phân phối xác suất của biến <span class="math inline">\(Y\)</span> là phân phối nhị thức do <span class="math inline">\(Y\)</span> chỉ có thể nhận là 0 hoặc 1. Đồng thời, giá trị trung bình của <span class="math inline">\(Y\)</span> nằm trong khoảng <span class="math inline">\((0,1)\)</span> chúng ta có thể chọn hàm liên kết <span class="math inline">\(g\)</span> là hàm <span class="math inline">\(\Phi^{-1}\)</span>. Nếu không lựa chọn <span class="math inline">\(\Phi^{-1}\)</span> làm hàm liên kết, mọi hàm số đơn điệu, có miền xác định là khoảng <span class="math inline">\((0,1)\)</span>, và miền giá trị là tập số thực <span class="math inline">\(\mathbb{R}\)</span> đều có thể được lựa chọn thay thế.</p>
 </div>
-<div id="xây-dựng-mô-hình-tuyến-tính-tổng-quát" class="section level2" number="2.2">
+<div id="xây-dựng-mô-hình-tuyến-tính-tổng-quát" class="section level2" number="11.2">
 <h2>
-<span class="header-section-number">2.2</span> Xây dựng mô hình tuyến tính tổng quát<a class="anchor" aria-label="anchor" href="#x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2</span> Xây dựng mô hình tuyến tính tổng quát<a class="anchor" aria-label="anchor" href="#x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t"><i class="fas fa-link"></i></a>
 </h2>
 <p>Trong phần này của cuốn sách, chúng ta sẽ thảo luận về cách xây dựng mô hình tuyến tổng quát với các kiểu giá trị khác nhau của biến phụ thuộc <span class="math inline">\(Y\)</span>. Xin nhắc lại rằng đây là cuốn sách dành cho cả các bạn đọc không có nền tảng toán học nâng cao. Do đó, những thảo luận phức tạp liên quan đến các giả thiết của mô hình hay phương pháp ước lượng tham số sẽ được trình bày ở phần sau của chương sách. Chúng ta sẽ hiểu về mô hình tuyến tính tổng quát thông qua việc ứng dụng mô hình cho các các dữ liệu thực tế trước khi đi sâu vào bản chất toán học của mô hình.</p>
-<div id="biến-phụ-thuộc-là-biến-dạng-nhị-phân." class="section level3" number="2.2.1">
+<div id="biến-phụ-thuộc-là-biến-dạng-nhị-phân." class="section level3" number="11.2.1">
 <h3>
-<span class="header-section-number">2.2.1</span> Biến phụ thuộc là biến dạng nhị phân.<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-d%E1%BA%A1ng-nh%E1%BB%8B-ph%C3%A2n."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2.1</span> Biến phụ thuộc là biến dạng nhị phân.<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-d%E1%BA%A1ng-nh%E1%BB%8B-ph%C3%A2n."><i class="fas fa-link"></i></a>
 </h3>
 <p>Đây là các trường hợp mà biến phụ thuộc chỉ nhận một trong hai giá trị. Trong phần trước chúng ta đã nêu một số ví dụ cho trường hợp này: khách hàng có hay không hoàn trả nợ thẻ tín dụng, khách hàng phản hồi tích cực hay tiêu cực về sản phầm, một yêu cầu bồi thường bảo hiểm là trục lợi hay bình thường, một giao dịch rút tiền ngân hàng có hay không phải là giao dịch gian lận, … Mặc dù đây chỉ là một trường hợp đặc biệt của biến phụ thuộc nhận giá trị rời rạc nhưng qua các ví dụ thực tế lại thấy rằng phần lớn các dữ liệu gặp phải lại có biến phụ thuộc ở dạng nhị phân. Khi <span class="math inline">\(Y\)</span> chỉ nhận hai giá trị, chúng ta sẽ luôn mã hóa giá trị của <span class="math inline">\(Y\)</span> thành hai số là 0 và 1. Một vài cuốn sách khác, hoặc trong một vài lĩnh vực nghiên cứu khác, người xây dựng mô hình có thể mã hóa <span class="math inline">\(Y\)</span> thành -1 và 1. Tuy nhiên hai cách mã hóa này chỉ khác nhau ở hình thức chứ không làm ảnh hưởng đến kết quả của mô hình.</p>
-<div id="phân-phối-xác-suất-của-biến-phụ-thuộc." class="section level4" number="2.2.1.1">
+<div id="phân-phối-xác-suất-của-biến-phụ-thuộc." class="section level4" number="11.2.1.1">
 <h4>
-<span class="header-section-number">2.2.1.1</span> Phân phối xác suất của biến phụ thuộc.<a class="anchor" aria-label="anchor" href="#ph%C3%A2n-ph%E1%BB%91i-x%C3%A1c-su%E1%BA%A5t-c%E1%BB%A7a-bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2.1.1</span> Phân phối xác suất của biến phụ thuộc.<a class="anchor" aria-label="anchor" href="#ph%C3%A2n-ph%E1%BB%91i-x%C3%A1c-su%E1%BA%A5t-c%E1%BB%A7a-bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c."><i class="fas fa-link"></i></a>
 </h4>
 <p>Khi biến phụ thuộc là biến dạng nhị phân, một cách tự nhiên, chúng ta sẽ sử dụng phân phối nhị thức để mô tả biến phụ thuộc. Biến ngẫu nhiên <span class="math inline">\(B\)</span> có phân phối nhị thức với tham số <span class="math inline">\(\rho\)</span>, <span class="math inline">\(0 &lt; \rho &lt; 1\)</span>, ký hiệu <span class="math inline">\(\mathcal{B}(\rho)\)</span>, là biến ngẫu nhiên chỉ nhận hai giá trị là 0 và 1 với hàm khối lượng xác suất như sau<br><span class="math display" id="eq:glm80">\[\begin{align}
 \mathbb{P}(B = x) = \rho^x \times (1-\rho)^{(1-x)} \text{ với } x \in \{0;1\}
-\tag{2.10}
+\tag{11.10}
 \end{align}\]</span></p>
 <p>Chúng ta có giá trị trung bình và phương sai của <span class="math inline">\(\mathcal{B}(\rho)\)</span>.
 <span class="math display" id="eq:glm81">\[\begin{align}
 &amp; \mathbb{E}(B) = \rho \\
 &amp; \mathbb{V}(B) = \rho \ (1-\rho)
-\tag{2.11}
+\tag{11.11}
 \end{align}\]</span></p>
 <p>Có thể thấy rằng phân phối nhị thức có duy nhất một tham số <span class="math inline">\(\rho\)</span> và tham số này cũng chính là giá trị trung bình của biến đó. Phương sai của <span class="math inline">\(\mathcal{B}(\rho)\)</span> nhỏ hơn giá trị trung bình.</p>
 </div>
-<div id="lựa-chọn-hàm-liên-kết." class="section level4" number="2.2.1.2">
+<div id="lựa-chọn-hàm-liên-kết." class="section level4" number="11.2.1.2">
 <h4>
-<span class="header-section-number">2.2.1.2</span> Lựa chọn hàm liên kết.<a class="anchor" aria-label="anchor" href="#l%E1%BB%B1a-ch%E1%BB%8Dn-h%C3%A0m-li%C3%AAn-k%E1%BA%BFt."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2.1.2</span> Lựa chọn hàm liên kết.<a class="anchor" aria-label="anchor" href="#l%E1%BB%B1a-ch%E1%BB%8Dn-h%C3%A0m-li%C3%AAn-k%E1%BA%BFt."><i class="fas fa-link"></i></a>
 </h4>
-<p>Khi biến phụ thuộc <span class="math inline">\(Y\)</span> có phân phối nhị thức, giá trị trung bình của biến phụ thuộc sẽ nằm trong khoảng <span class="math inline">\((0,1)\)</span>. Từ công thức <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:glm6">(2.8)</a>, nếu cho <span class="math inline">\(\rho_i\)</span> là giá trị trung bình của biến phụ thuộc với điều kiện các biến độc lập <span class="math inline">\(\textbf{X} = \textbf{x}_i\)</span>, ta có</p>
+<p>Khi biến phụ thuộc <span class="math inline">\(Y\)</span> có phân phối nhị thức, giá trị trung bình của biến phụ thuộc sẽ nằm trong khoảng <span class="math inline">\((0,1)\)</span>. Từ công thức <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:glm6">(11.8)</a>, nếu cho <span class="math inline">\(\rho_i\)</span> là giá trị trung bình của biến phụ thuộc với điều kiện các biến độc lập <span class="math inline">\(\textbf{X} = \textbf{x}_i\)</span>, ta có</p>
 <p><span class="math display" id="eq:bn1">\[\begin{align}
 &amp; \mathbb{E}(Y|\textbf{X} = \textbf{x}_i) = \rho_i \\
 &amp; g(\rho_i) = \beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p}
-\tag{2.12}
+\tag{11.12}
 \end{align}\]</span></p>
 <p>Như vậy, mọi hàm số đơn điệu có miền xác định là khoảng <span class="math inline">\((0,1)\)</span> và miền giá trị là tập số thực <span class="math inline">\(\mathbb{R}\)</span> đều có thể được lựa chọn để làm hàm ngược của hàm liên kết. Làm thế nào để có được những hàm số có tính chất như vậy? Chúng ta đều biết rằng các hàm phân phối xác suất của một biến ngẫu nhiên liên tục bất kỳ là các hàm số đơn điệu tăng, có miền xác định là <span class="math inline">\(\mathbb{R}\)</span> và miền giá trị là khoảng <span class="math inline">\((0,1)\)</span>. Do đó, hàm số ngược của các hàm phân phối xác suất, sẽ là các hàm số tăng, có miền xác định là khoảng <span class="math inline">\((0,1)\)</span> và miền giá trị là <span class="math inline">\(\mathbb{R}\)</span>. Nói một cách khác, hàm số ngược của các hàm phân phối xác suất liên tục bất kỳ thỏa mãn đầy đủ tính chất của hàm liên kết trong trường hợp <span class="math inline">\(Y\)</span> có phân phối nhị thức.</p>
 <p>Trong thực tế, việc lựa chọn hàm liên kết còn có mục tiêu là để mô hình dễ giải thích và quá trình ước lượng mô hình đơn giản nhất có thể. Các hàm phân phối xác suất thường được lựa chọn làm hàm ngược của hàm liên kết bao gồm:</p>
@@ -398,9 +425,9 @@ Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi v�
 &amp; Y_i \sim \mathcal{B}(\rho_i) \\
 &amp; \rho_i = \cfrac{1}{1 + e^{-(\beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p})}} \\
 &amp; ln(\cfrac{\rho_i}{1 - \rho_i}) = \beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p}
-\tag{2.13}
+\tag{11.13}
 \end{align}\]</span></p>
-<p>Mô hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:logit1">(2.13)</a> được biết đến rộng rãi trong học thuật và ứng dụng với tên gọi là <em>hồi quy logistic</em> và cũng là mô hình thường được sử dụng nhất trong khi biến phụ thuộc là biến nhị phân. Mô hình có ưu điểm là sự dễ hiểu khi diễn giải kết quả:</p>
+<p>Mô hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:logit1">(11.13)</a> được biết đến rộng rãi trong học thuật và ứng dụng với tên gọi là <em>hồi quy logistic</em> và cũng là mô hình thường được sử dụng nhất trong khi biến phụ thuộc là biến nhị phân. Mô hình có ưu điểm là sự dễ hiểu khi diễn giải kết quả:</p>
 <ul>
 <li><p><span class="math inline">\(\rho_i\)</span> ngoài ý nghĩa là trung bình của biến ngẫu nhiên <span class="math inline">\(Y_i\)</span>, còn có ý nghĩa là xác suất xảy ra sự kiện <span class="math inline">\(Y_i = 1\)</span>.</p></li>
 <li><p>Giá trị <span class="math inline">\(\cfrac{\rho_i}{1 - \rho_i}\)</span> được gọi là odds của sự kiện <span class="math inline">\(Y_i = 1\)</span>. Mối liên hệ giữa quan sát thứ <span class="math inline">\(i\)</span> của biến độc lập <span class="math inline">\(X_j\)</span> là <span class="math inline">\(x_{i,j}\)</span> và obbs của sự kiện <span class="math inline">\(Y_i = 1\)</span> có thể được diễn giải trực tiếp qua hệ số <span class="math inline">\(\beta_j\)</span>.</p></li>
@@ -419,7 +446,7 @@ Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi v�
 &amp; Y_i \sim \mathcal{B}(\rho_i) \\
 &amp; \rho_i = \Phi(\beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p}) \\
 &amp; \Phi^{-1}(\rho_i) = \beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p}
-\tag{2.14}
+\tag{11.14}
 \end{align}\]</span></p>
 <p>Hàm số ngược của biến ngẫu nhiên phân phối chuẩn được gọi là hàm probit do đó mô hình tuyến tính tổng quát trong trường hợp này còn được biết đến với tên gọi là <em>mô hình probit</em>.</p>
 <ol start="3" style="list-style-type: decimal">
@@ -427,7 +454,7 @@ Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi v�
 <span class="math display" id="eq:cauchy1">\[\begin{align}
 &amp; g^{-1}(x) = 0.5 + \cfrac{\text{arctan}(x)}{\pi} \\
 &amp; g(x) = \text{tan}\left( \pi \left( x - 0.5 \right) \right)
-\tag{2.15}
+\tag{11.15}
 \end{align}\]</span>
 </li>
 </ol>
@@ -436,19 +463,19 @@ Hình 2.1: Mối liên hệ giữa các biến giải thích là độ tuổi v�
 &amp; Y_i \sim \mathcal{B}(\rho_i) \\
 &amp; p_i = 0.5+ \cfrac{\text{arctan}(\beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p})}{\pi}  \\
 &amp; \text{tan}\left( \pi \left( \rho_i - 0.5 \right) \right) = \beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p}
-\tag{2.16}
+\tag{11.16}
 \end{align}\]</span></p>
 <p>Hàm số ngược của phân phối cauchy còn được gọi là hàm cauchit, do đó mô hình tuyến tính tổng quát trong trường hợp này còn được biết đến với tên là <em>mô hình cauchit</em>.</p>
-<p>Hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#fig:fgglm001b">2.2</a> mô tả hình dạng của ba phân phối xác suất và ba hàm liên kết là các hàm ngược của hàm phân phối xác suất</p>
+<p>Hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#fig:fgglm001b">11.2</a> mô tả hình dạng của ba phân phối xác suất và ba hàm liên kết là các hàm ngược của hàm phân phối xác suất</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fgglm001b"></span>
 <img src="10-mo-hinh-tuyen-tinh-tong-quat_files/figure-html/fgglm001b-1.png" alt="Các hàm phân phối xác suất thường được sử dụng làm hàm ngược của hàm liên kết khi biến phụ thuộc có phân phối nhị thức. Hình bên trái: các hàm phân phối xác suất. Hình bên phải: các hàm liên kết" width="672"><p class="caption">
-Hình 2.2: Các hàm phân phối xác suất thường được sử dụng làm hàm ngược của hàm liên kết khi biến phụ thuộc có phân phối nhị thức. Hình bên trái: các hàm phân phối xác suất. Hình bên phải: các hàm liên kết
+Hình 11.2: Các hàm phân phối xác suất thường được sử dụng làm hàm ngược của hàm liên kết khi biến phụ thuộc có phân phối nhị thức. Hình bên trái: các hàm phân phối xác suất. Hình bên phải: các hàm liên kết
 </p>
 </div>
 <p>Mô hình tuyến tính tổng quát trong trường hợp <span class="math inline">\(Y\)</span> là biến nhị phân có các tham số là các hệ số tuyến tính <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\beta_1\)</span>, <span class="math inline">\(\cdots\)</span>, <span class="math inline">\(\beta_p\)</span>. Các tham số này được ước lượng từ dữ liệu bằng phương pháp tối đa hóa hàm hợp lý, hay gọi tắt là phương pháp <em>MLE</em>. Chúng tôi sẽ trình bày phần ước lượng mô hình trong phần sau của chương sách để tránh nhắc đến các khái niệm toán học phức tạp.</p>
 <p>Hàm số <span style="color: #640514; font-family: Source Code Pro;">glm()</span> của thư viện <span style="color: #640514; font-family: Source Code Pro;">stats</span> được sử dụng để xây dựng mô hình tuyến tính tổng quát. Tham số <span style="color: #640514; font-family: Source Code Pro;">family</span> trong hàm <span style="color: #640514; font-family: Source Code Pro;">glm()</span> dùng để khai báo phân phối xác suất cho biến phụ thuộc <span class="math inline">\(Y\)</span> và để lựa chọn hàm liên kết phù hợp. Trở lại với ví dụ khi <span class="math inline">\(Y\)</span> là biến nhị phân mô tả khách hàng có hay không lựa chọn các quyền lợi đầy đủ khi tham gia bảo hiểm bổ sung, chúng ra thực hiện xây dựng mô hình như sau</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb781"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Phân phối Y là nhị thức và hàm liên kết là hàm logit</span></span>
 <span><span class="va">glm.binomial.logit</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Y</span> <span class="op">~</span> <span class="va">age</span> <span class="op">+</span> <span class="va">sex</span>, data<span class="op">=</span><span class="va">dat</span>, </span>
 <span>          family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"logit"</span><span class="op">)</span><span class="op">)</span></span>
@@ -475,11 +502,8 @@ Hình 2.2: Các hàm phân phối xác suất thường được sử dụng là
 \mathbb{P}(Y_i = 1| \text{age}_i, \text{sex}_i) = \cfrac{1}{2} + \cfrac{\text{arctan}\left(0.997 - 0.024 \times \text{age}_i - 0.624 \times \text{sex}_i\right)} {\pi}
 \end{align}\]</span></p></li>
 </ol>
-<p>Cả ba mô hình đều cho cùng một kết quả: người có độ tuổi càng cao thì càng ít có khả năng lựa chọn quyền lợi bảo hiểm bổ sung và xác suất nam giới lựa chọn quyền lợi bảo hiểm bổ sung là ít hơn so với nữ giới. Bảng <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#tab:glmtab001">2.1</a> tổng hợp kết quả là xác suất chấp nhận mua thêm quyền lợi bảo hiểm bổ sung theo ba mô hình với hai biến độc lập là độ tuổi và giới tính:</p>
+<p>Cả ba mô hình đều cho cùng một kết quả: người có độ tuổi càng cao thì càng ít có khả năng lựa chọn quyền lợi bảo hiểm bổ sung và xác suất nam giới lựa chọn quyền lợi bảo hiểm bổ sung là ít hơn so với nữ giới. Bảng <a href="#tab:glmtab001"><strong>??</strong></a> tổng hợp kết quả là xác suất chấp nhận mua thêm quyền lợi bảo hiểm bổ sung theo ba mô hình với hai biến độc lập là độ tuổi và giới tính:</p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:glmtab001">Bảng 2.1: </span>Xác suất người bảo hiểm lựa chọn quyền lợi bổ sung tính toán dựa trên mô hình GLM với hai biến giải thích là độ tuổi và giới tính. Các hàm liên kết được lựa chọn bao gồm hàm logit, hàm probit và hàm cauchit
-</caption>
 <thead><tr>
 <th style="text-align:center;">
 Người BH
@@ -703,21 +727,21 @@ Nữ
 </tr>
 </tbody>
 </table></div>
-<p>Từ Bảng <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#tab:glmtab001">2.1</a> có thể thấy rằng không có sự khác biệt lớn trong tính toán xác suất của <span class="math inline">\(Y\)</span> khi sử dụng hàm liên kết khác nhau. Thực tế cho thấy việc lựa chọn hàm liên kết sẽ không ảnh hưởng lớn đến kết quả của mô hình. Các lựa chọn quan trọng hơn trong mô hình tuyến tính bao gồm lựa chọn phân phối cho biến phụ thuộc và lựa chọn biến độc lập để đưa vào trong mô hình.</p>
+<p>Từ Bảng <a href="#tab:glmtab001"><strong>??</strong></a> có thể thấy rằng không có sự khác biệt lớn trong tính toán xác suất của <span class="math inline">\(Y\)</span> khi sử dụng hàm liên kết khác nhau. Thực tế cho thấy việc lựa chọn hàm liên kết sẽ không ảnh hưởng lớn đến kết quả của mô hình. Các lựa chọn quan trọng hơn trong mô hình tuyến tính bao gồm lựa chọn phân phối cho biến phụ thuộc và lựa chọn biến độc lập để đưa vào trong mô hình.</p>
 </div>
 </div>
-<div id="biến-phụ-thuộc-là-biến-rời-rạc-không-có-thứ-tự." class="section level3" number="2.2.2">
+<div id="biến-phụ-thuộc-là-biến-rời-rạc-không-có-thứ-tự." class="section level3" number="11.2.2">
 <h3>
-<span class="header-section-number">2.2.2</span> Biến phụ thuộc là biến rời rạc không có thứ tự.<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-r%E1%BB%9Di-r%E1%BA%A1c-kh%C3%B4ng-c%C3%B3-th%E1%BB%A9-t%E1%BB%B1."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2.2</span> Biến phụ thuộc là biến rời rạc không có thứ tự.<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-r%E1%BB%9Di-r%E1%BA%A1c-kh%C3%B4ng-c%C3%B3-th%E1%BB%A9-t%E1%BB%B1."><i class="fas fa-link"></i></a>
 </h3>
 <p>Biến rời rạc không có thứ tự, hay còn gọi là biến rời rạc danh nghĩa (non-ordinal variable), là biến ngẫu nhiên mà các giá trị có thể nhận không có ý nghĩa so sánh với nhau. Khi nói đến biến rời rạc không có thứ tự, chúng ta luôn hiểu rằng biến nhận từ ba giá trị trở lên bởi vì trường hợp biến mục tiêu chỉ có hai giá trị sẽ được xử lý như biến phân phối nhị phân. Một ví dụ đơn giản cho biến rời rạc không có thứ tự là màu sắc được chọn khi mua xe ô tô, hoặc loại hình bảo hiểm được lựa chọn bởi các khách hàng của một công ty bảo hiểm.</p>
-<p>Giả sử biến rời rạc danh nghĩa <span class="math inline">\(Y\)</span> có thể nhận <span class="math inline">\(J\)</span> giá trị khác nhau lần lượt là <span class="math inline">\(1, 2, \cdots, J\)</span>. Với biến danh nghĩa, chúng ta khó có thể mô tả được mối liên hệ giữa xác suất của hai sự kiện <span class="math inline">\((Y=i)\)</span> và <span class="math inline">\((Y=j)\)</span> với <span class="math inline">\(1 \leq i &lt; j \leq J\)</span> dưới dạng tham số. Chính vì thế cấu trúc dạng tham số của mô hình tuyến tính tổng quát như phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:glm1">(2.1)</a> là khó áp dụng trong trường hợp này.</p>
+<p>Giả sử biến rời rạc danh nghĩa <span class="math inline">\(Y\)</span> có thể nhận <span class="math inline">\(J\)</span> giá trị khác nhau lần lượt là <span class="math inline">\(1, 2, \cdots, J\)</span>. Với biến danh nghĩa, chúng ta khó có thể mô tả được mối liên hệ giữa xác suất của hai sự kiện <span class="math inline">\((Y=i)\)</span> và <span class="math inline">\((Y=j)\)</span> với <span class="math inline">\(1 \leq i &lt; j \leq J\)</span> dưới dạng tham số. Chính vì thế cấu trúc dạng tham số của mô hình tuyến tính tổng quát như phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:glm1">(11.1)</a> là khó áp dụng trong trường hợp này.</p>
 <p>Một phương pháp tiếp cận cho trường hợp biến mục tiêu <span class="math inline">\(Y\)</span> là biến rời rạc danh nghĩa là mở rộng mô hình tuyến tính tổng quát với biến nhị phân: với mỗi <span class="math inline">\(j \in {1,2,\cdots,J}\)</span>, xác suất biến mục tiêu nhận giá trị bằng <span class="math inline">\(j\)</span> với điều kiện các biến độc lập nhận giá trị <span class="math inline">\(\textbf{x}_i\)</span> được mô tả dưới dạng tham số như sau:
 <span class="math display" id="eq:sm">\[\begin{align}
 \mathbb{P}\left(Y = j\right|\textbf{x}_i) = \cfrac{h(\beta_{j,0} + \beta_{j,1} \cdot x_{i,1} + \cdots + \beta_{j,p} \cdot x_{i,p} ) }{ \sum\limits_{j=1}^J h(\beta_{j,0} + \beta_{j,1} \cdot x_{i,1} + \cdots + \beta_{j,p} \cdot x_{i,p} ) }
-\tag{2.17}
+\tag{11.17}
 \end{align}\]</span></p>
-<p>với hàm số <span class="math inline">\(h\)</span> có miền xác định là tập số thực <span class="math inline">\(\mathbb{R}\)</span> và miền giá trị là tập các số thực dương <span class="math inline">\(\mathbb{R}^+\)</span>. Cũng giống như khi lựa chọn hàm liên kết, việc lựa chọn hàm số <span class="math inline">\(h\)</span> thường thường được lựa chọn sao cho quá trình ước lượng các hệ số tuyến tính không quá phức tạp. Do đó, hàm lũy thừa cơ số tự nhiên <span style="color: #640514; font-family: Source Code Pro;">exp()</span> thường được lựa chọn. Trong trường hợp này, hàm số xác định xác suất xảy ra các sự kiện <span class="math inline">\((Y=j)\)</span> trong phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:sm">(2.17)</a> được gọi là hàm <em>Softmax</em>:
+<p>với hàm số <span class="math inline">\(h\)</span> có miền xác định là tập số thực <span class="math inline">\(\mathbb{R}\)</span> và miền giá trị là tập các số thực dương <span class="math inline">\(\mathbb{R}^+\)</span>. Cũng giống như khi lựa chọn hàm liên kết, việc lựa chọn hàm số <span class="math inline">\(h\)</span> thường thường được lựa chọn sao cho quá trình ước lượng các hệ số tuyến tính không quá phức tạp. Do đó, hàm lũy thừa cơ số tự nhiên <span style="color: #640514; font-family: Source Code Pro;">exp()</span> thường được lựa chọn. Trong trường hợp này, hàm số xác định xác suất xảy ra các sự kiện <span class="math inline">\((Y=j)\)</span> trong phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:sm">(11.17)</a> được gọi là hàm <em>Softmax</em>:
 <span class="math display">\[\begin{align}
 \text{softmax}(\textbf{z})  &amp; = \left(\cfrac{e^{z_1}}{\sum\limits_{j=1}^p e^{z_j}}, \cfrac{e^{z_2}}{\sum\limits_{j=1}^p e^{z_1}}, \cdots, \cfrac{e^{z_p}}{\sum\limits_{i=1}^p e^{z_j}}  \right) \\
 \textbf{z} &amp; = (z_1, z_2, \cdots, z_p)
@@ -726,32 +750,32 @@ Nữ
 <span class="math display">\[\begin{align}
 \sum\limits_{i=1}^n \sum\limits_{j=1}^J y_{i,j} \cdot \log\left(\mathbb{P}\left(Y = j|\textbf{x}_i\right)\right)
 \end{align}\]</span></p>
-<p>trong đó <span class="math inline">\(\mathbb{P}\left(Y = j|\textbf{x}_i\right)\)</span> được tính toán từ công thức <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:sm">(2.17)</a> và <span class="math inline">\(y_{i,j}\)</span> nhận một trong hai giá trị:</p>
+<p>trong đó <span class="math inline">\(\mathbb{P}\left(Y = j|\textbf{x}_i\right)\)</span> được tính toán từ công thức <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:sm">(11.17)</a> và <span class="math inline">\(y_{i,j}\)</span> nhận một trong hai giá trị:</p>
 <ul>
 <li>là 1 nếu giá trị quan sát thứ <span class="math inline">\(i\)</span> của biến mục tiêu <span class="math inline">\(Y\)</span> bằng <span class="math inline">\(j\)</span>
 </li>
 <li>là 0 nếu giá trị quan sát thứ <span class="math inline">\(i\)</span> của biến mục tiêu <span class="math inline">\(Y\)</span> khác <span class="math inline">\(j\)</span>
 </li>
 </ul>
-<p>Lưu ý rằng có <span class="math inline">\(J\)</span> véc-tơ hệ số tuyến tính trong phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:sm">(2.17)</a>. Trong thực tế, khi biến mục tiêu <span class="math inline">\(Y\)</span> có thể nhận <span class="math inline">\(J\)</span> giá trị danh nghĩa, chúng ta xây dựng mô hình với <span class="math inline">\((J-1)\)</span> véc-tơ hệ số tuyến tính tương ứng với các giá trị danh nghĩa <span class="math inline">\(1, 2, \cdots, (J-1)\)</span>, đồng thời cố định giá trị của tất cả các hệ số tuyến tính bằng 0 với giá trị danh nghĩa <span class="math inline">\(J\)</span>. Khi tất cả các hệ số tuyến tính bằng 0, chúng ta có <span class="math inline">\(exp(\textbf{x}_i^{'} \boldsymbol{\beta}_j) = exp(0) = 1\)</span> với mọi <span class="math inline">\(\textbf{x}_i\)</span>. Phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:sm">(2.17)</a> được viết lại như sau:</p>
+<p>Lưu ý rằng có <span class="math inline">\(J\)</span> véc-tơ hệ số tuyến tính trong phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:sm">(11.17)</a>. Trong thực tế, khi biến mục tiêu <span class="math inline">\(Y\)</span> có thể nhận <span class="math inline">\(J\)</span> giá trị danh nghĩa, chúng ta xây dựng mô hình với <span class="math inline">\((J-1)\)</span> véc-tơ hệ số tuyến tính tương ứng với các giá trị danh nghĩa <span class="math inline">\(1, 2, \cdots, (J-1)\)</span>, đồng thời cố định giá trị của tất cả các hệ số tuyến tính bằng 0 với giá trị danh nghĩa <span class="math inline">\(J\)</span>. Khi tất cả các hệ số tuyến tính bằng 0, chúng ta có <span class="math inline">\(exp(\textbf{x}_i^{'} \boldsymbol{\beta}_j) = exp(0) = 1\)</span> với mọi <span class="math inline">\(\textbf{x}_i\)</span>. Phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:sm">(11.17)</a> được viết lại như sau:</p>
 <p><span class="math display" id="eq:sm1">\[\begin{align}
 &amp; \mathbb{P}\left(Y = j\right|x_i) = \cfrac{h(\beta_{j,0} + \beta_{j,1} \cdot x_{i,1} + \cdots + \beta_{j,p} \cdot x_{i,p} ) }{1 + \sum\limits_{j=1}^{J-1} h(\beta_{j,0} + \beta_{j,1} \cdot x_{i,1} + \cdots + \beta_{j,p} \cdot x_{i,p} )} \textit{ với } j &lt; J \\
 &amp; \mathbb{P}\left(Y = J\right|x_i) = \cfrac{1}{1 + \sum\limits_{j=1}^{J-1} h(\beta_{j,0} + \beta_{j,1} \cdot x_{i,1} + \cdots + \beta_{j,p} \cdot x_{i,p} )} \\
-\tag{2.18}
+\tag{11.18}
 \end{align}\]</span></p>
-<p>Để minh họa cho xây dựng mô hình tuyến tính tổng quát trong trường hợp <span class="math inline">\(Y\)</span> là biến rời rạc danh nghĩa, chúng ta sẽ xây dựng mô hình phân loại trên dữ liệu <span style="color: #640514; font-family: Source Code Pro;">Travel_Insurance</span>. Đây là dữ liệu cung cấp thông tin về các sản phẩm bảo hiểm du lịch từ một đại lý du lịch, với biến mục tiêu là <span style="color: #640514; font-family: Source Code Pro;">product.name</span> cho biết khách hàng đã lựa chọn sản phẩm sản phẩm bảo hiểm nào. Biến mục tiêu có bốn giá trị danh nghĩa tương ứng với bốn loại sản phẩm là <span style="color: #640514; font-family: Source Code Pro;">Basic Plan</span>, <span style="color: #640514; font-family: Source Code Pro;">Bronze Plan</span>, <span style="color: #640514; font-family: Source Code Pro;">Silver Plan</span>, và <span style="color: #640514; font-family: Source Code Pro;">Value Plan</span>. Mặc dù các sản phẩm này có mức giá khác nhau nhưng việc so sánh các giá trị là không có nhiều ý nghĩa. Dữ liệu có 10 biến độc lập, tuy nhiên, để đơn giản hóa, chúng ta chỉ lấy hai biến là giới tính và độ tuổi của người tham gia bảo hiểm. Mối liên hệ giữa độ tuổi của khách hàng và loại sản phẩm khách hàng lựa chọn được mô tả bằng đồ thị dạng hộp như Hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#fig:fgglm001c">2.3</a>.</p>
+<p>Để minh họa cho xây dựng mô hình tuyến tính tổng quát trong trường hợp <span class="math inline">\(Y\)</span> là biến rời rạc danh nghĩa, chúng ta sẽ xây dựng mô hình phân loại trên dữ liệu <span style="color: #640514; font-family: Source Code Pro;">Travel_Insurance</span>. Đây là dữ liệu cung cấp thông tin về các sản phẩm bảo hiểm du lịch từ một đại lý du lịch, với biến mục tiêu là <span style="color: #640514; font-family: Source Code Pro;">product.name</span> cho biết khách hàng đã lựa chọn sản phẩm sản phẩm bảo hiểm nào. Biến mục tiêu có bốn giá trị danh nghĩa tương ứng với bốn loại sản phẩm là <span style="color: #640514; font-family: Source Code Pro;">Basic Plan</span>, <span style="color: #640514; font-family: Source Code Pro;">Bronze Plan</span>, <span style="color: #640514; font-family: Source Code Pro;">Silver Plan</span>, và <span style="color: #640514; font-family: Source Code Pro;">Value Plan</span>. Mặc dù các sản phẩm này có mức giá khác nhau nhưng việc so sánh các giá trị là không có nhiều ý nghĩa. Dữ liệu có 10 biến độc lập, tuy nhiên, để đơn giản hóa, chúng ta chỉ lấy hai biến là giới tính và độ tuổi của người tham gia bảo hiểm. Mối liên hệ giữa độ tuổi của khách hàng và loại sản phẩm khách hàng lựa chọn được mô tả bằng đồ thị dạng hộp như Hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#fig:fgglm001c">11.3</a>.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fgglm001c"></span>
 <img src="10-mo-hinh-tuyen-tinh-tong-quat_files/figure-html/fgglm001c-1.png" alt="Mối liên hệ giữa giới tính và loại hình bảo hiểm du lịch mà khách hàng lựa chọn" width="672"><p class="caption">
-Hình 2.3: Mối liên hệ giữa giới tính và loại hình bảo hiểm du lịch mà khách hàng lựa chọn
+Hình 11.3: Mối liên hệ giữa giới tính và loại hình bảo hiểm du lịch mà khách hàng lựa chọn
 </p>
 </div>
-<p>Từ Hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#fig:fgglm001c">2.3</a> có thể thấy rằng Nam giới có xu hướng lựa chọn các loại hình bảo hiểm du lịch <span style="color: #640514; font-family: Source Code Pro;">Basic Plan</span> và <span style="color: #640514; font-family: Source Code Pro;">Value Plan</span> khi tỷ lệ Nam lựa chọn mỗi loại Hình bảo hiểm này lần lượt là 58% và 66%. Nữ giới có xu hướng lựa chọn <span style="color: #640514; font-family: Source Code Pro;">Bronze Plan</span>, <span style="color: #640514; font-family: Source Code Pro;">Silver Plan</span> khi tỷ lệ Nữ giới lựa chọn là 58% và 56%. Có thể kết luận được rằng có khác biệt giữa Nam và Nữ khi lựa chọn loại hình bảo hiểm du lịch</p>
-<p>Chúng ta tiếp tục đánh giá mối liên hệ giữa biến độ tuổi đến loại hình bảo hiểm du lịch. Hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#fig:fgglm001d">2.4</a> sử dụng đồ thị dạng hộp để mô tả mối liên hệ giữa hai biến.</p>
+<p>Từ Hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#fig:fgglm001c">11.3</a> có thể thấy rằng Nam giới có xu hướng lựa chọn các loại hình bảo hiểm du lịch <span style="color: #640514; font-family: Source Code Pro;">Basic Plan</span> và <span style="color: #640514; font-family: Source Code Pro;">Value Plan</span> khi tỷ lệ Nam lựa chọn mỗi loại Hình bảo hiểm này lần lượt là 58% và 66%. Nữ giới có xu hướng lựa chọn <span style="color: #640514; font-family: Source Code Pro;">Bronze Plan</span>, <span style="color: #640514; font-family: Source Code Pro;">Silver Plan</span> khi tỷ lệ Nữ giới lựa chọn là 58% và 56%. Có thể kết luận được rằng có khác biệt giữa Nam và Nữ khi lựa chọn loại hình bảo hiểm du lịch</p>
+<p>Chúng ta tiếp tục đánh giá mối liên hệ giữa biến độ tuổi đến loại hình bảo hiểm du lịch. Hình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#fig:fgglm001d">11.4</a> sử dụng đồ thị dạng hộp để mô tả mối liên hệ giữa hai biến.</p>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:fgglm001d"></span>
 <img src="10-mo-hinh-tuyen-tinh-tong-quat_files/figure-html/fgglm001d-1.png" alt="Mối liên hệ giữa giới tính và loại hình bảo hiểm du lịch mà khách hàng lựa chọn" width="672"><p class="caption">
-Hình 2.4: Mối liên hệ giữa giới tính và loại hình bảo hiểm du lịch mà khách hàng lựa chọn
+Hình 11.4: Mối liên hệ giữa giới tính và loại hình bảo hiểm du lịch mà khách hàng lựa chọn
 </p>
 </div>
 <p>Có thể thấy rằng có sự khác biệt về phân phối của độ tuổi của những người lựa chọn các sản phẩm bảo hiểm: những người trẻ tuổi hơn có xu hướng lựa chọn <span style="color: #640514; font-family: Source Code Pro;">Bronze Plan</span>, <span style="color: #640514; font-family: Source Code Pro;">Silver Plan</span> trong khi những người lớn tuổi hơn có xu hướng lựa chọn <span style="color: #640514; font-family: Source Code Pro;">Basic Plan</span> và <span style="color: #640514; font-family: Source Code Pro;">Value Plan</span>.</p>
@@ -793,11 +817,8 @@ Hình 2.4: Mối liên hệ giữa giới tính và loại hình bảo hiểm du
 <p><span class="math display">\[\begin{align}
 S_0 = 1 + \mathbb{P}(Y = \text{Bronze}|g_i, a_i) + \mathbb{P}(Y = \text{Silver}|g_i, a_i) +  \mathbb{P}(Y = \text{Value}|g_i, a_i)
 \end{align}\]</span></p>
-<p>Bảng <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#tab:glmtab002">2.2</a> tính toán xác suất chấp nhận các sản phẩm du lịch theo một số độ tuổi điển hình và giới tính</p>
+<p>Bảng <a href="#tab:glmtab002"><strong>??</strong></a> tính toán xác suất chấp nhận các sản phẩm du lịch theo một số độ tuổi điển hình và giới tính</p>
 <div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:glmtab002">Bảng 2.2: </span>Xác suất lựa chọn loại hình bảo hiểm du lịch ước tính theo hai biến giải thích là giới tính và độ tuổi của người mua bảo hiểm
-</caption>
 <thead><tr>
 <th style="text-align:center;">
 Khách hàng
@@ -1100,16 +1121,16 @@ Nam
 </tr>
 </tbody>
 </table></div>
-<p>Kết quả từ mô hình cho thấy với các độ tuổi như trong Bảng <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#tab:glmtab002">2.2</a> chỉ có <span style="color: #640514; font-family: Source Code Pro;">Bronze Plan</span> và <span style="color: #640514; font-family: Source Code Pro;">Basic Plan</span> được lựa chọn nếu chúng ta chỉ sử dụng hai biến độc lập là giới tính và độ tuổi. Đây là kết quả chưa chính xác vì mô hình chỉ sử dụng hai biến giới thích là độ tuổi và giới tính. Lựa chọn của khách hàng còn phụ thuộc vào nhiều yếu tố khác. Chúng tôi muốn nhấn mạnh về cách xây dựng mô hình cho biến phân loại hơn là cố gắng xây dựng một mô hình có khả năng dự báo tốt. Chúng ta sẽ thảo luận về đánh giá hiệu quả của mô hình ở các phần sau của chương sách.</p>
+<p>Kết quả từ mô hình cho thấy với các độ tuổi như trong Bảng <a href="#tab:glmtab002"><strong>??</strong></a> chỉ có <span style="color: #640514; font-family: Source Code Pro;">Bronze Plan</span> và <span style="color: #640514; font-family: Source Code Pro;">Basic Plan</span> được lựa chọn nếu chúng ta chỉ sử dụng hai biến độc lập là giới tính và độ tuổi. Đây là kết quả chưa chính xác vì mô hình chỉ sử dụng hai biến giới thích là độ tuổi và giới tính. Lựa chọn của khách hàng còn phụ thuộc vào nhiều yếu tố khác. Chúng tôi muốn nhấn mạnh về cách xây dựng mô hình cho biến phân loại hơn là cố gắng xây dựng một mô hình có khả năng dự báo tốt. Chúng ta sẽ thảo luận về đánh giá hiệu quả của mô hình ở các phần sau của chương sách.</p>
 </div>
-<div id="biến-phụ-thuộc-là-biến-rời-rạc-có-thứ-tự" class="section level3" number="2.2.3">
+<div id="biến-phụ-thuộc-là-biến-rời-rạc-có-thứ-tự" class="section level3" number="11.2.3">
 <h3>
-<span class="header-section-number">2.2.3</span> Biến phụ thuộc là biến rời rạc có thứ tự<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-r%E1%BB%9Di-r%E1%BA%A1c-c%C3%B3-th%E1%BB%A9-t%E1%BB%B1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2.3</span> Biến phụ thuộc là biến rời rạc có thứ tự<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-r%E1%BB%9Di-r%E1%BA%A1c-c%C3%B3-th%E1%BB%A9-t%E1%BB%B1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Biến rời rạc có thứ tự, còn gọi là <em>ordinal categorical variable</em>, là các biến nhận giá trị rời rạc mà các giá trị rời rạc có thể so sánh được với nhau. Một ví dụ điển hình cho biến rời rạc có thứ tự là số lần mà một người đi khám chữa bệnh sử dụng bảo hiểm y tế hoặc một khách hàng gửi yêu cầu bồi thường đến công ty bảo hiểm. Đây là trường hợp mà chúng ta có thể sử dụng một phân phối xác suất rời rạc có tham số để mô tả biến phụ thuộc <span class="math inline">\(Y\)</span> giống như mô hình <a href="#eq:gml1">(<strong>??</strong>)</a>.</p>
-<div id="biến-phụ-thuộc-có-phân-phối-poisson" class="section level4" number="2.2.3.1">
+<div id="biến-phụ-thuộc-có-phân-phối-poisson" class="section level4" number="11.2.3.1">
 <h4>
-<span class="header-section-number">2.2.3.1</span> Biến phụ thuộc có phân phối Poisson<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-c%C3%B3-ph%C3%A2n-ph%E1%BB%91i-poisson"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2.3.1</span> Biến phụ thuộc có phân phối Poisson<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-c%C3%B3-ph%C3%A2n-ph%E1%BB%91i-poisson"><i class="fas fa-link"></i></a>
 </h4>
 <p>Phân phối rời rạc thường được lựa chọn cho biến phụ thuộc rời rạc có thứ tự là phân phối Poisson. Hàm phân phối xác suất của biến ngẫu nhiên <span class="math inline">\(Y\)</span> có phân phối Poisson với tham số <span class="math inline">\(\lambda &gt; 0\)</span>, ký hiệu <span class="math inline">\(Y \sim \mathcal{P}(\lambda)\)</span> được cho bởi công thức sau
 <span class="math display">\[\begin{align}
@@ -1133,7 +1154,7 @@ Nam
 &amp; \mathbb{E}(Y_i) = \lambda_i \\
 &amp; log(\lambda_i) = \left(\beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p}\right) \\
 &amp; \lambda_i = e^{\beta_0 + \beta_1 \cdot x_{i,1} + \beta_2 \cdot x_{i,2} + \cdots + \beta_p \cdot x_{i,p}}
-\tag{2.19}
+\tag{11.19}
 \end{align}\]</span></p>
 <p>Dữ liệu được sử dụng để mô tả mô hình tuyến tính tổng quát với biến phụ thuộc phân phối Poisson là dữ liệu <span class="math inline">\(SingaporeAuto.csv\)</span>. Dữ liệu được tổng hợp bởi Hiệp hội bảo hiểm Singapore trong năm 1993 mô tả số vụ tai nạn ô tô xảy ra cùng với các đặc điểm của người lái và đặc điểm của xe gây tai nạn. Cũng giống như các phần trước, chúng ta sẽ xây dựng mô hình ở mức độ đơn giản nhất để bạn đọc dễ dàng hình dung. Biến phụ thuộc trong mô hình là biến <span class="math inline">\(Clm\_Count\)</span> cho biết số vụ tai nạn mà một lái xe gây ra trong vòng một năm, hai biến phụ thuộc bao gồm có:</p>
 <ul>
@@ -1141,7 +1162,7 @@ Nam
 <li><p>Biến <span class="math inline">\(NCD\)</span>, viết tắt của No Claims Discount, cho biết lịch sử gây ra tai nạn của lái xe. Giá trị <span class="math inline">\(NCD\)</span> càng cao nghĩa là lịch sử người lái xe càng gây ra ít tai nạn.</p></li>
 </ul>
 <p>Chúng ta sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">glm()</span> để xây dựng và ước lượng mô hình tuyến tính tổng quát:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb784"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD Final/Dataset/SingaporeAuto.csv"</span><span class="op">)</span></span>
 <span><span class="va">glm2</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Clm_Count</span><span class="op">~</span><span class="va">PC</span><span class="op">+</span><span class="va">NCD</span>, data<span class="op">=</span><span class="va">dat</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">glm2</span><span class="op">)</span></span></code></pre></div>
@@ -1149,6 +1170,10 @@ Nam
 ## Call:
 ## glm(formula = Clm_Count ~ PC + NCD, family = poisson(link = "log"), 
 ##     data = dat)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.4685  -0.3801  -0.3520  -0.3283   4.1716  
 ## 
 ## Coefficients:
 ##              Estimate Std. Error z value Pr(&gt;|z|)    
@@ -1170,13 +1195,13 @@ Nam
 &amp; Clm\_Count_i \sim \mathcal{P}(\lambda_i) \\
 &amp; \log(\lambda_i) = -2.641 + 0.432 \cdot PC_{i} - 0.013 \cdot NCD_{i} \\
 &amp; \lambda_i = \exp\left(-2.641 + 0.432 \cdot PC_{i} - 0.013 \cdot NCD_{i} \right)
-\tag{2.20}
+\tag{11.20}
 \end{align}\]</span></p>
 <p>Hệ số của biến <span class="math inline">\(PC\)</span> là số dương, điều này cho biết các xe đăng ký dưới dạng cá nhân có khả năng gây tai nạn cao hơn so với xe đăng ký dưới hình thức doanh nghiệp. Đồng thời, hệ số của biến <span class="math inline">\(NCD\)</span> âm cho biết lái xe có lịch sử lái xe tốt, tương ứng với <span class="math inline">\(NCD\)</span> cao, ít có khả năng gây ra tai nạn hơn lái xe có lịch sử lái xe không tốt, tương ứng với <span class="math inline">\(NCD\)</span> thấp.</p>
 </div>
-<div id="phân-phối-rời-rạc-có-lạm-phát-tại-giá-trị-0." class="section level4" number="2.2.3.2">
+<div id="phân-phối-rời-rạc-có-lạm-phát-tại-giá-trị-0." class="section level4" number="11.2.3.2">
 <h4>
-<span class="header-section-number">2.2.3.2</span> Phân phối rời rạc có lạm phát tại giá trị 0.<a class="anchor" aria-label="anchor" href="#ph%C3%A2n-ph%E1%BB%91i-r%E1%BB%9Di-r%E1%BA%A1c-c%C3%B3-l%E1%BA%A1m-ph%C3%A1t-t%E1%BA%A1i-gi%C3%A1-tr%E1%BB%8B-0."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2.3.2</span> Phân phối rời rạc có lạm phát tại giá trị 0.<a class="anchor" aria-label="anchor" href="#ph%C3%A2n-ph%E1%BB%91i-r%E1%BB%9Di-r%E1%BA%A1c-c%C3%B3-l%E1%BA%A1m-ph%C3%A1t-t%E1%BA%A1i-gi%C3%A1-tr%E1%BB%8B-0."><i class="fas fa-link"></i></a>
 </h4>
 <p>Biến phụ thuộc dạng đếm chứa một tỷ lệ lớn giá trị bằng 0 là các kiểu biến phụ thuộc thường gặp phải khi làm việc trên dữ liệu trong lĩnh vực bảo hiểm. Tỷ lệ lớn ở đây thường được hiểu là trên 90% giá trị quan sát được. Đa số các phân phối xác suất rời rạc thông thường, bao gồm phân phối Poisson, không mô tả tốt khi biến phụ thuộc <span class="math inline">\(Y\)</span> trong trường hợp này.</p>
 <p>Một giải pháp phổ biến khi làm việc với kiểu dữ liệu như vậy là thay đổi phân phối dạng đếm thông thường để làm tăng tỷ lệ giá trị nhận được tại 0, để thu được các phân phối thường được gọi là các phân phối lạm phát tại 0, hay Zero-inflated variable. Phân phối lạm phát tại 0 là hỗn hợp của hai phân phối xác suất rời rạc, bao gồm một phân phối nhị thức chỉ báo cho trường hợp 0, và một phân phối xác suất dành cho biến đếm thông thường. Hàm phân phối của biến ngẫu nhiên dạng đếm có lạm phát tại 0, ký hiệu <span class="math inline">\(ZI_Y\)</span>, có thể được mô tả như sau
@@ -1185,36 +1210,36 @@ Nam
 &amp; \omega + (1-\omega) \cdot \mathbb{P}(Y=0) \text{ khi y = 0} \\
 &amp; (1-\omega) \cdot \mathbb{P}(Y=y) \text{ khi y &gt; 0}
 \end{cases}
-\tag{2.21}
+\tag{11.21}
 \end{align}\]</span>
 trong đó biến ngẫu nhiên <span class="math inline">\(Y\)</span> tuân theo phân phối số đếm tiêu chuẩn được. Trong trường hợp tham số <span class="math inline">\(\omega\)</span> bằng 0, phân phối của biến ngẫu nhiên <span class="math inline">\(ZI_Y\)</span> sẽ tương ứng tương ứng với phân phối của biến Y.</p>
-<p>Tất cả các phân phối kiểu đếm đều có thể được sử dụng để tạo ra các biến mới có lạm phát tại 0. Trong các mô hình tuyến tính tổng quát, biến dạng đếm thường được mô tả bằng phân phối cổ điển Poisson. Với việc sử dụng phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:zip1">(2.21)</a>, hàm phân phối của biến ngẫu nhiên Poisson có lạm phát tại 0, ký hiệu là <span class="math inline">\(ZI_\mathcal{P}\)</span> được cho bởi công thức sau:</p>
+<p>Tất cả các phân phối kiểu đếm đều có thể được sử dụng để tạo ra các biến mới có lạm phát tại 0. Trong các mô hình tuyến tính tổng quát, biến dạng đếm thường được mô tả bằng phân phối cổ điển Poisson. Với việc sử dụng phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:zip1">(11.21)</a>, hàm phân phối của biến ngẫu nhiên Poisson có lạm phát tại 0, ký hiệu là <span class="math inline">\(ZI_\mathcal{P}\)</span> được cho bởi công thức sau:</p>
 <p><span class="math display" id="eq:zip2">\[\begin{align}
 \mathbb{P}(ZI_\mathcal{P} = y) = \begin{cases}
 &amp; \omega + (1-\omega) \cdot e^{-\lambda} \text{ khi y = 0} \\
 &amp; (1-\omega) \cdot e^{-\omega} \cdot \cfrac{\lambda^y}{y!} \text{ khi y &gt; 0}
 \end{cases}
-\tag{2.22}
+\tag{11.22}
 \end{align}\]</span></p>
 <p>Chúng ta có thể xác định giá trị trung bình và phương sai của phân phối <span class="math inline">\(ZI_Y\)</span> dựa trên tham số <span class="math inline">\(\omega\)</span> và giá trị trung bình cũng như phương sai của biến <span class="math inline">\(Y\)</span> như sau
 <span class="math display" id="eq:zip3">\[\begin{align}
 &amp; \mathbb{E}(ZI_Y) = (1-\omega) \cdot \mathbb{E}(Y) \\
 &amp; \mathbb{V}(ZI_Y) = (1-\omega) \cdot \mathbb{V}(Y) + \omega(1-\omega) \cdot \mathbb{E}(Y)^2
-\tag{2.23}
+\tag{11.23}
 \end{align}\]</span></p>
 <p>Trong trường hợp <span class="math inline">\(Y\)</span> có phân phối Poission, chúng ta có giá trị trung bình và phương sai của biến <span class="math inline">\(ZI_\mathcal{P}\)</span>:
 <span class="math display" id="eq:zip4">\[\begin{align}
 &amp; \mathbb{E}(ZI_\mathcal{P}) = (1-\omega) \cdot \lambda \\
 &amp; \mathbb{V}(ZI_\mathcal{P}) = \mathbb{E}(ZI_\mathcal{P}) \cdot (1 + \lambda - \mathbb{E}(ZI_\mathcal{P}))
-\tag{2.24}
+\tag{11.24}
 \end{align}\]</span></p>
-<p>Với giá trị trung bình và phương sai của biến <span class="math inline">\(ZI_\mathcal{P}\)</span> như phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:zip1">(2.21)</a>, chúng ta có thể xây dựng mô hình tuyến tính tổng quát với biến phụ thuộc là <span class="math inline">\(ZI_\mathcal{P}\)</span> như sau: giá trị trung bình <span class="math inline">\(\left((1-\omega) \cdot \lambda\right)\)</span> sẽ được giải thích thông qua các biến phụ thuộc trong khi tham số <span class="math inline">\(\lambda\)</span> sẽ được ước lượng bằng phương pháp hợp lý tối đa.</p>
+<p>Với giá trị trung bình và phương sai của biến <span class="math inline">\(ZI_\mathcal{P}\)</span> như phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:zip1">(11.21)</a>, chúng ta có thể xây dựng mô hình tuyến tính tổng quát với biến phụ thuộc là <span class="math inline">\(ZI_\mathcal{P}\)</span> như sau: giá trị trung bình <span class="math inline">\(\left((1-\omega) \cdot \lambda\right)\)</span> sẽ được giải thích thông qua các biến phụ thuộc trong khi tham số <span class="math inline">\(\lambda\)</span> sẽ được ước lượng bằng phương pháp hợp lý tối đa.</p>
 <p>Biến phụ thuộc phân phối <span class="math inline">\(ZI_\mathcal{P}\)</span> sẽ hữu ích cho mục đích lập mô hình trong trường hợp dữ liệu quan sát có sự tập trung quá mức tại giá trị 0. Ngoài phân phối Poisson, các phân phối mở rộng từ phân phối Poisson cũng có thể được sử dụng với để tạo ra các phân phối có lạm phát tại 0, chẳng hạn như biến ngẫu nhiên phân phối Poisson - Gamma, Poisson - Inverse gaussian.</p>
 <p>Trong các nghiên cứu thực nghiệm, nhiều tác giả đã chứng minh rằng việc áp dụng phân phối có lạm phát tại 0 để mô hình hóa số lượng yêu cầu bồi thường bảo hiểm là phù hợp để mô tả hành vi của người được bảo hiểm. Thật vậy, trong ngành bảo hiểm không phải tất cả các vụ tai nạn đều được báo cáo, công ty bảo hiểm chỉ có thông tin về các yêu cầu bồi thường được báo cáo. Có hai cách để giải thích cách phân phối có lạm phát tại 0 như sau: (1) Một số người được bảo hiểm không gửi yêu cầu bồi thường dù có xảy ra sự kiện bảo hiểm, do họ không có nhận thức được về việc được bảo hiểm, hoặc không có nhu cầu gửi yêu cầu bảo hiểm. (2) Một cách giải thích khác của mô hình lạm phát tại 0 là xem xét xác suất của mỗi vụ tai nạn được báo cáo. Một hành vi thực tế của người được bảo hiểm là nếu họ đã báo cáo vụ tai nạn đầu tiên thì những vụ tai nạn tiếp theo cũng sẽ được báo cáo, còn nếu vụ tai nạn đầu tiên không được báo cáo thì các vụ tai nạn sau sẽ không được báo cáo. Cả hai cách giải thích dựa trên hành vi này đều dẫn đến việc số lượng biến mục tiêu nhận giá trị bằng 0 cao hơn so với số lượng tai nạn thực tế xảy ra.</p>
 Dữ liệu <span class="math inline">\(exposure.csv\)</span> là dữ liệu điển hình cho biến phụ thuộc có lạm phát tại giá trị 0. Dữ liệu được rút gọn chỉ bao gồm hai biến độc lập là tuổi (Age) và giới tính (Gender) của người được bảo hiểm. Biến phụ thuộc là số lần người được bảo hiểm báo cáo tai nạn trong khoảng thời gian một năm. Sự khác nhau giữa mô hình tuyến tính tổng quát với biến phụ thuộc có phân phối Poisson thông thường và mô hình tuyến tính tổng quát với biến phụ thuộc có phân phối Poisson có lạm phát tại 0 được mô tả như sau:
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-12">Bảng 2.3: </span><span id="tab:unnamed-chunk-12">Bảng 2.4: </span>Khác nhau giữa GLM - Poisson và GLM - ZIP
+<span id="tab:unnamed-chunk-12">Bảng 11.1: </span><span id="tab:unnamed-chunk-12">Bảng 11.2: </span>Khác nhau giữa GLM - Poisson và GLM - ZIP
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1275,7 +1300,7 @@ Tham số Zero-inflated
 </tbody>
 </table></div>
 <p>Để xây dựng mô hình tuyến tính tổng quát trong đó biến phụ thuộc có phân phối <span class="math inline">\(ZI_\mathcal{P}\)</span> chúng ta sử dụng hàm số <code>zeroinfl()</code> của thư viện <span class="math inline">\(pscl\)</span>.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb786"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD Final/Dataset/exposure.csv"</span><span class="op">)</span></span>
 <span><span class="co"># Biến phụ thuộc có phân phối Poisson</span></span>
 <span><span class="va">glm1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Claim_Count</span><span class="op">~</span><span class="va">Age</span><span class="op">+</span><span class="va">Gender</span>,</span>
@@ -1292,7 +1317,7 @@ Tham số Zero-inflated
 <p>Chúng ta có kết quả ước lượng các mô hình</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-14">Bảng 2.5: </span><span id="tab:unnamed-chunk-14">Bảng 2.6: </span>Kết quả ước lượng GLM - Poisson và GLM - ZIP
+<span id="tab:unnamed-chunk-14">Bảng 11.3: </span><span id="tab:unnamed-chunk-14">Bảng 11.4: </span>Kết quả ước lượng GLM - Poisson và GLM - ZIP
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1369,25 +1394,25 @@ Giá trị Log Likelyhood
 <p>Có thể nhận thấy rằng xác suất mà một người được bảo hiểm không để xảy ra tai nạn trong mô hình tuyến tính tổng quát với biến phụ thuộc có phân phối <span class="math inline">\(ZI_\mathcal{P}\)</span> là luôn cao hơn so với mô hình tuyến tính tổng quát với biến phụ thuộc có phân phối Poisson thông thường. Đồng thời, mô hình tuyến tính tổng quát với biến phụ thuộc có phân phối <span class="math inline">\(ZI_\mathcal{P}\)</span> cho kết quả xác suất xảy ra đúng một tai nạn thấp hơn so với mô hình có biến phụ thuộc có phân phối Poisson thông thường.</p>
 </div>
 </div>
-<div id="biến-phụ-thuộc-có-phân-phối-liên-tục." class="section level3" number="2.2.4">
+<div id="biến-phụ-thuộc-có-phân-phối-liên-tục." class="section level3" number="11.2.4">
 <h3>
-<span class="header-section-number">2.2.4</span> Biến phụ thuộc có phân phối liên tục.<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-c%C3%B3-ph%C3%A2n-ph%E1%BB%91i-li%C3%AAn-t%E1%BB%A5c."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2.4</span> Biến phụ thuộc có phân phối liên tục.<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-c%C3%B3-ph%C3%A2n-ph%E1%BB%91i-li%C3%AAn-t%E1%BB%A5c."><i class="fas fa-link"></i></a>
 </h3>
 <p>Một giả thiết quan trọng của mô hình tuyến tính tổng quát là biến phụ thuộc nằm trong họ các biến ngẫu nhiên có phân phối kiểu mũ, hay exponential family. Chúng ta sẽ thảo luận kỹ hơn về họ các biến ngẫu nhiên có phân phối kiểu mũ trong phần sau của cuốn sách. Lưu ý rằng họ các biến ngẫu nhiên có phân phối kiểu mũ không tương đồng với khái niệm biến ngẫu nhiên có phân phối mũ. Phân phối mũ chỉ là mộ trường hợp đặc biệt của phân phối kiển mũ. Có nhiều biến ngẫu nhiên liên tục khác có phân phối nằm trong họ các phân phối kiểu mũ. Có thể kể đến như phân phối gamma, phân phối chuẩn, phân phối chuẩn ngược…</p>
 <p>Các bước để xây dựng mô hình tuyến tính tổng quát trong trường hợp biến phụ thuộc <span class="math inline">\(Y\)</span> là biến ngẫu nhiên liên tục hoàn toàn tương tự như cách xây dựng mô hình tuyến tính tổng quát ở trên, bao gồm bước chọn phân phối xác suất cho biến mục tiêu và lựa chọn hàm liên kết phù hợp. Chúng ta sẽ tiếp tục xây dựng mô hình với dữ liệu “exposure.csv” đã đề cập ở các phần trên. Biến mục tiêu không còn là số lần khách hàng gửi yêu cầu bồi thường, mà là số tiền trung bình mỗi lần khách hàng gửi yêu cầu (biến <span class="math inline">\(Ave\_Amount\)</span>). Các biến giải thích vẫn tiếp tục là giới tính (<span class="math inline">\(Gender\)</span>) và độ tuổi (<span style="color: #640514; font-family: Source Code Pro;">age</span>) của người được bảo hiểm.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb787"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD Final/Dataset/exposure.csv"</span><span class="op">)</span></span>
-<span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu">mutate</span><span class="op">(</span><span class="va">dat</span>,Ave_Amount <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Claim_Count</span><span class="op">&gt;</span><span class="fl">0</span>,<span class="va">Total_Claim</span><span class="op">/</span><span class="va">Claim_Count</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">dat</span>,Ave_Amount <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Claim_Count</span><span class="op">&gt;</span><span class="fl">0</span>,<span class="va">Total_Claim</span><span class="op">/</span><span class="va">Claim_Count</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">dat1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dat</span>,<span class="va">Claim_Count</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>Mối liên hệ giữa <span class="math inline">\(Ave\_Amount\)</span> được thể hiện qua đồ thị dưới đây</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb788"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat1</span><span class="op">$</span><span class="va">Gender</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dat1</span><span class="op">$</span><span class="va">Gender</span><span class="op">==</span><span class="fl">0</span>,<span class="st">"F"</span>,<span class="st">"M"</span><span class="op">)</span></span>
-<span><span class="va">p1</span><span class="op">&lt;-</span><span class="va">dat1</span><span class="op">%&gt;%</span><span class="fu">ggplot</span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_boxplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span><span class="va">Gender</span>,y <span class="op">=</span> <span class="va">Ave_Amount</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu">ylim</span><span class="op">(</span><span class="fl">0</span>,<span class="fl">200</span><span class="op">)</span><span class="op">+</span><span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Số tiền yêu cầu bồi thường trung bình và giới tính"</span><span class="op">)</span></span>
-<span><span class="va">p2</span><span class="op">&lt;-</span><span class="va">dat1</span><span class="op">%&gt;%</span><span class="fu">ggplot</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span>,y <span class="op">=</span> <span class="va">Ave_Amount</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu">geom_point</span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu">geom_smooth</span><span class="op">(</span>col<span class="op">=</span><span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">1</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span><span class="fu">ylim</span><span class="op">(</span><span class="fl">0</span>,<span class="fl">200</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"Số tiền yêu cầu bồi thường trung bình và độ tuổi"</span><span class="op">)</span></span>
-<span><span class="fu">grid.arrange</span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">p1</span><span class="op">&lt;-</span><span class="va">dat1</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">Gender</span>,y <span class="op">=</span> <span class="va">Ave_Amount</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">200</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Số tiền yêu cầu bồi thường trung bình và giới tính"</span><span class="op">)</span></span>
+<span><span class="va">p2</span><span class="op">&lt;-</span><span class="va">dat1</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">Age</span>,y <span class="op">=</span> <span class="va">Ave_Amount</span><span class="op">)</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>alpha<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>col<span class="op">=</span><span class="st">"black"</span>, size <span class="op">=</span> <span class="fl">1</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">+</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">200</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span><span class="op">(</span><span class="st">"Số tiền yêu cầu bồi thường trung bình và độ tuổi"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>,<span class="va">p2</span>,ncol<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure"><img src="10-mo-hinh-tuyen-tinh-tong-quat_files/figure-html/unnamed-chunk-18-1.png" width="672"></div>
 <p>Đồ thị bên trái cho thấy số tiền yêu cầu bồi thường trung bình của nữ là cao hơn nam giới. Phân phối xác suất của số tiền yêu cầu bồi thương trung bình là phân phối liên tục lệch phải, có đuôi bên phải lớn. Đồ thị bên phải cho thấy số tiền yêu cầu bồi thường trung bình có xu hướng tăng theo độ tuổi.</p>
 <p>Số tiền bảo hiểm trung bình là số dương nên chúng ta sẽ sử dụng phân phối <span class="math inline">\(gamma\)</span> với hàm liên kết là hàm <code><a href="https://rdrr.io/r/base/Log.html">log()</a></code>. Lưu ý rằng phân phối <code><a href="https://rdrr.io/r/base/Special.html">gamma()</a></code> là phân phối có hai tham số, thường được ký hiệu là <span class="math inline">\(\alpha\)</span> và <span class="math inline">\(\gamma\)</span>, với hàm mật độ xác suất, giá trị trung bình, và phương sai như sau
@@ -1397,9 +1422,9 @@ Giá trị Log Likelyhood
 &amp; \mathbb{V}(X) = \cfrac{\alpha}{\gamma^2}
 \end{align}\]</span></p>
 <p>Khi phân phối <span class="math inline">\(gamma\)</span> được sử dụng cho biến phụ thuộc, giá trị trung bình được tính bằng <span class="math inline">\(\alpha/\gamma\)</span>, sẽ được mô tả thông qua các biến độc lập trong khi tham số <span class="math inline">\(\alpha\)</span> sẽ được ước lượng dựa trên hàm hợp lý tối đa:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb789"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD Final/Dataset/exposure.csv"</span><span class="op">)</span></span>
-<span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu">mutate</span><span class="op">(</span><span class="va">dat</span>,Ave_Amount <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Claim_Count</span><span class="op">&gt;</span><span class="fl">0</span>,<span class="va">Total_Claim</span><span class="op">/</span><span class="va">Claim_Count</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">dat</span>,Ave_Amount <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Claim_Count</span><span class="op">&gt;</span><span class="fl">0</span>,<span class="va">Total_Claim</span><span class="op">/</span><span class="va">Claim_Count</span>,<span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">dat1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dat</span>,<span class="va">Claim_Count</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">glm3</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Ave_Amount</span><span class="op">~</span><span class="va">Age</span><span class="op">+</span><span class="va">Gender</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">Gamma</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>,data <span class="op">=</span> <span class="va">dat1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">glm3</span><span class="op">)</span></span></code></pre></div>
@@ -1407,6 +1432,10 @@ Giá trị Log Likelyhood
 ## Call:
 ## glm(formula = Ave_Amount ~ Age + Gender, family = Gamma(link = "log"), 
 ##     data = dat1)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -4.3309  -0.9498  -0.3047   0.3360   2.9954  
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
@@ -1433,18 +1462,18 @@ Giá trị Log Likelyhood
 <p>Trước khi đi vào chi tiết các thành phần của mô hình, chúng tôi muốn kết luận rằng mô hình tuyến tính tổng quát có thể được sử dụng để mô hình hóa dữ liệu trong nhiều hoàn cảnh khác nhau. Việc xây dựng mô hình tuyến tính tổng quát luôn được bắt đầu bằng việc lựa chọn phân phối cho biến phụ thuộc và lựa chọn hàm số liên kết. Có các quy tắc chung trong việc lựa chọn phân phối và hàm liên kết giống như chúng tôi đã trình bày ở phần trên. Tuy nhiên để đưa ra được mô hình tuyến tính tổng quát phù hợp cho từng dữ liệu cụ thể, hoặc để có thể mở rộng được mô hình tuyến tính tổng quát trong các kiểu dữ liệu phức tạp hơn, bạn đọc cần am hiểu sâu hơn về các đặc điểm kỹ thuật của các mô hình này. Các kiến thức này sẽ được trình bày trong các phần tiếp theo của chương.</p>
 </div>
 </div>
-<div id="các-thành-phần-của-mô-hình-tuyến-tính-tổng-quát." class="section level2" number="2.3">
+<div id="các-thành-phần-của-mô-hình-tuyến-tính-tổng-quát." class="section level2" number="11.3">
 <h2>
-<span class="header-section-number">2.3</span> Các thành phần của mô hình tuyến tính tổng quát.<a class="anchor" aria-label="anchor" href="#c%C3%A1c-th%C3%A0nh-ph%E1%BA%A7n-c%E1%BB%A7a-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3</span> Các thành phần của mô hình tuyến tính tổng quát.<a class="anchor" aria-label="anchor" href="#c%C3%A1c-th%C3%A0nh-ph%E1%BA%A7n-c%E1%BB%A7a-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><i class="fas fa-link"></i></a>
 </h2>
 <p>Như chúng ta đã thảo luận trong phần trước, mô hình tuyến tính tổng quát khắc phục hai giả thiết, cũng là hai nhược điểm của mô hình tuyến tính thông thường, đó là i) biến phụ thuộc có phân phối chuẩn, và ii) giá trị trung bình của biến phụ thuộc bằng một tổ hợp tuyến tính của các biến độc lập. Trong phần này của cuốn sách, chúng tôi sẽ thảo luận kỹ hơn vào cách tiếp cận để khắc phục các hạn chế kể trên.</p>
 <ul>
 <li><p>Thứ nhất, thay vì sử dụng phân phối chuẩn, mô hình tuyến tính tổng quát giả thiết rằng biến phụ thuộc có phân phối nằm trong họ các phân phối kiểu mũ (exponential family). Phân phối chuẩn chỉ là một trường hợp đặc biệt của họ các phân phối này.</p></li>
 <li><p>Thứ hai, mô hình tuyến tính tổng quát sử dụng một hàm <span class="math inline">\(g\)</span>, được gọi là hàm liên kết, để mô tả mối liên hệ giữa giá trị trung bình của biến phụ thuộc với tổ hợp tuyến tính của các biến độc lập. Lựa chọn hàm <span class="math inline">\(g\)</span> có ý nghĩa quan trọng không chỉ trong cách luận giải kết quả của mô hình, mà còn ở việc dễ dàng ước lượng tham số của mô hình.</p></li>
 </ul>
-<div id="họ-các-biến-ngẫu-nhiên-có-phân-phối-kiểu-mũ." class="section level3" number="2.3.1">
+<div id="họ-các-biến-ngẫu-nhiên-có-phân-phối-kiểu-mũ." class="section level3" number="11.3.1">
 <h3>
-<span class="header-section-number">2.3.1</span> Họ các biến ngẫu nhiên có phân phối kiểu mũ.<a class="anchor" aria-label="anchor" href="#h%E1%BB%8D-c%C3%A1c-bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn-c%C3%B3-ph%C3%A2n-ph%E1%BB%91i-ki%E1%BB%83u-m%C5%A9."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.1</span> Họ các biến ngẫu nhiên có phân phối kiểu mũ.<a class="anchor" aria-label="anchor" href="#h%E1%BB%8D-c%C3%A1c-bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn-c%C3%B3-ph%C3%A2n-ph%E1%BB%91i-ki%E1%BB%83u-m%C5%A9."><i class="fas fa-link"></i></a>
 </h3>
 <p>Thay vì giả thiết rằng <span class="math inline">\(Y\)</span> có phân phối chuẩn trong mô hình tuyến tính thông thường, mô hình tuyến tính tổng quát giả thiết biến phụ thuộc <span class="math inline">\(Y\)</span> nằm trong họ các biến ngẫu nhiên có phân phối kiểu mũ. Họ các biến ngẫu nhiên có phân phối kiểu mũ (exponential family) có hàm mật độ xác suất có thể viết dưới dạng như sau:
 <span class="math display">\[\begin{align}
@@ -1460,7 +1489,7 @@ trong đó</p>
 <span class="math display" id="eq:EF1">\[\begin{align}
 &amp; \mathbb{E}(Y) = b^{'}(\theta) \\
 &amp; \mathbb{V}(Y) = a(\phi) \cdot b^{''}(\theta)
-\tag{2.25}
+\tag{11.25}
 \end{align}\]</span>
 với <span class="math inline">\(b^{'}(\theta)\)</span> và <span class="math inline">\(b^{''}(\theta)\)</span> lần lượt là đạo hàm bậc một và đạo hàm bậc hai của hàm số <span class="math inline">\(b\)</span> theo biến <span class="math inline">\(\theta\)</span>.</p>
 <p>Họ các biến ngẫu nhiên có phân phối kiểu mũ bao gồm đa số các biến ngẫu nhiên liên tục thông thường như phân phối chuẩn, phân phối mũ, phân phối Gamma, phân phối chuẩn ngược. Các biến ngẫu nhiên phân phối rời rạc như phân phối nhị thức, phân phối binomial, hoặc phân phối Poisson cũng nằm trong họ các biến ngẫu nhiên có phân phối kiểu mũ.</p>
@@ -1473,7 +1502,7 @@ Chúng ta có thể viết phân phối <span class="math inline">\(\mathcal{P}(
 <span class="math display">\[\begin{align}
 \mathbb{P}(Y = y; \theta) = exp\left[ \cfrac{\theta y - exp(\theta)}{1} - log(\Gamma(y+1)) \right] \text{ với } \lambda = exp(\theta)
 \end{align}\]</span>
-Đây là hàm phân phối của biến ngẫu nhiên nằm trong họ các phân phối kiểu mũ với <span class="math inline">\(a(\phi) = 1\)</span>; <span class="math inline">\(b(\theta) = exp(\theta)\)</span> và <span class="math inline">\(c(y,\phi) = log\left(\Gamma(y+1)\right)\)</span>. Bạn đọc có thể tính toán trung bình và phương sai của phân phối <span class="math inline">\(\lambda\)</span> dựa theo công thức <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:EF1">(2.25)</a>
+Đây là hàm phân phối của biến ngẫu nhiên nằm trong họ các phân phối kiểu mũ với <span class="math inline">\(a(\phi) = 1\)</span>; <span class="math inline">\(b(\theta) = exp(\theta)\)</span> và <span class="math inline">\(c(y,\phi) = log\left(\Gamma(y+1)\right)\)</span>. Bạn đọc có thể tính toán trung bình và phương sai của phân phối <span class="math inline">\(\lambda\)</span> dựa theo công thức <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:EF1">(11.25)</a>
 <span class="math display">\[\begin{align}
 &amp; \mathbb{E}(Y) = b^{'}(\theta) = exp(\theta) = \lambda \\
 &amp; \mathbb{V}(Y) = a(\phi) \cdot b^{''}(\theta) = 1 \cdot exp(\theta) = \lambda
@@ -1491,7 +1520,7 @@ Với <span class="math inline">\(\theta = \mu\)</span> và <span class="math in
 <span class="math display">\[\begin{align}
 c(y,\phi) = -\cfrac{y^2}{2\phi} - \cfrac{1}{2} log(2 \pi \phi)
 \end{align}\]</span>
-Bạn đọc có thể kiểm tra giá trị trung bình và phương sai của phân phối <span class="math inline">\(\mathcal{N}(\mu,\sigma)\)</span> dựa theo công thức <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:EF1">(2.25)</a>
+Bạn đọc có thể kiểm tra giá trị trung bình và phương sai của phân phối <span class="math inline">\(\mathcal{N}(\mu,\sigma)\)</span> dựa theo công thức <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:EF1">(11.25)</a>
 <span class="math display">\[\begin{align}
 &amp; \mathbb{E}(Y) = b^{'}(\theta) = \theta = \mu \\
 &amp; \mathbb{V}(Y) = a(\phi) \cdot b^{''}(\theta) = \phi \cdot 1 = \phi = \sigma^2
@@ -1510,7 +1539,7 @@ Chúng ta có phân phối kiểu mũ với <span class="math inline">\(a(\phi) 
 <span class="math display">\[\begin{align}
 c(y,\phi) = \cfrac{\log(\phi)}{\phi} - \log(\Gamma(1/\phi)) - (1/\phi-1) \cdot \log(y)
 \end{align}\]</span>
-Chúng ta kiểm tra giá trị trung bình và phương sai của phân phối <span class="math inline">\(Gamma(\alpha,\beta)\)</span> theo công thức <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:EF1">(2.25)</a>
+Chúng ta kiểm tra giá trị trung bình và phương sai của phân phối <span class="math inline">\(Gamma(\alpha,\beta)\)</span> theo công thức <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:EF1">(11.25)</a>
 <span class="math display">\[\begin{align}
 &amp; \mathbb{E}(Y) = b^{'}(\theta) = - \cfrac{1}{\theta} = \cfrac{\alpha}{\gamma} \\
 &amp; \mathbb{V}(Y) = a(\phi) \cdot b^{''}(\theta) = \cfrac{1}{\alpha} \cdot \cfrac{\alpha^2}{\gamma^2} = \cfrac{\alpha}{\gamma^2}
@@ -1536,9 +1565,9 @@ Giá trị trung bình và phương sai của biến ngẫu nhiên <span class="
 \end{align}\]</span></p>
 <p>Khi ước lượng mô hình tuyến tính tổng quát trên một dữ liệu cụ thể, giá trị hàm phương sai <span class="math inline">\(V\)</span> phụ thuộc vào cách chúng ta lựa chọn hàm <span class="math inline">\(b\)</span> và giá trị trung bình của <span class="math inline">\(Y_i\)</span>. Tham số <span class="math inline">\(\phi\)</span> không phụ thuộc vào quan sát <span class="math inline">\(Y_i\)</span>, do đó hệ số <span class="math inline">\(w_i\)</span> có ý nghĩa quyết định trong xác định phương sai của <span class="math inline">\(Y_i\)</span>. Chúng ta có thể lựa chọn đơn giản là cho <span class="math inline">\(w_i\)</span> bằng 1 với mọi <span class="math inline">\(i\)</span>, nếu chúng ta tin rằng tỷ lệ <span class="math inline">\(\cfrac{V(\mu_i)}{\mathbb{V}(Y_i)}\)</span> là hằng số. Trong một số trường hợp, <span class="math inline">\(\cfrac{V(\mu_i)}{\mathbb{V}(Y_i)}\)</span> thay đổi theo <span class="math inline">\(i\)</span>, đó là lúc chúng ta cần lựa chọn <span class="math inline">\(w_i\)</span> để cho kết quả tốt nhất. Chúng ta sẽ tiếp tục thảo luận về hàm phương sai của biến phụ thuộc trong phần hàm hợp lý tối đa của biến ngẫu nhiên nằm trong họ phân phối các phân phối kiểu mũ.</p>
 </div>
-<div id="hàm-liên-kết." class="section level3" number="2.3.2">
+<div id="hàm-liên-kết." class="section level3" number="11.3.2">
 <h3>
-<span class="header-section-number">2.3.2</span> Hàm liên kết.<a class="anchor" aria-label="anchor" href="#h%C3%A0m-li%C3%AAn-k%E1%BA%BFt."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3.2</span> Hàm liên kết.<a class="anchor" aria-label="anchor" href="#h%C3%A0m-li%C3%AAn-k%E1%BA%BFt."><i class="fas fa-link"></i></a>
 </h3>
 <p>Hàm số liên kết <span class="math inline">\(g(\cdot)\)</span> liên kết giá trị trung bình của biến phụ thuộc với tổ hợp tuyến tính của các biến độc lập luôn được lựa chọn trong nhóm các hàm số đơn điệu và có đạo hàm trên miền xác định của hàm số đó. Các giả thiết này đảm bảo để hàm liên kết có hàm số ngược <span class="math inline">\(g^{-1}(\cdot)\)</span> cũng là hàm đơn điệu và có đạo hàm trên miền xác định. Một yếu tố quan trọng khác khi lựa chọn hàm liên kết đó là <span class="math inline">\(g(\cdot)\)</span> có miền xác định trùng với miền xác định của giá trị trung bình của biến phụ thuộc và miền giá trị của <span class="math inline">\(g(\cdot)\)</span> là tập số thực <span class="math inline">\(\mathbb{R}\)</span>.</p>
 <p>Xin được nhắc lại rằng mối liên hệ giữa trung bình của biến phụ thuộc và tổ hợp tuyến tính của biến độc lập được mô tả thông qua hàm liên kết như sau:
@@ -1686,9 +1715,9 @@ Khi sử dụng hàm <span class="math inline">\(log\)</span>, mỗi biến đ�
 </ul>
 </div>
 </div>
-<div id="hàm-hợp-lý-tối-đa-và-ước-lượng-mô-hình." class="section level2" number="2.4">
+<div id="hàm-hợp-lý-tối-đa-và-ước-lượng-mô-hình." class="section level2" number="11.4">
 <h2>
-<span class="header-section-number">2.4</span> Hàm hợp lý tối đa và ước lượng mô hình.<a class="anchor" aria-label="anchor" href="#h%C3%A0m-h%E1%BB%A3p-l%C3%BD-t%E1%BB%91i-%C4%91a-v%C3%A0-%C6%B0%E1%BB%9Bc-l%C6%B0%E1%BB%A3ng-m%C3%B4-h%C3%ACnh."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4</span> Hàm hợp lý tối đa và ước lượng mô hình.<a class="anchor" aria-label="anchor" href="#h%C3%A0m-h%E1%BB%A3p-l%C3%BD-t%E1%BB%91i-%C4%91a-v%C3%A0-%C6%B0%E1%BB%9Bc-l%C6%B0%E1%BB%A3ng-m%C3%B4-h%C3%ACnh."><i class="fas fa-link"></i></a>
 </h2>
 <p>Hệ số tuyến tính của các biến độc lập <span class="math inline">\(\boldsymbol{\beta} = (\beta_0, \beta_1, \cdots, \beta_p)\)</span> được ước lượng từ dữ liệu <span class="math inline">\(\textbf{y} = (y_1, y_2, \cdots y_n)\)</span> và <span class="math inline">\(\textbf{x} = (\textbf{x}_1, \textbf{x}_2, \cdots \textbf{x}_n)\)</span> bằng phương pháp tối đa hóa hàm hợp lý, hay còn gọi là hàm likelihood. Khi biến mục tiêu <span class="math inline">\(Y_i\)</span> có phân phối kiểu mũ, hàm likelihood được viết như sau
 <span class="math display">\[\begin{align}
@@ -1774,14 +1803,14 @@ véc-tơ tham số <span class="math inline">\(\boldsymbol{\beta}\)</span> để
 \end{align}\]</span></p></li>
 </ul>
 </div>
-<div id="so-sánh-và-lựa-chọn-mô-hình-tuyến-tính-tổng-quát." class="section level2" number="2.5">
+<div id="so-sánh-và-lựa-chọn-mô-hình-tuyến-tính-tổng-quát." class="section level2" number="11.5">
 <h2>
-<span class="header-section-number">2.5</span> So sánh và lựa chọn mô hình tuyến tính tổng quát.<a class="anchor" aria-label="anchor" href="#so-s%C3%A1nh-v%C3%A0-l%E1%BB%B1a-ch%E1%BB%8Dn-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.5</span> So sánh và lựa chọn mô hình tuyến tính tổng quát.<a class="anchor" aria-label="anchor" href="#so-s%C3%A1nh-v%C3%A0-l%E1%BB%B1a-ch%E1%BB%8Dn-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><i class="fas fa-link"></i></a>
 </h2>
 <p>Nắm được các nguyên tắc chung bạn đọc có thể tự xây dựng nhiều mô hình tuyến tính tổng quát khác nhau cho một dữ liệu cụ thể. Thách thức đặt ra là một mô hình liệu có thực sự có tốt hơn các mô hình khác, hay trong số các mô hình bạn lựa chọn mô hình nào là phù hợp nhất? Phần này của chương sẽ thảo luận về vấn đề so sánh mô hình và lựa chọn mô hình. Các chỉ tiêu thống kê được sủ dụng để so sánh mô hình sẽ xoay quanh giá trị của hàm hợp lý tối đa, bao gồm có thước đo deviance, chỉ tiêu AIC, AICC, hay BIC.</p>
-<div id="thước-đo-deviance" class="section level3" number="2.5.1">
+<div id="thước-đo-deviance" class="section level3" number="11.5.1">
 <h3>
-<span class="header-section-number">2.5.1</span> Thước đo deviance<a class="anchor" aria-label="anchor" href="#th%C6%B0%E1%BB%9Bc-%C4%91o-deviance"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.5.1</span> Thước đo deviance<a class="anchor" aria-label="anchor" href="#th%C6%B0%E1%BB%9Bc-%C4%91o-deviance"><i class="fas fa-link"></i></a>
 </h3>
 <p>Thước đo được gọi là deviance thường được sử dụng để đánh giá và so sánh các mô hình tuyến tính tổng quát có cùng phân phối của biến độc lập. Chỉ tiêu này được tính toán dựa trên giá trị hàm Log-likelihood. Khi <span class="math inline">\(Y\)</span> là biến ngẫu nhiên trong nhóm các phân phối mũ, hàm log-likelihood được viết như sau
 <span class="math display">\[\begin{align}
@@ -1790,9 +1819,9 @@ l(\textbf{y},\theta) &amp; = \sum\limits_{i=1}^n  \left(\cfrac{y_i \theta_i - b(
 với <span class="math inline">\(\boldsymbol{\theta}\)</span> là véc-tơ các tham số chính tắc, <span class="math inline">\(\boldsymbol{\theta} = (\theta_1, \theta_2, \cdots, \theta_n)\)</span>. Sau khi phân phối của <span class="math inline">\(Y\)</span> và hàm liên kết được lựa chọn, chúng ta ước lượng được véc-tơ tham số <span class="math inline">\(\boldsymbol{\beta}\)</span> là hệ số của các biến độc lập bằng cách tối đa hóa hàm log-likelihood. Sau khi đã xác định được véc-tơ tham số <span class="math inline">\(\boldsymbol{\beta}\)</span>, với mỗi lựa chọn cho phân phối của <span class="math inline">\(Y\)</span> và hàm liên kết, chúng ta sẽ tính toán được các tham số chính tắc của mô hình tuyến tính tổng quát. Nếu hàm liên kết được lựa chọn là hàm liên kết chính tắc, <span class="math inline">\(g(\cdot) = (b^{'})^{-1}(\cdot)\)</span>, chúng ta có các tham số chính tắc chính là tổ hợp tuyến tính của các biến độc lập <span class="math inline">\(\boldsymbol{\theta}^M = (\theta^M_1, \theta^M_2, \cdots, \theta^M_n)\)</span> với
 <span class="math display" id="eq:compa1">\[\begin{align}
 \theta^M_i = \beta_0 + \beta_1 \cdot x_{i,1} + \cdots + \beta_p \cdot x_{i,p}
-\tag{2.26}
+\tag{11.26}
 \end{align}\]</span></p>
-<p>Với mỗi lựa chọn cho mô hình tuyến tính tổng quát, bao gồm lựa chọn cho phân phối của <span class="math inline">\(Y\)</span> và hàm liên kết <span class="math inline">\(g\)</span>, tạm gọi là mô hình <span class="math inline">\(M\)</span>, chúng ta gọi <span class="math inline">\(l(\textbf{y},\boldsymbol{\theta}^M)\)</span> là giá trị của hàm Log-likelihood tại tham số <span class="math inline">\(\boldsymbol{\theta}^M\)</span> được xác định qua phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:compa1">(2.26)</a>. Lưu ý rằng véc-tơ <span class="math inline">\(\boldsymbol{\theta}^M\)</span> có độ dài là <span class="math inline">\(n\)</span>, bằng với kích thước của dữ liệu, tuy nhiên các tham số này được tính toán từ <span class="math inline">\((p+1)\)</span> giá trị <span class="math inline">\(\beta\)</span> ước lượng được và giá trị của biến độc lập.</p>
+<p>Với mỗi lựa chọn cho mô hình tuyến tính tổng quát, bao gồm lựa chọn cho phân phối của <span class="math inline">\(Y\)</span> và hàm liên kết <span class="math inline">\(g\)</span>, tạm gọi là mô hình <span class="math inline">\(M\)</span>, chúng ta gọi <span class="math inline">\(l(\textbf{y},\boldsymbol{\theta}^M)\)</span> là giá trị của hàm Log-likelihood tại tham số <span class="math inline">\(\boldsymbol{\theta}^M\)</span> được xác định qua phương trình <a href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html#eq:compa1">(11.26)</a>. Lưu ý rằng véc-tơ <span class="math inline">\(\boldsymbol{\theta}^M\)</span> có độ dài là <span class="math inline">\(n\)</span>, bằng với kích thước của dữ liệu, tuy nhiên các tham số này được tính toán từ <span class="math inline">\((p+1)\)</span> giá trị <span class="math inline">\(\beta\)</span> ước lượng được và giá trị của biến độc lập.</p>
 <p>Điều gì xảy ra nếu tham số chính tắc <span class="math inline">\(\boldsymbol{\theta}\)</span> hoàn toàn tự do và không phụ thuộc vào biến độc lập? Hàm Log-likelihood sẽ đạt giá trị cực đại tại <span class="math inline">\(\theta^S = (\theta^S_1, \theta^S_2, \cdots, \theta^S_n)\)</span> với <span class="math inline">\(\theta^S_i\)</span> là giá trị sao cho đạo hàm của hàm Log-likelihood tại <span class="math inline">\(\theta^S_i\)</span> bằng 0. Do <span class="math inline">\(\theta\)</span> hoàn toàn tự do nên chỉ có thành phần thứ <span class="math inline">\(i\)</span> của hàm Log-likelihood phụ thuộc vào <span class="math inline">\(\theta^S_i\)</span>
 <span class="math display">\[\begin{align}
 \cfrac{\partial l(\textbf{y},\theta)}{\partial \theta_i} &amp; =  \cfrac{y_i - b^{'}(\theta_i)}{a_i(\phi)}
@@ -1845,7 +1874,7 @@ D^{*}(y, \theta^{M_1}) - D^{*}(y, \theta^{M_2}) = 2 \cdot \log\left( \cfrac{L(y,
 <ul>
 <li>Ví dụ 3: trong dữ liệu <span class="math inline">\(exposure.csv\)</span>, khi biến <span class="math inline">\(Claim\_Count\)</span> được giả thiết có phân phối Poisson và giá trị trung bình được giải thích bằng độ tuổi, hoặc giới tính của người được bảo hiểm, hoặc cả hai biến. Chúng ta gọi mô hình <span class="math inline">\(M_1\)</span> là mô hình mà giá trị trung bình của biến phụ thuộc được giải thích bằng biến độ tuổi, mô hình <span class="math inline">\(M_2\)</span> là mô hình mà giá trị trung bình của biến phụ thuộc được giải thích bằng cả biến giới tính, và mô hình <span class="math inline">\(M_3\)</span> là mô hình mà biến phụ thuộc phụ thuộc vào cả độ tuổi và giới tính của khách hàng.</li>
 </ul>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb791"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD Final/Dataset/exposure.csv"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">glm_M1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Claim_Count</span><span class="op">~</span><span class="va">Age</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link<span class="op">=</span><span class="st">"log"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
@@ -1906,9 +1935,9 @@ Age, Gender
 </table></div>
 <p>Mô hình <span class="math inline">\(M_1\)</span> và <span class="math inline">\(M_2\)</span> đều chỉ có một biến độc lập và <span class="math inline">\(M_1\)</span> có deviance nhỏ hơn <span class="math inline">\(M_2\)</span> do đó mô hình <span class="math inline">\(M_1\)</span> tốt hơn <span class="math inline">\(M_2\)</span>. So sánh mô hình <span class="math inline">\(M_1\)</span> với 1 biến độc lập là <span style="color: #640514; font-family: Source Code Pro;">age</span> với mô hình <span class="math inline">\(M_3\)</span> có 2 biến độc lập là <span style="color: #640514; font-family: Source Code Pro;">age</span> và <span class="math inline">\(Gender\)</span> cần dựa trên kiểm định <span class="math inline">\(\chi^2\)</span>. Ta có <span class="math inline">\(D^{*}(y, \theta^{M_1}) - D^{*}(y, \theta^{M_2}) = 8324.2 - 8316.8 = 7.4\)</span>. Giá trị 7.4 tương ứng với mức xác suất <span class="math inline">\(0.994\)</span> của phân phối <span class="math inline">\(\chi^2(1)\)</span>. Điều này có ý nghĩa là ở mức độ tin cậy 99%, có thể kết luận rằng thêm biến <span class="math inline">\(Gender\)</span> vào mô hình <span class="math inline">\(M_1\)</span> là có ý nghĩa thống kê, tuy nhiên việc thêm biến <span class="math inline">\(Gender\)</span> lại không có ý nghĩa thống kê ở mức độ tin cậy <span class="math inline">\(99.5\%\)</span>.</p>
 </div>
-<div id="giá-trị-hàm-log-likelihood-aic-và-bic" class="section level3" number="2.5.2">
+<div id="giá-trị-hàm-log-likelihood-aic-và-bic" class="section level3" number="11.5.2">
 <h3>
-<span class="header-section-number">2.5.2</span> Giá trị hàm log-likelihood, AIC và BIC<a class="anchor" aria-label="anchor" href="#gi%C3%A1-tr%E1%BB%8B-h%C3%A0m-log-likelihood-aic-v%C3%A0-bic"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.5.2</span> Giá trị hàm log-likelihood, AIC và BIC<a class="anchor" aria-label="anchor" href="#gi%C3%A1-tr%E1%BB%8B-h%C3%A0m-log-likelihood-aic-v%C3%A0-bic"><i class="fas fa-link"></i></a>
 </h3>
 <p>Deviance là một thước đo hữu ích trong so sánh các mô hình có cùng phân phối của biến phụ thuộc và hàm liên kết. Khi các mô hình cần so sánh không có chung phân phối của biến phụ thuộc thì hiệu giữa hai hàm log-likelihood sẽ không có phân phối <span class="math inline">\(\chi^2\)</span> và khi đó việc so sánh các mô hình là không thế thực hiện được.</p>
 <p>Trong phần trước, chúng ta đã định nghĩa <span class="math inline">\(l(y,\theta^M)\)</span> là giá trị tối đa của hàm log-likelihood cho mô hình M với tập hợp các biến độc lập đã lựa chọn. Nhìn chung, giá trị của <span class="math inline">\(l(y,\theta^M)\)</span> không cho biết nhiều thông tin về độ phù hợp của mô hình, nhưng người xây dựng mô hình thường mong muốn giá trị này càng lớn thì càng tốt. Tuy nhiên, có một vấn đề khi so sánh trực tiếp giá trị <span class="math inline">\(l(y,\theta^M)\)</span> giữa các mô hình là: một mô hình bao gồm nhiều biến độc lập hơn thì rất có thể có giá trị <span class="math inline">\(l(y,\theta^M)\)</span> lớn hơn. Để giải quyết vấn đề này, có ba thước đo được điều chỉnh từ <span class="math inline">\(l(y,\theta^M)\)</span> thường được sử dụng cho mô hình tuyến tính tổng quát với mục đích đánh giá và so sánh giữa các mô hình là AIC, AICC và BIC.</p>
@@ -1930,7 +1959,7 @@ BIC = 2 \left(-l(y,\theta^M)+r log(n)\right)
 <ul>
 <li>Ví dụ 1: chúng ta quay trở lại dữ liệu “MotoInsurance.csv” khi biến mục tiêu <span class="math inline">\(Y\)</span> chỉ nhận hai giá trị là <span style="color: #640514; font-family: Source Code Pro;">'No'</span> hoặc <span style="color: #640514; font-family: Source Code Pro;">'Yes'</span>. Biến <span class="math inline">\(Y\)</span> có thể là biến dạng nhị phân hoặc vừa có thể là biến dạng đếm nếu chúng ta cho tương đương giá trị <span style="color: #640514; font-family: Source Code Pro;">'No'</span> tương đương với 0 và giá trị <span style="color: #640514; font-family: Source Code Pro;">'Yes'</span> tương ứng với 1. Khi xây dựng mô hình tuyến tính tổng quát, chúng ta có thể sử dụng phân phối Poisson cho biến mục tiêu với hàm liên kết <span class="math inline">\(g(\cdot) = log(\cdot)\)</span>.</li>
 </ul>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb792"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD Final/Dataset/MotoInsurance.csv"</span><span class="op">)</span></span>
 <span><span class="va">dat</span><span class="op">$</span><span class="va">Y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Y</span><span class="op">==</span><span class="st">"Yes"</span>,<span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">dat</span><span class="op">$</span><span class="va">sex</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">sex</span><span class="op">)</span></span>
@@ -1941,6 +1970,10 @@ BIC = 2 \left(-l(y,\theta^M)+r log(n)\right)
 ## Call:
 ## glm(formula = Y ~ age + sex + urban + seniority, family = poisson(link = "log"), 
 ##     data = dat)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.0824  -0.7362  -0.5465   0.5711   1.9556  
 ## 
 ## Coefficients:
 ##              Estimate Std. Error z value Pr(&gt;|z|)    
@@ -1960,7 +1993,7 @@ BIC = 2 \left(-l(y,\theta^M)+r log(n)\right)
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>Do <span class="math inline">\(Y\)</span> là biến nhị phân nên một cách tự nhiên, bạn đọc sẽ cân nhắc sử dụng phân phối nhị phân cho <span class="math inline">\(Y\)</span>. Chúng ta xây dựng mô hình tuyến tính tổng quát với phân phối nhị thức cho <span class="math inline">\(Y\)</span> và hàm liên kết là hàm <span class="math inline">\(logit\)</span>. Thay vì sử dụng cả 4 biến độc lập, chúng ta chỉ sử dụng hai biến độc lập là <span style="color: #640514; font-family: Source Code Pro;">age</span> và <span style="color: #640514; font-family: Source Code Pro;">sex</span>,</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb794"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span><span class="op">$</span><span class="va">Y</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">Y</span><span class="op">)</span> <span class="co"># đổi biến Y thành factor</span></span>
 <span><span class="va">glm.binom.logit</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Y</span><span class="op">~</span><span class="va">age</span><span class="op">+</span><span class="va">sex</span>,data<span class="op">=</span><span class="va">dat</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"logit"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">glm.binom.logit</span><span class="op">)</span></span></code></pre></div>
@@ -1968,6 +2001,10 @@ BIC = 2 \left(-l(y,\theta^M)+r log(n)\right)
 ## Call:
 ## glm(formula = Y ~ age + sex, family = binomial(link = "logit"), 
 ##     data = dat)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.4544  -0.9261  -0.7396   1.2607   2.0088  
 ## 
 ## Coefficients:
 ##              Estimate Std. Error z value Pr(&gt;|z|)    
@@ -1988,7 +2025,7 @@ BIC = 2 \left(-l(y,\theta^M)+r log(n)\right)
 <ul>
 <li>Ví dụ 2: chúng ta sẽ tiếp tục với dữ liệu “MotoInsurance.csv”. Một cách tự nhiên, khi sử dụng phân phối nhị thức cho biến phụ thuộc, bạn đọc sử dụng hàm liên kết là hàm <span class="math inline">\(logit\)</span>. Liệu lựa chọn này có là tốt nhất để mô hình hóa dữ liệu mà chúng ta đang nghiên cứu? Bạn đọc có thể sử dụng chỉ tiêu AIC để lựa chọn hàm liên kết phù hợp. Chúng ta sẽ sử dụng 4 biến độc lập là <span style="color: #640514; font-family: Source Code Pro;">age</span>, <span style="color: #640514; font-family: Source Code Pro;">sex</span>, <span style="color: #640514; font-family: Source Code Pro;">urban</span>, và <span style="color: #640514; font-family: Source Code Pro;">seniority</span> để giải thích giá trị trung bình của biến phụ thuộc khi xây dựng mô hình</li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb796"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">glm.binom.logit</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Y</span><span class="op">~</span><span class="va">age</span><span class="op">+</span><span class="va">sex</span><span class="op">+</span><span class="va">seniority</span><span class="op">+</span><span class="va">urban</span>,data<span class="op">=</span><span class="va">dat</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"logit"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">glm.binom.probit</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">Y</span><span class="op">~</span><span class="va">age</span><span class="op">+</span><span class="va">sex</span><span class="op">+</span><span class="va">seniority</span><span class="op">+</span><span class="va">urban</span>,data<span class="op">=</span><span class="va">dat</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"probit"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">glm.binom.logit</span><span class="op">)</span></span></code></pre></div>
@@ -1996,6 +2033,10 @@ BIC = 2 \left(-l(y,\theta^M)+r log(n)\right)
 ## Call:
 ## glm(formula = Y ~ age + sex + seniority + urban, family = binomial(link = "logit"), 
 ##     data = dat)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.4424  -0.8115  -0.5046   1.0440   2.7439  
 ## 
 ## Coefficients:
 ##              Estimate Std. Error z value Pr(&gt;|z|)    
@@ -2014,12 +2055,16 @@ BIC = 2 \left(-l(y,\theta^M)+r log(n)\right)
 ## AIC: 4305.8
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb798"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">glm.binom.probit</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Y ~ age + sex + seniority + urban, family = binomial(link = "probit"), 
 ##     data = dat)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.4931  -0.8168  -0.4987   1.0639   2.9359  
 ## 
 ## Coefficients:
 ##              Estimate Std. Error z value Pr(&gt;|z|)    
@@ -2048,36 +2093,65 @@ BIC = 2 \left(-l(y,\theta^M)+r log(n)\right)
 <!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
 <!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->
 
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre><code>## 
+## Attaching package: 'kableExtra'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     group_rows</code></pre>
+<pre><code>## 
+## Attaching package: 'gridExtra'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     combine</code></pre>
+<pre><code>## 
+## Attaching package: 'pryr'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     where</code></pre>
+<pre><code>## Classes and Methods for R developed in the
+## Political Science Computational Laboratory
+## Department of Political Science
+## Stanford University
+## Simon Jackman
+## hurdle and zeroinfl functions by Achim Zeileis</code></pre>
 </div>
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></div>
-<div class="empty"></div>
+<div class="prev"><a href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">10</span> Các mô hình cộng tính tổng quát</a></div>
+<div class="next"><a href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">12</span> Mô hình tần suất - mức độ nghiêm trọng.</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><span class="header-section-number">2</span> Mô hình tuyến tính tổng quát.</a></li>
-<li><a class="nav-link" href="#c%C3%A1c-nh%C6%B0%E1%BB%A3c-%C4%91i%E1%BB%83m-c%E1%BB%A7a-m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh."><span class="header-section-number">2.1</span> Các nhược điểm của mô hình hồi quy tuyến tính.</a></li>
+<li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><span class="header-section-number">11</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="nav-link" href="#c%C3%A1c-nh%C6%B0%E1%BB%A3c-%C4%91i%E1%BB%83m-c%E1%BB%A7a-m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh."><span class="header-section-number">11.1</span> Các nhược điểm của mô hình hồi quy tuyến tính.</a></li>
 <li>
-<a class="nav-link" href="#x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t"><span class="header-section-number">2.2</span> Xây dựng mô hình tuyến tính tổng quát</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-d%E1%BA%A1ng-nh%E1%BB%8B-ph%C3%A2n."><span class="header-section-number">2.2.1</span> Biến phụ thuộc là biến dạng nhị phân.</a></li>
-<li><a class="nav-link" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-r%E1%BB%9Di-r%E1%BA%A1c-kh%C3%B4ng-c%C3%B3-th%E1%BB%A9-t%E1%BB%B1."><span class="header-section-number">2.2.2</span> Biến phụ thuộc là biến rời rạc không có thứ tự.</a></li>
-<li><a class="nav-link" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-r%E1%BB%9Di-r%E1%BA%A1c-c%C3%B3-th%E1%BB%A9-t%E1%BB%B1"><span class="header-section-number">2.2.3</span> Biến phụ thuộc là biến rời rạc có thứ tự</a></li>
-<li><a class="nav-link" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-c%C3%B3-ph%C3%A2n-ph%E1%BB%91i-li%C3%AAn-t%E1%BB%A5c."><span class="header-section-number">2.2.4</span> Biến phụ thuộc có phân phối liên tục.</a></li>
+<a class="nav-link" href="#x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t"><span class="header-section-number">11.2</span> Xây dựng mô hình tuyến tính tổng quát</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-d%E1%BA%A1ng-nh%E1%BB%8B-ph%C3%A2n."><span class="header-section-number">11.2.1</span> Biến phụ thuộc là biến dạng nhị phân.</a></li>
+<li><a class="nav-link" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-r%E1%BB%9Di-r%E1%BA%A1c-kh%C3%B4ng-c%C3%B3-th%E1%BB%A9-t%E1%BB%B1."><span class="header-section-number">11.2.2</span> Biến phụ thuộc là biến rời rạc không có thứ tự.</a></li>
+<li><a class="nav-link" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-l%C3%A0-bi%E1%BA%BFn-r%E1%BB%9Di-r%E1%BA%A1c-c%C3%B3-th%E1%BB%A9-t%E1%BB%B1"><span class="header-section-number">11.2.3</span> Biến phụ thuộc là biến rời rạc có thứ tự</a></li>
+<li><a class="nav-link" href="#bi%E1%BA%BFn-ph%E1%BB%A5-thu%E1%BB%99c-c%C3%B3-ph%C3%A2n-ph%E1%BB%91i-li%C3%AAn-t%E1%BB%A5c."><span class="header-section-number">11.2.4</span> Biến phụ thuộc có phân phối liên tục.</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#c%C3%A1c-th%C3%A0nh-ph%E1%BA%A7n-c%E1%BB%A7a-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><span class="header-section-number">2.3</span> Các thành phần của mô hình tuyến tính tổng quát.</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#h%E1%BB%8D-c%C3%A1c-bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn-c%C3%B3-ph%C3%A2n-ph%E1%BB%91i-ki%E1%BB%83u-m%C5%A9."><span class="header-section-number">2.3.1</span> Họ các biến ngẫu nhiên có phân phối kiểu mũ.</a></li>
-<li><a class="nav-link" href="#h%C3%A0m-li%C3%AAn-k%E1%BA%BFt."><span class="header-section-number">2.3.2</span> Hàm liên kết.</a></li>
+<a class="nav-link" href="#c%C3%A1c-th%C3%A0nh-ph%E1%BA%A7n-c%E1%BB%A7a-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><span class="header-section-number">11.3</span> Các thành phần của mô hình tuyến tính tổng quát.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#h%E1%BB%8D-c%C3%A1c-bi%E1%BA%BFn-ng%E1%BA%ABu-nhi%C3%AAn-c%C3%B3-ph%C3%A2n-ph%E1%BB%91i-ki%E1%BB%83u-m%C5%A9."><span class="header-section-number">11.3.1</span> Họ các biến ngẫu nhiên có phân phối kiểu mũ.</a></li>
+<li><a class="nav-link" href="#h%C3%A0m-li%C3%AAn-k%E1%BA%BFt."><span class="header-section-number">11.3.2</span> Hàm liên kết.</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#h%C3%A0m-h%E1%BB%A3p-l%C3%BD-t%E1%BB%91i-%C4%91a-v%C3%A0-%C6%B0%E1%BB%9Bc-l%C6%B0%E1%BB%A3ng-m%C3%B4-h%C3%ACnh."><span class="header-section-number">2.4</span> Hàm hợp lý tối đa và ước lượng mô hình.</a></li>
+<li><a class="nav-link" href="#h%C3%A0m-h%E1%BB%A3p-l%C3%BD-t%E1%BB%91i-%C4%91a-v%C3%A0-%C6%B0%E1%BB%9Bc-l%C6%B0%E1%BB%A3ng-m%C3%B4-h%C3%ACnh."><span class="header-section-number">11.4</span> Hàm hợp lý tối đa và ước lượng mô hình.</a></li>
 <li>
-<a class="nav-link" href="#so-s%C3%A1nh-v%C3%A0-l%E1%BB%B1a-ch%E1%BB%8Dn-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><span class="header-section-number">2.5</span> So sánh và lựa chọn mô hình tuyến tính tổng quát.</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#th%C6%B0%E1%BB%9Bc-%C4%91o-deviance"><span class="header-section-number">2.5.1</span> Thước đo deviance</a></li>
-<li><a class="nav-link" href="#gi%C3%A1-tr%E1%BB%8B-h%C3%A0m-log-likelihood-aic-v%C3%A0-bic"><span class="header-section-number">2.5.2</span> Giá trị hàm log-likelihood, AIC và BIC</a></li>
+<a class="nav-link" href="#so-s%C3%A1nh-v%C3%A0-l%E1%BB%B1a-ch%E1%BB%8Dn-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t."><span class="header-section-number">11.5</span> So sánh và lựa chọn mô hình tuyến tính tổng quát.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#th%C6%B0%E1%BB%9Bc-%C4%91o-deviance"><span class="header-section-number">11.5.1</span> Thước đo deviance</a></li>
+<li><a class="nav-link" href="#gi%C3%A1-tr%E1%BB%8B-h%C3%A0m-log-likelihood-aic-v%C3%A0-bic"><span class="header-section-number">11.5.2</span> Giá trị hàm log-likelihood, AIC và BIC</a></li>
 </ul>
 </li>
 </ul>
@@ -2097,7 +2171,7 @@ BIC = 2 \left(-l(y,\theta^M)+r log(n)\right)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-08-02.</p>
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-08-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

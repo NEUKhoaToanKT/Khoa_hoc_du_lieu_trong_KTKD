@@ -238,7 +238,7 @@ table1 <- data.frame(Comp, Likcomp1)
 kable(table1, "html",
       col.names = c("Hàm số",
         "Định dạng dữ liệu")) %>%
-  kable_styling(bootstrap_options = c("striped", "bordered", "hover"), full_width = F)
+  kable_styling(bootstrap_options = c( "bordered", "hover"), full_width = F)
 ```
 
 Để đọc dữ liệu từ nguồn ngoài bằng một trong các hàm được liệt kê trong Bảng \@ref(tab:tbptdl001), cấu trúc câu lệnh sẽ như sau:

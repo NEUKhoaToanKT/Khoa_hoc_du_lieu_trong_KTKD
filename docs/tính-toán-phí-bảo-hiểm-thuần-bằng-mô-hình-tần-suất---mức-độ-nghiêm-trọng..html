@@ -4,24 +4,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chương 15 Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+<title>Chương 13 Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
 <meta name="author" content="Nguyễn Quang Huy">
 <meta name="description" content="Tính toán phí của các sản phẩm bảo hiểm là một công việc phức tạp đòi hỏi phải kết hợp nhiều yếu tố khác nhau. Trước hết dữ liệu lịch sử phải được phân tích chính xác, các xu hướng kinh tế xã hội...">
-<meta name="generator" content="bookdown 0.38 with bs4_book()">
-<meta property="og:title" content="Chương 15 Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="generator" content="bookdown 0.37 with bs4_book()">
+<meta property="og:title" content="Chương 13 Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta property="og:type" content="book">
 <meta property="og:description" content="Tính toán phí của các sản phẩm bảo hiểm là một công việc phức tạp đòi hỏi phải kết hợp nhiều yếu tố khác nhau. Trước hết dữ liệu lịch sử phải được phân tích chính xác, các xu hướng kinh tế xã hội...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chương 15 Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="twitter:title" content="Chương 13 Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta name="twitter:description" content="Tính toán phí của các sản phẩm bảo hiểm là một công việc phức tạp đòi hỏi phải kết hợp nhiều yếu tố khác nhau. Trước hết dữ liệu lịch sử phải được phân tích chính xác, các xu hướng kinh tế xã hội...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.9/font.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.8/font.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Source%20Code%20Pro:wght@400;450&amp;display=swap" rel="stylesheet">
 <script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
-<script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.9/girafe.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.8/girafe.js"></script><script src="libs/plotly-binding-4.10.3/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script>
         $(function() {
@@ -76,7 +76,7 @@
               const newDate = `${day}/${month}/${year}`;
 
               // Replace the entire paragraph content with the new Vietnamese format
-              paragraph.innerHTML = `"${paragraph.querySelector('strong').innerText}" được viết bởi ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]}. Phiên bản này được cập nhật lần cuối vào ${newDate}.`;
+              paragraph.innerHTML = `Cuốn sách "${paragraph.querySelector('strong').innerText}" được viết bởi TS. ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]} - Trường Công nghệ - Đại học Kinh tế Quốc dân`;
             }
           }
         });
@@ -87,7 +87,7 @@
           paragraphs.forEach(paragraph => {
             if(paragraph.innerHTML.includes('This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.')) {
               // Replace the paragraph content
-              paragraph.innerHTML = 'Quyển sách này được viết bằng ngôn ngữ R, dựa trên gói lệnh bookdown.';
+              paragraph.innerHTML = 'Cuốn sách này được viết bằng hoàn toàn bằng ngôn ngữ R. Phiên bản hiện tại được cập nhật vào ngày ${newDate}.';
             }
           });
         });
@@ -119,29 +119,28 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Lời nói đầu</a></li>
 <li class="book-part">PHẦN I: GIỚI THIỆU CHUNG</li>
-<li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1nh.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sánh</a></li>
-<li><a class="" href="khdl-v%C3%A0-c%C3%A1c-kh%C3%A1i-ni%E1%BB%87m-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> KHDL và các khái niệm cơ bản</a></li>
+<li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></li>
 <li class="book-part">PHẦN II: GIỚI THIỆU VỀ R</li>
-<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">4</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">5</span> Kiến thức R nâng cao</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">4</span> Kiến thức R nâng cao</a></li>
 <li class="book-part">PHẦN III: PHÂN TÍCH DỮ LIỆU</li>
-<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html"><span class="header-section-number">6</span> Nhập dữ liệu vào R</a></li>
-<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Tiền xử lý dữ liệu</a></li>
-<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Biến đổi và sắp xếp dữ liệu</a></li>
-<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html"><span class="header-section-number">5</span> Nhập dữ liệu vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Biến đổi và sắp xếp dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
 <li class="book-part">PHẦN IV: MÔ HÌNH TUYẾN TÍNH</li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">10</span> Mô hình hồi quy tuyến tính</a></li>
-<li><a class="" href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">11</span> Các mô hình cộng tính tổng quát</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">12</span> Mô hình tuyến tính tổng quát.</a></li>
-<li><a class="" href="reference.html"><span class="header-section-number">13</span> REFERENCE</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">14</span> Mô hình tần suất - mức độ nghiêm trọng.</a></li>
-<li><a class="active" href="t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">15</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">9</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">10</span> Các mô hình cộng tính tổng quát</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">11</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">12</span> Mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li><a class="active" href="t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">13</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
 <li class="book-part">PHẦN V: MÔ HÌNH CÂY QUYẾT ĐỊNH</li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">16</span> Mô hình cây quyết định</a></li>
-<li><a class="" href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html"><span class="header-section-number">17</span> Boosting và cây quyết định.</a></li>
-<li><a class="" href="neuralnetwork.html"><span class="header-section-number">18</span> Mô hình mạng nơ-ron</a></li>
-<li><a class="" href="neuralnetwork1.html"><span class="header-section-number">19</span> Các mạng học sâu điển hình</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">14</span> Mô hình cây quyết định</a></li>
+<li><a class="" href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html"><span class="header-section-number">15</span> Boosting và cây quyết định.</a></li>
+<li><a class="" href="neuralnetwork.html"><span class="header-section-number">16</span> Mô hình mạng nơ-ron</a></li>
+<li><a class="" href="neuralnetwork1.html"><span class="header-section-number">17</span> Các mạng học sâu điển hình</a></li>
+<li><a class="" href="h%E1%BB%8Dc-m%C3%A1y-kh%C3%B4ng-c%C3%B3-gi%C3%A1m-s%C3%A1t.html"><span class="header-section-number">18</span> Học máy không có giám sát</a></li>
 </ul>
 
         <div class="book-extra">
@@ -149,20 +148,20 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng." class="section level1" number="15">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng." class="section level1" number="13">
 <h1>
-<span class="header-section-number">Chương 15</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.<a class="anchor" aria-label="anchor" href="#t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng."><i class="fas fa-link"></i></a>
+<span class="header-section-number">Chương 13</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.<a class="anchor" aria-label="anchor" href="#t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng."><i class="fas fa-link"></i></a>
 </h1>
 <p>Tính toán phí của các sản phẩm bảo hiểm là một công việc phức tạp đòi hỏi phải kết hợp nhiều yếu tố khác nhau. Trước hết dữ liệu lịch sử phải được phân tích chính xác, các xu hướng kinh tế xã hội cũng phải được xác định và thậm chí hoạt động của các công ty cạnh tranh cũng phải được tính đến. Các chuyên gia tính toán (hay các actuary) được đào tạo bài bản có kiến thức trong tất cả các lĩnh vực này và có khả năng đề xuất những nội dung cần thiết để phát triển và thực hiện thành công chiến lược định giá sản phẩm bảo hiểm. Trong phần này, chúng tôi sẽ minh họa quá trình tính toán ra một trong những nền tảng cơ bản nhất của một quá trình định giá, đó là xác định phí bảo hiểm thuần (Net premium). Chúng tôi sẽ xác định các khoản phí bảo hiểm thuần này dựa trên các mô hình tuyến tính tổng quát về tần suất và mức độ nghiêm trọng. Quá trình xây dựng mô hình sẽ được minh họa thông qua tất cả các giai đoạn: xác định đặc điểm dữ liệu, khai phá dữ liệu, phân tích đơn biến và đa biến, kết hợp tần suất và mức độ nghiêm trọng thành phí bảo hiểm thuần, và cuối cùng là xác thực mô hình. Các kỹ thuật mà chúng tôi minh họa có thể áp dụng rộng rãi và chúng tôi khuyến khích bạn đọc thực hành thông qua các đoạn câu lệnh được viết bằng phần mềm R.</p>
 <p>Các chuyên gia tính toán phân tích dữ liệu lịch sử và giải thích các xu hướng kinh tế xã hội để xác định mức giá hợp lý của sản phẩm bảo hiểm. Những tính toán của Actuary là nền tảng cho mức giá cuối cùng mà công ty đưa ra cho khách hàng của mình. Đưa ra mức giá cuối cùng phải kết hợp nhiều yếu tố, chẳng hạn như hành động của đối thủ cạnh tranh, chiến lược tăng trưởng và sự hài lòng của người tiêu dùng, … Do đó, các chuyên gia tính toán, các nhà bảo lãnh phát hành, phòng tiếp thị phân phối sản phẩm, bộ phận tiếp nhận yêu cầu bồi thường, và ban quản lý công ty phải cùng nhau hợp tác trong việc định giá sản phẩm. Các đối tượng đa dạng này đều phải hiểu rõ các hướng tiếp cận về định giá sản phẩm để có thể đưa ra quyết định chung.</p>
 <p>Trong các phần này của cuốn sách, chúng ta sẽ tập trung vào các giai đoạn đầu tiên của quá trình hình thành giá của sản phẩm bào hiểm đó là xây dựng, cải tiến, và mô hình. Kết quả của các quá trình này là tính toán ra phí bảo hiểm thuần dựa trên dữ liệu lịch sử và mô hình tuyến tính tổng quát. Sẽ có hai mô hình được xây dựng, một mô hình dành cho tần suất xảy ra sự kiện bảo hiểm và mô hình còn lại sẽ có biến mục tiêu là mức độ nghiêm trọng. Vì phí bảo hiểm thuần chỉ phản ánh dữ liệu lịch sử nên sẽ không phù hợp để sử dụng làm dự báo giá cho tương lai do không tính toán đến các xu hướng kinh tế xã hội trong khoảng thời gian tiếp theo. Phí bảo hiểm thuần cũng không tính toán đến các chi phí, chi phí vốn rủi ro, hay lợi nhuận biên cần thiết để giúp công ty tồn tại trên thị trường.</p>
 <p>Chương sách này được cấu trúc như sau: trước hết, chúng tôi mô tả các đặc điểm chính của tập dữ liệu mà chúng ta sử dụng làm cơ sở xây dựng mô hình. Điều này giúp bạn đọc có hiểu biết tổng quan về dữ liệu lịch sử. Tiếp theo, chúng tôi thực hiện các phân tích khai phá các biến trong tập dữ liệu. Đây là tập dữ liệu về bào hiểm đối với các xe ô tô chở khách tư nhân có nhiều đặc điểm điển hình mà bạn sẽ gặp phải mỗi khi làm việc với dữ liệu bảo hiểm. Những hiểu biết về dữ liệu bạn thu được khi khai phá dữ liệu về các biến riêng và mối quan hệ giữa các biến sẽ phục vụ tốt cho bạn trong giai đoạn xây dựng mô hình. Sau phân tích khai phá, chúng ta sẽ bắt đầu xây dựng các mô hình: mô hình cho tần suất và và mô hình cho mức độ nghiêm trọng tương ứng. Các mô hình sẽ được xây dựng từ đơn giản đến phức tạp, bắt đầu với các mô hình một biến và chuyển sang phân tích mô hình đa biến. Những mô hình chúng tôi xây dựng không nhất thiết phải là những mô hình tốt nhất và chúng tôi khuyến khích bạn đọc tự khám phá và cố gắng tạo ra những mô hình tốt hơn. Sau cùng, chúng ta sẽ kết hợp các mô hình tần suất và mức độ nghiêm trọng để tạo ra phí bảo hiểm thuần túy và xác thực mô hình trên tập dữ liệu ngoài mẫu.</p>
-<div id="dữ-liệu-để-xây-dựng-mô-hình" class="section level2" number="15.1">
+<div id="dữ-liệu-để-xây-dựng-mô-hình" class="section level2" number="13.1">
 <h2>
-<span class="header-section-number">15.1</span> Dữ liệu để xây dựng mô hình<a class="anchor" aria-label="anchor" href="#d%E1%BB%AF-li%E1%BB%87u-%C4%91%E1%BB%83-x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1</span> Dữ liệu để xây dựng mô hình<a class="anchor" aria-label="anchor" href="#d%E1%BB%AF-li%E1%BB%87u-%C4%91%E1%BB%83-x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh"><i class="fas fa-link"></i></a>
 </h2>
 <p>Tập dữ liệu “pricing-modeling-dataset.csv” được sử dụng làm dữ liệu để chúng ta phân tích và xây dựng các mô hình tuyến tính tổng quát. Bộ dữ liệu bao gồm thông tin về các hợp đồng bảo hiểm ô tô chở khách thương mại và chứa cả thông tin về yêu cầu bồi thường. Dữ liệu được quan sát trong các năm từ 2010 đến 2013. Có tổng cộng 40,760 hàng và 24 biến.</p>
-<div class="sourceCode" id="cb849"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb827"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD Final/Dataset/pricing-modeling-dataset.csv"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## # A tibble: 6 × 24
@@ -181,7 +180,7 @@
 <p>Cần lưu ý là một hàng dữ liệu có thể thể hiện nhiều yêu cầu bồi thường từ một đối tượng được bảo hiểm. Biến <span class="math inline">\(clm.count\)</span> đo lường số lượng yêu cầu bồi thường và biến <span class="math inline">\(clm.incurred\)</span> là tổng số tiền thanh toán yêu cầu bồi thường và bao gồm cả các khoản cần phải thanh toán trong tương lai. Các biến độc lập của dữ liệu có thể được nhóm thành bốn loại: biến điều khiển, biến đặc điểm người lái, biến đặc điểm địa lý, và biến đặc điểm phương tiện. Bảng dưới đây cho biết tên các biến trong tập dữ liệu</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-4">Bảng 2.3: </span><span id="tab:unnamed-chunk-4">Bảng 2.3: </span>Các biến trong dữ liệu lịch sử
+<span id="tab:unnamed-chunk-4">Bảng 12.1: </span><span id="tab:unnamed-chunk-4">Bảng 12.1: </span>Các biến trong dữ liệu lịch sử
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -365,7 +364,7 @@ fuel.type
 <p>Như đã giới thiệu ở trên, hai biến mục tiêu là <span class="math inline">\(clm.count\)</span> và <span class="math inline">\(clm.incurred\)</span>, cho biết số lần gửi yêu cầu bồi thường và tổng chi phí cuối cùng của những yêu cầu đó. Tất cả các biến trong tập dữ liệu đều có thể được phân loại là liên tục hoặc rời rạc. Các bảng dưới đây trình bày một số thông tin và chỉ số thống kê cho 14 biến liên tục và 12 biến rời rạc:</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-5">Bảng 15.1: </span><span id="tab:unnamed-chunk-5">Bảng 15.2: </span>Các biến kiểu số
+<span id="tab:unnamed-chunk-5">Bảng 13.1: </span><span id="tab:unnamed-chunk-5">Bảng 13.2: </span>Các biến kiểu số
 </caption>
 <thead><tr>
 <th style="text-align:right;">
@@ -672,7 +671,7 @@ clm.incurred
 </table></div>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-6">Bảng 15.3: </span><span id="tab:unnamed-chunk-6">Bảng 15.4: </span>Các biến kiểu rời rạc
+<span id="tab:unnamed-chunk-6">Bảng 13.3: </span><span id="tab:unnamed-chunk-6">Bảng 13.4: </span>Các biến kiểu rời rạc
 </caption>
 <thead><tr>
 <th style="text-align:right;">
@@ -820,7 +819,7 @@ Diesel,Gasoline,LPG
 Thống kê chung về tần suất và mức độ nghiêm trọng theo năm được cho trong bảng phía dưới:
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-7">Bảng 15.5: </span><span id="tab:unnamed-chunk-7">Bảng 15.6: </span>Tần suất và mức độ nghiêm trọng trung bình theo năm
+<span id="tab:unnamed-chunk-7">Bảng 13.5: </span><span id="tab:unnamed-chunk-7">Bảng 13.6: </span>Tần suất và mức độ nghiêm trọng trung bình theo năm
 </caption>
 <thead><tr>
 <th style="text-align:right;">
@@ -948,17 +947,17 @@ Total
 <p>Lưu ý rằng khối lượng kinh doanh đã tăng khoảng 78% từ năm 2010 đến năm 2012 và sau đó giảm 17% vào năm 2013. Tần suất trong hai năm đầu tiên là khoảng 11% và sau đó tăng đáng kể lên khoảng 20%. Mức độ nghiêm trọng trung bình trong tất cả các năm dương lịch là 790, nhưng có mức tăng mạnh theo thời gian, ngoại trừ năm 2011.</p>
 <p>Thông thường quá trình xây dựng và xác thực mô hình sẽ cần chia dữ liệu của thành ba phần: tập dữ liệu huấn luyện (training dataset), tập dữ liệu kiểm tra mô hình (test dataset) và tập dữ liệu xác thực mô hình (validation dataset). Lưu ý rằng việc phân chia dữ liệu thành ba phần chỉ khả thi khi có một lượng lớn dữ liệu. Trong trường hợp của dữ liệu ở trên, chúng ta chỉ có khoảng 41.000 quan sát trong bốn năm dương lịch. Đây là một tập dữ liệu không đủ lớn, vì vậy chúng tôi sẽ sử dụng phương pháp tập xác thực. Thay vì chia dữ liệu thành ba tập, chúng ta sẽ chỉ chia dữ liệu thành hai tập: tập huấn luyện và tập xác thực. Tập dữ liệu huấn luyện để phát triển và thử nghiệm các mô hình chứa 70% dữ liệu. 30% dữ liệu được sử dụng để kiểm tra mô hình. Trong xác thực chéo, chúng tôi chia dữ liệu huấn luyện của mình thành năm tập hợp con (5-folds) và gắn nhãn cho các tập này từ 1 đến 5. Tham số cuối cùng của mô hình được sử dụng là giá trị trung bình của các tham số được ước lượng ra từ mỗi lần xác thực chéo.</p>
 </div>
-<div id="phân-tích-khai-phá-dữ-liệu" class="section level2" number="15.2">
+<div id="phân-tích-khai-phá-dữ-liệu" class="section level2" number="13.2">
 <h2>
-<span class="header-section-number">15.2</span> Phân tích khai phá dữ liệu<a class="anchor" aria-label="anchor" href="#ph%C3%A2n-t%C3%ADch-khai-ph%C3%A1-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2</span> Phân tích khai phá dữ liệu<a class="anchor" aria-label="anchor" href="#ph%C3%A2n-t%C3%ADch-khai-ph%C3%A1-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
 </h2>
 <p>Trong phần này, chúng ta bắt đầu bằng cách khai phá các biến riêng lẻ để hiểu rõ hơn về thông tin có trong tập dữ liệu của mình. Trong quá trình phân tích dữ liệu, chúng ta sẽ tập trung vào việc tìm hiểu mức độ phổ biến của từng biến, loại giá trị mà mỗi biến nhận, cách mã hóa các giá trị còn thiếu và mối quan hệ qua lại giữa các biến.</p>
-<div id="biến-tần-suất-và-mối-liên-hệ-đến-các-biến-khác" class="section level3" number="15.2.1">
+<div id="biến-tần-suất-và-mối-liên-hệ-đến-các-biến-khác" class="section level3" number="13.2.1">
 <h3>
-<span class="header-section-number">15.2.1</span> Biến tần suất và mối liên hệ đến các biến khác<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-t%E1%BA%A7n-su%E1%BA%A5t-v%C3%A0-m%E1%BB%91i-li%C3%AAn-h%E1%BB%87-%C4%91%E1%BA%BFn-c%C3%A1c-bi%E1%BA%BFn-kh%C3%A1c"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2.1</span> Biến tần suất và mối liên hệ đến các biến khác<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-t%E1%BA%A7n-su%E1%BA%A5t-v%C3%A0-m%E1%BB%91i-li%C3%AAn-h%E1%BB%87-%C4%91%E1%BA%BFn-c%C3%A1c-bi%E1%BA%BFn-kh%C3%A1c"><i class="fas fa-link"></i></a>
 </h3>
 <p>Từ phần trước, chúng ta biết rằng tần suất chung của toàn bộ tập dữ liệu là 16,5%. Do chúng ta xây dựng mô hình dựa trên cách tiếp cận xác thực chéo nên dữ liệu xây dựng mô hình chỉ bao gồm 70% dữ liệu hiện có. Chúng ta chia dữ liệu một cách ngẫu nhiên như sau</p>
-<div class="sourceCode" id="cb851"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb829"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Đổi các biến rời rạc về kiểu factor</span></span>
 <span><span class="va">factor.variable</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"year"</span>,<span class="st">"nb.rb"</span>,<span class="st">"driver.gender"</span>,<span class="st">"marital.status"</span>,<span class="st">"ncd.level"</span>,<span class="st">"region"</span>,</span>
 <span>      <span class="st">"body.code"</span>,<span class="st">"seats"</span>,<span class="st">"fuel.type"</span><span class="op">)</span></span>
@@ -980,7 +979,7 @@ Total
 <p>Trên tập dữ liệu huấn luyện, tần suất trung bình là 16,35% rất gần với tần suất chung ở phần trước. Quá trình khai phá dữ liệu là quá trình tìm hiểu biến tần suất phụ thuộc như thế nào vào các biến số mà chúng ta có trong dữ liệu. Hãy bắt đầu bằng cách xem xét biến <span class="math inline">\(nb.rb\)</span>. Đây là một biến chỉ báo cho chúng ta biết hợp đồng bảo hiểm là hoạt động khai thác mới (NB) hay là hợp đồng tái tục (RB). Tần suất trong tập dữ liệu huấn luyện của chúng tôi theo chỉ số khai thác mới hoặc tái tục này nằm trong bảng dưới đây</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-9">Bảng 15.7: </span><span id="tab:unnamed-chunk-9">Bảng 15.8: </span>Tần suất trung bình theo năm của hợp đồng khai thác mới và tái tục
+<span id="tab:unnamed-chunk-9">Bảng 13.7: </span><span id="tab:unnamed-chunk-9">Bảng 13.8: </span>Tần suất trung bình theo năm của hợp đồng khai thác mới và tái tục
 </caption>
 <thead><tr>
 <th style="text-align:right;">
@@ -1185,9 +1184,9 @@ Có thể thấy rằng có sự khác nhau rõ rệt về tần suất xảy ra
 <p>Có thể thấy rằng tần suất gây ra tai nạn của lái xe nữ là cao hơn so với lái xe nam, sự khác biệt là tương đối rõ trong nhóm những người đã lập gia đình hoặc chưa từng lập gia đình. Cũng giống như kinh nghiệm nghiên cứu từ nhiều dữ liệu khác, nhóm những người góa vợ/chồng có tần suất gây ra tai nạn cao hơn đáng kể so với nhóm khác. Có thể nhận xét rằng tình trạng hôn nhân và giới tính của người lái xe có ảnh hưởng đến tần suất mặc dù ảnh hưởng không rõ ràng như các biến khác.</p>
 <p>Chúng ta có thể tiếp tục quá trình trên cho các biến khác liên quan đến người lái xe. Tuy nhiên, mục tiêu cuối cùng sẽ là xây dựng mô hình cho biến tần suất, do đó, bạn đọc có thể dựa trên các nguyên tắc ở trên để nghiên cứu mối liên hệ của các biến khác lên tần suất xảy ra tai nạn. Quá trình khai phá dữ liệu có ý nghĩa quan trọng trong việc lựa chọn đưa biến vào trong mô hình nhất là với các dữ liệu có nhiều biến. Bạn đọc có thể tiếp tục quá trình này với các biến liên quan đến đặc điểm của xe.</p>
 </div>
-<div id="biến-mức-độ-nghiêm-trọng-và-mối-liên-hệ-với-các-biến-khác" class="section level3" number="15.2.2">
+<div id="biến-mức-độ-nghiêm-trọng-và-mối-liên-hệ-với-các-biến-khác" class="section level3" number="13.2.2">
 <h3>
-<span class="header-section-number">15.2.2</span> Biến mức độ nghiêm trọng và mối liên hệ với các biến khác<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng-v%C3%A0-m%E1%BB%91i-li%C3%AAn-h%E1%BB%87-v%E1%BB%9Bi-c%C3%A1c-bi%E1%BA%BFn-kh%C3%A1c"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2.2</span> Biến mức độ nghiêm trọng và mối liên hệ với các biến khác<a class="anchor" aria-label="anchor" href="#bi%E1%BA%BFn-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng-v%C3%A0-m%E1%BB%91i-li%C3%AAn-h%E1%BB%87-v%E1%BB%9Bi-c%C3%A1c-bi%E1%BA%BFn-kh%C3%A1c"><i class="fas fa-link"></i></a>
 </h3>
 <p>Dữ liệu sử dụng để xây dựng mô hình cho mức độ nghiêm trọng chỉ bao gồm các hợp đồng có xảy ra yêu cầu bồi thường. Trong dữ liệu dùng để huấn luyện mô hình, có 2209 hợp đồng nằm trong phạm vi. Giá trị tiền bồi thường trung bình trên mỗi yêu cầu bồi thường là 800,57
 <span class="math display">\[\begin{align}
@@ -1196,7 +1195,7 @@ Có thể thấy rằng có sự khác nhau rõ rệt về tần suất xảy ra
 <p>Trước hết, chúng ta xem xét biến <span class="math inline">\(nb.rb\)</span> có tác động lên mức độ nghiêm trọng hay không. Bảng dưới đây cho biết số lượng yêu cầu bồi thường, tổng mức bồi thường và giá trị tiền bồi thường trung bình của các hợp đồng bán mới và các hợp đồng tái tục.</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-13">Bảng 12.1: </span><span id="tab:unnamed-chunk-13">Bảng 12.1: </span>Mức độ nghiêm trọng trung bình của hợp đồng khai thác mới và tái tục
+<span id="tab:unnamed-chunk-13">Bảng 13.9: </span><span id="tab:unnamed-chunk-13">Bảng 13.10: </span>Mức độ nghiêm trọng trung bình của hợp đồng khai thác mới và tái tục
 </caption>
 <thead><tr>
 <th style="text-align:right;">
@@ -1247,22 +1246,26 @@ RB
 <p>Việc phân tích các biến liên quan đến đặc điểm của người lái xe hoàn toàn được thực hiện tương tự như đối với biến tần suất nên chúng tôi sẽ không lặp lại. Việc lựa chọn các biến đưa vào mô hình tần suất sẽ được tiếp tục thảo luận trong phần xây dựng mô hình.</p>
 </div>
 </div>
-<div id="mô-hình-tuyến-tính-tổng-quát-cho-tần-suất." class="section level2" number="15.3">
+<div id="mô-hình-tuyến-tính-tổng-quát-cho-tần-suất." class="section level2" number="13.3">
 <h2>
-<span class="header-section-number">15.3</span> Mô hình tuyến tính tổng quát cho tần suất.<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-cho-t%E1%BA%A7n-su%E1%BA%A5t."><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.3</span> Mô hình tuyến tính tổng quát cho tần suất.<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-cho-t%E1%BA%A7n-su%E1%BA%A5t."><i class="fas fa-link"></i></a>
 </h2>
 <p>Khi phân tích khai phá dữ liêu, chúng ta biết rằng biến tần suất tập dữ liệu huấn luyện có giá trị trung bình là 16,4% và có một số biến có thể là phù hợp để đưa vào mô hình bao gồm tuổi của người lái xe hoặc chỉ số cho biết hợp đồng là bán mới hay tái tục. Chúng ta sẽ bắt đầu xây dựng mô hình tần số bằng cách thực hiện phân tích mô hình có một biến độc lập duy nhất, sau đó sẽ chuyển sang xây dựng mô hình có nhiều biến độc lập bằng cách bổ sung thêm các biến có ý nghĩa khác. Xây dựng mô hình có một biến độc lập là bước quan trọng để chúng ta có nhận định chính xác về khả năng giải thích của các biến độc lập và cách biến đổi các biến độc lập để tăng khả năng giải thích trước khi xây dựng mô hình có nhiều biến độc lập</p>
 <p>Trước khi nói đến biến độc lập, chúng ta cần đưa ra lựa chọn cho hàm liên kết và phân phối cho biến tần suất. Đối với hầu hết các mô hình tính toán phí bảo hiểm thuần, chúng ta muốn có biến phụ thuộc được giải thích bởi biến phụ thuộc thông qua quy tắc nhân, do đó chúng ta sẽ sử dụng hàm liên kết <span class="math inline">\(log()\)</span>. Đối với phân phối biến phụ thuộc, chúng ta có thể chọn giữa phân phối Poisson, phân phối nhị thức âm hoặc phân phối nhị thức do biến tần suất là biến dạng đếm. Hãy nhớ rằng mục tiêu của chúng ta là ước tính tần suất trung bình và mặc dù các giả thiết về phân phối là cần thiết nhưng không quan trọng bằng việc tìm ra các biến độc lập chính xác để đưa vào mô hình.</p>
 <p>Nếu phân phối xác suất của số lượng yêu cầu bồi thường là Poisson thì phương sai của biến phụ thuộc phải bằng giá trị trung bình. Tuy nhiên, trong trường hợp dữ liệu chúng ta đang có, và trong hầu hết các tập dữ liệu bảo hiểm, phương sai của tần suất thường lớn hơn giá trị trung bình. Hiện tượng này được gọi là phân tán quá mức. Bạn đọc nên lựa chọn phân phối nhị thức âm trong các trường hợp như vậy. Tuy nhiên, phân phối nhị thức âm không nằm trong nhóm các phân phối kiểu mũ nên để tránh sự phức tạp không cần thiết, chúng tôi vẫn chọn phân phối Poisson cho biến phụ thuộc. Hàm liên kết được sử dụng là hàm log.</p>
-<div id="mô-hình-tuyến-tính-tổng-quát-với-một-biến-giải-thích." class="section level3" number="15.3.1">
+<div id="mô-hình-tuyến-tính-tổng-quát-với-một-biến-giải-thích." class="section level3" number="13.3.1">
 <h3>
-<span class="header-section-number">15.3.1</span> Mô hình tuyến tính tổng quát với một biến giải thích.<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-v%E1%BB%9Bi-m%E1%BB%99t-bi%E1%BA%BFn-gi%E1%BA%A3i-th%C3%ADch."><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.3.1</span> Mô hình tuyến tính tổng quát với một biến giải thích.<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-v%E1%BB%9Bi-m%E1%BB%99t-bi%E1%BA%BFn-gi%E1%BA%A3i-th%C3%ADch."><i class="fas fa-link"></i></a>
 </h3>
 <p>Mô hình tuyến tính tổng quát đơn giản nhất mà chúng ta có thể áp dụng cho dữ liệu tần suất là mô hình chỉ có duy nhất hệ số chặn. Mô hình này sẽ cho biết tần suất trung bình của biến phụ thuộc. Chúng ta xây dựng mô hình với biến phụ thuộc có phân phối Poisson, với hàm liên kết log, và chỉ có hệ số chặn như sau</p>
 <pre><code>## 
 ## Call:
 ## glm(formula = clm.count ~ 1, family = poisson(link = "log"), 
 ##     data = training.dat, offset = log(exposure))
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -0.5720  -0.4953  -0.3692  -0.2335   4.5865  
 ## 
 ## Coefficients:
 ##             Estimate Std. Error z value Pr(&gt;|z|)    
@@ -1291,7 +1294,7 @@ Giá trị này rất gần với giá trị trung bình của biến tần su�
 <p>Trước khi xây dựng mô hình, bạn đọc cần lưu ý về biến độc lập kiểu số và biến độc lập kiểu factor. Biến <span class="math inline">\(year\)</span> trong mô hình đang được coi là biến kiểu factor với 4 giá trị khác nhau là 2010, 2011, 2012, và 2014, nghĩa là khi chúng ta sử dụng <span class="math inline">\(year\)</span> như một biến độc lập trong mô hình, sẽ có 4 tham số độc lập được ước lượng dành cho biến <span class="math inline">\(year\)</span>, mỗi tham số đại diện cho 1 giá trị. Nếu chúng ta coi biến <span class="math inline">\(year\)</span> như một biến kiểu số, khi xây dựng mô hình sẽ chỉ có một tham số ứng với biến <span class="math inline">\(year\)</span> và thêm 1 hệ số chặn. Với một số biến trong mô hình, chúng ta vừa có thể coi biến đó là kiểu số và vừa có thể coi biến đó là biến kiểu rời rạc. Danh sách các biến nằm trong bảng dưới đây</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-15">Bảng 12.3: </span><span id="tab:unnamed-chunk-15">Bảng 12.3: </span>Các biến vừa có thể là biến kiểu số vừa là rời rạc
+<span id="tab:unnamed-chunk-15">Bảng 13.11: </span><span id="tab:unnamed-chunk-15">Bảng 13.12: </span>Các biến vừa có thể là biến kiểu số vừa là rời rạc
 </caption>
 <thead><tr>
 <th style="text-align:right;">
@@ -1341,7 +1344,7 @@ Các số tự nhiên từ 0 đến 20
 </tbody>
 </table></div>
 <p>Đối với các biến này, chúng ta sẽ lưu trong dữ liệu huấn luyện mô hình đồng thời dưới dạng số (tên biến có <span class="math inline">\(.num\)</span> và dưới dạng factor (tên biến có <span class="math inline">\(.f\)</span>).</p>
-<div class="sourceCode" id="cb854"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb832"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">training.dat</span><span class="op">&lt;-</span><span class="va">training.dat</span><span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>yrs.licensed.num <span class="op">=</span> <span class="va">yrs.licensed</span>,</span>
 <span>                                    vehicle.age.num <span class="op">=</span> <span class="va">vehicle.age</span>,</span>
 <span>                                    prior.claims.num <span class="op">=</span> <span class="va">prior.claims</span>,</span>
@@ -1359,7 +1362,7 @@ Các số tự nhiên từ 0 đến 20
 <span>                                    prior.claims.f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">prior.claims</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">yrs.licensed</span>,<span class="op">-</span><span class="va">vehicle.age</span>,<span class="op">-</span><span class="va">prior.claims</span><span class="op">)</span></span></code></pre></div>
 <p>Chúng ta ước lượng các mô hình GLM với một biến độc lập, tính toán <span class="math inline">\(AIC\)</span> và <span class="math inline">\(deviance\)</span> và mô tả giá trị <span class="math inline">\(deviance\)</span> và <span class="math inline">\(AIC\)</span> trên một đồ thị rải điểm như sau</p>
-<div class="sourceCode" id="cb855"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb833"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">exposure</span><span class="op">&lt;-</span><span class="va">training.dat</span><span class="op">$</span><span class="va">exposure</span></span>
 <span><span class="va">variable.list</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">training.dat</span><span class="op">)</span></span>
 <span><span class="va">remove.list</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pol.id"</span>,<span class="st">"exposure"</span>,<span class="st">"clm.count"</span>,<span class="st">"clm.incurred"</span><span class="op">)</span></span>
@@ -1384,7 +1387,7 @@ Các số tự nhiên từ 0 đến 20
 - Biến <span class="math inline">\(region\)</span> là biến kiểu rời rạc và có 38 giá trị riêng biệt dẫn đến việc xây dựng mô hình sẽ có quá nhiều tham số.
 - Biến <span class="math inline">\(driver.age\)</span> có các giá trị từ 75 tuổi trở lên là có quá ít quan sát và không có tai nạn nào xảy ra.</p>
 <p>Đối với các biến kiểu rời rạc trong mô hình tuyến tính tổng quát, kinh nghiệm xây dựng mô hình là kết hợp các nhóm có cùng hệ số ước lượng gần nhau để tạo thành nhóm mới. Điều này giúp mô hình ước lượng có phương sai nhỏ hơn nhưng không làm giảm sai số của mô hình đi quá nhiều. Hình vẽ dưới đây cho biết hệ số ước lượng cho mỗi vùng khác nhau của biến <span class="math inline">\(region\)</span>.</p>
-<div class="sourceCode" id="cb856"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb834"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">simple.dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">training.dat</span>,<span class="va">region</span>,<span class="va">clm.count</span><span class="op">)</span></span>
 <span><span class="va">simple.glm</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">clm.count</span><span class="op">~</span><span class="va">.</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">simple.dat</span>,</span>
 <span>                  offset <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">exposure</span><span class="op">)</span><span class="op">)</span></span>
@@ -1399,7 +1402,7 @@ Các số tự nhiên từ 0 đến 20
 Chúng ta có thể biến đổi biến <span class="math inline">\(region\)</span> bằng cách nhóm các vùng có hệ số ước lượng tương tự nhau vào cùng nhóm để giảm số lượng tham số.
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-19">Bảng 15.9: </span><span id="tab:unnamed-chunk-19">Bảng 15.10: </span>Nhóm các vùng theo hệ số ước lượng
+<span id="tab:unnamed-chunk-19">Bảng 13.13: </span><span id="tab:unnamed-chunk-19">Bảng 13.14: </span>Nhóm các vùng theo hệ số ước lượng
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1477,7 +1480,7 @@ R8
 </tbody>
 </table></div>
 <p>Biến mới được tạo từ biến <span class="math inline">\(region\)</span> được gọi tên là <span class="math inline">\(region.f\)</span> được thêm vào dữ liệu như sau</p>
-<div class="sourceCode" id="cb857"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb835"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">training.dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">training.dat</span>, region.f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">region</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>,<span class="fl">2</span><span class="op">)</span>, <span class="st">"R1"</span>, </span>
 <span>                                                     <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">region</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">22</span><span class="op">)</span>, <span class="st">"R2"</span>, </span>
 <span>                                                            <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">region</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">27</span>,<span class="fl">29</span>,<span class="fl">14</span>,<span class="fl">35</span><span class="op">)</span>, <span class="st">"R3"</span>,</span>
@@ -1500,9 +1503,9 @@ R8
 <p>Với các phân tích đơn biến ở trên, chúng ta có thể kết luận rằng các biến <span class="math inline">\(ncd.levels\)</span>, <span class="math inline">\(year\)</span>, <span class="math inline">\(nb.rb\)</span>, <span class="math inline">\(region.f\)</span>, <span class="math inline">\(yrs.licenced.f\)</span>, <span class="math inline">\(driver.age\)</span> và <span class="math inline">\(prior.claims\)</span> là các biến có ý nghĩa nhất va có ảnh hưởng đến tần suất gây ra tai nạn. Lưu ý rằng biến <span class="math inline">\(year\)</span> không phải là biến liên quan đến đặc điểm của người lái xe hay phương tiện được bảo hiểm. Trong các mô hình tần suất và mức độ nghiêm trọng, biến thời gian thường được gọi là biến điều khiển và luôn có mặt trong mô hình đa biến.</p>
 </div>
 </div>
-<div id="xây-dựng-mô-hình-tuyến-tính-tổng-quát-nhiều-biến" class="section level2" number="15.4">
+<div id="xây-dựng-mô-hình-tuyến-tính-tổng-quát-nhiều-biến" class="section level2" number="13.4">
 <h2>
-<span class="header-section-number">15.4</span> Xây dựng mô hình tuyến tính tổng quát nhiều biến<a class="anchor" aria-label="anchor" href="#x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-nhi%E1%BB%81u-bi%E1%BA%BFn"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4</span> Xây dựng mô hình tuyến tính tổng quát nhiều biến<a class="anchor" aria-label="anchor" href="#x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-nhi%E1%BB%81u-bi%E1%BA%BFn"><i class="fas fa-link"></i></a>
 </h2>
 <p>Sau khi đã có ý tưởng tốt hơn về những biến giải thích phù hợp với dữ liệu, chúng ta có thể chuyển sang xây dựng các mô hình kết hợp nhiều hơn một biến giải thích. Về mặt lý thuyết, để tìm ra mô hình đa biến tốt, chúng ta có thể xem xét cả hai mô hình biến và chọn mô hình tốt nhất; sau đó có thể xem xét cả ba mô hình biến và lại chọn mô hình tốt nhất, v.v. Chiến lược này gọi là <span class="math inline">\(forward-stepwise-selection\)</span>. Tuy nhiên với số lượng biến chúng ta hiện có thì chiến lược này không khả thi Một chiến lược khác là xây dựng một mô hình có đầy đủ các biến sau đó lần lượt loại đi các biến không cần thiết. Mặc dù chiến lược này không yêu cầu về mặt tính toán nhưng nhược điểm chính là sự phụ thuộc vào thứ tự chúng ta loại bỏ đi các biến giải thích. Phương pháp khả thi nhất trong trường hợp hày là xây dựng mô hình đa biến được lựa chọn từ một tập hợp con các biến có ý nghĩa trong phân tích một biến sau đó cố gắng thêm các biến khác vào mô hình.</p>
 <p>Chúng ta cho mô hình với 7 biến giải thích <span class="math inline">\(ncd.levels\)</span>, <span class="math inline">\(year\)</span>, <span class="math inline">\(nb.rb\)</span>, <span class="math inline">\(region.f\)</span>, <span class="math inline">\(yrs.licenced.f\)</span>, <span class="math inline">\(driver.age\)</span> và <span class="math inline">\(prior.claims.f\)</span> là mô hình cơ sở và sẽ tìm kiếm các biến khác thêm vào mô hình nhằm cải thiện các chỉ tiêu như <span class="math inline">\(deviance\)</span> và <span class="math inline">\(AIC\)</span>.</p>
@@ -1510,7 +1513,7 @@ R8
 <p>Đồ thị trên cho thấy các biến có làm tăng chất lượng của mô hình là <span class="math inline">\(body.code\)</span>, <span class="math inline">\(height\)</span>, và <span class="math inline">\(marital.status\)</span>. Cách tốt nhất để đưa thêm biến độc lập vào mô hình cơ sở là thêm lần lượt từng biến vào mô hình sau đó và lặp lại các bước ở trên. Tuy nhiên, để tránh sự phức tạp không cần thiết, chúng ta sẽ đưa đồng thời cả ba biến vào mô hình sau đó thực hiện kiểm định <span class="math inline">\(\chi^2\)</span>: hiệu số giữa <span class="math inline">\(residual\)</span> <span class="math inline">\(deviance\)</span> của mô hình sau khi thêm biến và mô hình cơ sở có phân phối xấp xỉ phân phối <span class="math inline">\(\chi^2\)</span> với bậc tự do <span class="math inline">\(m_2 - m_1\)</span>, với <span class="math inline">\(m_2 - m_1\)</span> là số lượng tham số thêm vào trong mô hình mới. Biến <span class="math inline">\(body.code\)</span> là biến kiểu factor có 8 giá trị riêng biệt, biết <span class="math inline">\(height\)</span> là biến kiểu số, trong khi biến <span class="math inline">\(marital.status\)</span> là biến kiểu factor có 4 giá trị riêng biệt, do đó thêm 3 biến vào mô hình sẽ làm cho số lượng tham số của mô hình tăng lên là <span class="math inline">\((8-1) + 1 + (4-1) = 11\)</span> tham số.</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-23">Bảng 15.11: </span><span id="tab:unnamed-chunk-23">Bảng 15.12: </span>Thước đo deviance của mô hình cơ sở và mô hình thêm biến
+<span id="tab:unnamed-chunk-23">Bảng 13.15: </span><span id="tab:unnamed-chunk-23">Bảng 13.16: </span>Thước đo deviance của mô hình cơ sở và mô hình thêm biến
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1557,14 +1560,14 @@ Mô hình thêm biến
 </table></div>
 <p>Giá trị deviance giảm 54.99 sau khi thêm 11 tham số vào mô hình. Lưu ý rằng giá trị phân vị ngưỡng 99.99% của phân phối <span class="math inline">\(\chi^2(11)\)</span> là 37.37, nhỏ hơn 54.99, nên chúng ta có thể kết luận rằng việc thêm 3 biến <span class="math inline">\(body.code\)</span>, <span class="math inline">\(height\)</span>, và <span class="math inline">\(marital.status\)</span> là có ý nghĩa thống kê. Bạn đọc có thể lặp lại các bước ở trên để tìm được thêm các biến có ý nghĩa đưa vào mô hình giải thích tần suất.</p>
 </div>
-<div id="mô-hình-tuyến-tính-tổng-quát-cho-biến-mức-độ-nghiêm-trọng." class="section level2" number="15.5">
+<div id="mô-hình-tuyến-tính-tổng-quát-cho-biến-mức-độ-nghiêm-trọng." class="section level2" number="13.5">
 <h2>
-<span class="header-section-number">15.5</span> Mô hình tuyến tính tổng quát cho biến mức độ nghiêm trọng.<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-cho-bi%E1%BA%BFn-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng."><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.5</span> Mô hình tuyến tính tổng quát cho biến mức độ nghiêm trọng.<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-cho-bi%E1%BA%BFn-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng."><i class="fas fa-link"></i></a>
 </h2>
 <p>Xây dựng mô hình cho mức độ nghiêm trọng khó khăn hơn xây dựng mô hình cho tần suất vì thứ nhất, có ít dữ liệu hơn và thứ hai, các giá trị quan sát được thường biến động lớn. Thông thường, phần lớn các hợp đồng có yêu cầu bồi thường có mức độ nghiêm trọng nhỏ và trong khi một số ít hợp đồng có mức độ nghiêm trọng rất lớn. Điều này thường dẫn đến phân phối của mức độ nghiêm trọng bị lệch phải, như được thể hiện trong biểu đồ ở dưới. Bạn đọc có thể thấy rằng gần như tất cả các quan sát đều tập trung ở phía bên trái của biểu đồ. Có rất ít giá trị lớn hơn 6.000; trên thực tế, chỉ có 11 hợp đồng có yêu cầu bồi thường có mức độ nghiêm trọng lớn hơn 6000 trong tổng số 2209 quan sát có yêu cầu bồi thường trong tập dữ liệu huấn luyện.</p>
 <div class="inline-figure"><img src="10-Ung-dung-GLM_files/figure-html/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>Tương tự như khi xây dựng mô hình cho biến tần suất, chúng ta bắt đầu xây dựng mô hình cho biến mức độ nghiêm trọng bằng mô hình không có biến phụ thuộc.</p>
-<div class="sourceCode" id="cb858"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb836"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">clm.serverity</span> <span class="op">~</span><span class="fl">1</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">Gamma</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">training.dat</span>, weights <span class="op">=</span> <span class="va">clm.count</span> , subset <span class="op">=</span> <span class="va">clm.count</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:  glm(formula = clm.serverity ~ 1, family = Gamma(link = "log"), 
@@ -1580,12 +1583,12 @@ Mô hình thêm biến
 ## Residual Deviance: 4626  AIC: 36280</code></pre>
 <p>Mô hình không có biến giải thích có hệ số chặn là 6.685, nghĩa là giá trị trung bình của biến mức độ nghiêm trọng là <span class="math inline">\(e^{6.685} = 800.31\)</span> tương tự như giá trị trung bình đã tính toán ở phần khai phá dữ liệu.</p>
 <p>Biến <span class="math inline">\(year\)</span> kiểm soát tác động của thời gian lên mức độ nghiêm trọng, do đó chúng ta sẽ đưa biến này vào tất cả các mô hình cho mức độ nghiêm trọng. Các bước để xây dựng mô hình giống như khi chúng ta xây dựng mô hình cho tần suất: chúng ta cần tìm kiếm các biến giải thích (ngoài biến <span class="math inline">\(year\)</span>) có khả năng dự đoán mức độ nghiêm trọng của các yêu cầu bồi thường. Quá trình này tương tự như phần trước nên chúng tôi sẽ cố gắng trình bày ngắn gọn nhất có thể.</p>
-<div id="mô-hình-đơn-biến-cho-mức-độ-nghiêm-trọng" class="section level3" number="15.5.1">
+<div id="mô-hình-đơn-biến-cho-mức-độ-nghiêm-trọng" class="section level3" number="13.5.1">
 <h3>
-<span class="header-section-number">15.5.1</span> Mô hình đơn biến cho mức độ nghiêm trọng<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-%C4%91%C6%A1n-bi%E1%BA%BFn-cho-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.5.1</span> Mô hình đơn biến cho mức độ nghiêm trọng<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-%C4%91%C6%A1n-bi%E1%BA%BFn-cho-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng"><i class="fas fa-link"></i></a>
 </h3>
 <p>Mô hình đơn biến được hiểu là mô hình bao gồm hệ số chặn, biến điều khiển <span class="math inline">\(year\)</span> và một biến giải thích. Tương tự như khi xây dựng mô hình cho biến tần suất, chúng ta tính toán <span class="math inline">\(deviance\)</span> và chỉ tiêu <span class="math inline">\(AIC\)</span> cho các mô hình và biểu diễn kết quả trên một đồ thị rải điểm</p>
-<div class="sourceCode" id="cb860"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb838"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">variable.list</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">training.dat</span><span class="op">)</span></span>
 <span><span class="va">remove.list</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"pol.id"</span>,<span class="st">"exposure"</span>,<span class="st">"clm.count"</span>,<span class="st">"clm.incurred"</span>,<span class="st">"clm.serverity"</span>, <span class="st">"year"</span>, <span class="st">"region"</span><span class="op">)</span></span>
 <span><span class="va">variable.list</span><span class="op">&lt;-</span><span class="va">variable.list</span><span class="op">[</span><span class="op">!</span><span class="op">(</span><span class="va">variable.list</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">remove.list</span><span class="op">)</span><span class="op">]</span></span>
@@ -1617,12 +1620,12 @@ Mô hình thêm biến
 <div class="inline-figure"><img src="10-Ung-dung-GLM_files/figure-html/unnamed-chunk-26-1.png" width="672" style="display: block; margin: auto;"></div>
 <p>Mô hình “Null” là mô hình chỉ bao gồm biến <span class="math inline">\(year\)</span> và hệ số chặn. Có thể thấy rằng việc thêm biến giải thích vào mô hình sẽ làm cho <span class="math inline">\(deviance\)</span> giảm, nhưng chưa chắc chỉ số AIC sẽ giảm vì AIC tính đến số lượng tham số trong mô hình. Một số biến có làm giảm AIC của mô hình bao gồm có <span class="math inline">\(ncd.level\)</span>, <span class="math inline">\(nb.rb\)</span>, <span class="math inline">\(marital.status\)</span>, <span class="math inline">\(yrs.licensed.num\)</span>, <span class="math inline">\(driver.gender\)</span>.</p>
 </div>
-<div id="mô-hình-nhiều-biến-cho-mức-độ-nghiêm-trọng" class="section level3" number="15.5.2">
+<div id="mô-hình-nhiều-biến-cho-mức-độ-nghiêm-trọng" class="section level3" number="13.5.2">
 <h3>
-<span class="header-section-number">15.5.2</span> Mô hình nhiều biến cho mức độ nghiêm trọng<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-nhi%E1%BB%81u-bi%E1%BA%BFn-cho-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.5.2</span> Mô hình nhiều biến cho mức độ nghiêm trọng<a class="anchor" aria-label="anchor" href="#m%C3%B4-h%C3%ACnh-nhi%E1%BB%81u-bi%E1%BA%BFn-cho-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng"><i class="fas fa-link"></i></a>
 </h3>
 <p>Chúng ta xây dựng mô hình đa biến bao gồm 5 biến kể trên sau đó tìm kiếm thêm các biến khác.</p>
-<div class="sourceCode" id="cb861"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb839"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">glm1</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">clm.serverity</span> <span class="op">~</span> <span class="va">year</span> <span class="op">+</span> <span class="va">ncd.level</span><span class="op">+</span> <span class="va">nb.rb</span> <span class="op">+</span> <span class="va">marital.status</span> <span class="op">+</span> <span class="va">yrs.licensed.num</span> <span class="op">+</span> <span class="va">driver.gender</span>, </span>
 <span>         family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">Gamma</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">training.dat</span>, weights <span class="op">=</span> <span class="va">clm.count</span>, subset <span class="op">=</span> <span class="va">clm.count</span><span class="op">&gt;</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">glm1</span><span class="op">)</span></span></code></pre></div>
@@ -1632,6 +1635,10 @@ Mô hình thêm biến
 ##     yrs.licensed.num + driver.gender, family = Gamma(link = "log"), 
 ##     data = training.dat, weights = clm.count, subset = clm.count &gt; 
 ##         0)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -3.9662  -1.5961  -0.6651   0.3050   3.7805  
 ## 
 ## Coefficients:
 ##                        Estimate Std. Error t value Pr(&gt;|t|)    
@@ -1666,7 +1673,7 @@ Mô hình thêm biến
 <p>Đồ thị trên gợi ý cho chúng ta biết biến <span class="math inline">\(vehicle.age.num\)</span> là một biến giải thích tốt có làm giảm chỉ tiêu AIC. Chúng ta thực hiện kiểm định <span class="math inline">\(\chi^2\)</span> để kiểm tra xem việc thêm biến vào có ý nghĩa thống kê hay không</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-29">Bảng 15.13: </span><span id="tab:unnamed-chunk-29">Bảng 15.14: </span>Thước đo deviance của mô hình cơ sở và mô hình thêm biến
+<span id="tab:unnamed-chunk-29">Bảng 13.17: </span><span id="tab:unnamed-chunk-29">Bảng 13.18: </span>Thước đo deviance của mô hình cơ sở và mô hình thêm biến
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1714,9 +1721,9 @@ Mô hình thêm biến
 <p>Giá trị deviance giảm 7.6 sau khi thêm 1 tham số vào mô hình. Đây là giá trị phân vị ngưỡng 99.4% của phân phối <span class="math inline">\(\chi^2(1)\)</span> nên chúng ta có thể kết luận rằng việc thêm biến <span class="math inline">\(vehicle.age.num\)</span> là có ý nghĩa thống kê. Bạn đọc có thể lặp lại các bước ở trên để tìm được thêm các biến có ý nghĩa đưa vào mô hình giải thích mức độ nghiêm trọng.</p>
 </div>
 </div>
-<div id="xác-định-phí-bảo-hiểm-thuần-và-xác-thực-mô-hình" class="section level2" number="15.6">
+<div id="xác-định-phí-bảo-hiểm-thuần-và-xác-thực-mô-hình" class="section level2" number="13.6">
 <h2>
-<span class="header-section-number">15.6</span> Xác định phí bảo hiểm thuần và xác thực mô hình<a class="anchor" aria-label="anchor" href="#x%C3%A1c-%C4%91%E1%BB%8Bnh-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-v%C3%A0-x%C3%A1c-th%E1%BB%B1c-m%C3%B4-h%C3%ACnh"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.6</span> Xác định phí bảo hiểm thuần và xác thực mô hình<a class="anchor" aria-label="anchor" href="#x%C3%A1c-%C4%91%E1%BB%8Bnh-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-v%C3%A0-x%C3%A1c-th%E1%BB%B1c-m%C3%B4-h%C3%ACnh"><i class="fas fa-link"></i></a>
 </h2>
 <p>Trong phần này, chúng ta kết hợp các mô hình tần suất và mức độ nghiêm trọng để xác định mức phí bảo hiểm thuần. Công thức xác định phí bảo hiểm thuần chỉ đơn giản là
 <span class="math display">\[\begin{align}
@@ -1725,7 +1732,7 @@ Mô hình thêm biến
 <p>Chúng ta sử dụng mô hình tần suất và mô hình mức độ nghiêm trọng với các biến được xác định trong phần trước. Danh sách các biến được liệt kê trong bảng dưới đây.</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-30">Bảng 15.15: </span><span id="tab:unnamed-chunk-30">Bảng 15.16: </span>Các biến sử dụng trong xác định phí bảo hiểm thuần
+<span id="tab:unnamed-chunk-30">Bảng 13.19: </span><span id="tab:unnamed-chunk-30">Bảng 13.20: </span>Các biến sử dụng trong xác định phí bảo hiểm thuần
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -1755,7 +1762,7 @@ year, ncd.level, nb.rb, marital.status, driver.gender, vehicle.age.num
 </tbody>
 </table></div>
 <p>Chúng ta thêm biến tần suất trung bình (<span class="math inline">\(E.fre\)</span>), mức độ nghiêm trọng trung bình (<span class="math inline">\(E.ser\)</span>) và phí thuần (<span class="math inline">\(Net.prem\)</span>) vào dữ liệu huấn luyện mô hình.</p>
-<div class="sourceCode" id="cb863"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb841"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">glm.fre</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">clm.count</span><span class="op">~</span> <span class="va">year</span> <span class="op">+</span> <span class="va">ncd.level</span><span class="op">+</span> <span class="va">nb.rb</span><span class="op">+</span> <span class="va">yrs.licensed.f</span> <span class="op">+</span> <span class="va">region.f</span> <span class="op">+</span> <span class="va">driver.age</span> <span class="op">+</span> </span>
 <span>               <span class="va">prior.claims.f</span> <span class="op">+</span> <span class="va">marital.status</span> <span class="op">+</span>  <span class="va">body.code</span><span class="op">+</span> <span class="va">height</span>, </span>
 <span>             family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">training.dat</span>,</span>
@@ -1776,7 +1783,7 @@ year, ncd.level, nb.rb, marital.status, driver.gender, vehicle.age.num
 <p>Chúng ta thực hiện so sánh giữa tổng phí thuần của tất cả các hợp đồng với tổng số tiền thực trả cho các hợp đồng trong tập dữ liệu huấn luyện. Không có gì ngạc nhiên khi tổng tần suất trung bình bằng tổng số yêu cầu bổi thường và tổng phí bảo hiểm thuần xấp xỉ tổng số tiền yêu cầu bồi thường thực tế do mô hình được xây dựng trên tập huấn luyện.</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-32">Bảng 15.17: </span><span id="tab:unnamed-chunk-32">Bảng 15.18: </span>Giá trị thực tế và dự đoán trên dữ liệu huấn luyên mô hình
+<span id="tab:unnamed-chunk-32">Bảng 13.21: </span><span id="tab:unnamed-chunk-32">Bảng 13.22: </span>Giá trị thực tế và dự đoán trên dữ liệu huấn luyên mô hình
 </caption>
 <thead><tr>
 <th style="text-align:center;">
@@ -1825,7 +1832,7 @@ Tổng chi phí bồi thường
 <p>Thước đo quan trọng nhất về hiệu quả của mô hình là khả năng dự đoán của mô hình trên tập dữ liệu được sử dụng để kiểm tra (<span class="math inline">\(test.dat\)</span>). Tổng số lượng yêu cầu bồi thường và tổng chi phí bồi thường được dự đoán bằng mô hình tần suất - mức độ nghiêm trọng được so sánh với giá trị thực tế như ở bảng dưới đây</p>
 <div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-33">Bảng 15.19: </span><span id="tab:unnamed-chunk-33">Bảng 15.20: </span>Giá trị thực tế và dự đoán trên dữ liệu huấn luyên mô hình
+<span id="tab:unnamed-chunk-33">Bảng 13.23: </span><span id="tab:unnamed-chunk-33">Bảng 13.24: </span>Giá trị thực tế và dự đoán trên dữ liệu huấn luyên mô hình
 </caption>
 <thead><tr>
 <th style="text-align:center;">
@@ -1874,9 +1881,9 @@ Tổng chi phí bồi thường
 <p>Bạn đọc có thể thấy rằng trên dữ liệu ngoài mẫu, tổng số lượng yêu cầu bồi thường dự đoán bằng 95.78% tổng số lượng yêu cầu bồi thường thực tế, trong khi tổng số tiền yêu cầu bồi thường dự đoán bằng 100.46% tổng số tiền yêu cầu bồi thường thực tế. Có thể thấy rằng khả năng dự đoán ngoài mẫu của mô hình về cơ bản không thể giống như dự đoán trong mẫu, tuy nhiên các tỷ lệ 95.78% và 100.46% là vượt quá mức độ kỳ vọng vì tổng số lượng hợp đồng ngoài mẫu là 12228 hợp đồng.</p>
 <p>Ngoài phương pháp xác thực bằng dữ liệu ngoài mẫu, bạn đọc cũng có thể sử dụng xác thực chéo để đánh giá khả năng dự đoán của mô hình. Chúng ta sẽ chia dữ liệu ban đầu thành 5 phần (một cách ngẫu nhiên), tạm gọi là các phần 1, 2, 3, 4 và 5. Mỗi lần xây dựng mô hình, chúng ta sẽ lấy 1 phần làm dữ liệu ngoài mẫu và sử dụng 4 phần còn lại để xây dựng mô hình. Một mô hình ổn định là mô hình có khả năng dự đoán trên các tập ngoài mẫu không bị biến động quá nhiều.</p>
 </div>
-<div id="kết-luận" class="section level2" number="15.7">
+<div id="kết-luận" class="section level2" number="13.7">
 <h2>
-<span class="header-section-number">15.7</span> Kết luận<a class="anchor" aria-label="anchor" href="#k%E1%BA%BFt-lu%E1%BA%ADn"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.7</span> Kết luận<a class="anchor" aria-label="anchor" href="#k%E1%BA%BFt-lu%E1%BA%ADn"><i class="fas fa-link"></i></a>
 </h2>
 <p>Chúng ta đã thảo luận về một số bước cần thiết để phát triển một mô hình xác định phí bảo hiểm thuần, yếu tố quan trọng nhất trong quá trình hình thành phí bảo hiểm. Đê thực các bước này, chúng ta đã thực hiện một số phân tích dữ liệu khám phá để làm quen với dữ liệu và nhằm đạt được một số hiểu biết quan trọng trong giai đoạn lập mô hình. Tiếp theo chúng tôi bắt đầu vào việc tạo ra một số mô hình tuyến tính tổng quát cho biến tần suất yêu cầu bồi thường và biến mức độ nghiêm trọng của yêu cầu bồi thường. Các biến được sử dụng trong mô hình bao gồm cả các biến liên tục và biến rời rạc. Một vài biến được chuyển đổi để tăng khả năng giải thích các biến mục tiêu. Sau cùng, chúng tôi kết hợp hai mô hình lại để xác định phí bảo hiểm thuần. Mô hình được xác thực trên một tập dữ liệu ngoài mẫu và cho kết quả rất khả quan.</p>
 <p>Nhìn chung, chúng ta đã hoàn thành khá nhiều bước để tiến đến kết quả. Tuy nhiên trong thực tế, để đưa phí thuần vào hoạt động kinh doanh vẫn còn nhiều việc phải làm. Các bước tiếp theo vượt quá phạm vi của mô hình toán thông thường nên sẽ không nằm trong phạm vi của cuốn sách này.</p>
@@ -1938,31 +1945,31 @@ Tổng chi phí bồi thường
 
 
   <div class="chapter-nav">
-<div class="prev"><a href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">14</span> Mô hình tần suất - mức độ nghiêm trọng.</a></div>
-<div class="next"><a href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">16</span> Mô hình cây quyết định</a></div>
+<div class="prev"><a href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">12</span> Mô hình tần suất - mức độ nghiêm trọng.</a></div>
+<div class="next"><a href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">14</span> Mô hình cây quyết định</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng."><span class="header-section-number">15</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
-<li><a class="nav-link" href="#d%E1%BB%AF-li%E1%BB%87u-%C4%91%E1%BB%83-x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh"><span class="header-section-number">15.1</span> Dữ liệu để xây dựng mô hình</a></li>
+<li><a class="nav-link" href="#t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng."><span class="header-section-number">13</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li><a class="nav-link" href="#d%E1%BB%AF-li%E1%BB%87u-%C4%91%E1%BB%83-x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh"><span class="header-section-number">13.1</span> Dữ liệu để xây dựng mô hình</a></li>
 <li>
-<a class="nav-link" href="#ph%C3%A2n-t%C3%ADch-khai-ph%C3%A1-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">15.2</span> Phân tích khai phá dữ liệu</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#bi%E1%BA%BFn-t%E1%BA%A7n-su%E1%BA%A5t-v%C3%A0-m%E1%BB%91i-li%C3%AAn-h%E1%BB%87-%C4%91%E1%BA%BFn-c%C3%A1c-bi%E1%BA%BFn-kh%C3%A1c"><span class="header-section-number">15.2.1</span> Biến tần suất và mối liên hệ đến các biến khác</a></li>
-<li><a class="nav-link" href="#bi%E1%BA%BFn-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng-v%C3%A0-m%E1%BB%91i-li%C3%AAn-h%E1%BB%87-v%E1%BB%9Bi-c%C3%A1c-bi%E1%BA%BFn-kh%C3%A1c"><span class="header-section-number">15.2.2</span> Biến mức độ nghiêm trọng và mối liên hệ với các biến khác</a></li>
+<a class="nav-link" href="#ph%C3%A2n-t%C3%ADch-khai-ph%C3%A1-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">13.2</span> Phân tích khai phá dữ liệu</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#bi%E1%BA%BFn-t%E1%BA%A7n-su%E1%BA%A5t-v%C3%A0-m%E1%BB%91i-li%C3%AAn-h%E1%BB%87-%C4%91%E1%BA%BFn-c%C3%A1c-bi%E1%BA%BFn-kh%C3%A1c"><span class="header-section-number">13.2.1</span> Biến tần suất và mối liên hệ đến các biến khác</a></li>
+<li><a class="nav-link" href="#bi%E1%BA%BFn-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng-v%C3%A0-m%E1%BB%91i-li%C3%AAn-h%E1%BB%87-v%E1%BB%9Bi-c%C3%A1c-bi%E1%BA%BFn-kh%C3%A1c"><span class="header-section-number">13.2.2</span> Biến mức độ nghiêm trọng và mối liên hệ với các biến khác</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-cho-t%E1%BA%A7n-su%E1%BA%A5t."><span class="header-section-number">15.3</span> Mô hình tuyến tính tổng quát cho tần suất.</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-v%E1%BB%9Bi-m%E1%BB%99t-bi%E1%BA%BFn-gi%E1%BA%A3i-th%C3%ADch."><span class="header-section-number">15.3.1</span> Mô hình tuyến tính tổng quát với một biến giải thích.</a></li></ul>
+<a class="nav-link" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-cho-t%E1%BA%A7n-su%E1%BA%A5t."><span class="header-section-number">13.3</span> Mô hình tuyến tính tổng quát cho tần suất.</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-v%E1%BB%9Bi-m%E1%BB%99t-bi%E1%BA%BFn-gi%E1%BA%A3i-th%C3%ADch."><span class="header-section-number">13.3.1</span> Mô hình tuyến tính tổng quát với một biến giải thích.</a></li></ul>
 </li>
-<li><a class="nav-link" href="#x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-nhi%E1%BB%81u-bi%E1%BA%BFn"><span class="header-section-number">15.4</span> Xây dựng mô hình tuyến tính tổng quát nhiều biến</a></li>
+<li><a class="nav-link" href="#x%C3%A2y-d%E1%BB%B1ng-m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-nhi%E1%BB%81u-bi%E1%BA%BFn"><span class="header-section-number">13.4</span> Xây dựng mô hình tuyến tính tổng quát nhiều biến</a></li>
 <li>
-<a class="nav-link" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-cho-bi%E1%BA%BFn-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng."><span class="header-section-number">15.5</span> Mô hình tuyến tính tổng quát cho biến mức độ nghiêm trọng.</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-%C4%91%C6%A1n-bi%E1%BA%BFn-cho-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng"><span class="header-section-number">15.5.1</span> Mô hình đơn biến cho mức độ nghiêm trọng</a></li>
-<li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-nhi%E1%BB%81u-bi%E1%BA%BFn-cho-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng"><span class="header-section-number">15.5.2</span> Mô hình nhiều biến cho mức độ nghiêm trọng</a></li>
+<a class="nav-link" href="#m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t-cho-bi%E1%BA%BFn-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng."><span class="header-section-number">13.5</span> Mô hình tuyến tính tổng quát cho biến mức độ nghiêm trọng.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-%C4%91%C6%A1n-bi%E1%BA%BFn-cho-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng"><span class="header-section-number">13.5.1</span> Mô hình đơn biến cho mức độ nghiêm trọng</a></li>
+<li><a class="nav-link" href="#m%C3%B4-h%C3%ACnh-nhi%E1%BB%81u-bi%E1%BA%BFn-cho-m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng"><span class="header-section-number">13.5.2</span> Mô hình nhiều biến cho mức độ nghiêm trọng</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#x%C3%A1c-%C4%91%E1%BB%8Bnh-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-v%C3%A0-x%C3%A1c-th%E1%BB%B1c-m%C3%B4-h%C3%ACnh"><span class="header-section-number">15.6</span> Xác định phí bảo hiểm thuần và xác thực mô hình</a></li>
-<li><a class="nav-link" href="#k%E1%BA%BFt-lu%E1%BA%ADn"><span class="header-section-number">15.7</span> Kết luận</a></li>
+<li><a class="nav-link" href="#x%C3%A1c-%C4%91%E1%BB%8Bnh-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-v%C3%A0-x%C3%A1c-th%E1%BB%B1c-m%C3%B4-h%C3%ACnh"><span class="header-section-number">13.6</span> Xác định phí bảo hiểm thuần và xác thực mô hình</a></li>
+<li><a class="nav-link" href="#k%E1%BA%BFt-lu%E1%BA%ADn"><span class="header-section-number">13.7</span> Kết luận</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1980,7 +1987,7 @@ Tổng chi phí bồi thường
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-07-30.</p>
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-08-06.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,24 +4,25 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chương 6 Nhập dữ liệu vào R | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+<title>Chương 5 Nhập dữ liệu vào R | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
 <meta name="author" content="Nguyễn Quang Huy">
-<meta name="description" content="6.1 Giới thiệu chung Trong phần này của cuốn sách, bạn đọc sẽ được tìm hiểu về các kỹ thuật phân tích dữ liệu, bao gồm tiền xử lý dữ liệu, sắp xếp dữ liệu và trực quan hóa dữ liệu. Tiền xử lý dữ...">
-<meta name="generator" content="bookdown 0.38 with bs4_book()">
-<meta property="og:title" content="Chương 6 Nhập dữ liệu vào R | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="description" content="5.1 Giới thiệu chung Trong phần này của cuốn sách, bạn đọc sẽ được tìm hiểu về các kỹ thuật phân tích dữ liệu, bao gồm tiền xử lý dữ liệu, sắp xếp dữ liệu và trực quan hóa dữ liệu. Tiền xử lý dữ...">
+<meta name="generator" content="bookdown 0.40 with bs4_book()">
+<meta property="og:title" content="Chương 5 Nhập dữ liệu vào R | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
 <meta property="og:type" content="book">
-<meta property="og:description" content="6.1 Giới thiệu chung Trong phần này của cuốn sách, bạn đọc sẽ được tìm hiểu về các kỹ thuật phân tích dữ liệu, bao gồm tiền xử lý dữ liệu, sắp xếp dữ liệu và trực quan hóa dữ liệu. Tiền xử lý dữ...">
+<meta property="og:description" content="5.1 Giới thiệu chung Trong phần này của cuốn sách, bạn đọc sẽ được tìm hiểu về các kỹ thuật phân tích dữ liệu, bao gồm tiền xử lý dữ liệu, sắp xếp dữ liệu và trực quan hóa dữ liệu. Tiền xử lý dữ...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chương 6 Nhập dữ liệu vào R | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
-<meta name="twitter:description" content="6.1 Giới thiệu chung Trong phần này của cuốn sách, bạn đọc sẽ được tìm hiểu về các kỹ thuật phân tích dữ liệu, bao gồm tiền xử lý dữ liệu, sắp xếp dữ liệu và trực quan hóa dữ liệu. Tiền xử lý dữ...">
+<meta name="twitter:title" content="Chương 5 Nhập dữ liệu vào R | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="twitter:description" content="5.1 Giới thiệu chung Trong phần này của cuốn sách, bạn đọc sẽ được tìm hiểu về các kỹ thuật phân tích dữ liệu, bao gồm tiền xử lý dữ liệu, sắp xếp dữ liệu và trực quan hóa dữ liệu. Tiền xử lý dữ...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.9/font.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Source%20Code%20Pro:wght@400;450&amp;display=swap" rel="stylesheet">
-<script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.8.0/transition.js"></script><script src="libs/bs3compat-0.8.0/tabs.js"></script><script src="libs/bs3compat-0.8.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
-<script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.9/girafe.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.4.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.8.10/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.8.10/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.10/girafe.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script>
         $(function() {
@@ -76,7 +77,7 @@
               const newDate = `${day}/${month}/${year}`;
 
               // Replace the entire paragraph content with the new Vietnamese format
-              paragraph.innerHTML = `"${paragraph.querySelector('strong').innerText}" được viết bởi ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]}. Phiên bản này được cập nhật lần cuối vào ${newDate}.`;
+              paragraph.innerHTML = `Cuốn sách "${paragraph.querySelector('strong').innerText}" được viết bởi TS. ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]} - Trường Công nghệ - Đại học Kinh tế Quốc dân`;
             }
           }
         });
@@ -87,7 +88,7 @@
           paragraphs.forEach(paragraph => {
             if(paragraph.innerHTML.includes('This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.')) {
               // Replace the paragraph content
-              paragraph.innerHTML = 'Quyển sách này được viết bằng ngôn ngữ R, dựa trên gói lệnh bookdown.';
+              paragraph.innerHTML = 'Cuốn sách này được viết bằng hoàn toàn bằng ngôn ngữ R. Phiên bản hiện tại được cập nhật vào ngày ${newDate}.';
             }
           });
         });
@@ -119,29 +120,19 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Lời nói đầu</a></li>
 <li class="book-part">PHẦN I: GIỚI THIỆU CHUNG</li>
-<li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1nh.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sánh</a></li>
-<li><a class="" href="khdl-v%C3%A0-c%C3%A1c-kh%C3%A1i-ni%E1%BB%87m-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> KHDL và các khái niệm cơ bản</a></li>
+<li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></li>
 <li class="book-part">PHẦN II: GIỚI THIỆU VỀ R</li>
-<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">4</span> Kiến thức R cơ bản</a></li>
-<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">5</span> Kiến thức R nâng cao</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">4</span> Kiến thức R nâng cao</a></li>
 <li class="book-part">PHẦN III: PHÂN TÍCH DỮ LIỆU</li>
-<li><a class="active" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html"><span class="header-section-number">6</span> Nhập dữ liệu vào R</a></li>
-<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Tiền xử lý dữ liệu</a></li>
-<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Biến đổi và sắp xếp dữ liệu</a></li>
-<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></li>
+<li><a class="active" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html"><span class="header-section-number">5</span> Nhập dữ liệu vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Biến đổi và sắp xếp dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Trực quan hóa dữ liệu</a></li>
 <li class="book-part">PHẦN IV: MÔ HÌNH TUYẾN TÍNH</li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">10</span> Mô hình hồi quy tuyến tính</a></li>
-<li><a class="" href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">11</span> Các mô hình cộng tính tổng quát</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">12</span> Mô hình tuyến tính tổng quát.</a></li>
-<li><a class="" href="reference.html"><span class="header-section-number">13</span> REFERENCE</a></li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">14</span> Mô hình tần suất - mức độ nghiêm trọng.</a></li>
-<li><a class="" href="t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">15</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
-<li class="book-part">PHẦN V: MÔ HÌNH CÂY QUYẾT ĐỊNH</li>
-<li><a class="" href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">16</span> Mô hình cây quyết định</a></li>
-<li><a class="" href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html"><span class="header-section-number">17</span> Boosting và cây quyết định.</a></li>
-<li><a class="" href="neuralnetwork.html"><span class="header-section-number">18</span> Mô hình mạng nơ-ron</a></li>
-<li><a class="" href="neuralnetwork1.html"><span class="header-section-number">19</span> Các mạng học sâu điển hình</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">9</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">10</span> Các mô hình cộng tính tổng quát</a></li>
 </ul>
 
         <div class="book-extra">
@@ -149,13 +140,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="nhập-dữ-liệu-vào-r" class="section level1" number="6">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="nhập-dữ-liệu-vào-r" class="section level1" number="5">
 <h1>
-<span class="header-section-number">Chương 6</span> Nhập dữ liệu vào R<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">Chương 5</span> Nhập dữ liệu vào R<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r"><i class="fas fa-link"></i></a>
 </h1>
-<div id="giới-thiệu-chung" class="section level2" number="6.1">
+<div id="giới-thiệu-chung" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">6.1</span> Giới thiệu chung<a class="anchor" aria-label="anchor" href="#gi%E1%BB%9Bi-thi%E1%BB%87u-chung"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Giới thiệu chung<a class="anchor" aria-label="anchor" href="#gi%E1%BB%9Bi-thi%E1%BB%87u-chung"><i class="fas fa-link"></i></a>
 </h2>
 <p>Trong phần này của cuốn sách, bạn đọc sẽ được tìm hiểu về các kỹ thuật phân tích dữ liệu, bao gồm tiền xử lý dữ liệu, sắp xếp dữ liệu và trực quan hóa dữ liệu.</p>
 <ul>
@@ -168,31 +159,31 @@
 </ul>
 <p>Trước khi có thể bắt đầu bước tiền xử lý và phân tích dữ liệu, bước đầu tiên là nhập dữ liệu vào R. Trong một vài trường hợp, nhập dữ liệu cần nhập chỉ đơn giản là một bảng Excel có sẵn. Trong một số trường hợp khác, quá trình nhập dữ liệu có thể phức tạp hơn, chẳng hạn như từ một (vài) phần nào đó trong một hoặc nhiều bảng Excel, hoặc từ một cơ sở dữ liệu được lưu trữ trong các máy tính server, hoặc đôi khi cần viết các vòng lặp để lấy dữ liệu từ các trình duyệt web. Đây là chủ đề mà chúng ta sẽ thảo luận trong chương đầu của phần phân tích dữ liệu.</p>
 </div>
-<div id="đối-tượng-lưu-dữ-liệu-trong-r" class="section level2" number="6.2">
+<div id="đối-tượng-lưu-dữ-liệu-trong-r" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">6.2</span> Đối tượng lưu dữ liệu trong R<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%91i-t%C6%B0%E1%BB%A3ng-l%C6%B0u-d%E1%BB%AF-li%E1%BB%87u-trong-r"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Đối tượng lưu dữ liệu trong R<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%91i-t%C6%B0%E1%BB%A3ng-l%C6%B0u-d%E1%BB%AF-li%E1%BB%87u-trong-r"><i class="fas fa-link"></i></a>
 </h2>
 <p>Hai kiểu đối tượng thường được dùng để lưu dữ liệu trong R là <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> và tibble. Chúng ta sẽ thảo luận về <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> trước vì đây là kiểu lưu dữ liệu phổ biến và xuất hiện trước. Đối tượng kiểu tibble, với một vài ưu điểm hơn <span style="color: #640514; font-family: Source Code Pro;">data.frame</span>, sẽ được thảo luận trong phần tiếp theo.</p>
-<div id="data.frame" class="section level3" number="6.2.1">
+<div id="data.frame" class="section level3" number="5.2.1">
 <h3>
-<span class="header-section-number">6.2.1</span> <span style="color: #640514; font-family: Source Code Pro;">Data.frame</span><a class="anchor" aria-label="anchor" href="#data.frame"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.1</span> <span style="color: #640514; font-family: Source Code Pro;">Data.frame</span><a class="anchor" aria-label="anchor" href="#data.frame"><i class="fas fa-link"></i></a>
 </h3>
 <p><span style="color: #640514; font-family: Source Code Pro;">Data.frame</span> là đối tượng phổ biến nhất để lưu trữ dữ liệu trên môi trường làm việc của R. Hiểu một cách đơn giản, một <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> giống như một bảng excel mà mỗi cột tương ứng với một véc-tơ và mỗi dòng tương ứng với một quan sát. Ngay khi cài đặt R, đã có nhiều đối tượng là dữ liệu kiểu <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> đã được lưu trữ trong R và đã sẵn sàng được sử dụng. Bạn đọc sử dụng câu lệnh <span style="color: #640514; font-family: Source Code Pro;">data()</span> để biết trên môi trường đang sử dụng có những dữ liệu nào,</p>
-<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb438"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Sau khi thực thi câu lệnh, bạn đọc có thể thấy trên cửa sổ <span style="color: #640514; font-family: Source Code Pro;">script</span> xuất hiện một cửa sổ mới với danh sách tất cả các dữ liệu sẵn có trong R và những dữ liệu có trong các thư viện đang được gọi lên trên môi trường đang làm việc. Để biết trong một thư viện cụ thể có những dữ liệu nào, bạn đọc có thể sử dụng lệnh <span style="color: #640514; font-family: Source Code Pro;">data()</span> kèm với tùy chọn <span style="color: #640514; font-family: Source Code Pro;">package</span> như sau:</p>
-<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">dslabs</span><span class="op">)</span> <span class="co"># Gọi thư viện dslabs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"dslabs"</span><span class="op">)</span> <span class="co"># Liệt kê những data trong dslabs</span></span></code></pre></div>
 <p>Trong danh sách dữ liệu của thư viện <span style="color: #640514; font-family: Source Code Pro;">dslabs</span>, bạn đọc có thể thấy rất nhiều đối tượng kiểu <span style="color: #640514; font-family: Source Code Pro;">data.frame</span>. Một trong số đó có một dữ liệu có tên là <span style="color: #640514; font-family: Source Code Pro;">murders</span>. Bạn đọc có thể kiểm tra kiểu của đối tượng này bằng hàm <span style="color: #640514; font-family: Source Code Pro;">class()</span>:</p>
-<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb440"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">murders</span><span class="op">)</span> <span class="co"># Trả lại kết quả là một data frame</span></span></code></pre></div>
 <pre><code>## [1] "data.frame"</code></pre>
 <p>Thông thường để có hiểu biết ban đầu về một đối tượng kiểu <span style="color: #640514; font-family: Source Code Pro;">data.frame</span>, chúng ta nên bắt đầu bằng đọc mô tả về dữ liệu (nếu có):</p>
-<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb442"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">?</span> <span class="va">murders</span> <span class="co"># Cửa sổ help sẽ hiển thị mô tả về murders</span></span></code></pre></div>
 <p>Có một nhóm các câu lệnh thường được sử dụng để có cái nhìn tổng thể về cấu trúc của dữ liệu. Các câu lệnh này được liệt kê ở dưới:</p>
-<div class="sourceCode" id="cb470"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/View.html">View</a></span><span class="op">(</span><span class="va">murders</span><span class="op">)</span> <span class="co"># Hiển thị data.frame dưới dạng bảng</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">murders</span>,k <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="co"># Hiển thị k dòng đầu tiên của data.frame</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">murders</span><span class="op">)</span> <span class="co"># Hiển thị cấu trúc của data.frame</span></span>
@@ -211,7 +202,7 @@
 <li>Hàm <span style="color: #640514; font-family: Source Code Pro;">glimpse()</span> là một hàm số trong thư viện <span style="color: #640514; font-family: Source Code Pro;">dplyr</span> cũng thường được sử dụng để tìm hiểu về dữ liệu. Kết quả của hàm <span style="color: #640514; font-family: Source Code Pro;">glimpse()</span> tương tự như hàm <span style="color: #640514; font-family: Source Code Pro;">str()</span>.</li>
 </ul>
 <p>Một hàm số khác cũng thường được sử dụng để người phân tích có cái nhìn tổng quan về dữ liệu là hàm <span style="color: #640514; font-family: Source Code Pro;">summary()</span>. Hàm số này có thể được áp dụng trên các đối tượng kiểu khác nhau, không nhất thiết phải là kiểu <span style="color: #640514; font-family: Source Code Pro;">data.frame</span>. Khi sử dụng trên <span style="color: #640514; font-family: Source Code Pro;">data.frame</span>, hàm <span style="color: #640514; font-family: Source Code Pro;">summary()</span> cho chúng ta nhiều thông tin hữu ích về dữ liệu. Thật vậy, bạn đọc có thể quan sát kết quả của hàm <span style="color: #640514; font-family: Source Code Pro;">summary()</span> trên dữ liệu <span style="color: #640514; font-family: Source Code Pro;">murders</span>:</p>
-<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb444"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">murders</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##     state               abb                      region     population      
 ##  Length:51          Length:51          Northeast    : 9   Min.   :  563626  
@@ -234,18 +225,18 @@
 </ul>
 <p>Bạn đọc hãy sử dụng các hàm liệt kê ở trên để tìm hiểu về dữ liệu có tên <span style="color: #640514; font-family: Source Code Pro;">gapminder</span> trong thư viện <span style="color: #640514; font-family: Source Code Pro;">dslabs</span></p>
 <p>Xét về cấu trúc, có thể hiểu một <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> là một trường hợp đặc biệt của đối tượng kiểu <span style="color: #640514; font-family: Source Code Pro;">list</span> trong R. Các phần tử con của một <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> là các véc-tơ (cột) dữ liệu. Để lấy ra một cột dữ liệu của một <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> chúng ta sử dụng ký tự <span style="color: #640514; font-family: Source Code Pro;">$</span> để kết nối tên <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> và tên cột dữ liệu. Ví dụ, để lấy giá trị của cột có tên là <span style="color: #640514; font-family: Source Code Pro;">population</span> từ dữ liệu <span style="color: #640514; font-family: Source Code Pro;">murders</span>, chúng ta viết câu lệnh như sau:</p>
-<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb446"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">murders</span><span class="op">$</span><span class="va">population</span> <span class="co"># in ra màn hình cột population của data.frame murders</span></span></code></pre></div>
 <p>Hoặc lấy ra cột có tên là <span style="color: #640514; font-family: Source Code Pro;">region</span>:</p>
-<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb447"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">murders</span><span class="op">$</span><span class="va">region</span> <span class="co"># in ra màn hình cột region của data.frame murders</span></span></code></pre></div>
 <p>Kiểu dữ liệu của cột <span style="color: #640514; font-family: Source Code Pro;">region</span> là kiểu <span style="color: #640514; font-family: Source Code Pro;">factor</span>. Về bản chất, một véc-tơ kiểu <span style="color: #640514; font-family: Source Code Pro;">factor</span> là một véc-tơ kiểu chuỗi ký tự nhưng được lưu trong R theo một cách hiệu quả hơn, tiết kiệm bộ nhớ, và thuận lợi cho người sử dụng khi phân tích dữ liệu. Trước hết, mỗi giá trị trong véc-tơ chuỗi ký tự sẽ được cho tương ứng với một số tự nhiên, bắt đầu từ 1 đến số lượng chuỗi ký tự khác nhau trong véc-tơ đó. Thay vì lưu chính xác giá trị của các chuỗi ký tự, véc-tơ kiểu <span style="color: #640514; font-family: Source Code Pro;">factor</span> lưu dữ liệu dưới dạng các số tự nhiên. Mỗi khi cần hiển thị giá trị của một chuỗi ký tự, véc-tơ kiểu <span style="color: #640514; font-family: Source Code Pro;">factor</span> sẽ tìm kiếm số tự nhiên tương ứng với giá trị của chuỗi ký tự đó. Cách lưu dữ liệu như vậy hiệu quả hơn về mặt bộ nhớ đặc biệt là khi trong véc-tơ chuỗi ký tự có nhiều giá trị bị lặp lại.</p>
 <p>Các hàm số <span style="color: #640514; font-family: Source Code Pro;">summary()</span> và <span style="color: #640514; font-family: Source Code Pro;">table()</span> có thể được sử dụng để tổng hợp thông tin về một véc-tơ kiểu <span style="color: #640514; font-family: Source Code Pro;">factor</span>:</p>
-<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">murders</span><span class="op">$</span><span class="va">region</span><span class="op">)</span> <span class="co"># Tổng hợp thông tin của vec-tơ dạng factor</span></span></code></pre></div>
 <pre><code>##     Northeast         South North Central          West 
 ##             9            17            12            13</code></pre>
-<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb450"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">murders</span><span class="op">$</span><span class="va">region</span><span class="op">)</span> <span class="co"># cho kết quả tương tự như summary</span></span></code></pre></div>
 <pre><code>## 
 ##     Northeast         South North Central          West 
@@ -267,7 +258,7 @@
 </li>
 </ul>
 <p>Trong hầu hết các trường hợp, dữ liệu cần xử lý và phân tích là dữ liệu được nhập từ các nguồn bên ngoài. Dữ liệu sau khi được nhập vào R sẽ được lưu dưới dạng <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> để dễ dàng xử lý. Trong một vài trường hợp, bạn đọc sẽ cần tự tạo <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> trực tiếp từ các câu lệnh R. Hàm số để tạo một <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> là <span style="color: #640514; font-family: Source Code Pro;">data.frame()</span>. Các véc-tơ khai báo cho giá trị của các cột cần có độ dài bằng nhau nếu không R sẽ báo lỗi. Ví dụ, để tạo một <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> có tên <span style="color: #640514; font-family: Source Code Pro;">df</span> với các cột lần lượt là <span style="color: #640514; font-family: Source Code Pro;">id</span>, <span style="color: #640514; font-family: Source Code Pro;">names</span>, <span style="color: #640514; font-family: Source Code Pro;">grades</span>, và <span style="color: #640514; font-family: Source Code Pro;">result</span>, chúng ta viết câu lệnh như sau:</p>
-<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb452"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> <span class="co"># Hàm data.frame() dùng để tạo data.frame tên df</span></span>
 <span>      id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"SV"</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>, <span class="co"># Cột có tên là ID nhận giá trị "SV1",...,"SV5"</span></span>
 <span>      names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"You"</span>, <span class="st">"Me"</span>, <span class="st">"Him"</span>, <span class="st">"Her"</span>, <span class="st">"John"</span><span class="op">)</span>, <span class="co"># Cột names</span></span>
@@ -282,16 +273,16 @@
 ## 5 SV 5  John    7.6   TRUE</code></pre>
 <p>Khi lưu dữ liệu kiểu <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> sẽ có một số nhược điểm khiến cho việc lấy dữ liệu từ nguồn bên ngoài vào bị hạn chế, chẳng hạn như tên cột dữ liệu bị tự động thay đổi nếu không phù hợp, hoặc kiểu dữ liệu bị tự động thay đổi. Để khắc phục các nhược điểm này, một kiểu đối tượng mới được phát triển để lưu dữ liệu trên môi trường làm việc của R, đó là kiểu <span style="color: #640514; font-family: Source Code Pro;">tibble</span>. Trong phần tiếp theo chúng ta sẽ thảo luận về đối tượng lưu dữ liệu này.</p>
 </div>
-<div id="tibble" class="section level3" number="6.2.2">
+<div id="tibble" class="section level3" number="5.2.2">
 <h3>
-<span class="header-section-number">6.2.2</span> <span style="color: #640514; font-family: Source Code Pro;">Tibble</span><a class="anchor" aria-label="anchor" href="#tibble"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2.2</span> <span style="color: #640514; font-family: Source Code Pro;">Tibble</span><a class="anchor" aria-label="anchor" href="#tibble"><i class="fas fa-link"></i></a>
 </h3>
 <p>Về cơ bản một <span style="color: #640514; font-family: Source Code Pro;">tibble</span> là cũng có thể hiểu là một <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> với một vài điều chỉnh để giúp việc lấy dữ liệu từ nguồn bên ngoài vào và thực hiện phân tích trở nên dễ dàng hơn. Theo kinh nghiệm của chúng tôi, ở mức độ phân tích dữ liệu thông thường, sự khác khác nhau giữa <span style="color: #640514; font-family: Source Code Pro;">tibble</span> và <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> là không đáng kể. Sự khác nhau cơ bản giữu hai đối tượng này có thể liệt kê như sau:</p>
 <ul>
 <li>
 <em>Thứ nhất</em>, khi in một <span style="color: #640514; font-family: Source Code Pro;">tibble</span> ra màn hình sẽ chỉ có 10 dòng đầu được hiển thị và số lượng cột được in sẽ luôn khớp với kích thước cửa sổ <span style="color: #640514; font-family: Source Code Pro;">Console</span> hiện tại. Việc này giúp cho cửa sổ <span style="color: #640514; font-family: Source Code Pro;">Console</span> không bị tràn dòng giống như khi chúng ta in <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> có kích thước lớn. Ngoài ra, khi hiển thị trên cửa sổ <span style="color: #640514; font-family: Source Code Pro;">Console</span>, thông tin về kiểu dữ liệu của cột cũng sẽ xuất hiện ngay dưới tên cột. Thư viện để làm việc trên đối tượng <span style="color: #640514; font-family: Source Code Pro;">tibble</span> là thư viện có cùng tên. Bạn đọc có thể sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">as_tibble()</span> để đổi một <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> sang kiểu tibble và dùng hàm <span style="color: #640514; font-family: Source Code Pro;">as.data.frame()</span> để thực hiện phép đổi ngược lại. Bạn đọc có thể thực hiện in một <span style="color: #640514; font-family: Source Code Pro;">tibble</span> trực tiếp lên màn hình <span style="color: #640514; font-family: Source Code Pro;">Console</span> mà không gặp phải vấn đề về tràn dòng như ví dụ dưới đây:</li>
 </ul>
-<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb454"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></span>
 <span><span class="va">trump_tweets</span> <span class="co"># in một data.frame sẽ bị tràn dòng</span></span>
 <span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">trump_tweets</span><span class="op">)</span> <span class="co"># Hiển thị 1 tibble hiệu quả hơn.</span></span></code></pre></div>
@@ -302,7 +293,7 @@
 <em>Thứ ba</em>, khi dữ liệu từ nguồn bên ngoài được lưu vào một <span style="color: #640514; font-family: Source Code Pro;">tibble</span>, kiểu dữ liệu sẽ không thay đổi.</li>
 </ul>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">tibble()</span> được sử dụng để tạo ra một <span style="color: #640514; font-family: Source Code Pro;">tibble</span> trong R. Trong ví dụ dưới đây, chúng tôi tạo ra một dữ liệu có 3 cột với tên biến đều không được sử dụng làm tên biến trong R, tuy nhiên R vẫn không báo lỗi và dữ liệu được tạo ra có các cột có tên không thay đổi:</p>
-<div class="sourceCode" id="cb482"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb455"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tib</span><span class="op">&lt;-</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span> <span class="co"># hàm tibble dùng để tạo tibble</span></span>
 <span>  <span class="st">":D"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, <span class="co"># có thể dùng tên cột là ":D"</span></span>
 <span>  <span class="st">":p"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"X"</span>,<span class="st">"Y"</span>,<span class="st">"Z"</span><span class="op">)</span>, <span class="co"># có thể dùng tên cột là ":p"</span></span>
@@ -316,7 +307,7 @@
 ## 2     2 Y         2
 ## 3     3 Z         2</code></pre>
 <p>Nếu thay thế hàm <span style="color: #640514; font-family: Source Code Pro;">tibble()</span> trong đoạn câu lệnh trên bằng hàm <span style="color: #640514; font-family: Source Code Pro;">data.frame()</span> thì <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> được tạo thành sẽ tự động thay đổi tên cột</p>
-<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb457"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span> <span class="co"># tạo data.frame thay vì tibble</span></span>
 <span>  <span class="st">":D"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>, <span class="co"># data.frame sẽ đổi tên cột cho phù hợp</span></span>
 <span>  <span class="st">":p"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"X"</span>,<span class="st">"Y"</span>,<span class="st">"Z"</span><span class="op">)</span>, <span class="co"># data.frame sẽ đổi tên cột cho phù hợp</span></span>
@@ -331,14 +322,14 @@
 <p>Những điểm khác nhau giữa <span style="color: #640514; font-family: Source Code Pro;">tibble</span> và <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> sẽ được tiếp tục đề cập ở các phần tiếp theo của chương khi chúng tôi thảo luận về các hàm dùng để nhập dữ liệu vào R.</p>
 </div>
 </div>
-<div id="nhập-dữ-liệu-bằng-hàm-có-sẵn" class="section level2" number="6.3">
+<div id="nhập-dữ-liệu-bằng-hàm-có-sẵn" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">6.3</span> Nhập dữ liệu bằng hàm có sẵn<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-c%C3%B3-s%E1%BA%B5n"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Nhập dữ liệu bằng hàm có sẵn<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-c%C3%B3-s%E1%BA%B5n"><i class="fas fa-link"></i></a>
 </h2>
-<p>Dữ liệu từ các nguồn ngoài tồn tại ở nhiều định dạng khác nhau do được lưu và trích xuất từ các phần mềm/hệ thống khác nhau. Một trong những điểm mạnh của phần mềm R là khả năng đọc được hầu hết các định dạng khác nhau của dữ liệu. Ngay trong các thư viện sẵn có khi chúng ta cài đặt R, đã có một danh sách các hàm cho phép chúng ta đọc dữ liệu từ nhiều định dạng. Một số hàm điển hình và định dạng dữ liệu tương ứng được liệt kê trong các Bảng <a href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html#tab:tbptdl001">6.1</a></p>
-<div class="inline-table"><table class="table table-striped table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<p>Dữ liệu từ các nguồn ngoài tồn tại ở nhiều định dạng khác nhau do được lưu và trích xuất từ các phần mềm/hệ thống khác nhau. Một trong những điểm mạnh của phần mềm R là khả năng đọc được hầu hết các định dạng khác nhau của dữ liệu. Ngay trong các thư viện sẵn có khi chúng ta cài đặt R, đã có một danh sách các hàm cho phép chúng ta đọc dữ liệu từ nhiều định dạng. Một số hàm điển hình và định dạng dữ liệu tương ứng được liệt kê trong các Bảng <a href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html#tab:tbptdl001">5.1</a></p>
+<div class="inline-table"><table class="table table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:tbptdl001">Bảng 6.1: </span>Danh sách hàm có sẵn để lấy dữ liệu từ nguồn bên ngoài
+<span id="tab:tbptdl001">Bảng 5.1: </span>Danh sách hàm có sẵn để lấy dữ liệu từ nguồn bên ngoài
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -399,12 +390,12 @@ Dữ liệu kiểu data có sẵn trong R
 </tr>
 </tbody>
 </table></div>
-<p>Để đọc dữ liệu từ nguồn ngoài bằng một trong các hàm được liệt kê trong Bảng <a href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html#tab:tbptdl001">6.1</a>, cấu trúc câu lệnh sẽ như sau:</p>
-<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
+<p>Để đọc dữ liệu từ nguồn ngoài bằng một trong các hàm được liệt kê trong Bảng <a href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html#tab:tbptdl001">5.1</a>, cấu trúc câu lệnh sẽ như sau:</p>
+<div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">TenHamSo</span><span class="op">(</span><span class="va">Duong_dan</span><span class="op">/</span><span class="va">Ten_file</span><span class="op">)</span></span></code></pre></div>
 <p>trong đó <span style="color: #640514; font-family: Source Code Pro;">TenHamSo</span> là tên của hàm đọc dữ liệu; <span style="color: #640514; font-family: Source Code Pro;">Duong_dan</span> là đường dẫn đến folder chứa dữ liệu; và <span style="color: #640514; font-family: Source Code Pro;">Ten_file</span> là tên file chứa dữ liệu bao gồm cả phần định dạng.</p>
 <p>Khi lấy dữ liệu từ các nguồn bên ngoài vào bằng các câu lệnh có sẵn, tên của các cột dữ liệu có thể bị thay đổi do một số tên cột không thể được dùng để đặt tên của <span style="color: #640514; font-family: Source Code Pro;">data.frame</span>. Do đó, bạn đọc hãy luôn kiểm tra lại tên các cột dữ liệu sau khi đọc. Hàm <span style="color: #640514; font-family: Source Code Pro;">names()</span> cho biết tên các cột của một <span style="color: #640514; font-family: Source Code Pro;">data.frame</span>.</p>
-<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb460"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span>header <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>              text <span class="op">=</span> <span class="st">"@1,@2</span></span>
 <span><span class="st">                      1,2</span></span>
@@ -412,30 +403,30 @@ Dữ liệu kiểu data có sẵn trong R
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="co"># hiển thị tên của các cột</span></span></code></pre></div>
 <pre><code>## [1] "X.1" "X.2"</code></pre>
 <p>Để đổi tên của các biến trong <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> có tên <span style="color: #640514; font-family: Source Code Pro;">df</span> ở trên, bạn đọc sử dụng hàm cần gán <span style="color: #640514; font-family: Source Code Pro;">names()</span> để gọi tên các biến sau đó gán giá trị của hàm này bằng một véc-tơ kiểu chuỗi ký tự chứa tên các cột. Hãy đảm bảo rằng độ dài của vec-tơ chứa tên cột bằng số cột của <span style="color: #640514; font-family: Source Code Pro;">df</span> nếu không sẽ có cảnh báo từ R.</p>
-<div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"c1"</span>,<span class="st">"c2"</span><span class="op">)</span> <span class="co"># đổi tên 2 cột của data.frame df</span></span>
 <span><span class="va">df</span> <span class="co"># in data.frame df</span></span></code></pre></div>
 <pre><code>##   c1 c2
 ## 1  1  2
 ## 2  3  4</code></pre>
 <div class="blackbox">
-<p><em>Thực hành:Bạn đọc hãy tìm trên máy tính của mình các file dữ liệu có định dạng như trong Bảng <a href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html#tab:tbptdl001">6.1</a> sau đó hãy sử dụng hàm số tương ứng để đọc dữ liệu vào R.</em></p>
+<p><em>Thực hành:Bạn đọc hãy tìm trên máy tính của mình các file dữ liệu có định dạng như trong Bảng <a href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html#tab:tbptdl001">5.1</a> sau đó hãy sử dụng hàm số tương ứng để đọc dữ liệu vào R.</em></p>
 </div>
 <p>Mặc dù R đã hỗ trợ việc đọc dữ liệu từ hầu hết các định dạng khác nhau, tuy nhiên khi dữ liệu ngày càng lớn và phức tạp thì các hàm đọc dữ liệu sẵn có sẽ không còn đáp ứng được nhu cầu. Chính vì thế có các thư viện được thiết kế riêng cho việc đọc dữ liệu. Trong các phần tiếp theo chúng ta sẽ thảo luận về các thư viện như vậy và các ưu thế khi sử dụng các thư viện này so với việc sử dụng các hàm sẵn có.</p>
 </div>
-<div id="nhập-dữ-liệu-bằng-thư-viện-readr." class="section level2" number="6.4">
+<div id="nhập-dữ-liệu-bằng-thư-viện-readr." class="section level2" number="5.4">
 <h2>
-<span class="header-section-number">6.4</span> Nhập dữ liệu bằng thư viện <span style="color: #640514; font-family: Source Code Pro;">readr</span>.<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-readr."><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4</span> Nhập dữ liệu bằng thư viện <span style="color: #640514; font-family: Source Code Pro;">readr</span>.<a class="anchor" aria-label="anchor" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-readr."><i class="fas fa-link"></i></a>
 </h2>
 <p>Thư viện <span style="color: #640514; font-family: Source Code Pro;">readr</span> là một (1) trong tám (8) thư viện được tích hợp sẵn trong thư viện tổng hợp <span style="color: #640514; font-family: Source Code Pro;">tidyverse</span> chuyên dành cho việc phân tích dữ liệu. Thư viện <span style="color: #640514; font-family: Source Code Pro;">readr</span> có các câu lệnh để đọc dữ liệu tương tự như các câu lệnh sẵn có trong R nhưng đặc biệt hiệu quả hơn về tốc độ (thời gian) đọc dữ liệu. Chẳng hạn như hàm số dùng để đọc các file định dạng <em>.csv</em> trong thư viện <span style="color: #640514; font-family: Source Code Pro;">readr</span> là hàm <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span> thường được dùng thay thế cho hàm có sẵn <span style="color: #640514; font-family: Source Code Pro;">read.csv()</span> khi chúng ta cần đọc các file có dung lượng lớn.</p>
 <p>Chúng ta thực hiện một ví dụ như sau để so sánh thời gian đọc dữ liệu của hàm <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span> và hàm <span style="color: #640514; font-family: Source Code Pro;">read.csv()</span>: chúng ta sẽ tạo hai file dữ liệu bao gồm <span style="color: #640514; font-family: Source Code Pro;">test1.csv</span> và <span style="color: #640514; font-family: Source Code Pro;">test2.csv</span> là các file chứa các số được sinh ngẫu nhiên. Dữ liệu <span style="color: #640514; font-family: Source Code Pro;">test1.csv</span> có <span class="math inline">\(10^2\)</span> hàng và <span class="math inline">\(10^4\)</span> cột, trong khi dữ liệu <code>test2.csv</code> có <span class="math inline">\(10^2\)</span> hàng và <span class="math inline">\(10^5\)</span> cột. Chúng ta sẽ dùng hàm sẵn có và hàm <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span> cùng đọc hai dữ liệu này sau đó so sánh thời gian đọc dữ liệu. Các câu lệnh dưới đây dùng để tạo và lưu các dữ liệu:</p>
-<div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="fl">6</span><span class="op">)</span>,<span class="fl">10</span><span class="op">^</span><span class="fl">2</span>,<span class="fl">10</span><span class="op">^</span><span class="fl">4</span><span class="op">)</span> <span class="co"># Ma trận 100 hàng, 10^4 cột</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">x</span>,<span class="st">"test1.csv"</span><span class="op">)</span> <span class="co"># Ma tran thanh file .csv</span></span>
 <span><span class="va">x</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="fl">7</span><span class="op">)</span>,<span class="fl">10</span><span class="op">^</span><span class="fl">2</span>,<span class="fl">10</span><span class="op">^</span><span class="fl">5</span><span class="op">)</span> <span class="co"># Ma trận 100 hàng, 10^5 cột</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span><span class="op">(</span><span class="va">x</span>,<span class="st">"test2.csv"</span><span class="op">)</span> <span class="co"># Ma tran thanh file .csv</span></span></code></pre></div>
 <p>Bạn đọc có thể kiểm tra kích thước của các file <span style="color: #640514; font-family: Source Code Pro;">test1.csv</span> và <span style="color: #640514; font-family: Source Code Pro;">test2.csv</span> trên máy tính để thấy rằng dung lượng của các file lần lượt là 18 Mega byte và 180 Mega byte. Chúng ta sẽ kiểm tra thời gian mà các hàm <span style="color: #640514; font-family: Source Code Pro;">read.csv()</span> và <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span> nhập dữ liệu đối với dữ liệu test1.csv trước:</p>
-<div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb465"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">start</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># lưu lại thời điểm trước khi chạy read.csv</span></span>
 <span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"test1.csv"</span><span class="op">)</span> <span class="co"># dùng hàm read.csv để load dữ liệu</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> <span class="co"># tính thời gian hàm read.csv chạy</span></span>
@@ -444,7 +435,7 @@ Dữ liệu kiểu data có sẵn trong R
 <span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu">read_csv</span><span class="op">(</span><span class="st">"test1.csv"</span><span class="op">)</span> <span class="co"># dùng hàm read_csv để load dữ liệu</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> <span class="co"># tính thời gian hàm read_csv chạy</span></span></code></pre></div>
 <p>Đối với dữ liệu <span style="color: #640514; font-family: Source Code Pro;">test1.csv</span> thì thời gian nhập dữ liệu của <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span> có nhanh hơn nhưng không có sự khác biệt đáng kể. Tuy nhiên sự khác biệt sẽ rõ ràng khi nhập dữ liệu <span style="color: #640514; font-family: Source Code Pro;">test2.csv</span>. Bạn đọc cân nhắc khi dùng hàm <span style="color: #640514; font-family: Source Code Pro;">read.csv()</span> đọc dữ liệu bởi thời gian nhập dữ liệu với những file có dung lượng hơn 100 Mega bytes có thể lên đến hơn 20 phút.</p>
-<div class="sourceCode" id="cb493"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">start</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># lưu lại thời điểm trước khi chạy read.csv</span></span>
 <span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"test2.csv"</span><span class="op">)</span> <span class="co"># !!! THỜI GIAN CHẠY CÓ THỂ LÊN ĐẾN 20-25 phút</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> <span class="co"># tính thời gian hàm read.csv chạy</span></span>
@@ -453,10 +444,10 @@ Dữ liệu kiểu data có sẵn trong R
 <span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu">read_csv</span><span class="op">(</span><span class="st">"test2.csv"</span><span class="op">)</span> <span class="co"># dùng hàm read_csv để load dữ liệu</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/proc.time.html">proc.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">start</span> <span class="co"># tính thời gian hàm read_csv chạy</span></span></code></pre></div>
 <p>Trên máy tính của chúng tôi, hàm <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span> sẽ mất khoảng 2 phút để đọc dữ liệu <span style="color: #640514; font-family: Source Code Pro;">test2.csv</span>, nghĩa là thời gian có thể nhanh hơn đến 10 lần. Điều này đặc biệt quan trọng mỗi khi chúng ta cần đọc các dữ liệu có kích thước lớn. Một lưu ý khác đối với <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span> là dữ liệu sẽ được lưu dưới dạng một <span style="color: #640514; font-family: Source Code Pro;">tibble</span>, nghĩa là dữ liệu sẽ không bị thay đổi tên biến và kiểu giá trị của biến.</p>
-<p>Ngoài hàm <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span>, thư viện <span style="color: #640514; font-family: Source Code Pro;">readr</span> còn có các hàm số khác để đọc các kiểu định dạng file khác nhau. Danh sách các hàm thường hay dùng được liệt kê trong bảng <a href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html#tab:tbptdl002">6.2</a></p>
+<p>Ngoài hàm <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span>, thư viện <span style="color: #640514; font-family: Source Code Pro;">readr</span> còn có các hàm số khác để đọc các kiểu định dạng file khác nhau. Danh sách các hàm thường hay dùng được liệt kê trong bảng <a href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html#tab:tbptdl002">5.2</a></p>
 <div class="inline-table"><table class="table table-striped table-bordered table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:tbptdl002">Bảng 6.2: </span>Danh sách hàm đọc dữ liệu của thư viện readr
+<span id="tab:tbptdl002">Bảng 5.2: </span>Danh sách hàm đọc dữ liệu của thư viện readr
 </caption>
 <thead><tr>
 <th style="text-align:left;">
@@ -506,7 +497,7 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 <li>
 <em>Thứ nhất</em>: các hàm số đọc dữ liệu của <span style="color: #640514; font-family: Source Code Pro;">readr</span> luôn hiểu hàng đầu tiên của dữ liệu là tên của các biến. Do đó, nếu thực sự hàng đầu tiên không phải là tên của biên, bạn đọc cần sử dụng tham số <span style="color: #640514; font-family: Source Code Pro;">col_names</span> và gán giá trị cho tham số này bằng <span style="color: #640514; font-family: Source Code Pro;">FALSE</span>. Thật vậy, hãy quan sát sự khác nhau giữa việc có sử dụng và không sử dụng <span style="color: #640514; font-family: Source Code Pro;">col_names = FALSE</span> trong ví dụ dưới đây:</li>
 </ul>
-<div class="sourceCode" id="cb494"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://readr.tidyverse.org">readr</a></span><span class="op">)</span></span>
 <span><span class="co"># Kết quả sẽ là một Tibble 1 hàng và 3 cột</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"1,2,3</span></span>
@@ -515,7 +506,7 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 ##     `1`   `2`   `3`
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1     4     5     6</code></pre>
-<div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Kết quả sẽ là một Tibble 2 hàng và 3 cột</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"1,2,3</span></span>
 <span><span class="st">         4,5,6"</span>, col_names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
@@ -524,13 +515,13 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1     1     2     3
 ## 2     4     5     6</code></pre>
-<div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># readr tự động đặt tên các cột X1, X2, X3</span></span></code></pre></div>
 <p>Bạn đọc có thể thấy rằng khi không sử dụng <span style="color: #640514; font-family: Source Code Pro;">col_names = FALSE</span> như trong đoạn câu lệnh thứ nhất, hàm <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span> sẽ hiểu hàng đầu tiên, tương ứng với các số 1, 2, và 3, là tên các cột và dữ liệu chỉ được tính bắt đầu từ hàng thứ hai. Điều này giải thích tại sao kết quả nhận được là một <span style="color: #640514; font-family: Source Code Pro;">tibble</span> chỉ có 1 quan sát. Trong đoạn câu lệnh thứ hai, Khi chúng ta sử dụng <span style="color: #640514; font-family: Source Code Pro;">col_names = FALSE</span>, hàm <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span> sẽ tự động đặt tên các cột là <span style="color: #640514; font-family: Source Code Pro;">X1, X2, X3</span> và kết quả nhận được là một <span style="color: #640514; font-family: Source Code Pro;">tibble</span> có 2 quan sát.</p>
 <ul>
 <li>Khi dữ liệu được trích xuất từ nhiều nguồn khác nhau, trong một số trường hợp các dòng đầu tiên của dữ liệu là các đoạn văn bản được viết để mô tả về dữ liệu. Do đó khi sử dụng các hàm đọc dữ liệu, bạn đọc cần có thể sử dụng tham số <span style="color: #640514; font-family: Source Code Pro;">skip = k</span> để loại bỏ <span style="color: #640514; font-family: Source Code Pro;">k</span> dòng đầu tiên của file dữ liệu. Ví dụ, dữ liệu dưới đây có hai dòng đầu tiên là các đoạn văn bản không thuộc về dữ liệu, chúng ta loại bỏ đi hai dòng đó trong câu lệnh đọc dữ liệu như sau:</li>
 </ul>
-<div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Kết quả sẽ là một Tibble 2 hàng và 3 cột</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"Trường Công nghệ</span></span>
 <span><span class="st">        Khoa toán Kinh tế</span></span>
@@ -549,25 +540,25 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 ## 1     1     2     3
 ## 2     4     5     6</code></pre>
 <p>Bạn đọc cũng có thể gán một véc-tơ chuỗi ký tự cho tham số <span style="color: #640514; font-family: Source Code Pro;">col_names</span> tạo tên cho các biến ngay khi gọi hàm <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span>. Tuy nhiên để tránh sự phức tạp, chúng tôi khuyên bạn đọc hãy đặt tên cho các cột bằng các gọi hàm <span style="color: #640514; font-family: Source Code Pro;">names()</span> như chúng tôi đã đề cập ở trên.</p>
-<p>Cách sử dụng các hàm khác ngoài <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span> được liệt kê trong Bảng <a href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html#tab:tbptdl002">6.2</a> hoàn toàn tương tự và bạn đọc có thể tham khảo trong hướng dẫn của thư viện <span style="color: #640514; font-family: Source Code Pro;">readr</span>.</p>
+<p>Cách sử dụng các hàm khác ngoài <span style="color: #640514; font-family: Source Code Pro;">read_csv()</span> được liệt kê trong Bảng <a href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html#tab:tbptdl002">5.2</a> hoàn toàn tương tự và bạn đọc có thể tham khảo trong hướng dẫn của thư viện <span style="color: #640514; font-family: Source Code Pro;">readr</span>.</p>
 <p>Bạn đọc hãy thử kiểm tra xem các câu lệnh đọc dữ liệu dưới đây có vấn đề gì không và nếu có thể, bạn đọc hãy thử lựa chọn hàm hoặc thêm tham số phù hợp để đọc dữ liệu.</p>
-<div class="sourceCode" id="cb502"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"x,y\n1,2,3\n4,5,6"</span><span class="op">)</span> <span class="co"># \n thay cho xuống dòng</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"x,y,z\n1,2\n1,2,3,4"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"x,y\n\",1,\n,a,b"</span>,col_names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"x;y\n1;2\nx;y"</span><span class="op">)</span> <span class="co"># Thử hàm số khác</span></span>
 <span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"x|y\n1|2"</span><span class="op">)</span> <span class="co"># Thử hàm số khác</span></span></code></pre></div>
 </div>
-<div id="tương-tác-giữa-r-với-microsoft-excel" class="section level2" number="6.5">
+<div id="tương-tác-giữa-r-với-microsoft-excel" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">6.5</span> Tương tác giữa R với Microsoft Excel<a class="anchor" aria-label="anchor" href="#t%C6%B0%C6%A1ng-t%C3%A1c-gi%E1%BB%AFa-r-v%E1%BB%9Bi-microsoft-excel"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5</span> Tương tác giữa R với Microsoft Excel<a class="anchor" aria-label="anchor" href="#t%C6%B0%C6%A1ng-t%C3%A1c-gi%E1%BB%AFa-r-v%E1%BB%9Bi-microsoft-excel"><i class="fas fa-link"></i></a>
 </h2>
 <p>Speardsheet trong Microsoft Excel là công cụ rất phổ biến trong các môi trường làm việc liên quan đến lĩnh vực kinh tế và kinh doanh. Ngoài chức năng tính toán, phân tích, vẽ đồ thị rất phong phú và trực quan, Speardsheet cũng là một công cụ có thể dùng để lưu trữ dữ liệu khi cần. Thực tế là người phân tích dữ liệu trong môi trường kinh doanh sẽ thường xuyên nhận được dữ liệu từ các phòng ban, đơn vị khác trong các file có định dạng của Microsoft Excel như .xls, .xlsx, .xlsb, hoặc .xlsm.</p>
 <p>Bạn đọc có thể sử dụng trực tiếp Speardsheet để thực hiện những phân tích và tính toán đơn giản. Tuy nhiên để thực hiện các yêu cầu phức tạp hơn, chẳng hạn như khi làm việc trên các bảng có kích thước lớn, khi làm việc với nhiều bảng cùng lúc, hoặc khi thực hiện xây dựng các mô hình phức tạp trên dữ liệu, bạn cần phải sử dụng các công cụ phân tích dữ liệu cao cấp hơn, như R là một ví dụ.</p>
 <p>Ngoài hỗ trợ việc đọc dữ liệu từ các file được lưu dưới các định dạng của Microsoft Excel, R còn có thể truy cập và làm việc trực tiếp trên các Speardsheet mà không cần sử dụng Microsoft Excel. Các thư viện bổ sung mà chúng thôi thường sử dụng để có thể thực thi câu lệnh từ R, đọc dữ liệu và kết nối với Microsoft Excel là các thư viện <span style="color: #640514; font-family: Source Code Pro;">readxl</span> và <span style="color: #640514; font-family: Source Code Pro;">openxlsx</span>. Thư viện <span style="color: #640514; font-family: Source Code Pro;">readxl</span> bao gồm các hàm đọc dữ liệu từ nhiều định dạng khác nhau từ Excel trong khi thư viện <span style="color: #640514; font-family: Source Code Pro;">openxlsx</span> có tính năng cho phép sử dụng các câu lệnh của R để điều khiển, tính toán, và định dạng các Spreadsheet mà không cần mở Microsoft Excel. Cách sử dụng các hàm cơ bản trong hai thư viện này được trình bày trong các phần dưới đây.</p>
-<div id="đọc-dữ-liệu-được-lưu-bằng-microsoft-excel" class="section level3" number="6.5.1">
+<div id="đọc-dữ-liệu-được-lưu-bằng-microsoft-excel" class="section level3" number="5.5.1">
 <h3>
-<span class="header-section-number">6.5.1</span> Đọc dữ liệu được lưu bằng Microsoft Excel<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%8Dc-d%E1%BB%AF-li%E1%BB%87u-%C4%91%C6%B0%E1%BB%A3c-l%C6%B0u-b%E1%BA%B1ng-microsoft-excel"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5.1</span> Đọc dữ liệu được lưu bằng Microsoft Excel<a class="anchor" aria-label="anchor" href="#%C4%91%E1%BB%8Dc-d%E1%BB%AF-li%E1%BB%87u-%C4%91%C6%B0%E1%BB%A3c-l%C6%B0u-b%E1%BA%B1ng-microsoft-excel"><i class="fas fa-link"></i></a>
 </h3>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">read_excel()</span> được sử dụng để đọc các file được lưu bằng Microsoft Excel. Hàm số sẽ hỗ trợ đọc các file có định dạng .xlsx, .xlsm, và .xls. Hai biến thể khác của hàm <span style="color: #640514; font-family: Source Code Pro;">read_excel()</span> là <span style="color: #640514; font-family: Source Code Pro;">read_xlsx()</span> và <span style="color: #640514; font-family: Source Code Pro;">read_xls()</span> được sử dụng khi chúng ta biết chính xác định dạng của file cần đọc. Các tham số thường được sử dụng trong các hàm này được liệt kê như sau:</p>
 <ul>
@@ -579,7 +570,7 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 </ul>
 <p>Ngoài ra hàm <span style="color: #640514; font-family: Source Code Pro;">read_excel()</span> còn có các tham số khác có thể hữu ích trong nhiều trường hợp như <span style="color: #640514; font-family: Source Code Pro;">col_types</span> hay <span style="color: #640514; font-family: Source Code Pro;">n_max</span>. Bạn đọc cần đọc mô tả của hàm số <span style="color: #640514; font-family: Source Code Pro;">read_excel()</span> để hiểu chính xác hơn về các tham số này.</p>
 <p>Tóm lại, để đọc dữ liệu được lưu bằng Microsoft Excel, bạn đọc cần lựa chọn hàm tương ứng với định dạng của file, sau đó sử dụng các tham số được liệt kê ở trên để điều chỉnh việc đọc dữ liệu. Các câu lệnh dưới đây được sử dụng để đọc dữ liệu nằm trong <span style="color: #640514; font-family: Source Code Pro;">range</span> được giới hạn từ cell A1 đến cell E100, trong sheet có tên <span style="color: #640514; font-family: Source Code Pro;">‘ws1’</span>, và file có tên <span style="color: #640514; font-family: Source Code Pro;">‘wb1.xlsx’</span></p>
-<div class="sourceCode" id="cb503"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb476"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="va">path</span><span class="op">)</span> <span class="co"># Đặt đường dẫn đến folder chứa file</span></span>
 <span><span class="va">dat</span><span class="op">&lt;-</span><span class="fu">read_xlsx</span><span class="op">(</span><span class="st">"wb1.xlsx"</span>,</span>
 <span>               sheet <span class="op">=</span> <span class="st">"ws1"</span>,</span>
@@ -587,28 +578,28 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 <span>               col_names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><em>Thực hành: bạn đọc hãy tìm các file dữ liệu có định dạng khác nhau được lưu bằng Microsoft Excel trên máy tính của mình và sử dụng các hàm tương ứng trong thư viện <span style="color: #640514; font-family: Source Code Pro;">readxl</span> để đọc dữ liệu.</em></p>
 </div>
-<div id="tương-tác-r-với-spreadsheet" class="section level3" number="6.5.2">
+<div id="tương-tác-r-với-spreadsheet" class="section level3" number="5.5.2">
 <h3>
-<span class="header-section-number">6.5.2</span> Tương tác R với Spreadsheet<a class="anchor" aria-label="anchor" href="#t%C6%B0%C6%A1ng-t%C3%A1c-r-v%E1%BB%9Bi-spreadsheet"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5.2</span> Tương tác R với Spreadsheet<a class="anchor" aria-label="anchor" href="#t%C6%B0%C6%A1ng-t%C3%A1c-r-v%E1%BB%9Bi-spreadsheet"><i class="fas fa-link"></i></a>
 </h3>
 <p>Ngoài việc lấy dữ liệu từ các file được lưu bằng Microsoft Excel, bạn đọc cũng có thể sử dụng R để thực hiện tính toán trên các spreardsheet và lưu lại kết quả dưới định dạng của Microsoft Excel mà không cần phải mở file trực tiếp . Các hàm số: <span style="color: #640514; font-family: Source Code Pro;">loadWorkbook()</span>, <span style="color: #640514; font-family: Source Code Pro;">addWorksheet()</span>, <span style="color: #640514; font-family: Source Code Pro;">writeData()</span>, và <span style="color: #640514; font-family: Source Code Pro;">saveWorkbook()</span> trong thư viện <span style="color: #640514; font-family: Source Code Pro;">openxlsx</span> có thể giúp chúng ta thực hiện được các yêu cầu này.</p>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">loadWorkbook()</span> đượpc sử dụng để mở một excel workbook và lưu thành một đối tượng kiểu <span style="color: #640514; font-family: Source Code Pro;">workbook</span> trên R. Câu lệnh dưới đây dùng để lấy thông tin từ file có tên là <span style="color: #640514; font-family: Source Code Pro;">‘mau bd.xlsx’</span> trong đường dẫn tương ứng và sau đó lưu thông tin vào một đối tượng kiểu <span style="color: #640514; font-family: Source Code Pro;">workbook</span> với tên <span style="color: #640514; font-family: Source Code Pro;">wb1</span>:</p>
-<div class="sourceCode" id="cb504"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wb1</span><span class="op">&lt;-</span><span class="fu">loadWorkbook</span><span class="op">(</span><span class="st">"../KHDL_KTKD Final/Dataset/mau bd.xlsx"</span><span class="op">)</span></span></code></pre></div>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">str()</span> có thể sử dụng để xem cấu trúc của đối tượng <span style="color: #640514; font-family: Source Code Pro;">wb1</span>. Bạn đọc cần lưu ý là các workbook lớn có thể khiến cho kết quả của hàm <span style="color: #640514; font-family: Source Code Pro;">str()</span> khi hiển thị trở nên khó hiểu.</p>
-<div class="sourceCode" id="cb505"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb478"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">wb1</span><span class="op">)</span></span></code></pre></div>
 <p>Bạn đọc có thể hiểu đối tượng kiểu <span style="color: #640514; font-family: Source Code Pro;">workbook</span> sẽ hoạt động giống như một đối tượng kiểu <span style="color: #640514; font-family: Source Code Pro;">list</span> mà mỗi <span style="color: #640514; font-family: Source Code Pro;">list</span> con tương ứng với một sheet của workbook đó. Bạn đọc có thể sử dụng hàm <span style="color: #640514; font-family: Source Code Pro;">names()</span> để biết <span style="color: #640514; font-family: Source Code Pro;">wb1</span> có những đối tượng con nào:</p>
-<div class="sourceCode" id="cb506"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">wb1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Workbook"
 ## attr(,"package")
 ## [1] "openxlsx"</code></pre>
-<div class="sourceCode" id="cb508"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">wb1</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] "Sheet"  "Sheet1"</code></pre>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">addWorksheet()</span> được sử dụng để thêm một <span style="color: #640514; font-family: Source Code Pro;">worksheet</span> vào trong một đối tượng <span style="color: #640514; font-family: Source Code Pro;">workbook</span>. Cấu trúc câu lệnh của hàm <code>addWworksheet()</code> khá đơn giản và các tham số được sử dụng chủ yếu là để thiết kế định dạng cho worksheet mới. Ví dụ, câu lệnh sau được sử dụng để thêm vào workbook <span style="color: #640514; font-family: Source Code Pro;">wb1</span> một worksheet có tên là <span style="color: #640514; font-family: Source Code Pro;">Sheet 2</span></p>
-<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">addWorksheet</span><span class="op">(</span><span class="va">wb1</span>, <span class="st">"Sheet 2"</span><span class="op">)</span></span></code></pre></div>
 <p>Hàm <span style="color: #640514; font-family: Source Code Pro;">writeData()</span> có thể được sử dụng để thay đổi và sửa thông tin trên đối tượng kiểu <span style="color: #640514; font-family: Source Code Pro;">workbook</span>. Các tham số thường được sử dụng với hàm <span style="color: #640514; font-family: Source Code Pro;">writeData()</span> bao gồm có:</p>
 <ul>
@@ -618,24 +609,24 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 <li>Tham số <span style="color: #640514; font-family: Source Code Pro;">rowNames</span>: : nhận giá trị bằng <span style="color: #640514; font-family: Source Code Pro;">TRUE</span> hoặc <span style="color: #640514; font-family: Source Code Pro;">FALSE</span>. Giá trị <span style="color: #640514; font-family: Source Code Pro;">TRUE</span> cho biết có ghi nhận thông tin tên hàng của dữ liệu (hoặc véc-tơ) vào cột đầu tiên của worksheet. Giá trị <span style="color: #640514; font-family: Source Code Pro;">FALSE</span> nghĩa là không ghi nhận tên hàng của dữ liệu hay véc-tơ vào hàng đầu tiên của worksheet.</li>
 </ul>
 <p>Đoạn câu lệnh dưới đây sẽ lưu thông tin của một đối tượng kiểu <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> có tên là <span style="color: #640514; font-family: Source Code Pro;">women</span> là một <span style="color: #640514; font-family: Source Code Pro;">data.frame</span> có sẵn vào <span style="color: #640514; font-family: Source Code Pro;">worksheet</span> có tên <span style="color: #640514; font-family: Source Code Pro;">Sheet 2</span> của <span style="color: #640514; font-family: Source Code Pro;">wb1</span>. Dữ liệu sẽ được ghi vào bắt đầu từ hàng thứ nhất và cột thứ nhất, với tên của các biến trong dữ liệu ở trên hàng thứ nhất:</p>
-<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">writeData</span><span class="op">(</span><span class="va">wb1</span>, <span class="st">"Sheet 2"</span>, <span class="va">women</span>,</span>
 <span>          startCol <span class="op">=</span> <span class="fl">1</span>, startRow <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>          colNames <span class="op">=</span> <span class="cn">TRUE</span>, rowNames <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Hàm số <span style="color: #640514; font-family: Source Code Pro;">saveWorkbook()</span> được sử dụng để lưu một đối tượng <span style="color: #640514; font-family: Source Code Pro;">workbook</span> thành một excel workbook có định dạng phù hợp:</p>
-<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb485"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">saveWorkbook</span><span class="op">(</span><span class="va">wb1</span>, <span class="st">"mau bd1.xlsx"</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Bạn đọc có thể sử dụng Microsoft Excel để mở Workbook có tên <em>‘mau bd1.xlsx’</em> và xem thông tin về dữ liệu <span style="color: #640514; font-family: Source Code Pro;">women</span> ở trong worksheet có tên là “Sheet 2” của Workbook này. Trong hàm <span style="color: #640514; font-family: Source Code Pro;">saveWorkbook()</span>, tham số <span style="color: #640514; font-family: Source Code Pro;">overwrite</span> nhận giá trị <span style="color: #640514; font-family: Source Code Pro;">TRUE</span> có nghĩa là nếu trong đường dẫn tương ứng đã có file có tên trùng với tên Workbook mới thì sẽ lưu Workbook mới thay thế cho Workbook cũ có trùng tên.</p>
 </div>
 </div>
-<div id="kết-nối-r-với-cơ-sở-dữ-liệu" class="section level2" number="6.6">
+<div id="kết-nối-r-với-cơ-sở-dữ-liệu" class="section level2" number="5.6">
 <h2>
-<span class="header-section-number">6.6</span> Kết nối R với cơ sở dữ liệu<a class="anchor" aria-label="anchor" href="#k%E1%BA%BFt-n%E1%BB%91i-r-v%E1%BB%9Bi-c%C6%A1-s%E1%BB%9F-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.6</span> Kết nối R với cơ sở dữ liệu<a class="anchor" aria-label="anchor" href="#k%E1%BA%BFt-n%E1%BB%91i-r-v%E1%BB%9Bi-c%C6%A1-s%E1%BB%9F-d%E1%BB%AF-li%E1%BB%87u"><i class="fas fa-link"></i></a>
 </h2>
 <p>Có thể sử dụng R như một công cụ để kết nối vào các cơ sở dữ liệu (<em>database</em>) và viết các câu lệnh truy vấn từ R vào các cơ sở dữ liệu. Để thực hiện được việc này, trước tiên, bạn đọc cần phải cài đặt một <em>Open Database Connectivity (ODBC)</em>, được gọi là kết nối cơ sở dữ liệu mở. Kết nối này giúp cho hệ điều hành máy tính mà chúng ta cài đặt phần mềm R tương thích với hệ quản lý cơ sở dữ liệu mà chúng ta cần sử dụng. Chúng tôi sử dụng hệ điều hành Windows và hệ quản trị cơ sở dữ liệu MySQL nên chúng tôi sẽ lựa chọn ODBC cho Windows và MySQL. Bạn đọc tham khảo các ODBC cho MySQL với các hệ điều hành khác (Linux, MacOS) tại địa chỉ</p>
 <p><a href="https://dev.mysql.com/downloads/connector/odbc/" class="uri">https://dev.mysql.com/downloads/connector/odbc/</a></p>
 <p>Tại thời điểm nhóm tác giả viết cuốn sách này, ODBC cho hệ điều hành Windows đang là phiên bản 8.0. Sau khi cài đặt ODBC lên hệ điều hành, bạn đọc đã có thể sử dụng R để truy cập vào một cơ sở dữ liệu và thực hiện các câu lệnh truy vấn dữ liệu trên cơ sở dữ liệu đó trên R với sự trợ giúp của thư viện <span style="color: #640514; font-family: Source Code Pro;">DBI</span>. Sau khi cài đặt thư viện <span style="color: #640514; font-family: Source Code Pro;">DBI</span>, bạn đọc cần tạo một kết nối giữa R và cơ sở dữ liệu bằng hàm <span style="color: #640514; font-family: Source Code Pro;">dbConnect()</span></p>
-<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org">DBI</a></span><span class="op">)</span></span>
 <span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu">odbc</span><span class="fu">::</span><span class="fu">odbc</span><span class="op">(</span><span class="op">)</span>, .connection_string <span class="op">=</span> <span class="st">"Driver={MySQL ODBC 8.0 Unicode Driver};"</span>,</span>
 <span>    Server <span class="op">=</span> <span class="st">"ten_serve"</span>, Database <span class="op">=</span> <span class="st">"db_name"</span>, UID <span class="op">=</span> <span class="st">"ID"</span>, PWD <span class="op">=</span> <span class="st">"password"</span><span class="op">)</span></span></code></pre></div>
@@ -647,10 +638,10 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 <li>Các tham số <span style="color: #640514; font-family: Source Code Pro;">UID</span> và <span style="color: #640514; font-family: Source Code Pro;">PWD</span> lần lượt là tên người sử dụng và mật mã được cấp để truy cập vào cơ sở dữ liệu.</li>
 </ul>
 <p>Sau khi đã tạo được kết nối, bạn đọc có thể thực hiện các câu lệnh truy vấn dữ liệu từ R với hàm <span style="color: #640514; font-family: Source Code Pro;">DBI::dbGetQuery()</span>. Quy tắc viết câu lệnh truy vấn từ R như sau</p>
-<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb487"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span><span class="op">(</span><span class="st">"Cau_lenh_truy_van"</span><span class="op">)</span></span></code></pre></div>
 <p>trong đó <span style="color: #640514; font-family: Source Code Pro;">Cau_lenh_truy_van</span> là câu lệnh truy vấn được lưu dưới dạng biến chuỗi ký tự. Ví dụ, bạn đọc muốn lấy ra thông tin của tất cả những khách hàng có ngày sinh là ngày 01 tháng 01 năm 2000 từ một bảng có tên <span style="color: #640514; font-family: Source Code Pro;">Life_Insured</span> từ một cơ sở dữ liệu có tên <span style="color: #640514; font-family: Source Code Pro;">tktdb</span>, bạn đọc viết câu lệnh như sau</p>
-<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb488"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sql</span> <span class="op">&lt;-</span> <span class="st">"select * from tktdb.Life_Insured</span></span>
 <span><span class="st">      where DOB = '2000-01-01'"</span> <span class="co"># Viết chính xác câu lệnh truy vấn trên MySQL</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbGetQuery.html">dbGetQuery</a></span><span class="op">(</span><span class="va">sql</span><span class="op">)</span> <span class="co"># df sẽ lưu kết quả của câu lệnh truy vấn</span></span></code></pre></div>
@@ -661,28 +652,28 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">5</span> Kiến thức R nâng cao</a></div>
-<div class="next"><a href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Tiền xử lý dữ liệu</a></div>
+<div class="prev"><a href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">4</span> Kiến thức R nâng cao</a></div>
+<div class="next"><a href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">6</span> Tiền xử lý dữ liệu</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r"><span class="header-section-number">6</span> Nhập dữ liệu vào R</a></li>
-<li><a class="nav-link" href="#gi%E1%BB%9Bi-thi%E1%BB%87u-chung"><span class="header-section-number">6.1</span> Giới thiệu chung</a></li>
+<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r"><span class="header-section-number">5</span> Nhập dữ liệu vào R</a></li>
+<li><a class="nav-link" href="#gi%E1%BB%9Bi-thi%E1%BB%87u-chung"><span class="header-section-number">5.1</span> Giới thiệu chung</a></li>
 <li>
-<a class="nav-link" href="#%C4%91%E1%BB%91i-t%C6%B0%E1%BB%A3ng-l%C6%B0u-d%E1%BB%AF-li%E1%BB%87u-trong-r"><span class="header-section-number">6.2</span> Đối tượng lưu dữ liệu trong R</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#data.frame"><span class="header-section-number">6.2.1</span> Data.frame</a></li>
-<li><a class="nav-link" href="#tibble"><span class="header-section-number">6.2.2</span> Tibble</a></li>
+<a class="nav-link" href="#%C4%91%E1%BB%91i-t%C6%B0%E1%BB%A3ng-l%C6%B0u-d%E1%BB%AF-li%E1%BB%87u-trong-r"><span class="header-section-number">5.2</span> Đối tượng lưu dữ liệu trong R</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#data.frame"><span class="header-section-number">5.2.1</span> Data.frame</a></li>
+<li><a class="nav-link" href="#tibble"><span class="header-section-number">5.2.2</span> Tibble</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-c%C3%B3-s%E1%BA%B5n"><span class="header-section-number">6.3</span> Nhập dữ liệu bằng hàm có sẵn</a></li>
-<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-readr."><span class="header-section-number">6.4</span> Nhập dữ liệu bằng thư viện readr.</a></li>
+<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-h%C3%A0m-c%C3%B3-s%E1%BA%B5n"><span class="header-section-number">5.3</span> Nhập dữ liệu bằng hàm có sẵn</a></li>
+<li><a class="nav-link" href="#nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-b%E1%BA%B1ng-th%C6%B0-vi%E1%BB%87n-readr."><span class="header-section-number">5.4</span> Nhập dữ liệu bằng thư viện readr.</a></li>
 <li>
-<a class="nav-link" href="#t%C6%B0%C6%A1ng-t%C3%A1c-gi%E1%BB%AFa-r-v%E1%BB%9Bi-microsoft-excel"><span class="header-section-number">6.5</span> Tương tác giữa R với Microsoft Excel</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#%C4%91%E1%BB%8Dc-d%E1%BB%AF-li%E1%BB%87u-%C4%91%C6%B0%E1%BB%A3c-l%C6%B0u-b%E1%BA%B1ng-microsoft-excel"><span class="header-section-number">6.5.1</span> Đọc dữ liệu được lưu bằng Microsoft Excel</a></li>
-<li><a class="nav-link" href="#t%C6%B0%C6%A1ng-t%C3%A1c-r-v%E1%BB%9Bi-spreadsheet"><span class="header-section-number">6.5.2</span> Tương tác R với Spreadsheet</a></li>
+<a class="nav-link" href="#t%C6%B0%C6%A1ng-t%C3%A1c-gi%E1%BB%AFa-r-v%E1%BB%9Bi-microsoft-excel"><span class="header-section-number">5.5</span> Tương tác giữa R với Microsoft Excel</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#%C4%91%E1%BB%8Dc-d%E1%BB%AF-li%E1%BB%87u-%C4%91%C6%B0%E1%BB%A3c-l%C6%B0u-b%E1%BA%B1ng-microsoft-excel"><span class="header-section-number">5.5.1</span> Đọc dữ liệu được lưu bằng Microsoft Excel</a></li>
+<li><a class="nav-link" href="#t%C6%B0%C6%A1ng-t%C3%A1c-r-v%E1%BB%9Bi-spreadsheet"><span class="header-section-number">5.5.2</span> Tương tác R với Spreadsheet</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#k%E1%BA%BFt-n%E1%BB%91i-r-v%E1%BB%9Bi-c%C6%A1-s%E1%BB%9F-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">6.6</span> Kết nối R với cơ sở dữ liệu</a></li>
+<li><a class="nav-link" href="#k%E1%BA%BFt-n%E1%BB%91i-r-v%E1%BB%9Bi-c%C6%A1-s%E1%BB%9F-d%E1%BB%AF-li%E1%BB%87u"><span class="header-section-number">5.6</span> Kết nối R với cơ sở dữ liệu</a></li>
 </ul>
 
       <div class="book-extra">
@@ -700,7 +691,7 @@ Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-07-30.</p>
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-08-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
