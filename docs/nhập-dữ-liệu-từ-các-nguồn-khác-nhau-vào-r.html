@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chương 4 Nhập dữ liệu từ các nguồn khác nhau vào R | bookdown-demo.knit</title>
+  <meta name="description" content="" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chương 4 Nhập dữ liệu từ các nguồn khác nhau vào R | bookdown-demo.knit" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chương 4 Nhập dữ liệu từ các nguồn khác nhau vào R | bookdown-demo.knit" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="kiến-thức-r-nâng-cao.html"/>
+<link rel="next" href="tiền-xử-lý-dữ-liệu.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">KHDL KT&KD</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html"><i class="fa fa-check"></i><b>1</b> Giới thiệu chung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#các-khái-niệm-cơ-bản-trong-khoa-học-dữ-liệu"><i class="fa fa-check"></i><b>1.1</b> Các khái niệm cơ bản trong khoa học dữ liệu</a></li>
+<li class="chapter" data-level="1.2" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#r-là-gì-và-tại-sao-lại-sử-dụng-r"><i class="fa fa-check"></i><b>1.2</b> R là gì và tại sao lại sử dụng R</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html"><i class="fa fa-check"></i><b>2</b> Kiến thức R cơ bản</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#làm-quen-với-các-dòng-lệnh-cơ-bản"><i class="fa fa-check"></i><b>2.1</b> Làm quen với các dòng lệnh cơ bản</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#sử-dụng-r-như-một-máy-tính-cầm-tay"><i class="fa fa-check"></i><b>2.1.1</b> Sử dụng R như một máy tính cầm tay</a></li>
+<li class="chapter" data-level="2.1.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#sử-dụng-cửa-sổ-script-để-viết-câu-lệnh"><i class="fa fa-check"></i><b>2.1.2</b> Sử dụng cửa sổ Script để viết câu lệnh</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-trong-ngôn-ngữ-r"><i class="fa fa-check"></i><b>2.2</b> Biến trong ngôn ngữ R</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-số"><i class="fa fa-check"></i><b>2.2.1</b> Biến kiểu số</a></li>
+<li class="chapter" data-level="2.2.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-logic"><i class="fa fa-check"></i><b>2.2.2</b> Biến kiểu logic</a></li>
+<li class="chapter" data-level="2.2.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-chuỗi-ký-tự"><i class="fa fa-check"></i><b>2.2.3</b> Biến kiểu chuỗi ký tự</a></li>
+<li class="chapter" data-level="2.2.4" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-thời-gian"><i class="fa fa-check"></i><b>2.2.4</b> Biến kiểu thời gian</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#véc-tơ"><i class="fa fa-check"></i><b>2.3</b> Véc-tơ</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#tại-sao-xử-lý-véc-tơ-là-thế-mạnh-của-r"><i class="fa fa-check"></i><b>2.3.1</b> Tại sao xử lý véc-tơ là thế mạnh của R?</a></li>
+<li class="chapter" data-level="2.3.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#khởi-tạo-véc-tơ-và-các-phép-toán-trên-véc-tơ"><i class="fa fa-check"></i><b>2.3.2</b> Khởi tạo véc-tơ và các phép toán trên véc-tơ</a></li>
+<li class="chapter" data-level="2.3.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#lấy-các-thành-phần-con-từ-một-véc-tơ"><i class="fa fa-check"></i><b>2.3.3</b> Lấy các thành phần con từ một véc-tơ</a></li>
+<li class="chapter" data-level="2.3.4" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#các-hàm-tạo-chỉ-số"><i class="fa fa-check"></i><b>2.3.4</b> Các hàm tạo chỉ số</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#ngôn-ngữ-lập-trình-r"><i class="fa fa-check"></i><b>2.4</b> Ngôn ngữ lập trình R</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#câu-lệnh-điều-kiện"><i class="fa fa-check"></i><b>2.4.1</b> Câu lệnh điều kiện</a></li>
+<li class="chapter" data-level="2.4.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#viết-vòng-lặp"><i class="fa fa-check"></i><b>2.4.2</b> Viết vòng lặp</a></li>
+<li class="chapter" data-level="2.4.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#hàm-số"><i class="fa fa-check"></i><b>2.4.3</b> Hàm số</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-cơ-bản"><i class="fa fa-check"></i><b>2.5</b> Đồ thị cơ bản</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-phân-tán"><i class="fa fa-check"></i><b>2.5.1</b> Đồ thị phân tán</a></li>
+<li class="chapter" data-level="2.5.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-cột"><i class="fa fa-check"></i><b>2.5.2</b> Đồ thị cột</a></li>
+<li class="chapter" data-level="2.5.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-hình-hộp"><i class="fa fa-check"></i><b>2.5.3</b> Đồ thị hình hộp</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#bài-tập"><i class="fa fa-check"></i><b>2.6</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html"><i class="fa fa-check"></i><b>3</b> Kiến thức R nâng cao</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#ma-trận"><i class="fa fa-check"></i><b>3.1</b> Ma trận</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#khởi-tạo-ma-trận"><i class="fa fa-check"></i><b>3.1.1</b> Khởi tạo ma trận</a></li>
+<li class="chapter" data-level="3.1.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#lấy-phần-tử-con-và-ma-trận-con-của-ma-trận."><i class="fa fa-check"></i><b>3.1.2</b> Lấy phần tử con và ma trận con của ma trận.</a></li>
+<li class="chapter" data-level="3.1.3" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#các-phép-toán-trên-ma-trận"><i class="fa fa-check"></i><b>3.1.3</b> Các phép toán trên ma trận</a></li>
+<li class="chapter" data-level="3.1.4" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#phép-nhân-ma-trận"><i class="fa fa-check"></i><b>3.1.4</b> Phép nhân ma trận</a></li>
+<li class="chapter" data-level="3.1.5" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#ma-trận-đường-chéo-và-ma-trận-đơn-vị"><i class="fa fa-check"></i><b>3.1.5</b> Ma trận đường chéo và ma trận đơn vị</a></li>
+<li class="chapter" data-level="3.1.6" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#định-thức-của-ma-trận"><i class="fa fa-check"></i><b>3.1.6</b> Định thức của ma trận</a></li>
+<li class="chapter" data-level="3.1.7" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#ma-trận-nghịch-đảo"><i class="fa fa-check"></i><b>3.1.7</b> Ma trận nghịch đảo</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#mảng-nhiều-chiều"><i class="fa fa-check"></i><b>3.2</b> Mảng nhiều chiều</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#khởi-tạo-mảng-nhiều-chiều"><i class="fa fa-check"></i><b>3.2.1</b> Khởi tạo mảng nhiều chiều</a></li>
+<li class="chapter" data-level="3.2.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#sử-dụng-mảng-nhiều-chiều-để-biến-đổi-dữ-liệu-kiểu-hình-ảnh"><i class="fa fa-check"></i><b>3.2.2</b> Sử dụng mảng nhiều chiều để biến đổi dữ liệu kiểu hình ảnh</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#list-trong-r"><i class="fa fa-check"></i><b>3.3</b> List trong R</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#khởi-tạo-list-và-chỉ-số-của-list."><i class="fa fa-check"></i><b>3.3.1</b> Khởi tạo list và chỉ số của list.</a></li>
+<li class="chapter" data-level="3.3.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#sử-dụng-list-trong-viết-hàm-số"><i class="fa fa-check"></i><b>3.3.2</b> Sử dụng list trong viết hàm số</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#các-hàm-họ-apply"><i class="fa fa-check"></i><b>3.4</b> Các hàm họ <code>apply()</code></a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#hàm-apply"><i class="fa fa-check"></i><b>3.4.1</b> Hàm <code>apply()</code></a></li>
+<li class="chapter" data-level="3.4.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#hàm-lapply-và-sapply."><i class="fa fa-check"></i><b>3.4.2</b> Hàm <code>lapply()</code> và <code>sapply()</code>.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#phụ-lục"><i class="fa fa-check"></i><b>3.5</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#advrappen1"><i class="fa fa-check"></i><b>3.5.1</b> Kiến thức nâng cao liên quan đến ma trận</a></li>
+<li class="chapter" data-level="3.5.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#advrappen2"><i class="fa fa-check"></i><b>3.5.2</b> Gradient, Hessian và Jacobian</a></li>
+<li class="chapter" data-level="3.5.3" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#thuật-toán-gradient-descent"><i class="fa fa-check"></i><b>3.5.3</b> Thuật toán gradient descent</a></li>
+<li class="chapter" data-level="3.5.4" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#advrappen3"><i class="fa fa-check"></i><b>3.5.4</b> Các giá trị đặc trưng của một dòng tiền tương lai</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#bài-tập-1"><i class="fa fa-check"></i><b>3.6</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><i class="fa fa-check"></i><b>4</b> Nhập dữ liệu từ các nguồn khác nhau vào R</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#đối-tượng-dùng-để-lưu-dữ-liệu-trong-r"><i class="fa fa-check"></i><b>4.1</b> Đối tượng dùng để lưu dữ liệu trong R</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#data.frame-là-gì"><i class="fa fa-check"></i><b>4.1.1</b> data.frame là gì?</a></li>
+<li class="chapter" data-level="4.1.2" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#tibble-là-một-cải-tiến-của-data.frame"><i class="fa fa-check"></i><b>4.1.2</b> <span class="math inline">\(tibble\)</span> là một cải tiến của <span class="math inline">\(data.frame\)</span>?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#nhập-dữ-liệu-bằng-hàm-sẵn-có."><i class="fa fa-check"></i><b>4.2</b> Nhập dữ liệu bằng hàm sẵn có.</a></li>
+<li class="chapter" data-level="4.3" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#nhập-dữ-liệu-bằng-thư-viện-textbfreadr."><i class="fa fa-check"></i><b>4.3</b> Nhập dữ liệu bằng thư viện <span class="math inline">\(\textbf{readr}\)</span>.</a></li>
+<li class="chapter" data-level="4.4" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#tương-tác-giữa-r-với-microsoft-excel"><i class="fa fa-check"></i><b>4.4</b> Tương tác giữa R với Microsoft Excel</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#đọc-dữ-liệu-lưu-dưới-định-dạng-của-excel"><i class="fa fa-check"></i><b>4.4.1</b> Đọc dữ liệu lưu dưới định dạng của Excel</a></li>
+<li class="chapter" data-level="4.4.2" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#tương-tác-với-microsoft-excel-bằng-thư-viện-textbfopenxlsx"><i class="fa fa-check"></i><b>4.4.2</b> Tương tác với Microsoft Excel bằng thư viện <span class="math inline">\(\textbf{openxlsx}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#kết-nối-r-với-cơ-sở-dữ-liệu"><i class="fa fa-check"></i><b>4.5</b> Kết nối R với cơ sở dữ liệu</a></li>
+<li class="chapter" data-level="4.6" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#thu-thập-dữ-liệu-từ-các-website"><i class="fa fa-check"></i><b>4.6</b> Thu thập dữ liệu từ các website</a></li>
+<li class="chapter" data-level="4.7" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#phụ-lục-1"><i class="fa fa-check"></i><b>4.7</b> Phụ lục</a></li>
+<li class="chapter" data-level="4.8" data-path="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#bài-tập-2"><i class="fa fa-check"></i><b>4.8</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html"><i class="fa fa-check"></i><b>5</b> Tiền xử lý dữ liệu</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#tiền-xử-lý-dữ-liệu-là-gì"><i class="fa fa-check"></i><b>5.1</b> Tiền xử lý dữ liệu là gì?</a></li>
+<li class="chapter" data-level="5.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#định-dạng-lại-các-cột-dữ-liệu-sử-dụng-thư-viện-textbfreadr"><i class="fa fa-check"></i><b>5.2</b> Định dạng lại các cột dữ liệu sử dụng thư viện <span class="math inline">\(\textbf{readr}\)</span></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#quy-tắc-định-đạng-cột-của-textbfreadr"><i class="fa fa-check"></i><b>5.2.1</b> Quy tắc định đạng cột của <span class="math inline">\(\textbf{readr}\)</span></a></li>
+<li class="chapter" data-level="5.2.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#định-dạng-cột-bằng-các-hàm-parse_"><i class="fa fa-check"></i><b>5.2.2</b> Định dạng cột bằng các hàm <code>parse_*()</code></a></li>
+<li class="chapter" data-level="5.2.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#định-dạng-cột-kiểu-chuỗi-ký-tự"><i class="fa fa-check"></i><b>5.2.3</b> Định dạng cột kiểu chuỗi ký tự</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#giá-trị-ngoại-lai-và-giá-trị-không-quan-sát-được."><i class="fa fa-check"></i><b>5.3</b> Giá trị ngoại lai và giá trị không quan sát được.</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#giá-trị-ngoại-lai."><i class="fa fa-check"></i><b>5.3.1</b> Giá trị ngoại lai.</a></li>
+<li class="chapter" data-level="5.3.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#cách-phát-hiện-giá-trị-ngoại-lai"><i class="fa fa-check"></i><b>5.3.2</b> Cách phát hiện giá trị ngoại lai</a></li>
+<li class="chapter" data-level="5.3.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xử-lý-giá-trị-ngoại-lai."><i class="fa fa-check"></i><b>5.3.3</b> Xử lý giá trị ngoại lai.</a></li>
+<li class="chapter" data-level="5.3.4" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xử-lý-giá-trị-không-quan-sát-được."><i class="fa fa-check"></i><b>5.3.4</b> Xử lý giá trị không quan sát được.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#phụ-lục-2"><i class="fa fa-check"></i><b>5.4</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#box-cox-transformation"><i class="fa fa-check"></i><b>5.4.1</b> Box-Cox transformation</a></li>
+<li class="chapter" data-level="5.4.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#kolmogorov-smirnov-tests"><i class="fa fa-check"></i><b>5.4.2</b> Kolmogorov-Smirnov tests</a></li>
+<li class="chapter" data-level="5.4.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#pearsons-chi-squared-tests"><i class="fa fa-check"></i><b>5.4.3</b> Pearson’s Chi-squared tests</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#bài-tập-3"><i class="fa fa-check"></i><b>5.5</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html"><a href="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html"><i class="fa fa-check"></i><b>6</b> Biến đổi dữ liệu bằng thư viện <span class="math inline">\(dplyr\)</span></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html"><a href="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html#thêm-biến-bằng-hàm-mutate"><i class="fa fa-check"></i><b>6.1</b> Thêm biến bằng hàm <span class="math inline">\(mutate()\)</span></a></li>
+<li class="chapter" data-level="6.2" data-path="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html"><a href="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html#lựa-chọn-cột-bằng-hàm-select"><i class="fa fa-check"></i><b>6.2</b> Lựa chọn cột bằng hàm <span class="math inline">\(select()\)</span></a></li>
+<li class="chapter" data-level="6.3" data-path="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html"><a href="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html#lọc-quan-sát-bằng-hàm-filter"><i class="fa fa-check"></i><b>6.3</b> Lọc quan sát bằng hàm <code>filter()</code></a></li>
+<li class="chapter" data-level="6.4" data-path="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html"><a href="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html#sắp-xếp-dữ-liệu-bằng-hàm-arrange"><i class="fa fa-check"></i><b>6.4</b> Sắp xếp dữ liệu bằng hàm <code>arrange()</code></a></li>
+<li class="chapter" data-level="6.5" data-path="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html"><a href="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html#kết-hợp-các-hàm-bằng-toán-tử-pipe"><i class="fa fa-check"></i><b>6.5</b> Kết hợp các hàm bằng toán tử pipe (<code>\%&gt;\%</code>)</a></li>
+<li class="chapter" data-level="6.6" data-path="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html"><a href="biến-đổi-dữ-liệu-bằng-thư-viện-dplyr.html#tổng-hợp-dữ-liệu-bằng-group_by-và-summarise"><i class="fa fa-check"></i><b>6.6</b> Tổng hợp dữ liệu bằng <span class="math inline">\(group\_by()\)</span> và <span class="math inline">\(summarise()\)</span></a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chương 4</span> Nhập dữ liệu từ các nguồn khác nhau vào R<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Trong phần này của cuốn sách, bạn sẽ tìm hiểu về các kỹ thuật phân tích dữ liệu, bao gồm có tiền xử lý dữ liệu, sắp xếp dữ liệu và trực quan hóa dữ liệu.</p>
+<ul>
+<li><p>Tiền xử lý dữ liệu bao gồm tất cả các kỹ thuật biến đổi dữ liệu thô thành định dạng để có thể thực hiện phân tích. Dữ liệu thô bao gồm dữ liệu nhận được từ người khác hoặc dữ liệu mà người phân tích tự tìm kiếm từ các nguồn khác nhau.</p></li>
+<li><p>Sắp xếp dữ liệu bao gồm các bước biến đổi, chuyển hóa dữ liệu thành định dạng để có thể trực quan hóa, thực hiện phân tích tính toán và xây dựng mô hình trên dữ liệu.</p></li>
+<li><p>Trực quan hóa dữ liệu là một nghệ thuật biến đổi dữ liệu (thường được hiển thị dưới dạng các con số, chuỗi ký tự,…) thành các biểu đồ, đồ thị hay hình ảnh sử dụng hình dạng, màu sắc, khoảng cách để con người dễ dàng nhận thức và hiểu về dữ liệu. Trực quan hóa dữ liệu còn có thể giúp người phân tích tìm ra những giá trị ẩn chứa trong dữ liệu.</p></li>
+</ul>
+<p>Tuy nhiên, trước khi có thể bắt đầu bước tiền xử lý, chúng ta cần nhập dữ liệu vào R trước. Trong một vài trường hợp, nhập dữ liệu chỉ đơn giản là nhập từ một bảng excel có sẵn. Trong một số trường hợp khác, quá trình nhập dữ liệu có thể phức tạp hơn, chẳng hạn như từ một (vài) phần nào đó trong một hoặc nhiều bảng excel, hoặc từ một cơ sở dữ liệu được lưu trữ trong các máy tính server, hoặc đôi khi cần có thể cần viết các vòng lặp để lấy dữ liệu từ các trình duyệt web. Đây là chủ đề mà chúng ta sẽ thảo luận trong chương đầu của phần phân tích dữ liệu.</p>
+<div id="đối-tượng-dùng-để-lưu-dữ-liệu-trong-r" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Đối tượng dùng để lưu dữ liệu trong R<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#đối-tượng-dùng-để-lưu-dữ-liệu-trong-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Hai kiểu đối tượng thường được dùng để lưu dữ liệu trong R là data.frame và tibble. Chúng ta sẽ thảo luận về data.frame trước vì đây là kiểu lưu dữ liệu phổ biến và xuất hiện trước. Đối tượng kiểu tibble, với một vài ưu điểm hơn data.frame, sẽ được thảo luận trong phần tiếp theo.</p>
+<div id="data.frame-là-gì" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> data.frame là gì?<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#data.frame-là-gì" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Data.frame là đối tượng phổ biến nhất để lưu trữ dữ liệu trên môi trường làm việc của R. Hiểu một cách đơn giản, một data.frame giống như một bảng excel mà mỗi cột tương ứng với một véc-tơ và mỗi dòng tương ứng với một quan sát. Ngay khi cài đặt R, đã có nhiều đối tượng là dữ liệu kiểu data.frame đã được lưu trữ trong R và đã sẵn sàng được sử dụng mà không cần gọi thư viện bổ sung. Để biết trên cửa sổ Rstudio đang sử dụng có những dữ liệu nào, bạn đọc sử dụng câu lệnh <code>data()</code></p>
+<div class="sourceCode" id="cb443"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb443-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb443-1" tabindex="-1"></a><span class="fu">data</span>()</span></code></pre></div>
+<p>Bạn đọc có thể thấy trên cửa sổ <span class="math inline">\(script\)</span> xuất hiện một cửa sổ mới với danh sách tất cả các dữ liệu sẵn có trong R và những dữ liệu sẵn có trong các thư viện được cài đặt thêm đang được gọi ra trên cửa sổ làm việc. Để biết trong một thư viện đang được gọi ra trên cửa sổ Rstudio có những dữ liệu nào, bạn đọc có thể sử dụng lệnh <code>data()</code> kèm với tùy chọn <code>package</code> như sau:</p>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb444-1" tabindex="-1"></a><span class="fu">library</span>(dslabs) <span class="co"># Gọi thư viện dslabs </span></span>
+<span id="cb444-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb444-2" tabindex="-1"></a><span class="fu">data</span>(<span class="at">package =</span> <span class="st">&quot;dslabs&quot;</span>) <span class="co"># Liệt kê những data trong dslabs</span></span></code></pre></div>
+<p>Trong danh sách dữ liệu của thư viện <span class="math inline">\(\textf{dslabs}\)</span>, bạn đọc có thể thấy một đối tượng có tên <span class="math inline">\(\textbf{murders}\)</span>. Đây là một data.frame. Thật vậy, bạn đọc có thể kiểm tra kiểu của đối tượng này bằng hàm <code>class()</code>:</p>
+<div class="sourceCode" id="cb445"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb445-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb445-1" tabindex="-1"></a><span class="fu">class</span>(murders) <span class="co"># Trả lại kết quả là một data frame</span></span></code></pre></div>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<p>Thông thường để có hiểu biết ban đầu về một đối tượng kiểu data.frame, bạn đọc nên bắt đầu bằng đọc mô tả về dữ liệu (nếu có) bằng cách sử dụng <code>?</code> nếu đây là một dữ liệu có sẵn trong các thư viện của R:</p>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb447-1" tabindex="-1"></a>? murders <span class="co"># Cửa sổ help sẽ hiển thị mô tả về murders</span></span></code></pre></div>
+<p>Nhóm các câu lệnh dưới đây giúp bạn đọc hiểu được cấu trúc của dữ liệu trong một data.frame:</p>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb448-1" tabindex="-1"></a><span class="fu">View</span>(murders) <span class="co"># Hiển thị data.frame dưới dạng bảng </span></span>
+<span id="cb448-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb448-2" tabindex="-1"></a><span class="fu">head</span>(murders,<span class="at">k =</span> <span class="dv">5</span>) <span class="co"># Hiển thị k dòng đầu tiên của data.frame</span></span>
+<span id="cb448-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb448-3" tabindex="-1"></a><span class="fu">str</span>(murders) <span class="co"># Hiển thị cấu trúc của data.frame</span></span></code></pre></div>
+<ul>
+<li><p>Hàm <code>head()</code> hiển thị nhanh các dòng đầu tiên của dữ liệu cho bạn đọc cái nhìn ban đầu, tuy nhiên hàm <code>head()</code> không hiệu quả khi dữ liệu có nhiều cột.</p></li>
+<li><p>Hàm <code>View()</code> cho hiển thị về dữ liệu dễ nhìn nhất. Hàm <code>View()</code> có hạn chế khi dữ liệu có quá nhiều dòng hoặc nhiều cột và thời gian hiển thị lâu hơn so với <code>head()</code>.</p></li>
+<li><p>Hàm <code>str()</code> là cách hiển thị dữ liệu một cách tổng quát và hiệu quả hơn so với <code>head()</code> hoặc <code>View()</code>. Kết quả từ hàm <code>str()</code> với dữ liệu <span class="math inline">\(\textbf{murders}\)</span> cho thấy đây là một dữ liệu dạng bảng với 5 cột (còn gọi là variables) và 51 dòng (còn gọi là observations). Ngoài ra, sử dụng hàm <code>str()</code> bạn đọc có thể thấy được kiểu dữ liệu của từng cột; chẳng hạn như cột state là cột chứa dữ liệu kiểu chuỗi ký tự; cột region có kiểu dữ liệu là factor,…</p></li>
+</ul>
+<p>Một hàm số hiệu quả khác thường được sử dụng để bạn đọc có cái nhìn tổng quan về dữ liệu là hàm <code>summary()</code>. Chúng ta có thể quan sát kết quả khi sử dụng hàm <code>summary()</code> với dữ liệu <span class="math inline">\(\textbf{murders}\)</span> như sau</p>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb449-1" tabindex="-1"></a><span class="fu">summary</span>(murders)</span></code></pre></div>
+<pre><code>##     state               abb                      region     population      
+##  Length:51          Length:51          Northeast    : 9   Min.   :  563626  
+##  Class :character   Class :character   South        :17   1st Qu.: 1696962  
+##  Mode  :character   Mode  :character   North Central:12   Median : 4339367  
+##                                        West         :13   Mean   : 6075769  
+##                                                           3rd Qu.: 6636084  
+##                                                           Max.   :37253956  
+##      total       
+##  Min.   :   2.0  
+##  1st Qu.:  24.5  
+##  Median :  97.0  
+##  Mean   : 184.4  
+##  3rd Qu.: 268.0  
+##  Max.   :1257.0</code></pre>
+<p>Hàm <code>summary()</code> cho biết thông chi tiết hơn về giá trị trong mỗi cột.</p>
+<ul>
+<li><p>Cột state và cột abb là cột mà giá trị trong đó là kiểu chuỗi ký tự;</p></li>
+<li><p>Cột region là kiểu factor, có thể nhận một trong bốn giá trị là Northeast, South, North Central, hoặc West và cho biết mỗi giá trị xuất hiện bao nhiêu lần trong cột dữ liệu.</p></li>
+<li><p>Các cột population và total là các cột kiểu số. Chúng ta có thể thấy các giá trị lớn nhất, nhỏ nhất, giá trị trung bình và các giá trị tứ phân vị. Bạn đọc có thể hình dung ra phân phối của các giá trị trong cột giá trị kiểu số.</p></li>
+<li><p>Trong trường hợp cột có giá trị không quan sát được, hàm <code>summary()</code> cũng sẽ cho biết có bao nhiêu giá trị này trong mỗi cột.</p></li>
+</ul>
+<p>Để lấy ra một cột dữ liệu của một data.frame chúng ta sử dụng <span class="math inline">\(\$\)</span>. Chẳng hạn như để lấy giá trị cột population của dữ liệu murders:</p>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb451-1" tabindex="-1"></a>murders<span class="sc">$</span>population <span class="co"># in ra màn hình cột population của data.frame murders</span></span></code></pre></div>
+<p>Như chúng tôi đã đề cập, kiểu dữ liệu của cột <span class="math inline">\(region\)</span> là kiểu <span class="math inline">\(factor\)</span>. Về bản chất, véc-tơ kiểu <span class="math inline">\(factor\)</span> là một véc-tơ kiểu chuỗi ký tự nhưng được lưu theo một cách hiệu quả hơn, tiết kiệm bộ nhớ, và thuận lợi cho người sử dụng khi phân tích dữ liệu.</p>
+<ul>
+<li>Véc-tơ kiểu factor sẽ tương ứng với véc-tơ kiểu chuỗi ký tự nhưng được lưu dưới dạng vec-tơ số tự nhiên, bắt đầu từ 1 đến số lượng chuỗi ký tự khác biệt xuất hiện trong véc-tơ và mỗi chuỗi ký tự sẽ được cho tương ứng với một số tự nhiên. Các lưu này hiệu quả hơn về bộ nhớ khi làm việc với các véc-tơ kiểu chuỗi ký tự nếu có nhiều chuỗi ký tự bị lặp lại trong véc-tơ. Để biết một vec-tơ dạng factor có bao nhiêu giá trị riêng biệt, mỗi giá trị riêng biệt được cho tương ứng với số tự nhiên nào, và mỗi giá trị riêng biệt được lặp lại bao nhiêu lần trong véc-tơ, bạn đọc sử dụng hàm <code>summary()</code> hoặc hàm <code>table()</code></li>
+</ul>
+<div class="sourceCode" id="cb452"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb452-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb452-1" tabindex="-1"></a><span class="co"># summary(murders$region) # Tổng hợp thông tin của vec-tơ dạng factor</span></span>
+<span id="cb452-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb452-2" tabindex="-1"></a><span class="fu">table</span>(murders<span class="sc">$</span>region) <span class="co"># cho kết quả tương tự như summary</span></span></code></pre></div>
+<pre><code>## 
+##     Northeast         South North Central          West 
+##             9            17            12            13</code></pre>
+<p>Kết quả từ hàm <code>table()</code> cho thấy cột <span class="math inline">\(region\)</span> có 4 giá trị; cách cho tương ứng mỗi chuỗi ký tự với các số lần lượt là <span class="math inline">\(Northeast \rightarrow 1\)</span> ; <span class="math inline">\(South \rightarrow 2\)</span>; <span class="math inline">\(North Central \rightarrow 3\)</span>, và <span class="math inline">\(West \rightarrow 4\)</span>; tần suất xuất hiện của mỗi giá trị cũng được cho trong bảng: có 9 giá trị <span class="math inline">\(Northeast\)</span>, có 17 giá trị <span class="math inline">\(South\)</span>, có 12 giá trị <span class="math inline">\(North Central\)</span>, và 13 giá trị <span class="math inline">\(West\)</span>.</p>
+<p>Một lưu ý khác khi sử dụng véc-tơ kiểu factor thay vì kiểu chuỗi ký tự nghĩa là bạn đọc đang định nghĩa dữ liệu là kiểu biến rời rạc hay các biến định tính. Các biến này có thể trực tiếp đưa vào các mô hình và không cần thực hiện thêm biến đổi nào khác.</p>
+<p>Trong hầu hết các trường hợp, bạn đọc sẽ dùng R để xử lý dữ liệu từ nguồn ngoài vào. Chúng ta sẽ sử dụng các hàm có sẵn trong R đọc dữ liệu và kết quả đầu ra của hàm này sẽ là các <span class="math inline">\(data.frame\)</span>. Trong một vài trường hợp, bạn đọc sẽ phải tự tạo <span class="math inline">\(data.frame\)</span>. Câu lệnh để tạo một <span class="math inline">\(data.frame\)</span> (tên <span class="math inline">\(df\)</span>) với các cột có tên lần lượt là <span class="math inline">\(id\)</span>, <span class="math inline">\(names\)</span>, <span class="math inline">\(grades\)</span>, và <span class="math inline">\(result\)</span> được viết như sau:</p>
+<div class="sourceCode" id="cb454"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb454-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb454-1" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">data.frame</span>( <span class="co"># Hàm data.frame() dùng để tạo data.frame tên df</span></span>
+<span id="cb454-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb454-2" tabindex="-1"></a>      <span class="at">id =</span> <span class="fu">paste</span>(<span class="st">&quot;SV&quot;</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="co"># Cột có tên là ID nhận giá trị &quot;SV1&quot;,...,&quot;SV5&quot;</span></span>
+<span id="cb454-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb454-3" tabindex="-1"></a>      <span class="at">names =</span> <span class="fu">c</span>(<span class="st">&quot;You&quot;</span>, <span class="st">&quot;Me&quot;</span>, <span class="st">&quot;Him&quot;</span>, <span class="st">&quot;Her&quot;</span>, <span class="st">&quot;John&quot;</span>), <span class="co"># Cột names</span></span>
+<span id="cb454-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb454-4" tabindex="-1"></a>      <span class="at">grades =</span> <span class="fu">c</span>(<span class="fl">5.5</span>, <span class="fl">1.5</span>, <span class="fl">10.0</span>, <span class="fl">9.0</span>, <span class="fl">7.6</span>), <span class="co"># Cột grades</span></span>
+<span id="cb454-5"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb454-5" tabindex="-1"></a>      <span class="at">result =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>,<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)) <span class="co"># Cột result</span></span></code></pre></div>
+<p>Đối tượng kiểu <span class="math inline">\(data.frame\)</span> có một vài nhược điểm khi sử dụng để lưu dữ liệu từ các nguồn khác nhau vào R. Do đó kiểu đối tượng mới được phát triển để khắc phục các nhược điểm này, đó là <span class="math inline">\(tibble\)</span>. Phần tiếp theo chúng ta sẽ thảo luận về đối tượng này.</p>
+</div>
+<div id="tibble-là-một-cải-tiến-của-data.frame" class="section level3 hasAnchor" number="4.1.2">
+<h3><span class="header-section-number">4.1.2</span> <span class="math inline">\(tibble\)</span> là một cải tiến của <span class="math inline">\(data.frame\)</span>?<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#tibble-là-một-cải-tiến-của-data.frame" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Về cơ bản một <span class="math inline">\(tibble\)</span> là cũng có thể hiểu là một <span class="math inline">\(data.frame\)</span> với một vài điều chỉnh để giúp việc lấy dữ liệu từ nguồn bên ngoài vào và phân tích trở nên dễ dàng hơn. Thực tế thì ở mức độ phân tích dữ liệu thông thường, sự khác khác nhau giữa <span class="math inline">\(tibble\)</span> và <span class="math inline">\(data.frame\)</span> là không đáng kể. Để liệt kê ra sự khác nhau cơ bản giữu hai đối tượng này thì có thể kể đến:</p>
+<ul>
+<li>Thứ nhất: khi in một <span class="math inline">\(tibble\)</span> ra màn hình sẽ chỉ có 10 dòng đầu được hiển thị và số lượng cột của một <span class="math inline">\(tibble\)</span> luôn luôn khớp với kích thước cửa sổ R Console, đồng thời kiểu dữ liệu của mỗi cột sẽ được hiển thị ngay dưới tên cột</li>
+</ul>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb455-1" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb455-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb455-2" tabindex="-1"></a>trump_tweets <span class="co"># in một data frame ra màn hình sẽ không hiệu quả</span></span>
+<span id="cb455-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb455-3" tabindex="-1"></a><span class="co"># Hàm as_tibble đổi data.frame sang tibble</span></span>
+<span id="cb455-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb455-4" tabindex="-1"></a><span class="fu">as_tibble</span>(trump_tweets) <span class="co"># Hiển thị 1 tibble hiệu quả hơn.</span></span></code></pre></div>
+<ul>
+<li><p>Thứ hai: khi lấy dữ liệu từ bên ngoài vào trong R, <span class="math inline">\(tibble\)</span> không đổi tên cột dù tên cột không phải là kiểu tên được phép trong R. Đồng thời, khi tạo một <span class="math inline">\(tibble\)</span>, bạn đọc có thể đặt tên cột là một kiểu tên không được phép sử dụng với tên biến thông thường.</p></li>
+<li><p>Cuối cùng, khi dữ liệu từ bên ngoài được lưu vào một <span class="math inline">\(tibble\)</span>, kiểu dữ liệu sẽ không thay đổi.</p></li>
+</ul>
+<p>Để tạo một <span class="math inline">\(tibble\)</span>, bạn đọc có thể sử dụng hàm <code>tibble()</code>. Bạn đọc có thể tạo ra một dữ liệu có 3 cột mà tên các cột đều không thể được sử dụng làm tên biến trong R như sau</p>
+<div class="sourceCode" id="cb456"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb456-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb456-1" tabindex="-1"></a>tib<span class="ot">&lt;-</span><span class="fu">tibble</span>( <span class="co"># hàm tibble dùng để tạo tibble</span></span>
+<span id="cb456-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb456-2" tabindex="-1"></a>  <span class="st">&quot;:D&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="co"># có thể dùng tên cột là &quot;:D&quot;</span></span>
+<span id="cb456-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb456-3" tabindex="-1"></a>  <span class="st">&quot;:p&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>,<span class="st">&quot;Y&quot;</span>,<span class="st">&quot;Z&quot;</span>), <span class="co"># có thể dùng tên cột là &quot;:p&quot;</span></span>
+<span id="cb456-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb456-4" tabindex="-1"></a>  <span class="st">&quot;1&quot;</span> <span class="ot">=</span> <span class="dv">2</span> <span class="co"># có thể dùng tên cột là &quot;1&quot;</span></span>
+<span id="cb456-5"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb456-5" tabindex="-1"></a>)</span>
+<span id="cb456-6"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb456-6" tabindex="-1"></a>tib</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 3
+##    `:D` `:p`    `1`
+##   &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt;
+## 1     1 X         2
+## 2     2 Y         2
+## 3     3 Z         2</code></pre>
+<p>Nếu thay thế đoạn lệnh trên bằng hàm <code>data.frame()</code> thì hàm <span class="math inline">\(data.frame\)</span> được tạo thành sẽ tự động thay đổi tên cột</p>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb458-1" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">data.frame</span>( <span class="co"># tạo data.frame thay vì tibble</span></span>
+<span id="cb458-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb458-2" tabindex="-1"></a>  <span class="st">&quot;:D&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>), <span class="co"># data.frame sẽ đổi tên cột cho phù hợp</span></span>
+<span id="cb458-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb458-3" tabindex="-1"></a>  <span class="st">&quot;:p&quot;</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;X&quot;</span>,<span class="st">&quot;Y&quot;</span>,<span class="st">&quot;Z&quot;</span>), <span class="co"># data.frame sẽ đổi tên cột cho phù hợp</span></span>
+<span id="cb458-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb458-4" tabindex="-1"></a>  <span class="st">&quot;1&quot;</span> <span class="ot">=</span> <span class="dv">2</span> <span class="co"># data.frame sẽ đổi tên cột cho phù hợp</span></span>
+<span id="cb458-5"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb458-5" tabindex="-1"></a>)</span>
+<span id="cb458-6"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb458-6" tabindex="-1"></a>df <span class="co"># hãy quan sát xem tên cột của df thay đổi như thế nào</span></span></code></pre></div>
+<pre><code>##   X.D X.p X1
+## 1   1   X  2
+## 2   2   Y  2
+## 3   3   Z  2</code></pre>
+<p>Bạn đọc có thể thấy rằng dữ liệu có tên <span class="math inline">\(df\)</span> nếu được lưu dưới dạng <span class="math inline">\(data.frame\)</span> thì tên các cột đã được tự động thay đổi cho thích hợp với tên biến. Những điểm khác nhau giữa <span class="math inline">\(tibble\)</span> và <span class="math inline">\(data.frame\)</span> sẽ được tiếp tục thảo luận ở các phần tiếp theo khi chúng tôi giới thiệu về các hàm dùng để nhập dữ liệu vào R.</p>
+</div>
+</div>
+<div id="nhập-dữ-liệu-bằng-hàm-sẵn-có." class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Nhập dữ liệu bằng hàm sẵn có.<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#nhập-dữ-liệu-bằng-hàm-sẵn-có." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+Danh sách các hàm sẵn có trong R và kiểu dữ liệu tương ứng có thể nhập được liệt kê trong các bảng <a href="#tab:tbptdl001"><strong>??</strong></a>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+(#tab:tbptdl001 )Danh sách hàm có sẵn để lấy dữ liệu từ nguồn bên ngoài
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Hàm số
+</th>
+<th style="text-align:left;">
+Sử dụng trong trường hợp
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+read.table()
+</td>
+<td style="text-align:left;">
+Đọc các file có đuôi dạng .txt
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+read.csv()
+</td>
+<td style="text-align:left;">
+file dạng csv mà giá trị được ngăn cách bằng dấu ‘,’
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+read.csv2()
+</td>
+<td style="text-align:left;">
+file dạng csv mà giá trị được ngăn cách bằng dấu ‘;’
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+read.delim()
+</td>
+<td style="text-align:left;">
+Các file dạng text, các giá trị cách nhau bởi ký tự mà bạn đọc định nghĩa
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+readRDS()
+</td>
+<td style="text-align:left;">
+Dữ liệu được lưu dưới dạng .rds
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+load()
+</td>
+<td style="text-align:left;">
+Dữ liệu kiểu data có sẵn trong R
+</td>
+</tr>
+</tbody>
+</table>
+<p>Khi lấy dữ liệu từ các nguồn bên ngoài vào bằng các câu lệnh có sẵn, tên của các cột dữ liệu có thể bị thay đổi do một số tên cột không thể được dùng để đặt tên của <span class="math inline">\(data.frame\)</span>. Do đó, bạn đọc hãy luôn kiểm tra lại tên các cột dữ liệu sau khi đọc. Hàm <code>names()</code> cho biết tên các cột của một <span class="math inline">\(data.frame\)</span>.</p>
+<div class="sourceCode" id="cb460"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb460-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb460-1" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="at">header =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb460-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb460-2" tabindex="-1"></a>              <span class="at">text =</span> <span class="st">&quot;@1,@2 </span></span>
+<span id="cb460-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb460-3" tabindex="-1"></a><span class="st">                      1,2 </span></span>
+<span id="cb460-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb460-4" tabindex="-1"></a><span class="st">                      3,4&quot;</span>) <span class="co"># sử dụng read.csv để đọc đoạn text</span></span>
+<span id="cb460-5"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb460-5" tabindex="-1"></a><span class="fu">names</span>(df) <span class="co"># hiển thị tên của các cột</span></span></code></pre></div>
+<pre><code>## [1] &quot;X.1&quot; &quot;X.2&quot;</code></pre>
+<p>Để đổi tên của <span class="math inline">\(data.frame\)</span> ở trên, bạn đọc cần gán <span class="math inline">\(names(df)\)</span> bằng một véc-tơ chứa tên các cột. Hãy đảm bảo rằng độ dài của vec-tơ chứa tên cột bằng số cột của <span class="math inline">\(data.frame\)</span></p>
+<div class="sourceCode" id="cb462"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb462-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb462-1" tabindex="-1"></a><span class="fu">names</span>(df)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;@1&quot;</span>,<span class="st">&quot;@2&quot;</span>) <span class="co"># đổi tên 2 cột của data.frame df</span></span>
+<span id="cb462-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb462-2" tabindex="-1"></a>df <span class="co"># in data.frame df</span></span></code></pre></div>
+<pre><code>##   @1 @2
+## 1  1  2
+## 2  3  4</code></pre>
+</div>
+<div id="nhập-dữ-liệu-bằng-thư-viện-textbfreadr." class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Nhập dữ liệu bằng thư viện <span class="math inline">\(\textbf{readr}\)</span>.<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#nhập-dữ-liệu-bằng-thư-viện-textbfreadr." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Các câu lệnh để đọc dữ liệu của thư viện <span class="math inline">\(readr\)</span> tương tự như các câu lệnh sẵn có, nhưng đặc biệt hiệu quả hơn về thời gian đọc dữ liệu. Chẳng hạn như hàm số dùng để đọc các file định dạng <span class="math inline">\(csv\)</span> trong thư viện <span class="math inline">\(readr\)</span> là hàm <code>read_csv()</code> được dùng thay thế cho <code>read.csv()</code> khi chúng ta cần đọc các file có dung lượng lớn. Để so sánh thời gian đọc dữ liệu của hàm <code>read_csv()</code> và hàm <code>read.csv()</code> bạn đọc có thể thực hiện ví dụ sau: chúng ta sẽ tạo hai file dữ liệu bao gồm <code>test1.csv</code> và <code>test2.csv</code> là các file chứa các số được sinh ngẫu nhiên. Dữ liệu <code>test1.csv</code> có <span class="math inline">\(10^2\)</span> hàng và <span class="math inline">\(10^4\)</span> cột trong khi dữ liệu <code>test2.csv</code> có <span class="math inline">\(10^2\)</span> hàng và <span class="math inline">\(10^5\)</span> cột. Các dữ liệu này có thể được tạo và lưu bằng các câu lệnh dưới đây:</p>
+<div class="sourceCode" id="cb464"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb464-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb464-1" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">6</span>),<span class="dv">10</span><span class="sc">^</span><span class="dv">2</span>,<span class="dv">10</span><span class="sc">^</span><span class="dv">4</span>) <span class="co"># Ma trận 100 hàng, 10^4 cột</span></span>
+<span id="cb464-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb464-2" tabindex="-1"></a><span class="fu">write.csv</span>(x,<span class="st">&quot;test1.csv&quot;</span>) <span class="co"># Ma tran thanh file .csv</span></span>
+<span id="cb464-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb464-3" tabindex="-1"></a>x<span class="ot">&lt;-</span><span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">10</span><span class="sc">^</span><span class="dv">7</span>),<span class="dv">10</span><span class="sc">^</span><span class="dv">2</span>,<span class="dv">10</span><span class="sc">^</span><span class="dv">5</span>) <span class="co"># Ma trận 100 hàng, 10^5 cột</span></span>
+<span id="cb464-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb464-4" tabindex="-1"></a><span class="fu">write.csv</span>(x,<span class="st">&quot;test2.csv&quot;</span>) <span class="co"># Ma tran thanh file .csv</span></span></code></pre></div>
+<p>Bạn đọc có thể kiểm tra kích thước của các file <span class="math inline">\(test1.csv\)</span> và <span class="math inline">\(test2.csv\)</span> trên máy tính để thấy rằng dung lượng của các file lần lượt là 18 Mega byte và 180 Mega byte. Chúng ta sẽ kiểm tra thời gian mà các hàm <code>read.csv()</code> và <code>read_csv()</code> nhập dữ liệu đối với dữ liệu test1.csv trước:</p>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb465-1" tabindex="-1"></a>start<span class="ot">&lt;-</span><span class="fu">proc.time</span>() <span class="co"># lưu lại thời điểm trước khi chạy read.csv</span></span>
+<span id="cb465-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb465-2" tabindex="-1"></a>dat<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;test1.csv&quot;</span>) <span class="co"># dùng hàm read.csv để load dữ liệu </span></span>
+<span id="cb465-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb465-3" tabindex="-1"></a><span class="fu">proc.time</span>() <span class="sc">-</span> start <span class="co"># tính thời gian hàm read.csv chạy</span></span>
+<span id="cb465-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb465-4" tabindex="-1"></a></span>
+<span id="cb465-5"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb465-5" tabindex="-1"></a>start<span class="ot">&lt;-</span><span class="fu">proc.time</span>() <span class="co"># lưu lại thời điểm trước khi chạy read_csv</span></span>
+<span id="cb465-6"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb465-6" tabindex="-1"></a>dat<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;test1.csv&quot;</span>) <span class="co"># dùng hàm read_csv để load dữ liệu </span></span>
+<span id="cb465-7"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb465-7" tabindex="-1"></a><span class="fu">proc.time</span>() <span class="sc">-</span> start <span class="co"># tính thời gian hàm read_csv chạy</span></span></code></pre></div>
+<p>Đối với dữ liệu <code>test1.csv</code> thì thời gian nhập dữ liệu của <code>read_csv()</code> có nhanh hơn nhưng không có sự khác biệt đáng kể. Tuy nhiên sự khác biệt sẽ rõ ràng khi nhập dữ liệu <span class="math inline">\(test2.csv\)</span>. Bạn đọc cân nhắc khi dùng hàm <code>read.csv()</code> đọc dữ liệu bởi thời gian nhập dữ liệu với những file có dung lượng hơn 100 Mega bytes có thể lên đến hơn 20 phút.</p>
+<div class="sourceCode" id="cb466"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb466-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb466-1" tabindex="-1"></a>start<span class="ot">&lt;-</span><span class="fu">proc.time</span>() <span class="co"># lưu lại thời điểm trước khi chạy read.csv</span></span>
+<span id="cb466-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb466-2" tabindex="-1"></a>dat<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;test2.csv&quot;</span>) <span class="co"># !!! THỜI GIAN CHẠY CÓ THỂ LÊN ĐẾN 20-25 phút</span></span>
+<span id="cb466-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb466-3" tabindex="-1"></a><span class="fu">proc.time</span>() <span class="sc">-</span> start <span class="co"># tính thời gian hàm read.csv chạy</span></span>
+<span id="cb466-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb466-4" tabindex="-1"></a></span>
+<span id="cb466-5"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb466-5" tabindex="-1"></a>start<span class="ot">&lt;-</span><span class="fu">proc.time</span>() <span class="co"># lưu lại thời điểm trước khi chạy read_csv</span></span>
+<span id="cb466-6"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb466-6" tabindex="-1"></a>dat<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;test2.csv&quot;</span>) <span class="co"># dùng hàm read_csv để load dữ liệu </span></span>
+<span id="cb466-7"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb466-7" tabindex="-1"></a><span class="fu">proc.time</span>() <span class="sc">-</span> start <span class="co"># tính thời gian hàm read_csv chạy</span></span></code></pre></div>
+<p>Trên máy tính của chúng tôi, hàm <code>read_csv()</code> sẽ mất khoảng 2 phút để đọc dữ liệu <code>test2.csv</code>, nghĩa là thời gian tiết kiêm lên đến hơn 10 lần. Ngoài hàm <code>read_csv()</code>, thư viện <span class="math inline">\(\textbf{readr}\)</span> còn có các hàm để đọc các kiểu định dạng file khác nhau. Danh sách các hàm thường hay dùng được liệt kê trong bảng <a href="#tab:tbptdl002"><strong>??</strong></a></p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-212">Table 4.1: </span>Danh sách hàm đọc dữ liệu của thư viện readr
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Hàm số
+</th>
+<th style="text-align:left;">
+Sử dụng trong trường hợp
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+read_csv()
+</td>
+<td style="text-align:left;">
+file dạng csv mà giá trị được ngăn cách bằng dấu ‘,’
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+read_csv2()
+</td>
+<td style="text-align:left;">
+file dạng csv mà giá trị được ngăn cách bằng dấu ‘;’
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+read_tsv()
+</td>
+<td style="text-align:left;">
+Các file dạng text mà các giá trị cách nhau bởi khoảng trống
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+read_delim()
+</td>
+<td style="text-align:left;">
+Các file dạng text mà các giá trị cách nhau bởi ký tự bất kỳ
+</td>
+</tr>
+</tbody>
+</table>
+<p>Một sự khác biệt cơ bản khác của các hàm đọc dữ liệu trong thư viện <span class="math inline">\(\textbf{readr}\)</span> đó là dữ liệu được lưu vào một tibble thay vì một data.frame. Điều này giúp cho dữ liệu không bị thay đổi định dạng và giữ nguyên tên cột. Các lưu ý khác khi bạn đọc sử dụng các hàm số đọc dữ liệu của thư viện <span class="math inline">\(\textbf{readr}\)</span> là</p>
+<ul>
+<li>Các hàm số trong thư viện <span class="math inline">\(\textbf{readr}\)</span> luôn hiểu hàng đầu tiên của dữ liệu là tên của mỗi cột. Do đó, bạn đọc cần sử dụng tham số <span class="math inline">\(col_names = FALSE\)</span> nếu không muốn R tự động hiểu hàng đầu tiên là tên của mỗi cột dữ liệu. Ví dụ, hãy quan sát sự khác nhau giữa việc có và không sử dụng <code>col_names = FALSE</code>:</li>
+</ul>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb467-1" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb467-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb467-2" tabindex="-1"></a><span class="co"># Kết quả sẽ là một Tibble 1 hàng và 3 cột</span></span>
+<span id="cb467-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb467-3" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&quot;1,2,3 </span></span>
+<span id="cb467-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb467-4" tabindex="-1"></a><span class="st">         4,5,6&quot;</span>) <span class="co"># Tên các cột là &quot;1&quot;, &quot;2&quot;, và &quot;3&quot;</span></span></code></pre></div>
+<pre><code>## # A tibble: 1 × 3
+##     `1`   `2`   `3`
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     4     5     6</code></pre>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb469-1" tabindex="-1"></a><span class="co"># Kết quả sẽ là một Tibble 2 hàng và 3 cột</span></span>
+<span id="cb469-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb469-2" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&quot;1,2,3 </span></span>
+<span id="cb469-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb469-3" tabindex="-1"></a><span class="st">         4,5,6&quot;</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 2 × 3
+##      X1    X2    X3
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1     2     3
+## 2     4     5     6</code></pre>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb471-1" tabindex="-1"></a><span class="co"># readr tự động đặt tên các cột X1, X2, X3</span></span></code></pre></div>
+<p>bạn đọc có thể thấy rằng khi không sử dụng <code>col_names = FALSE</code>, hàm <code>read_csv()</code> sẽ hiểu hàng đầu tiên, tương ứng với các số 1, 2, và 3, là tên các cột và hàng thứ hai là dữ liệu. Điều này giải thích tại sao tibble chỉ có 1 hàng. Khi chúng ta sử dụng <code>col_names = FALSE</code>, hàm <code>read_csv()</code> sẽ tự động đặt tên các cột là “X1”, “X2”, “X3” và dữ liệu sẽ có 2 hàng.</p>
+<ul>
+<li>Trong nhiều file dữ liệu, người gửi thường sử dụng các hàng đầu tiên để mô tả về dữ liệu. Do đó khi sử dụng các hàm trong thư viện <span class="math inline">\(\textbf{readr}\)</span>, bạn đọc có thể sử dụng tham số <code>skip = k</code> để loại bỏ <span class="math inline">\(k\)</span> dòng đầu tiên của file dữ liệu. Ví dụ:</li>
+</ul>
+<div class="sourceCode" id="cb472"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb472-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb472-1" tabindex="-1"></a><span class="co"># Kết quả sẽ là một Tibble 2 hàng và 3 cột</span></span>
+<span id="cb472-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb472-2" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&quot;Trường ĐHKTQD</span></span>
+<span id="cb472-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb472-3" tabindex="-1"></a><span class="st">        Khoa toán Kinh tế</span></span>
+<span id="cb472-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb472-4" tabindex="-1"></a><span class="st">         1,2,3 </span></span>
+<span id="cb472-5"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb472-5" tabindex="-1"></a><span class="st">         4,5,6&quot;</span>, <span class="at">col_names =</span> <span class="cn">FALSE</span>, <span class="at">skip =</span> <span class="dv">2</span>) <span class="co"># readr sẽ không đọc 2 dòng đầu</span></span></code></pre></div>
+<pre><code>## Rows: 2 Columns: 3
+## ── Column specification ──────────────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## dbl (3): X1, X2, X3
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre><code>## # A tibble: 2 × 3
+##      X1    X2    X3
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1     2     3
+## 2     4     5     6</code></pre>
+<p>Bạn đọc cũng có thể sử dụng tham số <span class="math inline">\(col_names\)</span> để gán giá trị cho tên các cột ngay trong hàm <code>read_csv()</code>. Tuy nhiên để tránh sự phức tạp, chúng tôi khuyên bạn đọc hãy đặt tên cho các cột bằng hàm <code>names()</code> sau khi lưu dữ liệu vào tibble.</p>
+<p>Cách sử dụng các hàm khác ngoài <code>read_csv()</code> bạn đọc có thể tham khảo trong hướng dẫn của thư viện <span class="math inline">\(\textbf{readr}\)</span>. Sau khi đọc qua hướng dẫn, bạn đọc hãy thử kiểm tra xem các câu lệnh sau có vấn đề gì và nếu có thể, bạn đọc hãy thử lựa chọn hàm hoặc thêm tham số phù hợp để đọc dữ liệu.</p>
+<div class="sourceCode" id="cb475"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb475-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb475-1" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&quot;x,y</span><span class="sc">\n</span><span class="st">1,2,3</span><span class="sc">\n</span><span class="st">4,5,6&quot;</span>) <span class="co"># \n thay cho xuống dòng</span></span>
+<span id="cb475-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb475-2" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&quot;x,y,z</span><span class="sc">\n</span><span class="st">1,2</span><span class="sc">\n</span><span class="st">1,2,3,4&quot;</span>) </span>
+<span id="cb475-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb475-3" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&quot;x,y</span><span class="sc">\n\&quot;</span><span class="st">,1,</span><span class="sc">\n</span><span class="st">,a,b&quot;</span>,<span class="at">col_names =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb475-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb475-4" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&quot;x;y</span><span class="sc">\n</span><span class="st">1;2</span><span class="sc">\n</span><span class="st">x;y&quot;</span>) <span class="co"># Thử hàm số khác</span></span>
+<span id="cb475-5"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb475-5" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">&quot;x|y</span><span class="sc">\n</span><span class="st">1|2&quot;</span>) <span class="co"># Thử hàm số khác</span></span></code></pre></div>
+</div>
+<div id="tương-tác-giữa-r-với-microsoft-excel" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Tương tác giữa R với Microsoft Excel<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#tương-tác-giữa-r-với-microsoft-excel" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Microsoft Excel là rất phổ biến trong môi trường làm việc công sở. Do đó, người phân tích dữ liệu thường xuyên nhận được dữ liệu trong các file có xls, xlsx, xlsb, hoặc xlsm. Tất nhiên, bạn đọc có thể sử dụng trực tiếp Microsoft Excel để thực hiện những phân tích và tính toán đơn giản. Nhưng để thực hiện các yêu cầu phức tạp hơn, chẳng hạn như làm việc với nhiều file Excel, hoặc thực hiện xây dựng các mô hình trên dữ liệu bạn đọc cần phải sử dụng R. Các thư viện cần cài đặt bổ sung mà chúng thôi thường sử dụng để kết nối giữa R với Microsoft Excel là thư viện <span class="math inline">\(\textbf{readxl}\)</span> và <span class="math inline">\(\textbf{openxlsx}\)</span>. Nếu như thư viện <span class="math inline">\(\textbf{readxl}\)</span> chỉ đơn thuần là để đọc dữ liệu từ Excel thì thư viện <span class="math inline">\(\textbf{openxlsx}\)</span> còn cho phép chúng ta điều khiển, tính toán, và định dạng các file có định dạnh ở trên mà không cần mở Microsoft Excel. Cách sử dụng các hàm cơ bản trong hai thư viện này được trình bày trong các phần dưới đây.</p>
+<div id="đọc-dữ-liệu-lưu-dưới-định-dạng-của-excel" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Đọc dữ liệu lưu dưới định dạng của Excel<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#đọc-dữ-liệu-lưu-dưới-định-dạng-của-excel" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Hàm <code>read_excel()</code> được sử dụng để đọc các file được lưu bằng Microsoft Excel. Hàm số sẽ hỗ trợ đọc các file có định dạng xlsx, xlsm, xls. Hai biến thể khác của <code>read_excel()</code> là <code>read_xlsx()</code> và <code>read_xls()</code> được sử dụng khi chúng ta biết chính xác định dạng của file cần đọc. Các tham số thường được sử dụng trong các hàm này được liệt kê như sau:</p>
+<ul>
+<li><p><code>sheet</code> cho biết tên của sheet của excel workbook. Sử dụng tham số này có ý nghĩa khi workbook chúng ta cần lấy dữ liệu có nhiều sheet. Nếu không sử dụng tham số này, hàm <code>read_excel()</code> sẽ luôn luôn đọc dữ liệu trong sheet thứ nhất của excel workbook.</p></li>
+<li><p><code>range</code> được sử dụng nếu bạn đọc chỉ muốn đọc dữ liệu từ một phần của của sheet. Chẳng hạn như <code>range = "A1:E100"</code> nghĩa là bạn đọc chỉ muốn lấy dữ liệu từ cell A1 đến cell E100 của sheet tương ứng.</p></li>
+<li><p><code>col_names</code> nhận một trong hai giá trị là TRUE hoặc FALSE. Giá trị TRUE cho biết có sử dụng hàng đầu tiên làm tên các cột trong dữ liệu trong khi giá trị FALSE cho biết không lấy hàng đầu tiên làm tên cột.</p></li>
+<li><p><code>skip</code> cho biết số lượng dòng sẽ bỏ qua trước khi bắt đầu đọc dữ liệu. Nếu có sử dụng tham số <code>range</code> thì hàm <code>read_excel()</code> sẽ bỏ qua tham số này.</p></li>
+</ul>
+<p>Ngoài ra hàm <code>read_excel()</code> còn có các tham số khác có thể hữu ích trong nhiều trường hợp như <code>col_types</code> hay <code>n_max</code>. Bạn đọc hãy đọc mô tả hàm số để hiểu chính xác hơn về các tham số. Đoạn lệnh dưới đây được sử dụng để đọc dữ liệu nằm trong range được giới hạn từ cell A1 đến cell E100, trong sheet có tên ws1, và workbook có tên “wb1.xlsx”</p>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb476-1" tabindex="-1"></a><span class="fu">setwd</span>(path) <span class="co"># Đặt đường dẫn đến folder chứa file</span></span>
+<span id="cb476-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb476-2" tabindex="-1"></a>dat<span class="ot">&lt;-</span><span class="fu">read_xlsx</span>(<span class="st">&quot;wb1.xlsx&quot;</span>, </span>
+<span id="cb476-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb476-3" tabindex="-1"></a>               <span class="at">sheet =</span> <span class="st">&quot;ws1&quot;</span>,</span>
+<span id="cb476-4"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb476-4" tabindex="-1"></a>               <span class="at">range =</span> <span class="st">&quot;A1:E100&quot;</span>,</span>
+<span id="cb476-5"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb476-5" tabindex="-1"></a>               <span class="at">col_names =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="tương-tác-với-microsoft-excel-bằng-thư-viện-textbfopenxlsx" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Tương tác với Microsoft Excel bằng thư viện <span class="math inline">\(\textbf{openxlsx}\)</span><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#tương-tác-với-microsoft-excel-bằng-thư-viện-textbfopenxlsx" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ngoài việc lấy dữ liệu từ các file được lưu dưới định dạnh của Excel, bạn đọc cũng có thể sử dụng R để thực hiện tính toán ngay trên các worksheet và lưu lại kết quả mà không cần phải mở file. Thư viện <span class="math inline">\(openxlsx\)</span> sẽ giúp bạn đọc làm được việc này. Các hàm quan trọng sử dụng để làm việc trên các worksheet là: <code>loadWorkbook()</code>, <code>addWorksheet()</code> hàm <code>writeData()</code>, và hàm <code>saveWorkbook()</code>.</p>
+<p>Hàm <code>loadWorkbook()</code> đượpc sử dụng để mở một workbook và lưu thành một đối tượng kiểu workbook trên R. Đoạn lệnh dưới đây dùng để lấy thông tin từ file có tên là “mau bd.xlsx” trong đường dẫn tương ứng và sau đó lưu thông tin vào một đối tượng kiểu workbook trên R có tên <span class="math inline">\(wb1\)</span>:</p>
+<div class="sourceCode" id="cb477"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb477-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb477-1" tabindex="-1"></a>wb1<span class="ot">&lt;-</span><span class="fu">loadWorkbook</span>(<span class="st">&quot;C:/Users/AD/Desktop/New folder/Xet tot nghiep ACTUARY 60/mau bd.xlsx&quot;</span>)</span></code></pre></div>
+<p>Hàm <code>str()</code> có thể sử dụng để xem cấu trúc của đối tượng wb1. Tuy nhiên các workbook lớn có thể làm cho kết quả của hàm <code>str()</code> trở nên khó hiểu. Nhìn chung đối tượng kiểu workbook sẽ hoạt động tương đối giống như một list. Mỗi list con tương ứng với một sheet của workbook Bạn đọc có thể sử dụng hàm <code>names()</code> để biết wb1 có những sheet nào:</p>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb478-1" tabindex="-1"></a><span class="fu">class</span>(wb1)</span></code></pre></div>
+<pre><code>## [1] &quot;Workbook&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;openxlsx&quot;</code></pre>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb480-1" tabindex="-1"></a><span class="fu">names</span>(wb1)</span></code></pre></div>
+<pre><code>## [1] &quot;Sheet&quot;  &quot;Sheet1&quot;</code></pre>
+<p>Hàm <code>addWorksheet()</code> được sử dụng để thêm một worksheet vào trong một đối tượng workbook. Cấu trúc câu lệnh của hàm <code>addWworksheet()</code> khá đơn giản và các tham số được sử dụng chủ yếu là để thiết kế worksheet mới thêm vào nên chúng tôi không liệt kê ở đây. Đoạn câu lệnh sau được sử dụng để thêm vào workbook wb1 một worksheet có tên là “Sheet 2”</p>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb482-1" tabindex="-1"></a><span class="fu">addWorksheet</span>(wb1, <span class="st">&quot;Sheet 2&quot;</span>)</span></code></pre></div>
+<p>Hàm <code>writeData()</code> được sử dụng để thay đổi và sửa thông tin trên đối tượng workbook. Các tham số quan trọng với hàm <code>writeData()</code> được liệt kê ở dưới đây:</p>
+<ul>
+<li><p><code>startCol</code>: chỉ số của cột trên worksheet mà chúng ta bắt đầu ghi thông tin lên. Nếu không sử dụng tham số này, chỉ số cột đầu tiên sẽ luôn là 1, nghĩa là cột A của workssheet.</p></li>
+<li><p><code>statRow</code>: chỉ số của hàng trên worksheet mà chúng ta bắt đầu ghi thông tin lên. Nếu không sử dụng tham số này, chỉ số hàng đầu tiên sẽ luôn là 1.</p></li>
+<li><p><code>colNames</code>: nhận giá trị bằng TRUE hoặc FALSE. Giá trị TRUE cho biết có ghi nhận thông tin tên cột của dữ liệu (hoặc véc-tơ) vào hàng đầu tiên. Giá trị FALSE nghĩa là không ghi nhận tên cột của dữ liệu hay véc-tơ vào hàng đầu tiên.</p></li>
+<li><p><code>rowNames</code>: : nhận giá trị bằng TRUE hoặc FALSE. Giá trị TRUE cho biết có ghi nhận thông tin tên hàng của dữ liệu (hoặc véc-tơ) vào cột đầu tiên của worksheet. Giá trị FALSE nghĩa là không ghi nhận tên hàng của dữ liệu hay véc-tơ vào hàng đầu tiên của worksheet.</p></li>
+</ul>
+<p>Đoạn câu lệnh sau sẽ lưu thông tin của một data.frame có tên là <span class="math inline">\(\textbf{women}\)</span> bắt đầu từ hàng thứ nhất, cột thứ nhất (cell A1) vào sheet có tên là “Sheet 2” của workbook wb1:</p>
+<div class="sourceCode" id="cb483"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb483-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb483-1" tabindex="-1"></a><span class="fu">writeData</span>(wb1, <span class="st">&quot;Sheet 2&quot;</span>, women, <span class="at">startCol =</span> <span class="dv">1</span>, <span class="at">startRow =</span> <span class="dv">1</span>, <span class="at">colNames =</span> <span class="cn">TRUE</span>, <span class="at">rowNames =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Hàm số <code>saveWorkbook()</code> được sử dụng để lưu một đối tượng workbook (của R) thành một excel workbook.</p>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb484-1" tabindex="-1"></a><span class="fu">saveWorkbook</span>(wb1, <span class="st">&quot;mau bd1.xlsx&quot;</span>, <span class="at">overwrite =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Bạn đọc có thể sử dụng Microsoft excel để mở workbook có tên “mau bd1.xlsx” và xem thông tin về dữ liệu <span class="math inline">\(\textbf{women}\)</span> ở trong worksheet có tên là “Sheet 2” của workbook này. Tham số <code>overwrite</code> nhận giá trị TRUE có nghĩa là nếu trong đường dẫn tương ứng đã có file có tên trùng với tên workbook mới thì sẽ lưu workbook mới thay thế cho workbook cũ có trùng tên.</p>
+</div>
+</div>
+<div id="kết-nối-r-với-cơ-sở-dữ-liệu" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Kết nối R với cơ sở dữ liệu<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#kết-nối-r-với-cơ-sở-dữ-liệu" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Có thể sử dụng R như một công cụ để kết nối và thực hiện các câu lệnh truy vấn vào các cơ sở dữ liệu. Để làm được điều này, trước tiên, bạn đọc cần phải cài đặt một Open Database Connectivity (ODBC), được gọi là kết nối cơ sở dữ liệu mở. Kết nối này giúp cho hệ điều hành máy tính tương thích với hệ quản lý cơ sở dữ liệu mà bạn sử dụng. Nhóm tác giả sử dụng hệ điều hành Windows và hệ quản trị cơ sở dữ liệu MySQL nên chúng tôi sẽ lựa chọn ODBC phù hợp. Bạn đọc tham khảo tại địa chỉ <a href="https://dev.mysql.com/downloads/connector/odbc/" class="uri">https://dev.mysql.com/downloads/connector/odbc/</a>. Tại thời điểm nhóm tác giả viết cuốn sách này ODBC cho hệ điều hành Windows đang là phiên bản 8.0</p>
+<p>Sau khi cài đặt ODBC lên hệ điều hành, bạn đọc đã có thể sử dụng R để truy cập vào một cơ sở dữ liệu và thực hiện các câu lệnh truy vấn dữ liệu trên cơ sở dữ liệu đó trên R với sự trợ giúp của thư viện <span class="math inline">\(DBI\)</span>. Sau khi cài đặt thư viện <span class="math inline">\(DBI\)</span>, bạn đọc cần tạo một kết nối giữa R và cơ sở dữ liệu bằng hàm <span class="math inline">\(dbConnect\)</span>.</p>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb485-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb485-1" tabindex="-1"></a><span class="fu">library</span>(DBI)</span>
+<span id="cb485-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb485-2" tabindex="-1"></a>con <span class="ot">&lt;-</span> <span class="fu">dbConnect</span>(odbc<span class="sc">::</span><span class="fu">odbc</span>(), <span class="at">.connection_string =</span> <span class="st">&quot;Driver={MySQL ODBC 8.0 Unicode Driver};&quot;</span>, </span>
+<span id="cb485-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb485-3" tabindex="-1"></a>    <span class="at">Server =</span> <span class="st">&quot;ten_serve&quot;</span>, <span class="at">Database =</span> <span class="st">&quot;db_name&quot;</span>, <span class="at">UID =</span> <span class="st">&quot;ID&quot;</span>, <span class="at">PWD =</span> <span class="st">&quot;password&quot;</span>)</span></code></pre></div>
+<p>Trong đó “ten_serve” là địa chỉ local hoặc server lưu trữ cơ sở dữ liệu, “db_name” là tên của cơ sở dữ liệu, ID và password lần lượt là tên và password mà bạn đọc tự tạo hoặc được cấp để truy cập vào cơ sở dữ liệu. Sau khi đã tạo được kết nối, bạn đọc có thể thực hiện bất kỳ câu lệnh truy vấn dữ liệu nào từ R với hàm “DBI::dbGetQuery()”. Chẳng hạn, bạn đọc muốn lấy ra thông tin của tất cả những người có ngày sinh là ngày 01 tháng 01 năm 2000 từ một bảng có tên là Life_Insured từ một cơ sở dữ liệu tên là <span class="math inline">\(tktdb\)</span>, bạn đọc thực hiện như sau</p>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb486-1" tabindex="-1"></a>sql<span class="ot">&lt;-</span><span class="st">&quot;select * from tktdb.Life_Insured </span></span>
+<span id="cb486-2"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb486-2" tabindex="-1"></a><span class="st">      where DOB = &#39;2000-01-01&#39;&quot;</span> <span class="co"># Viết đúng câu lệnh truy vấn từ MySQL</span></span>
+<span id="cb486-3"><a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#cb486-3" tabindex="-1"></a>df<span class="ot">&lt;-</span>DBI<span class="sc">::</span><span class="fu">dbGetQuery</span>(sql) <span class="co"># data.frame df sẽ lưu kết quả của câu lệnh truy vấn</span></span></code></pre></div>
+<p>Khi làm việc với dữ liệu được trích xuất từ một hệ cơ sở dữ liệu, bạn đọc hãy cố gắng thực hiện các phép biến đổi, sắp xếp dữ liệu bằng SQL thay vì thực hiện biến đổi trên R vì các hệ quản trị cơ sở dữ liệu thực hiện các chức năng này nhanh hơn.</p>
+</div>
+<div id="thu-thập-dữ-liệu-từ-các-website" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Thu thập dữ liệu từ các website<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#thu-thập-dữ-liệu-từ-các-website" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="phụ-lục-1" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Phụ lục<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#phụ-lục-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="bài-tập-2" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> Bài tập<a href="nhập-dữ-liệu-từ-các-nguồn-khác-nhau-vào-r.html#bài-tập-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="kiến-thức-r-nâng-cao.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="tiền-xử-lý-dữ-liệu.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

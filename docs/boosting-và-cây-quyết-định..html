@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chương 17 Boosting và cây quyết định. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+<meta name="author" content="Nguyễn Quang Huy">
+<meta name="description" content="Trong một vài cuốn sách, boosting được dịch sang tiếng Việt là học tăng cường, tuy nhiên trong cuốn sách này, chúng tôi giữ nguyên khái niệm này bởi vì chúng tôi không nghĩ rằng học tăng cường...">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
+<meta property="og:title" content="Chương 17 Boosting và cây quyết định. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Trong một vài cuốn sách, boosting được dịch sang tiếng Việt là học tăng cường, tuy nhiên trong cuốn sách này, chúng tôi giữ nguyên khái niệm này bởi vì chúng tôi không nghĩ rằng học tăng cường...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chương 17 Boosting và cây quyết định. | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="twitter:description" content="Trong một vài cuốn sách, boosting được dịch sang tiếng Việt là học tăng cường, tuy nhiên trong cuốn sách này, chúng tôi giữ nguyên khái niệm này bởi vì chúng tôi không nghĩ rằng học tăng cường...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.9/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source%20Code%20Pro:wght@400;450&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script><script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script><script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script><script src="libs/flatbush-4.0.0/flatbush.min.js"></script><link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet">
+<script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script><script src="libs/girafe-binding-0.8.9/girafe.js"></script><script src="libs/plotly-binding-4.10.4/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script><script>
+        $(function() {
+            $("#toc h2").html("TRONG CHƯƠNG NÀY"); // Change text for "View source"
+        });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var viewSourceElement = document.getElementById('book-source');
+            var editPageElement = document.getElementById('book-edit');
+            var viewBookSourceElement = document.getElementById('book-repo');
+
+            if (viewSourceElement) {
+                viewSourceElement.innerText = 'Xem nguồn trang'; // Change text for "View source"
+            }
+
+            if (editPageElement) {
+                editPageElement.innerText = 'Chỉnh sửa trang'; // Change text for "Edit this page"
+            }
+
+            if (viewBookSourceElement) {
+                viewBookSourceElement.innerText = 'Xem nguồn sách'; // Change text for "View book source"
+            }
+        });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          var tocElement = document.querySelector('nav[aria-label="Table of contents"] h2');
+          if (tocElement) {
+            tocElement.textContent = 'Mục lục'; // Replace 'Mục lục' (Table of contents) with your desired text
+          }
+        });
+    </script><script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        var tocElement = document.querySelector('nav[aria-label="Table of contents"] h2');
+        if (tocElement) {
+          tocElement.textContent = 'NỘI DUNG CUỐN SÁCH'; // Ensure "NỘI DUNG CUỐN SÁCH" text remains
+        }
+      });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          // Find the paragraph containing the original text and date
+          const paragraph = document.querySelector('footer.bg-primary.text-light div.container div.row div.col-12.col-md-6.mt-3 p');
+
+          if (paragraph) {
+            // Extract the date using a regular expression
+            const dateRegex = /(\d{4}-\d{2}-\d{2})/;
+            const matches = paragraph.innerHTML.match(dateRegex);
+
+            if (matches && matches.length > 1) {
+              // Reformat the date from yyyy-mm-dd to dd/mm/yyyy
+              const originalDate = matches[1];
+              const [year, month, day] = originalDate.split('-');
+              const newDate = `${day}/${month}/${year}`;
+
+              // Replace the entire paragraph content with the new Vietnamese format
+              paragraph.innerHTML = `"${paragraph.querySelector('strong').innerText}" được viết bởi ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]}. Phiên bản này được cập nhật lần cuối vào ${newDate}.`;
+            }
+          }
+        });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          // Find the paragraph containing the specific text
+          const paragraphs = document.querySelectorAll('footer.bg-primary.text-light div.container div.row div.col-12.col-md-6.mt-3 p');
+          paragraphs.forEach(paragraph => {
+            if(paragraph.innerHTML.includes('This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.')) {
+              // Replace the paragraph content
+              paragraph.innerHTML = 'Quyển sách này được viết bằng ngôn ngữ R, dựa trên gói lệnh bookdown.';
+            }
+          });
+        });
+    </script><script src="local_edit.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Lời nói đầu</a></li>
+<li class="book-part">PHẦN I: GIỚI THIỆU CHUNG</li>
+<li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1nh.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sánh</a></li>
+<li><a class="" href="khdl-v%C3%A0-c%C3%A1c-kh%C3%A1i-ni%E1%BB%87m-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">2</span> KHDL và các khái niệm cơ bản</a></li>
+<li class="book-part">PHẦN II: GIỚI THIỆU VỀ R</li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n.html"><span class="header-section-number">3</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-c%C6%A1-b%E1%BA%A3n-1.html"><span class="header-section-number">4</span> Kiến thức R cơ bản</a></li>
+<li><a class="" href="ki%E1%BA%BFn-th%E1%BB%A9c-r-n%C3%A2ng-cao.html"><span class="header-section-number">5</span> Kiến thức R nâng cao</a></li>
+<li class="book-part">PHẦN III: PHÂN TÍCH DỮ LIỆU</li>
+<li><a class="" href="nh%E1%BA%ADp-d%E1%BB%AF-li%E1%BB%87u-v%C3%A0o-r.html"><span class="header-section-number">6</span> Nhập dữ liệu vào R</a></li>
+<li><a class="" href="ti%E1%BB%81n-x%E1%BB%AD-l%C3%BD-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">7</span> Tiền xử lý dữ liệu</a></li>
+<li><a class="" href="bi%E1%BA%BFn-%C4%91%E1%BB%95i-v%C3%A0-s%E1%BA%AFp-x%E1%BA%BFp-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">8</span> Biến đổi và sắp xếp dữ liệu</a></li>
+<li><a class="" href="tr%E1%BB%B1c-quan-h%C3%B3a-d%E1%BB%AF-li%E1%BB%87u.html"><span class="header-section-number">9</span> Trực quan hóa dữ liệu</a></li>
+<li class="book-part">PHẦN IV: MÔ HÌNH TUYẾN TÍNH</li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-h%E1%BB%93i-quy-tuy%E1%BA%BFn-t%C3%ADnh.html"><span class="header-section-number">10</span> Mô hình hồi quy tuyến tính</a></li>
+<li><a class="" href="c%C3%A1c-m%C3%B4-h%C3%ACnh-c%E1%BB%99ng-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t.html"><span class="header-section-number">11</span> Các mô hình cộng tính tổng quát</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">12</span> Mô hình tuyến tính tổng quát.</a></li>
+<li><a class="" href="reference.html"><span class="header-section-number">13</span> REFERENCE</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">14</span> Mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li><a class="" href="t%C3%ADnh-to%C3%A1n-ph%C3%AD-b%E1%BA%A3o-hi%E1%BB%83m-thu%E1%BA%A7n-b%E1%BA%B1ng-m%C3%B4-h%C3%ACnh-t%E1%BA%A7n-su%E1%BA%A5t---m%E1%BB%A9c-%C4%91%E1%BB%99-nghi%C3%AAm-tr%E1%BB%8Dng..html"><span class="header-section-number">15</span> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a></li>
+<li class="book-part">PHẦN V: MÔ HÌNH CÂY QUYẾT ĐỊNH</li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">16</span> Mô hình cây quyết định</a></li>
+<li><a class="active" href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html"><span class="header-section-number">17</span> Boosting và cây quyết định.</a></li>
+<li><a class="" href="neuralnetwork.html"><span class="header-section-number">18</span> Mô hình mạng nơ-ron</a></li>
+<li><a class="" href="neuralnetwork1.html"><span class="header-section-number">19</span> Các mạng học sâu điển hình</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="boosting-và-cây-quyết-định." class="section level1" number="17">
+<h1>
+<span class="header-section-number">Chương 17</span> Boosting và cây quyết định.<a class="anchor" aria-label="anchor" href="#boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh."><i class="fas fa-link"></i></a>
+</h1>
+<p>Trong một vài cuốn sách, boosting được dịch sang tiếng Việt là học tăng cường, tuy nhiên trong cuốn sách này, chúng tôi giữ nguyên khái niệm này bởi vì chúng tôi không nghĩ rằng học tăng cường giải nghĩa được chính xác ý tưởng của Boosting. Tính đến thời điểm chúng tôi đang viết cuốn sách này, có thể khẳng định rằng boosting là một trong những ý tưởng mạnh mẽ nhất trong lĩnh vực học máy. Ban đầu boosting được áp dụng cho các bài toán phân loại, nhưng bạn đọc sẽ thấy rằng có thể dễ dàng áp dụng boosting cho các bài toán hổi quy để cho kết quả hơn cả mong đợi. Ý tưởng chung của boosting là kết hợp kết quả đầu ra của nhiều hàm phân loại, hoặc hàm hồi quy “yếu”, để tạo ra một hàm phân loại hoặc hồi quy “mạnh”. Cùng là kết hợp nhiều hàm phân loại hay hổi quy, tuy nhiên boosting khác bagging hay random forest ở chỗ các hàm phân loại hoặc hồi quy được tạo ra theo thứ tự nhất định mà trong đó hàm phân loại hay hồi quy được tạo ra ở bước thứ <span class="math inline">\(m\)</span> sẽ phụ thuộc vào kết quả của hàm đó tại các bước thứ <span class="math inline">\(1, 2, \cdots, (m-1)\)</span>. Trong bagging hay random forest, cách xây dựng hàm phân loại hay hổi quy ở lần thứ <span class="math inline">\(m\)</span> hoàn toàn không phụ thuộc vào kết quả của các bước trước đó.</p>
+<p>Khái niệm boosting lần đầu tiên được nhắc đến trong nghiên cứu của Freund và Schapire (1997). Chúng tôi gọi thuật toán được giới thiệu trong nghiên cứu của Freund và Schapire là “AdaBoost.M1” để phân biệt với thuật toán AdaBoost thông dụng được trình bày trong nghiên cứu của Friedman (2000). Trong bài toán phân loại, biến mục tiêu chỉ nhận hai giá trị <span class="math inline">\(Y \in \{-1,1\}\)</span>. Hàm phân loại được ký hiệu là <span class="math inline">\(b^C\)</span> và với véc-tơ biến độc lập <span class="math inline">\(\textbf{x}_i\)</span> chúng ta có <span class="math inline">\(b^C(\textbf{x}_i) \in \{-1,1\}\)</span>. Sai số của hàm phân loại <span class="math inline">\(b^C\)</span> trên dữ liệu <span class="math inline">\((\textbf{x},y)\)</span> được tính như sau
+<span class="math display">\[\begin{align}
+err(\textbf{x},y) = \cfrac{1}{n} \ \sum\limits_{i=1}^n \mathbb{I}\left(b^C(\textbf{x}_i) \neq y_i \right)
+\end{align}\]</span></p>
+<p>Môt hàm phân loại “yếu” <span class="math inline">\(b^C\)</span> là một hàm phân loại có khả năng dự báo chỉ tốt hơn một chút so với việc phân loại một cách ngẫu nhiên. Ý tưởng của boosting là áp dụng tuần tự các hàm phân loại yếu trên các phiên bản dữ liệu được liên tục cập nhật dựa trên kết quả của các hàm phân loại trước đó. Hàm phân loại cuối cùng thu được bằng cách kết hợp có trọng số tất cả các hàm phân loại:
+<span class="math display">\[\begin{align}
+f(x) =  sign\left( \sum\limits_{m=1}^M \alpha_m \cdot b_m^C(x)  \right)
+\end{align}\]</span>
+trong đó các hệ số <span class="math inline">\(\alpha_1, \alpha_2, \cdots, \alpha_M\)</span> được tính toán dựa trên khả năng phân loại của các hàm <span class="math inline">\(b^C_1, b^C_2, \cdots, b^C_M\)</span>.</p>
+<p>Quá trình cập nhật và thay đổi dữ liệu ở mỗi bước của boosting được thực hiện thông qua thay đổi véc-tơ trọng số <span class="math inline">\(w^{(m)}_1, w^{(m)}_2, \cdots ,w^{(m)}_n\)</span> cho từng quan sát trong dữ liệu xây dựng mô hình <span class="math inline">\((\textbf{x}_i,y_i)\)</span>, với <span class="math inline">\(i = 1, 2, \cdots ,n\)</span>, và <span class="math inline">\(m = 1, 2, \cdots, M\)</span>.</p>
+<p>Ban đầu tất cả các trọng số được cho bằng nhau tại bước thứ nhất <span class="math inline">\(w^{(1)}_i = \cfrac{1}{n}\)</span> với mọi <span class="math inline">\(i\)</span>. Trong bước đầu tiên, hàm phân loại được xây dựng trên dữ liệu ban đầu theo cách thông thường. Đối với những lần xây dựng hàm phân loại tiếp theo <span class="math inline">\(m = 2, 3, \cdots ,M\)</span>, trọng số <span class="math inline">\(w^{(m)}_i\)</span> của quan sát thứ <span class="math inline">\(i\)</span> thay đổi và hàm phân loại được áp dụng lại cho dữ liệu với trọng số vừa cập nhật. Tại bước thứ <span class="math inline">\(m\)</span>, nếu quan sát thứ <span class="math inline">\(i\)</span> bị phân loại sai bởi hàm phân loại ở bước ngay liền trước đó, <span class="math inline">\(b^C_{m-1}(x_i)\)</span>, trọng số <span class="math inline">\(w^{(m)}_i\)</span> sẽ được tăng lên. Ngược lại, nếu quan sát thứ <span class="math inline">\(i\)</span> được phân loại đúng ở bước <span class="math inline">\((m-1)\)</span>, trọng số <span class="math inline">\(w^m_i\)</span> sẽ được giảm đi. Khi quá trình kể trên diễn ra lặp đi lặp lại, những quan sát khó phân loại chính xác sẽ nhận càng có tỷ trọng cao trong những bước phân loại tiếp theo. Những hàm phân loại xây dựng cho những bước sau sẽ tập trung vào phân loại những quan sát mà những hàm phân loại ở các bước trước đã bỏ sót.</p>
+<p>Thuật toán AdaBoost.M1 được mô tả trong nghiên cứu của Freund và Schapire (1997) được phát biểu như sau:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Cho <span class="math inline">\(w^{(1)}_i = \cfrac{1}{n}\)</span> với mọi <span class="math inline">\(i = 1, 2, \cdots, n\)</span> với <span class="math inline">\(n\)</span> là số dòng của dữ liệu ban đầu.</li>
+</ol></li>
+<li>
+<ol start="2" style="list-style-type: decimal">
+<li>Tại bước thứ <span class="math inline">\(m\)</span>, với <span class="math inline">\(m = 1, 2, \cdots, M\)</span>,</li>
+</ol>
+<ul>
+<li><p>2.(a) Xây dựng hàm phân loại <span class="math inline">\(b^C_m\)</span> trên dữ liệu ban đầu với véc-tơ trọng số tương ứng với dòng <span class="math inline">\(i\)</span> là <span class="math inline">\(w^{(m)}_i\)</span>.</p></li>
+<li><p>2.(b) Tính toán sai số của hàm phân loại <span class="math inline">\(b^C_m\)</span></p></li>
+</ul>
+<p><span class="math display">\[\begin{align}
+err_m = \sum\limits_{m=1}^M  w^{(m)}_i \cdot \mathbb{I} \left(b_m^C(\textbf{x}_i) \neq y_i \right)
+\end{align}\]</span></p>
+<ul>
+<li>2.(c) Tính hệ số của hàm phân loại thứ <span class="math inline">\(m\)</span> dựa trên sai số</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+\alpha_m = \log\left( \cfrac{1 - err_m}{err_m} \right)
+\end{align}\]</span></p>
+<ul>
+<li>2.(d). Cập nhật trọng số cho bước tiếp theo</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+w^{(m+1)}_i = w^{(m)}_i \cdot \exp\left[ \alpha_m \cdot \mathbb{I} \left(b_m^C(\textbf{x}_i) \neq y_i \right) \right]
+\end{align}\]</span></p>
+<ul>
+<li>2.(e). Chuẩn hóa lại trọng số để tổng các trọng số bằng 1.</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+w^{(m+1)}_i = \cfrac{w^{(m+1)}_i}{\sum\limits_{i=1}^n  w^{(m+1)}_i}
+\end{align}\]</span></p>
+</li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Kết thúc lần lặp thứ <span class="math inline">\(M\)</span>, trả lại kết quả hàm phân loại cuối cùng:
+<span class="math display">\[\begin{align}
+f^C(x) =  sign\left( \sum\limits_{m=1}^M \alpha_m \cdot b_m^C(x)  \right)
+\end{align}\]</span>
+</li>
+</ol></li>
+</ul>
+<p>Chúng tôi khuyên bạn đọc hãy hiểu ý tưởng của các bước kể trên thay vì cố gắng hiểu chính xác các công thức toán học. Các bước của thuật toán AdaBoost.M1 được trình bày ở trên khá rõ ràng, ngoại trừ bước 2.(a) là “Xây dựng hàm phân loại <span class="math inline">\(b^C_m\)</span> trên dữ liệu ban đầu với véc-tơ trọng số tương ứng với dòng <span class="math inline">\(i\)</span> là <span class="math inline">\(w^{(m)}_i\)</span>”. Quá trình xây dựng một hàm phân loại luôn luôn bao gồm hai bước: bước thứ nhất là lựa chọn kiểu mô hình và bước thứ hai là ước lượng tham số của mô hình với mục tiêu tối thiểu hóa một hàm tổn thất. Thuật toán AdaBoost.M1 ở trên có thể được áp dụng với mọi hàm phân loại (cây quyết định, hồi quy logistic, …) nhưng hàm tổn thất được lựa chọn phải là hàm tổn thất kiểu mũ. Trong các phần tiếp theo của cuốn sách bạn đọc sẽ được giải thích rằng công thức tính toán các trọng số <span class="math inline">\(w^{(m)}_i\)</span> ở bước 2.(d) là kết quả của việc lựa chọn hàm tổn thất, trong khi hàm phân loại có thể là bất cứ dạng hàm nào.</p>
+<p>Thuật toán AdaBoost.M1 được Friedman (2000) gọi là thuật toán AdaBoost phân loại vì các hàm <span class="math inline">\(b^C_m\)</span> được xây dựng ở bước thứ <span class="math inline">\(m\)</span> luôn là các dạng hàm phân loại. Nghiên cứu của Friedman (2000) điều chỉnh AdaBoost.M1 để phù hợp hơn cho cả bài toán phân loại và bài toán hồi quy. Hàm phân loại trong nghiên cứu của Friedman luôn luôn có dạng là một cây quyết định có 1 node duy nhất, còn được gọi là một “stump”. Một stump chỉ là một hàm phân loại yếu, nhưng bằng cách kết hợp các stump như ý tưởng của AdaBoost.M1, khả năng dự đoán của hàm phân loại cuối cùng là đáng kinh ngạc. Thuật toán được giới thiệu trong nghiên cứu của Friedman (2000) chính là thuật toán AdaBoost được áp dụng rộng rãi hiện nay.</p>
+<!-- - Phần thứ nhất: Chúng tôi chứng minh rằng AdaBoost phù hợp với mô hình cộng tính trong trình học cơ sở, tối ưu hóa hàm mất mũ mới. Hàm mất này rất giống với khả năng ghi nhật ký nhị thức (âm) (Phần 10.2– 10.4). • Bộ giảm thiểu dân số của hàm mất mũ được biểu diễn bằng log-odds của các xác suất của lớp (Phần 10.5). • Chúng tôi mô tả các hàm mất mát cho hồi quy và phân loại mạnh hơn sai số bình phương hoặc mất mát theo cấp số nhân (Phần 10.6). • Người ta lập luận rằng cây quyết định là một trình học cơ sở lý tưởng cho các ứng dụng khai thác dữ liệu tăng cường (Phần 10.7 và 10.9). • Chúng tôi phát triển một lớp mô hình tăng cường độ dốc (GBM), để tăng cường cây có bất kỳ chức năng mất nào (Phần 10.10). • Tầm quan trọng của “học chậm” được nhấn mạnh và được thực hiện bằng cách thu gọn từng thuật ngữ mới đưa vào mô hình (Phần 10.12), cũng như ngẫu nhiên hóa (Phần 10.12.2). • Mô tả các công cụ giải thích mô hình phù hợp (Phần 10.13) -->
+<div id="những-cơ-sở-của-kỹ-thuật-boosting." class="section level2" number="17.1">
+<h2>
+<span class="header-section-number">17.1</span> Những cơ sở của kỹ thuật boosting.<a class="anchor" aria-label="anchor" href="#nh%E1%BB%AFng-c%C6%A1-s%E1%BB%9F-c%E1%BB%A7a-k%E1%BB%B9-thu%E1%BA%ADt-boosting."><i class="fas fa-link"></i></a>
+</h2>
+<div id="nguyên-tắc-chung-của-boosting" class="section level3" number="17.1.1">
+<h3>
+<span class="header-section-number">17.1.1</span> Nguyên tắc chung của boosting<a class="anchor" aria-label="anchor" href="#nguy%C3%AAn-t%E1%BA%AFc-chung-c%E1%BB%A7a-boosting"><i class="fas fa-link"></i></a>
+</h3>
+<p>Xây dựng mô hình dựa trên kỹ thuật boosting về cơ bản là kết hợp tuyến tính một tập hợp các hàm cơ bản nhằm cải thiện khả năng giải thích hoặc dự đoán. Một cách tổng quát, hàm <span class="math inline">\(f\)</span> thu được từ kỹ thuật boosting có thể viết dưới dạng tổng của <span class="math inline">\(M\)</span> hàm phân loại hoặc hồi quy như sau:
+<span class="math display" id="eq:boosting1">\[\begin{align}
+f(\textbf{x}) = \sum\limits_{m=1}^M \ \lambda_m \cdot b(\textbf{x},\Theta_m)
+\tag{17.1}
+\end{align}\]</span>
+trong đó <span class="math inline">\(\lambda_m\)</span> là hệ số tuyến tính, <span class="math inline">\(b(\textbf{x},\Theta_m)\)</span> là một hàm phân loại hoặc hồi quy cơ bản có tham số là <span class="math inline">\(\Theta_m\)</span>. Dạng tham số của hàm <span class="math inline">\(b\)</span> thường được xác định trước khi xây dựng hàm <span class="math inline">\(f\)</span> trong khi các tham số <span class="math inline">\(\lambda_m\)</span> và <span class="math inline">\(\Theta_m\)</span> được ước lượng tại mỗi bước nhằm tối thiểu hóa hàm tổn thất. Quá trình ước lượng tham số của mô hình <a href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html#eq:boosting1">(17.1)</a> được thực hiện thông qua các bước như sau:</p>
+<ul>
+<li><p>Bước 1: Lựa chọn hàm tổn thất <span class="math inline">\(\sum\limits_{i=1}^n L(y_i, \hat{y}_i)\)</span>, dạng hàm cơ bản <span class="math inline">\(b(\textbf{x},\Theta)\)</span>, và cho <span class="math inline">\(f_0(\textbf{x}) = 0\)</span>.</p></li>
+<li><p>Bước 2: với mỗi <span class="math inline">\(m = 1, 2, \cdots, M\)</span>, tìm tham số (<span class="math inline">\(\lambda_m\)</span>,<span class="math inline">\(\Theta_m\)</span>) như sau
+<span class="math display" id="eq:boosting10">\[\begin{align}
+(\lambda_m,\Theta_m) = \underset{\lambda,\Theta}{\operatorname{argmax}} \sum\limits_{i=1}^n L\left( y_i, f_{m-1}(x_i) + \lambda \cdot b(\textbf{x}_i,\Theta) \right)
+\tag{17.2}
+\end{align}\]</span></p></li>
+<li><p>Bước 3: cho <span class="math inline">\(f_m(\textbf{x}) = f_{m-1}(\textbf{x}) + \lambda_m \cdot b(\textbf{x}_i,\Theta_m)\)</span>.</p></li>
+</ul>
+<p>Tại mỗi bước <span class="math inline">\(m = 1, 2, \cdots, M\)</span>, chúng ta cần phải tìm các tham số (<span class="math inline">\(\lambda_m\)</span>,<span class="math inline">\(\theta_m\)</span>) để tối thiểu hóa một hàm tổn thất. Khi giải bài toán tối ưu, lời giải chính xác luôn được ưu tiên trước, nếu không thể giải bằng lời giải chính xác mới cần sử dụng phương pháp số. Việc tồn tại hay không tồn tại lời giải chính xác cho mỗi bước <span class="math inline">\(m\)</span> phụ thuộc vào lựa chọn hàm tổn thất <span class="math inline">\(L\)</span> và hàm cơ bản <span class="math inline">\(b\)</span>. Hàm cơ bản <span class="math inline">\(b\)</span> thường được lựa chọn ở mức độ đơn giản nhất, chẳng hạn như 1 cây quyết định với 1 node. Hàm tổn thất có thể là hàm tổn thất kiểu mũ, hàm tổn thất kiểu trung bình sai số, hàm hợp lý,…</p>
+<ul>
+<li><p>Ví dụ 1: trong bài toán hồi quy, khi hàm tổn thất là hàm tổng sai số bình phương,
+<span class="math display">\[\begin{align}
+L(y_i, \hat{y}_i) = \cfrac{1}{2} \sum\limits_{i=1}^n (y_i - \hat{y}_i)^2
+\end{align}\]</span>
+tham số <span class="math inline">\((\lambda_m,\theta_m)\)</span> là lời giải của bài toán tối ưu sau
+<span class="math display">\[\begin{align}
+(\lambda_m,\theta_m) &amp; = \underset{\lambda,\theta}{\operatorname{argmin}} \cfrac{1}{2} \sum\limits_{i=1}^n \left(y_i - f_{m-1}(x_i) - \lambda \cdot b(\textbf{x}_i,\theta) \right)^2 \\
+&amp; = \underset{\lambda,\theta}{\operatorname{argmin}} \cfrac{1}{2} \sum\limits_{i=1}^n \left(\epsilon_{i,m-1}  - \lambda \cdot b(\textbf{x}_i,\theta) \right)^2
+\end{align}\]</span>
+trong đó <span class="math inline">\(\epsilon_{i,m-1}\)</span> là sai số của thuật toán Boosting sau bước thứ <span class="math inline">\((m-1)\)</span>. Bạn đọc có thể thấy rằng nếu chúng ta chọn hàm tổn thất là tổng sai số bình phương, tại bước thứ <span class="math inline">\(m\)</span> của quá trình boosting, chúng ta sẽ cần tìm các hệ số <span class="math inline">\((\lambda_m,\theta_m)\)</span> sao cho tổng sai số giữa <span class="math inline">\(\lambda_m \cdot b(\textbf{x}_i,\theta_m)\)</span> và sai số tại bước thứ <span class="math inline">\((m-1)\)</span>, <span class="math inline">\(\epsilon_{i,m-1}\)</span> là nhỏ nhất.</p></li>
+<li><p>Ví dụ 2: trong bài toán phân loại mà biến mục tiêu <span class="math inline">\(y\)</span> chỉ nhận hai giá trị là -1 hoặc 1, Freund và Schapire (1997) lựa chọn hàm tổn thất kiểu mũ
+<span class="math display">\[\begin{align}
+L(y_i, \hat{y}_i) = \sum\limits_{i=1}^n exp(- y_i \cdot \hat{y_i})
+\end{align}\]</span>
+tham số <span class="math inline">\((\lambda_m,\theta_m)\)</span> là lời giải của bài toán tối ưu sau
+<span class="math display">\[\begin{align}
+(\lambda_m,\theta_m) &amp; = \underset{\lambda,\theta}{\operatorname{argmin}} \sum\limits_{i=1}^n \exp\left[- y_i  \cdot \left(f_{m-1}(x_i) + \lambda \cdot b(\textbf{x}_i,\theta) \right) \right] \\
+&amp; = \underset{\lambda,\theta}{\operatorname{argmin}} \sum\limits_{i=1}^n \exp\left[ - y_i  \cdot f_{m-1}(x_i)\right]  \cdot \exp\left[- y_i \cdot \lambda \cdot b(\textbf{x}_i,\theta)  \right] \\
+&amp; = \underset{\lambda,\theta}{\operatorname{argmin}} \sum\limits_{i=1}^n w_i^{(m)}  \cdot \exp\left[- \lambda \cdot y_i \cdot b(\textbf{x}_i,\theta)  \right]
+\end{align}\]</span>
+với <span class="math inline">\(w_i^{(m)} = \exp\left[ - y_i \cdot f_{m-1}(x_i)\right]\)</span>. Bạn đọc có thể thấy rằng <span class="math inline">\(w_i^{(m)}\)</span> không phụ thuộc vào <span class="math inline">\(\lambda\)</span> hay <span class="math inline">\(\theta\)</span> nên có thể coi như trọng số tương ứng với dữ liệu thứ <span class="math inline">\(i\)</span>.</p></li>
+</ul>
+<p>Từ kết quả của ví dụ 2, chúng ta đã có thể giải thích các bước trong thuật toán AdaBoost.M1. Với mọi <span class="math inline">\(\lambda &gt; 0\)</span> và với một lựa chọn của hàm <span class="math inline">\(b\)</span>, tham số <span class="math inline">\(\theta_m\)</span> là giá trị tối thiểu hóa hàm tổn thất
+<span class="math display" id="eq:boosting2">\[\begin{align}
+(\theta_m) &amp; = \underset{\theta}{\operatorname{argmin}} \sum\limits_{i=1}^n w_i^{(m)}  \cdot \exp\left[- \lambda \cdot y_i \cdot b(\textbf{x}_i,\theta)  \right] \\
+\tag{17.3}
+\end{align}\]</span>
+Biến đổi công thức phía bên phải của phương trình <a href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html#eq:boosting2">(17.3)</a> chúng ta có
+<span class="math display" id="eq:boosting3">\[\begin{align}
+\sum\limits_{i=1}^n w_i^{(m)}  \cdot \exp\left[- \lambda \cdot y_i \cdot b(\textbf{x}_i,\theta)  \right] &amp; = \sum\limits_{i=1}^n w_i^{(m)}  \cdot \left[ e^{-\lambda} \cdot \mathbb{I}(y_i = b(\textbf{x}_i,\theta)) + e^{\lambda} \cdot \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta))  \right]\\
+&amp; = \sum\limits_{i=1}^n w_i^{(m)}  \cdot e^{-\lambda} +  \sum\limits_{i=1}^n w_i^{(m)}  \cdot \left[ e^{\lambda} - e^{-\lambda} \right] \cdot \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta)) \\
+&amp; = e^{-\lambda} \cdot \sum\limits_{i=1}^n w_i^{(m)}  + \left[ e^{\lambda} - e^{-\lambda} \right] \cdot  \sum\limits_{i=1}^n w_i^{(m)}  \cdot  \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta))
+\tag{17.4}
+\end{align}\]</span></p>
+<p>Do <span class="math inline">\(e^{\lambda} - e^{-\lambda} &gt; 0\)</span> và các <span class="math inline">\(w_i^{(m)}\)</span> không phụ thuộc vào <span class="math inline">\(\theta\)</span> nên ta có giá trị <span class="math inline">\(\theta_m\)</span> tối thiểu hóa hàm tổn thất trong phương trình <a href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html#eq:boosting2">(17.3)</a> cũng là giá trị <span class="math inline">\(\theta_m\)</span> tối thiểu hóa sai số dự đoán
+<span class="math display" id="eq:boosting4">\[\begin{align}
+(\theta_m) &amp; = \underset{\theta}{\operatorname{argmin}} \sum\limits_{i=1}^n w_i^{(m)}  \cdot  \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta))
+\tag{17.5}
+\end{align}\]</span></p>
+<p>Với mỗi <span class="math inline">\(\theta_m\)</span> là lời giải của <a href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html#eq:boosting4">(17.5)</a>, chúng ta có giá trị <span class="math inline">\(\lambda_m\)</span> để tối thiểu hóa giá trị hàm tổn thất trong phương trình <a href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html#eq:boosting2">(17.3)</a> là lời giải của phương trình
+<span class="math display">\[\begin{align}
+\sum\limits_{i=1}^n w_i^{(m)}  \cdot \cfrac{\partial \exp\left[- \lambda \cdot y_i \cdot b(\textbf{x}_i,\theta_m)  \right]}{\partial \lambda} = 0 \\
+\end{align}\]</span></p>
+<p>Lấy đạo hàm của vế phải của phương trình <a href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html#eq:boosting4">(17.5)</a> theo <span class="math inline">\(\lambda\)</span> chúng ta có:
+<span class="math display">\[\begin{align}
+&amp; - e^{-\lambda_m} \cdot \sum\limits_{i=1}^n w_i^{(m)}  + \left[ e^{\lambda_m} + e^{-\lambda_m} \right] \cdot  \sum\limits_{i=1}^n w_i^{(m)}  \cdot  \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta_m)) = 0 \\
+&amp; \rightarrow \lambda_m = \cfrac{1}{2} \cdot \log\left(\cfrac{1}{err_m} - 1 \right)
+\end{align}\]</span>
+với <span class="math inline">\(err_m\)</span> là sai số của hàm phân loại <span class="math inline">\(b(\textbf{x}_i,\theta_m)\)</span>
+<span class="math display">\[\begin{align}
+err_m = \cfrac{\sum\limits_{i=1}^n w_i^{(m)}  \cdot  \mathbb{I}(y_i \neq b(\textbf{x}_i,\theta_m))}{\sum\limits_{i=1}^n w_i^{(m)}}
+\end{align}\]</span></p>
+<p>Chúng ta cập nhật trọng số cho bước tiếp theo như sau
+<span class="math display">\[\begin{align}
+w_i^{(m+1)}&amp; = \exp\left[- y_i \cdot f_m(x_i)\right] \\
+&amp; = exp\left[- y_i \cdot f_{m-1}(x_i) - y_i \lambda_m b(x_i,\theta_m) \right] \\
+&amp; = w_i^{(m)} \cdot \exp\left[ \lambda_m \cdot(2 \mathbb{I}(b(x_i,\theta_m) \neq y_i) - 1)  \right] \\
+&amp; = w_i^{(m)} \cdot \exp\left[ (2\lambda_m) \cdot \mathbb{I}(b(x_i,\theta_m) \neq y_i)  \right] \cdot \exp(-\lambda_m)
+\end{align}\]</span>
+Công thức ở trên tương đương với bước 2.(d) trong thuật toán AdaBoost.M1 với <span class="math inline">\((2\lambda_m) = \alpha_m\)</span>. Giá trị <span class="math inline">\(\exp(-\lambda_m)\)</span> không ảnh hưởng đến trọng số vì không phụ thuộc vào <span class="math inline">\(i\)</span>.</p>
+<ul>
+<li>Ví dụ 1: chúng ta sẽ áp dụng thuật toán AdaBoost.M1 trên một dữ liệu có 10 quan sát như dưới đây. Dữ liệu có biến mục tiêu <span class="math inline">\(Y\)</span> nhận giá trị 1 khi khách hàng đồng ý mua sản phẩm và nhận giá trị -1 khi khách hành không đồng ý. Có bốn biến giải thích là độ tuổi (<span class="math inline">\(Age\)</span>), số năm kinh nghiệm lái xe (<span class="math inline">\(seniority\)</span>), giới tính (<span class="math inline">\(sex\)</span>) và thành thị (<span class="math inline">\(urban\)</span>). Hàm phân loại chúng ta lựa chọn là cây quyết định có 1 node duy nhất.</li>
+</ul>
+<div class="sourceCode" id="cb892"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">"../KHDL_KTKD Final/Dataset/AdaBoostM1Example1.csv"</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df</span>, booktabs <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tuổi"</span>, <span class="st">"Kinh nghiệm"</span>, <span class="st">"Giới tính"</span>, <span class="st">"Thành thị"</span>, <span class="st">"Lựa chọn"</span><span class="op">)</span>,</span>
+<span>      escape<span class="op">=</span><span class="cn">F</span>, align <span class="op">=</span> <span class="st">'r'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="co">#column_spec(c(1,4,5,6,7),border_left = T) %&gt;% column_spec(7,border_right = T) %&gt;% </span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>latex_options <span class="op">=</span> <span class="st">"scale_down"</span>,full_width <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;">
+Tuổi
+</th>
+<th style="text-align:right;">
+Kinh nghiệm
+</th>
+<th style="text-align:right;">
+Giới tính
+</th>
+<th style="text-align:right;">
+Thành thị
+</th>
+<th style="text-align:right;">
+Lựa chọn
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+F
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+F
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+F
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+F
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tại bước <span class="math inline">\(m=1\)</span> chúng ta có tỷ trọng của mỗi hàng dữ liệu là <span class="math inline">\(w^{(1)}_i = 0.1\)</span>; để xây dựng mô hình cây quyết định với 1 node và tôi thiểu hóa sai số trên dữ liệu, chúng ta thử trên từng cột dữ liệu</p>
+<ul>
+<li><p>Cột <span class="math inline">\(age\)</span>, bạn đọc có thể kiểm tra rằng tại điểm cắt 55.5 (tuổi), cây quyết định cho sai số có trọng số <span class="math inline">\(w^{(1)}_i\)</span> nhỏ nhất là 0.3. Lưu ý rằng điểm cắt 48 tuổi cũng có sai số là 0.3 tuy nhiên điểm cắt này chia dữ liệu thành một phần chỉ có 2 quan sát và một phần có 8 quan sát nên ít tối ưu hơn so với điểm cắt 55.5.</p></li>
+<li><p>Cột <span class="math inline">\(seniority\)</span>, điểm cắt tối ưu là 24.5 (năm) và cũng cho sai số có trọng số là 0.3</p></li>
+<li><p>Cột <span class="math inline">\(sex\)</span> chỉ có một lựa chọn là chia dữ liệu thành hai phần, Male và Female, cho sai số có trọng số là 0.3</p></li>
+<li><p>Cột <span class="math inline">\(urban\)</span> chỉ có một lựa chọn là chia dữ liệu thành 0 và 1, cũng cho sai số có trọng số là 0.4</p></li>
+</ul>
+<p>Chúng ta chọn cây quyết định dựa trên biến <span class="math inline">\(age\)</span> với điểm cắt là 55.5 tuổi là hàm phân loại tại <span class="math inline">\(m = 1\)</span>. Cây quyết định cho giá trị là 1 khi biến <span class="math inline">\(age\)</span> nhỏ hơn 55.5 và cho giá trị là -1 khi biến <span class="math inline">\(age\)</span> cho giá trị lớn hơn 1. Hệ số của hàm phân loại thứ nhất trong hàm phân loại tổng là
+<span class="math display">\[\begin{align}
+\alpha_1 = log(\cfrac{1 - err_1}{err_1}) = log(\cfrac{1-0.3}{0.3}) = 0.8473
+\end{align}\]</span></p>
+<p>Trọng số cho bước thứ 2 được cập nhật, theo công thức 2.(d) như sau
+<span class="math display">\[\begin{align}
+w^{(2)}_i = w^{(1)}_i \cdot \exp\left[ 0.8473 \cdot \mathbb{I} \left(f_m^C(\textbf{x}_i) \neq y_i \right) \right] =
+  \begin{cases}
+  0.1 \cdot e^0 \textit{ nếu }  f_m^C(\textbf{x}_i) = y_i \\
+  0.1 \cdot e^{0.8473} \textit{ nếu }  f_m^C(\textbf{x}_i) \neq y_i
+  \end{cases}
+\end{align}\]</span></p>
+<p>Bạn đọc có thể thấy rằng trọng số cho 3 hàng bị dự đoán sai đã được tăng lên thành <span class="math inline">\(0.1 \times e^{0.8473}\)</span> trong khi trọng số cho 7 hàng được dự đoán đúng vẫn là 0.1. Chuẩn hóa lại trọng số để có tổng bằng 1 chúng ta có bảng sau</p>
+<div class="sourceCode" id="cb893"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">df</span>, w1 <span class="op">=</span> <span class="fl">0.1</span>, pred1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">age</span><span class="op">&lt;</span><span class="fl">48</span>,<span class="fl">1</span>,<span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">df</span>, w2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">Y</span> <span class="op">==</span> <span class="va">pred1</span>, <span class="fl">0.1</span>,<span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fl">0.8573</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">df</span><span class="op">&lt;-</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="va">df</span>, w2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">w2</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">w2</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="va">df</span>, booktabs <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>      col.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tuổi"</span>, <span class="st">"Kinh nghiệm"</span>, <span class="st">"Giới tính"</span>, <span class="st">"Thành thị"</span>, <span class="st">"Y"</span>, <span class="st">"$w^{(1)}$"</span>, <span class="st">"$b(x_i,\\theta_1)$"</span>, <span class="st">"$w^{(2)}$"</span> <span class="op">)</span>,</span>
+<span>      escape<span class="op">=</span><span class="cn">F</span>, align <span class="op">=</span> <span class="st">'r'</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html">kable_styling</a></span><span class="op">(</span>latex_options <span class="op">=</span> <span class="st">"scale_down"</span>,full_width <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-table"><table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:right;">
+Tuổi
+</th>
+<th style="text-align:right;">
+Kinh nghiệm
+</th>
+<th style="text-align:right;">
+Giới tính
+</th>
+<th style="text-align:right;">
+Thành thị
+</th>
+<th style="text-align:right;">
+Y
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(w^{(1)}\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(b(x_i,\theta_1)\)</span>
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(w^{(2)}\)</span>
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+58
+</td>
+<td style="text-align:right;">
+32
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+46
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+F
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+65
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.303
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+F
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.303
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+53
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+F
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.303
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+64
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+63
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:right;">
+F
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+M
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.1
+</td>
+<td style="text-align:right;">
+-1
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tại bước <span class="math inline">\(m=2\)</span>, chúng ta cần tìm cây quyết định để tối thiểu hóa sai số có trọng số <span class="math inline">\(w^{(2)}\)</span> như bảng ở trên.</p>
+<ul>
+<li><p>Cột <span class="math inline">\(age\)</span>, bạn đọc có thể kiểm tra rằng tại điểm cắt 64.5 (tuổi), cây quyết định cho sai số có trọng số <span class="math inline">\(w^{(2)}_i\)</span> nhỏ nhất là 0.342</p></li>
+<li><p>Cột <span class="math inline">\(seniority\)</span>, điểm cắt tối ưu là 24.5 (năm) cho sai số có trọng số là 0.329</p></li>
+<li><p>Cột <span class="math inline">\(sex\)</span> chỉ có một lựa chọn là chia dữ liệu thành hai phần, Male và Female, cho sai số có trọng số là 0.329</p></li>
+<li><p>Cột <span class="math inline">\(urban\)</span> chỉ có một lựa chọn là chia dữ liệu thành 0 và 1, cũng cho sai số có trọng số là 0.342</p></li>
+</ul>
+<p>Như vậy, cây quyết định tại bước thứ hai có thể dựa trên biến <span class="math inline">\(seniority\)</span> hoặc <span class="math inline">\(sex\)</span>. Chúng ta sẽ lựa chọn biến <span class="math inline">\(seniority\)</span> với điểm cắt là 24.5 (năm). Cây quyết định trả lại giá trị là <span class="math inline">\(1\)</span> khi <span class="math inline">\(seniority &gt; 24.5\)</span> và trả lại giá trị <span class="math inline">\(-1\)</span> khi <span class="math inline">\(seniority &lt; 24.5\)</span>. Hệ số của hàm phân loại thứ hai trong hàm phân loại tổng là
+<span class="math display">\[\begin{align}
+\alpha_2 = log(\cfrac{1-0.342}{0.342}) = 0.654
+\end{align}\]</span></p>
+<p>Với <span class="math inline">\(M = 2\)</span> chúng ta có hàm phân loại từ thuật toán AdaBoost.M1 được xây dựng như sau
+<span class="math display">\[\begin{align}
+f^C = sign(0.8473 \cdot f^C_1 + 3.204 \cdot f^C_2) = \begin{cases}
+1 \textit{ nếu } age &lt; 55.5 \textit{ và } seniority &lt; 24.5 \\
+-1 \textit{ nếu } age &gt; 55.5 \textit{ và } seniority &gt; 24.5 \\
+1 \textit{ nếu } age &lt; 55.5 \textit{ và } seniority &lt; 24.5 \\
+-1 \textit{ nếu } age &gt; 55.5 \textit{ và } seniority &gt; 24.5
+\end{cases}
+\end{align}\]</span></p>
+</div>
+<div id="hàm-cơ-bản-dạng-cây-quyết-định" class="section level3" number="17.1.2">
+<h3>
+<span class="header-section-number">17.1.2</span> Hàm cơ bản dạng cây quyết định<a class="anchor" aria-label="anchor" href="#h%C3%A0m-c%C6%A1-b%E1%BA%A3n-d%E1%BA%A1ng-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh"><i class="fas fa-link"></i></a>
+</h3>
+<p>Cây quyết định thảo luận trong phần trước là kỹ thuật chia không gian tất cả các biến giải thích thành <span class="math inline">\(K\)</span> phần không giao nhau, <span class="math inline">\(R_1, R_2, \cdots, R_K\)</span>, mỗi phần được mô tả bởi một lá của cây quyết định. Một hằng số <span class="math inline">\(\gamma_k\)</span> được gán cho giá trị của mỗi vùng <span class="math inline">\(R_k\)</span> và nguyên tắc dự báo đơn giản là:
+<span class="math display">\[\begin{align}
+x \in R_k \rightarrow f(x) = \gamma_k
+\end{align}\]</span>
+Nói cách khác, cây quyết định có thể được viết dưới dạng như sau
+<span class="math display">\[\begin{align}
+T(x; \Theta) =  \sum\limits_{k=1}^K \gamma_k \cdot \mathbb{I}(x \in R_k)
+\end{align}\]</span>
+Tham số của cây quyết định bao gồm có 1. cách phân vùng không gian các biến độc lập <span class="math inline">\(R_1, R_2, \cdots, R_K\)</span>; và 2. các hằng số <span class="math inline">\(\gamma_k\)</span>, <span class="math inline">\(k = 1, 2, \cdots K\)</span>.</p>
+<p>Ước lượng tham số của cây quyết định bao gồm việc xác định phân vùng <span class="math inline">\(\{R_k\}\)</span> và xác định các tham số <span class="math inline">\(\gamma_k\)</span>. Thông thường thì ước lượng tham số sẽ bao gồm hai bước</p>
+<ul>
+<li><p>Thứ nhất: với mỗi phân vùng <span class="math inline">\(\{R_k\}\)</span> cho trước, xác định <span class="math inline">\(\gamma_k\)</span> để tối thiểu hóa hàm tổn thất trên miền <span class="math inline">\(R_k\)</span> tương ứng
+<span class="math display">\[\begin{align}
+\gamma_k = \underset{\gamma}{\operatorname{argmin}} \sum\limits_{x_i \in R_k} L(y_i, \gamma)
+\end{align}\]</span>
+Tùy vào hàm <span class="math inline">\(L\)</span> mà giá trị của <span class="math inline">\(\gamma_k\)</span> sẽ có quy tắc xác định khác nhau: với hàm <span class="math inline">\(L\)</span> là tổng bình phương sai số, <span class="math inline">\(\gamma_k\)</span> là giá trị trung bình của <span class="math inline">\(y_i\)</span> trên phân vùng <span class="math inline">\(R_k\)</span>; với hàm <span class="math inline">\(L\)</span> là tổng giá trị tuyệt đối sai số, <span class="math inline">\(\gamma_k\)</span> là giá trị trung vị của <span class="math inline">\(y_i\)</span> trên phân vùng <span class="math inline">\(R_k\)</span>; với <span class="math inline">\(L\)</span> là sai số phân loại, <span class="math inline">\(\gamma_k\)</span> là giá trị mode của <span class="math inline">\(y_i\)</span>,…</p></li>
+<li><p>Thứ hai: là việc xác định phân vùng <span class="math inline">\(\{R_k\}\)</span>. Đây là một vấn đề không đơn giản và không có lời giải chính xác. Hướng tiếp cận thường là giống như cách xác định cây quyết định như trong phần trước. Chúng ta thử phân vùng trên từng biến giải thích riêng lẻ và lựa chọn phân vùng tốt nhất dựa trên sai số phân loại, hệ số gini, hoặc hệ số entropy và tiếp tục quá trình đó cho đến khi một số chỉ tiêu đạt được.</p></li>
+</ul>
+<p>Chúng ta ký hiệu các hàm cơ bản là <span class="math inline">\(T\)</span> (viết tắt của Tree) thay vì <span class="math inline">\(b\)</span> như trong phần trước. Sau <span class="math inline">\(M\)</span> bước boosting, chúng ta có hàm phân loại (hoặc hồi quy) có dạng
+<span class="math display">\[\begin{align}
+f(\textbf{x}) = \sum\limits_{m=1}^M \lambda_m \cdot T(\textbf{x},\Theta_m)
+\end{align}\]</span></p>
+<p>Do hàm <span class="math inline">\(T(.)\)</span> nhận giá trị là hằng số trên mỗi phân vùng nên việc thêm tham số <span class="math inline">\(\lambda_m\)</span> là không cần thiết. Do đó các tham số cần ước lượng chỉ bao gồm tham số <span class="math inline">\(\Theta_m\)</span>. Tại mỗi bước <span class="math inline">\(m\)</span>, chúng ta cần tìm tham số <span class="math inline">\(\Theta_m\)</span> của cây quyết định <span class="math inline">\(T(\textbf{x},.)\)</span> sao cho
+<span class="math display" id="eq:boosttree1">\[\begin{align}
+(\Theta_m) = \underset{\Theta_m}{\operatorname{argmin}} \sum\limits_{i = 1}^n L\left(y_i, f_{m-1}(\textbf{x}_i) + T(\textbf{x}_i, \Theta) \right)
+\tag{17.6}
+\end{align}\]</span>
+Nhắc lại rằng tham số <span class="math inline">\(\Theta_m\)</span> bao gồm có phân vùng <span class="math inline">\(\{R^{(m)}_k\}\)</span> tại bước thứ <span class="math inline">\(m\)</span> và hằng số <span class="math inline">\(\gamma^{(m)}_k\)</span> của vùng <span class="math inline">\(R^{(m)}_k\)</span>. Tương tự như bài toán ước lượng tham số của cây quyết định thông thường, tại bước thứ <span class="math inline">\(m\)</span> trong kỹ thuật boosting, nếu cho trước vùng <span class="math inline">\(R^{(m)}_k\)</span>, <span class="math inline">\(\gamma^{(m)}_k\)</span> sẽ được xác định như sau
+<span class="math display">\[\begin{align}
+(\gamma^{m}_k) = \underset{\gamma}{\operatorname{argmin}} \sum\limits_{\textbf{x}_i \in R^{(m)}_k} L\left(y_i, f_{m-1}(\textbf{x}_i) + \gamma \right)
+\end{align}\]</span></p>
+<p>Việc xác định phân vùng <span class="math inline">\(\{R^{(m)}_k\}\)</span> là không đơn giản, thậm chí còn khó khăn hơn so với việc tìm phân vùng cho một cây quyết định riêng lẻ. Trong một vài trường hợp, tìm kiếm phân vùng tối ưu sẽ có lời giải:</p>
+<ul>
+<li><p>Ví dụ 1: trong bài toán hồi quy và hàm tổn thất là hàm tổng bình phương sai số, tìm cây quyết định <span class="math inline">\(T(\textbf{x}_i, \Theta_m)\)</span> tương đương với bài toán tìm cây quyết định với ma trận biến giải thích <span class="math inline">\(\textbf{x}\)</span> và biến mục tiêu là <span class="math inline">\(y - f_{m-1}(\textbf{x})\)</span>. Với mỗi phân vùng <span class="math inline">\(\{R^{(m)}_k\}\)</span>, giá trị <span class="math inline">\(\gamma^{(m)}_k\)</span> là giá trị trung bình của <span class="math inline">\(y - f_{m-1}(\textbf{x})\)</span> trên miền <span class="math inline">\(R^{(m)}_k\)</span>.</p></li>
+<li><p>Ví dụ 2: trong bài toán phân loại nhị phân và hàm tổn thất kiểu mũ, ước lượng tham số cho cây quyết định trong phương trình <a href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html#eq:boosttree1">(17.6)</a> được viết lại như sau
+<span class="math display" id="eq:boosttree2">\[\begin{align}
+(\Theta_m) = \underset{\Theta_m}{\operatorname{argmin}} \sum\limits_{i = 1}^n w^{(m)}_i \exp\left[- y_i T(\textbf{x}_i, \Theta) \right]
+\tag{17.7}
+\end{align}\]</span>
+với <span class="math inline">\(w^{(m)}_i = \exp(-y_i f_{m-1}(\textbf{x}_i))\)</span>. Để giải bài toán tối ưu ở trên, phương pháp tiếp cận sẽ là thử qua các phân vùng có thể tìm kiếm được phân vùng tốt nhất (tìm kiếm tham lam). Trên mỗi vùng <span class="math inline">\(R^{(m)}_k\)</span>, giá trị <span class="math inline">\(\gamma^{(m)}_k\)</span> tối thiểu hóa giá trị hàm tổn thất trên vùng đó là
+<span class="math display">\[\begin{align}
+\gamma^{(m)}_k = \log \left(\cfrac{\sum\limits_{x_i \in R^{(m)}_k} w^{(m)}_i \mathbb{I}(y_i = 1)}{\sum\limits_{x_i \in R^{(m)}_k} w^{(m)}_i \mathbb{I}(y_i = -1)} \right)
+\end{align}\]</span></p></li>
+</ul>
+</div>
+<div id="hàm-tổn-thất" class="section level3" number="17.1.3">
+<h3>
+<span class="header-section-number">17.1.3</span> Hàm tổn thất<a class="anchor" aria-label="anchor" href="#h%C3%A0m-t%E1%BB%95n-th%E1%BA%A5t"><i class="fas fa-link"></i></a>
+</h3>
+<p>Thuật toán AdaBoost.M1 mặc dù được giải thích dựa trên hàm tổn thất kiểu mũ, nhưng phương pháp tiếp cận ban đầu của thuật toán này lại không bắt đầu từ hàm tổn thất. Sau khi thuật toán được công bố thì mối liên hệ của thuật toán này và hàm phân loại kiểu mũ mới được tìm ra. Hàm tổn thất kiểu mũ trong ngữ cảnh của boosting có ưu điểm là cho phép tính toán nhanh và cho công thức chính xác của tỷ trọng trong các bước của quá trình boosting. Trong phần này của chương sách, chúng ta sẽ thảo luận kỹ hơn về hàm tổn thất kiểu mũ nói riêng các hàm tổn thất khác nói chung được sử dụng thường xuyên trong các bài toán hồi quy và phân loại.</p>
+<p>Với biến mục tiêu chỉ nhận hai giá trị là -1 và 1, có thể chứng minh được rằng giá trị <span class="math inline">\(\hat{y}^*\)</span> để tối thiểu giá trị trung bình của <span class="math inline">\(\exp(-Y \hat{y} )\)</span> được xác định như sau
+<span class="math display">\[\begin{align}
+\hat{y}^* = \underset{\hat{y}}{\operatorname{argmin}} \mathbb{E}\left( \exp(-Y \hat{y}) \right) = \cfrac{1}{2} \cdot \log \left( \cfrac{\mathbb{P}(Y = 1)}{\mathbb{P}(Y = -1)}\right)
+\end{align}\]</span>
+Giá trị tối ưu này giải thích tại sao trong bước (3). của AdaBoost.M1 lại lấy dấu của hàm <span class="math inline">\(f^C(x_i) = \left( \sum\limits_{m=1}^M \alpha_m \cdot f_m^C(x_i) \right)\)</span> để dự đoán giá trị của <span class="math inline">\(y_i\)</span>. Quy tắc đơn giản là nếu <span class="math inline">\(f^C(x_i) &gt; 0\)</span>, do <span class="math inline">\(f^C(x_i)\)</span> được xây dựng để xấp xỉ đến <span class="math inline">\(\hat{y_i}^*\)</span> nên ta có <span class="math inline">\(\log \left( \cfrac{\mathbb{P}(Y = 1)}{\mathbb{P}(Y = -1)}\right) &gt; 0\)</span> hay <span class="math inline">\(\mathbb{P}(Y_i = 1) &gt; \mathbb{P}(Y_i = -1)\)</span> do đó <span class="math inline">\(Y_i\)</span> có khả năng nhận giá trị bằng 1 cao hơn so với khả năng nhận giá trị là -1.</p>
+<p>Hàm tổn thất kiểu mũ khác cũng cho giá trị tối ưu tương đương như hàm tổn thất kiểu mũ trong bài toán phân loại nhị phân là hàm cross-entropy. Hàm tổn thất cross-entropy hay còn gọi là <span class="math inline">\(deviance\)</span> được sử dụng trong trường hợp biến <span class="math inline">\(Y^{'}\)</span> có phân phối nhị thức với tham số <span class="math inline">\(p\)</span> (chưa biết)<br><span class="math display" id="eq:entropyloss">\[\begin{align}
+l(Y^{'},\hat{p}) = - \left(Y^{'} log(\hat{p}) + (1 - Y^{'}) log(1 - \hat{p})\right)
+\tag{17.8}
+\end{align}\]</span>
+với <span class="math inline">\(\hat{p} \in (0,1)\)</span>. Giá trị <span class="math inline">\(\hat{p}\)</span> để tối thiểu giá trị trung bình của hàm tổn thất là <span class="math inline">\(\hat{p}^* = \mathbb{P}(Y^{'} = 1)\)</span>.</p>
+<p>Với <span class="math inline">\(\hat{p} \in (0,1)\)</span>, cho
+<span class="math display">\[\begin{align}
+\hat{y} = \cfrac{1}{2} \log\left( \cfrac{\hat{p}}{1-\hat{p}} \right)
+\end{align}\]</span>
+và <span class="math inline">\(Y = 2 \times Y^{'} - 1\)</span>, chúng ta sẽ thấy rằng bài toán tìm <span class="math inline">\(\hat{p}\)</span> để tối thiểu giá trị trung bình của hàm tổn thất trong <a href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html#eq:entropyloss">(17.8)</a> tương đương với việc tìm <span class="math inline">\(\hat{y}\)</span> để tối thiểu hóa hàm tổn thất kiểu mũ.</p>
+<p>Hàm tổn thất cross-entropy thường xuyên được sử dụng trong bài toán phân loại mà <span class="math inline">\(Y\)</span> có thể nhận <span class="math inline">\(J\)</span> giá trị. Giả sử các giá trị <span class="math inline">\(Y\)</span> có thể nhận được mã hóa thành <span class="math inline">\(J\)</span> số tự nhiên là <span class="math inline">\(1, 2, \cdots, J\)</span>. Trong trường hợp này, hàm <span class="math inline">\(f^C\)</span> là một véc-tơ có độ dài <span class="math inline">\(J\)</span> mỗi phần tử trong véc-tơ là một hàm số thực. Giá sử <span class="math inline">\(f^C_j\)</span> là phần tử thứ <span class="math inline">\(j\)</span> của hàm <span class="math inline">\(f^C\)</span>, hàm tổn thất kiểu cross-entropy trong bài toán phân loại được viết như sau
+<span class="math display">\[\begin{align}
+L(Y, \hat{p}) &amp; = - \sum\limits_{j = 1}^J \mathbb{I}(Y = j) \log(\hat{p}_j) \\
+&amp; = - \sum\limits_{j = 1}^J \mathbb{I}(Y = j) \cdot f^C_j + \log \left(\sum\limits_{j = 1}^J e^{f^C_j} \right) \text{ với } \hat{p}_j &amp; = \cfrac{e^{f^C_l}}{\sum\limits_{l = 1}^J e^{f^C_l}}
+\end{align}\]</span></p>
+<p>Quá trình ước lượng hàm <span class="math inline">\(f^C\)</span> trong kỹ thuật boosting bao gồm ước lượng các hàm <span class="math inline">\(f^C_l\)</span> mà mỗi hàm đại diện cho 1 biến phân loại. Thông thường chúng ta sẽ cố định một thành phần bằng 0 để số lượng hàm số cần ước lượng tại mỗi bước là <span class="math inline">\((J-1)\)</span>.</p>
+<p>Những lý thuyết cơ bản về boosting mà chúng tôi trình bày từ đầu chương sách có thể gây khó hiểu cho bạn đọc không có nền tảng nâng cao về toán học. Tuy nhiên, các kiến thức này là cần thiết nếu bạn đọc muốn giải mã các thuật toán boosting cập nhật nhất hiện nay. Tại thời điểm chúng tôi viết cuốn sách này, các thuật toán như XGBoost hay LGBoost là các thuật toán học máy chiếm ưu thế hoàn toàn trong các cuộc thi về khoa học dữ liệu. Các thuật toán này dựa trên nền tảng lý thuyết mà chúng tôi đã trình bày ở trên kết hợp với một vài kỹ thuật tối ưu hóa bằng phương pháp số thay vì tối ưu hóa bằng lời giải chính xác như lý thuyết. Ý tưởng tối ưu hóa tại mỗi bước của kỹ thuật boosting dựa trên nguyên lý “gradient desent”, hay còn gọi là gradient boosting là chìa khóa để thuật toán boosting có thể được áp dụng với bất kỳ kiểu hàm tổn thất thất nào, và do đó có thể được sử dụng trong cả bài toán hồi quy, bài toán phân loại nhị phân, hay bài toán phân loại nói chung.</p>
+</div>
+</div>
+<div id="gradient-boosting" class="section level2" number="17.2">
+<h2>
+<span class="header-section-number">17.2</span> Gradient boosting<a class="anchor" aria-label="anchor" href="#gradient-boosting"><i class="fas fa-link"></i></a>
+</h2>
+<p>Trong kỹ thuật boosting, tại mỗi bước <span class="math inline">\(m\)</span> sẽ cần phải giải bài toán tối ưu. Bài toán tối ưu chỉ có lời giải với một số hàm tổn thất cụ thể như hàm tổn thất kiểu mũ trong bài toán phân loại nhị phân, hay hàm tổn thất kiểu tổng sai số bình phương trong bài toán hồi quy. Thêm vào đó, việc liên tục tìm kiếm giá trị tối ưu tại mỗi bước nhiều khả năng dẫn đến overfitting, nghĩa là hàm phân loại hay hồi quy tìm được sẽ cho sai số rất nhỏ trên tập dữ liệu huấn luyện mô hình, nhưng sai số trên tập kiểm thử sẽ lớn.</p>
+<p>Thay vì cố gắng giải bài toán tối ưu tại từng bước <span class="math inline">\(m\)</span>, kỹ thuật boosting theo gradient của hàm tổn thất, hay còn gọi là gradient boosting là một phương pháp tiếp cận có thể áp dụng với mọi hàm tổn thất và hạn chế được hiện tượng overfitting. Chúng ta sẽ thảo luận về kỹ thuật này trong các phần tiếp theo: trước tiên, chúng tôi sẽ giới thiệu về gradient boosting nói chung cùng với các ví dụ trên dữ liệu cụ thể, sau đó chúng tôi sẽ giới thiệu một kỹ thuật gradient boosting có ưu điểm vượt trội nhất hiện nay là eXtreme Gradient Boosting hay viết tắt là XGBoost.</p>
+<div id="cơ-sở-toán-học-của-gradient-boosting." class="section level3" number="17.2.1">
+<h3>
+<span class="header-section-number">17.2.1</span> Cơ sở toán học của gradient boosting.<a class="anchor" aria-label="anchor" href="#c%C6%A1-s%E1%BB%9F-to%C3%A1n-h%E1%BB%8Dc-c%E1%BB%A7a-gradient-boosting."><i class="fas fa-link"></i></a>
+</h3>
+<p>Nguyên lý chung của boosting là tại bước thứ <span class="math inline">\(m\)</span>, tìm một hàm cơ sở <span class="math inline">\(b(\textbf{x},\Theta_m)\)</span> sao cho hàm tổn thất <span class="math inline">\(L(y, \hat{y})\)</span> tính tại <span class="math inline">\(\hat{y} = f_m(\textbf{x}) = f_{m_1}(\textbf{x}) + \lambda_m b(\textbf{x},\Theta_m)\)</span> đạt giá trị nhỏ nhất. Tại bước thứ <span class="math inline">\((m-1)\)</span> chúng ta có giá trị hàm tổn thất là <span class="math inline">\(L(\textbf{y}, \hat{y})\)</span> đã được xác định trước. Chúng ta coi <span class="math inline">\(f_{m_1}\)</span> là một véc-tơ có <span class="math inline">\(n\)</span> thành phần <span class="math inline">\(f_{m-1}(\textbf{x}_i)\)</span> tương ứng với mỗi dữ liệu quan sát được và bỏ qua ràng buộc <span class="math inline">\(b(\textbf{x},\Theta_m)\)</span> phải là một hàm có tham số <span class="math inline">\(\Theta_m\)</span> tính trên dữ liệu <span class="math inline">\(\textbf{x}\)</span>. Khi đó cách tốt nhất để làm giảm giá trị của hàm tổn thất <span class="math inline">\(L(y, f_{m-1}(\textbf{x}))\)</span> khi thay đổi giá trị <span class="math inline">\(f_{m-1}(\textbf{x}))\)</span> là cho mỗi thành phần <span class="math inline">\(f_{m-1}(\textbf{x}_i)\)</span> thay đổi tỷ lệ nghịch với giá trị đạo hàm của hàm <span class="math inline">\(L(y, f_{m-1}(\textbf{x}))\)</span> tính tại <span class="math inline">\(f_{m-1}(\textbf{x}_i)\)</span>. Gọi <span class="math inline">\(g_{m-1,i}\)</span> là đạo hàm của hàm <span class="math inline">\(L(y_i, f_{m-1}(\textbf{x}))\)</span> theo <span class="math inline">\(f_{m-1}(\textbf{x}_i)\)</span>
+<span class="math display">\[\begin{align}
+g_{m-1,i} = \cfrac{ \partial L(y_i, f_{m-1}(\textbf{x}))}{\partial f_{m-1}(\textbf{x}_i)}
+\end{align}\]</span>
+thì cách tốt nhất để giảm giá trị hàm tổn thất <span class="math inline">\(L(\textbf{y}, \hat{y})\)</span> tính tại <span class="math inline">\(\hat{y} = f_{m-1}(\textbf{x})\)</span> là thay đổi <span class="math inline">\(\hat{y}\)</span> như sau
+<span class="math display">\[\begin{align}
+\hat{y}_i = f_{m-1}(\textbf{x}_i) - \lambda_m \cdot g_{m-1,i}
+\end{align}\]</span>
+với <span class="math inline">\(\lambda_m\)</span> là hằng số không phụ thuộc vào <span class="math inline">\(i\)</span> làm thiểu hóa giá trị hàm tổn thất
+<span class="math display" id="eq:GB1">\[\begin{align}
+\lambda_m = \underset{\lambda}{\operatorname{argmin}} \sum\limits_{i = 1}^n L\left(y_i,  f_{m-1}(\textbf{x}_i) - \lambda \cdot g_{m-1,i}\right)
+\tag{17.9}
+\end{align}\]</span></p>
+<p>Như vậy, nếu có thể tìm được hàm <span class="math inline">\(f_m(\textbf{x})\)</span> mà mỗi thành phần của nó thỏa mãn <span class="math inline">\(f_m(\textbf{x}_i) = f_{m-1}(\textbf{x}_i) - \lambda_m \cdot g_{m-1,i}\)</span> chúng ta có thể chắc chắn rằng hàm tổn thất <span class="math inline">\(L(\textbf{y}, \hat{y})\)</span> sẽ nhỏ đi khi cho <span class="math inline">\(\hat{y}\)</span> thay đổi từ <span class="math inline">\(f_{m-1}(\textbf{x})\)</span> đến <span class="math inline">\(f_{m}(\textbf{x})\)</span>. Đây là nguyên tắc cơ bản trong các thuật toán tìm điểm tối ưu của một hàm số nhiều biến bằng phương pháp số hay còn gọi là phương pháp gradient descent.</p>
+<p>Hàm <span class="math inline">\(f_m\)</span> được xây dựng như trên bao gồm <span class="math inline">\(n\)</span> thành phần được xây dựng độc lập với nhau và hoàn toàn phụ thuộc vào dữ liệu huấn luyện mô hình. Mục tiêu của chúng ta là xây dựng hàm <span class="math inline">\(f_m\)</span> vận hành tốt trên dữ liệu ngoài mô hình chứ không phải trên dữ liệu huấn luyện, do đó sử dụng <span class="math inline">\(n\)</span> thành phần độc lập là không khả thi. Thay vì tìm một hàm số <span class="math inline">\(f_m\)</span> tối thiểu hóa giá trị hàm tổn thất tại bước thứ <span class="math inline">\(m\)</span> như phương trình <a href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html#eq:boosting1">(17.1)</a>, ý tưởng của gradient boosting là hãy tìm một hàm số cơ bản, hay cụ thể hơn là một cây quyết định <span class="math inline">\(T(\textbf{x},\Theta_m)\)</span> sao cho sai số giữa cây quyết định với các gradient (<span class="math inline">\(-g_{m-1,i}\)</span>) của hàm tổn thất là nhỏ nhất
+<span class="math display" id="eq:GB2">\[\begin{align}
+\Theta_m = \underset{\Theta}{\operatorname{argmin}} \sum\limits_{i = 1}^n \left(-g_{m-1,i} -  T(\textbf{x}_i,\Theta_m) \right)^2
+\tag{17.10}
+\end{align}\]</span>
+Như vậy, miễn là hàm tổn thất là hàm số có đạo hàm theo <span class="math inline">\(\hat{y}\)</span>, dù là bài toán hồi quy hay phân loại, tại bước thứ <span class="math inline">\(m\)</span> của kỹ thuật gradient boosting, chúng ta luôn luôn phải tìm một cây quyết định hồi quy.</p>
+<ul>
+<li><p>Ví dụ 1: trong bài toán hồi quy với hàm tổn thất kiểu tổng sai số bình phương, gradient của hàm tổn thất tại <span class="math inline">\(\hat{y}_i\)</span> là
+<span class="math display">\[\begin{align}
+&amp; g_{i} = \cfrac{ \partial (y_i - \hat{y}_i)^2 }{\partial \hat{y}_i} = 2 \cdot (\hat{y}_i - y_i) \\
+&amp; \rightarrow - g_{,i} = 2 \cdot (y_i - \hat{y}_i)
+\end{align}\]</span>
+Lưu ý rằng hàm sai số dạng tổng bình phương sai số thường được nhân với 0.5 để gradient tại <span class="math inline">\(\hat{y}_i\)</span> là <span class="math inline">\((y_i - \hat{y}_i)\)</span>.</p></li>
+<li><p>Ví dụ 2: trong bài toán hồi quy với hàm tổn thất kiểu tổng giá trị tuyệt đối sai số, gradient của hàm tổn thất tại <span class="math inline">\(\hat{y}_i\)</span> là
+<span class="math display">\[\begin{align}
+&amp; g_{i} = \cfrac{ \partial |y_i - \hat{y}_i| }{\partial \hat{y}_i} = sign(\hat{y}_i - y_i) \\
+&amp; \rightarrow - g_{i} = sign(y_i - \hat{y}_i)
+\end{align}\]</span></p></li>
+<li><p>Ví dụ 3: trong bài toán phân loại nhị phân với biến mục tiêu <span class="math inline">\(y_i\)</span> nhận giá trị 0 hoặc 1 và hàm tổn thất là hàm cross-entropy, gradient của hàm tổn thất tại <span class="math inline">\(\hat{y}_i\)</span> là</p></li>
+</ul>
+<p><span class="math display">\[\begin{align}
+&amp; g_{i} = - \cfrac{ \partial y_i \times \hat{y}_i - \log(1 + e^{\hat{y}_i}) }{\partial \hat{y}_i} = \cfrac{e^{\hat{y}_i}}{1 + e^{\hat{y}_i}} - y_i \\
+&amp; \rightarrow - g_{i} = y_i - \cfrac{e^{\hat{y}_i}}{1 + e^{\hat{y}_i}}
+\end{align}\]</span></p>
+<ul>
+<li>Ví dụ 4: trong bài toán phân loại mà biến mục tiêu <span class="math inline">\(y_i\)</span> có thể nhận <span class="math inline">\(J\)</span> giá trị được mã hóa là <span class="math inline">\(1, 2, \cdots, J\)</span> thì hàm tổn thất cross-entropy được viết như sau
+<span class="math display">\[\begin{align}
+L(y_i, \hat{y}_i) &amp;= - \sum\limits_{j=1}^J \mathbb{I}(y_i = j) \cdot \log\left(\cfrac{e^{\hat{y}_{i,j}}}{ \sum\limits_{l=1}^J  e^{\hat{y}_{i,l}}} \right) \\
+&amp;=  \log\left( \sum\limits_{j=1}^J  e^{\hat{y}_{i,j}} \right) - \sum\limits_{j=1}^J \mathbb{I}(y_i = j) \cdot \hat{y}_{i,j}
+\end{align}\]</span>
+Thành phần thứ <span class="math inline">\(J\)</span> của <span class="math inline">\(\hat{y}_i\)</span> được cố định bằng 0 do đó gradient của hàm tổn thất theo thành phần thứ <span class="math inline">\(J\)</span> của <span class="math inline">\(\hat{y}_i\)</span> cũng sẽ bằng 0. Với <span class="math inline">\(1 \leq j \leq (J-1)\)</span> ta có
+<span class="math display">\[\begin{align}
+&amp; g_{i,j} = \cfrac{e^{\hat{y}_{i,j}}}{ \sum\limits_{l=1}^J  e^{\hat{y}_{i,l}}} - \mathbb{I}(y_i = j) \\
+&amp; \rightarrow - g_{i,j} =  \mathbb{I}(y_i = j) - \cfrac{e^{\hat{y}_{i,j}}}{ \sum\limits_{l=1}^J  e^{\hat{y}_{i,l}}}
+\end{align}\]</span>
+Trong trường hợp này, tại bước thứ <span class="math inline">\(m\)</span> của kỹ thuật gradient boosting có <span class="math inline">\((J-1)\)</span> cây quyết định hồi quy được xây dựng độc lập nhau là <span class="math inline">\(T(\textbf{x}, \Theta_{m,j})\)</span> với biến mục tiêu tương ứng là <span class="math inline">\(-g_{m-1,i,j}\)</span>.</li>
+</ul>
+<p>Thuật toán gradient boosting được phát biểu như sau:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Với <span class="math inline">\(m = 0\)</span> cho
+<span class="math display" id="eq:GB1">\[\begin{align}
+f_0 = \underset{\gamma}{\operatorname{argmin}} \sum\limits_{i = 1}^n L\left(y_i, \gamma \right)
+\tag{17.9}
+\end{align}\]</span>
+</li>
+</ol></li>
+<li>
+<ol start="2" style="list-style-type: decimal">
+<li>Tại bước thứ <span class="math inline">\(m\)</span>, với <span class="math inline">\(m = 1, 2, \cdots, M\)</span>,</li>
+</ol>
+<ul>
+<li>2.(a). Với mỗi <span class="math inline">\(i = 1, 2, \cdots, n\)</span> tính</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+  g_{m,i} = \cfrac{ \partial L(y_i, f_{m-1}(\textbf{x}))}{\partial f_{m-1}(\textbf{x}_i)}
+\end{align}\]</span></p>
+<ul>
+<li>2.(b). Tìm cây quyết định hồi quy <span class="math inline">\(T(\textbf{x},\Theta_m)\)</span> trên ma trận biến giải thích <span class="math inline">\(\textbf{x}\)</span> và biến mục tiêu là <span class="math inline">\((-g_{m,i})\)</span>, tham số của cây quyết định <span class="math inline">\(\Theta_m\)</span> bao gồm phân vùng <span class="math inline">\(\{R_{m,k}\}\)</span> với <span class="math inline">\(k = 1, 2, \cdots K_m\)</span> và hằng số <span class="math inline">\(\gamma_{m,k}\)</span>
+</li>
+</ul>
+<p><span class="math display">\[\begin{align}
+\gamma_{m,k} = \underset{\gamma}{\operatorname{argmin}} \sum\limits_{i \in R_{m,k}}^n L\left(y_i, f_{m-1}(\textbf{x}_i) + \gamma \right)
+\end{align}\]</span></p>
+<ul>
+<li>
+<p>2.(c). Cập nhật hàm <span class="math inline">\(f_m(\textbf{x})\)</span></p>
+<p><span class="math display">\[\begin{align}
+  f_m(\textbf{x}) =  f_{m-1}(\textbf{x}) + \lambda \cdot T(\textbf{x},\Theta_m)
+\end{align}\]</span></p>
+</li>
+</ul>
+</li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Kết thúc vòng lặp, cho <span class="math inline">\(f(\textbf{x}) = f_M(\textbf{x})\)</span>
+</li>
+</ol></li>
+</ul>
+<p>Một vài lưu ý đối với thuật toán gradient boosting ở trên:</p>
+<ul>
+<li><p>Chúng tôi không nói về <span class="math inline">\(\lambda_m\)</span> tại mỗi bước của gradient boosting bởi vì tham số này không có ý nghĩa trong quá trình tối ưu hóa cây quyết định mà cho <span class="math inline">\(\lambda_m\)</span> nhận giá trị bằng một hằng số <span class="math inline">\(\lambda\)</span> tại bước 2.(c). Giá trị của <span class="math inline">\(\lambda\)</span> luôn nhỏ hơn 1 với vai trò như một biến kiểm soát nhằm trách hiện tượng overfitting. Chúng ta sẽ thảo luận về <span class="math inline">\(\lambda\)</span> trong phần tiếp theo.</p></li>
+<li><p>Trong bài toán phân loại mà biến mục tiêu nhận <span class="math inline">\(J\)</span> giá trị, tại bước 2.(a) có <span class="math inline">\((J-1)\)</span> véc-tơ gradient cần phải tính và tại bước 2.(b) có <span class="math inline">\((J-1)\)</span> cây quyết định hồi quy cần được ước lượng.</p></li>
+</ul>
+<p>Trong quá trình thực hiện gradient boosting, có ba tham số điều khiển chất lượng của mô hình là số bước lặp <span class="math inline">\(M\)</span>, kích thước của cây quyết định <span class="math inline">\(T(\textbf{x},\Theta_m)\)</span> tại mỗi bước, và tham số <span class="math inline">\(\lambda\)</span> - thường được gọi là “learning rate”. Chúng ta sẽ thảo luận về các tham số này trong phần tiếp theo của chương.</p>
+</div>
+<div id="những-cân-nhắc-khi-thực-hiện-gradient-boosting" class="section level3" number="17.2.2">
+<h3>
+<span class="header-section-number">17.2.2</span> Những cân nhắc khi thực hiện gradient boosting<a class="anchor" aria-label="anchor" href="#nh%E1%BB%AFng-c%C3%A2n-nh%E1%BA%AFc-khi-th%E1%BB%B1c-hi%E1%BB%87n-gradient-boosting"><i class="fas fa-link"></i></a>
+</h3>
+<p>Những vấn đề được thảo luận dưới đây phần nhiều dựa trên kinh nghiệm của những người xây dựng mô hình hơn là dựa trên những cơ sở toán học vững chắc. Nói một cách khác, không có lời giải chính xác cho các tham số điều khiển kỹ thuật gradient boosting được thảo luận dưới đây. Với những tham số như vậy, cách duy nhất để đưa ra ước lượng phù hợp là sử dụng xác thực chéo.</p>
+<div id="kích-thước-của-cây-quyết-định" class="section level4" number="17.2.2.1">
+<h4>
+<span class="header-section-number">17.2.2.1</span> Kích thước của cây quyết định<a class="anchor" aria-label="anchor" href="#k%C3%ADch-th%C6%B0%E1%BB%9Bc-c%E1%BB%A7a-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh"><i class="fas fa-link"></i></a>
+</h4>
+<p>Tại mỗi bước <span class="math inline">\(m\)</span>, bạn đọc có thể tùy chọn kích thước của cây quyết định để đảm bảo cây quyết định cho kết quả gần với các gradient của hàm tổn thất. Nếu tại mỗi bước, chúng ta luôn cố gắng tìm một kích thước cây tối ưu thì sẽ gặp phải các vấn đề là: thứ nhất thời gian thực hiện thuật toán chậm, và thứ hai dễ gặp hiện tượng overfitting. Cách tiếp cận như vậy luôn cho kết quả là các cây quyết định ban đầu sẽ cho kích thước lớn do sai số lớn ở các bước ban đầu, sau đó các cây quyết định phía sau sẽ có kích thước nhỏ do sai số đã giảm đáng kể sau khi xây dựng các cây lớn ở các bước ban đầu.</p>
+<p>Một chiến lược đơn giản để khắc phục hai vấn đề kể trên là cố định kích thước của cây quyết định tại tất cả các bước <span class="math inline">\(K_m = K\)</span> <span class="math inline">\(\forall m\)</span>. Tham số <span class="math inline">\(K\)</span> khi đó trở thành siêu tham số của thuật toán và sẽ được ước lượng thông qua xác thực chéo. Để trả lời cho câu hỏi là miền giá trị nào của <span class="math inline">\(K\)</span> nên là miền để tìm kiếm <span class="math inline">\(K\)</span> trong xác thực chéo, chúng ta cần hiểu thêm một chút về kích thước các cây ảnh hưởng đến giá trị hàm <span class="math inline">\(\hat{f}\)</span> như thế nào.</p>
+<p>Mục tiêu của các thuật toán học máy là tìm hàm <span class="math inline">\(\hat{f}\)</span> sao cho
+<span class="math display">\[\begin{align}
+  \hat{f} = \underset{f}{\operatorname{argmin}} \mathbb{E}\left(Y,f(\textbf{x})\right)
+\end{align}\]</span>
+Với ma trận <span class="math inline">\(\textbf{x}\)</span> bao gồm các biến <span class="math inline">\((\textbf{x}_1, \textbf{x}_2, \cdots, \textbf{x}_p)\)</span>, mọi hàm <span class="math inline">\(f(\textbf{x})\)</span> có thể được viết dưới dạng sau
+<span class="math display" id="eq:gbtreesize">\[\begin{align}
+  f(\textbf{x}) = \sum\limits_j f_j(\textbf{x}_j) + \sum\limits_{j,k} f_{j,k}(\textbf{x}_j, \textbf{x}_k) + \sum\limits_{j,k,l} f_{j,k,l}(\textbf{x}_j, \textbf{x}_k, \textbf{x}_l) + \cdots
+  \tag{17.11}
+\end{align}\]</span>
+trong đó <span class="math inline">\(f_j(\textbf{x}_j)\)</span> là thành phần của hàm mục tiêu chỉ bao gồm 1 biến duy nhất, <span class="math inline">\(f_{j,k}(\textbf{x}_j, \textbf{x}_k)\)</span> là thành phần của hàm mục tiêu có tính toán đến tác động giữa hai biến, <span class="math inline">\(f_{j,k,l}(\textbf{x}_j, \textbf{x}_k, \textbf{x}_l)\)</span> là thành phần tính đến tác động giữa ba biến,… Đa số dữ liệu thực tế cho thấy rằng phân rã hàm <span class="math inline">\(f\)</span> trong phương trình <a href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html#eq:gbtreesize">(17.11)</a> các thành phần mô tả tương tác giữa một số nhỏ các biến luôn chiếm ưu thế.</p>
+<p>Phân tích kể trên có liên quan chặt chẽ đến kích thước của cây quyết định. Thật vậy, khi <span class="math inline">\(K = 2\)</span> nghĩa là mỗi cây quyết định chỉ có duy nhất một biến giải thích. Khi <span class="math inline">\(K = 3\)</span>, cây quyết định có không quá 2 biến giải thích, … và nói chung, cây quyết định có kích thước bằng <span class="math inline">\(K\)</span> nghĩa là cây quyết định có không quá <span class="math inline">\((K-1)\)</span> biến giải thích. Như vậy, nếu hàm <span class="math inline">\(f\)</span> có các thành phần ban đầu chiếm ưu thế, các cây quyết định với 2 hoặc 3 lá sẽ là phù hợp, còn với các hàm <span class="math inline">\(f\)</span> có các thành phần phía sau chiếm ưu thế, cây quyết định cần có kích thước lớn hơn để mô tả sự tương tác giữa nhiều biến. Như chúng ta đã nói, đa số các dữ liệu thực tế có các thành phần ban đầu trong phương trình <a href="boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh..html#eq:gbtreesize">(17.11)</a> chiếm ưu thế, do đó kích thước của các cây quyết định trong Gradient boosting thường không lớn. Thực nghiệm cho thấy hiếm khi cần kích thước cây quyết định <span class="math inline">\(K &gt; 10\)</span>. Nếu tính toán cho phép bạn đọc nên sử dụng xác thực chéo để lựa chọn <span class="math inline">\(K\)</span> nhận giá trị từ 2 đến 10. Nếu thời gian và nguồn lực không cho phép, lựa chọn <span class="math inline">\(K = 6\)</span> thường được áp dụng.</p>
+</div>
+<div id="số-lượng-cây-quyết-định-và-tốc-độ-học" class="section level4" number="17.2.2.2">
+<h4>
+<span class="header-section-number">17.2.2.2</span> Số lượng cây quyết định và tốc độ học<a class="anchor" aria-label="anchor" href="#s%E1%BB%91-l%C6%B0%E1%BB%A3ng-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh-v%C3%A0-t%E1%BB%91c-%C4%91%E1%BB%99-h%E1%BB%8Dc"><i class="fas fa-link"></i></a>
+</h4>
+<p>Ngoài kích thước của các cây, số lượng cây quyết định <span class="math inline">\(M\)</span> cũng là một siêu tham số. Sau mỗi bước <span class="math inline">\(m\)</span>, giá trị hàm tổn thất <span class="math inline">\(L(\textbf{y}, f_m)\)</span> sẽ giảm, nghĩa là hàm <span class="math inline">\(f_m\)</span> sẽ ngày càng phù hợp hơn với dữ liệu huấn luyện mô hình. Tuy nhiên, mục tiêu của chúng ta là tìm kiếm hàm <span class="math inline">\(f\)</span> vận hành tốt trên dữ liệu kiểm thử chứ không phải dữ liệu huấn luyện, do đó tăng <span class="math inline">\(M\)</span> không phải luôn là lựa chọn tốt. Không có<br>
+câu trả lời chính xác cho số lượng cây tối ưu, tham số này chỉ có thể được xác định thông qua xác thực chéo.</p>
+<p>Một tham số khác cũng cần được cân nhắc khi triển khai gradient boosting là tốc độ học <span class="math inline">\(\lambda\)</span>. Tham số <span class="math inline">\(lambda\)</span> xuất hiện trong bước 2.(c). của thuật toán gradient boosting cho biết đóng góp của mỗi cây quyết định vào kết quả cuối cùng. Cũng giống như khi triển khai thuật toán gradient decent thông thường, khi tốc độ học <span class="math inline">\(\lambda\)</span> nhỏ, quá trình tìm kiếm điểm tối ưu sẽ chậm hơn nhưng khả năng tìm được đúng điểm tối ưu sẽ lớn hơn. Nói cách khác, khi lựa chọn tham số <span class="math inline">\(\lambda\)</span> nhỏ, khoảng tìm kiếm của <span class="math inline">\(M\)</span> cần phải ưu tiên các giá trị lớn hơn, thời gian thực hiện thuật toán sẽ lâu hơn và khả năng tìm được hàm <span class="math inline">\(f\)</span> tối ưu sẽ lớn hơn.</p>
+<p>Nghiên cứu của Friedman (2001) đã chỉ ra rằng lựa chọn <span class="math inline">\(\lambda\)</span> nhỏ hơn sẽ làm cho sai số trên tập kiểm tra tốt hơn và yêu cầu các giá trị <span class="math inline">\(M\)</span> lớn hơn tương ứng. Chiến lược tốt nhất để thực hiện boosting là cho <span class="math inline">\(\lambda\)</span> nhận giá trị rất nhỏ, thường là nhỏ hơn <span class="math inline">\(0.1\)</span> và sau đó chọn M bằng cách dừng sớm. Cách tiếp cận này cải thiện đáng kể sai số trên tập kiểm tra cho cả bài toán hồi quy và phân loại so với việc sử dụng <span class="math inline">\(\lambda = 1\)</span>. Sự đánh đổi ở đây là thời gian và nguồn lực để thực hiện tính toán: <span class="math inline">\(\lambda\)</span> càng nhỏ thì càng cần phải làm tăng giá trị <span class="math inline">\(M\)</span> làm cho thời gian và nguồn lực tính toán tăng lên tỷ lệ thuận. Tuy nhiên, với khả năng tính toán của đa số các máy tính hiện nay, cách tiếp cận này là khả thi ngay cả trên các tập dữ liệu rất lớn.</p>
+</div>
+<div id="stochastic-gradient-boosting" class="section level4" number="17.2.2.3">
+<h4>
+<span class="header-section-number">17.2.2.3</span> Stochastic gradient boosting<a class="anchor" aria-label="anchor" href="#stochastic-gradient-boosting"><i class="fas fa-link"></i></a>
+</h4>
+<p>Stochastic gradient boosting là một cải tiến của gradient boosting mà tại mỗi bước <span class="math inline">\(m\)</span>, thay vì sử dụng toàn bộ dữ liệu huấn luyện để xây dựng cây quyết định, chúng ta chỉ sử dụng một mẫu ngẫu nhiên của dữ liệu để xây dựng cây quyết định. Tỷ lệ mẫu ngẫu nhiên so với dữ liệu huấn luyện được ký hiệu là <span class="math inline">\(\eta\)</span> và thường được lựa chọn bằng <span class="math inline">\(0.5\)</span>. Khi kích thước dữ liệu <span class="math inline">\(n\)</span> lớn, có thể lựa chọn <span class="math inline">\(\eta\)</span> nhỏ hơn.</p>
+<p>Lợi thế trước tiên của stochastic gradient boosting đó là giảm thời gian tính toán do dữ liệu để xây dựng cây quyết định nhỏ hơn đáng kể so với dữ liệu huấn luyện. Một lợi thế đáng kể khác của cách tiếp cận này là trong nhiều trường hợp nó còn có thể tìm được điểm tối ưu tốt hơn so với gradient boosting thông thường. Không có cách giải thích toán học đáng tin cậy nào về kết luận này, tuy nhiên có thể hiểu rằng khi xây dựng các cây quyết định trên một mẫu ngẫu nhiên của dữ liệu, nếu kích thước dữ liệu đủ lớn thì phân phối xác suất của mẫu và toàn bộ dữ liệu là tương đương, trong khi trong khi các quan sát nhiễu hay ngoại lai của dữ liệu huấn luyện ít có khả năng rơi vào mẫu ngẫu nhiên, việc này làm cho các cây quyết định ít bị ảnh hưởng bởi nhiễu hoặc các giá trị ngoại lai, đặc biệt là trong các bài toán hồi quy.</p>
+</div>
+</div>
+<div id="thực-hiện-gradient-boosting-trên-r." class="section level3" number="17.2.3">
+<h3>
+<span class="header-section-number">17.2.3</span> Thực hiện gradient boosting trên R.<a class="anchor" aria-label="anchor" href="#th%E1%BB%B1c-hi%E1%BB%87n-gradient-boosting-tr%C3%AAn-r."><i class="fas fa-link"></i></a>
+</h3>
+<p>Thư viện để thực hiện gradient boosting trên R là thư viện <span class="math inline">\(gbm\)</span>. Tại thời điểm chúng tôi viết chương sách này, thư viện <span class="math inline">\(gbm\)</span> được sử dụng đang ở phiên bản 2.1.8.1. Thư viện được xây dựng dựa trên nghiên cứu của Greg Ridgeway (1999) với ý tưởng hoàn toàn giống như chúng tôi đã trình bày trong các phần trước. Hàm số để thực hiện gradient boosting là hàm số <code>gbm()</code>.</p>
+<div class="sourceCode" id="cb894"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/gbm-developers/gbm">gbm</a></span><span class="op">)</span></span>
+<span><span class="op">?</span> <span class="va">gbm</span></span></code></pre></div>
+<p>Bạn đọc có thể đọc hướng dẫn ngắn gọn của R về các tham số và cách sử dụng trong hàm <code>gbm()</code> hoặc tìm hướng dẫn đầy đủ về thư viện <code>gbm()</code> theo đường dẫn . Chúng tôi chỉ tập trung giải thích vào các tham số quan trọng của thuật toán:</p>
+<ul>
+<li><p><span class="math inline">\(formula\)</span>: cách sử dụng tương tự như hàm <span class="math inline">\(lm\)</span> hay <span class="math inline">\(glm\)</span>; cần khai báo tên biến phụ thuộc và các biến giải thích.</p></li>
+<li>
+<p><span class="math inline">\(distribution\)</span>: là phân phối xác suất của biến mục tiêu. Mặc dù không phải tham số bắt buộc nhưng lời khuyên của chúng tôi là bạn đọc hãy luôn luôn khai báo biến này để đảm bảo cách xây dựng mô hình đúng với ý định. Tham số này không được khai báo, hàm <code>gbm()</code> sẽ dựa trên kiểu biến mục tiêu để dự đoán phân phối xác suất: nếu <span class="math inline">\(Y\)</span> có dạng factor và chỉ nhận hai giá trị phân phối nhị thức sẽ được sử dụng, nếu <span class="math inline">\(Y\)</span> nhận nhiều hơn 2 giá trị, phân phối multinomial sẽ được sử dụng. Nếu <span class="math inline">\(Y\)</span> là biến dạng số, phân phối Gaussian sẽ được sử dụng. Các giá trị có thể nhận được của tham số <span class="math inline">\(distribution\)</span></p>
+<ul>
+<li>
+<span class="math inline">\("gaussian"\)</span>: cho bài toán hồi quy và hàm tổn thất hàm tổng sai số bình phương.</li>
+<li>
+<span class="math inline">\("laplace"\)</span>: cho bài toán hồi quy và hàm tổn thất hàm tổng giá trị tuyệt đối sai số.</li>
+<li>
+<span class="math inline">\("bernoulli"\)</span>: cho bài toán phân loại nhị phân và hàm tổn thất cross-entropy.</li>
+<li>
+<span class="math inline">\("adaboost"\)</span>: cho bài toàn phân loại nhị phân và hàm tổn thất kiểu mũ.</li>
+<li>
+<span class="math inline">\("multinomial"\)</span>: cho bài toán phân loại chung và hàm tổn thất cross-entropy.</li>
+</ul>
+</li>
+<li><p><span class="math inline">\(data\)</span> là dữ liệu huấn luyện mô hình.</p></li>
+<li><p><span class="math inline">\(n.trees\)</span> tương đương với tham số <span class="math inline">\(M\)</span> trong gradient boosting, là số lượng cây quyết định trong thuật toán.</p></li>
+<li><p><span class="math inline">\(interaction.depth\)</span> cho biết kích thước (số node) của các cây phân loại. Giá trị mặc định là 1 cho biết các cây phân loại được mặc định là các stump.</p></li>
+<li><p><span class="math inline">\(shrinkage\)</span> là tham số <span class="math inline">\(\lambda\)</span> trong gradient boosting. Giá trị mặc định là 0.1. Giá trị tham số <span class="math inline">\(shrinkage\)</span> được gợi ý là khoảng từ 0.001 đến 0.1.</p></li>
+<li><p><span class="math inline">\(bag.fraction\)</span> là tham số <span class="math inline">\(\eta\)</span> trong stochastic gradient boosting. Giá trị mặc định của tham số này là 0.5 nghĩa là tại mỗi bước xây dựng cây quyết định chỉ có 50% dữ liệu huấn luyện được sử dụng để xây dựng mô hình. Lưu ý khi sử dụng <span class="math inline">\(bag.fraction &lt; 1\)</span> bạn đọc cần khởi tạo lại hàm sinh ngẫu nhiên (<code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code>) để đảm bảo kết quả các lần chạy giống nhau.</p></li>
+<li><p><span class="math inline">\(cv.folds\)</span> là tham số cho biết có sử dụng xác thực chéo hay không. Nếu <span class="math inline">\(cv.folds &gt; 1\)</span> thì xác thực chéo sẽ được thực hiện và sai số xác thực chéo sẽ được lưu lại trong output có tên là <span class="math inline">\(cv.error\)</span>.</p></li>
+</ul>
+<!-- ### Source from thesis --><p><strong>1.</strong> Freund, Y. and Schapire, R. (1997). <em>A decision-theoretic generalization of online learning and an application to boosting</em></p>
+<p><strong>2.</strong> G. Ridgeway (1999). <em>The state of boosting</em></p>
+<p><strong>3.</strong> J.H. Friedman, T. Hastie, R. Tibshirani (2000). <em>Additive Logistic Regression: a Statistical View of Boosting</em></p>
+<p><strong>4.</strong> J.H. Friedman (2001). <em>Greedy Function Approximation: A Gradient Boosting Machine</em></p>
+<!-- ### Souce from website -->
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->
+
+<pre><code>## 
+## Attaching package: 'dplyr'</code></pre>
+<pre><code>## The following objects are masked from 'package:stats':
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre><code>## 
+## Attaching package: 'kableExtra'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     group_rows</code></pre>
+<pre><code>## 
+## Attaching package: 'gridExtra'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     combine</code></pre>
+<pre><code>## 
+## Attaching package: 'pryr'</code></pre>
+<pre><code>## The following object is masked from 'package:dplyr':
+## 
+##     where</code></pre>
+<pre><code>## Loading required package: shape</code></pre>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="m%C3%B4-h%C3%ACnh-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh.html"><span class="header-section-number">16</span> Mô hình cây quyết định</a></div>
+<div class="next"><a href="neuralnetwork.html"><span class="header-section-number">18</span> Mô hình mạng nơ-ron</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#boosting-v%C3%A0-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh."><span class="header-section-number">17</span> Boosting và cây quyết định.</a></li>
+<li>
+<a class="nav-link" href="#nh%E1%BB%AFng-c%C6%A1-s%E1%BB%9F-c%E1%BB%A7a-k%E1%BB%B9-thu%E1%BA%ADt-boosting."><span class="header-section-number">17.1</span> Những cơ sở của kỹ thuật boosting.</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#nguy%C3%AAn-t%E1%BA%AFc-chung-c%E1%BB%A7a-boosting"><span class="header-section-number">17.1.1</span> Nguyên tắc chung của boosting</a></li>
+<li><a class="nav-link" href="#h%C3%A0m-c%C6%A1-b%E1%BA%A3n-d%E1%BA%A1ng-c%C3%A2y-quy%E1%BA%BFt-%C4%91%E1%BB%8Bnh"><span class="header-section-number">17.1.2</span> Hàm cơ bản dạng cây quyết định</a></li>
+<li><a class="nav-link" href="#h%C3%A0m-t%E1%BB%95n-th%E1%BA%A5t"><span class="header-section-number">17.1.3</span> Hàm tổn thất</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#gradient-boosting"><span class="header-section-number">17.2</span> Gradient boosting</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#c%C6%A1-s%E1%BB%9F-to%C3%A1n-h%E1%BB%8Dc-c%E1%BB%A7a-gradient-boosting."><span class="header-section-number">17.2.1</span> Cơ sở toán học của gradient boosting.</a></li>
+<li><a class="nav-link" href="#nh%E1%BB%AFng-c%C3%A2n-nh%E1%BA%AFc-khi-th%E1%BB%B1c-hi%E1%BB%87n-gradient-boosting"><span class="header-section-number">17.2.2</span> Những cân nhắc khi thực hiện gradient boosting</a></li>
+<li><a class="nav-link" href="#th%E1%BB%B1c-hi%E1%BB%87n-gradient-boosting-tr%C3%AAn-r."><span class="header-section-number">17.2.3</span> Thực hiện gradient boosting trên R.</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD/blob/master/11-2-cay-quyet-dinh-boosting.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD/edit/master/11-2-cay-quyet-dinh-boosting.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-07-30.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

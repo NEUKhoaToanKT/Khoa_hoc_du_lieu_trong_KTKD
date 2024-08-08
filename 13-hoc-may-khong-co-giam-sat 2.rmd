@@ -1,0 +1,68 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r, warning = FALSE, echo = FALSE}
+library(readxl)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(forcats)
+library(ggpubr)
+library(grid)
+library(gridExtra)
+library(forcats)
+library(pryr)
+```
+
+```{r, echo = FALSE}
+colorize <- function(x, color) {
+ if (knitr::is_latex_output()) {
+ sprintf("\\textcolor{%s}{%s}", color, x)
+ } else if (knitr::is_html_output()) {
+ sprintf("<span style='color: %s;'>%s</span>", 
+ color,
+ x)
+ } else x
+}
+```
+
+# Học máy không có giám sát
+Chương sách này sẽ tập trung vào học máy không giám sát; một tập hợp các công cụ thống kê được sử dụng cho trường hợp chúng ta có một dữ liệu bao gồm $p$ biến $X_1, X_2, \cdots, X_p$ và $n$ quan sát. Mục đích của chúng ta là khám phá những giá trị bên trong dữ liệu mà không quan tâm đến có hay không có biến mục tiêu. Các câu hỏi đặt ra bao gồm có
+
+Có cách nào thông tin để trực quan hóa dữ liệu? Chúng ta có thể khám phá các nhóm con giữa các biến hoặc giữa các quan sát không? Học tập không giám sát đề cập đến một tập hợp các kỹ thuật đa dạng để trả lời các câu hỏi như thế này. Trong chương này, chúng ta sẽ tập trung vào hai loại học tập không giám sát cụ thể: phân tích thành phần chính, một công cụ được sử dụng để trực quan hóa dữ liệu hoặc xử lý trước dữ liệu trước khi áp dụng các kỹ thuật có giám sát và phân cụm, một loại phương pháp rộng rãi để khám phá. các nhóm con chưa biết trong dữ liệu.
+
+## Phương pháp phân tích thành phần chính
+
+## Các phương pháp phân cụm
+
+### K-mean
+### Hierarchical Clustering
+
+
+## Thực hành: 
+
+
+
+
+
+
+
+
+<!-- # REFERENCE -->
+
+<!-- ### Source from thesis -->
+
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+
+<!-- ### Souce from website -->
+
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->

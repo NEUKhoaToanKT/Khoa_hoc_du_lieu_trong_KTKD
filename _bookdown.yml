@@ -1,6 +1,30 @@
-book_filename: "bookdown-demo"
+book_filename: "Sách về Khoa Học Dữ Liệu"
 output_dir: "docs"
 language:
   ui:
-    chapter_name: "Chapter "
+    chapter_name: "Chương "
+  label:
+    fig: 'Hình '
+    tab: 'Bảng '
 delete_merged_file: true
+new_session: yes
+rmd_files:
+  [
+   "index.Rmd",
+   "01-intro.Rmd",
+   #"02-literature.Rmd",
+   #"07-lap-trinh-co-ban-voi-R.Rmd",
+   #"07-1-lap-trinh-nang-cao-voi-R.Rmd",
+   #"08-phan-tich-du-lieu-bang-R.Rmd",
+   #"08-1-truc-quan-hoa-du-lieu.rmd",
+   #"09-mo-hinh-tuyen-tinh.Rmd",
+   #"09-mo-hinh-cong-tinh-tong-quat.Rmd",
+   "10-mo-hinh-tuyen-tinh-tong-quat.Rmd",
+   #"10-mo-hinh-tuyen-tinh-tong-quat-mo-rong.Rmd",
+   #"10-Ung-dung-GLM.Rmd",
+   #"11-mo-hinh-cay-quyet-dinh.Rmd",
+   #"11-2-cay-quyet-dinh-boosting.Rmd",
+   #"12-mo-hinh-mang-noron.Rmd",
+   #"12-1-Cac-mo-hinh-mang-noron-dien-hinh.Rmd",
+   #"13-hoc-may-khong-co-giam-sat.Rmd"
+  ]

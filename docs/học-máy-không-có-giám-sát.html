@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chương 19 Học máy không có giám sát | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+  <meta name="description" content="Hello, This is the test version" />
+  <meta name="generator" content="bookdown 0.38 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chương 19 Học máy không có giám sát | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="Hello, This is the test version" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chương 19 Học máy không có giám sát | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh" />
+  
+  <meta name="twitter:description" content="Hello, This is the test version" />
+  
+
+<meta name="author" content="Nguyễn Quang Huy" />
+
+
+<meta name="date" content="2024-07-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="neuralnetwork1.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="libs/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+<script src="libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+<script src="libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+<script src="libs/flatbush-4.0.0/flatbush.min.js"></script>
+<link href="libs/ggiraphjs-0.4.6/ggiraphjs.min.css" rel="stylesheet" />
+<script src="libs/ggiraphjs-0.4.6/ggiraphjs.min.js"></script>
+<script src="libs/girafe-binding-0.8.9/girafe.js"></script>
+<script src="libs/plotly-binding-4.10.4/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">KHDL KT&KD</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Lời nói đầu</a></li>
+<li class="chapter" data-level="1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html"><i class="fa fa-check"></i><b>1</b> Giới thiệu chung</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#giới-thiệu-về-khoa-học-dữ-liệu-và-các-ứng-dụng"><i class="fa fa-check"></i><b>1.1</b> Giới thiệu về Khoa học dữ liệu và các ứng dụng</a>
+<ul>
+<li class="chapter" data-level="1.1.1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#dữ-liệu-chi-phí-quảng-cáo"><i class="fa fa-check"></i><b>1.1.1</b> Dữ liệu chi phí quảng cáo</a></li>
+<li class="chapter" data-level="1.1.2" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#dữ-liệu-bảo-hiểm-xe-ô-tô"><i class="fa fa-check"></i><b>1.1.2</b> Dữ liệu bảo hiểm xe ô tô</a></li>
+<li class="chapter" data-level="1.1.3" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#dữ-liệu-về-giá-nhà"><i class="fa fa-check"></i><b>1.1.3</b> Dữ liệu về giá nhà</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#sơ-lược-quá-trình-phát-triển-của-xây-dựng-mô-hình-dữ-liệu"><i class="fa fa-check"></i><b>1.2</b> Sơ lược quá trình phát triển của xây dựng mô hình dữ liệu</a></li>
+<li class="chapter" data-level="1.3" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#tại-sao-lại-sử-dụng-phần-mềm-r"><i class="fa fa-check"></i><b>1.3</b> Tại sao lại sử dụng phần mềm R</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#phần-mềm-r-là-gì"><i class="fa fa-check"></i><b>1.3.1</b> Phần mềm R là gì?</a></li>
+<li class="chapter" data-level="1.3.2" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#tại-sao-r-lại-được-sử-dụng-trong-khdl"><i class="fa fa-check"></i><b>1.3.2</b> Tại sao R lại được sử dụng trong KHDL</a></li>
+<li class="chapter" data-level="1.3.3" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#r-có-thể-làm-những-gì"><i class="fa fa-check"></i><b>1.3.3</b> R có thể làm những gì?</a></li>
+<li class="chapter" data-level="1.3.4" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#tại-sao-cuốn-sách-này-lại-sử-dụng-r"><i class="fa fa-check"></i><b>1.3.4</b> Tại sao cuốn sách này lại sử dụng R</a></li>
+<li class="chapter" data-level="1.3.5" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#các-lựa-chọn-thay-thế-và-bổ-sung-cho-r-trong-khdl"><i class="fa fa-check"></i><b>1.3.5</b> Các lựa chọn thay thế và bổ sung cho R trong KHDL</a></li>
+<li class="chapter" data-level="1.3.6" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#cài-đặt-r-và-rstudio"><i class="fa fa-check"></i><b>1.3.6</b> Cài đặt R và RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#về-cuốn-sách-và-tác-giả"><i class="fa fa-check"></i><b>1.4</b> Về cuốn sách và tác giả</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#đôi-lời-từ-tác-giả"><i class="fa fa-check"></i><b>1.4.1</b> Đôi lời từ tác giả</a></li>
+<li class="chapter" data-level="1.4.2" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#ai-nên-đọc-cuốn-sách-này"><i class="fa fa-check"></i><b>1.4.2</b> Ai nên đọc cuốn sách này</a></li>
+<li class="chapter" data-level="1.4.3" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#cấu-trúc-của-cuốn-sách"><i class="fa fa-check"></i><b>1.4.3</b> Cấu trúc của cuốn sách</a></li>
+<li class="chapter" data-level="1.4.4" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#các-ký-hiệu-thông-dụng"><i class="fa fa-check"></i><b>1.4.4</b> Các ký hiệu thông dụng</a></li>
+<li class="chapter" data-level="1.4.5" data-path="giới-thiệu-chung.html"><a href="giới-thiệu-chung.html#các-dữ-liệu-sử-dụng-trong-cuốn-sách"><i class="fa fa-check"></i><b>1.4.5</b> Các dữ liệu sử dụng trong cuốn sách</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>I Kiến thức cơ bản về dữ liệu</b></span></li>
+<li class="chapter" data-level="2" data-path="real-introduction.html"><a href="real-introduction.html"><i class="fa fa-check"></i><b>2</b> Real Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="real-introduction.html"><a href="real-introduction.html#các-khái-niệm-cơ-bản-trong-khoa-học-dữ-liệu"><i class="fa fa-check"></i><b>2.1</b> Các khái niệm cơ bản trong khoa học dữ liệu</a></li>
+<li class="chapter" data-level="2.2" data-path="real-introduction.html"><a href="real-introduction.html#tại-sao-cần-hàm-f"><i class="fa fa-check"></i><b>2.2</b> Tại sao cần hàm f?</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="real-introduction.html"><a href="real-introduction.html#dự-báo"><i class="fa fa-check"></i><b>2.2.1</b> Dự báo</a></li>
+<li class="chapter" data-level="2.2.2" data-path="real-introduction.html"><a href="real-introduction.html#suy-diễn"><i class="fa fa-check"></i><b>2.2.2</b> Suy diễn</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="real-introduction.html"><a href="real-introduction.html#cách-ước-lượng-hàm-f"><i class="fa fa-check"></i><b>2.3</b> Cách ước lượng hàm f</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="real-introduction.html"><a href="real-introduction.html#ước-lượng-tham-số-parametric-methods"><i class="fa fa-check"></i><b>2.3.1</b> Ước lượng tham số (parametric methods)</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="real-introduction.html"><a href="real-introduction.html#uớc-lượng-phi-tham-số-non---parametric-methods"><i class="fa fa-check"></i><b>2.4</b> Uớc lượng phi tham số (Non - parametric methods)</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="real-introduction.html"><a href="real-introduction.html#đánh-đổi-giữa-khả-năng-dự-báo-chính-xác-prediction-accuracy-và-khả-năng-diễn-giải-mô-hình-model-interpretability"><i class="fa fa-check"></i><b>2.4.1</b> Đánh đổi giữa khả năng dự báo chính xác (prediction accuracy) và khả năng diễn giải mô hình (model interpretability)</a></li>
+<li class="chapter" data-level="2.4.2" data-path="real-introduction.html"><a href="real-introduction.html#phương-pháp-học-có-giám-sát-và-phương-pháp-học-không-giám-sát"><i class="fa fa-check"></i><b>2.4.2</b> Phương pháp học có giám sát và phương pháp học không giám sát</a></li>
+<li class="chapter" data-level="2.4.3" data-path="real-introduction.html"><a href="real-introduction.html#bài-toán-hồi-quy-và-bài-toán-phân-loại"><i class="fa fa-check"></i><b>2.4.3</b> Bài toán hồi quy và bài toán phân loại</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="real-introduction.html"><a href="real-introduction.html#đánh-giá-sự-chính-xác-của-mô-hình"><i class="fa fa-check"></i><b>2.5</b> Đánh giá sự chính xác của mô hình</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="real-introduction.html"><a href="real-introduction.html#đo-độ-khớp-của-mô-hình"><i class="fa fa-check"></i><b>2.5.1</b> Đo độ khớp của mô hình</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="real-introduction.html"><a href="real-introduction.html#sự-đánh-đổi-giữa-độ-chệch-và-phương-sai"><i class="fa fa-check"></i><b>2.6</b> Sự đánh đổi giữa độ chệch và phương sai</a>
+<ul>
+<li class="chapter" data-level="2.6.1" data-path="real-introduction.html"><a href="real-introduction.html#phương-sai-của-mô-hình"><i class="fa fa-check"></i><b>2.6.1</b> Phương sai của mô hình</a></li>
+<li class="chapter" data-level="2.6.2" data-path="real-introduction.html"><a href="real-introduction.html#độ-chệch-của-mô-hình"><i class="fa fa-check"></i><b>2.6.2</b> Độ chệch của mô hình</a></li>
+<li class="chapter" data-level="2.6.3" data-path="real-introduction.html"><a href="real-introduction.html#sự-đánh-đổi-giữa-độ-chệch-và-phương-sai-1"><i class="fa fa-check"></i><b>2.6.3</b> Sự đánh đổi giữa độ chệch và phương sai</a></li>
+<li class="chapter" data-level="2.6.4" data-path="real-introduction.html"><a href="real-introduction.html#sự-đánh-đổi-giữa-độ-chệch-và-phương-sai-của-phương-pháp-k-fold-cross-validation"><i class="fa fa-check"></i><b>2.6.4</b> Sự đánh đổi giữa độ chệch và phương sai của phương pháp k-fold cross validation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="real-introduction.html"><a href="real-introduction.html#k-fold-cross-validation"><i class="fa fa-check"></i><b>2.7</b> K-fold cross validation</a></li>
+<li class="chapter" data-level="2.8" data-path="real-introduction.html"><a href="real-introduction.html#cross-validation-cho-lớp-bài-toán-phân-loại"><i class="fa fa-check"></i><b>2.8</b> Cross-validation cho lớp bài toán phân loại</a></li>
+<li class="chapter" data-level="2.9" data-path="real-introduction.html"><a href="real-introduction.html#phương-pháp-bootstrap"><i class="fa fa-check"></i><b>2.9</b> Phương pháp Bootstrap</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html"><i class="fa fa-check"></i><b>3</b> Kiến thức R cơ bản</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#làm-quen-với-các-dòng-lệnh-cơ-bản"><i class="fa fa-check"></i><b>3.1</b> Làm quen với các dòng lệnh cơ bản</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#sử-dụng-r-như-một-máy-tính-cầm-tay"><i class="fa fa-check"></i><b>3.1.1</b> Sử dụng R như một máy tính cầm tay</a></li>
+<li class="chapter" data-level="3.1.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#sử-dụng-cửa-sổ-script-để-viết-câu-lệnh"><i class="fa fa-check"></i><b>3.1.2</b> Sử dụng cửa sổ Script để viết câu lệnh</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-trong-ngôn-ngữ-r"><i class="fa fa-check"></i><b>3.2</b> Biến trong ngôn ngữ R</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-số"><i class="fa fa-check"></i><b>3.2.1</b> Biến kiểu số</a></li>
+<li class="chapter" data-level="3.2.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-logic"><i class="fa fa-check"></i><b>3.2.2</b> Biến kiểu logic</a></li>
+<li class="chapter" data-level="3.2.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-chuỗi-ký-tự"><i class="fa fa-check"></i><b>3.2.3</b> Biến kiểu chuỗi ký tự</a></li>
+<li class="chapter" data-level="3.2.4" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biến-kiểu-thời-gian"><i class="fa fa-check"></i><b>3.2.4</b> Biến kiểu thời gian</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#véc-tơ"><i class="fa fa-check"></i><b>3.3</b> Véc-tơ</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#tại-sao-xử-lý-véc-tơ-là-thế-mạnh-của-r"><i class="fa fa-check"></i><b>3.3.1</b> Tại sao xử lý véc-tơ là thế mạnh của R?</a></li>
+<li class="chapter" data-level="3.3.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#khởi-tạo-véc-tơ-và-các-phép-toán-trên-véc-tơ"><i class="fa fa-check"></i><b>3.3.2</b> Khởi tạo véc-tơ và các phép toán trên véc-tơ</a></li>
+<li class="chapter" data-level="3.3.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#lấy-các-thành-phần-con-từ-một-véc-tơ"><i class="fa fa-check"></i><b>3.3.3</b> Lấy các thành phần con từ một véc-tơ</a></li>
+<li class="chapter" data-level="3.3.4" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#các-hàm-tạo-chỉ-số"><i class="fa fa-check"></i><b>3.3.4</b> Các hàm tạo chỉ số</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#ngôn-ngữ-lập-trình-r"><i class="fa fa-check"></i><b>3.4</b> Ngôn ngữ lập trình R</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#câu-lệnh-điều-kiện"><i class="fa fa-check"></i><b>3.4.1</b> Câu lệnh điều kiện</a></li>
+<li class="chapter" data-level="3.4.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#viết-vòng-lặp"><i class="fa fa-check"></i><b>3.4.2</b> Viết vòng lặp</a></li>
+<li class="chapter" data-level="3.4.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#hàm-số"><i class="fa fa-check"></i><b>3.4.3</b> Hàm số</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-cơ-bản"><i class="fa fa-check"></i><b>3.5</b> Đồ thị cơ bản</a>
+<ul>
+<li class="chapter" data-level="3.5.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-phân-tán"><i class="fa fa-check"></i><b>3.5.1</b> Đồ thị phân tán</a></li>
+<li class="chapter" data-level="3.5.2" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-cột"><i class="fa fa-check"></i><b>3.5.2</b> Đồ thị cột</a></li>
+<li class="chapter" data-level="3.5.3" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#đồ-thị-hình-hộp"><i class="fa fa-check"></i><b>3.5.3</b> Đồ thị hình hộp</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#phụ-lục"><i class="fa fa-check"></i><b>3.6</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="3.6.1" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#biểu-thức-chính-quy-và-thư-viện-textbfstringr"><i class="fa fa-check"></i><b>3.6.1</b> Biểu thức chính quy và thư viện <span class="math inline">\(\textbf{stringr}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="kiến-thức-r-cơ-bản.html"><a href="kiến-thức-r-cơ-bản.html#bài-tập"><i class="fa fa-check"></i><b>3.7</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html"><i class="fa fa-check"></i><b>4</b> Kiến thức R nâng cao</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#ma-trận"><i class="fa fa-check"></i><b>4.1</b> Ma trận</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#khởi-tạo-ma-trận"><i class="fa fa-check"></i><b>4.1.1</b> Khởi tạo ma trận</a></li>
+<li class="chapter" data-level="4.1.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#lấy-phần-tử-con-và-ma-trận-con-của-ma-trận."><i class="fa fa-check"></i><b>4.1.2</b> Lấy phần tử con và ma trận con của ma trận.</a></li>
+<li class="chapter" data-level="4.1.3" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#các-phép-toán-trên-ma-trận"><i class="fa fa-check"></i><b>4.1.3</b> Các phép toán trên ma trận</a></li>
+<li class="chapter" data-level="4.1.4" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#phép-nhân-ma-trận"><i class="fa fa-check"></i><b>4.1.4</b> Phép nhân ma trận</a></li>
+<li class="chapter" data-level="4.1.5" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#ma-trận-đường-chéo-và-ma-trận-đơn-vị"><i class="fa fa-check"></i><b>4.1.5</b> Ma trận đường chéo và ma trận đơn vị</a></li>
+<li class="chapter" data-level="4.1.6" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#định-thức-của-ma-trận"><i class="fa fa-check"></i><b>4.1.6</b> Định thức của ma trận</a></li>
+<li class="chapter" data-level="4.1.7" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#ma-trận-nghịch-đảo"><i class="fa fa-check"></i><b>4.1.7</b> Ma trận nghịch đảo</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#mảng-nhiều-chiều"><i class="fa fa-check"></i><b>4.2</b> Mảng nhiều chiều</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#khởi-tạo-mảng-nhiều-chiều"><i class="fa fa-check"></i><b>4.2.1</b> Khởi tạo mảng nhiều chiều</a></li>
+<li class="chapter" data-level="4.2.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#sử-dụng-mảng-nhiều-chiều-để-biến-đổi-dữ-liệu-kiểu-hình-ảnh"><i class="fa fa-check"></i><b>4.2.2</b> Sử dụng mảng nhiều chiều để biến đổi dữ liệu kiểu hình ảnh</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#list-trong-r"><i class="fa fa-check"></i><b>4.3</b> List trong R</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#khởi-tạo-list-và-chỉ-số-của-list."><i class="fa fa-check"></i><b>4.3.1</b> Khởi tạo list và chỉ số của list.</a></li>
+<li class="chapter" data-level="4.3.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#sử-dụng-list-trong-viết-hàm-số"><i class="fa fa-check"></i><b>4.3.2</b> Sử dụng list trong viết hàm số</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#các-hàm-họ-apply"><i class="fa fa-check"></i><b>4.4</b> Các hàm họ <code>apply()</code></a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#hàm-apply"><i class="fa fa-check"></i><b>4.4.1</b> Hàm <code>apply()</code></a></li>
+<li class="chapter" data-level="4.4.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#hàm-lapply-và-sapply."><i class="fa fa-check"></i><b>4.4.2</b> Hàm <code>lapply()</code> và <code>sapply()</code>.</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#phụ-lục-1"><i class="fa fa-check"></i><b>4.5</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#advrappen1"><i class="fa fa-check"></i><b>4.5.1</b> Kiến thức nâng cao liên quan đến ma trận</a></li>
+<li class="chapter" data-level="4.5.2" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#advrappen2"><i class="fa fa-check"></i><b>4.5.2</b> Gradient, Hessian và Jacobian</a></li>
+<li class="chapter" data-level="4.5.3" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#sgd"><i class="fa fa-check"></i><b>4.5.3</b> Thuật toán gradient descent</a></li>
+<li class="chapter" data-level="4.5.4" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#advrappen3"><i class="fa fa-check"></i><b>4.5.4</b> Các giá trị đặc trưng của một dòng tiền tương lai</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="kiến-thức-r-nâng-cao.html"><a href="kiến-thức-r-nâng-cao.html#bài-tập-1"><i class="fa fa-check"></i><b>4.6</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html"><i class="fa fa-check"></i><b>5</b> Nhập dữ liệu vào R</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#đối-tượng-dùng-để-lưu-dữ-liệu-trong-r"><i class="fa fa-check"></i><b>5.1</b> Đối tượng dùng để lưu dữ liệu trong R</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#data.frame-là-gì"><i class="fa fa-check"></i><b>5.1.1</b> data.frame là gì?</a></li>
+<li class="chapter" data-level="5.1.2" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#tibble-là-một-cải-tiến-của-data.frame"><i class="fa fa-check"></i><b>5.1.2</b> <span class="math inline">\(tibble\)</span> là một cải tiến của <span class="math inline">\(data.frame\)</span>?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#nhập-dữ-liệu-bằng-hàm-sẵn-có."><i class="fa fa-check"></i><b>5.2</b> Nhập dữ liệu bằng hàm sẵn có.</a></li>
+<li class="chapter" data-level="5.3" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#nhập-dữ-liệu-bằng-thư-viện-textbfreadr."><i class="fa fa-check"></i><b>5.3</b> Nhập dữ liệu bằng thư viện <span class="math inline">\(\textbf{readr}\)</span>.</a></li>
+<li class="chapter" data-level="5.4" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#tương-tác-giữa-r-với-microsoft-excel"><i class="fa fa-check"></i><b>5.4</b> Tương tác giữa R với Microsoft Excel</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#đọc-dữ-liệu-lưu-dưới-định-dạng-của-excel"><i class="fa fa-check"></i><b>5.4.1</b> Đọc dữ liệu lưu dưới định dạng của Excel</a></li>
+<li class="chapter" data-level="5.4.2" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#tương-tác-với-microsoft-excel-bằng-thư-viện-textbfopenxlsx"><i class="fa fa-check"></i><b>5.4.2</b> Tương tác với Microsoft Excel bằng thư viện <span class="math inline">\(\textbf{openxlsx}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#kết-nối-r-với-cơ-sở-dữ-liệu"><i class="fa fa-check"></i><b>5.5</b> Kết nối R với cơ sở dữ liệu</a></li>
+<li class="chapter" data-level="5.6" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#thu-thập-dữ-liệu-từ-các-website"><i class="fa fa-check"></i><b>5.6</b> Thu thập dữ liệu từ các website</a></li>
+<li class="chapter" data-level="5.7" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#phụ-lục-2"><i class="fa fa-check"></i><b>5.7</b> Phụ lục</a></li>
+<li class="chapter" data-level="5.8" data-path="nhập-dữ-liệu-vào-r.html"><a href="nhập-dữ-liệu-vào-r.html#bài-tập-2"><i class="fa fa-check"></i><b>5.8</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html"><i class="fa fa-check"></i><b>6</b> Tiền xử lý dữ liệu</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#tiền-xử-lý-dữ-liệu-là-gì"><i class="fa fa-check"></i><b>6.1</b> Tiền xử lý dữ liệu là gì?</a></li>
+<li class="chapter" data-level="6.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#định-dạng-cột-dữ-liệu-sử-dụng-thư-viện-textbfreadr"><i class="fa fa-check"></i><b>6.2</b> Định dạng cột dữ liệu sử dụng thư viện <span class="math inline">\(\textbf{readr}\)</span></a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#quy-tắc-định-dạng-tự-động-của-textbfreadr"><i class="fa fa-check"></i><b>6.2.1</b> Quy tắc định dạng tự động của <span class="math inline">\(\textbf{readr}\)</span></a></li>
+<li class="chapter" data-level="6.2.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#định-dạng-véc-tơ-bằng-các-hàm-parse_"><i class="fa fa-check"></i><b>6.2.2</b> Định dạng véc-tơ bằng các hàm <code>parse_*()</code></a></li>
+<li class="chapter" data-level="6.2.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#định-dạng-cột-kiểu-chuỗi-ký-tự"><i class="fa fa-check"></i><b>6.2.3</b> Định dạng cột kiểu chuỗi ký tự</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xử-lý-giá-trị-không-quan-sát-được"><i class="fa fa-check"></i><b>6.3</b> Xử lý giá trị không quan sát được</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xác-định-giá-trị-không-quan-sát-được"><i class="fa fa-check"></i><b>6.3.1</b> Xác định giá trị không quan sát được</a></li>
+<li class="chapter" data-level="6.3.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xử-lý-giá-trị-không-quan-sát-được."><i class="fa fa-check"></i><b>6.3.2</b> Xử lý giá trị không quan sát được.</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xử-lý-giá-trị-ngoại-lai"><i class="fa fa-check"></i><b>6.4</b> Xử lý giá trị ngoại lai</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#ảnh-hưởng-của-giá-trị-ngoại-lai-lên-kết-quả-phân-tích"><i class="fa fa-check"></i><b>6.4.1</b> Ảnh hưởng của giá trị ngoại lai lên kết quả phân tích</a></li>
+<li class="chapter" data-level="6.4.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#phương-pháp-phát-hiện-giá-trị-ngoại-lai"><i class="fa fa-check"></i><b>6.4.2</b> Phương pháp phát hiện giá trị ngoại lai</a></li>
+<li class="chapter" data-level="6.4.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#xử-lý-giá-trị-ngoại-lai."><i class="fa fa-check"></i><b>6.4.3</b> Xử lý giá trị ngoại lai.</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#phụ-lục-3"><i class="fa fa-check"></i><b>6.5</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#appenptdl01"><i class="fa fa-check"></i><b>6.5.1</b> Kiểm định sự độc lập của hai biến</a></li>
+<li class="chapter" data-level="6.5.2" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#appenptdl02"><i class="fa fa-check"></i><b>6.5.2</b> Box-Cox transformation</a></li>
+<li class="chapter" data-level="6.5.3" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#phương-pháp-chuẩn-hóa-véc-tơ-bằng-hàm-ngược"><i class="fa fa-check"></i><b>6.5.3</b> Phương pháp chuẩn hóa véc-tơ bằng hàm ngược</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="tiền-xử-lý-dữ-liệu.html"><a href="tiền-xử-lý-dữ-liệu.html#bài-tập-3"><i class="fa fa-check"></i><b>6.6</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html"><i class="fa fa-check"></i><b>7</b> Biến đổi và sắp xếp dữ liệu</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#biến-đổi-dữ-liệu-bằng-thư-viện-textbfdplyr"><i class="fa fa-check"></i><b>7.1</b> Biến đổi dữ liệu bằng thư viện <span class="math inline">\(\textbf{dplyr}\)</span></a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#thêm-biến-bằng-hàm-mutate"><i class="fa fa-check"></i><b>7.1.1</b> Thêm biến bằng hàm <code>mutate()</code></a></li>
+<li class="chapter" data-level="7.1.2" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#lựa-chọn-biến-bằng-hàm-select"><i class="fa fa-check"></i><b>7.1.2</b> Lựa chọn biến bằng hàm <code>select()</code></a></li>
+<li class="chapter" data-level="7.1.3" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#sắp-xếp-dữ-liệu-bằng-hàm-arrange"><i class="fa fa-check"></i><b>7.1.3</b> Sắp xếp dữ liệu bằng hàm <code>arrange()</code></a></li>
+<li class="chapter" data-level="7.1.4" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#kết-hợp-các-phép-biến-đổi-bằng-toán-tử-pipe"><i class="fa fa-check"></i><b>7.1.4</b> Kết hợp các phép biến đổi bằng toán tử pipe (<code>%&gt;%</code>)</a></li>
+<li class="chapter" data-level="7.1.5" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#tổng-hợp-dữ-liệu-bằng-group_by-và-summarise"><i class="fa fa-check"></i><b>7.1.5</b> Tổng hợp dữ liệu bằng <code>group_by</code> và <code>summarise()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#sắp-xếp-dữ-liệu-bằng-thư-viện-textbftidyr"><i class="fa fa-check"></i><b>7.2</b> Sắp xếp dữ liệu bằng thư viện <span class="math inline">\(\textbf{tidyr}\)</span></a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#kéo-dài-dữ-liệu-bằng-gather"><i class="fa fa-check"></i><b>7.2.1</b> Kéo dài dữ liệu bằng <code>gather()</code></a></li>
+<li class="chapter" data-level="7.2.2" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#mở-rộng-dữ-liệu-với-speard"><i class="fa fa-check"></i><b>7.2.2</b> Mở rộng dữ liệu với <code>speard()</code></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#phụ-lục-4"><i class="fa fa-check"></i><b>7.3</b> Phụ lục</a></li>
+<li class="chapter" data-level="7.4" data-path="biến-đổi-và-sắp-xếp-dữ-liệu.html"><a href="biến-đổi-và-sắp-xếp-dữ-liệu.html#bài-tập-4"><i class="fa fa-check"></i><b>7.4</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html"><i class="fa fa-check"></i><b>8</b> Trực quan hóa dữ liệu</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#ggplot_intro"><i class="fa fa-check"></i><b>8.1</b> Tổng quan về <span class="math inline">\(\textbf{ggplot2}\)</span></a></li>
+<li class="chapter" data-level="8.2" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#tạo-một-đồ-thị-cơ-bản"><i class="fa fa-check"></i><b>8.2</b> Tạo một đồ thị cơ bản</a></li>
+<li class="chapter" data-level="8.3" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#cấu-trúc-nhiều-lớp-và-ngữ-pháp-của-đồ-thị"><i class="fa fa-check"></i><b>8.3</b> Cấu trúc nhiều lớp và ngữ pháp của đồ thị</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#ánh-xạ-thẩm-mỹ-trong-đồ-thị-có-nhiều-lớp"><i class="fa fa-check"></i><b>8.3.1</b> Ánh xạ thẩm mỹ trong đồ thị có nhiều lớp</a></li>
+<li class="chapter" data-level="8.3.2" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#các-hàm-geom_-cơ-bản"><i class="fa fa-check"></i><b>8.3.2</b> Các hàm <code>geom_*()</code> cơ bản</a></li>
+<li class="chapter" data-level="8.3.3" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#các-hàm-stat_"><i class="fa fa-check"></i><b>8.3.3</b> Các hàm <code>stat_*()</code>+–</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#hàm-scale_"><i class="fa fa-check"></i><b>8.4</b> Hàm <code>scale_*()</code></a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#vị-trí-xuất-hiện-trên-trục-tọa-độ"><i class="fa fa-check"></i><b>8.4.1</b> Vị trí xuất hiện trên trục tọa độ</a></li>
+<li class="chapter" data-level="8.4.2" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#màu-sắc-hiển-thị"><i class="fa fa-check"></i><b>8.4.2</b> Màu sắc hiển thị</a></li>
+<li class="chapter" data-level="8.4.3" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#các-thuộc-tính-thẩm-mỹ-khác"><i class="fa fa-check"></i><b>8.4.3</b> Các thuộc tính thẩm mỹ khác</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#tùy-chỉnh-chú-giải-của-ánh-xạ-thẩm-mỹ"><i class="fa fa-check"></i><b>8.5</b> Tùy chỉnh chú giải của ánh xạ thẩm mỹ</a></li>
+<li class="chapter" data-level="8.6" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#chủ-đề-và-ngữ-cảnh-của-đồ-thị"><i class="fa fa-check"></i><b>8.6</b> Chủ đề và ngữ cảnh của đồ thị</a></li>
+<li class="chapter" data-level="8.7" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#tạo-đồ-thị-tương-tác"><i class="fa fa-check"></i><b>8.7</b> Tạo đồ thị tương tác</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#tạo-đồ-thị-tương-tác-với-textbfggiraph"><i class="fa fa-check"></i><b>8.7.1</b> Tạo đồ thị tương tác với <span class="math inline">\(\textbf{ggiraph}\)</span></a></li>
+<li class="chapter" data-level="8.7.2" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#tạo-đồ-thị-tương-tác-bằng-thư-viện-textbfplotly"><i class="fa fa-check"></i><b>8.7.2</b> Tạo đồ thị tương tác bằng thư viện <span class="math inline">\(\textbf{plotly}\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#đồ-thị-động"><i class="fa fa-check"></i><b>8.8</b> Đồ thị động</a></li>
+<li class="chapter" data-level="8.9" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#bài-tập-5"><i class="fa fa-check"></i><b>8.9</b> Bài tập</a></li>
+<li class="chapter" data-level="8.10" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#phụ-lục-5"><i class="fa fa-check"></i><b>8.10</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="8.10.1" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#lập-trình-trong-textbfggplot2"><i class="fa fa-check"></i><b>8.10.1</b> Lập trình trong <span class="math inline">\(\textbf{ggplot2}\)</span></a></li>
+<li class="chapter" data-level="8.10.2" data-path="trực-quan-hóa-dữ-liệu.html"><a href="trực-quan-hóa-dữ-liệu.html#tạo-dashboard-bằng-thư-viện-textbfshiny"><i class="fa fa-check"></i><b>8.10.2</b> Tạo dashboard bằng thư viện <span class="math inline">\(\textbf{shiny}\)</span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html"><i class="fa fa-check"></i><b>9</b> Mô hình hồi quy tuyến tính</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#những-nội-dung-cơ-bản-của-mô-hình-quy-tuyến-tính"><i class="fa fa-check"></i><b>9.1</b> Những nội dung cơ bản của mô hình quy tuyến tính</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#mô-hình-hồi-quy-tuyến-tính-đơn-biến"><i class="fa fa-check"></i><b>9.1.1</b> Mô hình hồi quy tuyến tính đơn biến</a></li>
+<li class="chapter" data-level="9.1.2" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#mô-hình-hồi-quy-tuyến-tính-đa-biến"><i class="fa fa-check"></i><b>9.1.2</b> Mô hình hồi quy tuyến tính đa biến</a></li>
+<li class="chapter" data-level="9.1.3" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#những-cân-nhắc-khi-xây-dựng-mô-hình-hồi-quy-tuyến-tính"><i class="fa fa-check"></i><b>9.1.3</b> Những cân nhắc khi xây dựng mô hình hồi quy tuyến tính</a></li>
+<li class="chapter" data-level="9.1.4" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#những-khiếm-khuyết-của-mô-hình-hồi-quy-tuyến-tính"><i class="fa fa-check"></i><b>9.1.4</b> Những khiếm khuyết của mô hình hồi quy tuyến tính</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#leastsquared"><i class="fa fa-check"></i><b>9.2</b> Mô hình hồi quy tuyến tính và phương pháp bình phương nhỏ nhất</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#ước-lượng-các-hệ-số-tuyến-tính"><i class="fa fa-check"></i><b>9.2.1</b> Ước lượng các hệ số tuyến tính</a></li>
+<li class="chapter" data-level="9.2.2" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#ước-lượng-phương-sai-của-biến-phụ-thuộc."><i class="fa fa-check"></i><b>9.2.2</b> Ước lượng phương sai của biến phụ thuộc.</a></li>
+<li class="chapter" data-level="9.2.3" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#kiểm-định-các-hệ-số-ước-lượng."><i class="fa fa-check"></i><b>9.2.3</b> Kiểm định các hệ số ước lượng.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#linearmodelselection"><i class="fa fa-check"></i><b>9.3</b> Các phương pháp chọn biến trong mô hình hồi quy tuyến tính.</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#phương-pháp-lựa-chọn-tập-hợp-con-tốt-nhất"><i class="fa fa-check"></i><b>9.3.1</b> Phương pháp lựa chọn tập hợp con tốt nhất</a></li>
+<li class="chapter" data-level="9.3.2" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#forward--and-backward-stepwise-selection"><i class="fa fa-check"></i><b>9.3.2</b> Forward- and Backward-Stepwise Selection</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#hồi-quy-tuyến-tính-có-ràng-buộc-tham-số"><i class="fa fa-check"></i><b>9.4</b> Hồi quy tuyến tính có ràng buộc tham số</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#hồi-quy-ridge"><i class="fa fa-check"></i><b>9.4.1</b> Hồi quy ridge</a></li>
+<li class="chapter" data-level="9.4.2" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#phương-pháp-lasso"><i class="fa fa-check"></i><b>9.4.2</b> Phương pháp Lasso</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#thực-hành-xây-dựng-mô-hình-tuyến-tính-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>9.5</b> Thực hành xây dựng mô hình tuyến tính trên dữ liệu Boston</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#xây-dựng-mô-hình-hồi-quy-đa-biến"><i class="fa fa-check"></i><b>9.5.1</b> Xây dựng mô hình hồi quy đa biến</a></li>
+<li class="chapter" data-level="9.5.2" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#lựa-chọn-biến-trong-mô-hình-hồi-quy-tuyến-tính"><i class="fa fa-check"></i><b>9.5.2</b> Lựa chọn biến trong mô hình hồi quy tuyến tính</a></li>
+<li class="chapter" data-level="9.5.3" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#hồi-quy-ridge-và-lasso"><i class="fa fa-check"></i><b>9.5.3</b> Hồi quy ridge và lasso</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#bài-tập-6"><i class="fa fa-check"></i><b>9.6</b> Bài tập</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#bài-tập-lý-thuyết"><i class="fa fa-check"></i><b>9.6.1</b> Bài tập lý thuyết</a></li>
+<li class="chapter" data-level="9.6.2" data-path="mô-hình-hồi-quy-tuyến-tính.html"><a href="mô-hình-hồi-quy-tuyến-tính.html#bài-tập-thực-hành"><i class="fa fa-check"></i><b>9.6.2</b> Bài tập thực hành</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html"><i class="fa fa-check"></i><b>10</b> Các mô hình cộng tính tổng quát</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-splines"><i class="fa fa-check"></i><b>10.1</b> Hồi quy splines</a></li>
+<li class="chapter" data-level="10.2" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#smoothing-splines"><i class="fa fa-check"></i><b>10.2</b> Smoothing Splines</a></li>
+<li class="chapter" data-level="10.3" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-từng-đoạn"><i class="fa fa-check"></i><b>10.3</b> Hồi quy từng đoạn</a></li>
+<li class="chapter" data-level="10.4" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#gammodel"><i class="fa fa-check"></i><b>10.4</b> Mô hình hồi quy cộng tính tổng quát</a></li>
+<li class="chapter" data-level="10.5" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#thực-hành"><i class="fa fa-check"></i><b>10.5</b> Thực hành</a>
+<ul>
+<li class="chapter" data-level="10.5.1" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-spline-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>10.5.1</b> Hồi quy spline trên dữ liệu Boston</a></li>
+<li class="chapter" data-level="10.5.2" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#hồi-quy-cục-bộ-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>10.5.2</b> Hồi quy cục bộ trên dữ liệu Boston</a></li>
+<li class="chapter" data-level="10.5.3" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#mô-hình-công-tính-tổng-quát-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>10.5.3</b> Mô hình công tính tổng quát trên dữ liệu Boston</a></li>
+</ul></li>
+<li class="chapter" data-level="10.6" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#phụ-lục-6"><i class="fa fa-check"></i><b>10.6</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="10.6.1" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen1"><i class="fa fa-check"></i><b>10.6.1</b> Ước lượng tham số cho splines bậc ba và <span class="math inline">\(k\)</span> nút</a></li>
+<li class="chapter" data-level="10.6.2" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen2"><i class="fa fa-check"></i><b>10.6.2</b> Ước lượng tham số cho natural splines bậc ba có <span class="math inline">\(k\)</span> nút</a></li>
+<li class="chapter" data-level="10.6.3" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen3"><i class="fa fa-check"></i><b>10.6.3</b> Tại sao smoothing splines lại là một natural spline</a></li>
+<li class="chapter" data-level="10.6.4" data-path="các-mô-hình-cộng-tính-tổng-quát.html"><a href="các-mô-hình-cộng-tính-tổng-quát.html#gamapen4"><i class="fa fa-check"></i><b>10.6.4</b> Ước lượng smoothing splines</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html"><i class="fa fa-check"></i><b>11</b> Mô hình tuyến tính tổng quát.</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#các-nhược-điểm-của-mô-hình-hồi-quy-tuyến-tính."><i class="fa fa-check"></i><b>11.1</b> Các nhược điểm của mô hình hồi quy tuyến tính.</a></li>
+<li class="chapter" data-level="11.2" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#xây-dựng-mô-hình-tuyến-tính-tổng-quát"><i class="fa fa-check"></i><b>11.2</b> Xây dựng mô hình tuyến tính tổng quát</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#biến-phụ-thuộc-là-biến-dạng-nhị-phân."><i class="fa fa-check"></i><b>11.2.1</b> Biến phụ thuộc là biến dạng nhị phân.</a></li>
+<li class="chapter" data-level="11.2.2" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#biến-phụ-thuộc-là-biến-rời-rạc-không-có-thứ-tự."><i class="fa fa-check"></i><b>11.2.2</b> Biến phụ thuộc là biến rời rạc không có thứ tự.</a></li>
+<li class="chapter" data-level="11.2.3" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#biến-phụ-thuộc-là-biến-rời-rạc-có-thứ-tự."><i class="fa fa-check"></i><b>11.2.3</b> Biến phụ thuộc là biến rời rạc có thứ tự.</a></li>
+<li class="chapter" data-level="11.2.4" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#biến-phụ-thuộc-có-phân-phối-liên-tục."><i class="fa fa-check"></i><b>11.2.4</b> Biến phụ thuộc có phân phối liên tục.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#các-thành-phần-của-mô-hình-tuyến-tính-tổng-quát."><i class="fa fa-check"></i><b>11.3</b> Các thành phần của mô hình tuyến tính tổng quát.</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#họ-các-biến-ngẫu-nhiên-có-phân-phối-kiểu-mũ."><i class="fa fa-check"></i><b>11.3.1</b> Họ các biến ngẫu nhiên có phân phối kiểu mũ.</a></li>
+<li class="chapter" data-level="11.3.2" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#hàm-liên-kết."><i class="fa fa-check"></i><b>11.3.2</b> Hàm liên kết.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#hàm-hợp-lý-tối-đa-và-ước-lượng-mô-hình."><i class="fa fa-check"></i><b>11.4</b> Hàm hợp lý tối đa và ước lượng mô hình.</a></li>
+<li class="chapter" data-level="11.5" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#so-sánh-và-lựa-chọn-mô-hình-tuyến-tính-tổng-quát."><i class="fa fa-check"></i><b>11.5</b> So sánh và lựa chọn mô hình tuyến tính tổng quát.</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#thước-đo-deviance"><i class="fa fa-check"></i><b>11.5.1</b> Thước đo deviance</a></li>
+<li class="chapter" data-level="11.5.2" data-path="mô-hình-tuyến-tính-tổng-quát..html"><a href="mô-hình-tuyến-tính-tổng-quát..html#giá-trị-hàm-log-likelihood-aic-và-bic"><i class="fa fa-check"></i><b>11.5.2</b> Giá trị hàm log-likelihood, AIC và BIC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="reference.html"><a href="reference.html"><i class="fa fa-check"></i><b>12</b> REFERENCE</a></li>
+<li class="chapter" data-level="13" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><i class="fa fa-check"></i><b>13</b> Mô hình tần suất - mức độ nghiêm trọng.</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#tại-sao-tần-suất-lại-có-ảnh-hưởng-đến-mức-độ-nghiêm-trọng"><i class="fa fa-check"></i><b>13.1</b> Tại sao tần suất lại có ảnh hưởng đến mức độ nghiêm trọng?</a></li>
+<li class="chapter" data-level="13.2" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#các-nền-tảng-xây-dựng-mô-hình."><i class="fa fa-check"></i><b>13.2</b> Các nền tảng xây dựng mô hình.</a></li>
+<li class="chapter" data-level="13.3" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-tần-suất---mức-độ-nghiêm-trọng.-1"><i class="fa fa-check"></i><b>13.3</b> Mô hình tần suất - mức độ nghiêm trọng.</a>
+<ul>
+<li class="chapter" data-level="13.3.1" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-hai-thành-phần"><i class="fa fa-check"></i><b>13.3.1</b> Mô hình hai thành phần</a></li>
+<li class="chapter" data-level="13.3.2" data-path="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#phân-phối-tweedie"><i class="fa fa-check"></i><b>13.3.2</b> Phân phối Tweedie</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><i class="fa fa-check"></i><b>14</b> Tính toán phí bảo hiểm thuần bằng mô hình tần suất - mức độ nghiêm trọng.</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#dữ-liệu-để-xây-dựng-mô-hình"><i class="fa fa-check"></i><b>14.1</b> Dữ liệu để xây dựng mô hình</a></li>
+<li class="chapter" data-level="14.2" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#phân-tích-khai-phá-dữ-liệu"><i class="fa fa-check"></i><b>14.2</b> Phân tích khai phá dữ liệu</a>
+<ul>
+<li class="chapter" data-level="14.2.1" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#biến-tần-suất-và-mối-liên-hệ-đến-các-biến-khác"><i class="fa fa-check"></i><b>14.2.1</b> Biến tần suất và mối liên hệ đến các biến khác</a></li>
+<li class="chapter" data-level="14.2.2" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#biến-mức-độ-nghiêm-trọng-và-mối-liên-hệ-với-các-biến-khác"><i class="fa fa-check"></i><b>14.2.2</b> Biến mức độ nghiêm trọng và mối liên hệ với các biến khác</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-tuyến-tính-tổng-quát-cho-tần-suất."><i class="fa fa-check"></i><b>14.3</b> Mô hình tuyến tính tổng quát cho tần suất.</a>
+<ul>
+<li class="chapter" data-level="14.3.1" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-tuyến-tính-tổng-quát-với-một-biến-giải-thích."><i class="fa fa-check"></i><b>14.3.1</b> Mô hình tuyến tính tổng quát với một biến giải thích.</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#xây-dựng-mô-hình-tuyến-tính-tổng-quát-nhiều-biến"><i class="fa fa-check"></i><b>14.4</b> Xây dựng mô hình tuyến tính tổng quát nhiều biến</a></li>
+<li class="chapter" data-level="14.5" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-tuyến-tính-tổng-quát-cho-biến-mức-độ-nghiêm-trọng."><i class="fa fa-check"></i><b>14.5</b> Mô hình tuyến tính tổng quát cho biến mức độ nghiêm trọng.</a>
+<ul>
+<li class="chapter" data-level="14.5.1" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-đơn-biến-cho-mức-độ-nghiêm-trọng"><i class="fa fa-check"></i><b>14.5.1</b> Mô hình đơn biến cho mức độ nghiêm trọng</a></li>
+<li class="chapter" data-level="14.5.2" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#mô-hình-nhiều-biến-cho-mức-độ-nghiêm-trọng"><i class="fa fa-check"></i><b>14.5.2</b> Mô hình nhiều biến cho mức độ nghiêm trọng</a></li>
+</ul></li>
+<li class="chapter" data-level="14.6" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#xác-định-phí-bảo-hiểm-thuần-và-xác-thực-mô-hình"><i class="fa fa-check"></i><b>14.6</b> Xác định phí bảo hiểm thuần và xác thực mô hình</a></li>
+<li class="chapter" data-level="14.7" data-path="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html"><a href="tính-toán-phí-bảo-hiểm-thuần-bằng-mô-hình-tần-suất---mức-độ-nghiêm-trọng..html#kết-luận"><i class="fa fa-check"></i><b>14.7</b> Kết luận</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html"><i class="fa fa-check"></i><b>15</b> Mô hình cây quyết định</a>
+<ul>
+<li class="chapter" data-level="15.1" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#cơ-bản-về-mô-hình-cây-quyết-định"><i class="fa fa-check"></i><b>15.1</b> Cơ bản về mô hình cây quyết định</a>
+<ul>
+<li class="chapter" data-level="15.1.1" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#mô-hình-cây-quyết-định-hồi-quy"><i class="fa fa-check"></i><b>15.1.1</b> Mô hình cây quyết định hồi quy</a></li>
+<li class="chapter" data-level="15.1.2" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#cây-quyết-định-phân-loại"><i class="fa fa-check"></i><b>15.1.2</b> Cây quyết định phân loại</a></li>
+<li class="chapter" data-level="15.1.3" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#cây-quyết-định-và-mô-hình-tuyến-tính"><i class="fa fa-check"></i><b>15.1.3</b> Cây quyết định và mô hình tuyến tính</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#thực-hành-xây-dựng-mô-hình-cây-quyết-định-sử-dụng-r"><i class="fa fa-check"></i><b>15.2</b> Thực hành: xây dựng mô hình cây quyết định sử dụng R</a>
+<ul>
+<li class="chapter" data-level="15.2.1" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#cây-quyết-định-hồi-quy-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>15.2.1</b> Cây quyết định hồi quy trên dữ liệu Boston</a></li>
+<li class="chapter" data-level="15.2.2" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#cây-quyết-định-phân-loại-trên-dữ-liệu-titanic"><i class="fa fa-check"></i><b>15.2.2</b> Cây quyết định phân loại trên dữ liệu Titanic</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#thuật-toán-rừng-ngẫu-nhiên"><i class="fa fa-check"></i><b>15.3</b> Thuật toán rừng ngẫu nhiên</a>
+<ul>
+<li class="chapter" data-level="15.3.1" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#phương-pháp-lấy-mẫu-lặp-lại"><i class="fa fa-check"></i><b>15.3.1</b> Phương pháp lấy mẫu lặp lại</a></li>
+<li class="chapter" data-level="15.3.2" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#thuật-toán-rừng-ngẫu-nhiên-1"><i class="fa fa-check"></i><b>15.3.2</b> Thuật toán rừng ngẫu nhiên</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#thực-hành-mô-hình-rừng-ngẫu-nhiên"><i class="fa fa-check"></i><b>15.4</b> Thực hành: mô hình rừng ngẫu nhiên</a>
+<ul>
+<li class="chapter" data-level="15.4.1" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#xây-dựng-mô-hình-rừng-ngẫu-nhiên-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>15.4.1</b> Xây dựng mô hình rừng ngẫu nhiên trên dữ liệu Boston</a></li>
+<li class="chapter" data-level="15.4.2" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#xây-dựng-mô-hình-rừng-ngẫu-nhiên-trên-dữ-liệu-oj"><i class="fa fa-check"></i><b>15.4.2</b> Xây dựng mô hình rừng ngẫu nhiên trên dữ liệu OJ</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#bài-tập-7"><i class="fa fa-check"></i><b>15.5</b> Bài tập</a>
+<ul>
+<li class="chapter" data-level="15.5.1" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#bài-tập-lý-thuyết-1"><i class="fa fa-check"></i><b>15.5.1</b> Bài tập lý thuyết</a></li>
+<li class="chapter" data-level="15.5.2" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#bài-tập-thực-hành-1"><i class="fa fa-check"></i><b>15.5.2</b> Bài tập thực hành</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#phụ-lục-7"><i class="fa fa-check"></i><b>15.6</b> Phụ lục</a>
+<ul>
+<li class="chapter" data-level="15.6.1" data-path="mô-hình-cây-quyết-định.html"><a href="mô-hình-cây-quyết-định.html#tính-toán-sự-quan-trọng-của-biến-giải-thích-trong-mô-hình-rừng-ngẫu-nhiên"><i class="fa fa-check"></i><b>15.6.1</b> Tính toán sự quan trọng của biến giải thích trong mô hình rừng ngẫu nhiên</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="boosting-và-cây-quyết-định..html"><a href="boosting-và-cây-quyết-định..html"><i class="fa fa-check"></i><b>16</b> Boosting và cây quyết định.</a>
+<ul>
+<li class="chapter" data-level="16.1" data-path="boosting-và-cây-quyết-định..html"><a href="boosting-và-cây-quyết-định..html#những-cơ-sở-của-kỹ-thuật-boosting."><i class="fa fa-check"></i><b>16.1</b> Những cơ sở của kỹ thuật boosting.</a>
+<ul>
+<li class="chapter" data-level="16.1.1" data-path="boosting-và-cây-quyết-định..html"><a href="boosting-và-cây-quyết-định..html#nguyên-tắc-chung-của-boosting"><i class="fa fa-check"></i><b>16.1.1</b> Nguyên tắc chung của boosting</a></li>
+<li class="chapter" data-level="16.1.2" data-path="boosting-và-cây-quyết-định..html"><a href="boosting-và-cây-quyết-định..html#hàm-cơ-bản-dạng-cây-quyết-định"><i class="fa fa-check"></i><b>16.1.2</b> Hàm cơ bản dạng cây quyết định</a></li>
+<li class="chapter" data-level="16.1.3" data-path="boosting-và-cây-quyết-định..html"><a href="boosting-và-cây-quyết-định..html#hàm-tổn-thất"><i class="fa fa-check"></i><b>16.1.3</b> Hàm tổn thất</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="boosting-và-cây-quyết-định..html"><a href="boosting-và-cây-quyết-định..html#gradient-boosting"><i class="fa fa-check"></i><b>16.2</b> Gradient boosting</a>
+<ul>
+<li class="chapter" data-level="16.2.1" data-path="boosting-và-cây-quyết-định..html"><a href="boosting-và-cây-quyết-định..html#cơ-sở-toán-học-của-gradient-boosting."><i class="fa fa-check"></i><b>16.2.1</b> Cơ sở toán học của gradient boosting.</a></li>
+<li class="chapter" data-level="16.2.2" data-path="boosting-và-cây-quyết-định..html"><a href="boosting-và-cây-quyết-định..html#những-cân-nhắc-khi-thực-hiện-gradient-boosting"><i class="fa fa-check"></i><b>16.2.2</b> Những cân nhắc khi thực hiện gradient boosting</a></li>
+<li class="chapter" data-level="16.2.3" data-path="boosting-và-cây-quyết-định..html"><a href="boosting-và-cây-quyết-định..html#thực-hiện-gradient-boosting-trên-r."><i class="fa fa-check"></i><b>16.2.3</b> Thực hiện gradient boosting trên R.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="neuralnetwork.html"><a href="neuralnetwork.html"><i class="fa fa-check"></i><b>17</b> Mô hình mạng nơ-ron</a>
+<ul>
+<li class="chapter" data-level="17.1" data-path="neuralnetwork.html"><a href="neuralnetwork.html#nnonelayer"><i class="fa fa-check"></i><b>17.1</b> Mạng nơ-rơn có một lớp ẩn</a></li>
+<li class="chapter" data-level="17.2" data-path="neuralnetwork.html"><a href="neuralnetwork.html#nnmultilayer"><i class="fa fa-check"></i><b>17.2</b> Mạng nơ-ron có nhiều lớp ẩn</a></li>
+<li class="chapter" data-level="17.3" data-path="neuralnetwork.html"><a href="neuralnetwork.html#nnestimation"><i class="fa fa-check"></i><b>17.3</b> Ước lượng tham số của mạng nơ-ron</a>
+<ul>
+<li class="chapter" data-level="17.3.1" data-path="neuralnetwork.html"><a href="neuralnetwork.html#ước-lượng-tham-số-cho-mạng-nơ-ron-hồi-quy-có-một-lớp-ẩn"><i class="fa fa-check"></i><b>17.3.1</b> Ước lượng tham số cho mạng nơ-ron hồi quy có một lớp ẩn</a></li>
+<li class="chapter" data-level="17.3.2" data-path="neuralnetwork.html"><a href="neuralnetwork.html#ước-lượng-tham-số-cho-mạng-nơ-ron-phân-loại-có-hai-lớp-ẩn"><i class="fa fa-check"></i><b>17.3.2</b> Ước lượng tham số cho mạng nơ-ron phân loại có hai lớp ẩn</a></li>
+<li class="chapter" data-level="17.3.3" data-path="neuralnetwork.html"><a href="neuralnetwork.html#khắc-phục-hiện-tượng-khớp-quá-mức-của-mạng-nơ-ron"><i class="fa fa-check"></i><b>17.3.3</b> Khắc phục hiện tượng khớp quá mức của mạng nơ-ron</a></li>
+</ul></li>
+<li class="chapter" data-level="17.4" data-path="neuralnetwork.html"><a href="neuralnetwork.html#pickands-dependent-function"><i class="fa fa-check"></i><b>17.4</b> Pickands dependent function</a></li>
+<li class="chapter" data-level="17.5" data-path="neuralnetwork.html"><a href="neuralnetwork.html#nhóm-các-hàm-at-để-cuv-là-một-copula"><i class="fa fa-check"></i><b>17.5</b> Nhóm các hàm A(t) để C(u,v) là một copula</a>
+<ul>
+<li class="chapter" data-level="17.5.1" data-path="neuralnetwork.html"><a href="neuralnetwork.html#cách-thứ-nhất-để-tham-số-hóa-đa-thức-từng-phần"><i class="fa fa-check"></i><b>17.5.1</b> Cách thứ nhất để tham số hóa đa thức từng phần</a></li>
+<li class="chapter" data-level="17.5.2" data-path="neuralnetwork.html"><a href="neuralnetwork.html#cách-thứ-hai"><i class="fa fa-check"></i><b>17.5.2</b> Cách thứ hai</a></li>
+</ul></li>
+<li class="chapter" data-level="17.6" data-path="neuralnetwork.html"><a href="neuralnetwork.html#thực-hành-1"><i class="fa fa-check"></i><b>17.6</b> Thực hành:</a>
+<ul>
+<li class="chapter" data-level="17.6.1" data-path="neuralnetwork.html"><a href="neuralnetwork.html#mô-hình-mạng-nơ-ron-trên-dữ-liệu-boston"><i class="fa fa-check"></i><b>17.6.1</b> Mô hình mạng nơ-ron trên dữ liệu Boston</a></li>
+<li class="chapter" data-level="17.6.2" data-path="neuralnetwork.html"><a href="neuralnetwork.html#mô-hình-mạng-nơ-ron-để-phân-loại-khách-hàng"><i class="fa fa-check"></i><b>17.6.2</b> Mô hình mạng nơ-ron để phân loại khách hàng</a></li>
+</ul></li>
+<li class="chapter" data-level="17.7" data-path="neuralnetwork.html"><a href="neuralnetwork.html#phụ-lục-8"><i class="fa fa-check"></i><b>17.7</b> Phụ lục</a></li>
+<li class="chapter" data-level="17.8" data-path="neuralnetwork.html"><a href="neuralnetwork.html#bài-tập-8"><i class="fa fa-check"></i><b>17.8</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html"><i class="fa fa-check"></i><b>18</b> Các mạng học sâu điển hình</a>
+<ul>
+<li class="chapter" data-level="18.1" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#mạng-nơ-ron-tích-chập"><i class="fa fa-check"></i><b>18.1</b> Mạng nơ-ron tích chập</a>
+<ul>
+<li class="chapter" data-level="18.1.1" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#lớp-tích-chập-trong-mạng-cnn"><i class="fa fa-check"></i><b>18.1.1</b> Lớp tích chập trong mạng CNN</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#pickands-dependent-function-1"><i class="fa fa-check"></i><b>18.2</b> Pickands dependent function</a></li>
+<li class="chapter" data-level="18.3" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#nhóm-các-hàm-at-để-cuv-là-một-copula-1"><i class="fa fa-check"></i><b>18.3</b> Nhóm các hàm A(t) để C(u,v) là một copula</a>
+<ul>
+<li class="chapter" data-level="18.3.1" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#cách-thứ-nhất-để-tham-số-hóa-đa-thức-từng-phần-1"><i class="fa fa-check"></i><b>18.3.1</b> Cách thứ nhất để tham số hóa đa thức từng phần</a></li>
+<li class="chapter" data-level="18.3.2" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#cách-thứ-hai-1"><i class="fa fa-check"></i><b>18.3.2</b> Cách thứ hai</a></li>
+</ul></li>
+<li class="chapter" data-level="18.4" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#copula-có-2-kendall-tau"><i class="fa fa-check"></i><b>18.4</b> Copula có 2 kendall tau</a></li>
+<li class="chapter" data-level="18.5" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#hàm-at-là-đa-thức-bậc-k"><i class="fa fa-check"></i><b>18.5</b> Hàm A(t) là đa thức bậc k</a></li>
+<li class="chapter" data-level="18.6" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#thực-hành-2"><i class="fa fa-check"></i><b>18.6</b> Thực hành:</a>
+<ul>
+<li class="chapter" data-level="18.6.1" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#mô-hình-mạng-nơ-ron-trên-dữ-liệu-boston-1"><i class="fa fa-check"></i><b>18.6.1</b> Mô hình mạng nơ-ron trên dữ liệu Boston</a></li>
+<li class="chapter" data-level="18.6.2" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#mô-hình-mạng-nơ-ron-để-phân-loại-khách-hàng-1"><i class="fa fa-check"></i><b>18.6.2</b> Mô hình mạng nơ-ron để phân loại khách hàng</a></li>
+</ul></li>
+<li class="chapter" data-level="18.7" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#phụ-lục-9"><i class="fa fa-check"></i><b>18.7</b> Phụ lục</a></li>
+<li class="chapter" data-level="18.8" data-path="neuralnetwork1.html"><a href="neuralnetwork1.html#bài-tập-9"><i class="fa fa-check"></i><b>18.8</b> Bài tập</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="học-máy-không-có-giám-sát.html"><a href="học-máy-không-có-giám-sát.html"><i class="fa fa-check"></i><b>19</b> Học máy không có giám sát</a>
+<ul>
+<li class="chapter" data-level="19.1" data-path="học-máy-không-có-giám-sát.html"><a href="học-máy-không-có-giám-sát.html#phương-pháp-phân-tích-thành-phần-chính"><i class="fa fa-check"></i><b>19.1</b> Phương pháp phân tích thành phần chính</a></li>
+<li class="chapter" data-level="19.2" data-path="học-máy-không-có-giám-sát.html"><a href="học-máy-không-có-giám-sát.html#các-phương-pháp-phân-cụm"><i class="fa fa-check"></i><b>19.2</b> Các phương pháp phân cụm</a>
+<ul>
+<li class="chapter" data-level="19.2.1" data-path="học-máy-không-có-giám-sát.html"><a href="học-máy-không-có-giám-sát.html#k-mean"><i class="fa fa-check"></i><b>19.2.1</b> K-mean</a></li>
+<li class="chapter" data-level="19.2.2" data-path="học-máy-không-có-giám-sát.html"><a href="học-máy-không-có-giám-sát.html#hierarchical-clustering"><i class="fa fa-check"></i><b>19.2.2</b> Hierarchical Clustering</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="học-máy-không-có-giám-sát.html"><a href="học-máy-không-có-giám-sát.html#thực-hành-3"><i class="fa fa-check"></i><b>19.3</b> Thực hành:</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="học-máy-không-có-giám-sát" class="section level1 hasAnchor" number="19">
+<h1><span class="header-section-number">Chương 19</span> Học máy không có giám sát<a href="học-máy-không-có-giám-sát.html#học-máy-không-có-giám-sát" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Chương sách này sẽ tập trung vào học máy không giám sát; một tập hợp các công cụ thống kê được sử dụng cho trường hợp chúng ta có một dữ liệu bao gồm <span class="math inline">\(p\)</span> biến <span class="math inline">\(X_1, X_2, \cdots, X_p\)</span> và <span class="math inline">\(n\)</span> quan sát. Mục đích của chúng ta là khám phá những giá trị bên trong dữ liệu mà không quan tâm đến có hay không có biến mục tiêu. Các câu hỏi đặt ra bao gồm có</p>
+<p>Có cách nào thông tin để trực quan hóa dữ liệu? Chúng ta có thể khám phá các nhóm con giữa các biến hoặc giữa các quan sát không? Học tập không giám sát đề cập đến một tập hợp các kỹ thuật đa dạng để trả lời các câu hỏi như thế này. Trong chương này, chúng ta sẽ tập trung vào hai loại học tập không giám sát cụ thể: phân tích thành phần chính, một công cụ được sử dụng để trực quan hóa dữ liệu hoặc xử lý trước dữ liệu trước khi áp dụng các kỹ thuật có giám sát và phân cụm, một loại phương pháp rộng rãi để khám phá. các nhóm con chưa biết trong dữ liệu.</p>
+<div id="phương-pháp-phân-tích-thành-phần-chính" class="section level2 hasAnchor" number="19.1">
+<h2><span class="header-section-number">19.1</span> Phương pháp phân tích thành phần chính<a href="học-máy-không-có-giám-sát.html#phương-pháp-phân-tích-thành-phần-chính" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="các-phương-pháp-phân-cụm" class="section level2 hasAnchor" number="19.2">
+<h2><span class="header-section-number">19.2</span> Các phương pháp phân cụm<a href="học-máy-không-có-giám-sát.html#các-phương-pháp-phân-cụm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="k-mean" class="section level3 hasAnchor" number="19.2.1">
+<h3><span class="header-section-number">19.2.1</span> K-mean<a href="học-máy-không-có-giám-sát.html#k-mean" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+<div id="hierarchical-clustering" class="section level3 hasAnchor" number="19.2.2">
+<h3><span class="header-section-number">19.2.2</span> Hierarchical Clustering<a href="học-máy-không-có-giám-sát.html#hierarchical-clustering" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+</div>
+</div>
+<div id="thực-hành-3" class="section level2 hasAnchor" number="19.3">
+<h2><span class="header-section-number">19.3</span> Thực hành:<a href="học-máy-không-có-giám-sát.html#thực-hành-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<!-- # REFERENCE -->
+<!-- ### Source from thesis -->
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+<!-- ### Souce from website -->
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="neuralnetwork1.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Sách về Khoa Học Dữ Liệu.pdf", "Sách về Khoa Học Dữ Liệu.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

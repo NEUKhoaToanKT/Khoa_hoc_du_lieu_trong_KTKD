@@ -1,298 +1,186 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Lời nói đầu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</title>
+<meta name="author" content="Nguyễn Quang Huy">
+<meta name="description" content="Hello, This is the test version">
+<meta name="generator" content="bookdown 0.38 with bs4_book()">
+<meta property="og:title" content="Lời nói đầu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Hello, This is the test version">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lời nói đầu | Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh">
+<meta name="twitter:description" content="Hello, This is the test version">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Lora-0.4.9/font.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source%20Code%20Pro:wght@400;450&amp;display=swap" rel="stylesheet">
+<script src="libs/bs3compat-0.6.1/transition.js"></script><script src="libs/bs3compat-0.6.1/tabs.js"></script><script src="libs/bs3compat-0.6.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/kePrint-0.0.1/kePrint.js"></script><link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<script>
+        $(function() {
+            $("#toc h2").html("TRONG CHƯƠNG NÀY"); // Change text for "View source"
+        });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var viewSourceElement = document.getElementById('book-source');
+            var editPageElement = document.getElementById('book-edit');
+            var viewBookSourceElement = document.getElementById('book-repo');
 
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Sách về khoa học dữ liệu</title>
-  <meta name="description" content="Đây là một quyển sách tốt" />
-  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+            if (viewSourceElement) {
+                viewSourceElement.innerText = 'Xem nguồn trang'; // Change text for "View source"
+            }
 
-  <meta property="og:title" content="Sách về khoa học dữ liệu" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="Đây là một quyển sách tốt" />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+            if (editPageElement) {
+                editPageElement.innerText = 'Chỉnh sửa trang'; // Change text for "Edit this page"
+            }
 
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Sách về khoa học dữ liệu" />
-  
-  <meta name="twitter:description" content="Đây là một quyển sách tốt" />
-  
+            if (viewBookSourceElement) {
+                viewBookSourceElement.innerText = 'Xem nguồn sách'; // Change text for "View book source"
+            }
+        });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          var tocElement = document.querySelector('nav[aria-label="Table of contents"] h2');
+          if (tocElement) {
+            tocElement.textContent = 'Mục lục'; // Replace 'Mục lục' (Table of contents) with your desired text
+          }
+        });
+    </script><script>
+      document.addEventListener('DOMContentLoaded', (event) => {
+        var tocElement = document.querySelector('nav[aria-label="Table of contents"] h2');
+        if (tocElement) {
+          tocElement.textContent = 'NỘI DUNG CUỐN SÁCH'; // Ensure "NỘI DUNG CUỐN SÁCH" text remains
+        }
+      });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          // Find the paragraph containing the original text and date
+          const paragraph = document.querySelector('footer.bg-primary.text-light div.container div.row div.col-12.col-md-6.mt-3 p');
 
-<meta name="author" content="Lã Minh Hiếu" />
+          if (paragraph) {
+            // Extract the date using a regular expression
+            const dateRegex = /(\d{4}-\d{2}-\d{2})/;
+            const matches = paragraph.innerHTML.match(dateRegex);
 
+            if (matches && matches.length > 1) {
+              // Reformat the date from yyyy-mm-dd to dd/mm/yyyy
+              const originalDate = matches[1];
+              const [year, month, day] = originalDate.split('-');
+              const newDate = `${day}/${month}/${year}`;
 
-<meta name="date" content="2023-07-06" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-
-<link rel="next" href="intro.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<script src="libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-<style type="text/css">
-/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}
-</style>
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+              // Replace the entire paragraph content with the new Vietnamese format
+              paragraph.innerHTML = `Cuốn sách "${paragraph.querySelector('strong').innerText}" được viết bởi TS. ${paragraph.innerHTML.split('was written by ')[1].split('. ')[0]} - Trường Công nghệ - Đại học Kinh tế Quốc dân`;
+            }
+          }
+        });
+    </script><script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          // Find the paragraph containing the specific text
+          const paragraphs = document.querySelectorAll('footer.bg-primary.text-light div.container div.row div.col-12.col-md-6.mt-3 p');
+          paragraphs.forEach(paragraph => {
+            if(paragraph.innerHTML.includes('This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.')) {
+              // Replace the paragraph content
+              paragraph.innerHTML = 'Cuốn sách này được viết bằng hoàn toàn bằng ngôn ngữ R. Phiên bản hiện tại được cập nhật vào ngày ${newDate}.';
+            }
+          });
+        });
+    </script><script src="local_edit.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
 
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
 
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Prerequisites</a></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="literature.html"><a href="literature.html#bản-copy-của-midterm-visualization"><i class="fa fa-check"></i><b>3.1</b> Bản copy của midterm visualization</a>
-<ul>
-<li class="chapter" data-level="3.1.1" data-path="literature.html"><a href="literature.html#chuẩn-bị"><i class="fa fa-check"></i><b>3.1.1</b> Chuẩn bị</a></li>
-<li class="chapter" data-level="3.1.2" data-path="literature.html"><a href="literature.html#bài-1-data-summary"><i class="fa fa-check"></i><b>3.1.2</b> Bài 1: Data summary</a></li>
-<li class="chapter" data-level="3.1.3" data-path="literature.html"><a href="literature.html#bài-2-visualize-các-vector-factor"><i class="fa fa-check"></i><b>3.1.3</b> Bài 2: Visualize các vector factor</a></li>
-<li class="chapter" data-level="3.1.4" data-path="literature.html"><a href="literature.html#bài-3-visualize-vector-numeric"><i class="fa fa-check"></i><b>3.1.4</b> Bài 3: Visualize vector numeric:</a></li>
-<li class="chapter" data-level="3.1.5" data-path="literature.html"><a href="literature.html#bài-4-vẽ-biểu-đồ-với-nhiều-vector-khác-nhau"><i class="fa fa-check"></i><b>3.1.5</b> Bài 4: Vẽ biểu đồ với nhiều vector khác nhau:</a></li>
-<li class="chapter" data-level="3.1.6" data-path="literature.html"><a href="literature.html#bài-5-vẽ-biểu-đồ-thể-hiện-mối-quan-hệ-giữa-2-vector-numeric"><i class="fa fa-check"></i><b>3.1.6</b> Bài 5: Vẽ biểu đồ thể hiện mối quan hệ giữa 2 vector numeric:</a></li>
-<li class="chapter" data-level="3.1.7" data-path="literature.html"><a href="literature.html#bài-6-vẽ-biểu-đồ-biểu-diễn-một-vector-numeric-và-một-vector-factor"><i class="fa fa-check"></i><b>3.1.7</b> Bài 6: Vẽ biểu đồ biểu diễn một vector numeric và một vector factor</a></li>
-<li class="chapter" data-level="3.1.8" data-path="literature.html"><a href="literature.html#bài-7-vẽ-biểu-đồ-biểu-diễn-2-vector-numeric-và-1-vector-factor"><i class="fa fa-check"></i><b>3.1.8</b> Bài 7: Vẽ biểu đồ biểu diễn 2 vector numeric và 1 vector factor</a></li>
-<li class="chapter" data-level="3.1.9" data-path="literature.html"><a href="literature.html#bài-8-vẽ-biểu-đồ-một-vector-numeric-và-2-vector-factor"><i class="fa fa-check"></i><b>3.1.9</b> Bài 8: Vẽ biểu đồ một vector numeric và 2 vector factor</a></li>
-<li class="chapter" data-level="3.1.10" data-path="literature.html"><a href="literature.html#bài-9-vẽ-biểu-đồ-đường"><i class="fa fa-check"></i><b>3.1.10</b> Bài 9: Vẽ biểu đồ đường</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="methods.html"><a href="methods.html#math-example"><i class="fa fa-check"></i><b>4.1</b> math example</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
-<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="active" href="index.html">Lời nói đầu</a></li>
+<li class="book-part">PHẦN I: GIỚI THIỆU CHUNG</li>
+<li><a class="" href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></li>
+<li><a class="" href="m%C3%B4-h%C3%ACnh-tuy%E1%BA%BFn-t%C3%ADnh-t%E1%BB%95ng-qu%C3%A1t..html"><span class="header-section-number">2</span> Mô hình tuyến tính tổng quát.</a></li>
 </ul>
 
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD">View book source <i class="fab fa-github"></i></a></p>
+        </div>
       </nav>
-    </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Sách về khoa học dữ liệu</a>
-          </h1>
-        </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Sách về khoa học dữ liệu</h1>
-<p class="author"><em>Lã Minh Hiếu</em></p>
-<p class="date"><em>2023-07-06</em></p>
 </div>
-<div id="prerequisites" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Prerequisites<a href="index.html#prerequisites" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports, e.g., a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<p>The <strong>bookdown</strong> package can be installed from CRAN or Github:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;bookdown&quot;</span>)</span>
-<span id="cb1-2"><a href="index.html#cb1-2" tabindex="-1"></a><span class="co"># or the development version</span></span>
-<span id="cb1-3"><a href="index.html#cb1-3" tabindex="-1"></a><span class="co"># devtools::install_github(&quot;rstudio/bookdown&quot;)</span></span></code></pre></div>
-<p>Remember each Rmd file contains one and only one chapter, and a chapter is defined by the first-level heading <code>#</code>.</p>
-<p>To compile this example to PDF, you need XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.name/tinytex/" class="uri">https://yihui.name/tinytex/</a>.</p>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="lời-nói-đầu" class="section level1 unnumbered">
+<h1>Lời nói đầu<a class="anchor" aria-label="anchor" href="#l%E1%BB%9Di-n%C3%B3i-%C4%91%E1%BA%A7u"><i class="fas fa-link"></i></a>
+</h1>
+<div class="line-block"><br></div>
+<p><a href="https://nct.neu.edu.vn/%22"><img src="Bia%20sach%202.png" width="360" height="540" class="cover" alt="Buy on Amazon"></a> Khoa học dữ liệu (KHDL) là ngành khoa học kết hợp giữa toán học - xác suất thống kê với khoa học máy tính và kiến thức chuyên môn trong một lĩnh vực cụ thể như kinh tế, tài chính, y học, giáo dục, thể thao, v.v., để khám phá những thông tin hữu ích và có giá trị nằm trong dữ liệu liên quan đến lĩnh vực chuyên môn đó. Những thông tin hữu ích này được sử dụng để hướng dẫn việc ra quyết định và lập kế hoạch chiến lược cho các cơ quan, tổ chức, doanh nghiệp và các cá nhân hoạt động trong lĩnh vực này.</p>
+<p>Cuốn sách “Khoa học dữ liệu trong Kinh tế và Kinh doanh” được viết xuất phát từ nhu cầu học tập và tìm hiểu về KHDL của những bạn đọc đang học tập, nghiên cứu và làm việc trong lĩnh vực kinh tế, quản lý, quản trị kinh doanh. Cuốn sách ít tập trung vào các khái niệm mang tính kỹ thuật trong toán học hay khoa học máy tính, mà tập trung nhiều hơn vào việc mô tả và áp dụng các phương pháp trên những vấn đề cụ thể. Trong mỗi chương đều sẽ có phần thực hành sử dụng phần mềm thống kê R để minh họa cách triển khai các phương pháp kỹ thuật. Những phần thực hành này sẽ cung cấp cho bạn đọc những trải nghiệm thực tiễn có giá trị.</p>
+<p>Cuốn sách phù hợp với sinh viên đại học hoặc cao học các ngành kinh tế, khoa học quản lý, quản trị kinh doanh, thương mại, tài chính ngân hàng, bảo hiểm, v.v., muốn nâng cao hiểu biết và tăng cường kinh nghiệm về làm việc với dữ liệu. Cuốn sách có thể làm giáo trình hoặc sách tham khảo cho một môn học kéo dài trong hai học kỳ.</p>
+<p>Nội dung của cuốn sách bao gồm hầu hết những chủ đề quan trọng trong KHDL: thu thập dữ liệu, tiền xử lý, sắp xếp và biến đổi, trực quan hóa, và xây dựng mô hình trên dữ liệu. Các mô hình được trình bày trong cuốn sách bao gồm cả các mô hình đơn giản như hồi quy tuyến tính hay cây quyết định, và các mô hình phức tạp như mô hình tuyến tính tổng quát, mô hình cộng tính tổng quát, mô hình rừng ngẫu nhiên, học tăng cường hoặc mô hình mạng nơ-ron. Song song với việc trình bày và giải thích các mô hình, chúng tôi sẽ cung cấp các gói lệnh có sẵn để bạn đọc thực hành trên các dữ liệu cụ thể.</p>
+<p>Đây là phiên bản đầu tiên của cuốn sách nên không thể tránh được những sai sót. Chúng tôi hy vọng rằng sẽ nhận được sự góp ý của bạn đọc về nội dung của cuốn sách để chúng tôi có thể hoàn thiện trong các phiên bản tiếp theo.</p>
+<p>Xin chân thành cảm ơn các đồng nghiệp tại Khoa Toán Kinh tế nói riêng và Đại học Kinh tế Quốc dân nói chung đã đồng hành cùng với chúng tôi trong suốt quá trình hoàn thành cuốn sách này. Xin cảm ơn các thành viên của Actuarial Sciences Lab đã nỗ lực hết sức để cuốn sách này có thể đến tay người đọc trong thời gian ngắn nhất!</p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="50%">
+<col width="50%">
+</colgroup>
+<tbody><tr class="odd">
+<td></td>
+<td><span style="color: #640514; font-family: Lora;"><em><em>Gạo đem vào giã, bao đau đớn - Gạo giã xong rồi, trắng tựa bông - Sống ở trên đời, người cũng vậy - Gian nan rèn luyện mới thành công - Hồ Chí Minh.</em></em></span></td>
+</tr></tbody>
+</table></div>
+<!-- # REFERENCE --><!-- ### Source from thesis --><!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ --><!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ --><!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ --><!-- ### Souce from website --><!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ --><!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ --><!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ --><!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ --><!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->
+</div>
+
+
+
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="next"><a href="gi%E1%BB%9Bi-thi%E1%BB%87u-v%E1%BB%81-cu%E1%BB%91n-s%C3%A1ch.html"><span class="header-section-number">1</span> Giới thiệu về cuốn sách</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#l%E1%BB%9Di-n%C3%B3i-%C4%91%E1%BA%A7u">Lời nói đầu</a></li></ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD/blob/master/index.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD/edit/master/index.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
 
 </div>
-            </section>
+</div> <!-- .container -->
 
-          </div>
-        </div>
-      </div>
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Khoa Học Dữ Liệu trong Kinh tế và Kinh doanh</strong>" was written by Nguyễn Quang Huy. It was last built on 2024-08-02.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -304,7 +192,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

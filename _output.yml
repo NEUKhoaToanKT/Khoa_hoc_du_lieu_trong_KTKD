@@ -3,7 +3,38 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">A Minimal Book Example</a></li>
+        <li><a href="./">KHDL KT&KD</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
     download: ["pdf", "epub"]
+
+bookdown::bs4_book:
+  css: style.css
+  theme:
+    primary: "#770513"
+    base_font:
+      google:
+        family: Lora
+        wght: [400, 450]
+        ital: [0, 1]
+    heading_font:
+      google:
+        family: Lora
+        wght: 600
+    code_font:
+      google:
+        family: Source Code Pro
+        wght: [400, 450]
+        local: false
+  includes:
+      in_header: ["local_js.html"]
+  repo: https://github.com/NEUKhoaToanKT/Khoa_hoc_du_lieu_trong_KTKD
+
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
+  keep_tex: yes
+
+bookdown::epub_book: default

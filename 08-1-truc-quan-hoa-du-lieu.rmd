@@ -1,0 +1,2049 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+```{r, warning = FALSE, echo = FALSE, message = FALSE}
+library(readxl)
+library(knitr)
+library(kableExtra)
+library(ggplot2)
+library(forcats)
+library(grid)
+library(gridExtra)
+library(forcats)
+library(pryr)
+library(tibble)
+library(dplyr)
+library(dslabs)
+library(lubridate)
+library(tidyr)
+library(ggthemes)
+library(ggrepel)
+library(wesanderson)
+library(RColorBrewer)
+library(plotly)
+library(ggiraph)
+library(tidyverse)
+library(gganimate)
+library(gifski)
+library(colorspace)
+
+colorize_style <- function(x, color = "#640514", font = "Source Code Pro", style = NULL) {
+  apply_style = function(text, style) {
+    if (!is.null(style)) {
+      if (style == "bold") {
+        text = sprintf("\\textbf{%s}", text)
+      }else if (style == "it") {
+      text = sprintf("\\textit{%s}", text)
+      }else if (style == "under") {
+      text = sprintf("\\underline{%s}", text)
+      }
+    }
+    return(text)
+  }
+  if(knitr::is_latex_output()){
+    x = apply_style(x, style)
+    if (!is.null(font)) {
+      sprintf("\\textcolor{%s}{\\textsf{%s}{%s}}", color, font, x)
+    }else {
+      sprintf("\\textcolor{%s}{%s}", color, x)
+    }
+  }else if (knitr::is_html_output()){
+    if(!is.null(style)){
+      if(style == "bold"){
+        x = sprintf("<strong>%s</strong>", x)
+      }else if (style == "it"){
+        x = sprintf("<em>%s</em>", x)
+      }else if (style == "under"){
+        x = sprintf("<span style='text-decoration: underline;'>%s</span>", x)
+      }
+    }
+    if (!is.null(font)){
+    sprintf("<span style='color: %s; font-family: %s;'>%s</span>", color, font, x)
+    }else{
+    sprintf("<span style='color: %s;'>%s</span>", color, x)
+    }
+  }else{
+  x
+  }
+}
+
+Visual_Na<-function(df,variable){
+  # Tìm chỉ số của biến variable
+  ind<-names(df)==variable
+
+  # Tính tỷ lệ NA của từng biến theo từng nhóm
+  # Nhóm đươc xác định theo giá trị của variable
+  df1<-df%>%group_by(df[,ind])%>%
+    group_modify(~summarize(.x, across(everything(), function(x) sum(is.na(x))/length(x) ))) %>%
+    as.data.frame()%>%gather(variables,na_rate,-1)
+
+  # Đặt lại tên biến nhóm theo
+  names(df1)[1]<-"variable"
+
+  # Biểu diễn đồ thị
+  p<-df1%>%ggplot(aes(x = variable, y = variables, fill = na_rate))+
+    geom_tile(color = "grey30", height = 1, width = 1)+
+    scale_fill_gradient(low="white", high = "#640514",
+                        labels = scales::label_percent())+
+    theme_minimal()+ylab("")+xlab("")
+  return(p)
+}
+
+```
+
+
+# Trực quan hóa dữ liệu
+
+## Giới thiệu về trực quan hóa dữ liệu
+
+Trực quan hóa dữ liệu là nghệ thuật mô tả dữ liệu thông qua việc sử dụng đồ họa và hình ảnh như các biểu đồ, sơ đồ, hình vẽ, bao gồm cả hình ảnh động hoặc hình ảnh tương tác. Đây là phương pháp truyền đạt thông tin một cách trực quan và dễ hiểu từ người quản lý dữ liệu đến người tiếp nhận. Trực quan hóa giúp mô tả một cách hiệu quả các mối quan hệ dữ liệu phức tạp, các thông tin chuyên sâu, và các vấn đề bất thường ẩn chứa trong dữ liệu.
+
+Tại sao lại cần trực quan hóa dữ liệu? Thứ nhất, não bộ của con người phản ứng tốt hơn với hình ảnh, màu sắc, kích thước, hay khoảng cách so với các ký hiệu, chuỗi ký tự, hay các con số. Thứ hai, dữ liệu ngày càng trở nên lớn hơn và phức tạp hơn. Trực quan hóa là phương pháp hiệu quả nhất để tìm ra các giá trị ẩn chứa bên trong dữ liệu. Đây chính là nguyên nhân khiến kỹ năng trực quan hóa dữ liệu được đánh giá là kỹ năng quan trọng nhất đối với những người phân tích dữ liệu.
+
+Có nhiều công cụ để trực quan hóa dữ liệu một cách chuyên nghiệp. Tiêu biểu phải kể đến hai công cụ quen thuộc là Power BI và Tableau. Đây là hai công cụ thân thiện với người dùng, cho phép người dùng tạo bảng điều khiển và báo cáo tương tác một cách nhanh chóng và dễ dàng. Cả hai đều có giao diện kiểu kéo và thả con trỏ giúp dễ dàng tạo hình ảnh trực quan mà không cần bất kỳ kỹ năng lập trình nào.
+
+Khác với Power BI hay Tableau, R sử dụng thư viện `r colorize_style("ggplot2")` để trực quan hóa dữ liệu. Sẽ là không dễ dàng cho người mới bắt đầu vẽ được đồ thị bằng các câu lệnh của `r colorize_style("ggplot2")`. Điểm mạnh của thư viện `r colorize_style("ggplot2")` so với các công cụ như Power BI hay Tableau là cho phép người dùng tạo các hình ảnh có khả năng tùy biến cao. `r colorize_style("ggplot2")` là lựa chọn phù hợp dành cho các nhà phân tích dữ liệu, những người cảm thấy hứng thú với việc viết các câu lệnh để tạo ra các hình ảnh trực quan phức tạp, và quan trọng nhất là đúng theo ý muốn của mình. Với một chút kinh nghiệm về Power BI và Tableau, cùng với nhiều hơn một chút kinh nghiệm về `r colorize_style("ggplot2")`, chúng tôi cho rằng bạn đọc nên làm quen với cả hai cách trực quan hóa dữ liệu. Khi bạn phải tạo các báo cáo trực quan trong một thời gian ngắn, Power BI hay Tableau sẽ là lựa chọn tối ưu. Khi bạn muốn vẽ những hình ảnh phức tạp, có tính cá nhân cao, và bạn có thời gian để làm việc đó, hãy sử dụng R và thư viện `r colorize_style("ggplot2")`.
+
+## Tổng quan về thư viện ggplot2
+
+Như chúng tôi đã giới thiệu, `r colorize_style("ggplot2")` là một thư viện để trực quan hóa dữ liệu trong R. Ngoài `r colorize_style("ggplot2")`, bạn đọc cũng có thể sử dụng các đồ thị cơ bản của R hoặc các thư viện khác như`r colorize_style("lattice")` để vẽ đồ thị. Tuy nhiên, không giống như hầu hết các công cụ khác, `r colorize_style("ggplot2")` trực quan hóa dữ liệu dựa trên Ngữ pháp của đồ thị (Wilkinson 2005). Hai chữ gg trong ggplot2 có nghĩa là *"Grammar of Graphics"* - Ngữ pháp của đồ thị. Ngữ pháp này cho phép bạn đọc vẽ đồ thị bằng cách kết hợp các cấu phần độc lập lại với nhau. Đây chính là điểm mạnh của `r colorize_style("ggplot2")`. Thay vì bị giới hạn ở các bộ đồ thị đã được xác định trước, bạn đọc có thể tạo đồ thị mới phù hợp với mục tiêu của mình.
+
+Ý tưởng phải học ngữ pháp để vẽ đồ thị có thể làm bạn đọc cảm thấy nản chí, nhưng sự thật là ngữ pháp của `r colorize_style("ggplot2")` thực sự dễ học. Chỉ có một số nguyên tắc cốt lõi đơn giản và rất ít trường hợp đặc biệt. Khi đã thông thạo Ngữ pháp của đồ thị, ngoài việc tạo ra những đồ thị quen thuộc, bạn đọc còn có thể tạo ra những đồ thị mới hơn, đẹp hơn và mang tính cá nhân riêng. Bạn đọc có thể gặp khó khăn một chút ban đầu nhưng chúng tôi tin rằng khi đã quen với thư viện `r colorize_style("ggplot2")`, sẽ rất ít bạn đọc muốn quay lại với các công cụ trực quan hóa dữ liệu khác.
+
+Chúng ta hãy thử xem một ví dụ để hình dung về cách thư viện `r colorize_style("ggplot2")` trực quan hóa dữ liệu. Chúng ta sẽ bắt đầu với một dữ liệu có tên là `r colorize_style("murders")` trong thư viện `r colorize_style("dslabs")`. Đây là dữ liệu do FBI cung cấp về số vụ sát nhân bằng súng tại các bang của Mỹ vào năm 2010. Giả sử bạn muốn du lịch đến Mỹ nhưng lo ngại về việc cho phép sử dụng súng ở quốc gia này và muốn biết ở những bang nào có tỷ lệ số vụ sát nhân bằng súng cao. Chúng ta sẽ bắt đầu bằng việc tìm hiểu thông tin sơ bộ về dữ liệu này. Nếu bạn đã quen với đối tượng kiểu *data.frame* trong R, bạn cũng sẽ quen với các câu lệnh giúp tìm hiểu dữ liệu như `r colorize_style("head()")`, `r colorize_style("str()")`, `r colorize_style("view()")`:
+
+```{r, warning=FALSE, message=FALSE}
+library(dslabs)
+head(murders)
+# str(murders)
+# View(murders)
+```
+
+Dù dữ liệu chỉ có hơn 51 dòng và 5 cột nhưng thật khó để có thể có được cái nhìn tổng thể về dữ liệu nếu chỉ nhìn vào các bảng, các con số, các véc-tơ kiểu chuỗi ký tự như trên. Thay vì trình bày dữ liệu dưới dạng con số hay ký tự, bạn đọc có thể mô tả dữ liệu `r colorize_style("murders")` dưới dạng một đồ thị phân tán như Hình \@ref(fig:fgggplot01), thì hiệu quả sẽ cao hơn rất nhiều.
+
+```{r fgggplot01, warning=FALSE, message=FALSE, echo = FALSE, fig.cap = "Số vụ sát nhân bằng súng tại 51 bang của Mỹ vào năm 2010. Có mối liên hệ cùng chiều giữa dân số của các bang và số vụ sát nhân bằng súng tại mỗi bang.", fig.align='center', fig.retina = 5}
+dat<-murders
+dat$region <- ifelse(dat$region == "Northeast", "Đông Bắc",
+                     ifelse(dat$region == "South", "Phía Nam",
+                            ifelse(dat$region == "North Central", "Trung tâm phía Bắc",
+                                   "Miền Tây")))
+dat %>% ggplot(aes(x = population/10^6, y = total, label = abb)) +
+  geom_smooth(method = "lm", se = FALSE, linetype = 2, size = 0.7, color="grey30")+
+  geom_point(aes(fill=region), size = 3, shape=21, alpha = 0.8) +
+  geom_text_repel(color = "#640514", size = 3) +
+  scale_x_log10() +
+  scale_y_log10() +
+  scale_fill_brewer(palette = "Dark2",
+                    guide = guide_legend(title = "Vùng"))+
+  xlab("Dân số của bang (triệu dân)") +
+  ylab("Tổng số vụ sát nhân bằng súng") +
+  ggtitle("Số vụ sát nhân bằng súng trong năm 2010 tại Mỹ")+
+  theme_minimal()+
+  theme(legend.position = "top")
+```
+
+Chúng tôi đã sử dụng một vài kỹ thuật biến đổi dữ liệu kết hợp với kỹ thuật trực quan hóa để vẽ đồ thị ở trên:
+
+* Biến tổng số vụ sát nhân (`r colorize_style("total")`) và biến dân số của mỗi bang (`r colorize_style("population")`) đều có đuôi dài sang phía bên phải, nghĩa là có nhiều điểm tập trung ở khu vực trung tâm, và một số ít điểm tập trung ở phía đuôi bên phải. Nếu sử dụng chính xác giá trị của các biến này trên đồ thị, các điểm của đồ thị phân tán sẽ phân bố không đồng đều. Để hiển thị các điểm một cách rõ ràng hơn, giá trị hiển thị trên đồ thị đã được điều chính lại theo hàm `r colorize_style("log()")` cơ số 10. Điều này giải thích tại sao bạn đọc thấy rằng trên trục *y* khoảng cách từ 10 (vụ sát nhân) đến 100 (vụ sát nhân) sẽ bằng khoảng cách từ 100 (vụ sát nhân) đến 1000 (vụ sát nhân), hay trên trục *x* khoảng cách từ 1 (triệu người) đến 3 (triệu người) tương đương với khoảng cách từ 3 (triệu người) đến 10 (triệu người)
+* Chúng tôi thêm vào một đường thẳng tuyến tính đi qua trung tâm các điểm để mô tả mối quan hệ chung giữa hai biến `r colorize_style("total")` và `r colorize_style("population")`. Đường thẳng có độ dốc dương cho thấy mối quan hệ cùng chiều giữa biến. Điều này có thể giải thích là ở các bang có dân số càng đông thì tổng số vụ sát nhân bằng súng càng cao.
+* Để bạn đọc dễ dàng phân biệt một bang thuộc vào vùng (`r colorize_style("region")`) nào, chúng tôi sử dụng các màu sắc khác nhau hiển thị cho một vùng.
+* Mỗi bang được ghi chú bằng tên viết tắt của bang đó.
+
+Dựa trên đồ thị phân tán ở trên, bạn đọc có thể đưa ra được các nhận xét như sau
+
+* Bang có dân số càng cao thì số vụ sát nhân bằng súng càng nhiều.
+* Hầu hết các bang nằm phía trên đường trung bình là các bang ở miền Nam.
+* Các vùng còn lại không có sự phân biệt rõ ràng về tỷ lệ số vụ sát nhân bằng súng.
+* Bang *District of Columbia* là bang nằm cao hơn hẳn so với đường trung bình, và cũng là bang có tỷ lệ số vụ sát nhân bằng súng cao nhất.
+* Bang *California* có tổng số vụ sát nhân bằng súng lớn nhất, nhưng tỷ lệ số vụ sát nhân bằng súng trên đầu người chỉ bằng mức trung bình chung.
+
+Rõ ràng là không dễ dàng để đưa ra được các nhận xét như trên nếu chỉ dựa trên quan sát con số và dữ liệu. Thay vào đó chúng ta có thể đưa ra nhiều phân tích có ý nghĩa về dữ liệu khi sử dụng đồ thị như Hình \@ref(fig:fgggplot01).
+
+Wilkinson (2005) giới thiệu khái niệm Ngữ pháp đồ thị để mô tả các thành phần cơ bản làm nền tảng cho tất cả các đồ thị và cách thức các thành phần đó tương tác với nhau khi mô tả một dữ liệu. Ngữ pháp đồ thị là mô tả chính xác nhất cho câu hỏi đồ thị trực quan hóa dữ liệu là gì? Thư viện `r colorize_style("ggplot2")` được Wickham giới thiệu vào năm 2009 và được xây dựng dựa trên Ngữ pháp đồ thị mà Wilkinson đã đề cập.
+
+Ngữ pháp đồ thị, theo Wickham (2009), là các quy tắc cho tương ứng các biến của dữ liệu đến các thuộc tính thẩm mỹ, được gọi là các *aesthetic attributions*, của các đối tượng hình ảnh, được gọi là các *geometries*, xuất hiện trên đồ thị. Đồ thị được trực quan bằng thư viện `r colorize_style("ggplot2")` cũng có thể bao gồm hình ảnh mô tả các mô hình thống kê của dữ liệu và được mô tả trên một hệ tọa độ cụ thể. Ngoài ra, khi dữ liệu muốn hiển thị quá phức tạp, bạn đọc cũng có thể chia dữ liệu thành các tập hợp con dựa trên các biến rời rạc và mô tả dữ liệu thông qua một nhóm các đồ thị con dựa trên kỹ thuật *facetting*. Sự kết hợp của các thành phần độc lập kể trên tạo nên một đồ thị trực quan mô tả dữ liệu.
+
+Bạn đọc không cần phải lo lắng nếu khái niệm Ngữ pháp đồ thị chúng tôi vừa giải thích ở trên không có ý nghĩa ngay lập tức. Trong phần sau của cuốn sách, chúng tôi sẽ nói về ngữ pháp đồ thị một cách chi tiết hơn. Bạn sẽ có nhiều cơ hội hơn để tìm hiểu về Ngữ pháp và các sử dụng ngữ pháp để kết hợp các cấu phần độc lập của một đồ thị hoạt động cùng nhau. Trong phần giới thiệu này, chúng tôi muốn bạn đọc hãy ghi nhớ **bảy** thành phần độc lập tạo nên một đồ thị cơ bản trong thư viện `r colorize_style("ggplot2")`:
+
+1. Dữ liệu (*Data*) là dữ liệu hay tập hợp các dữ liệu mà bạn đọc muốn trực quan hóa. Thông thường thì chỉ có một dữ liệu chính mà bạn đọc muốn minh họa cho người tiếp nhận dữ liệu, trong khi các dữ liệu khác được sử dụng với mục đích để mô tả và minh họa cho dữ liệu chính. Các dữ liệu được sử dụng để minh họa dữ liệu chính thường được gọi là các *meta data*. Một ví dụ điển hình của dữ liệu minh họa là dữ liệu kiểu bản đồ. Chẳng hạn như khi bạn đọc muốn mô tả về dữ liệu `r colorize_style("murders")` ở trên, bạn đọc có thể sử dụng dữ liệu về bản đồ nước Mỹ để có mô tả tốt hơn. Chúng ta sẽ thảo luận về dữ liệu kiểu bản đồ trong phần sau của chương.
+
+2. Hình dạng đồ họa, được gọi là các *geometries* hay viết tắt là các *geoms*, là những hình dạng đồ họa mà chúng ta muốn nhìn thấy trên đồ thị. Các hình dạng này có thể là các điểm, các thanh, các đường.
+
+3. Các ánh xạ thẩm mỹ, được gọi là các *aesthetic mapping*, là các quy tắc cho tương ứng từ các biến (hay các cột của dữ liệu) đến các thuộc tính thẩm mỹ của các hình dạng đồ họa. Các thuộc tính thẩm mỹ có thể là hình dạng, màu sắc, độ đậm nhạt.
+
+4. Các mô hình hay biến đổi thống kê, được gọi là các *statistics* hay viết tắt là *stats* là các quy tắc tóm tắt dữ liệu để làm nổi bật các xu thế và hiển thị các giá trị ẩn trong dữ liệu. Các mô hình xây dựng trên dữ liệu được mô tả dưới dạng một hình dạng đồ họa nhằm tăng tính dễ hiểu cho đồ thị và giúp cho người tiếp nhận nhanh chóng tiếp nhận thông tin. Ví dụ như trong đồ thị phân tán mô tả dữ liệu `r colorize_style("murders")`, chúng tôi đã sử dụng một mô hình tuyến tính nhằm mô tả mối quan hệ giữa biến `r colorize_style("total")` và biến `r colorize_style("population")` với mục đích cho thấy mối liên hệ cùng chiều giữa hai biến này, đồng thời cho bạn đọc biết được các bang nào có tỷ lệ số vụ sát nhân bằng súng thấp hơn trung bình và các bang nào có tỷ lệ số vụ sát nhân bằng súng cao hơn so với mức trung bình chung.
+
+5. Hệ tọa độ, hay *Cordinate* mô tả cách dữ liệu được trực quan hóa trên mặt phẳng của đồ họa. Đa số các trường hợp chúng ta sẽ sử dụng hệ tọa độ Descartes, nhưng cũng có một số hệ tọa độ khác có thể sử dụng bao gồm tọa độ cực và bản đồ.
+
+6. Một thành phần mô tả cách dữ liệu được hiển thị là chia nhỏ dữ liệu để mô tả bằng một nhóm các đồ thị thay vì một đồ thị duy nhất được gọi là *facetting*. Thành phần này thường được sử dụng để mô tả khi dữ liệu có kích thước lớn và hoặc chúng ta muốn so sánh trực quan dữ liệu ở các nhóm khác nhau.
+
+7. Thành phần cuối cùng của đồ thị là ngữ cảnh của đồ thị, còn được gọi là các *themes*. Theme quy định khung hoặc nền mà đồ thị được hiển thị, chẳng hạn như kích thước phông chữ hoặc màu nền. Mặc dù các giá trị mặc định trong thư viện `r colorize_style("ggplot2")` đã được lựa chọn hợp lý nhưng bạn đọc cũng có thể cần tham khảo các tài liệu tham khảo khác để tạo ra một ngữ cảnh phù hợp hơn cho đồ thị của mình.
+
+Mỗi khi vẽ một đồ thị sử dụng `r colorize_style("ggplot2")`, bạn đọc cần tự định nghĩa ít nhất **ba** thành phần: 1. Dữ liệu; 2. Các hình dạng đồ họa; và 3. Các ánh xạ thẩm mỹ. Các thành phần 5. Hệ tọa độ; và 7. Ngữ cảnh; sẽ được tự động gán cho các giá trị mặc định nếu bạn đọc không quy định trong câu lệnh. Và các thành phần 4. Mô hình; và 6. Facetting; chỉ xuất hiện khi bạn đọc gọi lên.
+
+Trước khi đi vào nội dung chi tiết về cách tạo nên một đồ thị, bạn đọc cũng cần biết được các hạn chế khi trực quan hóa dữ liệu bằng `r colorize_style("ggplot2")` như sau
+
+* `r colorize_style("ggplot2")` là một thư viện của R nên bạn đọc cần có kỹ năng viết câu lệnh R tương đối thành thạo.
+* Thư viện `r colorize_style("ggplot2")` không gợi ý bạn đọc nên sử dụng đồ thị nào khi gặp một dữ liệu cụ thể. Điều đó cũng có nghĩa là bạn đọc cần có một chút kinh nghiệm về trực quan hóa dữ liệu trước khi sử dụng thư viện này.
+* Thư viện `r colorize_style("ggplot2")` không được phát triển để vẽ các đồ thị động hay đồ thị tương tác mà chỉ tập trung vào vẽ các đồ thị tĩnh. Muốn vẽ các đồ thị tương tác hay đồ thị động, bạn đọc phải sử dụng các thư viện đi kèm như `r colorize_style("gganimate")` hay `r colorize_style("ggplotly")`.
+
+Để kết thúc phần giới thiệu, chúng tôi sẽ sử dụng thư viện `r colorize_style("ggplot2")` kết hợp với thư viện vẽ hình ảnh động `r colorize_style("gganimate")`, để kể một câu chuyện về sự phát triển về sự tiến bộ y tế của các quốc gia trên thế giới trong khoảng thời gian từ năm 1960 đến năm 2010, thông qua hai khía cạnh là tuổi thọ trung bình của các quốc gia và tỷ lệ tử vong trung bình tính trên mỗi 1000 trẻ sơ sinh. Dữ liệu chính được sử dụng là dữ liệu `r colorize_style("gapminder")` trong thư viện `r colorize_style("dslabs")` mà bạn đọc đã làm quen trong phần phân tích dữ liệu. Sự thay đổi của tuối thọ trung bình (`r colorize_style("life_expectancy")`) và tỷ lệ trẻ sơ sinh tử vong (`r colorize_style("infant_mortality")`) của các quốc gia trên thế giới được mô tả lại một cách sinh động qua Hình \@ref(fig:fgggplot02)
+
+```{r, warning=FALSE, message=FALSE, echo = FALSE}
+library(imputeTS)
+dat<-gapminder
+list_country<-unique(dat$country)
+for (ct in list_country){
+  ind<-(dat$country == ct)
+  if (sum(!is.na(dat$infant_mortality[ind]))>=2){
+    dat$infant_mortality[ind] <- na.interpolation(dat$infant_mortality[ind])
+  }
+}
+dat$continent<-as.character(dat$continent)
+dat$continent[dat$continent == "Africa"]<-"Châu Phi"
+dat$continent[dat$continent == "Asia"]<-"Châu Á"
+dat$continent[dat$continent == "Europe"]<-"Châu Âu"
+dat$continent[dat$continent == "Americas"]<-"Châu Mỹ"
+dat$continent[dat$continent == "Oceania"]<-"Châu Đại Dương"
+dat$continent<-as.factor(dat$continent)
+
+
+```
+
+```{r fgggplot02, warning = FALSE, message = FALSE, echo = FALSE, fig.align='center', fig.retina = 1.4, fig.cap = "Sự thay đổi trong tỷ lệ tử vong trẻ sơ sinh, tính trên 1000 trẻ, và tuổi thọ trung bình của cá quốc gia trên thế giới từ năm 1960 đến năm 2010"}
+
+k<-0.8
+p<-dat%>%
+  # FIX DU LIEU
+  filter(year<=2011)%>%
+  # AESTHETIC MAPPING
+  ggplot(aes(y=life_expectancy,x=infant_mortality,size = population, fill= continent), color = "white")+
+  # TAO DO THI SCATTERPLOT
+  geom_point(shape=21, alpha = 0.4)+
+  # THAY DOI TITLE CUA DO THI, TRUC X, TRUC Y
+  labs(title = 'Năm: {as.integer(frame_time)}',
+       y = "Tuổi thọ trung bình",
+       x = "Tỷ lệ tử vong trên 1000 trẻ sơ sinh")+
+  #GIOI HAN LAI GIA TRI TREN X,Y
+
+  #xlim(0,10)+ylim(20,90)+
+  # SCALE LAI SIZE (POPULATION)
+  scale_size(range = c(1, 13),
+             guide = guide_legend(title = "Dân số",title.position = "top",
+                                  )) +
+  # SCALE LAI MAU SAC THE0 DAI MAU "SET1" CUA BREWER
+  scale_fill_brewer(palette = "Set1",
+                    guide = guide_legend(title = "Lục địa",title.position = "top",
+                                         override.aes = list(size = 3)))+
+  # LAM TITLE THAY DOI THEO NAM
+  transition_time(year)+
+
+  # theme
+  theme_minimal()+
+
+  #SIZE & FONT CHU
+  theme(plot.title = element_text(size = 10*k),
+        axis.title.x = element_text(size = 10*k),
+        axis.title.y = element_text(size = 10*k),
+        axis.text.x = element_text(size = 10*k),
+        axis.text.y = element_text(size = 10*k),
+        legend.text = element_text(size = 10*k,
+                                   margin = margin(r = 10*k, unit = "pt")),
+        legend.title = element_text(size = 10*k),
+        #    legend.text=element_text(size=20*2),
+  )
+
+#legend.key.size = element_rect(size = rel(1.5)),
+
+# TAO DO THI DANG DONG
+
+animate(p, height = 3.5 , width = 5, units = "in", res = 500)
+```
+
+Dựa trên đồ thị ở trên, bạn đọc có thể suy nghĩ về các câu hỏi dưới đây:
+
+1. Xu hướng di chuyển chung của các điểm dữ liệu là như thế nào ? Điều này cho biết tỷ lệ tử vong của trẻ sơ sinh và tuổi thọ bình quân của các quốc gia trên thế giới từ năm 1960 đến năm 2010 thay đổi như thế nào ? Điều này cho thấy việc phát triển về y tế nhìn chung là như thế nào ?
+
+2. Trong xu thế phát triển chung đó, sự khác biệt của các Châu lục là như thế nào ?
+
+3. Kích thước của các điểm trong đồ thị phân tán cho biết dân số quốc gia đó, bạn có nhận thấy sự thay đổi của kích thước của các điểm theo thời gian là như thế nào không ? Bạn có nhận ra các quốc gia đông dân như Trung Quốc, Ấn Độ, Mỹ, Nhật Bản từ đồ thị trên hay không ?
+
+4. Một vài quốc gia Châu Phi có quỹ đạo di chuyển bất thường khi điểm dữ liệu bị "rơi" xuống theo trục $\overrightarrow{Oy}$ trong một vài năm, theo bạn đó là do nguyên nhân gì ?
+
+## Tạo một đồ thị cơ bản
+Trước khi giới thiệu chi tiết về các thành phần độc lập của đồ thị trực quan và cách sử dụng ngữ pháp của đồ thị, chúng tôi cho rằng sẽ tốt hơn nếu bạn đọc bắt đầu vẽ các đồ thị đơn giản bằng cách sao chép và dán các câu lệnh vẽ đồ thị. Sau khi thực thi một vài lần, bạn đọc sẽ có cảm nhận được một phần cách mà một đồ thị của thư viện `r colorize_style("ggplot2")` được xây dựng. Dữ liệu chúng tôi sử dụng để trực quan hóa trong suốt chương sách này là dữ liệu `r colorize_style("gapminder")` - dữ liệu mô tả về sức khỏe và thu nhập của tất cả các quốc gia trên thế giới bắt đầu từ năm 1960 đến năm 2016. Hình \@ref(fig:fgggplot03) mô tả tỷ lệ biến không dữ liệu không quan sát được của các biến qua các năm
+
+```{r fgggplot03, warning=FALSE, message=FALSE, echo = FALSE, fig.align='center', fig.retina=5, fig.cap = "Tỷ lệ giá trị không quan sát được của các biến trong dữ liệu gapminder theo năm bắt đầu từ 1960 đến 2016"}
+Visual_Na(gapminder,"year")
+```
+
+Bạn đọc có thể thấy rằng dữ liệu `r colorize_style("gapminder")` có nhiều giá trị không quan sát được trong năm 2016. Hai cột có tỷ lệ không quan sát được qua các năm lớn là `r colorize_style("infant_mortality")` và `r colorize_style("gdp")`. Riêng biến `r colorize_style("gdp")` là gần như không quan sát được từ năm 2012 đến 2016. Do chỉ sử dụng dữ liệu với mục đích trực quan hóa nên chúng tôi sẽ xử lý việc dữ liệu không quan sát được này một cách đơn giản là xóa các quan sát của các năm 2012 đến 2016. Các giá trị không quan sát được từ năm 1960 đến 2011 sẽ được thay thế bằng cách nội suy tuyến tính theo chuỗi thời gian. Thư viện để nội suy tuyến tính các giá trị không quan sát được theo chuỗi thời gian là thư viện `r colorize_style("imputeTS")`.
+
+```{r, warning=FALSE, message=FALSE}
+library(imputeTS) # Thư viện dùng để nội suy tuyến tính
+mydat<-gapminder%>%filter(year<=2011)
+list_country<-unique(mydat$country)
+for (ct in list_country){
+  ind<-(mydat$country == ct)
+  if (sum(!is.na(mydat$infant_mortality[ind]))>=2){
+    mydat$infant_mortality[ind]<-na.interpolation(mydat$infant_mortality[ind])
+  }
+  if (sum(!is.na(mydat$gdp[ind]))>=2){
+    mydat$gdp[ind] <- na.interpolation(mydat$gdp[ind])
+  }
+}
+```
+
+<!-- Hàm số sử dụng vẽ đồ thị thư viện `r colorize_style("ggplot2")` là hàm `r colorize_style("ggplot()")`. Như chúng tôi đã trình bày ở trên, ba thành phần bắt buộc phải có của một đồ thị là 1. Dữ liệu; 2. Ít nhất một hình dạng đồ họa; và 3. Ánh xạ thẩm mỹ. Đồ thị dưới đây mô tả hai biến gdp bình quân đầu người và tuổi thọ trung bình của các quốc gia trên thế giới vào năm 2011. Bạn đọc có thể sao chép các câu lệnh ở dưới vào cửa sổ Script và sau đó thực thi giống như các câu lệnh thông thường -->
+```{r fgggplot04, warning=FALSE, message=FALSE, fig.cap = "Thu nhập bình quân đầu người và tuổi thọ trung bình của các quốc gia trên thế giới năm 2011", fig.align='center', fig.retina=5}
+# Biến đổi dữ liệu
+dat<-mydat%>%filter(year==2011)%>%
+  mutate(gdp_per_capita = gdp/population)
+
+# Trực quan hóa
+ggplot(dat, aes(x = life_expectancy, y = gdp_per_capita)) +
+  geom_point()
+```
+
+Khi sử dụng hàm `r colorize_style("ggplot()")` ở trên, dữ liệu được đưa vào có tên là `r colorize_style("dat")` - dữ liệu được biến đổi từ dữ liệu `r colorize_style("gapminder")` bằng cách thêm vào cột thu nhâp bình quân đầu người (`r colorize_style("gdp_per_capita")`) và sau đó lọc theo năm 2011. Hình dạng đồ họa là các điểm trên trục tọa độ Descartes. Hình dạng đồ họa này được gọi bằng hàm `r colorize_style("geom_point()")`. Ánh xạ thẩm mỹ được khai báo thông qua hàm `r colorize_style("aes()")` nằm trong hàm `r colorize_style("ggplot()")`. Bên trong hàm `r colorize_style("aes()")`, chúng ta đã cho tương ứng (ánh xạ) biến `r colorize_style("life_expectancy")` với giá trị trên trục $\overrightarrow{Ox}$ và biến `r colorize_style("gdp_per_capita")` tương ứng (ánh xạ) với giá trị trên trục $\overrightarrow{Oy}$ của trục tọa độ Descartes.
+
+Mặc dù đồ thị trên Hình \@ref(fig:fgggplot04) còn đơn giản, nhưng chúng ta đã có thể nhận thấy được một số thông tin về tuổi thọ trung bình, thu nhập bình quân đầu người, và mối liên hệ giữa hai biến này:
+
+* Có mối liên hệ đồng biến giữa tuổi thọ trung bình và thu nhập bình quân đầu người. Quốc gia nào có thu nhập bình quân đầu người cao thì tuổi thọ trung bình cũng sẽ cao. Điều này khá hợp lý bởi các quốc gia có thu nhập trung bình cao thường là các nước phát triển có hệ thống chăm sóc sức khỏe tốt, do đó tuổi thọ trung bình cũng sẽ cao.
+* Mối liên hệ đồng biến nhưng không tuyến tính, thu nhập bình quân đầu người tăng nhanh hơn rất nhiều ro với tuổi thọ trung bình.
+* Có một vài điểm có khả năng là ngoại lai trong mối liên hệ đồng biến này. Nghĩa là có các quốc gia có mức thu nhập bình quân khá cao (từ 10 nghìn USD - 20 nghìn USD/1 người) nhưng lại có tuổi thọ trung bình không cao. Tuy nhiên chỉ với các thông tin như trên chúng ta không thể đưa ra giải thích cho các giá trị này.
+
+Hình dạng đồ họa là những hình dạng cụ thể mà bạn đọc nhìn thấy trên đồ thị, chẳng hạn như các điểm, các đường, thanh, hay các khối hình khác. Khi gọi các hình dạng đồ họa, thư viện `r colorize_style("ggplot2")` luôn luôn sử dụng các hàm số bắt đầu bởi *geom* là viết tắt của từ *geometries*. Để làm quen với các khối hình khác trong `r colorize_style("ggplot2")`, bạn đọc có thể thử các câu lệnh để vẽ các khối hình khác như dưới đây:
+```{r, warning=FALSE, message=FALSE, eval = FALSE}
+## geom_histogram() sử dụng các thanh
+## mô tả phân phối của một biến liên tục
+ggplot(dat,aes(x = gdp_per_capita))+
+  geom_histogram()
+
+## geom_bar() sử dụng các thanh
+## mô tả phân phối của một biến rời rạc
+ggplot(dat,aes(x = continent))+
+  geom_bar()
+
+## geom_boxplot() sử dụng các hình hộp
+## mô tả phân phối của biến liên tục
+ggplot(dat,aes(x = continent, y = life_expectancy))+
+  geom_boxplot()
+
+## geom_line() sử dụng đường nối các điểm
+## mô tả các điểm theo thứ tự xuất hiện
+dat1<-filter(gapminder, year<=2011, country == "United States")%>%
+  select(year,gdp)
+ggplot(dat1,aes(x = year, y = gdp))+
+  geom_line()
+```
+
+Còn nhiều hàm `r colorize_style("geom_*()")` khác có thể được sử dụng để trực quan hóa dữ liệu. Bạn đọc có thể tham khảo danh sách các hàm `r colorize_style("geom_*()")` thường sử dụng trong link dưới đây.
+
+https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf
+
+Bạn đọc có thể thấy rằng trong danh sách các hàm `r colorize_style("geom_*()")` có thể sử dụng bao gồm cả gợi ý cho người sử dụng nên dùng hàm `r colorize_style("geom_*()")` nào trong từng trường hợp. Chẳng hạn như `r colorize_style("geom_point()")` được gợi ý sử dụng khi mô tả đông thời hai biến liên tục, hoặc `r colorize_style("geom_boxplot()")` được gợi ý khi mô tả đồng thời một biến liên tục và một biến rời rạc. Ngoài ra, bên cạnh gợi ý sử dụng, mỗi hàm `r colorize_style("geom_*()")` sẽ có đi kèm với một danh sách các thuộc tính thẩm mỹ đi kèm. Ví dụ, khi sử dụng hàm `r colorize_style("geom_point()")` sẽ có các thuộc tính thẩm mỹ bao gồm `r colorize_style("x")`, `r colorize_style("y")`, `r colorize_style("alpha")`, `r colorize_style("color")`, `r colorize_style("fill")`, `r colorize_style("shape")`, `r colorize_style("size")`, và `r colorize_style("stroke")`. Bạn đọc cần tham khảo hướng dẫn sử dụng của hàm `r colorize_style("geom_point()")` (câu lệnh `r colorize_style("? geom_point")`) để biết các thuộc tính thẩm mỹ này có ý nghĩa như thế nào. Trong các thuộc tính thẩm mỹ được sử dụng với `r colorize_style("geom_point()")`, các thuộc tính thẩm mỹ `r colorize_style("color")`, `r colorize_style("fill")`, `r colorize_style("shape")`, và `r colorize_style("size")` là các thuộc tính thẩm mỹ xuất hiện ở nhiều hàm `r colorize_style("geom_*()")` khác. Đây là các thuộc tính thẩm mỹ thường xuyên được sử dụng để tăng khả năng mô tả dữ liệu của các đồ thị `r colorize_style("ggplot2")`.
+
+Chúng ta tiếp tục với ví dụ về mô tả trực quan mối liên hệ giữa thu nhập bình quân đầu người và tuổi thọ trung bình của các quốc gia trên thế giới vào năm 2011. Để đồ thị giải thích tốt hơn, chúng ta cần đưa thêm thông tin vào đồ thị trong Hình \@ref(fig:fgggplot04). Một phương pháp đơn giản để thêm biến khác vào một đồ thị là ánh xạ biến đó đến một trong các thuộc tính thẩm mỹ của đồ thị được vẽ bằng hàm `r colorize_style("geom_point()")`. Biến được thêm vào đồ thị trong Hình \@ref(fig:fgggplot05) là biến `r colorize_style("continent")`. Chúng ta sẽ ánh xạ biến này đến thuộc tính thẩm mỹ `r colorize_style("color")` như sau
+
+```{r fgggplot05, warning=FALSE, message=FALSE, fig.align='center', fig.retina = 5,  fig.cap="Thu nhập bình quân đầu người và tuổi thọ trung bình của các quốc gia trên thế giới năm 2011. Biến continent được ánh xạ đến thuộc tính thẩm mỹ màu sắc của các điểm"}
+# Vẽ đồ thị phân tán, ánh xạ biến continent đến màu sắc
+ggplot(dat, aes(x=life_expectancy, y=gdp_per_capita,
+                color=continent))+
+  geom_point()
+```
+
+Bằng cách thêm biến `r colorize_style("continent")` vào đồ thị và ánh xạ đến thuộc tính thẩm mỹ màu sắc, chúng ta đã có thể đưa ra thêm các phân tích về mối liên hệ giữa tuổi thọ trung bình và thu nhập bình quân đầu người của các quốc gia trên thế giới vào năm 2011:
+
+* Có sự phân bố không đồng đều về thu nhập bình quân và tuổi thọ trung bình của các quốc gia trên thế giới theo châu lục. Đa số các quốc gia Châu Phi có thu nhập bình quân đầu người thấp và tuổi thọ trung bình thấp trong khi các quốc gia Châu Âu có thu nhập bình quân đầu người cao và tuổi thọ trung bình cao.
+* Có sự phân hóa rõ ràng ở Châu Đại Dương và Châu Mỹ, một vài quốc gia nằm trong nhóm các nước có thu nhập cao, tuổi thọ trung bình cao trong khi đa số các quốc gia còn lại nằm trong nhóm thu nhập thấp và tuổi thọ trung bình thấp. Sự phân hóa ở các nước Châu Á không quá rõ ràng.
+* Các nước có mối liên hệ giữa thu nhập bình quân và tuổi thọ trung bình ít giống như các nước khác là các quốc gia ở Châu Phi và Châu Mỹ.
+
+Có một số nguyên tắc chung, tuy không bắt buộc, nhưng khuyến khích khi sử dụng các thuộc tính thẩm mỹ như sau
+
+* Thuộc tính thẩm mỹ `r colorize_style("color")` thường được sử dụng với biến kiểu rời rạc.
+* Thuộc tính thẩm mỹ `r colorize_style("size")` thường được sử dụng với biến liên tục.
+* Thuộc tính thẩm mỹ `r colorize_style("shape")` chỉ có thể được sử dụng với biến rời rạc, R sẽ báo lỗi nếu bạn ánh xạ một biến liên tục vào thuộc tính thẩm mỹ này. Có tổng số 21 giá trị khác nhau cho thuộc tính thẩm mỹ `r colorize_style("shape")` và R sẽ đưa ra cảnh báo nếu bạn đọc ánh xạ một biến rời rạc có nhiều hơn 21 giá trị.
+
+Đồ thị trong hình \@ref(fig:fgggplot06) thêm biến `r colorize_style("population")` từ dữ liệu vào đồ thị bằng cách sử dụng thuộc tính thẩm mỹ `r colorize_style("size")`. Bạn đọc hãy luôn nhớ rằng khai báo ánh xạ thẩm mỹ từ một biến dữ liệu đến một thuộc tính thẩm mỹ luôn luôn phải thực hiện bên trong hàm `r colorize_style("aes()")`,
+
+```{r fgggplot06, warning=FALSE, message=FALSE, fig.align= 'center', fig.retina=5,  fig.cap= "Thu nhập bình quân đầu người và tuổi thọ trung bình của các quốc gia trên thế giới năm 2011. Biến continent ánh xạ đến thuộc tính thẩm mỹ màu sắc của các điểm và biến population ánh xạ đến thuộc tính thẩm mỹ kích thước" }
+# Vẽ đồ thị phân tán, ánh xạ biến continent đến màu sắc
+# ánh xạ population đến kích thước
+ggplot(dat, aes(x = life_expectancy, y = gdp_per_capita,
+                color = continent, size = population)) +
+  geom_point(alpha = 0.5)
+```
+
+Thuộc tính thẩm mỹ `r colorize_style("alpha")` sử dụng trong hàm `r colorize_style("geom_point()")` được nhận giá trị cố định là 0.5 và có thể hiểu là một phép thiết lập tham số cố định. Chúng ta sẽ phân biết về thiết lập tham số và xạ thẩm mỹ trong phần sau. Tham số `r colorize_style("alpha")` được sử dụng trong trường hợp dữ liệu có nhiều điểm bị trùng lên nhau; `r colorize_style("alpha")` nhận giá trị từ 0 đến 1 cho biết độ trong suốt của các điểm tăng dần. Khi đồ thị có quá nhiều điểm, để quan sát được dễ dàng hơn chúng ta có thể thiết lập cho tham số `r colorize_style("alpha")` nhận giá trị nhỏ hơn 1 để cho phép chúng ta quan sát được nhiều hơn các điểm trên đồ thị phân tán. Lưu ý rằng `r colorize_style("alpha")` cũng có thể được sử dụng trong hàm `r colorize_style("aes()")` như một thuộc tính thẩm mỹ. Chúng ta sẽ thảo luận chi tiết hơn về thuộc tính thẩm mỹ này trong phần sau của chương sách.
+
+Bạn đọc có thể thấy rằng khi thêm biến `r colorize_style("population")` bằng cách ánh xạ đến thuộc tính kích thước các điểm như Hình \@ref(fig:fgggplot06) đã giúp cho đồ thị có thêm thông tin:
+
+* Chúng ta có thể nhận ra vị trí của các quốc gia đông dân tiêu biểu như Trung Quốc và Ấn Độ vào năm 2011, có thể nhận thấy hai quốc gia này vẫn nằm trong nhóm các nước có thu nhập bình quân đầu người thấp;
+* Cũng có thể nhận ra Mỹ và Nhật Bản là các quốc gia nằm ở góc trên bên phải là các nước cũng có dân số tương đối lớn so với các quốc gia khác. Tất nhiên, so với thuộc tính thẩm mỹ màu sắc thì thuộc tính thẩm mỹ kích thước không hiệu quả bằng.
+
+Ngoài ra, bạn đọc cũng có thể nhận ra rằng khi cùng sử dụng nhiều thuộc tính thẩm mỹ trên một đồ thị, hiệu quả sẽ không được như mong muốn. Một phương pháp khác để tạo các đồ thị rõ ràng hơn, đặc biệt với các dữ liệu có nhiều quan sát, bạn đọc có thể chia nhỏ dữ liệu thành các nhóm và mô tả dữ liệu trong mỗi nhóm bằng một đồ thị khác nhau. Kỹ thuật này được gọi là *facetting* và được mô tả trong Hình \@ref(fig:fgggplot07)
+
+```{r fgggplot07, warning=FALSE, message=FALSE, fig.cap="Chia dữ liệu thành năm nhóm tương ứng với năm lục địa và sử dụng năm đồ thị phân tán để mô tả phân bố của các điểm dữ liệu", fig.align='center', fig.retina=5}
+# Dùng facet_wrap để chia dữ liệu ra thành các nhóm
+ggplot(dat, aes(x = life_expectancy, y = gdp_per_capita,
+                size = population)) +
+  geom_point(alpha = 0.5)+
+  facet_wrap(~continent)
+```
+
+Trong các câu lệnh vẽ Hình \@ref(fig:fgggplot07), chúng tôi không sử dụng biến `r colorize_style("continent")` ánh xạ vào thuộc tính thẩm mỹ màu sắc, mà chia nhỏ dữ liệu ra thành 5 phần tương ứng với 5 giá trị trong biến này và mô tả mỗi thành phần  của dữ liệu trong một đồ thị riêng biệt. Các đồ thị có miền giá trị trên các trục tọa độ *x* và *y* giống nhau để việc so sánh trở nên dễ dàng.
+
+Có thể nhận thấy từ Hình \@ref(fig:fgggplot07) rằng sử dụng năm đồ thị phân tán có cùng khoảng giá trị của trục tọa độ *x* và *y* để mô tả mối quan hệ giữa thu nhập bình quân đầu người và tuổi thọ trung bình của các quốc gia thuộc năm châu lục là rõ ràng hơn rất nhiều so với sử dụng một đồ thị duy nhất và phân biệt các lục địa khác nhau bằng màu sắc.
+
+Một thành phần tuy không bắt buộc nhưng bạn đọc có thể thêm vào đồ thị của `r colorize_style("ggplot2")` để tăng tính thẩm mỹ và sự rành mạch là ngữ cảnh hay còn gọi là các *themes*. Có một số *theme* có sẵn khi chúng ta cài đặt thư viện và cũng có các ngữ cảnh nằm trong các thư viện cài đặt bổ sung như thư viện `r colorize_style("ggthemes")`. Chúng ta sẽ thảo luận chi tiết về cách tùy chỉnh ngữ cảnh và tự tạo ngữ cảnh cho đồ thị ở phần sau của chương. Để thay đổi ngữ cảnh mặc định của các đồ thị của `r colorize_style("ggplot2")`, chúng ta sử dụng các hàm `r colorize_style("theme_()")`. Ví dụ, trong Hình \@ref(fig:fgggplot08) chúng tôi thay đổi ngữ cảnh mặc định của Hình \@ref(fig:fgggplot07) thành ngữ cảnh khác bằng cách sử dụng hàm `r colorize_style("theme_minimal()")`.
+
+```{r fgggplot08, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Thay đổi ngữ cảnh mặc định của ggplot sang ngữ cảnh khác giúp đồ thị rõ ràng hơn"}
+ggplot(dat, aes(x = life_expectancy, y = gdp_per_capita, size = population)) +
+  geom_point(shape = 21, alpha = 0.5, fill = "#640514")+
+  facet_wrap(~continent, ncol = 2)+
+  # thêm title
+  labs( title = "Thu nhập bình quân và tuổi thọ trung bình")+
+  xlab("Tuổi thọ trung bình (tuổi)")+
+  ylab("Gdp bình quân đầu người (USD)")+
+  theme_minimal()# thêm ngữ cảnh
+```
+
+Thành phần chưa được nhắc đến khi tạo đồ thị trực quan hóa dữ liệu là các *statistics* hay viết tắt là các *stats*. Do đây là thành phần phức tạp nhất và liên quan đến các kiến thức về xây dựng mô hình trên dữ liệu nên chúng tôi chưa đề cập đến trong phần này. Mục tiêu của chúng tôi trong phần giới thiệu là để bạn đọc làm quen với cách sử dụng các câu lệnh vẽ đồ thị trong `r colorize_style("ggplot2")`. Trong các phần tiếp theo, từng thành phần của đồ thị và các cấu phần thẩm mỹ quan trọng sẽ được thảo luận chi tiết cùng với ngữ pháp của đồ thị.
+
+## Cấu trúc nhiều lớp và ngữ pháp của đồ thị
+
+Cấu trúc theo lớp (nhiều *layers*) của đồ thị `r colorize_style("ggplot2")` giúp cho người phân tích trực quan dữ liệu xây dựng đồ thị của mình theo một đối tượng có cấu trúc. Đồ thị được tạo thành từ `r colorize_style("ggplot2")` từ đơn giản đến phức tạp đều được tạo thành từ (ít nhất) một đến nhiều lớp. Mỗi lớp trong đồ thị có mục tiêu hiển thị khác nhau:
+
+* Mục tiêu hiện thị đầu tiên và cũng là mục tiêu chính, đó là để hiển thị dữ liệu. Luôn luôn có một hoặc một vài lớp chính với mục tiêu mô tả dữ liệu thô, mô tả cấu trúc tổng thể, hoặc mô tả các giá trị ngoại lai của dữ liệu. Lớp này xuất hiện trên tất cả các đồ thị. Trong giai đoạn đầu của quá trình mô tả dữ liệu bằng trực quan hóa, lớp này thường xuất hiện duy nhất. Đơn giản như khi mô tả mỗi quan hệ giữa thu nhập bình quân đầu người và tuổi thọ trung bình của các quốc gia trên thế giới năm 2011, lớp được hiển thị bằng hàm `r colorize_style("geom_point()")` là lớp hiển thị dữ liệu chính.
+* Các lớp có mục tiêu tóm tắt và mô tả ý nghĩa thống kê của dữ liệu. Bằng cách thêm vào đồ thị các mô hình hoặc bằng cách hiển thị các dự đoán dựa trên mô hình mà người phân tích dữ liệu và người tiếp nhận dữ liệu sẽ nhận biết được những giá trị bên trong dữ liệu và những chi tiết mà khi xây dựng mô hình có thể bỏ sót.
+* Các lớp có mục tiêu thêm vào ngữ cảnh của dữ liệu. Các lớp này hiển thị bối cảnh nền, thêm vào các chú thích giúp mang lại ý nghĩa cho dữ liệu thô hoặc các giá trị tham chiếu nhằm hỗ trợ việc so sánh hoặc đánh giá. Đây thường là lớp cuối cùng được thêm vào trong đồ thị.
+
+Lớp chính của đồ thị có thể bao gồm bảy thành phần độc lập giống như chúng ta đã giới thiệu ở phần đầu. Cấu trúc của các lớp còn lại của đồ thị `r colorize_style("ggplot2")` có thể bao gồm các thành phần sau:
+
+1. Dữ liệu: nếu bạn không khai báo dữ liệu trong mỗi lớp, `r colorize_style("ggplot2")` sẽ sử dụng dữ liệu ban đầu là dữ liệu mặc định.
+
+2. Ánh xạ thẩm mỹ: được khai báo trong hàm `r colorize_style("aes()")` trong mỗi lớp, nếu không có khai báo riêng về ánh xạ thẩm mỹ, `r colorize_style("ggplot2")` sẽ sử dụng ánh xạ thẩm mỹ được khai báo trong hàm `r colorize_style("ggplot()")`.
+
+3. Một, hoặc một vài hình dạng đồ họa được gọi bằng các hàm `r colorize_style("geom_()")`.
+
+4. Một biến đổi thống kê hoặc một tóm tắt của dữ liệu được gọi bằng hàm `r colorize_style("stat_()")`.
+
+5. Vị trí xuất hiện của lớp đó trong bố cục chung.
+
+Khi đồ thị chỉ có một lớp với mục tiêu hiển thị dữ liệu chính, bạn đọc không cần phải am hiểu về ngữ pháp của đồ thị. Bạn đọc chỉ cần khai báo chính xác ánh xạ thẩm mỹ trong hàm `r colorize_style("aes()")` để có được kết quả mong muốn. Tuy nhiên khi xây dựng đồ thị phức tạp có nhiều lớp, bạn đọc cần phải nắm được ngữ pháp của đồ thị để kết hợp các lớp chính và các lớp phụ lại với nhau theo ý muốn của mình. Thảo luận chi tiết về cấu trúc nhiều lớp của đồ thị sẽ có trong phần tiếp theo.
+
+### Ánh xạ thẩm mỹ trong đồ thị có nhiều lớp
+
+Để hiểu về cách các lớp tương tác với nhau trong một đồ thị, hãy quan sát Hình \@ref(fig:fgggplot09). Sau khi sử dụng một lớp chính là các điểm được gọi bằng hàm `r colorize_style("geom_point()")` để mô tả mối liên hệ giữa thu nhập bình quân đầu người và tuổi thọ trung bình của các quốc gia trên thế giới vào năm 2011, bạn muốn thêm vào một lớp phụ là một đường cong mô tả mối liên hệ giữa hai biến. Hàm số dùng để thêm vào một đường mô tả mối liên hệ là `r colorize_style("geom_smooth()")`
+
+```{r fgggplot09, warning=FALSE, message=FALSE, fig.align='center', fig.retina = 5, fig.cap = "Đồ thị có hai lớp bao gồm một đồ thị phân tán và một đường mô tả mối liên hệ giữa các điểm. Hình bên trái: ánh xạ thẩm mỹ màu sắc được khai báo trong hàm ggplot(). Hình bên phải: ánh xạ thẩm mỹ màu sắc được khai báo trong hàm geom_point()"}
+## Hình bên trái, khai báo color trong ggplot()
+p1<-dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita,
+                color = continent)) +
+  geom_point(alpha = 0.5)+
+  geom_smooth(se=FALSE)+
+  theme(legend.position = "none")+
+  theme_minimal()
+
+## Hình bên phải, khai báo color trong geom_point()
+p2<-dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita))+
+  geom_point(aes(color = continent), alpha = 0.5) +
+  geom_smooth(se=FALSE)+
+  theme(legend.position = "none")+
+  theme_minimal()
+
+## Vẽ p1 và p2 trên cùng một đồ thị
+grid.arrange(p1,p2,nrow= 1 , ncol = 2)
+```
+
+Bạn đọc có thể thấy sự khác nhau giữa hai đồ thị là như sau:
+
+* Các đường mô tả mối liên hệ giữa tuổi thọ trung bình và thu nhập bình quân đầu người được xây dựng cho từng lục địa cho hình bên trái Hình \@ref(fig:fgggplot09)
+* Chỉ có duy nhất một đường được xây dựng cho tất cả các quốc gia trong hình bên phải của Hình \@ref(fig:fgggplot09).
+
+Sự khác biệt này là do:
+
+* Trong hình bên trái chúng ta khai báo ánh xạ từ biến `r colorize_style("continent")` đến thuộc tính thẩm mỹ `r colorize_style("color")` bên trong hàm `r colorize_style("aes()")` nằm trong hàm `r colorize_style("ggplot()")`,
+* Trong khi đó, trong hình bên phải, chúng ta đã khai báo ánh xạ từ biến `r colorize_style("continent")` đến thuộc tính thẩm mỹ `r colorize_style("color")` bên trong hàm `r colorize_style("aes()")` nằm trong hàm `r colorize_style("geom_point()")`
+
+Như chúng tôi đã đề cập ở trên, hàm `r colorize_style("geom_point()")` là lớp chính mô tả dữ liệu thô, còn hàm `r colorize_style("geom_smooth()")` là lớp phụ được thêm vào nhằm tăng khả năng mô tả của dữ liệu. Các ánh xạ thẩm mỹ được khai báo trong hàm `r colorize_style("ggplot()")` có thể hiểu như khai báo các biến toàn cục trong một đồ thị, còn các ánh xạ thẩm mỹ được khai báo trong các hàm `r colorize_style("geom_()")` có thể hiểu như khai báo các biến cục bộ trong hàm số đó. Theo quy tắc chung, các biến cục bộ nếu không được khai báo trong các hàm `r colorize_style("geom_()")` sẽ được tìm trên môi trường toàn cục của hàm `r colorize_style("ggplot()")`. Trong trường hợp trong các hàm `r colorize_style("geom_()")` và `r colorize_style("ggplot()")` các thuộc tính thẩm mỹ đều không được khai báo giá trị thì các thuộc tính thẩm mỹ trong các lớp phụ sẽ nhận giá trị mặc định.
+
+Dựa trên nguyên tắc này, trong hình bên trái của Hình \@ref(fig:fgggplot09), các thuộc tính thẩm mỹ `r colorize_style("x")`, `r colorize_style("y")`, và `r colorize_style("color")` được khai báo trong hàm `r colorize_style("ggplot()")`; đồng thời trong các hàm `r colorize_style("geom_point()")` và `r colorize_style("geom_smooth()")` không khai báo các ánh xạ thẩm mỹ; do đó cả hai hàm này đều hiểu các thuộc tính thẩm mỹ `r colorize_style("x")`, `r colorize_style("y")`, và `r colorize_style("color")` giống như khai báo trong hàm `r colorize_style("ggplot()")`.
+
+Trong hình bên phải của Hình \@ref(fig:fgggplot09), hai thuộc tính thẩm mỹ `r colorize_style("x")` và `r colorize_style("y")` được khai báo trong hàm `r colorize_style("ggplot()")` trong khi thuộc tính thẩm mỹ `r colorize_style("color")` được khai báo bên trong hàm `r colorize_style("geom_point()")`. Do đó, hàm `r colorize_style("geom_smooth()")` chỉ hiểu hai thuộc tính thẩm mỹ `r colorize_style("x")` và `r colorize_style("y")` như được khai báo trong `r colorize_style("ggplot()")`. Thuộc tính thẩm mỹ `r colorize_style("color")` của hàm `r colorize_style("geom_smooth()")` trong hình bên phải của Hình \@ref(fig:fgggplot09) sẽ được gán giá trị mặc định.
+
+Cách ghi nhận các thuộc tính thẩm mỹ của hai lớp, được gọi bằng các hàm `r colorize_style("geom_point()")` và `r colorize_style("geom_smooth()")`, của các đồ thị trong Hình \@ref(fig:fgggplot09) được tổng kết lại như sau:
+
+```{r, warning=FALSE, message=FALSE, echo = FALSE}
+Col1 = c("Hình bên trái", "Hình bên phải")
+Col2 = c("x, y và color", "x, y, và color")
+Col3 = c("x, y và color", "x, y")
+dat0<-data.frame(c1 = Col1, c2 = Col2, c3 = Col3 )
+
+kable(dat0, booktabs = T,
+      col.names = c(" ",
+        "geom_point()", "geom_smooth()"),
+      escape=F) %>%
+  kable_styling(bootstrap_options = c("striped", "bordered", "hover"), full_width = F)
+```
+
+Đường mô tả mối liên hệ giữa hai biến thu nhập bình quân và tuổi thọ trung bình được xây dựng bằng hàm `r colorize_style("geom_smooth()")` dựa trên phương pháp được gọi là hồi quy cục bộ, *locally estimated scatterplot smoothing* hay viết tắt là *loess*. Phương pháp này sẽ được chúng tôi sẽ thảo luận trong Chương **Mô hình cộng tính tổng quát**.  Khi thuộc tính thẩm mỹ `r colorize_style("color")` được sử dụng và ánh xạ đến một biến rời rạc, hàm `r colorize_style("geom_smooth()")` sẽ chia dữ liệu thành các nhóm, mỗi nhóm tương ứng với một giá trị của biến rời rạc ánh xạ đến thuộc tính `r colorize_style("color")`, sau đó xây dựng mô hình hồi quy với thu nhập bình quân phụ thuộc vào tuổi thọ trung bình trong mỗi nhóm. Điều này lý giải tại sao trong hình bên trái có năm (5) mô hình được xây dựng tương ứng với năm Châu lục, trong khi trong hình bên phải chỉ có một mô hình duy nhất được xây dựng cho tất cả các quốc gia trên thế giới.
+
+Vậy khi nào nên khai báo ánh xạ thẩm mỹ trong hàm `r colorize_style("ggplot()")` và khi nào bạn nên khai báo ánh xạ thẩm mỹ bên trong hàm `r colorize_style("geom_()")` nói chung? Câu trả lời như sau: nếu đa số các lớp bạn đọc sử dụng có chung một dữ liệu và dùng chung ánh xạ thẩm mỹ, bạn nên khai báo ánh xạ thẩm mỹ bên trong hàm `r colorize_style("ggplot()")`. Còn trong trường hợp các lớp sử dụng dữ liệu khác nhau, hoặc có ánh xạ thẩm mỹ khác nhau, bạn hãy khai báo ánh xạ thẩm mỹ bên trong mỗi hàm `r colorize_style("geom_()")`. Trong trường hợp bạn dùng một hàm thuộc nhóm các hàm `r colorize_style("geom_()")` và không muốn sử dụng ánh xạ thẩm mỹ đã khai báo trong `r colorize_style("ggplot()")`, bạn có thể khai báo lại ánh xạ đó, hoặc khai báo thuộc tính thẩm mỹ đó bằng giá trị `r colorize_style("NULL")`.
+
+Một lưu ý quan trọng cần được thảo luận trong ngữ pháp của đồ thị đó là sự khác nhau giữa sử dụng ánh xạ thẩm mỹ và thiết lập tham số. Trước hết, bạn đọc hãy lưu ý các câu lệnh vẽ đồ thị trực quan và kết quả nhận được trong Hình \@ref(fig:fgggplot10)
+
+```{r fgggplot10, warning=FALSE, message=FALSE, fig.align='center', fig.retina= 5, fig.cap= "Sự khác nhau giữa ánh xạ thẩm mỹ và thiết lập tham số. Thuộc tính thẩm mỹ color trong geom_smooth() được sử dụng theo các cách khác nhau. Hình góc trên bên trái: trong hàm geom_smooth() sử dụng không sử dụng ánh xạ thẩm mỹ đến thuộc tính color. Hình phía trên bê phải, trong hàm geom_smooth() không sử dụng khai báo ánh xạ thẩm mỹ và color được thiết lập cho giá trị là 'black'. Hình góc dưới bên trái: trong hàm geom_smooth sử dụng khai báo ánh xạ thẩm mỹ va color được ánh xạ đến giá trị 'black'. Hình góc dưới bên phải: hàm geom_smooth() sử dụng ánh xạ thẩm mỹ và thuộc tính color ánh xạ đến một cột dữ liệu nhận toàn các giá trị là 'black' "}
+## Hình góc trên bên trái, geom_smooth có aes(color = NULL)
+p1<-dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita,
+                color = continent)) +
+  geom_point(alpha = 0.5)+
+  geom_smooth(aes(color=NULL), se = FALSE)+
+  theme(legend.position = "right")+
+  theme_minimal()
+
+## Hình góc trên bên phải, geom_smooth có thiết lập (color = back)
+p2<-dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita,
+                color = continent)) +
+  geom_point(alpha = 0.5)+
+  geom_smooth(color="black", se = FALSE)+
+  theme(legend.position = "right")+
+  theme_minimal()
+
+## Hình góc dưới bên trái, geom_smooth có aes(color = "black")
+p3<-dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita,
+                color = continent)) +
+  geom_point(alpha = 0.5)+
+  geom_smooth(aes(color="black") , se = FALSE)+
+  theme(legend.position = "right")+
+  theme_minimal()
+
+
+## Hình góc dưới bên phải, geom_smooth có aes(color = newcol)
+p4<-dat%>%mutate(newcol = "black")%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita)) +
+  geom_point(aes(color = continent))+
+  geom_smooth(aes(color = newcol) , se = FALSE)+
+  theme(legend.position = "right")+
+  theme_minimal()
+
+## Vẽ các đồ thị trên cùng một hình
+grid.arrange(p1,p2,p3,p4, nrow= 2 , ncol = 2)
+```
+
+Có hai cách để chúng ta tác động đến các thuộc tính thẩm mỹ của đồ thị, đó là dùng ánh xạ thẩm mỹ và thiết lập tham số. Sự khác nhau giữa hai cách này là việc bạn khai báo giá trị của thuộc tính thẩm mỹ bên trong hay bên ngoài hàm `r colorize_style("aes()")`. Hình \@ref(fig:fgggplot10) cho thấy rằng:
+
+* Hình góc trên bên trái có đường hồi quy liên tục mô tả mối liên hệ giữa hai biến có màu mặc định. Nguyên nhân là do khi gọi hàm `r colorize_style("geom_smooth()")` chúng ta đã cho thuộc tính thẩm mỹ `r colorize_style("color")` nhận giá trị mặc định. Bạn đọc có thể thấy rằng trong câu lệnh vẽ hình góc trên bên trái, thuộc tính `r colorize_style("color")` được gọi trong hàm `r colorize_style("aes()")` của `r colorize_style("geom_smooth()")` và  được ánh xạ đến giá trị `r colorize_style("NULL")`.
+* Hình góc trên bên phải đã thực hiện thiết lập cấu phần thẩm mỹ `r colorize_style("color")` thay vì gọi ánh xạ. Thuộc tính `r colorize_style("color")` được gọi bên trong hàm `r colorize_style("geom_smooth()")` nhưng không sử dụng `r colorize_style("aes()")`. Giá trị được thiết lập là *'black'*, do đó đường hồi quy được tạo ra sẽ có màu đen đúng như yêu cầu từ thiết lập thuộc tính thẩm mỹ. Để thiết lập giá trị cho cấu phần thẩm mỹ, bạn đọc cần sử dụng giá trị tương ứng với cấu phần thẩm mỹ tương ứng đó và sử dụng ngoài hàm `r colorize_style("aes()")`. Giá trị tương ứng với thuộc tính `r colorize_style("color")` có thể là bất kỳ chuỗi ký tự mô tả màu sắc có ý nghĩa trong ngôn ngữ R. Điều gì xảy ra nếu trong cùng một lớp (trong một hàm `r colorize_style("geom_()")` bạn đọc vừa sử dụng có ánh xạ thẩm mỹ vừa thiết lập thuộc tính thẩm mỹ? Câu trả lời là `r colorize_style("ggplot2")` sẽ ưu tiên giá trị nằm ngoài `r colorize_style("aes()")`, nghĩa là ưu tiên thiết lập tham số.
+* Hình góc dưới bên trái phức tạp hơn các hình phía trên. Trước hết, thuộc tính `r colorize_style("color")` được ánh xạ từ biến `r colorize_style("color")` trong hàm `r colorize_style("ggplot()")`. Sau đó, thuộc tính thẩm mỹ màu sắc lại được được ánh xạ từ giá trị *'black'* trong hàm `r colorize_style("aes()")` của `r colorize_style("geom_smooth()")`.
+    * Bạn đọc có thể thấy rằng đường hồi quy được tạo từ hàm `r colorize_style("geom_smooth()")` không có màu đen như hình ở phía trên bên phải. Nguyên nhân là do khi khai báo thuộc tính thẩm mỹ trong hàm `r colorize_style("aes()")`, chúng ta đã ánh xạ thuộc tính `r colorize_style("color")` của hàm `r colorize_style("geom_smooth()")` đến một giá trị kiểu ký tự là *'black'*. `r colorize_style("ggplot2")` sẽ hiểu *'black'* là một biến kiểu ký tự được ánh xạ đến thuộc tính thẩm mỹ màu sắc.
+    * Trước đó, trong hàm `r colorize_style("ggplot()")` biến `r colorize_style("continent")` được ánh xạ đến thuộc tính thẩm mỹ `r colorize_style("color")`. Khi chúng ta tiếp tục ánh xạ một biến nhận giá trị *'black'* tới thuộc tính `r colorize_style("color")` thì `r colorize_style("ggplot2")` hiểu rằng có thêm một giá trị mới cho thuộc tính màu sắc là *'black'* và thêm vào với các giá trị hiện có là tên của 5 châu lục. Điều này lý giải tại sao trong chú giải của hình có 6 loại màu sắc thay vì 5 loại màu sắc như các hình ở trên.
+* Hình góc dưới bên phải được vẽ trên dữ liệu sau khi được thêm vào cột mới có tên `r colorize_style("newcol")` có tất cả các giá trị đều là *'black'*. Đồ thị vẫn bao gồm hai lớp là `r colorize_style("geom_point()")` và `r colorize_style("geom_smooth()")`. Cả hai lớp đều sử dụng chung thuộc tính thẩm mỹ `r colorize_style("x")` và `r colorize_style("y")`. Thuộc tính thẩm mỹ `r colorize_style("color")` của `r colorize_style("geom_point()")` được ánh xạ đến biến `r colorize_style("continent")` trong khi thuộc tính thẩm mỹ `r colorize_style("color")` của `r colorize_style("geom_smooth()")` ánh xạ đến cột mới được tạo thành. Bạn đọc có thể thấy rằng đồ thị được tạo ra hoàn toàn giống như hình góc dưới bên phải khi chúng ta gán trực tiếp thuộc tính `r colorize_style("color")` của `r colorize_style("geom_smooth()")` với giá trị *'black'*.
+
+Câu hỏi đặt ra là khi nào sử dụng ánh xạ thẩm mỹ và khi nào sử dụng thiết lập giá trị cho các thuộc tính thẩm mỹ. Để trả lời, bạn đọc cần cân nhắc về việc có muốn tác động lên thuộc tính thẩm mỹ nữa hay không. Nếu bạn muốn cố định giá trị cho thuộc tính thẩm mỹ, hãy sử dụng thiết lập giá trị. Còn nếu bạn muốn tác động lên thuộc tính thẩm mỹ sau đó, hãy sử dụng ánh xạ thẩm mỹ. Chúng ta sẽ thảo luận thêm về vấn đề này khi nói về các hàm `r colorize_style("scale_()")`.
+
+Bạn đọc hãy lưu ý về cách chú giải ghi nhận giá trị mới của một thuộc tính thẩm mỹ. Trong đồ thị góc dưới bên trái của Hình \@ref(fig:fgggplot10), khi chúng ta khai báo giá trị *'black'* cho thuộc tính `r colorize_style("color")`, đồ thị ghi nhận thêm *'black'* như một giá trị mới tương đương với tên các Châu lục đã sử dụng trong khai báo trước đó. Cách ghi nhận tên biến mới trong chú giải sẽ rất hữu ích khi chúng ta muốn tạo một đồ thị có nhiều lớp và đặt tên cho từng lớp trong phần chú giải của đồ thị. Ví dụ, khi chúng ta muốn so sánh ba phương pháp xây dựng mô hình trong lớp `r colorize_style("geom_smooth()")` khi mô tả mối liên hệ giữa biến tuổi thọ trung bình và biến thu nhập bình quân đầu người bao gồm:
+
+* Phương pháp hồi quy tuyến tính thông thường, sử dụng `r colorize_style("method = 'lm'")`,
+* Phương pháp hồi quy loess, sử dụng `r colorize_style("method = 'loess'")`,
+* Phương pháp hồi quy cộng tính tổng quát `r colorize_style("method = 'gam'")`,
+
+chúng ta có thể sử dụng ánh xạ thẩm mỹ `r colorize_style("color")` như sau:
+
+```{r fgggplot11, warning=FALSE, message=FALSE, fig.cap= "Sử dụng đồ thị trực quan để so sánh ba phương pháp xây dựng mô hình mô tả mối liên hệ giữa tuổi thọ trung binh và thu nhập bình quân đầu người của các quốc gia trên thế giới năm 2011.", fig.align='center', fig.retina=5}
+# So sánh ba phương pháp xây dựng mô hình khác nhau của hàm geom_smooth
+dat%>%ggplot(aes(x = life_expectancy, y = gdp_per_capita)) +
+  #Layer 1: đồ thị rải điểm
+  geom_point(alpha = 0.4)+
+
+  # Layer 2: Đường hồi quy tuyến tính
+  geom_smooth(aes(color="Hồi quy tuyến tính"), method = "lm" , se = FALSE)+
+
+  # Layer 3: Đường hồi quy loess
+  geom_smooth(aes(color="Hồi quy loess"), method = "loess", span = 0.3 , se = FALSE)+
+
+  # Layer 4: Mô hình GAM (generalized additive model)
+  geom_smooth(aes(color="Mô hình cộng tính tổng quát"), method = "gam" , se = FALSE)+
+  theme_minimal()
+```
+
+Đồ thị trong Hình \@ref(fig:fgggplot11) có bốn lớp. Khi chúng ta khai báo thuộc tính thẩm mỹ `r colorize_style("x")` và `r colorize_style("y")` trong hàm `r colorize_style("ggplot()")`, cả bốn lớp đều sử dụng chung các thuộc tính thẩm mỹ này. Hàm `r colorize_style("geom_point()")` không sử dụng thêm ánh xạ thẩm mỹ nào. Mỗi hàm `r colorize_style("geom_smooth()")` thêm một đường hồi quy vào trong đồ thị, và thêm một giá trị vào thuộc tính thẩm mỹ `r colorize_style("color")`. Kết quả thu được là một đồ thị có ba màu sắc mô tả ba đường hồi quy tương ứng, với chú giải là tên của phương pháp xây dựng đường hổi quy.
+
+
+### Các hàm `r colorize_style("geom_()")` cơ bản
+Các hình dạng đồ họa, gọi tắt là các *geoms*, là một cách phổ biến để hiển thị một lớp của một đồ thị trực quan. Ví dụ như sử dụng `r colorize_style("geom_point()")` sẽ tạo ra một đồ thị phân tán hay còn gọi là đồ thị rải điểm; khi sử dụng `r colorize_style("geom_line()")` sẽ tạo ra các đồ thị theo đường. Danh sách các *geoms* và các thuộc tính thẩm mỹ bạn đọc có thể tìm trong danh sách được liệt kê trong link ở phần \@ref(sec:ggplot_intro). Trong phần này, chúng tôi phân loại và giải thích cách sử dụng các *geoms* chi tiết hơn.
+
+#### Mô tả một biến
+Khi sử dụng đồ thị trực quan bằng thư viện `r colorize_style("ggplot2")` để mô tả một biến rời rạc, hàm thường được sử dụng là hàm `r colorize_style("geom_bar()")`. Tần suất xuất hiện của các giá trị trong các biến rời rạc được mô tả dưới dạng các thanh. Các thuộc tính thẩm mỹ quan trọng trong hàm `r colorize_style("geom_bar()")` bao gồm:
+
+* Thuộc tính thẩm mỹ `r colorize_style("x")` được ánh xạ đến tên biến (rời rạc).
+* Thuộc tính thẩm mỹ `r colorize_style("color")` là màu sắc của đường viền xung quanh các thanh.
+* Thuộc tính thẩm mỹ `r colorize_style("fill")` là màu sắc của các thanh. `r colorize_style("fill")` ngoài ý nghĩa tăng tính thẩm mỹ cho đồ thị dạng thanh, còn có ý nghĩa khi mô tả mối liên hệ giữa biến rời rạc một biến rời rạc khác.
+
+Hình \@ref(fig:fgggplot12) sử dụng đồ thị dạng thanh mô tả phân phối xác suất của biến `r colorize_style("continent")` trong dữ liệu `r colorize_style("gapminder")` được lọc theo năm 2011. Khi sử dụng đồ thị dạng thanh, chúng ta thường sắp xếp sao cho các thanh có chiều cao tăng dần hoặc giảm dần.
+
+```{r fgggplot12, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap= "Phân phối xác suất của biến continent trong dữ liệu gapminder trong năm 2011. Hình bên trái: phân phối xác suất của biến continent mô tả theo thứ tự của giá trị xuất hiện. Hình bên phải: phân phối xác suất của biến continent mô tả theo thứ tự của tần suất xuất hiện của các biến tăng dần." }
+p1<-dat%>%ggplot() +
+  geom_bar(aes(x = continent), color = "darkblue", fill = "#640514", alpha = 0.5)+
+  theme_minimal()
+p2<-dat%>%ggplot() +
+  geom_bar(aes(x = continent), color = "darkblue", fill = "#640514", alpha = 0.5)+
+  scale_x_discrete(limits = names(sort(table(dat$continent))))+
+  theme_minimal()
+grid.arrange(p1,p2, nrow= 1 , ncol = 2)
+```
+Khi mô tả biến rời rạc, `r colorize_style("geom_bar()")` luôn mặc định sắp xếp các thanh theo thứ tự các giá trị xuất hiện trong biến rời rạc tăng dần. Tuy nhiên, để đồ thị dạng thanh mô tả hiệu quả hơn, chúng ta thường để các thanh xuất hiện theo thứ tự có chiều cao tăng dần hoặc giảm dần giống như hình bên phải của Hình \@ref(fig:fgggplot12). Để thực hiện việc này, chúng ta cần thay đổi thứ tự xuất hiện của các giá trị trên trục $\overrightarrow{Ox}$ theo thứ tự tần suất tăng dần hay giảm dần bằng cách sử dụng hàm `r colorize_style("scale_x_discrete()")`. Chúng ta sẽ thảo luận về các hàm này trong phần sau của chương.
+
+Hàm `r colorize_style("geom_bar()")` cũng có thể được sử dụng để mô tả các giá trị liên tục được lưu trong một biến tương ứng với các giá trị rời rạc được lưu trong biến khác. Ví dụ, khi chúng ta muốn mô tả thu nhập bình quân của 10 nước có thu nhập bình quân đầu người lớn nhất thế giới năm 2011, chúng ta có thể sử dụng `r colorize_style("geom_bar()")` với đầy đủ hai thuộc tính thẩm mỹ `r colorize_style("x")` và `r colorize_style("y")` như sau:
+
+```{r fgggplot13, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap= "10 quốc gia có thu nhập bình quân đầu người cao nhất thế giới năm 2011. Hình bên trái: Thứ tự các nước không được sắp xếp theo thu nhập bình quân đầu người. Hình bên phải: các nước xuất hiện theo thứ tụ thu nhập bình quân đâu người giảm dần."}
+p1<-dat%>%arrange(desc(gdp_per_capita))%>%head(10)%>%
+  ggplot() +
+  geom_bar(aes(x = gdp_per_capita, y = country),
+           stat = "identity",
+           color = "darkblue", fill = "#640514", alpha = 0.5)+
+  theme_minimal()
+p2<-dat%>%arrange(desc(gdp_per_capita))%>%head(10)%>%
+  ggplot() +
+  geom_bar(aes(x = gdp_per_capita, y = reorder(country,gdp_per_capita)),
+           stat = "identity",
+           color = "darkblue", fill = "#640514", alpha = 0.5)+
+  ylab("country")+
+  theme_minimal()
+grid.arrange(p1,p2, nrow= 1 , ncol = 2)
+```
+
+Khi sử dụng `r colorize_style("geom_bar()")` để mô tả hai biến như Hình \@ref(fig:fgggplot13), chúng ta cần cho tham số `r colorize_style("stat")` nhận giá trị bằng `r colorize_style("identity")` để phân biệt với khi sử dụng `r colorize_style("geom_bar()")` khi mô tả một biến liên tục. Chúng tôi sẽ giải thích tham số `r colorize_style("stat")` trong phần lập trình ggplot2 ở phần cuối của chương. Để biểu diễn các cột theo thứ tự chiều cao tăng dần hay giảm dần, bạn đọc sử dụng hàm `r colorize_style("reorder()")`. Trong đồ thị bên phải của Hình \@ref(fig:fgggplot13), chúng tôi ánh xạ cấu phần thẩm mỹ `r colorize_style("y")` của `r colorize_style("geom_bar()")` đến biến `r colorize_style("country")` nhưng được sắp xếp theo thứ tự `r colorize_style("gdp_per_capita")` của giảm dần.
+
+Để mô tả phân phối xác suất của một biến liên tục, chúng ta sử dụng `r colorize_style("geom_histogram()")`. Hình dạng đồ họa của `r colorize_style("geom_histogram()")` giống với `r colorize_style("geom_bar()")` khi cùng sử dụng hình dạng kiểu các thanh/cột để mô tả phân phối xác suất của một biến. Nguyên tắc vẽ đồ thị của hàm `r colorize_style("geom_histogram()")` là chia miền giá trị được xác định từ giá trị nhỏ nhất đến giá trị lớn nhất của biến liên tục thành $k$ khoảng bằng nhau, sau đó đếm trong mỗi khoảng có bao nhiêu giá trị của biến liên tục xuất hiện. Chiều cao của các cột là số lần xuất hiện của các giá của biến liên tục trong khoảng đó. Tham số  `r colorize_style("bins")` trong hàm `r colorize_style("geom_histogram()")` được sử dụng để gán giá trị cho số khoảng giá trị. `r colorize_style("bins")` càng lớn thì số cột càng lớn và chiểu rộng của các cột càng nhỏ; trong khi `r colorize_style("bins")` càng nhỏ thì số cột càng nhỏ và chiều rộng của các cột càng lớn. Lựa chọn số `r colorize_style("bins")` phù hợp để mô tả chính xác phân phối xác suất của biến liên tục là rất quan trọng. Ngoài tham số `r colorize_style("bins")`, các cấu phần thẩm mỹ của `r colorize_style("geom_histogram()")` tương đối giống với `r colorize_style("geom_bar()")` nên chúng tôi sẽ không nhắc lại.
+
+Hình \@ref(fig:fgggplot14) mô tả biến thu nhập bình quân đầu người trong năm 2011 của tất cả các quốc gia trên thế giới.
+
+```{r fgggplot14, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap= "Phân phối của biến thu nhập bình quân đầu người của các quốc gia trên thế giới năm 2011. Hình bên trái: Sử dụng 10 bins để mô tả. Hình bên phải: Sử dụng 30 bins để mô tả."}
+p1<-dat%>%ggplot() +
+  geom_histogram(aes(x = gdp_per_capita), bins = 10,
+           color = "darkblue", fill = "#640514", alpha = 0.5)+
+  theme_minimal()
+p2<-dat%>%ggplot() +
+  geom_histogram(aes(x = gdp_per_capita), bins = 40,
+           color = "darkblue", fill = "#640514", alpha = 0.5)+
+  theme_minimal()
+grid.arrange(p1,p2, nrow= 1 , ncol = 2)
+
+```
+
+Như chúng tôi đã đề cập, lựa chọn số `r colorize_style("bins")` để hiển thị là rất quan trọng trong mô tả phân phối xác suất của một biết liên tục. Trong trường hợp biến có ít quan sát như Hình \@ref(fig:fgggplot13), lựa chọn giữa 10 bins hoặc 30 bins không dẫn đến sự khác biệt nhiều. Tuy nhiên, khi biến liên tục có nhiều quan sát, lựa chọn số `r colorize_style("bins")` quá ít sẽ làm cho chúng ta hiểu sai về phân phối của biến. Hãy quan sát ví dụ khi chúng ta mô tả biến `r colorize_style("price")` trong dữ liệu có tên là `r colorize_style("diamond")`. Đây là một dữ liệu nằm trong thư viện `r colorize_style("dslabs")`, với biến `r colorize_style("price")` là biến chứa giá của hơn 50 nghìn viên kim cương.
+
+```{r fgggplot15, warning=FALSE, message=FALSE,fig.align='center', fig.retina=5, fig.cap= "Phân phối của biến price trong dữ liệu diamonds với hơn 50 nghìn quan sát. Hình bên trái: Sử dụng 10 bins để mô tả. Hình bên phải: Sử dụng 60 bins để mô tả."}
+p1<-diamonds%>%ggplot() +
+  geom_histogram(aes(x = price), bins = 10,
+           color = "darkblue", fill = "#640514", alpha = 0.5)+
+  theme_minimal()
+p2<-diamonds%>%ggplot() +
+  geom_histogram(aes(x = price), bins = 60,
+           color = "darkblue", fill = "#640514", alpha = 0.5)+
+  theme_minimal()
+grid.arrange(p1,p2, nrow= 1 , ncol = 2)
+```
+
+Có thể nhận thấy rằng nếu chúng ta sử dụng quá ít `r colorize_style("bins")` để mô tả một số lượng quan sát lớn có thể dẫn đến kết luận sai về phân phối của biến liên tục. Hình bên trái của Hình \@ref(fig:fgggplot15) là phân phối của một biến ngẫu nhiên chỉ có một giá trị mode (một đỉnh) tại giá trị \$2500 và sau đó có tần suất xuất hiện giảm dần. Hình bên phải của Hình \@ref(fig:fgggplot15) lại cho biết đây là một phân phối liên tục có hai đỉnh tại các giá trị 1000 và 4500. Phương pháp tốt nhất để lựa chọn số `r colorize_style("bins")` phù hợp đó là tăng dần tham số này cho đến khi phân phối xác suất của biến liên tục không còn bị thay đổi quá nhiều.
+
+Cũng để mô tả phân phối xác suất của biến liên tục, `r colorize_style("geom_density()")` có thể được sử dụng một cách độc lập hoặc bổ sung với `r colorize_style("geom_histogram()")` để mô tả phân phối của các biến liên tục một cách tốt hơn. Hình \@ref(fig:fgggplot16) mô tả cách sử dụng `r colorize_style("geom_density()")` cùng với `r colorize_style("geom_histogram()")` để mô tả phân phối của các biến liên tục.
+
+```{r fgggplot16, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap= "Kết hợp geom_density() và geom_histogram() để mô tả phân phối xác suất của biến liên tục. Hình bên trái: phân phối của biến thu nhập bình quân đầu người của các quốc gia trên thế giới năm 2011. Hình bên phải: phân phối của giá của các viên kim cương trong dữ liệu diamonds"}
+p1<-dat%>%ggplot() +
+  geom_histogram(aes(x = gdp_per_capita, after_stat(density)), bins = 30,
+          fill = "#640514", alpha = 0.2)+
+  geom_density(aes(x = gdp_per_capita), color = "darkblue")+
+  theme_classic()
+p2<-diamonds%>%ggplot() +
+  geom_histogram(aes(x = price, after_stat(density)), bins = 60,
+           fill = "#640514", alpha = 0.2)+
+  geom_density(aes(x = price),color = "darkblue")+
+  theme_classic()
+grid.arrange(p1,p2, nrow= 1 , ncol = 2)
+```
+
+Để hiển thị đồng thời đồ thị vẽ bằng `r colorize_style("geom_histogram()")` và đồ thị vẽ bằng `r colorize_style("geom_density()")` trên cùng một đồ thị, chúng ta cần phải biến đổi đồ thị histogram từ mô tả số lần xuất hiện của biến liên tục thành tần suất xuất hiện. Bạn đọc thực hiện phép biến đổi này bằng cách thêm vào sau phần khai báo ánh xạ thẩm mỹ của `r colorize_style("geom_histogram()")` câu lệnh `r colorize_style("after_stat(density)")` để tổng diện tích của các hình được tạo bởi các thanh được quy đổi về 1 đơn vị.
+
+Phương pháp vẽ đồ thị của `r colorize_style("geom_density()")` cũng giống như hàm `r colorize_style("geom_density()")` có sẵn trong thư viện `r colorize_style("stats")` khi cho kết quả là một đường liên tục là ước lượng cho hàm mật độ xác suất của một biến ngẫu nhiên liên tục. Hàm mật độ này được ước lượng bằng phương pháp *Kernel*. Giá trị hàm mật độ tại một điểm `r colorize_style("x")` bất kỳ nằm trong miền giá trị của một biến liên tục được tính bằng trung bình giá trị hàm $K$, được gọi là hàm Kernel, tính trên khoảng cách từ điểm `r colorize_style("x")` tới tất cả các quan sát. Ký hiệu $\hat{f}(x)$ là giá trị hàm mật độ tính tại `r colorize_style("x")` bằng phương pháp Kernel thì ta có
+\begin{align}
+\hat{f}(x) = \cfrac{1}{nh} \times \sum\limits_{i = 1}^{n} \ K\left( \cfrac{x - x_i}{h} \right)
+(#eq:ggplot1)
+\end{align}
+trong đó $x_i$ là giá trị quan sát thứ $i$ và `r colorize_style("h")` là được gọi là tham số làm mịn. `r colorize_style("h")` càng lớn thì hàm $\hat{f}$ sẽ càng mịn. Hàm $K$ được sử dụng làm hàm Kernel mặc định cho `r colorize_style("geom_density()")` là hàm mật độ của biến ngẫu nhiên phân phối chuẩn.
+
+Một hàm số khác cũng có thể được sử dụng để mô tả phân phối của một biến liên tục là `r colorize_style("geom_boxplot()")` nhưng hàm số này có thể được sử dụng để mô tả mối liên hệ giữa biến rời rạc và biến liên tục nên chúng tôi sẽ thảo luận ở phần sau.
+
+#### Mô tả hai biến liên tục
+Đồ thị phân tán hay đồ thị rải điểm được trực quan bằng hàm `r colorize_style("geom_point()")` là cách hiệu quả nhất để mô tả trực quan hai biến liên tục. Bạn đọc đã làm quen với `r colorize_style("geom_point()")` cùng với các thuộc tính thẩm mỹ như `r colorize_style("x")`, `r colorize_style("y")`, `r colorize_style("color")`, `r colorize_style("shape")`, `r colorize_style("size")`, để mô tả mối liên hệ giữa các biến thu nhập bình quân đầu người và tuổi thọ bình quân của các quốc gia trên thế giới nên chúng tôi sẽ không nhắc lại cách sử dụng các cấu phần thẩm mỹ này khi sử dụng `r colorize_style("geom_point()")`.
+
+Đồ thị phân tán thường được sử dụng cùng với `r colorize_style("geom_smooth()")` để mô tả mối liên hệ giữa hai biến. Phương pháp xây dựng mô hình trong hàm `r colorize_style("geom_smooth()")` bao gồm:
+
+- Phương pháp *loess* là phương pháp mặc định để xây dựng đường hồi quy mô tả mối liên hệ giữa biến liên tục được ánh xạ tới `r colorize_style("y")` phụ thuộc vào biến liên tục được ánh xạ tới `r colorize_style("x")`. Phương pháp này được sử dụng khi số lượng dòng của dữ liệu nhỏ hơn hoặc bằng 1000. Nguyên nhân là do thời gian xây dựng mô hình bằng phương pháp *loess* tăng lên tỷ lệ với bình phương của số lượng quan sát, do đó sẽ mất nhiều thời gian để vẽ đường hồi quy mô tả mối liên hệ giữa hai biến khi dữ liệu lớn.
+
+- Phương pháp *lm* sẽ ước lượng đường thẳng tuyến tính mô tả mối liên hệ giữa biến liên tục ánh xạ đến `r colorize_style("x")` và biến liên tục ánh xạ đến `r colorize_style("y")`.
+
+- Phương pháp *gam* sẽ ước lượng một hàm liên tục được biến đến với tên gọi là một *smoothing spline* mô tả mối liên hệ giữa hai biến liên tục. Đây là phương pháp mặc định để xây dựng mô hình khi dữ liệu có kích thước lớn hơn 1000. Chúng ta sẽ thảo luận về *smoothing spline* trong Chương mô hình cộng tính tổng quát.
+
+Trong trường hợp mô tả trực quan hai biến liên tục nhưng có nhiều điểm bị trùng nhau lên nhau thì `r colorize_style("geom_point()")` có thể sẽ gây nhầm lẫn về mật độ xuất hiện của các điểm. Hãy quan sát ví dụ khi chúng tôi sử dụng `r colorize_style("geom_point()")` để mô tả trực quan hai biến `r colorize_style("city")` và `r colorize_style("hwy")` của dữ liệu `r colorize_style("mpg")`. Đây là dữ liệu nằm trong thư viện `r colorize_style("ggplot2")` mô tả mức độ tiêu hao nhiên liệu của 234 loại xe ô tô khác nhau được sản xuất vào các năm 1998 và 2008 và hai biến `r colorize_style("city")` và `r colorize_style("hwy")` lần lượt là mức độ tiêu hao nhiên liệu khi ô tô di chuyển trong thành phố và ô tô di chuyển trên đường cao tốc. Đơn vị của hai biến này đều là miles per gallon, nghĩa là cho biết số dặm mà xe đi được trên mỗi gallon nhiên liệu.
+
+```{r fgggplot17, warning=FALSE, message=FALSE, fig.align='center' , fig.retina=5, fig.cap= "Sử dụng đồ thị phân tán để mô tả trực quan hai biến liên tục là hwy và cty trong dữ liệu mpg. Hình bên trái: không sử dụng tham số alpha. Hình bên phải sử dụng tham số alpha bằng 0.2 để biết mật độ xuất hiện của các điểm"}
+p1<-mpg%>%ggplot(aes(x = cty,y = hwy)) +
+  geom_point(color = "#640514")+
+  geom_smooth(se = FALSE, linetype = 2, size = 0.7, color = "darkblue")+
+  theme_minimal()
+p2<-mpg%>%ggplot(aes(x = cty,y = hwy)) +
+  geom_point(color = "#640514", alpha = 0.2)+
+  geom_smooth(se = FALSE, linetype = 2, size = 0.7, color = "darkblue")+
+  theme_minimal()
+grid.arrange(p1,p2, nrow= 1 , ncol = 2)
+```
+
+Bạn đọc có thể nhận thấy rằng số lượng điểm xuất hiện trên đồ thị bên trái của Hình \@ref(fig:fgggplot17) không tương ứng với số quan sát của dữ liệu. Nhận xét này được khẳng định thêm từ đồ thị bên phải của Hình \@ref(fig:fgggplot17). Khi chúng ta cho tham số `r colorize_style("alpha")` nhận giá trị 0.2, độ đậm nhạt của các điểm là rất khác nhau. Điều này cho thấy sự xuất hiện trùng lặp của của các điểm tại một số giá trị nhất định. Để có hiển thị tốt hơn với dữ liệu như vậy, bạn đọc có thể sử dụng `r colorize_style("geom_jitter()")` thay thế cho `r colorize_style("geom_point()")`. Hàm `r colorize_style("geom_jitter()")` cũng hiển thị các điểm trên hai trục tọa độ giống như `r colorize_style("geom_point()")`, tuy nhiên khác biệt của `r colorize_style("geom_jitter()")` đó là mỗi điểm sẽ được di chuyển các một cách ngẫu nhiên xung quanh điểm ban đầu để tránh việc hiển thị điểm bị trùng nhau.
+
+```{r fgggplot18, warning=FALSE, message=FALSE, fig.align='center' , fig.retina=5, fig.cap= "Sử dụng đồ thị phân tán kết hợp với di chuyển ngẫu nhiên bằng geom_jitter() để mô tả trực quan hai biến liên tục là hwy và cty trong dữ liệu mpg. Hình bên trái: các điểm được di chuyển một cách ngẫu nhiên với trung bình bằng 1 đơn vị. Hình bên phải: các điểm được di chuyển một cách ngẫu nhiên với trung bình bằng 3 đơn vị."}
+p1<-mpg%>%ggplot(aes(x = cty,y = hwy)) +
+  geom_jitter(width = 1, height = 1, alpha = 0.5, color = "#640514")+
+  geom_smooth(se = FALSE, linetype = 2, size = 0.7, color = "darkblue")+
+  theme_minimal()
+p2<-mpg%>%ggplot(aes(x = cty,y = hwy)) +
+  geom_jitter(width = 3, height = 3,alpha = 0.5, color = "#640514")+
+  geom_smooth(se = FALSE, linetype = 2, size = 0.7, color = "darkblue")+
+  theme_minimal()
+grid.arrange(p1,p2, nrow= 1 , ncol = 2)
+```
+
+Có thể thấy rằng các điểm dữ liệu đã được hiển thị đầy đủ hơn trong Hình \@ref(fig:fgggplot18). Hai tham số quan trọng trong `r colorize_style("geom_jitter()")` là `r colorize_style("width")` và `r colorize_style("height")` cho biết các điểm được di chuyển theo chiều ngang và chiều dọc với giá trị trung bình là bao nhiêu. Nếu lựa chọn giá trị cho hai tham số này quá nhỏ, mục tiêu hiển thị đầy đủ các điểm sẽ không được đảm bảo, trong khi lựa chọn giá trị cho hai tham số này quá lớn sẽ làm cho dữ liệu bị thay đổi về bản chất.
+
+Một phương pháp khác được sử dụng để mô tả trực quan hai biến liên tục là `r colorize_style("geom_text()")` hoặc `r colorize_style("geom_label()")`. Thay vì hiển thị các điểm như `r colorize_style("geom_point()")`, `r colorize_style("geom_text()")` hiển thị một biến kiểu chuỗi ký tự thay vì hiển thị điểm. `r colorize_style("geom_text()")` thường được sử dụng kết hợp với `r colorize_style("geom_point()")` hoặc cũng có thể sử dụng độc lập trên những dữ liệu nhỏ. Khi dữ liệu có kích thước trung bình trở lên, `r colorize_style("geom_text()")` nên được sử dụng để nhấn mạnh hoặc chú thích cho một vài điểm quan trọng hơn là được sử dụng cho tất cả các điểm. Khi hiển thị biến kiểu ký tự và các điểm trên cùng một đồ thị, rất dễ dẫn đến hiện tượng ký tự và điểm bị trùng nhau hiển thị chồng lên nhau. Để điều chỉnh ký tự xuất hiện về các phía, bạn đọc cần phải sử dụng thêm các tham số như `r colorize_style("hjust")`, `r colorize_style("vjust")`.
+
+Theo kinh nghiệm của chúng tôi, để hiện thị biến kiểu ký tự tốt hơn, nên sử dụng các hàm `geom_text_repel()` và `geom_label_repel()` thay thế cho `r colorize_style("geom_text()")` và `r colorize_style("geom_label()")`. Để sử dụng hai hàm này cần cài đặt thêm thư viện bổ sung là thư viện $\textbf{ggrepel}$.
+
+```{r fgggplot19, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5,  fig.cap = "Tỷ lệ sinh trung bình mỗi phụ nữ và tỷ lệ tử vong trên 1000 trẻ sơ sinh cả các quốc gia Đông Nam Á năm 2011. Hình phía trên bên phải: Sử dụng geom_text. Hình phía trên bên trái: Sử dụng geom_label. Hình phía dưới bên trái: Sử dụng geom_text_rebel. Hình phía dưới bên phải: Sử dụng geom_label_rebel"}
+p1<-dat%>%filter(region == "South-Eastern Asia")%>%
+  ggplot(aes(fertility, infant_mortality))+
+  geom_point(color = "#640514")+
+  geom_text(aes(label = country), size = 2.5,vjust=  - 1.1, color = "#640514")+
+  ggtitle("Sử dụng geom_text()")+
+  theme_minimal()
+p2<-dat%>%filter(region == "South-Eastern Asia")%>%
+  ggplot(aes(fertility, infant_mortality))+
+  geom_point(color = "#640514")+
+  geom_label(aes(label = country), size = 2.5, vjust= - 1.1, color = "#640514")+
+  ggtitle("Sử dụng geom_label()")+
+  theme_minimal()
+
+p3<-dat%>%filter(region == "South-Eastern Asia")%>%
+  ggplot(aes(fertility, infant_mortality))+
+  geom_point(color = "#640514")+
+  geom_text_repel(aes(label = country), size = 2.5,color = "#640514")+
+  ggtitle("Sử dụng geom_text_repel()")+
+  theme_minimal()
+p4<-dat%>%filter(region == "South-Eastern Asia")%>%
+  ggplot(aes(fertility, infant_mortality), )+
+  geom_point(color = "#640514")+
+  geom_label_repel(aes(label = country),size = 2.5,color = "#640514")+
+  ggtitle("Sử dụng geom_label_repel()")+
+  theme_minimal()
+grid.arrange(p1,p2,p3,p4,nrow=2,ncol=2)
+```
+
+Khi một trong hai biến liên tục là biến dạng thời gian thì chúng ta thường sử dụng `r colorize_style("geom_line()")` để trực quan dữ liệu. `r colorize_style("geom_point()")` cũng có thể sử dụng cùng với `r colorize_style("geom_line()")` nếu số lượng điểm dữ liệu không quá lớn. Nguyên tắc vẽ hình của `r colorize_style("geom_line()")` là sử dụng các đường thẳng để nối các điểm xuất hiện trong dữ liệu theo thứ tự tăng dần của biến được ánh xạ tới cấu phần thẩm mỹ `r colorize_style("x")`. Khi vẽ đồ thị của một biến liên tục theo thời gian, biến thời gian luôn luôn được ánh xạ đến thuộc tính `r colorize_style("x")`.
+
+```{r fgggplot20, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5,  fig.cap = "Thu nhập bình quân đầu người thay đổi theo thời gian của bốn quốc gia là Pháp, Nhật Bản, Mỹ, và Vương quốc Anh từ năm 1960 đến năm 2016"}
+gapminder%>%
+  filter(country %in% c("United States","Japan","France","United Kingdom"))%>%
+  ggplot(aes(x = year, y = gdp/population,color = country))+
+  geom_line()+
+  geom_point(size = 0.5, alpha = 0.5)+
+  theme_minimal()
+```
+
+Hình \@ref(fig:fgggplot20) mô tả sự thay đổi của thu nhập bình quân đầu người của các quốc gia phát triển trên thế giới từ năm 1960 đến 2016. Biến thu nhập bình quân đầu người được ánh xạ đến thuộc tính `r colorize_style("y")` trong khi biến thời gian (`r colorize_style("year")`) được ánh xạ đến thuộc tính thẩm mỹ `r colorize_style("x")`. Để mô tả mỗi quốc gia bằng một đường khác nhau, bạn đọc có các lựa chọn là ánh xạ biến `r colorize_style("country")` đến một trong các thuộc tính thẩm mỹ là: `r colorize_style("group")`, `r colorize_style("linetype")`, hoặc `r colorize_style("color")`.
+
+Khi trực quan hai biến liên tục với số lượng quan sát lớn thì việc hiển thị trực quan bằng các điểm trên trục tọa độ sẽ không hiệu quả. Thay vào đó, chúng ta có thể hiển thị tần xuất hay mật độ xuất hiện của các điểm để đồ thị được rõ ràng hơn. `r colorize_style("geom_bin2d()")` và `r colorize_style("geom_density2d()")` là các hàm để trực quan hóa phân phối của hai biến liên tục.
+
+- `r colorize_style("geom_bin2d()")` chia miền giá trị của từng biến thành các khoảng bằng nhau sau đó đếm trên mặt phằng hai chiều trong mỗi một hình chữ nhật đơn vị có bao nhiêu điểm sau đó sử dụng màu sắc từ đậm tới nhạt để mô tả số lượng điểm trong từng hình chữ nhật từ lớn đến nhỏ.
+
+- `r colorize_style("geom_density2d()")` sử dụng phương pháp Kernel để tính giá trị hàm mật độ trong không gian hai chiều giống như cách tính toán của `r colorize_style("geom_density()")` trong công thức \@ref(eq:ggplot1). Khoảng cách từ quan sát $(x_{i,1}, x_{i,2})$ đến điểm $(x_1, x_2)$ cần xác định mật độ được sử dụng là khoảng cách Euclide thay vì $|x_i-x|$ trong không gian một chiều. Hàm Kernel được sử dụng là hàm mật độ của biến ngẫu nhiên phân phối chuẩn hai chiều. Hàm `r colorize_style("geom_density2d()")` vẽ các đường nối các điểm có giá trị hàm mật độ bằng nhau lại với nhau, đường này còn được gọi là các đường bàng quang (hay contour). Hình vẽ dưới đây mô tả phân phối đồng thời của hai biến `r colorize_style("price")` và `r colorize_style("carat")` trong dữ liệu `r colorize_style("diamond")`.
+
+```{r fgggplot21, warning = FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Biểu diễn phân phối của hai biến liên tục là price và carat trong dữ liệu diamonds. Hình bên trái: sử dụng geom_bin2d() để chia miền giá trị của các biến ra thành các ô vuông nhỏ và sử dụng màu sắc để mô tả mật độ xuất hiện. Hình bên phải: sử dụng geom_density2d() kết nối các điểm có cùng ước lượng của hàm mật độ."}
+p1<-diamonds%>%
+  ggplot(aes(price, carat))+geom_bin2d(bins = 40)+
+  scale_x_log10()+scale_y_log10()+
+  theme_minimal()+scale_fill_viridis_c()+
+  ggtitle("geom_bind2d")
+
+p2<-diamonds%>%
+  ggplot(aes(price, carat))+geom_density2d(color = "#640514",alpha = 0.5)+
+  scale_x_log10()+scale_y_log10()+
+  theme_minimal()+
+  ggtitle("geom_density2d")
+
+grid.arrange(p1,p2,nrow=1, ncol = 2)
+```
+
+Hình \@ref(fig:fgggplot21) cho thấy phân phối đồng thời của hai biến `r colorize_style("carat")` và `r colorize_style("price")` trong dữ liệu `r colorize_style("diamond")` là phân phối có nhiều mode. Các điểm có tập trung mật độ đặc biệt cao là các điểm có (`r colorize_style("price")`, `r colorize_style("carat")`) bằng (1000, 0.3), (2200,0.7), và (4700, 1.0).
+
+#### Mô tả một biến liên tục và một biến rời rạc
+Đồ thị boxplot là phương pháp thông dụng nhất để mô tả mối liên hệ giữa một biến liên tục với một biến rời rạc. Đồ thị boxplot được vẽ bằng hàm `r colorize_style("geom_boxplot()")` với thuộc tính thẩm mỹ `r colorize_style("x")` được ánh xạ đến biến rời rạc và thuộc tính thẩm mỹ `r colorize_style("y")` được ánh xạ đên biến liên tục, hoặc ngược lại. Các thuộc tính thẩm mỹ như `r colorize_style("color")` và `r colorize_style("fill")` được sử dụng giống như `r colorize_style("geom_histogram()")`. Hình \@ref(fig:fgggplot22) mô tả mối liên hệ giữa biến thu nhập bình quân đầu người và biến Châu lục trong dữ liệu `r colorize_style("gapminder")` được lọc theo năm 2011.
+
+```{r fgggplot22, warning = FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Logarit của thu nhập bình quân đầu người của các quốc gia trên thế giới theo Châu lục năm 2011. Hình bên trái: Các châu lục được sắp xếp theo thứ tự tên Châu lục tăng dần. Hình bên phải: các châu lục được sắp xếp theo thứ tự giá trị trung bình của biến thu nhập bình quân đầu người tăng dần"}
+p1<-dat%>%ggplot(aes(x = continent, y = log(gdp_per_capita),
+                     fill=continent))+
+  geom_boxplot(color = "#640514")+
+  theme_minimal()+
+  theme(legend.position = "none")
+p2<-dat%>%ggplot(aes(x = reorder(continent, gdp_per_capita),
+                     y = log(gdp_per_capita), fill=continent))+
+  geom_boxplot(color = "#640514")+
+  theme_minimal()+
+  theme(legend.position = "none")
+grid.arrange(p1,p2,nrow=1, ncol = 2)
+```
+
+Thứ tự của các đồ thị hình hộp sẽ xuất hiện trên trục $\overrightarrow{Ox}$ theo thứ tự của các biến rời rạc. Tuy nhiên, để hiệu quả trực quan được tốt hơn, các đồ thị hình hộp nên được sắp xếp theo thứ tự mà giá trị trung bình của biến liên tục tương ứng với mỗi giá trị rời rạc tăng dần giống như đồ thị bên phải của Hình \@ref(fig:fgggplot22). Chúng ta có thể thấy rằng thu nhập bình quân đầu người của Châu Mỹ thấp hơn Châu Á mặc dù các giá trị trung vị và tứ phân vị thứ nhất cao hơn. Nguyên nhân là do phân phối của biến thu nhập bình quân đầu người của châu Á lệch phải mạnh hơn so với phân phối của biến này tại các nước châu Mỹ.
+
+Do `r colorize_style("geom_boxplot()")` chỉ thể hiện các giá trị phân vị của phân phối xác suất, nên đôi khi sẽ không cung cấp đầy đủ thông tin về phân phối của biến liên tục. Do đó, người phân tích dữ liệu thường sử dụng `r colorize_style("geom_violin()")` kết hợp cùng với `r colorize_style("geom_boxplot()")` để cho mô tả tốt hơn về phân phối xác suất của biến liên tục trong từng nhóm. `r colorize_style("geom_violin()")` đơn giản là vẽ hàm mật độ của biến liên tục trong từng nhóm được định nghĩa bởi biến rời rạc.
+
+```{r fgggplot23, warning = FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Logarit thu nhập bình quân đầu người của các quốc gia trên thế giới theo Châu lục năm 2011 kết hợp geom_boxplot và geom_violin"}
+p1<-dat%>%ggplot(aes(x = reorder(continent, log(gdp_per_capita)),
+                     y = log(gdp_per_capita), fill=continent))+
+  geom_boxplot(color = "#640514")+
+  theme_minimal()+
+  theme(legend.position = "none")
+p2<-dat%>%ggplot(aes(x = reorder(continent, log(gdp_per_capita)),
+                     y = log(gdp_per_capita)))+
+  geom_violin(draw_quantiles = c(0.25,0.5,0.75),
+              color = "#640514")+
+  theme_minimal()
+grid.arrange(p1,p2,nrow=1, ncol = 2)
+```
+Tham số `draw_quantiles` cho biết các giá ngưỡng phân vị mà chúng ta muốn vẽ cùng với các hàm mật độ. Trong Hình \@ref(fig:fgggplot23) sử dụng các ngưỡng phân vị 25%, 50% và 75% tương tự như `r colorize_style("geom_boxplot()")`.
+
+#### Mô tả hai biến rời rạc
+Đồ thị thường được sử dụng để mô tả trực quan phân phối của hai biến rời rạc là đồ thị kiểu bong bóng. Hàm số được sử dụng để trực quan đồ thị này là `r colorize_style("geom_count()")`. Tương ứng với mỗi cặp giá trị của hai biến rời rạc, hàm `r colorize_style("geom_count()")` tính toán số lượng điểm dữ liệu tương ứng với hai giá trị này và phản ánh số lượng điểm dữ liệu lên trên đồ thị thông qua kích thước của mỗi bong bóng. Để mô tả cách sử dụng của `r colorize_style("geom_count()")`, chúng ta mô tả phân phối của hai biến rời rạc là `r colorize_style("cut")` và `r colorize_style("color")` trong dữ liệu `r colorize_style("diamond")` như sau:
+
+```{r fgggplot24, warning=FALSE, message=FALSE,  fig.align='center', fig.retina=5, fig.cap = "Đồ thị bong bóng mô tả phân phối của hai biến rời rạc là cut và color trong dữ liệu diamonds. Hình bên trái sử dụng hình dạng tròn (shape = 21) để mô tả số điểm dữ liệu. Hình bên phải sử dụng hình vuông (shape = 22) để dễ phân biệt kích thước hơn"}
+p1<-diamonds%>%ggplot(aes(cut,color))+
+  geom_count(fill="#640514",alpha = 0.5,shape = 21)+
+  theme_minimal()+scale_size(range = c(1,12))+
+  theme(legend.position = "top")
+
+p2<-diamonds%>%ggplot(aes(cut,color))+
+  geom_count(fill="#640514",alpha = 0.5,shape = 22)+
+  theme_minimal()+scale_size(range = c(1,12))+
+  theme(legend.position = "top")
+grid.arrange(p1,p2,nrow=1, ncol = 2)
+```
+
+Các thuộc tính thẩm mỹ của `r colorize_style("geom_count()")` hoàn toàn giống với `r colorize_style("geom_point()")` nên chúng ta có thể lựa chọn các hình dạng cho phép phân biệt kích thước tốt hơn thay vì sử dụng hình tròn như mặc định. Đồ thị trực quan trong Hình \@ref(fig:fgggplot24) còn sử dụng hàm `r colorize_style("scale_size()")` để giúp cho hiển thị được tốt hơn. Chúng ta sẽ thảo luận về các hàm `r colorize_style("scale_()")` trong các phần tiếp theo. Từ Hình \@ref(fig:fgggplot24) để nhận ra tỷ lệ lớn các viên kim cương có biến `r colorize_style("cut")` nhận giá trị *'ideal'* và tỷ lệ lớn các viên kim cương có màu sắc nhận giá trị *'G'*. Các viên kim cương có biến `r colorize_style("cut")` nhận giá trị $'ideal'$ và biến `r colorize_style("color")` nhận giá trị *'G'* cũng xuất hiện nhiều nhất trong dữ liệu với số lượng hơn 4000 viên.
+
+Một phương pháp khác để trực quan hai biến rời rạc là trực quan một biến bằng `r colorize_style("geom_bar()")` sau đó ánh xạ thuộc tính `r colorize_style("fill")` đến biến rời rạc còn lại.
+
+
+#### Mô tả ba biến
+Thư viện `r colorize_style("ggplot2")` có hỗ trợ vẽ các hình ảnh trong không gian ba chiều, nhưng sử dụng hình ảnh kiểu 3 chiều không phải là một phương pháp tốt để hiển thị ba biến trên cùng một đồ thị. Khi mô tả mối liên hệ giữa ba biến, phương pháp đơn giản và hiệu quả nhất là sử dụng ba đồ thị, và mỗi đồ thị trực quan mô tả mối liên hệ giữa hai biến với nhau. Hướng tiếp cận khác để mô tả ba biến trên cùng một đồ thị là lựa chọn đồ thị trực quan cho hai biến trước sau đó ánh xạ biến còn lại vào một thuộc tính thẩm mỹ của đồ thị đó.
+
+* Trong trường hợp hai trong ba biến là biến liên tục và biến còn lại là biến rời rạc, hãy sử dụng đồ thị phân tán để mô tả hai biến liên tục và sử dụng màu sắc để mô tả (ánh xạ) từ biến rời rạc còn lại.
+
+* Khi hai trong ba biến là các biến rời rạc trong khi biến còn lại là biến liên tục, chúng ta có thể sử dụng `r colorize_style("geom_tile()")`. Thật vậy, hàm `r colorize_style("geom_tile()")` là một phương pháp hiệu quả khi mô tả mối liên hệ giữa hai biến rời rạc với một biến liên tục bằng cách ánh xạ hai biến rời rạc vào các thuộc tính thẩm mỹ `r colorize_style("x")` và `r colorize_style("y")`, trong khi giá trị của biến liên tục được mô tả thông qua màu sắc. Nếu tương ứng với một cặp giá trị của biến rời rạc ánh xạ đến thuộc tính `r colorize_style("x")` và thuộc tính `r colorize_style("y")` có nhiều giá trị của biến liên tục thì màu sắc được hiển thị nên là một giá trị thống kê đại diện cho giá trị biến liên tục, giá trị trung bình là một ví dụ. Thật vậy, hãy lấy ví dụ khi chúng ta muốn mô tả ba biến `r colorize_style("region")`, `r colorize_style("year")`, và `r colorize_style("life_expectancy")` của dữ liệu `r colorize_style("gapminder")` trên cùng một đồ thị. Các biến `r colorize_style("region")` và `r colorize_style("year")` là các biến rời rạc, do đó sẽ được ánh xạ đến các thuộc tính thẩm mỹ `r colorize_style("y")` và `r colorize_style("x")` của `r colorize_style("geom_tile()")`. Tương ứng với mỗi giá trị của `r colorize_style("region")` và `r colorize_style("year")`, chúng ta có một véc-tơ giá trị của biến liên tục `r colorize_style("life_expectancy")`. Để có thể trực quan hóa được bằng `r colorize_style("geom_tile()")`, chúng ta sẽ cần tính `r colorize_style("life_expectancy")` trung bình của mỗi vùng trước khi thực hiện trực quan hóa.
+
+```{r fgggplot25, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Tuổi thọ trung bình của các vùng trên thế giới thay đổi qua các năm từ năm 1960 đến năm 2015"}
+# Tạo danh sách các vùng có tuổi thọ trung bình tăng dần
+dat1<-gapminder%>%group_by(region)%>%
+     summarise(life_expectancy = mean(life_expectancy,na.rm = TRUE))%>%
+    arrange(desc(life_expectancy))
+region_list<-dat1$region
+
+# Tạo dải màu rời rạc từ cam tới xanh
+#
+mycol<-colorRampPalette(c("#EB492E", "grey95"),space = "Lab")(5)
+mycol<-c(mycol,colorRampPalette(c("grey95","#4C99EB"),space = "Lab")(5) )
+
+#mycol<-hcl_palettes(palette = "Red-Blue", n = 5)
+
+# Trực quan hóa 3 biến region, year, và life_expectancy
+gapminder%>%group_by(year,region)%>%
+     summarise(life_expectancy = mean(life_expectancy,na.rm = TRUE))%>%
+     ggplot()+
+     geom_tile(aes(x = year, y = region , fill = life_expectancy),color = "grey30", size = 0.1)+
+     scale_fill_gradientn(colours = mycol,
+                          guide = guide_legend(title = "Tuổi thọ trung bình") )+
+
+     scale_x_continuous(breaks = seq(1960,2015,5),
+                        limits = c(1960,2015))+
+     scale_y_discrete(limits = region_list)+
+     theme_minimal()+
+    xlab("")+ylab("")+
+    theme(legend.position = "top")
+```
+
+Trong các câu lệnh vẽ Hình \@ref(fig:fgggplot25) chúng tôi đã sử dụng thêm các hàm `r colorize_style("scale_()")` để kiểm soát các ánh xạ thẩm mỹ: giá trị của biến `r colorize_style("year")` xuất hiện trên trục $\overrightarrow{Ox}$ sẽ là cách đều 5 năm, các vùng trên trục $\overrightarrow{Oy}$ được sắp xếp theo thứ tự có tuổi thọ trung bình trên toàn bộ dữ liệu tăng dần. Dải màu sắc cũng được gán giá trị cho dải màu liên tục hai giá trị màu sắc khai báo trong các câu lệnh. Chúng ta sẽ thảo luận về `r colorize_style("scale_()")` trong phần sau của chương sách.
+
+### Các hàm `r colorize_style("stat_()")`
+Bạn đọc cũng có thể xây dựng các lớp cho đồ thị `r colorize_style("ggplot2")` bằng cách sử dụng các hàm `r colorize_style("stat_()")`. Các hàm số này không hiển thị dữ liệu ở trạng thái ban đầu mà thường hiển thị dữ liệu dưới một phép biến đổi thống kê hoặc một phương pháp tóm tắt dữ liệu. Có sự tương đương giữa các hàm `r colorize_style("stat_()")` với các hàm `r colorize_style("geom_()")`, nghĩa là chúng ta có thể gọi hàm `r colorize_style("geom_()")` bằng một hàm `r colorize_style("stat_()")` và ngược lại. Ví dụ `r colorize_style("stat_bin()")` tương đương với `r colorize_style("geom_histogram()")` và `r colorize_style("geom_bar()")`; `r colorize_style("stat_smooth()")` tương đương với `r colorize_style("geom_smooth()")`. Về bản chất, các *geom* và các *stat* đều có nguồn gốc từ chung một hàm tạo một lớp mới cho đồ thị là hàm `r colorize_style("layer_()")`. Chúng ta sẽ thảo luận về các hàm này trong phần Kiến thức nâng cao về `r colorize_style("ggplot2")`.
+
+Ví dụ, thay vì sử dụng `r colorize_style("geom_()")`, chúng ta có thể sử dụng `r colorize_style("stat_()")` để mô tả phân phối của các biến liên tục:
+
+```{r fgggplot26, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Phân phối của biến tỷ lệ sinh trung bình một phụ nữ (fertility) năm 2011. Hình bên trái: histogram và mật độ của biến fertility. Hình bên phải: phân phối của biến fertility theo các lục địa"}
+p1<-dat%>%ggplot(aes(fertility, after_stat(density)))+
+  stat_bin(fill = "#640514",alpha = 0.5)+
+  stat_density(color = "darkblue",alpha = 0.1)+
+  theme_minimal()
+p2<-dat%>%ggplot(aes(x = reorder(continent,fertility), y = fertility,fill = continent))+
+  stat_boxplot(alpha = 0.7, color = "#640514")+
+  theme_minimal()+
+  theme(legend.position = "none")
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+Bạn đọc có thể thấy rằng các đồ thị trong Hình \@ref(fig:fgggplot26) được tạo bằng các hàm `r colorize_style("stat_()")` và cho kết quả hoàn toàn giống với các hàm `r colorize_style("geom_()")` tương ứng.
+
+## Nhóm hàm `r colorize_style("scale_()")`
+Các hàm `r colorize_style("scale_()")` trong thư viện `r colorize_style("ggplot2")` được sử dụng để kiểm soát ánh xạ thẩm mỹ từ các biến trong dữ liệu đến thuộc tính thẩm mỹ của đồ thị. Các hàm này sử dụng dữ liệu thô ban đầu để biến đổi thành các đối tượng trực quan mà chúng ta có thể nhìn thấy như kích thước, màu sắc, vị trí, hoặc hình dạng. Bạn đọc có thể tạo đồ thị bằng thư viện `r colorize_style("ggplot2")` mà không cần biết chính xác các ánh xạ thẩm mỹ hoạt động như thế nào vì các cài mặc định của thư viện `r colorize_style("ggplot2")` đã được lựa chọn kỹ càng. Tuy nhiên, hiểu về nguyên tắc biến đổi từ giá trị thành đối tượng trực quan của `r colorize_style("ggplot2")` và hiểu cách hoạt động của các hàm `r colorize_style("scale_()")` sẽ giúp bạn kiểm soát tốt những đối tượng trực quan trên đồ thị và tạo được đồ thị trực quan theo ý của mình.
+
+### Vị trí xuất hiện trên trục tọa độ
+Đa số các đồ thị trực quan được vẽ bằng thư viện `r colorize_style("ggplot2")` hiển thị dữ liệu trên trục tọa độ Descartes nên chúng tôi sẽ tập trung vào cách dữ liệu được mô tả khi ánh xạ đến trục tọa độ $\overrightarrow{Ox}$ và $\overrightarrow{Oy}$. Khi ánh xạ các biến của dữ liệu tới các trục tọa, nếu chúng ta không sử dụng các hàm `r colorize_style("scale_()")`, dữ liệu sẽ được hiển thị đúng như giá trị ban đầu trên các trục tọa độ. Trong nhiều trường hợp, hiển thị tại vị trí đúng như dữ liệu ban đầu sẽ không mang lại hiệu quả. Chúng ta quay trở lại ví dụ khi mô tả hai biến `r colorize_style("total")` và `r colorize_style("population")` của dữ liệu `r colorize_style("murders")` trong thư viện `r colorize_style("dslabs")`. Bạn đọc có thể so sánh cách hiển thị giữa việc không kiểm soát và có kiểm soát ánh xạ thẩm mỹ như Hình \@ref(fig:fgggplot27)
+
+```{r fgggplot27, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5,  fig.cap="Hiển thị dân số và số vụ sát nhân bằng súng của các bang trong dữ liệu murders. Hình bên trái: vị trí các điểm trên trục tọa độ là giá trị dữ liệu thô. Hình bên phải: vị trí trên các trục tọa độ đã được biến đổi bằng cách lấy logarit cơ số 10"}
+p1<-murders%>%ggplot(aes(x = population,y = total))+
+  geom_point(size = 2, shape = 21, color = "#640514")+
+  theme_minimal()+ggtitle("Không sử dụng scale")
+p2<-murders%>%ggplot(aes(x = population,y = total))+
+  geom_point(size = 2, shape = 21, color = "#640514")+
+  theme_minimal()+
+  scale_x_continuous(trans = "log10")+
+  scale_y_continuous(trans = "log10")+
+  ggtitle("Có sử dụng scale (log10)")
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+Có thể thấy rằng đồ thị bên phải của Hình \@ref(fig:fgggplot27) hiển thị rõ ràng hơn đồ thị bên trái. Các điểm dữ liệu hiển thị rõ ràng hơn  nhờ vào chúng ta đã gọi các hàm bằng các hàm `r colorize_style("scale_x_continuous()")` và `r colorize_style("scale_y_continuous()")` để tác động đến ánh xạ từ biến `r colorize_style("population")` đến thuộc tính `r colorize_style("x")` và ánh xạ từ biến `r colorize_style("total")` đến thuộc tính `r colorize_style("y")`. Đây là hai hàm số được dùng để kiểm soát vị trí xuất hiện của các điểm trên trục tọa độ khi các biến trong ánh xạ là các biến kiểu số liên tục. Các tham số có thể được sử dụng trong các hàm này bao gồm có:
+
+* Tham số `r colorize_style("trans")`, là viết tắt của *transformation*, nhận giá trị mặc định là `r colorize_style("'identity'")`, nghĩa là lấy chính xác giá trị của dữ liệu khi ánh xạ đến các thuộc tính `r colorize_style("x")` hoặc `r colorize_style("y")`. Để biết các giá trị khác mà tham số này có thể nhận được, bạn đọc có thể tham khảo trong tài liệu đi kèm với các hàm `r colorize_style("scale_x_continuous()")` và `r colorize_style("scale_y_continuous()")`. Khi sử dụng hàm các hàm này với tham số `r colorize_style("trans")`, với các biến $X_1$ và $X_2$ là các biến của dữ liệu được ánh xạ tới các thuộc tính thẩm mỹ `r colorize_style("x")` và `r colorize_style("y")`, và một hàm $f$ được gán giá trị cho tham số `r colorize_style("trans")`, giá trị xuất hiện trên trục tọa độ $\overrightarrow{Ox}$ và $\overrightarrow{Oy}$ sẽ tương ứng là $f(X_1)$ và $f(X_2)$. Chẳng hạn như trong đồ thị bên phải của Hình \@ref(fig:fgggplot27), khi chúng ta sử dụng hàm `r colorize_style("scale_x_continuous()")` và `r colorize_style("scale_y_continuous()")`, với tham số `r colorize_style("trans")` được gán bằng `r colorize_style("'log10'")`, tọa độ (giá trị xuất hiện) của mỗi quốc gia trên các trục $\overrightarrow{Ox}$ và $\overrightarrow{Oy}$ sẽ là `r colorize_style("log10(population)")` và `r colorize_style("log10(total)")`. Việc chuyển đổi này sẽ hữu ích bởi rất đa số các bang có dân số nhỏ, trong khi có một vài bang có dân số rất lớn. Thực hiện chuyển đổi dữ liệu bằng hàm `r colorize_style("'log10'")` sẽ giúp cho khoảng cách của các điểm cách đều nhau hơn và dễ dàng phân biệt hơn với người quan sát đồ thị.
+* Tham số `r colorize_style("limits")` giới hạn giá trị trên các thuộc tính thẩm mỹ `r colorize_style("x")` và `r colorize_style("y")` của đồ thị. Mỗi khi chúng ta vẽ đồ thị và sử dụng thư viện `r colorize_style("ggplot2")`, tham số `r colorize_style("limits")` mặc định sẽ đảm bảo việc hiển thị được đầy đủ nhất. Trong một vài trường hợp, khi chúng ta cần phải thay đổi các giá trị giới hạn của các trục tọa độ, việc thay đổi miền giá trị là cần thiết để truyền tải ý nghĩa của dữ liệu. Ví dụ như khi muốn so sánh hai dữ liệu trên cùng một miền giá trị các biến được ánh xạ tới các trục tọa độ $\overrightarrow{Ox}$ và $\overrightarrow{Oy}$: các đồ thị trong Hình \@ref(fig:fgggplot28) mô tả hai biến `r colorize_style("fertility")` và `r colorize_style("life_expectancy")` trong các năm 1960 và 2011 và không sử dụng các hàm `r colorize_style("scale_()")`
+
+```{r fgggplot28, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Mối liên hệ giữa hai biến tỷ lệ sinh trung bình của mỗi phụ nữ và tuổi thọ trung bình của tất cả các quốc gia trên thế giới trong năm 1960 và năm 2010. Miền giá trị trên các trục tọa độ là khác nhau. Hình bên trái: dữ liệu năm 1960. Hình bên phải: dữ liệu năm 2011"}
+p1<-gapminder%>%filter(year==1960)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(size = 2, shape = 21 ,color = "#640514")+
+  ggtitle("Năm 1960")+
+  theme_minimal()
+p2<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(size = 2, shape = 21,color = "#640514")+
+  ggtitle("Năm 2011")+
+  theme_minimal()
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+Không thể dễ dàng nhận biết được sự khác biệt giữa hai đồ thị mô tả mối liên hệ giữa hai biến tỷ lệ sinh trung bình và tuổi thọ trung bình của các quốc gia trên thế giới sau 50 năm, từ năm 1960 đến năm 2010, do chúng ta không biểu diễn các biến trên cùng một miền giá trị của các trục tọa độ. Để khắc phục vấn đề này, Hình \@ref(fig:fgggplot29) sử dụng tham số `r colorize_style("limits")` trong các hàm `r colorize_style("scale_x_continuous()")` và `r colorize_style("scale_y_continuous()")`. Để khai báo tham số cho tham số này, chúng ta sử dụng một véc-tơ hai chiều chứa giá trị nhỏ nhất và giá trị lớn nhất trên trục tọa độ mà bạn muốn hiển thị.
+
+```{r fgggplot29, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Mối liên hệ giữa tỷ lệ sinh trung bình của mỗi phụ nữ và tuổi thọ trung bình của các quốc gia trên thế giới trong năm 1960 và 2010 sử dụng cùng một miền giá trị trên mỗi trục tọa độ. Hình bên trái: dữ liệu năm 1960. Hình bên phải: dữ liệu năm 2010"}
+p1<-gapminder%>%filter(year==1960)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(size = 2, shape = 21 ,color = "#640514")+
+  ggtitle("Năm 1960")+
+  scale_x_continuous(limits = c(1,9))+
+  scale_y_continuous(limits = c(25,85))+
+  theme_minimal()
+p2<-gapminder%>%filter(year==2010)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(size = 2, shape = 21,color = "#640514")+
+  ggtitle("Năm 2010")+
+  scale_x_continuous(limits = c(1,9))+
+  scale_y_continuous(limits = c(25,85))+
+  theme_minimal()
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+* Tham số `r colorize_style("breaks")` kiểm soát vị trí các điểm được đánh dấu xuất hiện trên các trục tọa độ. Chúng tôi thường kết hợp `r colorize_style("breaks")` với tham số `r colorize_style("labels")` để kiểm soát đồng thời vị trí và cách hiển thị trên các trục số. Ví dụ như trong đồ thị mô tả hai biến `r colorize_style("fertility")` và `r colorize_style("life_expectancy")` của các năm 1960 và năm 2010, chúng ta muốn giá trị xuất hiện trên trục $\overrightarrow{Ox}$ là các số 2, 4, 6, 8 và các số trên trục $\overrightarrow{Oy}$ xuất hiện tại các vị trí 10, 30, 50, 70, và 90, chúng ta chỉ cần khai báo giá trị cho tham số `r colorize_style("breaks")` bằng một véc-tơ chứa các giá trị mà chúng ta muốn hiển thị. Lưu ý rằng `r colorize_style("breaks")` có chữ `r colorize_style("s")` ở cuối để phân biệt với từ khóa `r colorize_style("break")`.
+
+```{r fgggplot30, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Mối liên hệ giữa hai biến tỷ lệ sinh trung bình và tuổi thọ trung bình của các quốc gia trên thế giới biểu diễn trên cùng một miền giá trị của mỗi trục tọa độ. Giá trị trên trục tọa độ được định nghĩa lại bằng các tham số breaks và labels. Hình bên trái: dữ liệu năm 1960. Hình bên phải: dữ liệu năm 2011"}
+p1<-gapminder%>%filter(year==1960)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(size = 2, shape = 21 ,color = "#640514")+
+  ggtitle("Năm 1960")+
+  scale_x_continuous(limits = c(1,9),
+                     breaks = c(2,4,6,8),
+                     labels = paste(c(2,4,6,8),"trẻ em"))+
+  scale_y_continuous(limits = c(25,85),
+                     breaks = c(10,30,50,70,90),
+                     labels = paste(c(10,30,50,70,90),"tuổi"))+
+  theme_minimal()
+p2<-gapminder%>%filter(year==2010)%>%
+  ggplot(aes(fertility,life_expectancy))+
+  geom_point(size = 2, shape = 21 ,color = "#640514")+
+  ggtitle("Năm 2010")+
+  scale_x_continuous(limits = c(1,9),
+                     breaks = c(2,4,6,8),
+                     labels = paste(c(2,4,6,8),"trẻ em"))+
+  scale_y_continuous(limits = c(25,85),
+                     breaks = c(10,30,50,70,90),
+                     labels = paste(c(10,30,50,70,90),"tuổi"))+
+  theme_minimal()
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+Khi một trong hai biến liên tục là biến kiểu thời gian thì hàm số sử dụng để kiểm soát giá trị hiển thị trên trục tọa độ là `r colorize_style("scale_x_date()")`, cùng với hai tham số thường được sử dụng là `r colorize_style("date_break")` và `r colorize_style("date_labels")`. Cách sử dụng của các tham số này tương tựng như các tham số `r colorize_style("breaks")` và `r colorize_style("labels")`. Bạn đọc có thể tham khảo cách sử dụng của hàm `r colorize_style("scale_x_date()")` thông qua ví dụ sau: chúng ta mô tả biến số lượng hành khách trung bình từng tháng được lưu trong dữ liệu `r colorize_style("AirPassengers")` theo một biến thời gian bắt đầu từ tháng 01 năm 1949:
+
+```{r fgggplot31, warning=FALSE, message=FALSE,fig.align='center', fig.retina=5, fig.cap = "Số lượng hành khách trung bình theo tháng trong dữ liệu AirPassenger. Hình bên trái: không sử dụng scale_x_date. Hình bên phải: sử dụng scale_x_date để hiển thị tốt hơn giá trị ngày tháng trên trục tọa độ"}
+dat0<-data.frame(Number_Passengers = AirPassengers,
+                Month = seq(as.Date("1949-01-01"), by = "month", length.out = 144))
+p1<-dat0%>%ggplot(aes(x = Month, y = Number_Passengers))+
+  geom_line(color = "#640514") + ggtitle("Không sử dụng scale")+
+  theme_minimal()
+p2<-dat0%>%ggplot(aes(x = Month, y = Number_Passengers))+
+  geom_line(color = "#640514")+ ggtitle("Sử dụng scale_x_date()")+
+  scale_x_date(date_break = "2 years", date_labels = "%b\n%Y" )+
+  scale_y_continuous(breaks = seq(100,600,length=6))+
+  theme_minimal()
+
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+Khi giá trị trên trục $\overrightarrow{Ox}$ hoặc trục $\overrightarrow{Oy}$ là các giá trị rời rạc, các hàm số sử dụng để kiểm soát ánh xạ thẩm mỹ từ các biến đến các trục tọa độ là các hàm `r colorize_style("scale_x_discrete()")` và `r colorize_style("scale_y_discrete()")` và các tham số thường sử dụng đi kèm với các hàm này là `r colorize_style("limits")` và `r colorize_style("labels")`. Tham số `r colorize_style("limits")` được sử dụng để cho biết các giá trị nào của biến rời rạc xuất hiện trên đồ thị, trong khi tham số `r colorize_style("labels")` cho biết từng giá trị của biến rời rạc xuất hiện như thế nào
+
+```{r fgggplot32, warning=FALSE, message=FALSE,fig.align='center', fig.retina=5, fig.cap = "Phân phối của biến tỷ lệ số vụ xả súng trên một triệu người dân theo vùng vào năm 2010 tại Mỹ. Hình bên trái: không sử dụng scale. Hình bên phải: sử dụng limits trên trục y và labels trên trục x cho hiển thị tốt hơn"}
+# Không sử dụng scale
+p1<-murders%>%mutate(rate = total/population*10^6)%>%
+  ggplot(aes(reorder(region,rate),rate, fill = region))+
+  geom_boxplot(color = "#640514")+
+  ggtitle("Không sử dụng scale")+
+  theme_minimal()+xlab("")+
+  theme(legend.position = "none")
+# Sử dụng tham số labels cho trục x
+# và sử dụng limits cho trục y
+p2<-murders%>%mutate(rate = total/population*10^6)%>%
+  ggplot(aes(reorder(region,rate),rate,fill = region))+
+  geom_boxplot(color = "#640514")+
+  scale_y_continuous(limits = c(0,50))+
+  # Thay thế giá trị hiển thị trên trục số bằng labels
+  scale_x_discrete(labels = c("Northeast" = "Đông Bắc",
+                              "West" = "Miền Tây",
+                              "South" = "Miền Nam",
+                              "North Central" = "Miền Bắc"))+
+  ggtitle("Sử dụng limits và labels")+
+  theme_minimal()+xlab("")+
+  theme(legend.position = "none")
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+
+### Màu sắc hiển thị
+Thuộc tính thẩm mỹ được sử dụng phổ biến nhất là màu sắc. Có nhiều cách để ánh xạ giá trị của biến tới màu sắc khi trực quan hóa dữ liệu bằng thư viện `r colorize_style("ggplot2")`. Vì màu sắc là một chủ đề phức tạp, chúng tôi sẽ bắt đầu bằng thảo luận sơ lược về lý thuyết màu sắc. Sau đó, chúng tôi sẽ giới thiệu đến bạn đọc về thang màu liên tục, thang màu rời rạc và thang màu tổng hợp được sử dụng để ánh xạ các biến rời rạc và biến liên tục trong trực quan hóa dữ liệu. Chúng tôi cũng sẽ đề cập đến các thang màu dành cho biến kiểu thời gian, kiểu ngày tháng, độ trong của các màu sắc hiển thị, và nguyên tắc chú giải cho màu sắc được thiết lập trong các đồ thị của `r colorize_style("ggplot2")`.
+
+#### Cảm nhận của con người về màu sắc
+Trong vật lý, màu sắc được tạo ra bởi hỗn hợp các bước sóng ánh sáng. Để mô tả đầy đủ về một màu sắc, chúng ta cần biết sự kết hợp chính xác của các bước sóng. Thực tế, mắt con người chỉ có ba cơ quan cảm nhận màu sắc khác nhau, vì vậy chúng ta có thể tóm tắt khả năng cảm nhận bất kỳ màu nào chỉ bằng ba con số. Một không gian màu quen thuộc với bạn đọc là không gian màu RGB, không gian mà mọi màu sắc được xác định theo cường độ ánh sáng đỏ, xanh da trời và xanh lá cây để tạo ra màu đó. Ưu điểm của không gian màu này là sự đơn giản do mỗi màu sắc đều được mô tả bằng ba con số từ 0 đến 255 hoàn toàn độc lập với nhau. Một vấn đề với không gian này là các dải màu liên tục nhận được bằng cách tăng giảm các cường độ màu đỏ, xanh lá cây, và xanh dương lại không giống như cách nhận thức về màu sắc của con người. Khi nhìn vào một màu cụ thể, chúng ta không thể ước tính được cường độ mỗi màu là bao nhiêu, điều này có thể gây khó khăn cho việc tạo ánh xạ từ một biến liên tục sang một dải màu.
+
+Mỗi khi hiển thị một giá trị màu sắc trong không gian RGB,ngôn ngữ R cũng như đa số các ngôn ngữ khác thường sử dụng kiểu chuỗi ký tự có 6 chữ số viết theo hệ 16, bắt đầu từ 0 và kết thúc ở F, và bắt đầu bằng một dấu '#'. Hai chữ số đầu đại diện cho sắc đỏ, 2 chữ số tiếp theo đại diện cho màu xanh lá cây và 2 chữ số cuối đại diện cho màu xanh da trời. Cường độ ánh sáng của mỗi màu sẽ bắt đầu từ `r colorize_style("'00'")` cho đến `r colorize_style("'FF'")`, nghĩa là có 256 mức độ cho mỗi màu. Bạn đọc có thể dễ dàng suy diễn ra mã của các màu sắc quen thuộc:
+
+* Màu đen: `r colorize_style("'#000000'")`
+* Màu trắng: `r colorize_style("'#FFFFFF'")`
+* Màu đỏ: `r colorize_style("'#FF0000'")`
+* Màu xanh lá cây: `r colorize_style("'#00FF00'")`
+* Màu xanh da trời: `r colorize_style("'#0000FF'")`
+
+Dễ dàng suy diễn và nhận biết chính là điểm mạnh của không gian màu RGB. Tuy nhiên, như chúng tôi đã thảo luận, sự liên tục của màu sắc trong không gian này lại không liên tục giống như cách cảm nhận màu sắc của con người. Chính vì thế những nhà nghiên cứu về màu sắc luôn cố gắng xây dựng các không gian màu sắc giống với cảm nhận về màu sắc của con người hơn không gian RGB.
+
+Một không gian màu có thể được sử dụng thay thế cho không gian RGB là không gian Lab mà trong đó:
+
+* L đại diện cho độ tương phản sáng-tối của màu sắc;
+* trục tọa độ a cho biết các vị trí của màu trên trục từ xanh lá cây đến đỏ;
+* trục tọa độ b cho biết các vị trí của màu trên trục từ xanh da trời đến màu vàng.
+
+Cải tiến từ không gian RGB sang không gian Lab giúp cho các dải màu sắc tương ứng hơn với khả năng nhận biết màu sắc của con người, tuy nhiên vẫn còn khoảng cách giữa không gian Lab với nhận thức màu sắc. Nhìn chung, không gian Lab có các ưu điểm vượt trội hơn không gian RGB do đó thư viện `r colorize_style("ggplot2")` mặc định sử dụng không gian Lab khi nội suy tuyến tính các màu sắc nằm giữa hai màu bất kỳ khi chúng ta ánh xạ một biến liên tục lên thuộc tính thẩm mỹ màu sắc.
+
+Một không gian màu khác có thể hạn chế vấn đề của không gian RGB là không gian màu HCL với ba thành phần màu: sắc độ (Hue), độ bão hòa (Chroma) và độ sáng (Luminance):
+
+* Sắc độ (Hue) nằm trong khoảng từ 0 đến 360 (một góc) và cho biết màu sắc chính muốn hiển thị.
+* Độ bão hòa (Chroma) là “độ tinh khiết” hay đậm của một màu, nằm trong khoảng từ 0 (xám) đến mức tối đa thay đổi theo mức độ đậm.
+* Độ sáng là độ sáng của màu, dao động từ 0 (đen) đến 1 (trắng).
+
+Ba chiều có những đặc tính khác nhau. Tương tự như không gian màu Lab, màu sắc trong HCL được sắp xếp xung quanh một hình tròn và không được coi là có trật tự; ví dụ: màu xanh lá cây không lớn hơn hay nhỏ hơn màu đỏ và màu xanh da trời không lớn hơn hay nhỏ hơn màu vàng. Ngược lại, độ bão hòa (đậm nhạt) và độ sáng đều được coi là có trật tự: màu hồng được coi là nằm giữa màu đỏ và trắng, và màu xám được coi là nằm giữa màu đen và trắng. Tạo các thang màu sắc từ không gian HCL thường được dựa trên nguyên tắc cố định 2 tham số và thay đổi tham số còn lại. Do không gian màu HCL gần với nhận thức màu sắc của con người hơn nên các dải màu được tạo ra sẽ "cách đều" nhau hơn theo cách mà chúng ta nhận thức.
+
+Xin được nhắc lại với bạn đọc rằng màu sắc là một chủ đề phức tạp mà phạm vi của nó vượt rất xa những gì mà chúng tôi đề cập ở trên. Bạn đọc nên tham khảo thêm các tài liệu chuyên ngành khoa học máy tính để có thể sử dụng màu sắc một cách hiệu quả nhất.
+
+#### Dải màu liên tục
+Dải màu liên tục được sử dụng để hiển thị giá trị của một biến liên tục trên bề mặt phẳng. Để kiểm soát màu sắc trong thư viện `r colorize_style("ggplot2")`, chúng ta sử dụng các hàm `r colorize_style("scale_color_()")`. Lưu ý rằng các thuộc tính thẩm mỹ `r colorize_style("color")` và `r colorize_style("fill")` có thể được sử dụng song song với đa số các hình dạng đồ họa, do đó bất kỳ hàm `r colorize_style("scale_color_()")` cũng có hàm `r colorize_style("scale_fill_()")` tương ứng.
+
+Dải màu liên tục thường được sử dụng cùng với các hàm `r colorize_style("geom_()")` có hình dạng đồ họa cần màu sắc để phân biệt trên trên mặt phẳng như `r colorize_style("geom_polygon()")`, `r colorize_style("geom_tile()")`, `r colorize_style("geom_raster()")`), và `r colorize_style("geom_bin2d()")`. Mỗi khi chúng ta cho một biến liên tục ánh xạ đến thuộc tính thẩm mỹ màu sắc, thư viện `r colorize_style("ggplot2")` sẽ tự động hiểu rằng chúng ta sử dụng dải màu liên tục để mô tả biến đó.
+
+Chúng ta sẽ làm quen với các dải màu liên tục thông qua trực quan hóa hàm mật độ của biến ngẫu nhiên phân phối chuẩn hai chiều với trung bình 0, phương sai 1 và hệ số tương quan $\rho = 0.8$. Lưu ý rằng hàm mật độ của hai biến ngẫu nhiên phân phối chuẩn $\mathcal{N}(0,1)$ với hệ số tương quan $\rho = 0.8$ được tính như sau
+\begin{align}
+f(x,y) = \cfrac{1}{2 \pi \sqrt{1-\rho^2}} \ \exp \left(- \cfrac{x^2 + y^2 - 2\rho x y}{1-\rho^2}  \right)
+\end{align}
+
+Đồ thị hàm mật độ của véc-tơ ngẫu nhiên có phân phối chuẩn hai chiều được lưu trong đối tượng có tên `r colorize_style("p")` và được tạo thành từ các đoạn câu lệnh như dưới như dưới đây
+```{r, warning=FALSE,message=FALSE}
+# tạo lưới điểm trên hình vuông [-2,2] * [2-,2]
+n<-100
+x<-rep(1:n,n)/n*4-2
+y<-sort(x, decreasing = FALSE)
+rho<-0.8
+dat0<-data.frame(X=x,Y=y,
+                dens = 1/(2*pi*sqrt(1-rho^2)) *
+                  exp(-(x^2+y^2-2*rho*x*y)/(1-rho^2)))
+p<-dat0%>%ggplot(aes(x,y,fill=dens))+geom_raster()+
+  theme_minimal()
+```
+
+Phương pháp đơn giản nhất để kiểm soát ánh xạ thẩm mỹ từ một biến liên tục đến thuộc tính màu sắc là lựa chọn các dải màu liên tục có sẵn trong thư viện `r colorize_style("ggplot2")`, hoặc trong các thư viện được cài đặt bổ sung. Các dải màu có sẵn này đều đã được xây dựng để ngay cả những người gặp khó khăn trong phân biệt màu sắc cũng có thể cảm nhận được. Trong Hình \@ref(fig:fgggplot32), chúng tôi lựa chọn các dải màu như sau:
+
+1. Dải màu liên tục mặc định của thư viện `r colorize_style("ggplot2")`;
+2. Dải màu liên tục viridis, được gọi bằng hàm `r colorize_style("scale_fill_viridis_c()")`;
+3. Dải màu liên tục distiller, được gọi bằng hàm `r colorize_style("scale_fill_distiller()")`;
+4. Dải màu liên tục fermenter, được gọi bằng hàm `r colorize_style("scale_fill_fermenter")`.
+
+Trong mỗi hàm `r colorize_style("scale_fill_()")` chúng ta đều sử dụng tham số `r colorize_style("palette")` để lựa chọn dải các dải màu sắc có sẵn.
+
+```{r fgggplot33, warning=FALSE,message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Hàm mật độ của véc-tơ ngẫu nhiên phân phối chuẩn hai chiều với hệ số tương quan bằng 0.8. Hình góc trên bên trái: dải màu liên tục mặc định của ggplot2. Hình góc trên bên phải: dải màu viridis với option = 'A'. Hình góc dưới bên trái: dải màu liên tục distiller số 3. Hình góc dưới bên phải: dải màu liên tục fermenter số 2"}
+
+p1<-p + scale_fill_continuous()+
+  ggtitle("Màu mặc định") # sử dụng dải màu mặc định
+p2<-p + scale_fill_viridis_c(option = "A")+ # Dải màu viridis liên tục
+  ggtitle("Dải màu viridis")
+p3<-p + scale_fill_distiller(palette = 3)+ # Dải màu distiller
+  ggtitle("Dải màu distiller")
+p4<-p + scale_fill_fermenter(palette = 2)+ # Dải màu fermenter
+  ggtitle("Dải màu fermenter")
+grid.arrange(p1,p2,p3,p4,nrow=2,ncol=2)
+```
+
+Để dải màu sắc liên tục có tính cá nhân hóa cao hơn, bạn đọc có thể chỉ định thang màu sắc thay vì sử dụng các thang màu có sẵn. Nhóm các hàm `r colorize_style("scale_*_gradient()")` là các công cụ mạnh mẽ giúp bạn đọc thực hiện việc này. Bạn đọc cần cung cấp các giá trị màu sắc tương ứng với giá trị bắt đầu của dải màu, giá trị kết thúc của dải màu, và có thể thêm một vài giá trị trung gian, thư viện `r colorize_style("ggplot2")` sẽ nội suy tuyến tính ra các màu sắc thành một dải màu tương ứng với các giá trị mà bạn khai báo. Các hàm số có thể được sử dụng để tạo dải màu liên tục bao gồm có:
+
+* Hàm `r colorize_style("scale_fill_gradient()")` tạo một thang màu liên tục giữa hai màu sắc mà bạn khai báo. Hai tham số được sử dụng để khai báo là giá trị bắt đầu và giá trị kết thúc của dải màu là tham số `r colorize_style("low")` và tham số `r colorize_style("high")`. Đây cũng chính là cách tạo dải màu liên tục mặc định của thư viện `r colorize_style("ggplot2")`; mỗi khi chúng ta sử dụng ánh xạ thẩm mỹ từ một biến liên tục đến thuộc tính màu sắc, thư viện `r colorize_style("ggplot2")` sử dụng dải màu liên tục theo hàm số `r colorize_style("scale_fill_gradient()")` với giá trị tham số `r colorize_style("low")` là `r colorize_style("#132B43")` và giá trị tham số `r colorize_style("high")` là `r colorize_style("#56B1F7")`. Không gian nội suy tuyến tính thang màu là luôn luôn là không gian màu Lab.
+* Một hàm số khác cũng được dùng để tạo một dải màu liên tục là `scale_fill_gradient2()`. Ngoài hai tham số `r colorize_style("low")` và `r colorize_style("high")` tương ứng với là điểm bắt đầu và điểm kết thúc của thang màu, chúng ta cần khai báo thêm một màu ở giữa bằng tham số `r colorize_style("mid")`. Ngoài ra, chúng ta cần khai báo tham số `r colorize_style("midpoint")`, là giá trị của biến liên tục tương ứng với màu được khai báo với tham số `r colorize_style("mid")`! Nếu không khai báo, tham số `r colorize_style("midpoint")` sẽ nhận giá trị mặc định là 0.
+* Hàm `r colorize_style("scale_fill_gradientn()")` tạo một thang màu liên tục từ một véc-tơ chứa các màu sắc mà bạn đọc khai báo. Dải màu này bắt đầu từ màu sắc có vị trí đầu tiên trong véc-tơ, đi qua lần lượt các màu sắc được khai báo, và kết thúc ở màu sắc tương ứng với giá trị cuối cùng của véc-tơ.
+
+Cách sử dụng các hàm `r colorize_style("scale_*_gradient()")` được thể hiện thông qua ví dụ trong Hình \@ref(fig:fgggplot34)
+
+```{r fgggplot34, warning=FALSE,message=FALSE,fig.align='center', fig.retina=5, fig.cap = "Hàm mật độ của biến ngẫu nhiên phân phối chuẩn hai chiều với hệ số tương quan bằng 0.8. Hình góc trên bên trái: dải màu liên tục mặc định của ggplot2. Hình góc trên bên phải: dải màu liên tục bắt đầu từ xanh da trời (low) và kết thúc tại màu đỏ (high). Hình góc dưới bên trái: dải màu liên tục bắt đầu từ xanh da trời (low) đi qua màu trắng (mid) và kết thúc tại màu đỏ (high). Hình góc dưới bên phải: dải màu liên tục bắt đầu từ xanh lá cây đi qua, màu trắng, màu xanh da trời và kết thúc tại màu vàng."}
+p1<-p + ggtitle("Màu mặc định") # sử dụng dải màu mặc định
+p2<-p + scale_fill_gradient(low = "blue", high = "red")+
+  ggtitle("Dải màu từ xanh lam đến đỏ") # sử dụng dải màu từ xanh lam đến đỏ
+p3<-p + scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0.12)+
+  ggtitle("Dải màu từ xanh lam đến đỏ điểm giữa là trắng")
+p4<-p +  scale_fill_gradientn(colours = c("#00FF00","#FFFFFF","#0000FF", "#FFFF00"))+
+  ggtitle("Dải màu đi qua nhiều điểm màu")
+grid.arrange(p1,p2,p3,p4,nrow=2,ncol=2)
+```
+
+Cả ba hàm số ở trên đều nội suy tuyến tính trong không gian màu Lab để tạo ra các giải màu liên tục. Khi nói đến nội suy tuyến tính giữa hai màu sắc, sẽ dễ hiểu nếu bạn đọc sử dụng không gian RGB mà tất cả các màu đều nằm trong một hình lập phương với điểm (0,0,0) là màu đen, (1,1,1) là màu trắng. Có thể hiểu nội suy màu sắc một cách đơn giản như sau: mỗi màu sắc hiển thị có ba thành phần là cường độ màu đỏ (r), cường độ màu xanh lá (g) cường độ màu xanh lam (b) ... Một dải màu bao gồm $n$ màu, bắt đầu từ màu $m_1$ bao gồm các thành phần $(r_1, g_1, b_1)$, đến màu $m_n$ với thành phần $(r_n, g_n, b_n)$ sẽ là các màu $m_i$ có các thành phần tương ứng
+\begin{align}
+r_i = \left[r_1 + (i-1) * \cfrac{r_n - r_1}{(n-1)} \right] \\
+g_i = \left[g_1 + (i-1) * \cfrac{g_n - g_1}{(n-1)} \right] \\
+b_i = \left[b_1 + (i-1) * \cfrac{b_n - b_1}{(n-1)} \right]
+\end{align}
+
+Nói một cách đơn giản, trong không gian RGB dải màu liên tục sẽ là tất cả các điểm nằm trên đường thẳng nối điểm bắt đầu (low) và điểm kết thúc (high). Đáng tiếc là trong không gian Lab việc nội suy màu sắc không đơn giản như vậy. Việc nội suy dựa trên các tính toán phức tạp và kết quả cuối cùng là các công thức gần đúng. Ưu điểm của nội suy màu sắc trong không gian Lab so với không gian RGB sự chuyển đổi màu sắc giữa các điểm mượt mà hơn rất nhiều trong cách nhận biết màu sắc của con người.
+
+Hàm số để nội suy một véc-tơ màu rời rạc từ hai màu sắc bất kỳ trên không gian RGB hoặc không gian Lab là hàm `r colorize_style("colorRampPalette()")` của thư viện `r colorize_style("grDevices")`. Ví dụ, chúng ta có thể sử dụng hàm `r colorize_style("colorRampPalette()")` để nội suy các véc-tơ màu bắt đầu từ màu xanh da trời và kết thúc ở màu cam như sau:
+
+```{r, warning=FALSE,message=FALSE}
+n<-200
+my_rgb_palette<-colorRampPalette(c("blue", "orange"),space = "rgb")(n+1)
+my_lab_palette<-colorRampPalette(c("blue", "orange"),space = "Lab")(n+1)
+```
+
+Để so sánh hiệu quả khi nội suy dải màu trên không gian RGB và không gian Lab, chúng ta sẽ sử dụng hai dải màu kể trên mô tả hàm mật độ xác suất của biến phân phối chuẩn hai chiều. Do các hàm `r colorize_style("scale_fill_gradient()")` luôn nội suy trên không gian Lab nên để hiển thị dải màu RGB, chúng ta cần rời rạc hóa giá trị mật độ hàm mật độ trước khi ánh xạ đến dải màu rời rạc được tạo ra từ hàm `r colorize_style("colorRampPalette()")`
+
+```{r fgggplot35, warning=FALSE,message=FALSE , fig.align='center', fig.retina=5, fig.cap = "Hàm mật độ của véc-tơ ngẫu nhiên phân phối chuẩn hai chiều với hệ số tương quan bằng 0.8. Hình bên trái: dải màu nội suy trên không gian RGB. Hình bên phải: dải màu nội suy trên không gian Lab"}
+
+x<-rep(1:n,n)/n*4-2
+y<-sort(x, decreasing = FALSE)
+rho<-0.8
+dat0<-data.frame(x=x,y=y,dens = 1/(2*pi*sqrt(1-rho^2)) * exp(-(x^2+y^2-2*rho*x*y)/(1-rho^2)))
+h<-(max(dat0$dens)-min(dat0$dens))/n
+dat0<-mutate(dat0,dens.d = round((dens - min(dat0$dens))/h))
+dat0$dens.d<-as.factor(dat0$dens.d)
+
+mycol<-colorRampPalette(c("blue", "orange"),space = "rgb")(n+1)
+
+p1<-dat0%>%ggplot(aes(x,y,fill=dens.d))+geom_raster()+theme_minimal()+
+  scale_fill_manual(values= mycol)+
+  theme(legend.position = "none")+
+  ggtitle("Nội suy trên RGB")
+
+mycol<-colorRampPalette(c("blue", "orange"),space = "Lab")(n+1)
+p2<-dat0%>%ggplot(aes(x,y,fill=dens.d))+geom_raster()+theme_minimal()+
+  scale_fill_manual(values= mycol)+
+  theme(legend.position = "none")+
+  ggtitle("Nội suy trên Lab")
+grid.arrange(p1,p2,ncol=2,nrow=1)
+```
+
+Cả hai đồ thị đều sử dụng dải màu liên tục từ màu xanh da trời đến màu cam để mô tả mật độ của phân phối chuẩn hai chiều có hệ số tương quan $\rho=0.8$. Bạn đọc có thể thấy rằng việc chuyển hóa màu sắc trên không gian màu Lab ít làm thay đổi độ sáng tối của màu sắc và tự nhiên với mắt quan sát hơn so với không gian RGB. Đây là lý do tại sao các dải màu liên tục của thư viện `r colorize_style("ggplot2")` mặc định sử dụng không gian Lab để nội suy màu sắc.
+
+Các tham số `r colorize_style("limits")`, `r colorize_style("breaks")`, và `r colorize_style("label")` cũng có thể được sử dụng trong các hàm `r colorize_style("scale_fill_()")` và `r colorize_style("scale_color_()")` để kiểm soát các thang màu liên tục.
+
+* Tham số `r colorize_style("limits")` khi sử dụng cần được gán giá trị là một véc-tơ hai phần tử, phần tử thứ nhất cho biết màu sắc bắt đầu trong thang màu tương ứng với giá trị nào trong biến liên tục và phần tử thứ hai cho biết màu sắc kết thúc của thang màu ứng với giá trị nào của biến liên tục.
+* Các tham số `r colorize_style("breaks")` và `r colorize_style("labels")` được sử dụng để thay đổi giá trị trên thang màu của chú giải.
+
+```{r, echo = FALSE}
+# tạo lưới điểm trên hình vuông [-2,2] * [2-,2]
+n<-100
+x<-rep(1:n,n)/n*4-2
+y<-sort(x, decreasing = FALSE)
+rho<-0.8
+dat0<-data.frame(X=x,Y=y,
+                dens = 1/(2*pi*sqrt(1-rho^2)) *
+                  exp(-(x^2+y^2-2*rho*x*y)/(1-rho^2)))
+p<-dat0%>%ggplot(aes(x,y,fill=dens))+geom_raster()+
+  theme_minimal()
+```
+
+
+```{r fgggplot36, warning=FALSE,message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Hàm mật độ của véc-tơ ngẫu nhiên phân phối chuẩn hai chiều với hệ số tương quan bằng 0.8. Hình bên trái: sử dụng tham số limits trong scale_fill_gradient(). Hình bên phải: sử dụng limits, breaks và labels trong scale_fill_gradient()"}
+# limits cho biết hai giá trị tương ứng với điểm đầu và cuối của dải màu
+p1<-p + scale_fill_gradient(low = "blue", high = "orange",
+                            limits = c(0,0.8))+
+  ggtitle("Tham số limits")
+# breaks cho biết các giá trị nào xuất hiện trên chú giải
+# labels cho biết giá trị hiển thị trong chú giải
+p2<-p + scale_fill_gradient(low = "blue", high = "orange",
+                            limits = c(0,0.3),
+                            breaks = c(0.1,0.15,0.25),
+                            labels = paste("Density at", c(0.1,0.15,0.25)))+
+  ggtitle("Tham số breaks và labels")
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+* Đồ thị bên trái của Hình \@ref(fig:fgggplot36) sử dụng giá trị của tham số `r colorize_style("limits")` là từ 0 đến 0.8 trong khi giá trị lớn nhất của hàm mật độ tại tâm ellipse chỉ khoảng 0.3. Màu bắt đầu của dải màu là màu xanh da trời tương ứng với giá trị thứ nhất của tham số `r colorize_style("limits")` là 0 và màu kết thúc của dải màu là màu cam tương ứng với giá trị thứ hai của tham số `r colorize_style("limits")` là 0.8. Điều này giải thích tại sao cả các giá trị nằm trong tâm của hình ellipse chưa chuyển thành màu cam.
+* Đồ thị bên phải của Hình \@ref(fig:fgggplot36) sử dụng tham số `r colorize_style("limits")` từ 0 đến 0.3 nên các giá trị càng nằm gần tâm đường ellipse càng chuyển sang màu cam. Tham số `r colorize_style("breaks")` thay đổi các vị trí giải thích thang màu trên chú giải của thuộc tính màu sắc, trong khi tham số `r colorize_style("labels")` kiểm soát cách hiển thị tại các vị trí trên thang màu.
+
+#### Dải màu rời rạc
+
+Dải màu rời rạc dùng để mô tả thuộc tính thẩm mỹ màu sắc khi ánh xạ đến thuộc tính thẩm mỹ này là các biến rời rạc. Hàm số dùng để kiểm soát màu sắc rời rạc khi trực quan hóa dữ liệu bằng thư viện `r colorize_style("ggplot2")` là các hàm `r colorize_style("scale_fill_discrete()")` và `r colorize_style("scale_color_discrete()")`. Mỗi khi sử dụng các hàm số kể trên, thư viện `r colorize_style("ggplot2")` sẽ mặc định sử dụng dải màu rời rạc cách đều nhau trong không gian màu HCL. Dải màu rời rạc mặc định có cùng độ bão hòa (*Chroma*), được ký hiệu bằng tham số `r colorize_style("c")`, cùng độ sáng (*Luminance*), được ký bằng tham số `r colorize_style("l")`, và khác nhau về sắc độ (*Hue*), được ký hiệu bằng tham số `r colorize_style("h")`. Sắc độ là tham số chính trong ba cấu phần và nhận giá trị từ 0 đến 360 (độ). Sắc độ `r colorize_style("h")` của một dải màu rời rạc mặc định luôn cách đều nhau với giá trị ban đầu là 15 (độ).
+
+Bạn đọc muốn sử dụng các dải màu rời rạc trong không gian HCL để ánh xạ tới biến rời rạc thì có thể sử dụng các hàm `r colorize_style("scale_fill_hue()")` và `r colorize_style("scale_color_hue()")` thay thế cho `r colorize_style("scale_fill_discrete()")` và `r colorize_style("scale_color_discrete()")`. Cách sử dụng các hàm số này được thể hiện qua ví dụ trong Hình \@ref(fig:fgggplot37)
+
+```{r fgggplot37, warning=FALSE,message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Mô tả phân phối của biến continent trong dữ liệu gapminder lọc theo năm 2011. Hình bên trái: Sử dụng dải màu rời rạc mặc định. Hình ở giữa: sử dụng dải màu rời rạc trong không gian HCL với sắc độ (tham số h) thay đổi. Hình bên phải: sử dụng dải màu rời rạc trong không gian HCL với độ bão hòa (tham số c) thay đổi"}
+
+p1<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+
+  geom_bar()+ggtitle("Màu rời rạc mặc định")+
+  theme_minimal()+
+  theme(legend.position = "none")
+p2<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_hue(h=c(0,360)+15+360/5)+
+  ggtitle("Thay đổi tham số h")+
+  theme_minimal()+
+  theme(legend.position = "none")
+p3<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_hue(c=30)+ggtitle("Thay đổi tham số c")+
+  theme_minimal()+
+  theme(legend.position = "none")
+grid.arrange(p1,p2,p3,nrow=1,ncol=3)
+```
+
+Dải màu mặc định đối với biến rời rạc sử dụng tham số `r colorize_style("c")` bằng 100 và tham số `r colorize_style("l")` bằng 65 trong khi tham số `r colorize_style("h")` nhận các giá trị cách đều nhau, bắt đầu từ `r colorize_style("h = 15")` (độ). Lưu ý rằng:
+
+* `r colorize_style("h")` nhận giá trị từ 0 độ đến 360 độ nên trong trong đồ thị ở trên, khi biến `r colorize_style("continent")` có năm giá trị, các màu sắc sẽ lần lượt nhận các giá trị với tham số `r colorize_style("h")` là $15$, $15 + 360/5$, $15 + 2 \times 360/5$, $15 + 3 \times 360/5$ và $15 + 4 \times 360/5$. Đó là màu sắc của các thanh trong đồ thị bên trái của Hình \@ref(fig:fgggplot37) theo thứ tự từ trái qua phải.
+* Trong đồ thị ở giữa, khi chúng ta tăng giá trị ban đầu của `r colorize_style("h")` thêm 360/5 (độ), chúng ta có thể thấy các màu sắc bắt đầu từ $h = 15 + 360/5$ và kết thúc ở $h = 15$. Nghĩa là màu sắc trong thanh thứ nhất của đồ thị bên trái đã trở thành màu sắc của thanh thứ năm trong đồ thị ở giữa.
+* Trong đồ thị bên phải, chúng tôi giảm độ chói (tham số `r colorize_style("c")`) xuống còn 40. Chúng ta có thể thấy dải màu vẫn tương tự như hai đồ thị còn lại nhưng có sự khác biệt về độ chói.
+
+Bạn đọc cũng có thể sử dụng các dải màu rời rạc được thiết kế sẵn trong thư viện `r colorize_style("ggplot2")`. Dải màu rời rạc mà chúng tôi thường sử dụng là dải màu brewer. Những dải màu này được thiết kế để hoạt động tốt trong nhiều tình huống khác nhau kể cả đối với những người khó khăn khi nhận biết màu sắc hay khi sử dụng để hiển thị trên những bề mặt lớn. Hàm số để kiểm soát ánh xạ thẩm mỹ màu sắc sử dụng dải màu brewer là `r colorize_style("scale_color_brewer()")` và `r colorize_style("scale_fill_brewer()")`. Bạn đọc cần cài đặt thư viện `r colorize_style("RColorBrewer")` để sử dụng được các hàm này. Để xem các dải màu có sẵn trong thư viện này, bạn đọc sử dụng câu lệnh sau
+
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+display.brewer.all()
+```
+
+Tham số `r colorize_style("palette")` trong hàm `r colorize_style("scale_color_brewer()")` được sử dụng để lựa chọn dải màu:
+
+```{r fgggplot38, warning=FALSE,message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Mô tả phân phối xác suất của biến continent trong dữ liệu gapminder lọc theo năm 2011 và màu sắc sử dụng là dải màu brewer. Hình bên trái: sử dụng dải màu Dark2. Hình ở giữa: sử dụng dải màu Set1. Hình bên phải: sử dụng dải màu Spectral"}
+
+p1<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_brewer(palette = "Dark2")+
+  ggtitle("Sử dụng dải màu Dark2")+
+  theme_minimal()+
+  theme(legend.position = "none")
+p2<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_brewer(palette = "Set1")+
+  ggtitle("Sử dụng dải màu Set1")+
+  theme_minimal()+
+  theme(legend.position = "none")
+p3<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_brewer(palette = "Spectral")+
+  ggtitle("Sử dụng dải màu Spectral")+
+  theme_minimal()+
+  theme(legend.position = "none")
+grid.arrange(p1,p2,p3,nrow=1,ncol=3)
+```
+
+Bạn đọc có thể tự tạo ra dải màu rời rạc cho các giá trị của thuộc tính thẩm mỹ màu sắc bằng cách sử dụng các hàm `r colorize_style("scale_fill_manual()")` và `r colorize_style("scale_color_manual()")`. Tham số `r colorize_style("values")` được sử dụng để nhận giá trị là véc-tơ chứa màu sắc mà bạn đọc tự tạo. Số lượng phần tử trong véc-tơ phải tương ứng với số lượng phần tử trong biến rời rạc.
+
+Như chúng tôi đã giới thiệu trong phần dải màu sắc liên tục, hàm số `r colorize_style("colorRampPalette()")` của thư viện `r colorize_style("grDevices")` có thể được sử dụng để nội suy ra một véc-tơ màu rời rạc giữa hai giá trị màu cho trước. Ví dụ, để tạo ra một véc-tơ có độ dài 5, mỗi giá trị là một màu sắc được nội suy tuyến tính từ màu xanh da trời đến màu cam chúng ta viết câu lệnh như sau:
+```{r, warning=FALSE, message=FALSE}
+# nội suy trong RGB
+mypalette1<-colorRampPalette(c("blue","orange"), space = "rgb")(5)
+# nội suy trong Lab
+mypalette2<-colorRampPalette(c("blue","orange"), space = "Lab")(5)
+```
+
+Các đồ thị trong Hình \@ref(fig:fgggplot39) sử dụng các véc-tơ màu sắc rời rạc tự định nghĩa bằng cách liệt kê các màu sắc trong `r colorize_style("scale_fill_manual()")` và bằng nội suy tuyến tính trong không gian RGB và không gian Lab.
+
+```{r fgggplot39, warning=FALSE,message=FALSE, fig.align='center', fig.retina=5,   fig.cap = "Mô tả phân phối của biến continent trong dữ liệu gapminder được lọc theo năm 2011 và sử dụng dải màu tự định nghĩa. Hình bên trái: dải màu được tự định nghĩa bằng cách liệt kê tên các màu sắc. Hình ở giữa: nội suy trong không gian RGB giữa xanh da trời và màu cam. Hình bên phải: nội suy trong không gian Lab giữa màu xanh da trời và màu cam"}
+p1<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_manual(values = c("blue","green","grey","yellow","orange"))+
+  ggtitle("Màu tự định nghĩa")+
+  theme_minimal()+
+  theme(legend.position = "none")
+p2<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_manual(values = mypalette1)+
+  ggtitle("Màu nội suy trong RGB")+
+  theme_minimal()+
+  theme(legend.position = "none")
+p3<-gapminder%>%filter(year==2011)%>%
+  ggplot(aes(continent,fill=continent))+geom_bar()+
+  scale_fill_manual(values = mypalette2)+
+  ggtitle("Màu nội suy trong Lab")+
+  theme_minimal()+
+  theme(legend.position = "none")
+grid.arrange(p1,p2,p3,nrow=1,ncol=3)
+```
+
+Cách sử dụng tham số `r colorize_style("limits")`, `r colorize_style("breaks")`, và `r colorize_style("label")` trong các hàm `r colorize_style("scale_fill_manual()")` và `r colorize_style("scale_color_manual()")` cũng tương tự như khi sử dụng đối với dải màu liên tục:
+
+* Tham số `r colorize_style("limits")` cho biết các giá trị nào trong biến rời rạc được ánh xạ tới dải màu sắc.
+* Tham số `r colorize_style("breaks")` cho biết các giá trị nào không được sử dụng trong ánh xạ thẩm mỹ.
+* Tham số `r colorize_style("label")` cho biết cách các màu sắc hiển thị trong phần chú giải.
+
+Sự thật thì tham số `r colorize_style("breaks")` không có nhiều ý nghĩa khi sử dụng đối với dải màu sắc rời rạc, trong khi tham số `r colorize_style("limits")` có ý nghĩa quan trọng khi bạn đọc cần cố định ánh xạ màu sắc lên biến rời rạc khi vẽ nhiều biểu đồ khác nhau và để kiểm soát thứ tự xuất hiện của biến liên tục trên đồ thị. Hãy quan sát ví dụ sau để thấy sự quan trọng của tham số `r colorize_style("limits")`
+
+```{r fgggplot40, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5,  fig.cap = "Dân số của ba nước Philippines, Việt Nam, và Indonesia trong top 10 nước đông dân nhất châu Á. Hình bên trái: Dữ liệu năm 1960. Hình bên phải: Dữ liệu năm 2011"}
+p1<-gapminder%>%filter(year==1960, continent == "Asia")%>%
+  arrange(-population)%>%head(10)%>%
+  ggplot(aes(fill=country))+
+  geom_bar(aes(x = population, y = reorder(country,population)),
+           stat="identity",col="darkblue", alpha = 0.7)+
+  ylab("")+ggtitle("Năm 1960")+theme_minimal()+
+  theme(legend.position = "top")+
+  scale_x_continuous(labels = scales::comma)+
+  scale_fill_manual(values = c("blue","red","yellow"), limits = c("Philippines","Vietnam", "Indonesia"))
+p2<-gapminder%>%filter(year==2011, continent == "Asia")%>%
+  arrange(-population)%>%head(10)%>%
+  ggplot(aes(fill=country))+
+  geom_bar(aes(x = population, y = reorder(country,population)),
+           stat="identity",col="darkblue", alpha = 0.7)+
+  ylab("")+ggtitle("Năm 2010")+theme_minimal()+theme(legend.position = "top")+
+  scale_x_continuous(labels = scales::comma)+
+  scale_fill_manual(values = c("blue","red","yellow"), limits = c("Philippines","Vietnam", "Indonesia"))
+
+grid.arrange(p1,p2,nrow=1,ncol=2)
+```
+
+Chúng tôi đã sử dụng tham số `r colorize_style("limits")` để cố định màu sắc tương ứng với các giá trị của biến rời rạc như trong Hình \@ref(fig:fgggplot40). Giá trị biến rời rạc là `r colorize_style("Philippines")` được cố định với màu sắc là xanh da trời, `r colorize_style("Vietnam")` được cố định với màu đỏ, trong khi `r colorize_style("Indonesia")` được cố định với màu vàng. Bạn đọc có thể dễ dàng nhận ra sự thay đổi về thứ hạng về quy mô dân số của ba 3 quốc gia Philippines, Việt Nam, và Indonesia trong nhóm 10 nước có dân số lớn nhất châu Á trong các năm 1960 và 2010.
+
+### Các thuộc tính thẩm mỹ khác
+Ngoài vị trí trên các trục tọa độ và màu sắc, còn có một số thuộc tính thẩm mỹ khác mà thư viện `r colorize_style("ggplot2")` có thể sử dụng để mô tả trực quan dữ liệu. Trong phần này, chúng ta sẽ xem xét thuộc tính kích thước (*size*), hình dạng (*shape*), chiều rộng của line (*linewidth*) và kiểu line (*linetype*) khi sử dụng cùng với các thuộc tính vị trí trên trục tọa độ và màu sắc để trực quan một cách hiệu quả nhất các biến trong dữ liệu. Ngoài đề cập đến các giá trị mặc định, chúng tôi cũng sẽ thảo luận về các hàm số thuộc nhóm `r colorize_style("scale_()")` tương ứng với các thuộc tính thẩm mỹ để bạn đọc có thể sử dụng để kiểm soát tốt các thuộc tính này.
+
+#### Thuộc tính thẩm mỹ kích thước
+Thuộc tính thẩm mỹ kích thước (*size*) thường được sử dụng để mô tả hình dạng đồ họa kiểu điểm hoặc ký tự. Như chúng tôi đã đề cập trong phần giới thiệu, thuộc tính kích thước cho hiệu quả tốt nhất khi được ánh xạ từ các biến liên tục. Nếu không có hàm kiểm soát ánh xạ thẩm mỹ, bán kính của điểm tương ứng với giá trị nhỏ nhất luôn là 1 và bán kính của điểm có giá trị lớn nhất luôn là 6, nghĩa là có bán kính gấp 6 lần bán kính của điểm nhỏ nhất. Khi nội suy ra kích thước của các điểm khác, thư viện `r colorize_style("ggplot2")` mặc định cho *kích thước của điểm là diện tích của hình tròn mô tả điểm đó chứ không phải bán kính của hình tròn*. Hơn thế nữa, kích thước của điểm sẽ phụ thuộc vào thứ hạng (rank) của giá trị đó trong biến liên tục chứ không được tính bằng giá trị thực của điểm đó. Thực vậy, nếu $area_m$ là diện tích của hình tròn tương ứng với giá trị nhỏ nhất và $area_M$ tương ứng với diện tích của hình tròn tương ứng với giá trị lớn nhất thì diện tích của hình tròn tương ứng với giá trị có thứ hạng $k$ trong tổng số $n$ giá trị của biến liên tục là
+\begin{align}
+area = area_m + (k-1) \times \cfrac{area_M - area_m}{n - 1}
+\end{align}
+
+Để hiểu về cách thư viện `r colorize_style("ggplot2")` ánh xạ kích thước đến giá trị các biến, bạn đọc có thể quan sát kích thước của các hình tròn trong Hình \@ref(fig:fgggplot41)
+```{r fgggplot41, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Ánh xạ véc-tơ số tự nhiên đến thuộc tính thẩm mỹ kích thước. Hình bên trái: ánh xạ các số 1, 2, 3 đến kích thước ba hình tròn. Hình ở giữa: ánh xạ bình phương của 1, 2, 3 đến kích thước các hình tròn. Hình bên phải: ánh xạ hai số 2 và 3 đến kích thước của hai hình tròn."}
+dat0<-data.frame(x=1:3,y=1:3,z=1:3)
+# Hình bên trái
+p1<-dat0%>%ggplot(aes(x,y,size=z))+
+  geom_point(shape=21,fill= "#640514", alpha = 0.7, color = "darkblue")+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  scale_x_continuous(limits = c(0.9,3.1))+
+  scale_y_continuous(limits = c(0.9,3.1))
+# Hình ở giữa
+p2<-dat0%>%ggplot(aes(x,y,size=z^2))+
+  geom_point(shape=21,fill= "#640514", alpha = 0.7, color = "darkblue")+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  scale_x_continuous(limits = c(0.9,3.1))+
+  scale_y_continuous(limits = c(0.9,3.1))
+# Hình bên phải
+p3<-dat0%>%filter(z>1)%>%ggplot(aes(x,y,size=z))+
+  geom_point(shape=21,fill= "#640514", alpha = 0.7, color = "darkblue")+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  scale_x_continuous(limits = c(0.9,3.1))+
+  scale_y_continuous(limits = c(0.9,3.1))
+grid.arrange(p1,p2,p3,ncol=3,nrow=1)
+```
+
+Từ Hình \@ref(fig:fgggplot41) chúng ta có thể thấy rằng:
+
+* Trong đồ thị bên trái: kích thước của các hình tròn ở các tọa độ (1,1), (2,2), và (3,3) được ánh xạ đến các giá trị số lần lượt là 1, 2, và 3. Tham số mặc định của các hàm `r colorize_style("scale_size_()")` là `r colorize_style("range = c(1,6)")` nên hình tròn tại vị trí tọa độ (1,1) có bán kính là 1 trong khi hình tròn ở vị trí tọa độ (3,3) có bán kính là 6. Diện tích của hình tròn nằm ở tọa độ (2,2) được nội suy theo diện tích của hai hình tròn tại tọa độ (1,1) và (3,3) bằng trung bình cộng diện tích của hình tròn nằm ở vị trí (1,1) và (3,3). Do diện tích của hình tròn nằm ở vị trí (3,3) bằng $6^2 = 36$ lần diện tích của hình tròn tại vị trí $(1,1)$ nên diện tích của hình tròn tại (2,2) bằng $\cfrac{36+1}{2} = 18,5 \textit{(lần)}$ diện tích hình tròn tại tọa độ (1,1), hay nói cách khác bán kính của hình tròn tại vị trí (2,2) bằng $\sqrt{18,5} \sim 4,3 \text{ (lần)}$ bán kính của hình tròn tại vị trí (1,1).
+* Đồ thị ở giữa: chúng ta ánh xạ thuộc tính thẩm mỹ kích thước với $z^2$, nghĩa là các giá trị thực của biến được ánh xạ đến thuộc tính kích thước là $1^2$, $2^2$, và $3^2$. Tuy nhiên, kích thước các hình tròn xuất hiện vẫn không hề thay đổi so với hình bên trái. Giống như chúng ta đã thảo luận, thư viện `r colorize_style("ggplot2")` sử dụng thứ hạng của các giá trị trong véc-tơ số chứ không sử dụng giá trị thực. Thứ hạng của $1^2$, $2^2$, và $3^2$ vẫn là 1, 2, và 3, đồng thời hình tròn nhỏ nhất vẫn có bán kính bằng 1 và đường tròn lớn nhất vẫn có bán kính bằng 6. Kết quả là kích thước của các hình xuất hiện vẫn không thay đổi.
+* Đồ thị bên phải: khi chúng ta chỉ trực quan hai điểm tại vị trí (2,2) và (3,3) và thuộc tính thẩm mỹ kích thước được ánh xạ vào hai giá trị là 2 và 3; có thể thấy rằng diện tích hình tròn nhỏ nhất và diện tích hình tròn lớn nhất vẫn không thay đổi.
+
+Hàm số dùng để kiểm soát giá trị của ánh xạ thẩm mỹ kích thước là hàm `r colorize_style("scale_size()")`. Để thay đổi miền giá trị của thuộc tính kích thước, chúng ta sử dụng tham số `r colorize_style("range")`.
+
+```{r fgggplot42, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5,  fig.cap = "Ánh xạ các số tự nhiên đến thuộc tính thẩm mỹ kích thước. Hình bên trái: ánh xạ các số 1, 2, 3 đến kích thước ba hình tròn. Hình bên phải: sử dụng scale_size để hình nhỏ nhất có bán kính bằng 6 và hình lớn nhất có bán kính bằng 12."}
+dat0<-data.frame(x=1:3,y=1:3,z=1:3)
+# Hình bên trái
+p1<-dat0%>%ggplot(aes(x,y,size=z))+
+  geom_point(shape=21,fill= "#640514", alpha = 0.7, color = "darkblue")+
+  theme(legend.position = "none")+
+  scale_x_continuous(limits = c(0.9,3.25))+
+  scale_y_continuous(limits = c(0.9,3.25))+
+  theme_minimal()+ggtitle("Không sử dụng scale_size")
+# Hình bên phải
+p2<-dat0%>%ggplot(aes(x,y,size=z))+
+  geom_point(shape=21,fill= "#640514", alpha = 0.7, color = "darkblue")+
+  scale_size(range=c(6,12))+
+  theme(legend.position = "none")+
+  scale_x_continuous(limits = c(0.9,3.25))+
+  scale_y_continuous(limits = c(0.9,3.25))+
+  theme_minimal()+ggtitle("Sử dụng scale_size với range = (6,12)")
+grid.arrange(p1,p2,ncol=2,nrow=1)
+```
+
+Hình \@ref(fig:fgggplot42) mô tả cách sử dụng tham số `r colorize_style("range")` trong hàm `r colorize_style("scale_size()")`.
+
+* Đồ thị bên trái: bán kính của hình tròn nhỏ nhất là 1, bán kính của hình tròn lớn nhất là 6.
+
+- Đồ thị bên phải: bán kính của hình nhỏ nhất là 6 bằng với kích thước của hình lớn nhất của đồ thị bên trái. Trong khi đó, bán kính của hình tròn lớn nhất là 12. Mặc dù khi khai báo tham số `r colorize_style("range")` được hiểu là bán kính của các hình, nhưng khi nội suy kích thước, hình tròn ở tọa độ (2,2) lại được nội suy theo diện tích, chứ không phải theo bán kính.
+
+Trong trường hợp bạn đọc muốn sử dụng nội suy kích thước theo bán kính thay vì nội suy theo diện tích, hàm `r colorize_style("scale_radius()")` thay thế cho `r colorize_style("scale_size()")`. Hình \@ref(fig:fgggplot43) mô tả sự khác nhau khi sử dụng `r colorize_style("scale_size()")` và `r colorize_style("scale_radius()")`:
+
+```{r fgggplot43, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Sự khác nhau giữa scale_size() và scale_radius(). Hình bên trái: sử dụng scale_size() với range = c(1,7). Hình ở giữa: sử dụng scale_radius() với range = c(1,7). Hình bên phải: sử dụng scale_radius() với range = c(4,10)"}
+dat0<-data.frame(x=1:3,y=1:3,z=1:3)
+# Hình bên trái
+p1<-dat0%>%ggplot(aes(x,y,size=z))+
+  geom_point(shape=21,fill= "#640514", alpha = 0.7, color = "darkblue")+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  scale_x_continuous(limits = c(0.9,3.1))+
+  scale_y_continuous(limits = c(0.9,3.1))+
+  scale_size(range = c(1,7))
+
+p2<-dat0%>%ggplot(aes(x,y,size=z))+
+  geom_point(shape=21,fill= "#640514", alpha = 0.7, color = "darkblue")+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  scale_x_continuous(limits = c(0.9,3.1))+
+  scale_y_continuous(limits = c(0.9,3.1))+
+  scale_radius(range=c(1,7))
+# Hình bên phải
+p3<-dat0%>%ggplot(aes(x,y,size=z))+
+  geom_point(shape=21,fill= "#640514", alpha = 0.7, color = "darkblue")+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  scale_x_continuous(limits = c(0.9,3.1))+
+  scale_y_continuous(limits = c(0.9,3.1))+
+  theme(legend.position = "none")+
+  scale_radius(range=c(4,10))
+grid.arrange(p1,p2,p3,ncol=3,nrow=1)
+```
+
+* Đồ thị bên trái sử dụng scale theo diện tích và bán kính hình tròn lớn nhất bằng 7 lần đường tròn nhỏ; hình tròn ở giữa có bán kính bằng $\sqrt{\cfrac{7^2+1^2}{2}} = 5 \text{ (lần)}$ bán kính hình tròn nhỏ nhất.
+* Đồ thị ở giữa, do scale theo bán kính hình tròn nên hình ở giữa có bán kính bằng $\cfrac{7+1}{2} = 4 \textit{ (lần)}$ bán kính hình tròn nhỏ. Bạn đọc có thể thấy rằng kích thước của hình tròn ở vị trí tọa độ (2,2) trong đồ thị ở giữa nhỏ hơn hình tròn ở vị trí tọa độ (2,2) trong hình bên trái.
+* Trong đồ thị bên phải, bán kính của hình nhỏ nhất là 4, của hình tròn lớn nhất là 10, nên bán kính hình ở giữa là $\cfrac{4+10}{2} = 7$ do nội suy bằng hàm `r colorize_style("scale_radius()")`. Bạn đọc có thể thấy rằng kích thước của hình ở vị trí (2,2) của đồ thị này bằng với kích thước của hình tròn ở vị trí (3,3) của hình ở giữa.
+
+Các tham số `r colorize_style("limits")`, `r colorize_style("breaks")`, và `r colorize_style("label")` được sử dụng tương tự như khi sử dụng với thuộc tính thẩm mỹ màu sắc:
+
+* Tham số `r colorize_style("limits")` cho biết miền giá trị nào của biến được ánh xạ đến thuộc tính thẩm mỹ size.
+* Tham số `r colorize_style("breaks")` cho biết các giá trị nào của kích thước nào xuất hiện trên chú giải về cấu phần thẩm mỹ kích thước.
+* Tham số `r colorize_style("labels")` mô tả thuộc tính thẩm mỹ kích thước trên chú giải của đồ thị.
+
+Bạn đọc tham khảo cách sử dụng các tham số này trong ví dụ dưới đây khi mô tả hai biến liên tục là tỷ lệ trẻ sơ sinh tử vong và tuổi thọ trung bình bằng đồ thị phân tán và ánh xạ biến dân số vào kích thước của các điểm
+
+```{r fgggplot44, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Tỷ lệ trẻ sơ sinh tử vong và tuổi thọ trung bình của các quốc gia trên thế giới năm 2011"}
+dat%>%
+  ggplot(aes(infant_mortality,life_expectancy, size = population))+
+  geom_point(shape=21,fill= "#640514", alpha = 0.5, color = "darkblue")+
+  theme_minimal()+
+  scale_size(range = c(1,12),
+             limits = c(10^7,max(gapminder$population)),
+             breaks = c(10^8,2*10^8,5*10^8,10^9),
+             labels = c(paste(c(10^8,2*10^8,5*10^8)/10^6,"triệu"), "Một tỷ"))
+```
+
+Ánh xạ thẩm mỹ từ biến dân số đến thuộc tính thẩm mỹ kích thước của các điểm được điều chỉnh bằng hàm `r colorize_style("scale_size()")` như sau:
+
+* Tham số `r colorize_style("range = c(1,12)")` cho biết bán kính của hình tròn tương ứng với nước có dân số nhỏ nhất bằng 1 và bán kính của hình tròn tương ứng với nước có dân số lớn nhất là 12.
+* Tham số `r colorize_style("limits")` cho biết chỉ các nước có dân số 10 triệu trở lên được đưa vào trong đồ thị.
+* Tham số `r colorize_style("breaks")` cho biết các giá trị xuất hiện trên chú giải là các giá trị 100 triệu, 200 triệu, 500 triệu và 1 tỷ.
+* Tham số `r colorize_style("labels")` cho biết các số viết trên chú giải sử dụng cách viết giá trị lên chú giải là theo đơn vị triệu.
+
+#### Thuộc tính thẩm mỹ hình dạng
+Thuộc tính thẩm mỹ hình dạng được sử dụng trong các đồ thị trực quan để mô tả một hoặc một vài biến rời rạc với điều kiện biến này không có quá nhiều giá trị riêng biệt. Theo kinh nghiệm của chúng tôi thì hình dạng *chỉ nên sử dụng với các biến có nhỏ hơn năm giá trị riêng biệt*. Mặc dù thư viện `r colorize_style("ggplot2")` cho phép sử dụng lên đến 25 hình dạng khác nhau, nhưng sử dụng nhiều hơn hoặc bằng năm hình dạng trong một đồ thị sẽ làm cho đồ thị trở nên rắc rối và khó khăn khi nhận diện. Tại phiên bản `r colorize_style("ggplot2")` mà chúng tôi đang sử dụng, có 25 hình dạng khác nhau có thể dùng để mô tả biến rời rạc. Các hình dạng này được sử dụng bằng cách ánh xạ thẩm mỹ một biến rời rạc đến thuộc tính `r colorize_style("shape")` hoặc thiết lập tham số cho `r colorize_style("shape")` tương ứng với 25 số tự nhiên từ 1 đến 25 được mô tả trong Hình \@ref(fig:fgggplot45)
+
+```{r fgggplot45, warning=FALSE, message=FALSE, echo = FALSE, fig.align='center', fig.retina=5, fig.cap = "Các hình dạng có thể được sử dụng trong trực quan hóa dữ liệu của thư viện ggplot2"}
+dat0<-data.frame(x=c(rep(1:10,2),1:5),y = c(rep(3,10),rep(2,10),rep(1,5)), z = 1:25)
+dat0%>%ggplot(aes(x,y,shape=as.factor(z)))+geom_point(size=7,color = "#640514")+
+  scale_shape_manual(values = 1:25)+geom_text(aes(label=z),vjust=-2,color = "#640514")+
+  scale_y_continuous(limits = c(0,4))+
+  theme_void()+
+  theme(legend.position = "none")
+```
+
+Bạn đọc cần lưu ý rằng có một số hình dạng trông giống nhau nhưng lại có thuộc tính thẩm mỹ khác nhau. Chẳng hạn như hình dạng tương ứng với số 1 là một điểm hình tròn với thuộc tính thẩm mỹ `r colorize_style("color")` là màu sắc của toàn bộ hình tròn đó, trong khi hình dạng tương ứng với số 21 có thuộc tính thẩm mỹ `r colorize_style("color")` là màu viền bên ngoài của hình tròn và thuộc tính thẩm mỹ `r colorize_style("fill")` mới là màu sắc bên trong hình tròn.
+
+Để kiểm soát ánh xạ thẩm mỹ đến thuộc tính hình dạng, bạn đọc sử dụng hàm `r colorize_style("scale_shape_manual()")`. Bạn đọc có thể tham khảo cách sử dụng hàm này thông qua ví dụ dưới đây:
+
+```{r fgggplot46,warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Thu nhập bình quân đầu người và tuổi thọ trung bình của các quốc gia châu Á vào năm 2011"}
+gapminder%>%filter(year==2011, continent == "Asia")%>%
+  ggplot(aes(gdp/population,life_expectancy, shape = region))+
+  geom_point(color = "#640514")+
+  scale_x_continuous(trans="log10")+
+  scale_shape_manual(values=c(21:24,8) )+
+  theme_minimal()
+```
+
+Tham số được sử dụng để gán giá trị cho biến rời rạc đến hình dạng cụ thể là tham số `r colorize_style("values")`. Nhìn chung, ánh xạ biến rời rạc đến thuộc tính thẩm mỹ hình dạng chỉ cho hiệu quả tốt khi dữ liệu không có quá nhiều quan sát và số lượng giá trị riêng biệt của biến rời rạc là nhỏ. Trong trường hợp dữ liệu có nhiều quan sát và biến rời rạc nhận nhiều hơn năm giá trị khác nhau, bạn đọc nên thận trọng khi sử dụng thuộc tính thẩm mỹ này!
+
+#### Kích thước và hình dạng của các đường
+Đối với hình dạng đồ họa là các đường được vẽ bằng các hàm như `r colorize_style("geom_line()")`, `r colorize_style("geom_path()")` hay `r colorize_style("geom_segment()")`, chúng ta có thể ánh xạ các biến rời rạc vào độ rộng hoặc hình dạng của đường. Hình dạng và kích thước của các đường được sử dụng tương đương như hình dạng và kích thước của các điểm nên không có nhiều kiến thức mới cần thảo luận trong phần này.
+
+Hình \@ref(fig:fgggplot47) mô tả sự thay đổi của biến tổng thu nhập quốc dân (`r colorize_style("gdp")`) của ba quốc gia bao gồm Mỹ, Trung Quốc và Nhật Bản theo thời gian từ năm 1960 đến năm 2011 sử dụng dữ liệu `r colorize_style("gapminder")`. Các đường mô tả được phân biệt bằng cách sử dụng ba kiểu đường khác nhau:
+
+```{r fgggplot47,warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Tổng thu nhập quốc dân của Mỹ, Trung Quốc, và Nhật Bản từ năm 1960 đến 2011"}
+gapminder%>%filter(country %in% c("United States", "China", "Japan"), year <= 2011)%>%
+  ggplot(aes(x = year,y = gdp/10^9))+
+  geom_line(aes(linetype = country), color = "#640514")+
+  theme_minimal()+
+  ylab("GDP in Billion USD")+
+  scale_x_continuous(breaks = seq(1960,2010,10))+
+  scale_y_continuous(labels = scales::label_comma())
+```
+
+Hàm số dùng để kiểm soát ánh xạ thẩm mỹ vào hình dạng của các đường là `r colorize_style("scale_linetype_manual()")`. Thư viện `r colorize_style("ggplot2")` có 13 hình dạng cho các đường được đánh số từ 1 đến 13 như Hình \@ref(fig:fgggplot48) dưới đây
+
+```{r fgggplot48,warning=FALSE, message=FALSE, echo = FALSE,  fig.align='center', fig.retina=5, fig.cap = "Hình dạng của các đường có thể sử dụng để trực quan hóa dữ liệu trong thư viện ggplot2"}
+df <- data.frame(value = as.factor(1:13))
+df%>%ggplot()+
+  geom_segment(aes(x = 0, xend = 1, y = value, yend = value,linetype = value),
+               color = "#640514",
+               show.legend = FALSE)+
+  geom_label(aes(x = 0.5 ,y = value,label = value),
+             color = "#640514")+
+  scale_linetype_manual(values = 1:13)+
+  theme_void()+
+  scale_y_discrete(limits = 13:1)
+```
+
+Để các đường có hình dạng như mong muốn, chúng ta gán giá trị tham số `r colorize_style("values")` trong hàm `r colorize_style("scale_linetype_manual()")` cho một véc-tơ chứa các số nhận giá trị từ 1 đến 13 tương ứng với hình dạng mà bạn lựa chọn như sau
+
+```{r fgggplot49,warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Tổng thu nhập quốc dân của Mỹ, Trung Quốc, và Nhật Bản từ năm 1960 đến 2011"}
+gapminder%>%filter(country %in%
+                     c("United States", "China", "Japan"), year <= 2011)%>%
+  ggplot(aes(x = year,y = gdp/10^9))+
+  geom_line(aes(linetype = country),
+            color = "#640514")+
+  theme_minimal()+
+  ylab("GDP in $B")+
+  scale_x_continuous(breaks = seq(1960,2010,10))+
+  scale_y_continuous(labels = scales::label_comma())+
+  scale_linetype_manual(values = c(4,7,12))
+```
+
+## Tùy chỉnh chú giải của ánh xạ thẩm mỹ
+Về mặt hình thức, nếu coi các hàm `r colorize_style("scale_()")` như các ánh xạ từ tập hợp các giá trị của biến đến tập hợp các giá trị của thuộc tính thẩm mỹ thì chú giải là ánh xạ ngược từ thuộc tính thẩm mỹ đến miền giá trị của biến. Chú giải cho phép bạn chuyển đổi các thuộc tính trực quan trở lại giá trị của dữ liệu. Giá trị xuất hiện trên các trục tọa độ và các chú giải có cách hiển thị khác nhau nhưng về bản chất lại có cùng một mục đích là cho phép người tiếp nhận quan sát các hình ảnh đồ họa trực quan và ánh xạ chúng trở lại giá trị của dữ liệu. Các cấu phần khác nhau của chú giải được mô tả trong Hình \@ref(fig:fgggplot50)
+
+```{r fgggplot50, warning=FALSE, message=FALSE, fig.align='center', fig.retina=2, echo = FALSE, fig.cap = "Các thành phần và tên gọi của chú giải"}
+knitr::include_graphics("../KHDL_KTKD Final/Image/Rplot01.PNG")
+```
+
+Chú giải có khả năng giải thích tốt hơn giá trị xuất hiện trên các trục tọa độ bởi các nguyên nhân sau
+
+- Chú giải có thể giải thích nhiều biến cùng lúc trong khi giá trị trên trục tọa độ chỉ cho phép một biến.
+
+- Chú giải có thể tùy biến dễ hơn: có thể xuất hiện ở các vị trí theo ý muốn của người xây dựng đồ thị, có thể xuất hiện theo bất kỳ hướng nào.
+
+Bạn đọc hãy lưu ý rằng dù chúng ta không gọi bất kỳ hàm `r colorize_style("scale_()")` nào trong các câu lệnh thì mỗi khi vẽ đồ thị, thư viện `r colorize_style("ggplot2")` vẫn luôn luôn sử dụng một nhóm hàm `r colorize_style("scale_()")` mặc định để ánh xạ từ các biến đến các thuộc tính thẩm mỹ của đồ thị trực quan. Mỗi khi bạn đọc gọi hàm `r colorize_style("scale_()")` để kiểm soát ánh xạ thẩm mỹ, các giá trị mà bạn khai báo sẽ thay thế cho các giá trị mặc định. Trong trường hợp bạn gọi nhiều hàm `r colorize_style("scale_()")` cùng tác động đến một thuộc tính thẩm mỹ thì chỉ có hàm `r colorize_style("scale_()")` được gọi ra sau cùng được sử dụng. Hãy quan sát ví dụ dưới đây:
+
+```{r fgggplot51, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Thu nhập bình quân đầu người của các quốc gia Đông Nam Á năm 2011"}
+p<-gapminder%>%filter(year==2011,region=="South-Eastern Asia")%>%
+  mutate(gdp_per_capita = gdp/population)%>%
+  ggplot(aes(reorder(country,gdp_per_capita),
+             gdp_per_capita,fill = country))+
+  geom_bar(stat="identity")+
+  theme_minimal()
+p+theme(legend.position = "none")+
+  scale_y_continuous(name = "Thu nhập bình quân đầu người",
+                     labels = scales::label_comma())+
+  scale_x_discrete(name = "Country")+
+  scale_y_continuous(trans = "sqrt")+
+  scale_x_discrete(name = "Quốc gia", labels = c(
+    "Vietnam" = "VN",
+    "Thailand" = "TL",
+    "Timor-Leste" = "Đông Timor"))+
+  scale_y_continuous(name = "Thu nhập bình quân đầu người",
+                     labels = scales::label_dollar())
+```
+
+Đồ thị trực quan trong Hình \@ref(fig:fgggplot51) được vẽ bằng các câu lệnh gọi hàm `r colorize_style("scale_x_continuous()")` lặp lại hai (2) lần và hàm `r colorize_style("scale_y_continuous()")` lặp lại ba (3) lần. Quan sát kết quả, bạn đọc có thể thấy rằng chỉ có câu lệnh sau cùng được chấp nhận. Ngoài ra, khi thực thi đoạn lệnh ở trên, thư viện `r colorize_style("ggplot2")` cũng sẽ đưa ra các cảnh báo về các hàm `r colorize_style("scale_()")` đã xuất hiện và sẽ bị thay thế bằng các hàm cùng tên.
+
+Để kiểm soát chú giải của các ánh xạ thẩm mỹ, bạn đọc sử dụng tham số `r colorize_style("guide")` trong các hàm `r colorize_style("scale_()")` tương ứng. Giá trị gán cho tham số `r colorize_style("guide")` là một trong các hàm số sau đây:
+
+* Hàm `r colorize_style("guide_axis()")` là hàm số dùng để gán cho tham số `r colorize_style("guide")` khi chúng ta sử dụng các hàm `r colorize_style("scale_()")` nhằm kiểm soát ánh xạ thẩm mỹ đến các trục tọa độ.
+
+```{r fgggplot52, warning=FALSE, message=FALSE,  fig.align='center', fig.retina=5, fig.cap = "Thu nhập bình quân đầu người của các quốc gia Tây Âu năm 2011. Hàm guide_axis() được sử dụng để kiểm soát chú giải cho các trục tọa độ x và y"}
+gapminder%>%filter(year==2011,region=="Western Europe")%>%
+  mutate(gdp_per_capita = gdp/population)%>%
+  filter(!is.na(gdp_per_capita))%>%
+  ggplot(aes(reorder(country,gdp_per_capita),gdp_per_capita,fill = country))+
+  geom_bar(stat="identity")+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  scale_x_discrete(name = "Country",
+                   guide = guide_axis(title = "Quốc gia",
+                                      angle = 90))+
+  scale_y_continuous(name = "GDP per capita",
+                     labels = scales::label_dollar(),
+                     guide = guide_axis(title = "Thu nhập bình quân đầu người"))
+```
+
+Bạn đọc có thể thấy rằng tham số `r colorize_style("title")` trong hàm `r colorize_style("guide_axis()")` đã thay thế cho tham số `r colorize_style("name")` trong các hàm `scale_x_discrete()` và `scale_y_discrete()`. Tham số `angle` cho biết hướng các giá trị xuất hiện trên trục tọa độ. Trong Hình \@ref(fig:fgggplot52), tên các quốc gia trên trục tọa độ x đã được xoay một góc 90 độ. Bạn đọc tham khảo hướng dẫn sử dụng hàm `r colorize_style("guide_axis()")` để hiểu về các tham số khác như `r colorize_style("n.dodge")`, `r colorize_style("order")`, hay `r colorize_style("position")`.
+
+* Hàm `r colorize_style("guide_legend()")` là hàm số dùng để gán cho tham số `r colorize_style("guide")` khi gọi các hàm `r colorize_style("scale_()")` kiểm soát ánh xạ từ các biến rời rạc đến màu sắc. Có rất nhiều tham số có thể sử dụng trong hàm số này. Bạn đọc tham khảo hướng dẫn sử dụng hàm để biết đầy đủ các tham số.
+
+```{r fgggplot53, warning=FALSE, message=FALSE,  fig.align='center', fig.retina=5, fig.cap = "Thu nhập bình quân đầu người của các quốc gia Nam Mỹ năm 2011. Hàm guide_legend được sử dụng để kiểm soát chú giải cho ánh xạ thẩm mỹ màu sắc"}
+gapminder%>%filter(year==2011,region=="South America")%>%
+  mutate(gdp_per_capita = gdp/population)%>%
+  filter(!is.na(gdp_per_capita))%>%
+  ggplot(aes(reorder(country,gdp_per_capita),gdp_per_capita,fill = country))+
+  geom_bar(stat="identity")+
+  theme_minimal()+
+  theme(legend.position = "none")+
+  scale_x_discrete(guide = guide_axis(title = "Quốc gia",angle = 90))+
+  scale_y_continuous(labels = scales::label_dollar(),
+                     guide = guide_axis(title = "Thu nhập bình quân đầu người"))+
+  scale_fill_brewer(palette = "Paired",
+                    guide = guide_legend(title = "Quốc gia",
+                                         title.position = "top",ncol = 2))
+```
+
+* Tương tự như hàm `r colorize_style("guide_legend()")`, hàm `r colorize_style("guide_colorbar()")` được sử dụng khi chú giải cho các ánh xạ từ biến liên tục đến dải màu liên tục
+* Hàm `r colorize_style("guide_bin()")`  được dùng khi chú giải cho các ánh xạ từ biến liên tục đến thuộc tính thẩm mỹ kích thước (size).
+
+<!-- ## Các kiểu trục tọa độ -->
+
+## Chủ đề và ngữ cảnh của đồ thị
+Ngữ cảnh cho phép bạn đọc kiểm soát tốt các cấu phần không ánh xạ đến dữ liệu trong đồ thị như phông chữ, hình nền, vị trí chú giải, ... Sự phân tách giữa các thành các phần có ánh xạ đến dữ liệu và thành phần không ánh xạ đến dữ liệu trong các đồ thị trực quan của thư viện `r colorize_style("ggplot2")` là điểm khác biệt so với đồ họa cơ sở. Trong đồ họa cơ sở hầu hết các hàm đều có một số lượng lớn các tham số số chỉ định đồng thời cho dữ liệu và cho cả phần không liên quan đến dữ liệu, điều này làm cho các hàm trong đồ thị cơ sở của R trở nên phức tạp và khó kiểm soát. Thư viện `r colorize_style("ggplot2")` tiếp cận theo cách khác: khi tạo đồ thị, bạn xác định cách hiển thị dữ liệu trước, sau đó bạn có thể chỉnh sửa mọi chi tiết không liên quan đến dữ liệu bằng các hàm kiểm soát chủ đề và ngữ cảnh. Để kiểm soát chủ đề và ngữ cảnh của đồ thị, bạn đọc cần nắm vững các nội dung sau:
+
+* Các chủ đề và ngữ cảnh đã được hoàn chỉnh và sẵn có trong thư viện `r colorize_style("ggplot2")` và trong các thư viện cài đặt bổ sung, chẳng hạn như `r colorize_style("ggthemes")`.
+* Cách kiểm soát các thành phần của chủ đề và ngữ cảnh như: tiêu đề của đồ thị (kiểu chữ, kích thước, vị trí), cách hiển thị các số trên các trục, cách hiển thị các hình dạng đồ họa trên chú giải, kiểu chữ, kích thước hay vị trí của chú giải...
+* Kiểm soát các tùy biến của các hàm dùng để gán giá trị cho các thành phần của chủ đề. Ví dụ như hàm `r colorize_style("element_text()")` có thể dùng để chỉnh kích thước phông chữ, màu sắc và giao diện của các thành phần văn bản.
+* Cách sử dụng hàm `r colorize_style("theme()")` với một danh sách dài các tùy biến cho phép bạn sao chép lên các thành phần của chủ đề và ngữ cảnh mặc định.
+
+## Tạo đồ thị tương tác và đồ thị động với R
+
+Các đồ thị trực quan được vẽ bằng các câu lệnh của thư viện `r colorize_style("ggplot2")` đều là các đồ thị tĩnh. Như chúng tôi đã đề cập trong phần giới thiệu, thư viện `r colorize_style("ggplot2")` không có tính năng vẽ các đồ thị dạng động và các đồ thị tương tác. Tuy nhiên, trong yêu cầu của trực quan hóa dữ liệu nói chung, các đồ thị động và đồ thị tương tác luôn có vị trí nhất định. Các lợi thế của đồ thị động và đồ thị tương tác so với đồ thị tĩnh có thể liệt kê ra như sau:
+
+* Các đồ thị dạng động đặc biệt hiệu quả trong việc mô tả sự thay đổi dữ liệu theo thời gian. Một đồ thị tĩnh khi mô tả biến theo thời gian thường chỉ có thể mô tả yếu tố thời gian lên một trục tọa độ và rất khó để có thể mô tả sự thay đổi đồng thời của một nhóm các biến theo thời gian trên một đồ thị tĩnh.
+* Cùng với đồ thị động, các đồ thị tương tác có lợi thế ở việc thu hút thị giác của người tiếp nhận và có khả năng mô tả dữ liệu một cách đầy đủ thông tin hơn. Các đồ thị tương tác cho phép hiển thị thông tin bằng con trỏ, hoặc phóng to, thu nhỏ từng phần của đồ thị. Người trực quan hóa dữ liệu không cần phải hiển thị quá nhiều thông tin lên đồ thị cùng lúc, đặc biệt là với các dữ liệu có nhiều biến.
+* Ngoài các ưu điểm kể trên, khuyết điểm lớn nhất của các đồ thị tương tác và các đồ thị động đó là không thể biểu diễn trên các bản in cứng.
+
+Trong phần này của chương sách, chúng tôi sẽ thảo luận về hai thư viện dùng để tạo đồ thị tương tác và đồ thị dạng động là `r colorize_style("ggiraph")` và `r colorize_style("plotly")`. Nếu như `r colorize_style("ggiraph")` là thư viện bổ sung cho `r colorize_style("ggplot2")` và được xây dựng dựa trên cấu trúc ngữ pháp đồ thị thì `r colorize_style("plotly")` là một thư viện độc lập với `r colorize_style("ggplot2")` và chuyên được sử dụng để tạo đồ thị dạng động và tương tác. Ưu nhược điểm và cách vẽ đồ thị của các thư viện này sẽ được thảo luận trong phần tiếp theo của chương.
+
+### Tạo đồ thị tương tác với `r colorize_style("ggiraph")`
+Ưu điểm lớn nhất của thư viện `r colorize_style("ggiraph")` đó là các câu lệnh tạo đồ thị cũng được dựa trên ngữ pháp của đồ thị, nghĩa là hoàn toàn tương đồng với các câu lệnh trong thư viện `r colorize_style("ggplot2")`. Để tạo một đồ thị trực quan tương tác hoặc đồ thị động với `r colorize_style("ggiraph")`, bạn đọc chỉ cần thêm các thuộc tính thẩm mỹ của đồ thị tương tác và đồ thị động cùng với các thuộc tính của đồ thị tĩnh mà chúng ta đã làm quen khi vẽ đồ thị với thư viện `r colorize_style("ggplot2")`. Tại thời điểm chúng tôi viết chương sách này, thư viện `r colorize_style("ggiraph")` đang ở phiên bản 0.8.7 và hướng dẫn sử dụng ở trong đường dẫn như sau:
+
+https://cloud.r-project.org/web/packages/ggiraph/ggiraph.pdf
+
+Trong danh sách các hàm số trong thư viện `r colorize_style("ggiraph")`, bạn đọc có thể thấy rằng đa số các hàm `r colorize_style("geom_()")` của thư viện `r colorize_style("ggplot2")` đều có một hàm tương ứng để tạo đồ thị tương tác tương ứng là `r colorize_style("geom_*_interactive()")`. Chẳng hạn như hàm `r colorize_style("geom_point()")` của thư viện `r colorize_style("ggplot2")` sẽ có hàm tương ứng trong thư viện `r colorize_style("ggiraph")` là `r colorize_style("geom_point_interactive()")`. 
+
+Hai cấu phần thẩm mỹ thường được sử dụng để tạo đồ thị tương tác là `r colorize_style("tooltip")` và `r colorize_style("data_id")`. Bạn đọc cần lưu ý là hàm `r colorize_style("geom_point_interactive()")` không trực tiếp tạo ra đồ thị tương tác, mà bạn đọc cần lưu đối tượng được tạo bằng hàm số này, sau đó thực hiện câu lệnh tạo đồ thị tương tác bằng hàm `r colorize_style("girafe()")` của thư viện `r colorize_style("ggiraph")`
+
+Hình \@ref(fig:fgggplot54) là đồ thị trực quan tương tác được vẽ bằng thư viện `r colorize_style("ggiraph")` mô tả số vụ sát nhân bằng súng tại Mỹ năm 2010 từ dữ liệu `r colorize_style("murders")`.
+
+```{r fgggplot54, warning=FALSE, message=FALSE, fig.align='center', fig.cap = "Đồ thị tương tác mô tả số vụ sát nhân bằng súng tại 51 bang của Mỹ vào năm 2010"}
+p<-murders %>% ggplot(aes(y = total, x = population)) +
+  geom_point_interactive(aes(fill=region,
+                             tooltip = paste0("Bang: ", state, 
+                                              "\n Vùng: ", region, 
+                                              "\n Dân số: ", round(population/1000,0)*1000),
+                             data_id = region),
+                         size = 4, shape=21, alpha = 0.8, color = "black") +
+  geom_smooth(method = "lm", se = FALSE, linetype = 2, color="#640514")+
+  scale_x_continuous(trans = "log10", labels = scales::label_comma()) +
+  scale_y_log10() +
+  scale_fill_brewer(palette = "Dark2",
+                    guide = guide_legend(title = "Vùng"))+
+  theme_minimal()+
+  ggtitle("Số vụ sát nhân bằng súng tại các bang năm 2010")+
+  xlab("Dân số")+ylab("Số vụ sát nhân bằng súng")
+
+girafe(ggobj = p, width_svg = 6.5, height_svg = 3.5,
+       options = list(
+                opts_sizing(width = .7),
+                opts_tooltip(css= "font-family: Source Code Pro; 
+                              color: white; 
+                               background-color: #640514")
+                ))
+```
+
+* Thuộc tính thẩm mỹ `r colorize_style("tooltip")` được ánh xạ đến các biến chứa thông tin mà bạn đọc muốn hiển thị của các điểm trên đồ thị khi sử dụng con trỏ. Trong Hình \@ref(fig:fgggplot54) chúng tôi ánh xạ thuộc tính này đến các biến `r colorize_style("state")`, `r colorize_style("region")` và `r colorize_style("population")`. Các biến này chỉ hiển thị khi bạn đọc sử dụng con trỏ di chuyển đến một điểm trên đồ thị.
+* Thuộc tính thẩm mỹ `r colorize_style("data_id")` khi được ánh xạ đến một biến sẽ cho biết (làm nổi bật) các điểm dữ liệu có cùng giá trị trên biến đó. Trong đồ thị trên, biến `r colorize_style("region")` ánh xạ đến thuộc tính thẩm mỹ `r colorize_style("data_id")`, do đó mỗi khi di chuyển con trỏ đến một bang, tất cả các bang có cùng giá trị của biến `r colorize_style("region")` sẽ được làm nổi bật. Bạn đọc có thể sử dụng con trỏ di chuyển đến từng các điểm trên đồ thị trong Hình \@ref(fig:fgggplot54) để xem kết quả của ánh xạ đến thuộc tính `r colorize_style("tooltip")` và `r colorize_style("data_id")` như miêu tả.
+
+Không chỉ trong đồ thị phân tán, các loại đồ thị cơ bản các cũng có cách sử dụng các thuộc tính thẩm mỹ `r colorize_style("tooltip")` và `r colorize_style("data_id")` hoàn toàn tương tự. Dưới đây là một vài ví dụ:
+
+1. Hình \@ref(fig:fgggplot55) mô tả đồ thị bong bóng dạng tương tác. Do mắt quan sát không dễ dàng đánh giá được kích thước của các hình tròn, kể cả khi chúng ta sử dụng chú giải cho kích thước, do đó việc sử dụng đồ thị tương tác để hiển thị số lượng điểm tại mỗi hình tròn giúp cho dữ liệu càng trở nên sinh động và trực quan hơn
+
+```{r fgggplot55, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5 , fig.cap = "Đồ thị bong bóng tương tác mô tả số lượng viên kim cương theo màu sắc (color) và giác cắt (cut)"}
+p<-diamonds%>%group_by(cut,color)%>%mutate(ave_price = mean(price))%>%ungroup()%>%
+  as.data.frame()%>%
+  ggplot(aes(cut,color))+
+  geom_count_interactive(aes(tooltip = paste0("Số lượng: ", after_stat(n))),
+                         alpha = 0.7, color = "darkblue",
+                         shape = 21, fill = "#640514")+
+  scale_size(range=c(1,12))+
+  theme_minimal()+
+  theme(legend.position = "none")+xlab("Giác cắt")+ylab("Màu sắc")
+girafe(ggobj = p, width_svg = 5, height_svg = 4,
+        options = list(opts_sizing(width = .55),
+        opts_tooltip(css = "font-family: Source Code Pro; 
+                               padding:3pt; color: white; 
+                               background-color: #640514")
+                ))
+```
+
+2. Hình \@ref(fig:fgggplot56) sử dụng đồ thị dạng đường và đồ thị dạng hình hộp chữ nhật có tương tác
+
+```{r fgggplot56, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Đồ thị tương tác mô tả tỷ lệ thất nghiệp của nước Mỹ qua các thời kỳ Tổng thống và các Đảng cầm quyền"}
+dat1<-presidential[3:11,]
+p<-economics%>%mutate(unemploy_rate = unemploy/pop)%>%
+  ggplot()+
+  geom_rect_interactive(data=dat1,
+            aes(xmin = start, xmax = end,
+                ymin = 0.005, ymax = 0.06,
+                tooltip = paste("Tổng thống: ", name),
+                data_id = name,
+                fill = party),color = "white",size=0.08,alpha = 0.7)+
+  theme_minimal()+
+  scale_fill_manual(values=c("blue","red"),
+                    labels = c("Democratic" = "Dân chủ","Republican" = "Cộng hòa"),
+                    guide = guide_legend(title = "Đảng cầm quyền:"))+
+  geom_line(aes(x = date, y = unemploy_rate),size = 0.5, col= "#A1FDFD")+
+  geom_point_interactive(aes(x = date, y = unemploy_rate,
+                             tooltip = paste(round(unemploy_rate*100,2),"%")), 
+                         col = "#A1FDFD",size = 0.3, alpha = 0.5)+
+  scale_y_continuous(limits = c(0.005,0.06),labels = scales::label_percent())+
+  xlab("Năm") + ylab("Tỷ lệ thất nghiệp")+
+  theme(legend.position = "top")
+
+girafe(ggobj = p, width_svg = 6, height_svg = 3.5,
+        options = list(opts_sizing(width = .65),
+        opts_tooltip(css = "font-family: Source Code Pro; 
+                               padding:3pt; color: white; 
+                               background-color: #640514 ; 
+                               border-radius:5px")
+                ))
+```
+
+ĐỒ thị trong Hình \@ref(fig:fgggplot56) được trực quan từ hai dữ liệu. Dữ liệu chính là dữ liệu `r colorize_style("economics")` với biến `r colorize_style("unemploy")` cho biết số lượng người thất nghiệp tại Mỹ được quan sát theo tháng từ năm 1967 đến năm 2015. Dữ liệu thứ hai là dữ liệu về các nhiệm kỳ của các tổng thống Mỹ trong các khoảng thời gian tương ứng. Bạn đọc có thể nhận thấy sự khác biệt về sự biến động của tỷ lệ thất nghiệp qua các thời kỳ cầm quyền của các đảng cầm quyền: tỷ lệ thất nghiệp luôn có xu thế giảm trong giai đoạn đảng Dân chủ nắm quyền, trong khi lại có xu thế tăng trong giai đoạn đảng Cộng hòa nắm chính quyền.
+
+3. Hình \@ref(fig:fgggplot57) sử dụng các đồ thị tương tác dạng thanh để mô tả thu nhập bình quân đầu người của các quốc gia vùng Đông Á trong năm 2011
+
+```{r fgggplot57, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Thu nhập bình quân đầu người của các quốc gia vùng Đông Á năm 2011"}
+p<-gapminder%>%filter(year==2011,region=="Eastern Asia")%>%
+  mutate(gdp_per_capita = gdp/population)%>%
+  filter(!is.na(gdp_per_capita))%>%
+  ggplot(aes(reorder(country,gdp_per_capita),gdp_per_capita,fill = country))+
+  geom_bar_interactive(aes(
+    tooltip = paste0("GDP: ", round(gdp/10^9,2), 
+                     " tỷ USD \n Dân số: ", round(population/10^6,2),
+                     " triệu \n Tuổi thọ bình quân: ", life_expectancy)),
+                       stat="identity")+
+  theme_minimal()+
+  scale_x_discrete(guide = guide_axis(title = "", angle = 90))+
+  scale_y_continuous(labels = scales::label_dollar(),
+                     guide = guide_axis(title = "Thu nhập bình quân đầu người"))+
+  scale_fill_brewer(palette = "Paired",
+                    guide = guide_legend(title = "Quốc gia",
+                                         title.position = "top"))+
+  ggtitle("Các nước Đông Á năm 2011")+
+  theme(legend.position = "none")
+girafe(ggobj = p, width_svg = 6, height_svg = 4,
+        options = list(opts_sizing(width = .6),
+        opts_tooltip(css = "font-family: Source Code Pro; 
+                               padding:3pt; color: white; 
+                               background-color: #640514 ; 
+                               border-radius:5px")
+                ))
+```
+
+4. Hình \@ref(fig:fgggplot58) sử dụng bản đồ tương tác để mô tả biến tỷ lệ trẻ sơ sinh tử vong trong dữ liệu `r colorize_style("gapminder")` lọc theo năm 2011. 
+
+```{r fgggplot58, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Bản đồ mô tả tỷ lệ trẻ sơ sinh tử vong các quốc gia trên thế giới năm 2011"}
+dat_map<-map_data("world")
+mycol<-colorRampPalette(c("#5AA0EB","grey95"), space = "Lab")(5)
+mycol<-c(mycol,colorRampPalette(c("grey95","#EB5541"), space = "Lab")(5))
+
+dat<-filter(gapminder,year == 2011)
+dat$country<-as.character(dat$country)
+dat$country[dat$country == "Congo, Dem. Rep."]<-"Democratic Republic of the Congo"
+dat$country[dat$country == "Congo, Rep."]<-"Republic of Congo"
+dat$country[dat$country == "Dominican Republic"]<-"Dominica"
+dat$country[dat$country == "Kyrgyz Republic"]<-"Kyrgyzstan"
+dat$country[dat$country == "Lao"]<-"Laos"
+dat$country[dat$country == "St. Lucia"]<-"Saint Lucia"
+dat$country[dat$country == "United States"]<-"USA"
+dat$country[dat$country == "United Kingdom"]<-"UK"
+dat$country[dat$country == "Trinidad and Tobago"]<-"Trinidad"
+dat$country<-as.factor(dat$country)
+
+ind<-match(dat_map$region,dat$country)
+dat_map<-dat_map%>%mutate(gdp = dat$gdp[ind],
+                 population = dat$population[ind],
+                 infant_mortality = dat$infant_mortality[ind])
+ind<-is.na(dat_map$infant_mortality)
+dat_map$infant_mortality[ind]<-round(mean(dat_map$infant_mortality,na.rm=TRUE),2)
+
+p<-dat_map%>%
+  ggplot(aes(x=long,y=lat,group=group,label = region, fill = infant_mortality))+
+  geom_polygon_interactive(aes(tooltip = paste0(region, "\n Dân số: ", round(population/10^6,2),
+                                                " triệu \n Tỷ lệ tử vong trẻ sơ sinh: ", infant_mortality,"/1000")),
+                           color="black",size = 0.1)+
+  scale_x_continuous(expand=c(0,0))+
+  scale_fill_gradientn(colors = mycol,
+                       guide = guide_legend(title = "Tỷ lệ (phần nghìn)"))+
+  theme_minimal()+xlab("")+ylab("")+ggtitle("Tỷ lệ trẻ sơ sinh tử vong năm 2011")+
+  theme(legend.position = "top")
+girafe(ggobj = p, 
+        options = list(opts_sizing(width = .9),
+        opts_tooltip(css = "font-family: Source Code Pro; 
+                               padding:3pt; color: white; 
+                               background-color: #640514")
+                ))
+```
+
+Bạn đọc có thể thấy rằng bản đồ tương tác đặc biệt hiệu quả trong hiển thị thông tin thay thế cho chú giải. Màu sắc từ xanh da trời đến màu cam cho biết vùng quốc gia - vùng lãnh thổ nào có tỷ lệ trẻ sơ sinh tử vong thấp và quốc gia - vùng lãnh thổ nào có tỷ lệ trẻ sơ sinh tử vong cao. Bạn đọc muốn biết thông tin chi tiết về quốc gia đó có thể sử dụng con trỏ để hiển thị thông tin, bao gồm có thông tin về tên nước, dân số, và tỷ lệ trẻ sơ sinh tử vong.
+
+### Tạo đồ thị tương tác bằng thư viện `r colorize_style("plotly")`
+Để tạo một đồ thị tương tác bằng thư viện `r colorize_style("plotly")` dễ dàng hơn so với sử dụng thư viện `r colorize_style("ggiraph")` vì chúng ta không cần viết các câu lệnh có ngữ pháp. Việc duy nhất cần làm là sử dụng hàm `r colorize_style("ggplotly()")` trên một đối tượng được tạo bằng hàm `r colorize_style("ggplot()")`. Đoạn câu lệnh dưới đây mô tả dữ liệu `r colorize_style("murders")` dưới dạng đồ thị tương tác.
+
+```{r fgggplot59, warning=FALSE, message=FALSE, fig.align='center',  fig.cap = "Đồ thị tương tác mô tả số vụ sát nhân bằng súng tại 51 bang của Mỹ vào năm 2010"}
+p<-murders %>%
+  ggplot(aes(x = population/10^6, y = total)) +
+  geom_point(aes(group = state, fill = region ), size = 3, shape=21, alpha = 0.8) +
+  geom_smooth(method = "lm", se = FALSE, linetype = 2, color="#640514", alpha = 0.5)+
+  scale_x_log10() +
+  scale_y_log10() +
+  scale_fill_brewer(palette = "Dark2",
+                    guide = guide_legend(title = "Vùng"))+
+  xlab("Dân số của bang (triệu dân)") +
+  ylab("Tổng số vụ sát nhân bằng súng") +
+  ggtitle("Số vụ sát nhân bằng súng trong năm 2010 tại Mỹ")+
+  theme_minimal()
+ggplotly(p)
+```
+
+Bạn đọc có thể tương tác với đồ thị tạo bằng `r colorize_style("ggplotly()")` bằng các thao tác như sau:
+
+1. Sử dụng con trỏ chỉ vào các điểm để xem thông tin chính xác về dân số, số vụ sát nhân, tên bang, và tên vùng của mỗi điểm.
+
+2. Sử dụng con trỏ, hoặc các nút phóng to, thu nhỏ để xem từng phần của đồ thị.
+
+3. Sử dụng con trỏ trên chú giải để lựa chọn các vùng nào hiển thị, hoặc không hiển thị trên đồ thị.
+
+4. Sử dụng con trỏ trượt theo đường thẳng tạo bởi `r colorize_style("geom_smooth()")` để biết giá trị trên trục total và population của mỗi điểm trên đường thẳng. Lưu ý rằng giá trị xuất hiện là giá trị sau khi đã chuyển đổi bằng hàm `r colorize_style("log10()")`.
+
+Các thông tin bạn đọc muốn hiển thị bằng con trỏ là tất cả các biến dữ liệu đã được ánh xạ vào trong các thuộc tính thẩm mỹ của đồ thị. Đồ thị trong Hình \@ref(fig:fgggplot59) hiển thị thông tin trên các điểm bao gồm giá trị các biến `r colorize_style("population")`, `r colorize_style("total")`, `r colorize_style("state")`, và `r colorize_style("region")` là tất cả các biến được sử dụng trong ánh xạ thẩm mỹ của hàm `r colorize_style("geom_point()")`. Dọc theo đường hồi quy tuyến tính, chúng ta sẽ có thông tin về giá trị của các biến `r colorize_style("population")` và `r colorize_style("total")` là các biến được sử dụng trong ánh xạ thẩm mỹ của hàm `r colorize_style("geom_smooth()")`.
+
+Tham số `r colorize_style("tooltip")` trong hàm `r colorize_style("ggplotly()")` được sử dụng để kiểm soát các thuộc tính thẩm mỹ xuất hiện trên đồ thị tương tác. Ví dụ như trong đồ thị phân tán trong Hình \@ref(fig:fgggplot59), nếu chúng ta chỉ muốn hiển thị thông tin về tên của bang và thông tin về vùng. Do tên của bang được ánh xạ tới thuộc tính thẩm mỹ `r colorize_style("group")` và vùng được ánh xạ tới thuộc tính thẩm mỹ `r colorize_style("fill")`, nên chúng ta có thể sử dụng tham số `r colorize_style("tooltip")` như sau
+
+```{r, warning=FALSE, message=FALSE, eval = FALSE, fig.align='center',  fig.cap = "Đồ thị tương tác mô tả số vụ sát nhân bằng súng tại 51 bang của Mỹ vào năm 2010"}
+# Thông tin chỉ bao gồm tên bang và vùng
+ggplotly(p, tooltip = c("group","fill"))
+```
+
+Hàm số `r colorize_style("ggplotly()")` có thể được sử dụng để tạo đồ thị tương tác với đa số các đồ thị được tạo bởi $ggplot2$, dưới đây là một số ví dụ
+
+1. Hình \@ref(fig:fgggplot60) vẽ đồ thị kiểu bong bóng tương tác mô tả số lượng và giá trung bình của kim cương khi phân loại theo màu sắc và giác cắt.
+```{r fgggplot60, warning=FALSE, message=FALSE, fig.cap = "Số lượng và giá trung bình của kim cương phân loại theo màu sắc và giác cắt"}
+mycol = colorRampPalette(c("#5AA0EB","grey90"), space = "Lab")(5)
+mycol = c(mycol,colorRampPalette(c("grey90","orange"), space = "Lab")(5))
+
+p<-diamonds%>%group_by(cut,color)%>%mutate(ave_price = round(mean(price)))%>%ungroup()%>%
+  as.data.frame()%>%
+  ggplot(aes(cut,color,fill = ave_price))+
+  geom_count(shape = 21, alpha = 0.9, color = "#640514")+
+  scale_fill_gradientn(colors = mycol,
+                       guide = guide_legend(title = "Giá trung bình"))+
+  scale_size(range=c(1,12))+
+  theme_minimal()
+ggplotly(p, tooltip = c("n", "color"))
+```
+
+2. Hình \@ref(fig:fgggplot61) sử dụng đồ thị tương tác dạng đường để mô tả tổng thu nhập quốc dân của năm quốc gia phát triển trên thế giới là Mỹ, Đức, Pháp, Nhật và Trung Quốc từ năm 1970 đến năm 2011.
+```{r fgggplot61, warning=FALSE, message=FALSE, fig.cap = "Tổng thu nhập quốc dân của các quốc gia Mỹ, Đức, Pháp, Nhật và Trung Quốc từ năm 1970 đến năm 2011"}
+p<-gapminder%>%filter(country %in% c("United States","Japan","Germany","France", "China"),
+                   year <= 2011, year >= 1970)%>%mutate(gdp_bil_usd = gdp/10^9)%>%
+  ggplot(aes(x = year, y = gdp_bil_usd, color = country))+
+  geom_line()+
+  scale_y_continuous(labels = scales::label_comma())+
+  theme_minimal()
+ggplotly(p, tooltip = c("x","y", "color"))
+```
+
+3. Hình \@ref(fig:fgggplot62) sử dụng đồ thị tương tác dạng thanh để trực quan hóa hai biến rời rạc là thu nhập bình quân đầu người và châu lục vào năm 2011. Thu nhập bình quân đầu người được phân loại theo ba mức độ: thấp tương ứng với thu nhập bình quân dưới 3000 USD, trung bình tương ứng với thu nhập bình quân từ 3000 USD đến 8000 USD, và cao tương ứng với thu nhập bình quân trên 8000 USD.
+
+```{r fgggplot62, warning=FALSE, message=FALSE, fig.cap = "Tỷ lệ các nước thu nhập thấp, trung bình, và cao tại các châu lục năm 2011"}
+p<-gapminder%>%filter(year == 2011)%>%drop_na()%>%
+  mutate(gdp_per_capita = gdp/population,
+         gdp_levels = ifelse(gdp_per_capita<3000,"Thấp",
+                            ifelse(gdp_per_capita<8000,"Trung bình","Cao")),
+         gdp_range = factor(gdp_levels, levels = c("Cao","Trung bình","Thấp")))%>%
+  ggplot(aes(x = continent,fill = gdp_range))+
+  geom_bar(color="#640514",alpha=0.7)+
+  scale_fill_manual(values = c("orange","grey90","#5AA0EB"))+
+  theme_minimal()
+ggplotly(p, tooltip = "count")
+```
+
+<!-- 4. Hình \@ref(fig:fgggplot63) sử dụng đồ thị tương tác dạng bản đồ để mô tả tỷ lệ số vụ xả súng tại các bang tại Mỹ năm 2010. -->
+<!-- ```{r fgggplot63, warning=FALSE, message=FALSE, fig.cap="Tỷ lệ số vụ xả súng trên 1 triệu dân tại các bang của nước Mỹ năm 2010"} -->
+<!-- dat<-map_data("state") -->
+<!-- dat1<-murders%>%mutate(murder_rate=total/population*10^6, -->
+<!--                        state = tolower(state)) -->
+
+<!-- p<-dat%>%mutate(state = region)%>% -->
+<!--   mutate(murder_rate=dat1$murder_rate[match(state,dat1$state)])%>% -->
+<!--   ggplot(aes(x=long,y=lat,group=group,label = state, fill=murder_rate))+ -->
+<!--   geom_polygon(color="black",size = 0.1)+ -->
+<!--   scale_x_continuous(expand=c(0,0))+ -->
+<!--   scale_fill_gradientn(colors = c(rgb(0.95,0.95,0.95),rgb(0.95,0.3,0.3), -->
+<!--                                   rgb(0.95,0.1,0.1)))+ -->
+<!--   theme_minimal()+ -->
+<!--   theme(legend.position = "bottom") -->
+<!-- ggplotly(p) -->
+<!-- ``` -->
+
+### Đồ thị động
+Đồ thị động là một phương pháp thường được sử dụng để mô tả dữ liệu biến đổi theo thời gian. Đồ thị dạng động ngoài yếu tố thẩm mỹ còn giúp cho người tiếp nhận dữ liệu nhanh chóng tiếp nhận được sự thay đổi của các biến liên tục và rời rạc theo thời gian một cách trực quan nhất. Chúng tôi sẽ giới thiệu đến bạn đọc cách tạo các đồ thị động với thư viện `r colorize_style("plotly")` và thư viện `r colorize_style("gganimate")`. 
+
+Để hiểu cách tạo đồ thị động, hãy bắt đầu với một dữ liệu đơn giản bao gồm hai biến liên tục là `r colorize_style("x")`, `r colorize_style("y")` và một biến thời gian:
+```{r, warning=FALSE, message=FALSE}
+dat<-data.frame(x=1:30,y=(1:30)^2,time=1:30)
+```
+
+Để trực quan hóa ba biến đều là kiểu số, bao gồm `r colorize_style("x")`, `r colorize_style("y")` và `r colorize_style("time")`, phương pháp thường được sử dụng là trực quan hóa hai biến `r colorize_style("x")` và `r colorize_style("y")` bằng một đồ thị phân tán, sau đó ánh xạ biến `r colorize_style("time")` vào một thuộc tính thẩm mỹ phù hợp, chẳng hạn như kích thước của các điểm. Đồ thị như vậy được mô tả trong Hình \@ref(fig:fgggplot64)
+
+```{r fgggplot64, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Mô tả ba biến liên tục sử dụng thuộc tính thẩm mỹ kích thước"}
+dat%>%ggplot(aes(x,y,size = time))+
+  geom_point(alpha=0.3,shape = 21, color = "darkblue", fill = "#640514")+
+  scale_size(range=c(1,15))+
+  theme_minimal()
+```
+
+Một phương pháp khác để mô tả ba biến trong dữ liệu kể trên là sử dụng đồ thị động, một tập hợp của nhiều đồ thị tĩnh xuất hiện liên tục mà mỗi đồ thị tương ứng với một giá trị của biến `r colorize_style("time")`. Bạn đọc có thể thực hiện thao tác này bằng thư viện `r colorize_style("plotly")`. Thuộc tính thẩm mỹ để tạo đồ thị dạng động là `r colorize_style("frame")`. Chúng ta khai báo thêm ánh xạ thẩm mỹ từ tham số `r colorize_style("frame")` đến biến `r colorize_style("time")` để tạo một đồ thị động trực quan như Hình \@ref(fig:fgggplot65)
+
+```{r fgggplot65, warning=FALSE, message=FALSE, fig.align='center', fig.retina=5, fig.cap = "Đồ thị động mô tả sự chuyển động của một điểm theo biến time của dữ liệu"}
+p<-dat%>%ggplot(aes(x=x,y=y,size=time,frame = time))+
+  geom_point(alpha=0.3,shape = 21, color = "darkblue", fill = "#640514")+
+  scale_size(range=c(1,15))+
+  theme_minimal()
+ggplotly(p, tooltip = "size")
+```
+
+Đồ thị dạng động sẽ được kích hoạt mỗi khi chúng ta bấm nút `play`. Bạn đọc có thể thấy rằng cách mô tả sự thay đổi của điểm theo thời gian của đồ thị động trong Hình \@ref(fig:fgggplot65) trực quan và hiệu quả hơn so với Hình \@ref(fig:fgggplot64).
+
+Vẽ đồ thị dạng động bằng `r colorize_style("ggplotly()")` có ưu điểm là đơn giản và hiệu quả đặc biệt là khi mô tả các biến thay đổi theo thời gian. Bạn đọc có thể sử dụng tham số `r colorize_style("frame")` với biến `r colorize_style("year")` trong dữ liệu `r colorize_style("gapminder")` để mô tả sự thay đổi của các biến khác trong dữ liệu này theo thời gian. Ví dụ, chúng ta muốn mô tả hai biến tuổi thọ trung bình và tỷ lệ sinh trung bình của một phụ nữ qua các năm, chúng ta có thể ánh xạ hai biến lên hai trục tọa độ, sau đó sử dụng màu sắc để mô tả biến châu lục, sử dụng kích thước để mô tả biến dân số, và sau cùng sẽ gán tham số `r colorize_style("frame")` với biến `r colorize_style("year")`:
+
+```{r fgggplot66, warning=FALSE, message=FALSE, fig.cap = "Đồ thị động mô tả sự thay đổi của tỷ lệ sinh trung bình và tuổi thọ trung bình của tất cả các quốc gia trên thế giới từ năm 1960 đến 2011"}
+p<-gapminder%>%filter(year %in% 1960:2011)%>%
+  ggplot(aes(x = fertility, y = life_expectancy, size = population,
+             fill = continent, frame = year))+
+  geom_point(alpha = 0.5,shape=21)+
+  scale_fill_brewer(palette = "Set1")+
+  scale_size(range=c(1,15))+
+  theme_minimal()+
+  ggtitle("Tuổi thọ và tỷ lệ sinh trung bình 1960 đến 2011")
+ggplotly(p, tooltip = c())
+```
+
+<!-- Một trong những công việc khó khăn nhất của những người làm việc liên quan đến xây dựng các mô hình toán học phức tạp là giải thích kết quả của mình cho những người ít có kiến thức chuyên môn về lĩnh vực này. Kinh nghiệm của chúng tôi là hãy trực quan hóa kết quả của mình thay vì các công thức phức tạp. Dưới đây là một vài khái niệm toán học phức tạp được giải thích dưới dạng đồ thị động -->
+
+<!-- 1. Chuyển động Brown: chuyển động Brown là một quá trình ngẫu nhiên có ý nghĩa đặc biệt quan trọng trong tài chính, bảo hiểm, và cả các lĩnh vực công nghệ. Không dễ dàng để giải thích cho những người không có nền tảng về toán các khái niệm về chuyển động Brown. Thay vì các công thức toán, chúng ta có thể giải thích về chuyển động Brown thông qua trực quan hóa: -->
+
+<!-- 2. Markov Chain Monte Carlo là một kỹ thuật mô phỏng biến ngẫu nhiên hoặc một véc-tơ ngẫu nhiên có hàm phân phối $F$ mà không thể mô phỏng được một cách trực tiếp. Quá trình tạo ra biến ngẫu nhiên có hàm phân phối $F$ sẽ bắt đầu từ một phân phối $G$ mà chúng ta có thể mô phỏng ra được đi qua các hàm phân phối trung gian và sẽ hội tụ đến phân phối $F$. Hình vẽ dưới đây mô tả quá trình mô phỏng biến ngẫu nhiên phân phối chuẩn $\mathcal{N}(0,1)$ từ một phân phối có hai đinh (2 mode). -->
+
+<!-- ```{r, warning=FALSE, message=FALSE, echo = FALSE} -->
+<!-- # Input -->
+<!-- N<-2*10^4 # number of simulation -->
+<!-- n<-300 # length of each tranjectory -->
+<!-- dt<-0.025 -->
+
+<!-- # pi(x) -->
+<!-- pi_x<-function(x){ -->
+<!--   return (exp(-(x^2+sin(5*x+5)))) -->
+<!-- } -->
+
+<!-- d_log_pi<-function(x) return (-x) -->
+
+<!-- # simulate process Xt -->
+<!-- X<-matrix(0,N,n) -->
+<!-- ## initial value: mix nornal -->
+<!-- X[,1]<- ifelse(runif(N,0,1)<0.5,rnorm(N,-3,1),rnorm(N,3,1)) -->
+
+<!-- # generate Xt -->
+<!-- for (j in 2:n){ -->
+<!--   dX <- 1/2*d_log_pi(X[,(j-1)])*dt + sqrt(dt)*rnorm(N,0,1) -->
+<!--   X[,j]<-X[,(j-1)]+dX -->
+<!-- } -->
+
+<!-- # visualization -->
+<!-- dat<-data.frame(t = c(1:(N*n)), value = rep(0,N*n)) -->
+<!-- for (i in 1:n){ -->
+<!--   ind<-((i-1)*N+1):(i*N) -->
+<!--   dat$t[ind]<-i -->
+<!--   dat$value[ind]<-X[,i] -->
+<!-- } -->
+
+<!-- p<-dat%>%ggplot(aes(value,frame=t))+ -->
+<!--   geom_density(fill = "yellow")+#GIOI HAN LAI GIA TRI TREN X,Y -->
+<!--   xlim(-5,5)+ylim(0,0.5)+ -->
+<!--   theme_dark() -->
+<!-- ggplotly(p, width = 800, height = 600) %>% -->
+<!--   animation_opts(frame = 2) -->
+<!-- ``` -->
+
+
+## Bài tập
+
+
+
+
+## Phụ lục
+
+### Lập trình trong `r colorize_style("ggplot2")`
+
+### Tạo dashboard với thư viện `r colorize_style("shiny")`
+
+
+
+
+
+
+
+
+
+<!-- # REFERENCE -->
+
+<!-- ### Source from thesis -->
+
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+
+<!-- ### Souce from website -->
+
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->

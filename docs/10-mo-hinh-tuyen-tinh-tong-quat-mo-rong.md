@@ -1,0 +1,408 @@
+---
+output:
+  word_document: default
+  html_document: default
+  pdf_document: default
+---
+
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```
+## 
+## Attaching package: 'kableExtra'
+```
+
+```
+## The following object is masked from 'package:dplyr':
+## 
+##     group_rows
+```
+
+```
+## 
+## Attaching package: 'gridExtra'
+```
+
+```
+## The following object is masked from 'package:dplyr':
+## 
+##     combine
+```
+
+```
+## 
+## Attaching package: 'pryr'
+```
+
+```
+## The following object is masked from 'package:dplyr':
+## 
+##     where
+```
+
+```
+## Classes and Methods for R originally developed in the
+## Political Science Computational Laboratory
+## Department of Political Science
+## Stanford University (2002-2015),
+## by and under the direction of Simon Jackman.
+## hurdle and zeroinfl functions by Achim Zeileis.
+```
+
+
+
+# Mô hình tần suất - mức độ nghiêm trọng.
+Nhiều dữ liệu thu thập được trong lĩnh vực bảo hiểm có thông tin về tần suất, chẳng hạn như tần suất phát sinh yêu cầu bồi thường, cũng như mức độ nghiêm trọng của yêu cầu bồi thường. Phần này của cuốn sách giới thiệu các công cụ để xử lý phân phân phối xác suất đồng thời của tần suất và mức độ nghiêm trọng. Mô hình hóa tần suất rất quan trọng trong các ứng dụng bảo hiểm vì các đặc điểm của hợp đồng, hành vi của chủ hợp đồng, cơ sở dữ liệu mà các công ty bảo hiểm duy trì và cả các yêu cầu pháp lý. Việc lựa chọn mô hình tùy thuộc vào kiểu dữ liệu thu thập được. 
+
+Đối với một số dữ liệu, chúng tôi quan sát số tiền yêu cầu bồi thường và coi yêu cầu bồi thường bằng 0 có nghĩa là không có yêu cầu bồi thường nào trong khoảng thời gian dữ liệu được thu thập. Đối với các dữ liệu khác, dữ liệu quan sát được lại là số tiền yêu cầu bồi thường của từng cá nhân. Cũng như các phần trước, chúng tôi sẽ không quá đi sâu vào các kỹ thuật xây dựng hay ước lượng mô hình mà sẽ nhấn mạnh vào các ứng dụng thực tế. Chương này của cuốn sách sử dụng công cụ thường được áp dụng trong thực tế để so sánh các mô hình đó là xác nhận mô hình ngoài mẫu (out-of-sample validation)
+
+
+## Tại sao tần suất lại có ảnh hưởng đến mức độ nghiêm trọng?
+Hiểu một cách đơn giản nhất, hoạt động cơ bản nhất trong bảo hiểm là các công ty bảo hiểm nhận phí bảo hiểm để đổi lấy lời hứa bồi thường cho chủ hợp đồng về sự cố không chắc chắn của người được bảo hiểm. Mỗi lần khách hàng gặp sự cố sẽ gửi một thông báo đến công ty để yêu cầu công ty thanh toán tổn thất, thông báo này được gọi là yêu cầu bồi thường. Số tiền được gọi là mức độ nghiêm trọng của yêu cầu bồi thường, là khoản chi quan trọng đối với công ty bảo hiểm. Chúng ta cũng có thể coi yêu cầu bồi thường bằng 0 tương đương với việc sự kiện được bảo hiểm không xảy ra. Bỏ qua chi phí, một công ty bảo hiểm nếu chỉ quan tâm đến số tiền đã thanh toán sẽ không quan tâm đến hai yêu cầu bồi thường, mỗi yêu cầu bằng 100 triệu, so sánh với một yêu cầu bồi thường 200 triệu, mặc dù số lượng yêu cầu bồi thường khác nhau. 
+
+Tuy nhiên, nghiên cứu tần suất phát sinh các yêu cầu bồi thường, hay còn gọi tắt là tần suất, cũng là một chủ đề đáng quan tâm của những người nghiên cứu về bảo hiểm. Dưới đây là các nguyên nhân mà chúng ta cần quan tâm đến tần suất của sự kiện bảo hiểm:
+
+- Thứ nhất: thông thường thì các hợp đồng bảo hiểm sẽ áp đặt các khoản khấu trừ và giới hạn trên cho mỗi lần xảy ra sự cố. Ví dụ: nếu hợp đồng có mức khấu trừ là 100 triệu cho mỗi lần xảy ra, thì hai khoản lỗ 100 triệu sẽ dẫn đến khoản thanh toán (hoặc yêu cầu bồi thường) bằng 0 từ công ty bảo hiểm, trong khi một sự kiện ở mức tổn thất 200 triệu sẽ dẫn đến khoản thanh toán là 100 triệu. Tổng số tiền tổn thất được bảo hiểm cần phải tính đến các khoản khấu trừ và giới hạn chi trả cho từng sự kiện được bảo hiểm. 
+
+- Thứ hai là do hành vi của các bên liên quan đến hợp đồng bảo hiểm. Các mô hình tổn thất bảo hiểm giải thích rõ ràng hoặc ngầm định các hành vi dẫn đến quyết định của người dân và doanh nghiệp có thể ảnh hưởng đến cả tần suất và mức độ nghiêm trọng của tổn thất. Những người liên quan đến hợp đồng có thể không chỉ bao gồm chủ hợp đồng mà còn có cả người bảo hiểm, chuyên gia sửa chữa (oto, nhà), nhà cung cấp dịch vụ y tế, v.v. Các biến giải thích hành vi có thể có những tác động khác nhau lên tần suất xảy ra một sự kiện. Ví dụ, trong bảo hiểm nhà, khi xem xét một người mua bảo hiểm rất cẩn thận và sống trong một khu nhà đắt đỏ. Chúng ta có thể xem xét các đặc điểm của chủ nhà như một dấu hiệu cho thấy việc áp dụng các biện pháp ngăn ngừa tổn thất như những yếu tố quyết định cho thấy tần suất thấp. Đồng thời, chúng ta có thể xem xét mức thu nhập chung của khu vực địa lý nơi có ngôi nhà làm đại diện cho mức chi phí sửa chữa trong trường hợp xảy ra tai nạn, cho thấy mức độ nghiêm trọng cao. Trong bảo hiểm ô tô, chúng ta có thể nghĩ mật độ dân số có mối tương quan dương với tần suất tai nạn và có mối tương quan nghịch với mức độ nghiêm trọng. Ví dụ, ở một khu đô thị đông dân cư, tình trạng tắc nghẽn giao thông cao, có nghĩa là người lái xe có thể gặp tai nạn thường xuyên nhưng chi phí tương đối thấp. Điều này trái ngược với một khu vực nông thôn dân cư thưa thớt hơn, nơi có đường rộng, ít tắc nghẽn và lái xe có thể chạy với tốc độ cao, có nghĩa là tai nạn ít xảy ra hơn, nhưng tốc độ cao hơn có nghĩa là mức độ nghiêm trọng hơn. Lịch sử yêu cầu bồi thường trước đây là một biến số khác cung cấp thông tin về mức độ chấp nhận rủi ro của chủ hợp đồng. Đặc biệt trong bảo hiểm cá nhân, người ta thường sử dụng dấu hiệu cho biết liệu yêu cầu bồi thường có xảy ra hay không, chẳng hạn như trong ba năm qua, thay vì số tiền yêu cầu bồi thường. Ở nhiều quốc gia, phí bảo hiểm ô tô được điều chỉnh bằng hệ thống được gọi là hệ thống thưởng-phạt, trong đó tần suất yêu cầu trước được sử dụng để điều chỉnh linh hoạt phí bảo hiểm. 
+
+- Thứ ba: là các cơ sở dữ liệu trong bảo hiểm. Đa số các công ty bảo hiểm lưu trữ dữ liệu theo hướng làm cơ sở để phát triển các mô hình tần suất và mức độ nghiêm trọng một cách riêng biệt. Ví dụ: các công ty bảo hiểm duy trì hồ sơ chủ hợp đồng được thiết lập khi soạn thảo hợp đồng. Hồ sơ này ghi lại thông tin phát hành và lịch sử hợp đồng, bao gồm có thông tin người được bảo hiểm, chẳng hạn như tuổi tác, giới tính và kinh nghiệm yêu cầu bồi thường trước đó; thông tin về phạm vi bảo hiểm, khoản khấu trừ và giới hạn; và thông tin về sự kiện yêu cầu bồi thường bảo hiểm. Một hồ sơ riêng biệt khác, thường được gọi là hồ sơ yêu cầu bồi thường, ghi lại chi tiết về yêu cầu bồi thường đối với công ty bảo hiểm. Cách lưu trữ dữ liệu như vậy giúp các công ty bảo hiểm mô hình hóa tần suất và mức độ nghiêm trọng thành các quy trình riêng biệt một cách hoàn toàn tự nhiên. 
+
+- Thứ tư là do quy định pháp luật. Bảo hiểm là một ngành dịch vụ được giám sát chặt chẽ. Các cơ quan quản lý thường xuyên yêu cầu công ty báo cáo cả số lượng và số tiền yêu cầu bồi thường. Các công ty bảo hiểm cần các hệ thống quản lý khác nhau để xử lý các tổn thất nhỏ, xảy ra thường xuyên như bảo hiểm sức khỏa, và các sự kiện hiếm xảy ra, có tác động lớn, chẳng hạn như bảo hiểm cháy nổ hay hàng hải. Mỗi yêu cầu bồi thường bảo hiểm có nghĩa là công ty phải chịu thêm chi phí, cho thấy tần suất yêu cầu bồi thường là yếu tố quan trọng quyết định chi phí của công ty.
+
+## Các nền tảng xây dựng mô hình.
+Hãy bắt đầu xây dựng mô hình bằng cách suy nghĩ về cơ sở dữ liệu của công ty bảo hiểm duy trì, bao gồm dữ liệu chủ hợp đồng và dữ liệu về yêu cầu bồi thường. Công ty bảo hiểm ký hợp đồng với người được bảo hiểm, quản lý dữ liệu hợp đồng và dữ liệu về yêu cầu bồi thường một cách liên tục theo thời gian. Đối với các mục đích, chẳng hạn như xác định số dự phòng tổn thất, sẽ rất hữu ích khi xem xét dữ liệu một cách liên tục theo thời gian. Phần này của cuốn sách chỉ tập trung vào xây dựng mô hình trong một khoảng thời gian cụ thể, chẳng hạn như 1 năm, và chỉ xem xét đến các yêu cầu bồi thường đã hoàn thành, nghĩa là đã được thanh toán đầy đủ hoặc không đủ điều kiện để bồi thường. Đây là cách xem xét dữ liệu gắn liền với các nghiệp vụ tính toán như xác định mức phí bảo hiểm (rate making) cho hợp đồng mới và tái bảo hiểm (reinsurance).
+
+Giả sử rằng có $n$ hợp đồng trong danh mục nghiệp vụ bảo hiểm của công ty, các hợp đồng được ký hiệu là $1, 2, \cdots, n$ với
+
+- $N_i$ là số lượng yêu cầu bồi thường được chấp thuận của hợp đồng $i$ trong thời gian quan sát.
+
+- Khi $N_i > 0$, ký hiệu $y_{i,j}$, với $j = 1, 2, \cdots, N_i$ lần lượt là số tiền yêu cầu bồi thường của lần yêu cầu thứ $j$. 
+
+- Tổng số tiền bồi thường cho hợp đồng $i$ trong thời gian quan sát là
+\begin{align}
+S_i = \begin{cases}
+0 & \text{ nếu } N_i = 0 \\
+\sum\limits_{j=1}^{N_i} y_{i,j} & \text{ nếu } N_i > 0
+\end{cases}
+\end{align}
+
+Trong cơ sở dữ liệu của các công ty bảo hiểm, tổn thất có thể được lưu trữ dưới các dạng như sau
+
+- 1. Chỉ có $S_i$ được lưu lại, chẳng hạn như các hợp đồng bảo hiểm thương mại.
+
+- 2. Cả $N_i$ và $S_i$ đều được lưu lại.
+
+- 3. Tất cả các thông tin liên quan đến yêu cầu bồi thường đều được lưu lại, nghĩa là dữ liệu có đầy đủ thông tin về $y_{i,j}$, với $j = 1, 2, \cdots, N_i$ với mọi hợp đồng $i$.
+
+Chúng ta có thể sử dụng quy tắc xác suất có điều kiện để xây dựng phân phối đồng thời cho các thành phần tần suất và mức độ nghiêm trọng. Để cụ thể, giả sử dữ liệu được quan sát một cách đầy đủ. Chúng ta có hàm phân phối đồng thời cho hai biến $N$ - tần suất và $Y$ mức độ nghiêm trọng như sau
+\begin{align}
+f(N,Y) = p(N) \cdot f(Y|N)
+(\#eq:FS1)
+\end{align}
+trong đó $f(N,Y)$ là hàm phân phối xác suất đồng thời của hai biến $N$ và $Y$, $p(N)$ là phân phối xác suất của biến $N$ và $f(Y|N)$ là phân phối xác suất của mức độ nghiêm trọng $Y$ với điều kiện $N$. 
+
+Khi dữ liệu thu thập được ở dạng thứ hai, chúng ta cũng có thể mô tả mối liên hệ giữa tần suất và mức độ nghiêm trọng một cách tương tự, thay thế véc-tơ tổn thất riêng $y$ bằng tổng tổn thất $S$. Đối với dữ liệu thu thập được ở dạng thứ nhất, chúng ta có thể phân tách dữ liệu bằng cách tách sự kiện $N = 0$ thông qua ký hiệu chỉ báo $R_i = \mathbb{I}_{S_i > 0}$ cho thành phần tần suất và chỉ sử dụng phần dữ liệu có $R_i = 1$ cho thành phần mức độ nghiêm trọng. 
+
+Thông qua việc phân tách $S_i$ thành hai thành phần có phân phối như \@ref(eq:FS1), chúng ta không yêu cầu giả thiết độc lập của các thành phần như truyền thống. Có nhiều cách để mô hình hóa sự phụ thuộc khi xét $f(N,Y)$. Ví dụ: chúng ta có thể sử dụng một biến ngẫu nhiên ẩn ảnh hưởng đồng thời đến cả tần số $N$ và lượng tổn thất $Y$ để mô tả mối liên hệ cùng chiều, hoặc ngược chiều. Kỹ thuật copula là một công cụ hữu ích được sử dụng thường xuyên để mô hình hóa các mối liên hệ giữa $N$ và $Y$. Nhìn chung, xuất phát từ công thức xác suất có điều kiện là một tiếp cận hợp lý cho phép mô tả mối liên hệ giữa các thành phần và cung cấp nền tảng khởi đầu cho các tính toán thực nghiệm.
+
+Nền tảng thứ hai cho mô hình tần suất - mức độ nghiêm trọng là mô hình tuyến tính tổng quát. Khả năng tùy biến linh hoạt của GLM cho phép chúng ta xây dựng được mối liên hệ của tần suất và mức độ nghiêm trọng với các biến độc lập một cách đồng thời. Giả sử biến $Y_i$ là biến mục tiêu, có thể là tần suất hoặc mức độ nghiêm trọng, chúng ta luôn có thể xây dựng mô hình tuyến tính tổng quát mà giá trị trung bình của biến phụ thuộc được giải thích thông qua các biến phụ thuộc. Do giá trị trung bình của tần suất và mức độ nghiêm trọng là số dương nên trong đa số các trường hợp chúng ta sử dụng hàm liên kết là hàm $log(\cdot)$. Ta có $\mathbb{E}(Y_i) = exp(\textbf{x}_i^{'} \beta)$. 
+
+Trong một số trường hợp, giá trị trung bình của biến phụ thuộc được biết là thay đổi tỷ lệ thuận với một biến mà chúng ta gắn nhãn là $E_i$, trong đó $E$ là viết tắt của "Exposure" - một đại lượng mà chúng ta sẽ thảo luận ở phần dưới. Mối liên hệ giữa giá trị trung bình của biến phụ thuộc và exposure được mô tả như sau
+
+\begin{align}
+\mathbb{E}(Y_i) = E_i \cdot \exp(\textbf{x} \beta)
+\end{align}
+
+Lấy $log$ của hai vế, chúng ta có phương trình tuyến tính mà một trong các biến độc lập là $log(E_i)$ với hệ số là 1.
+\begin{align}
+\log(\mu_i) = \log(E_i) + \textbf{x}_i^{'} \beta 
+\end{align}
+
+Khi xây dựng các mô hình trong bảo hiểm, các chuyên gia tính toán thường sử dụng khái niệm "exposure" để hiệu chỉnh quy mô của một rủi ro. Tùy theo loại hình bảo hiểm mà exposure được định nghĩa khác nhau. Ví dụ như trong bảo hiểm vật chất xe oto, exposure thường được sử dụng là 1 năm mà một xe ô tô được bảo hiểm. Trong bảo hiểm trách nhiệm lái xe ô tô, exposure lại có thể là tổng quãng đường lái xe tính theo km, chẳng hạn như mỗi 10,000 km. Khi xây dựng mô hình tần suất - mức độ nghiêm trọng, cần xác định được mối liên hệ giữa tần suất hoặc mức độ nghiêm trọng với exposure. Đối với bảo hiểm vật chất xe ô tô, tần suất có mối liên hệ trực tiếp đến exposure bởi vì thời gian bảo hiểm hoặc quãng đường lái xe càng dài thì tần suất cũng tăng theo tương ứng nhưng mức độ nghiêm trọng lại không có mối liên hệ. Trái lại, trong bảo hiểm thất nghiệp, exposure là tháng lương của người lao động nên sẽ được điều chỉnh theo lạm phát, nghĩa là exposure có tác động đến mức độ nghiêm trọng nhưng lại không có tác động lên tần suất.
+
+Để minh họa cách hiệu chỉnh mô hình khi sử dụng exposure, giả sử trong bảo hiểm xe ô tô, $E_i$ là một phần của năm mà chủ hợp đồng được bảo hiểm. Logic đằng sau là số vụ tai nạn dự kiến tỷ lệ thuận với độ dài của thời gian bảo hiểm.
+
+- Trong trường hợp tần suất xảy ra tai nạn có phân phối Poisson, xây dựng mô hình tuyến tính tổng quát là đơn giản vì nếu 1 đơn vị exposure có phân phối Poisson với tham số $\mu_i$ thì $E_i$ đơn vị exposure sẽ có phân phối Poisson với tham số $\lambda_i = E_i \cdot \mu_i$. Mô hình tuyến tính tổng quát sẽ có dạng như sau
+\begin{align}
+& Y_i \sim \mathcal{P}(\lambda_i) \\
+& \log(\lambda_i) = \log(E_i) + \textbf{x}_i^{'} \beta 
+(\#eq:pois1)
+\end{align}
+
+- Trong trường hợp biến phụ thuộc có giá trị nhị phân và hàm liên kết có dạng logit. Với một đơn vị exposure, xác suất xảy ra tai nạn là $p_i = \cfrac{\exp{\left(\textbf{x}_i^{'} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{'} \beta\right)}}$. Giả sử $Y_i$ là biến phụ thuộc cho trường hợp có $E_i$ đơn vị exposure. Có một số tiếp cận khác nhau để xây dựng mô hình tuyến tính tổng quát cho $Y_i$ như sau
+\begin{align}
+\text{Cách 1: } & P(Y_i = 1) = \pi_i = E_i \cdot p_i = E_i \cfrac{\exp{\left(\textbf{x}_i^{'} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{'} \beta\right)}}\\
+\text{Cách 2: } & P(Y_i = 1) = \pi_i = 1 - (1 - p_i)^{E_i} = 1 - \left(1 - \cfrac{\exp{\left(\textbf{x}_i^{'} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{'} \beta\right)}} \right)^{E_i}\\
+\text{Cách 3: } & P(Y_i = 1) = \pi_i = \cfrac{E_i \cdot p_i}{1 - (1 - E_i) \cdot p_i} = \cfrac{E_i \cdot \cfrac{\exp{\left(\textbf{x}_i^{'} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{'} \beta\right)}}} {1 - (1 - E_i) \cdot \cfrac{\exp{\left(\textbf{x}_i^{'} \beta\right)}}{1 + \exp{\left(\textbf{x}_i^{'} \beta\right)}}}
+\end{align}
+
+Đối với phân bố Poisson, phương sai bằng giá trị trung bình, do đó cả giá trị trung bình và phương sai đều tăng tỷ lệ với giá trị $E_i$. Do đó, khi sử dụng phân phối Poisson với hàm liên kết $log(\cdot)$, chúng ta chỉ cần sử dụng $log(E_i)$ để tự động tính đến phương sai ngày càng tăng. Tuy nhiên, điều này lại không đúng đối với các phân phối khác thuộc nhóm phân phối mũ.
+
+Ví dụ, hãy xem xét phân phối $gamma$ với tham số $\alpha$ và $beta$ khi viết dưới dạng phân phối kiểu mũ có tham số chính tắc $\theta$ và tham số phân tán $\phi$. Nếu có $E_i$ biến ngẫu nhiên $gamma$ độc lập trong cùng nhóm $i$, mỗi biến có trung bình $\alpha/\beta$ và phương sai $\alpha/\beta^2$, thì phân phối tổng của $E_i$ expusure cũng sẽ là phân phối gamma với trung bình $E_i \cdot \alpha/\beta$ và phương sai $E_i \cdot \alpha/\beta^2$. Khi sử dụng phân phối $gamma$ cho biến phụ thuộc và hàm liên kết $log(\cdot)$, giá trị trung bình của tổng sẽ tăng tỷ lệ thuận với $E_i$, nhưng phương sai sẽ tăng tỷ lệ thuận với $E^2_i$ chứ không phải $E_i$.
+
+Giả sử dữ liệu quan sát được bao gồm $n$ nhóm; với nhóm thứ $i$, $1 \leq i \leq n$, chúng ta có $E_i$ quan sát độc lập với cùng phân phối thuộc họ các phân phối kiểu mũ hàm mũ. Phân phối của nhóm $i$ có tham số chính tắc $\theta_i$, trung bình $\mu_i$ và tham số phân tán $\phi$ (có thể phụ thuộc hoặc không phụ thuộc vào $i$). Có hai hướng tiếp cận để xây dựng mô hình trong trường hợp này. Thứ nhất đó là tiến hành phân tích với tập dữ liệu dựa trên từng quan sát riêng lẻ $j = 1, 2, \cdots, E_i$ với mỗi $i = 1, 2, \cdots, n$. Mặt khác, với những giả định này, thì trung bình của nhóm thứ $i$ cũng sẽ có phân phối kiểu mũ với cùng giá trị trung bình $\mu_i$, cùng tham số chính tắc $\theta_i$ nhưng có tham số phân tán $\phi_i/E_i$. Do đó hướng tiếp cận thứ hai là sử dụng mẫu dữ liệu theo nhóm bao gồm $n$ quan sát và sử dụng nghịch đảo của $E_i$ làm trọng số. Với quan sát riêng lẻ thứ $j$ thuộc nhóm $i$, các biến phụ thuộc bao gồm $(N_{i,j}, Y_{i_j})$. Nếu các biến giải thích có sẵn cho từng quan sát riêng lẻ thì việc tổng hợp thông tin cho nhóm $i$ sẽ gặp khó khăn vì chúng ta sẽ đi thông tin. Thay vào đó, nếu các biến giải thích chỉ có sẵn theo nhóm và chúng ta muốn xây dựng mô hình các biến tần suất và mức độ nghiêm trọng tổng: $N_i = \sum\limits_{i=1}^{E_i} N_{i,j}$, và $S_i = \sum\limits_{i=1}^{E_i} Y_{i,j}$ thì
+
+- Đối với biến tần suất chúng ta sử dụng phân phối Poisson với biến phụ thuộc $N_i$ được điều chỉnh bởi $log(E_i)$, hoặc sử dụng biến ngẫu nhiên dạng đếm thuộc họ phân phối kiểu mũ cho biến phụ thuộc là $N_i/E_i$ và tham số phân tán $\phi/E_i$.
+
+- Đối với biến mức độ nghiêm trọng, chúng ta sử dụng biến phụ thuộc là $S_i/N_i$ thuộc nhóm các phân phối kiểu mũ có tham số phân tán là $\phi/N_i$.
+
+## Mô hình tần suất - mức độ nghiêm trọng.
+Như chúng ta đã nói ở trên, có ba kiểu dữ liệu được thu thập, đó là i) chỉ có tổng tổn thất theo hợp đồng $S_i$; ii) có thông tin tần suất và tổng giá trị tổn thất $(N_i, S_i)$; và iii) có đầy đủ thông tin về $N_i$ và các tổn thất riêng lẻ $y_{i,j}$ với $j = 1, 2, \cdots, N_i$. Tùy theo kiểu dữ liệu của công ty bảo hiểm mà mô hình tần suất mức độ nghiêm trọng được xây dựng theo các trình tự khác nhau.
+
+### Mô hình hai thành phần
+Mô hình hai thành phần thường được sử dụng để xây dựng mô hình trong trường hợp chúng ta chỉ có thông tin về tổng giá trị tổn thất của hợp đồng $S_i$ với $i = 1, 2, \cdots, n$. Đây là một trường hợp đặc biệt của mô hình tần suất - mức độ nghiêm trọng. Thành phần thứ nhất của mô hình là biến ngẫu nhiên $B_i$ có phân phối nhị phân chỉ nhận hai giá trị là 0 hoặc 1, trong đó 0 tương ứng với hợp đồng không có yêu cầu bổi thường và 1 tương ứng với hợp đồng có yêu cầu bối thường. Thành phần thứ hai của mô hình là biến ngẫu nhiên $S_i$ cho biết tổn thất đó có độ lớn như thế nào với điều kiện $B_i = 1$.
+
+Quá trình ước lượng mô hình hai thành phần bao gồm hai mô hình tuyến tính tổng quát:
+
+- Mô hình thứ nhất có biến phụ thuộc là $B_i$ với véc-tơ các biến giải thích $\textbf{x}_{i,B}$ và các hệ số tương ứng của các biến độc lập là $\boldsymbol{\beta}_B$. Hàm liên kết được chọn thường là hàm logit.
+
+- Mô hình thứ hai có biến phụ thuộc là $S_i$ với véc-tơ các biến giải thích $\textbf{x}_{i,S}$ và các hệ số tương ứng của các biến độc lập là $\boldsymbol{\beta}_S$. Dữ liệu để ước lượng mô hình là dữ liệu chỉ tính đến các hợp đồng có $S_i > 0$. Lựa chọn phổ biến cho phân phối của biến độc lập là phân phối gamma và hàm liên kết là hàm log.
+
+Thông thường sẽ luôn luôn có các biến giải thích vừa nằm trong véc-tơ $\textbf{x}_{i,B}$ và véc-tơ $\textbf{x}_{i,S}$. Một giả thiết khác trong mô hình hai thành phần nói riêng và mô hình tổn thất - mức độ nghiêm trọng nói riêng là các véc-tơ hệ số $\boldsymbol{\beta}_B$ và $\boldsymbol{\beta}_S$ độc lập với nhau. Giả thiết này đảm bảo việc ước lượng các hệ số của mỗi thành phần hoàn toàn riêng biệt.
+
+Trong trường hợp dữ liệu xây dựng mô hình ở dạng thứ hai, nghĩa là chúng ta có quan sát đồng thời cho tần suất và tổng tổn thất của mỗi hợp đồng $(N_i, S_i)$, hai bước ước lượng mô hình tần suất - mức độ nghiêm trọng cụ thể như sau
+
+- Sử dụng một biến ngẫu nhiên dạng đếm để mô tả tần suất $N_i$ với tập hợp các biến độc lập là $\textbf{x}_{i,N}$. Hệ số của các biến độc lập được ước lượng là $\boldsymbol{\beta}_N$. Phân phối thường được lựa chọn là phân phối Poisson hoặc phân phối nhị thức âm.
+
+- Với điều kiện $N_i > 0$, sử dụng mô hình tuyến tính tổng quát với $S_i/N_i$ là biến phụ thuộc và $\textbf{x}_{i,S}$ là các biến độc lập. Hệ số của các biến độc lập được ước lượng là $\boldsymbol{\beta}_S$. Phân phối của biến phụ thuộc thường được lựa chọn là phân phối $gamma$ sao cho tham số phân tán của quan sát thứ $i$ là $\phi/N_i$.
+
+Nếu dữ liệu xây dựng mô hình ở dạng thứ ba, nghĩa là chúng ta có thông tin chính xác về từng khoảng tổn thất riêng biệt, bước xây dựng mô hình cho tần suất hoàn toàn tương tự như khi dữ liệu ở dạng thứ hai. Trong bước xây dựng mô hình cho mức độ nghiêm trọng, chúng ta sử dụng $y_{i,j}$ là các biến phụ thuộc thay vì sử dụng giá trị trung bình của nhóm $i$. Phân phối được lựa chọn cho biến $y_{i,j}$ thường là phân phối gamma, hoặc phân phối chuẩn với hàm liên kết là hàm log. 
+
+### Phân phối Tweedie
+Họ các phân phối kiểu mũ bao gồm các phân phối liên tục, chẳng hạn như phân phối chuẩn và phân phối gamma, cũng như các phân bố rời rạc, chẳng hạn như phân phối nhị thức và Poisson. Ngoài ra, các phân phối kiểu mũ cũng bao gồm cả các phân phối hỗn hợp, nghĩa là các phân phối vừa có thành phần rời rạc và vừa có thành phần liên tục. Trong mô hình hóa dữ liệu trong bảo hiểm, một phân phối hỗn hợp được sử dụng rộng rãi là phân phối Tweedie (1984). Phân phối này có mật độ xác suất dương tại điểm 0 (rời rạc) biểu thị rằng không có yêu cầu bồi thường nào, và phân phối này có thành phần liên tục tại mọi giá trị dương, biểu thị tổng số tiền cho một hoặc nhiều yêu cầu bồi thường.
+
+Phân phối Tweedie được định nghĩa là tổng Poisson của các biến ngẫu nhiên Gamma. Cụ thể, giả sử rằng $N$ có phân phối Poisson với giá trị trung bình $\lambda$, mô tả tần suất yêu cầu bồi thường. Giả sử $Y_j$, với $j = 1, 2, \cdots, N_i$, là các biến ngẫu nhiên độc lập có cùng phân phối và độc lập với $N$. Hơn nữa, mỗi $Y_j$ có phân phối gamma với các tham số $\alpha$ và $\gamma$, mô tả số tiền yêu cầu bồi thường thứ $j$. Khi đó 
+
+\begin{align}
+S_N = \begin{cases}
+0 & \text{ nếu } N = 0 \\
+\sum\limits_{j=1}^{N} y_{j} & \text{ nếu } N > 0
+\end{cases}
+\end{align}
+là tổng Poisson của các phân phối gamma. Chúng ta nói rằng $S_N$ có phân phối Tweedie với các tham số $(\lambda, \alpha, \gamma)$.
+
+Hàm phân phối của biến ngẫu nhiên phân phối Tweedie được xác định như sau:
+\begin{align}
+\mathbb{P}(S_N = 0) = \mathbb{P}(N = 0) = exp(-\lambda)
+\end{align}
+với $s \geq 0$ thì
+\begin{align}
+\mathbb{P}(S_N \leq y) = exp(-\lambda) + \sum\limits_{k = 1}^{\infty} \mathbb{P}(N = k) \cdot \mathbb{P}(S_k \leq y)
+\end{align}
+
+Do $S_k$ là tổng của $k$ biến ngẫu nhiên phân phối gamma độc lập với tham số $\alpha$, $\gamma$ do đó $S_k$ cũng có phân phối gamma với tham số $(k \cdot \alpha)$, $\gamma$. Ta có hàm mật độ xác suất của biến $S_k$ 
+\begin{align}
+f_{S_k}(y) = \cfrac{\gamma^{k \cdot \alpha}}{\Gamma(k \cdot \alpha)} \cdot y^{(k \cdot \alpha - 1)} \cdot e^{-\gamma \cdot y}
+\end{align}
+
+Vậy hàm mật độ của phân phối Tweedie tại $y > 0$ được viết như sau
+\begin{align}
+f_{S_N}(y) = \sum\limits_{k = 1}^{\infty} e^{-\lambda} \cdot \cfrac{\lambda^k}{k!} \cdot \cfrac{\gamma^{k \cdot \alpha}}{\Gamma(k \cdot \alpha)} \cdot y^{(k \cdot \alpha - 1)} \cdot e^{-\gamma \cdot y}
+\end{align}
+
+Phân phối Tweedie nằm trong họ các phân phối kiểu mũ. Tuy nhiên sẽ không dễ dàng để viết phân phối ở trên dưới dạng phân phối kiểu mũ nếu chúng ta không định nghĩa lại các tham số. Trước hết, ta có giá trị trung bình và phương sai của $S_N$ được tính toán thông qua các tham số của phân phối Poisson và phân phối gamma như sau
+\begin{align}
+& \mathbb{E}(S_N) = \mathbb{E}(N) \cdot \mathbb{E}(S) = \lambda \cdot \cfrac{\alpha}{\gamma} \\
+& \mathbb{V}(S_N) = \cfrac{\lambda \alpha}{\gamma^2} \cdot (1 + \alpha)
+\end{align}
+
+Với các tham số $\mu$, $\phi$, $p$ được định nghĩa từ các tham số ban đầu
+\begin{align}
+& \mu = \lambda \cdot \cfrac{\alpha}{\gamma} \\
+& p = \cfrac{\alpha + 2}{\alpha + 1} \\
+& \phi = \cfrac{1}{\mu^p} \cdot \cfrac{\lambda \alpha}{\gamma^2} \cdot (1 + \alpha)
+\end{align}
+chúng ta có thể viết hàm phân phối của biến ngẫu nhiên phân phối Tweedie dưới dạng phân phối kiểu mũ như sau
+
+\begin{align}
+f_{S_N}(y) & = \exp\left( \cfrac{1}{\phi(1-p)} \cdot \left( y \cdot \mu^{1-p} - \cfrac{1-p}{2-p} \mu^{2-p} \right) + H(y,p,\phi) \right)
+\end{align}
+với hàm $H(y,p,\phi)$ chỉ phụ thuộc vào các tham số $\phi$ và $p$
+\begin{align}
+H(y,p,\phi) = \log\left( \cfrac{1}{y} \sum\limits_{k=1}^{\infty} \cfrac{1}{k! \Gamma(k \alpha)} \cdot \left( \cfrac{y^\alpha}{\phi^{1/(1-p)}(2-p)(1-p)^\alpha} \right)^n  \right)
+\end{align}
+
+Với tham số chính chắc $\theta = \mu^{1-p}$, ta có $\cfrac{1-p}{2-p} \mu^{2-p} = \cfrac{1-p}{2-p} \theta^{(2-p)/(1-p)}$ hay nói cách khác $b(\theta) = - \cfrac{\theta^{-\alpha}}{\alpha}$. Giá trị trung bình và phương sai của $S_N$ tính toán theo hàm mật độ xác suất của phân phối kiểu mũ là
+\begin{align}
+\mathbb{E}(S_N) = b^{'}(\theta) = \partial \cfrac{-\theta^{-\alpha}}{\alpha}/ \partial \theta = \theta^{-(\alpha+1)} = \theta^{1/(1-p)} = \mu \\
+\mathbb{V}(S_N) = a(\phi) b^{''}(\theta) = \phi (1-p) \cdot \cfrac{1}{1-p} \theta^{p/(1-p)} = \phi \cdot \mu^p
+\end{align}
+
+Khi sử dụng phân phối Tweedie cho biến phụ thuộc trong mô hình tuyến tính tổng quát, chúng ta ước lượng một mô hình GLM thay vì ước lượng hai thành phần tần suất và mức độ nghiêm trọng. Giả sử các biến $\textbf{x}_{i,T}$ là các biến độc lập trong mô hình Tweedie với hàm liên kết là hàm log và hệ số $\boldsymbol{\beta_T}$ là các hệ số tương ứng của các biến độc lập, ta có mô hình tuyến tính tổng quát như sau
+\begin{align}
+Y_i \sim Tweedie(\mu_i , p , \phi) \\
+\mu_i = \exp(\textbf{x}_{i,T}^{'} \cdot \boldsymbol{\beta_T})
+\end{align}
+
+Chúng ta sẽ so sánh giữa giữa sử dụng mô hình tần suất - mức độ nghiêm trọng với sử dụng phân phối Tweedie trên dữ liệu "exposure.csv". Chỉ tiêu để so sánh hai mô hình là giá trị trung bình của tổng tổn thất theo mỗi hợp đồng trên dữ liệu ngoài mẫu. Giá trị trung bình của tổng tổn thất còn được gọi bằng thuật ngữ là phí bảo hiểm thuần. Dữ liệu sử dụng để xây dựng mô hình được lấy ngẫu nhiên 70\% từ dữ liệu ban đầu và chúng ta sẽ so sánh giá trị của phí bảo hiểm thuần được tính toán từ mô hình tần suất mức độ nghiêm trọng với mô hình Tweedie. 
+
+Để sử dụng phân phối Tweedie trong hàm `glm()`, chúng ta cần cài đặt thêm thư viện $statmod$.
+
+
+``` r
+library(statmod)
+dat<-read.csv("../KHDL_KTKD Final/Dataset/exposure.csv")
+n<-nrow(dat); p<-ncol(dat)
+dat$Gender<-as.factor(dat$Gender)
+
+set.seed(10)
+train.index<-sample(1:n,size = round(n*0.7),replace=FALSE)
+train<-dat[train.index,]
+test<-dat[-train.index,]
+
+glm.ser<-glm(Ave_Claim~Age+Gender,family = Gamma(link = "log"),data=train, weight = Claim_Count)
+glm.fre<-glm(Claim_Count~Age+Gender,family = poisson(link = "log"), data = train)
+glm.twe<-glm(Total_Claim~Age+Gender,family=tweedie(var.power=1.5,link.power=0),data=train)
+
+glm.fre
+```
+
+```
+## 
+## Call:  glm(formula = Claim_Count ~ Age + Gender, family = poisson(link = "log"), 
+##     data = train)
+## 
+## Coefficients:
+## (Intercept)          Age      Gender1  
+##    -0.54133     -0.02187      0.11533  
+## 
+## Degrees of Freedom: 6999 Total (i.e. Null);  6997 Residual
+## Null Deviance:	    5952 
+## Residual Deviance: 5785 	AIC: 8934
+```
+
+``` r
+glm.ser
+```
+
+```
+## 
+## Call:  glm(formula = Ave_Claim ~ Age + Gender, family = Gamma(link = "log"), 
+##     data = train, weights = Claim_Count)
+## 
+## Coefficients:
+## (Intercept)          Age      Gender1  
+##    -0.08272      0.07992     -0.51748  
+## 
+## Degrees of Freedom: 1469 Total (i.e. Null);  1467 Residual
+##   (5530 observations deleted due to missingness)
+## Null Deviance:	    3833 
+## Residual Deviance: 1713 	AIC: 13250
+```
+
+``` r
+glm.twe
+```
+
+```
+## 
+## Call:  glm(formula = Total_Claim ~ Age + Gender, family = tweedie(var.power = 1.5, 
+##     link.power = 0), data = train)
+## 
+## Coefficients:
+## (Intercept)          Age      Gender1  
+##    -0.50403      0.05485     -0.37003  
+## 
+## Degrees of Freedom: 6999 Total (i.e. Null);  6997 Residual
+## Null Deviance:	    91600 
+## Residual Deviance: 82290 	AIC: NA
+```
+
+Hệ số của các biến độc lập của các mô hình ở trong bảng dưới đây
+
+``` r
+df<-data.frame(a = c("Tần suất", "Mức độ nghiêm trọng", "Tweedie"),
+               b = c("glm.fre", "glm.ser", "glm.twe"),
+               d = c(-0.541,-0.082,-0.504),
+               e = c(-0.021,0.079,0.055),
+               f = c(0.115,-0.517,-0.370))
+knitr::kable(df, booktabs = T,
+      caption = "Hệ số tuyến tính của biến độc lập",
+      col.names = c("Mô hình", "Tên mô hình trên R","Hệ số chặn", "Hệ số của Age", "Hệ số của Gender"),
+      escape=F, align = 'l') %>%
+  #column_spec(c(1,4,5,6,7),border_left = T) %>% column_spec(7,border_right = T) %>% 
+  kable_styling(latex_options = "scale_down",full_width = F)
+```
+
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>(\#tab:unnamed-chunk-4)(\#tab:unnamed-chunk-4)Hệ số tuyến tính của biến độc lập</caption>
+ <thead>
+  <tr>
+   <th style="text-align:left;"> Mô hình </th>
+   <th style="text-align:left;"> Tên mô hình trên R </th>
+   <th style="text-align:left;"> Hệ số chặn </th>
+   <th style="text-align:left;"> Hệ số của Age </th>
+   <th style="text-align:left;"> Hệ số của Gender </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:left;"> Tần suất </td>
+   <td style="text-align:left;"> glm.fre </td>
+   <td style="text-align:left;"> -0.541 </td>
+   <td style="text-align:left;"> -0.021 </td>
+   <td style="text-align:left;"> 0.115 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Mức độ nghiêm trọng </td>
+   <td style="text-align:left;"> glm.ser </td>
+   <td style="text-align:left;"> -0.082 </td>
+   <td style="text-align:left;"> 0.079 </td>
+   <td style="text-align:left;"> -0.517 </td>
+  </tr>
+  <tr>
+   <td style="text-align:left;"> Tweedie </td>
+   <td style="text-align:left;"> glm.twe </td>
+   <td style="text-align:left;"> -0.504 </td>
+   <td style="text-align:left;"> 0.055 </td>
+   <td style="text-align:left;"> -0.370 </td>
+  </tr>
+</tbody>
+</table>
+Có thể thấy rằng hệ số của các biến độc lập trong mô hình Tweedie khá gần với tổng của hệ số của biến độc lập trong mô hình tần suất và hệ số của biến độc lập trong mô hình mức độ nghiêm trọng. Điều này có thể được giải thích bởi hàm liên kết được sử dụng trong cả ba mô hình đều là hàm $log(\cdot)$. Giá trị trung bình của tổng tổn thất được tính toán từ các mô hình như sau:
+\begin{align}
+\mathbb{E}(S_N|\text{x}_i) &= \mathbb{E}(N|\text{x}_i) \cdot \mathbb{E}(Y|\text{x}_i) \\
+&= exp(\beta^F_{0,i} +  \beta^F_{1,i} \cdot Age_i + \beta^F_{2,i} \cdot Gender_i) \cdot 
+
+\end{align}
+
+
+
+
+
+
+
+
+
+<!-- # REFERENCE -->
+
+
+<!-- ### Source from thesis -->
+
+<!-- **1.** Chen, Chun-houh, Wolfgang Karl Härdle, and Antony Unwin, eds (2007). *Handbook of data visualization.* \ -->
+<!-- **2.** Aparicio, Manuela, and Carlos J. Costa. (2015). *Data visualization - Communication design quarterly review.* \ -->
+<!-- **3.** Hadley Wickham. (2010). *A Layered Grammar of Graphics.* \ -->
+
+<!-- ### Souce from website -->
+
+<!-- **4.** [https://www.tableau.com/learn/articles/data-visualization](https://www.tableau.com/learn/articles/data-visualization) \ -->
+<!-- **5.** [https://www.r-graph-gallery.com/ggplot2-package.html](https://www.r-graph-gallery.com/ggplot2-package.html) \ -->
+<!-- **6.** [http://r-statistics.co/ggplot2-Tutorial-With-R.html](http://r-statistics.co/ggplot2-Tutorial-With-R.html) \ -->
+<!-- **7.** [https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf](https://www.maths.usyd.edu.au/u/UG/SM/STAT3022/r/current/Misc/data-visualization-2.1.pdf) \ -->
+<!-- **8.** [https://www.kaggle.com/](https://www.kaggle.com/) \ -->
